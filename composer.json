@@ -1,0 +1,37 @@
+{
+	"name": "chillerlan/php-httpinterface",
+	"description": "A http client interface for PHP7+",
+	"minimum-stability": "dev",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "smiley",
+			"email": "smiley@chillerlan.net",
+			"homepage": "https://github.com/codemasher"
+		}
+	],
+	"support": {
+		"issues": "https://github.com/chillerlan/php-httpinterface/issues",
+		"source": "https://github.com/chillerlan/php-httpinterface"
+	},
+	"require": {
+		"php": "^7.0.3",
+		"chillerlan/php-traits": "^1.1"
+	},
+	"require-dev": {
+		"chillerlan/php-curl": "dev-master",
+		"guzzlehttp/guzzle": "^6.3",
+		"phpunit/phpunit": "^6.5"
+	},
+	"autoload": {
+		"psr-4": {
+			"chillerlan\\HTTP\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"chillerlan\\HTTPTest\\": "tests/",
+			"chillerlan\\HTTPExamples\\": "examples/"
+		}
+	}
+}
