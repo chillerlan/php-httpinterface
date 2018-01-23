@@ -17,7 +17,9 @@ use chillerlan\Traits\{
 };
 
 class HTTPResponse implements HTTPResponseInterface, ContainerInterface{
-	use Container;
+	use Container{
+		__get as containerGet;
+	}
 
 	/**
 	 * @var string
@@ -35,7 +37,6 @@ class HTTPResponse implements HTTPResponseInterface, ContainerInterface{
 	protected $body;
 
 	/**
-	 * @todo -> align with php-oauth
 	 * @codeCoverageIgnore
 	 *
 	 * @param string $property
@@ -50,11 +51,8 @@ class HTTPResponse implements HTTPResponseInterface, ContainerInterface{
 		elseif($property === 'json_array'){
 			return json_decode($this->body, true);
 		}
-		elseif(property_exists($this, $property)){
-			return $this->{$property};
-		}
 
-		return null;
+		return $this->containerGet($property);
 	}
 
 
