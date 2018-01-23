@@ -24,11 +24,11 @@ interface HTTPClientInterface{
 	public function __construct(ContainerInterface $options);
 
 	/**
-	 * @param string $url
-	 * @param array  $params
-	 * @param string $method
-	 * @param mixed  $body
-	 * @param array  $headers
+	 * @param string      $url
+	 * @param array|null  $params
+	 * @param string|null $method
+	 * @param mixed|null  $body
+	 * @param array|null  $headers
 	 *
 	 * @return \chillerlan\HTTP\HTTPResponseInterface
 	 * @throws \chillerlan\HTTP\HTTPClientException

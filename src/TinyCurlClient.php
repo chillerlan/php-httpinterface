@@ -24,12 +24,14 @@ class TinyCurlClient extends HTTPClientAbstract{
 	 * TinyCurlClient constructor.
 	 *
 	 * @param \chillerlan\Traits\ContainerInterface $options
-	 * @param \chillerlan\TinyCurl\Request          $http
+	 * @param \chillerlan\TinyCurl\Request|null     $http
 	 */
 	public function __construct(ContainerInterface $options, Request $http = null){
 		parent::__construct($options);
 
-		$this->setClient($http);
+		if($http instanceof Request){
+			$this->setClient($http);
+		}
 	}
 
 	/** @inheritdoc */

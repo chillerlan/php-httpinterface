@@ -24,13 +24,15 @@ class GuzzleClient extends HTTPClientAbstract{
 	/**
 	 * GuzzleClient constructor.
 	 *
-	 * @param \chillerlan\Traits\ContainerInterface|null $options
-	 * @param \GuzzleHttp\Client|null                    $http
+	 * @param \chillerlan\Traits\ContainerInterface $options
+	 * @param \GuzzleHttp\Client|null               $http
 	 */
-	public function __construct(ContainerInterface $options = null, Client $http = null){
+	public function __construct(ContainerInterface $options, Client $http = null){
 		parent::__construct($options);
 
-		$this->setClient($http);
+		if($http instanceof Client){
+			$this->setClient($http);
+		}
 	}
 
 	/** @inheritdoc */
