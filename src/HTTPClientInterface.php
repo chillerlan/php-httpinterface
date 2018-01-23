@@ -30,10 +30,10 @@ interface HTTPClientInterface{
 	 * @param mixed  $body
 	 * @param array  $headers
 	 *
-	 * @return \chillerlan\HTTP\HTTPResponse
+	 * @return \chillerlan\HTTP\HTTPResponseInterface
 	 * @throws \chillerlan\HTTP\HTTPClientException
 	 */
-	public function request(string $url, array $params = null, string $method = null, $body = null, array $headers = null):HTTPResponse;
+	public function request(string $url, array $params = null, string $method = null, $body = null, array $headers = null):HTTPResponseInterface;
 
 	/**
 	 * @param array $headers

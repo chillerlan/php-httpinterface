@@ -50,7 +50,7 @@ class CurlClient extends HTTPClientAbstract{
 	}
 
 	/** @inheritdoc */
-	public function request(string $url, array $params = null, string $method = null, $body = null, array $headers = null):HTTPResponse{
+	public function request(string $url, array $params = null, string $method = null, $body = null, array $headers = null):HTTPResponseInterface{
 		$this->responseHeaders = new \stdClass;
 
 		try{

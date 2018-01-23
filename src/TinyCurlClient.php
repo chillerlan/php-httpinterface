@@ -39,17 +39,8 @@ class TinyCurlClient extends HTTPClientAbstract{
 		return $this;
 	}
 
-	/**
-	 * @param string $url
-	 * @param array  $params
-	 * @param string $method
-	 * @param mixed  $body
-	 * @param array  $headers
-	 *
-	 * @return \chillerlan\HTTP\HTTPResponse
-	 * @throws \chillerlan\HTTP\HTTPClientException
-	 */
-	public function request(string $url, array $params = null, string $method = null, $body = null, array $headers = null):HTTPResponse{
+	/** @inheritdoc */
+	public function request(string $url, array $params = null, string $method = null, $body = null, array $headers = null):HTTPResponseInterface{
 
 		try{
 
