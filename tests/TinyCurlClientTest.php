@@ -13,7 +13,7 @@
 namespace chillerlan\HTTPTest;
 
 use chillerlan\HTTP\TinyCurlClient;
-use chillerlan\TinyCurl\{Request, RequestOptions};
+use chillerlan\TinyCurl\Request;
 
 class TinyCurlClientTest extends HTTPClientTestAbstract{
 

@@ -13,9 +13,6 @@
 namespace chillerlan\HTTPTest;
 
 use chillerlan\HTTP\CurlClient;
-use chillerlan\HTTP\HTTPOptions;
-use chillerlan\Traits\Container;
-use chillerlan\Traits\ContainerInterface;
 
 class CurlClientTest extends HTTPClientTestAbstract{
 

@@ -1,8 +1,8 @@
 <?php
 /**
- * Trait HTTPOptions
+ * Trait HTTPOptionsTrait
  *
- * @filesource   HTTPOptions.php
+ * @filesource   HTTPOptionsTraitTrait.php
  * @created      23.01.2018
  * @package      chillerlan\HTTP
  * @author       Smiley <smiley@chillerlan.net>
@@ -14,7 +14,7 @@ namespace chillerlan\HTTP;
 
 /**
  */
-trait HTTPOptions{
+trait HTTPOptionsTrait{
 
 	/**
 	 * @var string

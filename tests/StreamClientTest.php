@@ -13,7 +13,7 @@
 namespace chillerlan\HTTPTest;
 
 use chillerlan\HTTP\StreamClient;
-use chillerlan\TinyCurl\{Request, RequestOptions};
+use chillerlan\TinyCurl\Request;
 
 class StreamClientTest extends HTTPClientTestAbstract{
 

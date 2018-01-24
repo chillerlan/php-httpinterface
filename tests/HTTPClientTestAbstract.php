@@ -13,7 +13,7 @@
 namespace chillerlan\HTTPTest;
 
 use chillerlan\HTTP\HTTPClientInterface;
-use chillerlan\HTTP\HTTPOptions;
+use chillerlan\HTTP\HTTPOptionsTrait;
 use chillerlan\Traits\Container;
 use chillerlan\Traits\ContainerInterface;
 use PHPUnit\Framework\TestCase;
@@ -42,7 +42,7 @@ abstract class HTTPClientTestAbstract extends TestCase{
 
 	protected function getOptions(array $arr = null):ContainerInterface{
 		return new class($arr ?? []) implements ContainerInterface{
-			use Container, HTTPOptions;
+			use Container, HTTPOptionsTrait;
 		};
 	}
 
