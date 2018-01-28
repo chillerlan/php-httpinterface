@@ -116,7 +116,7 @@ trait HTTPClientTrait{
 	 *
 	 * @return array
 	 */
-	protected function checkQueryParams($params, bool $booleans_as_string = null){
+	protected function checkQueryParams($params, bool $booleans_as_string = null):array{
 
 		if(is_array($params)){
 			return $this->http->checkQueryParams($params, $booleans_as_string);

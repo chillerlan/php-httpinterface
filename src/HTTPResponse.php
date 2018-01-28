@@ -38,6 +38,7 @@ class HTTPResponse implements HTTPResponseInterface, ContainerInterface{
 
 	/**
 	 * @codeCoverageIgnore
+	 * @todo
 	 *
 	 * @param string $property
 	 *

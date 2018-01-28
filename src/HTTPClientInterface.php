@@ -58,6 +58,6 @@ interface HTTPClientInterface{
 	 *
 	 * @return array
 	 */
-	public function checkQueryParams(array $params, bool $booleans_as_string = null);
+	public function checkQueryParams(array $params, bool $booleans_as_string = null):array;
 
 }

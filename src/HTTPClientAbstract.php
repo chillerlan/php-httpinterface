@@ -128,13 +128,8 @@ abstract class HTTPClientAbstract implements HTTPClientInterface{
 		return implode($delimiter ?? '&', $pairs);
 	}
 
-	/**
-	 * @param array     $params
-	 * @param bool|null $booleans_as_string - converts booleans to "true"/"false", otherwise "0"/"1"
-	 *
-	 * @return array
-	 */
-	public function checkQueryParams(array $params, bool $booleans_as_string = null){
+	/** @inheritdoc */
+	public function checkQueryParams(array $params, bool $booleans_as_string = null):array{
 
 		foreach($params as $key => $value){
 
