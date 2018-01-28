@@ -2,7 +2,7 @@
 /**
  * Class HTTPResponse
  *
- * @filesource   HTTPResponsephp
+ * @filesource   HTTPResponse.php
  * @created      09.07.2017
  * @package      chillerlan\HTTP
  * @author       Smiley <smiley@chillerlan.net>
