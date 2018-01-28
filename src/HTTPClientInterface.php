@@ -42,4 +42,22 @@ interface HTTPClientInterface{
 	 */
 	public function normalizeRequestHeaders(array $headers):array;
 
+	/**
+	 * @param array       $params
+	 * @param bool|null   $urlencode
+	 * @param string|null $delimiter
+	 * @param string|null $enclosure
+	 *
+	 * @return string
+	 */
+	public function buildQuery(array $params, bool $urlencode = null, string $delimiter = null, string $enclosure = null):string;
+
+	/**
+	 * @param array     $params
+	 * @param bool|null $booleans_as_string - converts booleans to "true"/"false" strings if set to true, "0"/"1" otherwise.
+	 *
+	 * @return array
+	 */
+	public function checkQueryParams(array $params, bool $booleans_as_string = null);
+
 }
