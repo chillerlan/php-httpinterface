@@ -103,9 +103,11 @@ trait HTTPClientTrait{
 
 	/**
 	 * @param array $headers
+	 *
+	 * @return array
 	 */
-	protected function normalizeRequestHeaders(array $headers){
-		$this->http->normalizeRequestHeaders($headers);
+	protected function normalizeRequestHeaders(array $headers):array{
+		return $this->http->normalizeRequestHeaders($headers);
 	}
 
 	/**
@@ -114,10 +116,10 @@ trait HTTPClientTrait{
 	 *
 	 * @return array
 	 */
-	protected function checkParams($params, bool $booleans_as_string = null){
+	protected function checkQueryParams($params, bool $booleans_as_string = null){
 
 		if(is_array($params)){
-			$this->http->checkQueryParams($params, $booleans_as_string);
+			return $this->http->checkQueryParams($params, $booleans_as_string);
 		}
 
 		return $params;
