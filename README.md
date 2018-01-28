@@ -46,5 +46,5 @@ method | return
 `httpPOST(string $url, array $params = null, $body = null, array $headers = null)` | `HTTPResponseInterface`
 `httpPUT(string $url, array $params = null, $body = null, array $headers = null)` | `HTTPResponseInterface`
 `normalizeRequestHeaders(array $headers)` | array
-`checkQueryParams($params, bool $booleans_as_string = null)` | array
+`checkQueryParams($params, bool $booleans_as_string = null)` | mixed
 `httpBuildQuery(array $params, bool $urlencode = null, string $delimiter = null, string $enclosure = null)` | string

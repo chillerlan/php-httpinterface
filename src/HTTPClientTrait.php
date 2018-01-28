@@ -111,12 +111,21 @@ trait HTTPClientTrait{
 	}
 
 	/**
-	 * @param mixed     $params
-	 * @param bool|null $booleans_as_string
+	 * @param mixed $data
 	 *
 	 * @return array
 	 */
-	protected function checkQueryParams($params, bool $booleans_as_string = null):array{
+	protected function rawurlencode($data){
+		return $this->http->rawurlencode($data);
+	}
+
+	/**
+	 * @param mixed     $params
+	 * @param bool|null $booleans_as_string
+	 *
+	 * @return mixed
+	 */
+	protected function checkQueryParams($params, bool $booleans_as_string = null){
 
 		if(is_array($params)){
 			return $this->http->checkQueryParams($params, $booleans_as_string);

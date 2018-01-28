@@ -56,12 +56,8 @@ abstract class HTTPClientAbstract implements HTTPClientInterface{
 		return $normalized_headers;
 	}
 
-	/**
-	 * @param $data
-	 *
-	 * @return array|string
-	 */
-	protected function rawurlencode($data){
+	/** @inheritdoc */
+	public function rawurlencode($data){
 
 		if(is_array($data)){
 			return array_map([$this, 'rawurlencode'], $data);

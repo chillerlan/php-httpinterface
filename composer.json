@@ -1,8 +1,12 @@
 {
 	"name": "chillerlan/php-httpinterface",
 	"description": "A http client interface for PHP7+",
-	"minimum-stability": "dev",
 	"license": "MIT",
+	"type": "library",
+	"keywords": [
+		"http", "client", "wrapper"
+	],
+	"minimum-stability": "stable",
 	"authors": [
 		{
 			"name": "smiley",
@@ -19,7 +23,7 @@
 		"chillerlan/php-traits": "^1.1"
 	},
 	"require-dev": {
-		"chillerlan/php-curl": "dev-master",
+		"chillerlan/php-curl": "^1.0",
 		"guzzlehttp/guzzle": "^6.3",
 		"phpunit/phpunit": "^6.5"
 	},

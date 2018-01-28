@@ -43,6 +43,13 @@ interface HTTPClientInterface{
 	public function normalizeRequestHeaders(array $headers):array;
 
 	/**
+	 * @param mixed $data
+	 *
+	 * @return mixed
+	 */
+	public function rawurlencode($data);
+
+	/**
 	 * @param array       $params
 	 * @param bool|null   $urlencode
 	 * @param string|null $delimiter
