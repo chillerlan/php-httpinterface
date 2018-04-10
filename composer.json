@@ -18,9 +18,13 @@
 		"issues": "https://github.com/chillerlan/php-httpinterface/issues",
 		"source": "https://github.com/chillerlan/php-httpinterface"
 	},
+	"provide": {
+		"chillerlan/php-httpinterface": "1.0"
+	},
 	"require": {
 		"php": "^7.0.3",
-		"chillerlan/php-traits": "^1.1"
+		"chillerlan/php-traits": "^1.1",
+		"psr/log": "^1.0"
 	},
 	"require-dev": {
 		"chillerlan/php-curl": "^1.0",
