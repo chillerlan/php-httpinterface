@@ -16,7 +16,13 @@ use chillerlan\Traits\ContainerInterface;
 
 class StreamClient extends HTTPClientAbstract{
 
-	/** @inheritdoc */
+	/**
+	 * StreamClient constructor.
+	 *
+	 * @param \chillerlan\Traits\ContainerInterface $options
+	 *
+	 * @throws \chillerlan\HTTP\HTTPClientException
+	 */
 	public function __construct(ContainerInterface $options){
 		parent::__construct($options);
 
