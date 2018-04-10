@@ -13,8 +13,12 @@
 namespace chillerlan\HTTP;
 
 use chillerlan\Traits\ContainerInterface;
+use Psr\Log\{
+	LoggerAwareInterface, LoggerAwareTrait, LoggerInterface, NullLogger
+};
 
-abstract class HTTPClientAbstract implements HTTPClientInterface{
+abstract class HTTPClientAbstract implements HTTPClientInterface, LoggerAwareInterface{
+	use LoggerAwareTrait;
 
 	/**
 	 * @var mixed
@@ -27,8 +31,9 @@ abstract class HTTPClientAbstract implements HTTPClientInterface{
 	protected $options;
 
 	/** @inheritdoc */
-	public function __construct(ContainerInterface $options){
+	public function __construct(ContainerInterface $options, LoggerInterface $logger = null){
 		$this->options = $options;
+		$this->logger  = $logger ?? new NullLogger;
 	}
 
 	/** @inheritdoc */
@@ -66,7 +71,7 @@ abstract class HTTPClientAbstract implements HTTPClientInterface{
 			return rawurlencode($data);
 		}
 
-		return $data;
+		return $data; // @codeCoverageIgnore
 	}
 
 	/**

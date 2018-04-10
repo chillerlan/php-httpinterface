@@ -24,7 +24,13 @@ class CurlClient extends HTTPClientAbstract{
 	 */
 	protected $responseHeaders;
 
-	/** @inheritdoc */
+	/**
+	 * CurlClient constructor.
+	 *
+	 * @param \chillerlan\Traits\ContainerInterface $options
+	 *
+	 * @throws \chillerlan\HTTP\HTTPClientException
+	 */
 	public function __construct(ContainerInterface $options){
 		parent::__construct($options);
 
@@ -33,8 +39,6 @@ class CurlClient extends HTTPClientAbstract{
 		}
 
 		$this->http = curl_init();
-
-		curl_setopt_array($this->http, $this->options->curl_options);
 
 		curl_setopt_array($this->http, [
 			CURLOPT_HEADER         => false,
@@ -47,6 +51,7 @@ class CurlClient extends HTTPClientAbstract{
 			CURLOPT_USERAGENT      => $this->options->user_agent,
 		]);
 
+		curl_setopt_array($this->http, $this->options->curl_options);
 	}
 
 	/** @inheritdoc */

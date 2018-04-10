@@ -12,16 +12,7 @@
 
 namespace chillerlan\HTTP;
 
-use chillerlan\Traits\ContainerInterface;
-
 interface HTTPClientInterface{
-
-	/**
-	 * HTTPClientInterface constructor.
-	 *
-	 * @param \chillerlan\Traits\ContainerInterface $options
-	 */
-	public function __construct(ContainerInterface $options);
 
 	/**
 	 * @param string      $url
