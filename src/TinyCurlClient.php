@@ -48,19 +48,22 @@ class TinyCurlClient extends HTTPClientAbstract{
 
 			$parsedURL = parse_url($url);
 
-			if(!isset($parsedURL['host']) || $parsedURL['scheme'] !== 'https'){
+			if(!isset($parsedURL['host']) || !in_array($parsedURL['scheme'], ['http', 'https'], true)){
 				trigger_error('invalid URL');
 			}
 
-			$response = $this->http->fetch(new URL(
+			$url = new URL(
 				explode('?', $url)[0],
 				$params ?? [],
 				$method ?? 'POST',
 				$body,
 				$headers ?? []
-			));
+			);
+
+			$response = $this->http->fetch($url);
 
 			return new HTTPResponse([
+				'url'     => $url->__toString(),
 				'headers' => $response->headers,
 				'body'    => $response->body->content,
 			]);
