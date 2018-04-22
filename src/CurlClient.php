@@ -83,7 +83,10 @@ class CurlClient extends HTTPClientAbstract{
 			'Connection: close',
 		];
 
-		$url = $this->requestURL.(!empty($this->requestParams) ? '?'.$this->buildQuery($this->requestParams) : '');
+		parse_str($this->parsedURL['query'] ?? '', $parsedquery);
+		$params = array_merge($parsedquery, $this->requestParams);
+
+		$url = $this->requestURL.(!empty($params) ? '?'.http_build_query($params) : '');
 
 		$options += [
 			CURLOPT_URL => $url,
@@ -95,8 +98,6 @@ class CurlClient extends HTTPClientAbstract{
 
 		$response  = curl_exec($this->http);
 		$curl_info = curl_getinfo($this->http);
-
-		curl_close($this->http);
 
 		return new HTTPResponse([
 			'url'       => $url,
