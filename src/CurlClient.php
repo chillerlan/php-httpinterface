@@ -59,20 +59,23 @@ class CurlClient extends HTTPClientAbstract{
 		$this->responseHeaders = new \stdClass;
 
 		$headers = $this->normalizeRequestHeaders($this->requestHeaders);
-		$options = [CURLOPT_CUSTOMREQUEST => $this->requestMethod];
 
-		if(in_array($this->requestMethod, ['PATCH', 'POST', 'PUT', 'DELETE'], true)){
+		if(in_array($this->requestMethod, ['PATCH', 'POST', 'PUT', 'DELETE'])){
 
-			if($this->requestMethod === 'POST'){
-				$options = [CURLOPT_POST => true];
+			$options = in_array($this->requestMethod, ['PATCH', 'PUT', 'DELETE'])
+				? [CURLOPT_CUSTOMREQUEST => $this->requestMethod]
+				: [CURLOPT_POST => true];
 
-				if(!isset($headers['Content-type']) && is_array($this->requestBody)){
-					$headers += ['Content-type: application/x-www-form-urlencoded'];
-					$this->requestBody = http_build_query($this->requestBody, '', '&', PHP_QUERY_RFC1738);
-				}
+
+			if(!isset($headers['Content-type']) && $this->requestMethod === 'POST' && is_array($this->requestBody)){
+				$headers += ['Content-type: application/x-www-form-urlencoded'];
+				$this->requestBody = http_build_query($this->requestBody, '', '&', PHP_QUERY_RFC1738);
 			}
 
 			$options += [CURLOPT_POSTFIELDS => $this->requestBody];
+		}
+		else{
+			$options = [CURLOPT_CUSTOMREQUEST => $this->requestMethod];
 		}
 
 		$headers += [
@@ -90,12 +93,16 @@ class CurlClient extends HTTPClientAbstract{
 
 		curl_setopt_array($this->http, $options);
 
-		$response = curl_exec($this->http);
+		$response  = curl_exec($this->http);
+		$curl_info = curl_getinfo($this->http);
+
+		curl_close($this->http);
 
 		return new HTTPResponse([
-			'url'     => $url,
-			'headers' => $this->responseHeaders,
-			'body'    => $response,
+			'url'       => $url,
+			'curl_info' => $curl_info,
+			'headers'   => $this->responseHeaders,
+			'body'      => $response,
 		]);
 	}
 
