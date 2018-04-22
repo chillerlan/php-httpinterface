@@ -32,63 +32,49 @@ class StreamClient extends HTTPClientAbstract{
 	}
 
 	/** @inheritdoc */
-	public function request(string $url, array $params = null, string $method = null, $body = null, array $headers = null):HTTPResponseInterface{
+	protected function getResponse():HTTPResponseInterface{
+		$headers = $this->normalizeRequestHeaders($this->requestHeaders);
 
-		try{
-			$parsedURL = parse_url($url);
+		if(in_array($this->requestMethod, ['PATCH', 'POST', 'PUT', 'DELETE']) && is_array($this->requestBody)){
+			$this->requestBody = http_build_query($this->requestBody, '', '&', PHP_QUERY_RFC1738);
 
-			if(!isset($parsedURL['host']) || $parsedURL['scheme'] !== 'https'){
-				trigger_error('invalid URL');
-			}
-
-			$method  = strtoupper($method ?? 'POST');
-			$headers = $this->normalizeRequestHeaders($headers ?? []);
-
-			if(in_array($method, ['PATCH', 'POST', 'PUT', 'DELETE']) && is_array($body)){
-				$body = http_build_query($body, '', '&', PHP_QUERY_RFC1738);
-
-				$headers['Content-Type']   = 'Content-Type: application/x-www-form-urlencoded';
-				$headers['Content-length'] = 'Content-length: '.strlen($body);
-			}
-
-			$headers['Host']           = 'Host: '.$parsedURL['host'].(!empty($parsedURL['port']) ? ':'.$parsedURL['port'] : '');
-			$headers['Connection']     = 'Connection: close';
-
-			$params = $params ?? [];
-			$url    = $url.(!empty($params) ? '?'.http_build_query($params) : '');
-
-			$context = stream_context_create([
-				'http' => [
-					'method'           => $method,
-					'header'           => $headers,
-					'content'          => $body,
-					'protocol_version' => '1.1',
-					'user_agent'       => $this->options->user_agent,
-					'max_redirects'    => 0,
-					'timeout'          => 5,
-				],
-				'ssl' => [
-					'cafile'              => $this->options->ca_info,
-					'verify_peer'         => true,
-					'verify_depth'        => 3,
-					'peer_name'           => $parsedURL['host'],
-					'ciphers'             => 'HIGH:!SSLv2:!SSLv3',
-					'disable_compression' => true,
-				],
-			]);
-
-			$response         = file_get_contents($url, false, $context);
-			$responseHeaders  = get_headers($url, 1);
-
-			return new HTTPResponse([
-				'headers' => $this->parseResponseHeaders($responseHeaders),
-				'body'    => trim($response),
-			]);
-
+			$headers['Content-Type']   = 'Content-Type: application/x-www-form-urlencoded';
+			$headers['Content-length'] = 'Content-length: '.strlen($this->requestBody);
 		}
-		catch(\Exception $e){
-			throw new HTTPClientException($e->getMessage());
-		}
+
+		$headers['Host']       = 'Host: '.$this->parsedURL['host'].(!empty($this->parsedURL['port']) ? ':'.$this->parsedURL['port'] : '');
+		$headers['Connection'] = 'Connection: close';
+
+		$url = $this->requestURL.(!empty($this->requestParams) ? '?'.$this->buildQuery($this->requestParams) : '');
+
+		$context = stream_context_create([
+			'http' => [
+				'method'           => $this->requestMethod,
+				'header'           => $headers,
+				'content'          => $this->requestBody,
+				'protocol_version' => '1.1',
+				'user_agent'       => $this->options->user_agent,
+				'max_redirects'    => 0,
+				'timeout'          => 5,
+			],
+			'ssl' => [
+				'cafile'              => $this->options->ca_info,
+				'verify_peer'         => true,
+				'verify_depth'        => 3,
+				'peer_name'           => $this->parsedURL['host'],
+				'ciphers'             => 'HIGH:!SSLv2:!SSLv3',
+				'disable_compression' => true,
+			],
+		]);
+
+		$response         = file_get_contents($url, false, $context);
+		$responseHeaders  = get_headers($url, 1);
+
+		return new HTTPResponse([
+			'url'     => $url,
+			'headers' => $this->parseResponseHeaders($responseHeaders),
+			'body'    => trim($response),
+		]);
 
 	}
 

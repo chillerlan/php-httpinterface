@@ -43,51 +43,39 @@ class GuzzleClient extends HTTPClientAbstract{
 	}
 
 	/** @inheritdoc */
-	public function request(string $url, array $params = null, string $method = null, $body = null, array $headers = null):HTTPResponseInterface{
+	protected function getResponse():HTTPResponseInterface{
+		// @link http://docs.guzzlephp.org/en/stable/request-options.html
+		$options = [
+			'query'       => $this->requestParams,
+			'headers'     => $this->requestHeaders,
+			'http_errors' => false, // no exceptions on HTTP errors plz
+		];
 
-		try{
-			$parsedURL = parse_url($url);
-			$method    = strtoupper($method ?? 'POST');
+		if(in_array($this->requestMethod, ['PATCH', 'POST', 'PUT', 'DELETE'], true)){
 
-			if(!isset($parsedURL['host']) || $parsedURL['scheme'] !== 'https'){
-				trigger_error('invalid URL');
+			if(is_scalar($this->requestBody) || $this->requestBody instanceof StreamInterface){
+				$options['body'] = $this->requestBody; // @codeCoverageIgnore
+			}
+			elseif(in_array($this->requestMethod, ['PATCH', 'POST', 'PUT'], true) && is_array($this->requestBody)){
+				$options['form_params'] = $this->requestBody;
 			}
 
-			// @link http://docs.guzzlephp.org/en/stable/request-options.html
-			$options = [
-				'query'       => $params ?? [],
-				'headers'     => $headers ?? [],
-				'http_errors' => false, // no exceptions on HTTP errors plz
-			];
-
-			if(in_array($method, ['PATCH', 'POST', 'PUT', 'DELETE'], true)){
-
-				if(is_scalar($body) || $body instanceof StreamInterface){
-					$options['body'] = $body; // @codeCoverageIgnore
-				}
-				elseif(in_array($method, ['PATCH', 'POST', 'PUT'], true) && is_array($body)){
-					$options['form_params'] = $body;
-				}
-
-			}
-
-			$response = $this->http->request($method, explode('?', $url)[0], $options);
-
-			$responseHeaders              = $this->parseResponseHeaders($response->getHeaders());
-			$responseHeaders->statuscode  = $response->getStatusCode();
-			$responseHeaders->statustext  = $response->getReasonPhrase();
-			$responseHeaders->httpversion = $response->getProtocolVersion();
-
-			return new HTTPResponse([
-				'headers' => $responseHeaders,
-				'body'    => $response->getBody(),
-			]);
-
-		}
-		catch(\Exception $e){
-			throw new HTTPClientException('fetch error: '.$e->getMessage());
 		}
 
+		$url = explode('?', $this->requestURL)[0];
+
+		$response = $this->http->request($this->requestMethod, $url, $options); // @todo: merge query params
+
+		$responseHeaders              = $this->parseResponseHeaders($response->getHeaders());
+		$responseHeaders->statuscode  = $response->getStatusCode();
+		$responseHeaders->statustext  = $response->getReasonPhrase();
+		$responseHeaders->httpversion = $response->getProtocolVersion();
+
+		return new HTTPResponse([
+			'url'     => $url,
+			'headers' => $responseHeaders,
+			'body'    => $response->getBody(),
+		]);
 	}
 
 	/**

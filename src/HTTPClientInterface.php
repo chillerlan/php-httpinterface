@@ -14,6 +14,8 @@ namespace chillerlan\HTTP;
 
 interface HTTPClientInterface{
 
+	const ALLOWED_SCHEMES = ['http', 'https'];
+
 	/**
 	 * @param string      $url
 	 * @param array|null  $params

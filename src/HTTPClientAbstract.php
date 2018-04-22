@@ -30,10 +30,53 @@ abstract class HTTPClientAbstract implements HTTPClientInterface, LoggerAwareInt
 	 */
 	protected $options;
 
+	protected $requestURL;
+	protected $parsedURL;
+	protected $requestParams;
+	protected $requestMethod;
+	protected $requestBody;
+	protected $requestHeaders;
+
 	/** @inheritdoc */
 	public function __construct(ContainerInterface $options, LoggerInterface $logger = null){
 		$this->options = $options;
 		$this->logger  = $logger ?? new NullLogger;
+	}
+
+	/**
+	 * @return \chillerlan\HTTP\HTTPResponseInterface
+	 */
+	abstract protected function getResponse():HTTPResponseInterface;
+
+	/**
+	 * @param string      $url
+	 * @param array|null  $params
+	 * @param string|null $method
+	 * @param null        $body
+	 * @param array|null  $headers
+	 *
+	 * @return \chillerlan\HTTP\HTTPResponseInterface
+	 * @throws \chillerlan\HTTP\HTTPClientException
+	 */
+	public function request(string $url, array $params = null, string $method = null, $body = null, array $headers = null):HTTPResponseInterface{
+		$this->requestURL    = $url;
+		$this->parsedURL     = parse_url($this->requestURL);
+		$this->requestParams = $params ?? [];
+		$this->requestMethod = strtoupper($method ?? 'POST');
+		$this->requestBody   = $body;
+		$this->requestHeaders = $headers ?? [];
+
+		if(!isset($this->parsedURL['host']) || !in_array($this->parsedURL['scheme'], $this::ALLOWED_SCHEMES, true)){
+			throw new HTTPClientException('invalid URL');
+		}
+
+		try{
+			return $this->getResponse();
+		}
+		catch(\Exception $e){
+			throw new HTTPClientException('fetch error: '.$e->getMessage());
+		}
+
 	}
 
 	/** @inheritdoc */

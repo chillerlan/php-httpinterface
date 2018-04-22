@@ -55,63 +55,48 @@ class CurlClient extends HTTPClientAbstract{
 	}
 
 	/** @inheritdoc */
-	public function request(string $url, array $params = null, string $method = null, $body = null, array $headers = null):HTTPResponseInterface{
+	protected function getResponse():HTTPResponseInterface{
 		$this->responseHeaders = new \stdClass;
 
-		try{
-			$parsedURL = parse_url($url);
+		$headers = $this->normalizeRequestHeaders($this->requestHeaders);
+		$options = [CURLOPT_CUSTOMREQUEST => $this->requestMethod];
 
-			if(!isset($parsedURL['host']) || $parsedURL['scheme'] !== 'https'){
-				trigger_error('invalid URL');
-			}
+		if(in_array($this->requestMethod, ['PATCH', 'POST', 'PUT', 'DELETE'], true)){
 
-			$method    = strtoupper($method ?? 'POST');
-			$headers   = $this->normalizeRequestHeaders($headers ?? []);
-			$options   = [CURLOPT_CUSTOMREQUEST => $method];
+			if($this->requestMethod === 'POST'){
+				$options = [CURLOPT_POST => true];
 
-			if(in_array($method, ['PATCH', 'POST', 'PUT', 'DELETE'], true)){
-
-				if($method === 'POST'){
-					$options = [CURLOPT_POST => true];
-
-					if(!isset($headers['Content-type']) && is_array($body)){
-						$headers += ['Content-type: application/x-www-form-urlencoded'];
-						$body = http_build_query($body, '', '&', PHP_QUERY_RFC1738);
-					}
-
+				if(!isset($headers['Content-type']) && is_array($this->requestBody)){
+					$headers += ['Content-type: application/x-www-form-urlencoded'];
+					$this->requestBody = http_build_query($this->requestBody, '', '&', PHP_QUERY_RFC1738);
 				}
-
-				$options += [CURLOPT_POSTFIELDS => $body];
 			}
 
-			$headers += [
-				'Host: '.$parsedURL['host'],
-				'Connection: close',
-			];
-
-			$params = $params ?? [];
-			$url    = $url.(!empty($params) ? '?'.http_build_query($params) : '');
-
-			$options += [
-				CURLOPT_URL => $url,
-				CURLOPT_HTTPHEADER => $headers,
-				CURLOPT_HEADERFUNCTION => [$this, 'headerLine'],
-			];
-
-			curl_setopt_array($this->http, $options);
-
-			$response = curl_exec($this->http);
-
-			return new HTTPResponse([
-				'headers' => $this->responseHeaders,
-				'body'    => $response,
-			]);
-
-		}
-		catch(\Exception $e){
-			throw new HTTPClientException($e->getMessage());
+			$options += [CURLOPT_POSTFIELDS => $this->requestBody];
 		}
 
+		$headers += [
+			'Host: '.$this->parsedURL['host'],
+			'Connection: close',
+		];
+
+		$url = $this->requestURL.(!empty($this->requestParams) ? '?'.$this->buildQuery($this->requestParams) : '');
+
+		$options += [
+			CURLOPT_URL => $url,
+			CURLOPT_HTTPHEADER => $headers,
+			CURLOPT_HEADERFUNCTION => [$this, 'headerLine'],
+		];
+
+		curl_setopt_array($this->http, $options);
+
+		$response = curl_exec($this->http);
+
+		return new HTTPResponse([
+			'url'     => $url,
+			'headers' => $this->responseHeaders,
+			'body'    => $response,
+		]);
 	}
 
 	/**

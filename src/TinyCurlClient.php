@@ -42,37 +42,23 @@ class TinyCurlClient extends HTTPClientAbstract{
 	}
 
 	/** @inheritdoc */
-	public function request(string $url, array $params = null, string $method = null, $body = null, array $headers = null):HTTPResponseInterface{
+	protected function getResponse():HTTPResponseInterface{
 
-		try{
+		$url = new URL(
+			explode('?', $this->requestURL)[0],
+			$this->requestParams,
+			$this->requestMethod,
+			$this->requestBody,
+			$this->requestHeaders
+		);
 
-			$parsedURL = parse_url($url);
+		$response = $this->http->fetch($url);
 
-			if(!isset($parsedURL['host']) || !in_array($parsedURL['scheme'], ['http', 'https'], true)){
-				trigger_error('invalid URL');
-			}
-
-			$url = new URL(
-				explode('?', $url)[0],
-				$params ?? [],
-				$method ?? 'POST',
-				$body,
-				$headers ?? []
-			);
-
-			$response = $this->http->fetch($url);
-
-			return new HTTPResponse([
-				'url'     => $url->__toString(),
-				'headers' => $response->headers,
-				'body'    => $response->body->content,
-			]);
-
-		}
-		catch(\Exception $e){
-			throw new HTTPClientException('fetch error: '.$e->getMessage());
-		}
-
+		return new HTTPResponse([
+			'url'     => $url->__toString(),
+			'headers' => $response->headers,
+			'body'    => $response->body->content,
+		]);
 	}
 
 }
