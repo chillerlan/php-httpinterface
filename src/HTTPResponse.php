@@ -46,11 +46,11 @@ class HTTPResponse implements HTTPResponseInterface, ContainerInterface{
 	 */
 	public function __get(string $property){
 
-		if($property === 'json'){
-			return json_decode($this->body);
-		}
-		elseif($property === 'json_array'){
-			return json_decode($this->body, true);
+		switch($property){
+			case 'json': return json_decode($this->body);
+			case 'json_array': return json_decode($this->body, true);
+			case 'xml': return simplexml_load_string($this->body);
+			case 'xml_array': return json_decode(json_encode(simplexml_load_string($this->body)), true); // cruel, but works.
 		}
 
 		return $this->containerGet($property);
