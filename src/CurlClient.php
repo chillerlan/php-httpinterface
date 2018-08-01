@@ -38,6 +38,12 @@ class CurlClient extends HTTPClientAbstract{
 			throw new HTTPClientException('invalid CA file');
 		}
 
+	}
+
+	/**
+	 * @return void
+	 */
+	protected function initCurl(){
 		$this->http = curl_init();
 
 		curl_setopt_array($this->http, [
@@ -86,7 +92,7 @@ class CurlClient extends HTTPClientAbstract{
 		parse_str($this->parsedURL['query'] ?? '', $parsedquery);
 		$params = array_merge($parsedquery, $this->requestParams);
 
-		$url = $this->requestURL.(!empty($params) ? '?'.http_build_query($params) : '');
+		$url = $this->requestURL.(!empty($params) ? '?'.$this->buildQuery($params) : '');
 
 		$options += [
 			CURLOPT_URL => $url,
@@ -94,6 +100,7 @@ class CurlClient extends HTTPClientAbstract{
 			CURLOPT_HEADERFUNCTION => [$this, 'headerLine'],
 		];
 
+		$this->initCurl();
 		curl_setopt_array($this->http, $options);
 
 		$response  = curl_exec($this->http);
@@ -115,7 +122,7 @@ class CurlClient extends HTTPClientAbstract{
 	 *
 	 * @link http://php.net/manual/function.curl-setopt.php CURLOPT_HEADERFUNCTION
 	 */
-	protected function headerLine(/** @noinspection PhpUnusedParameterInspection */$curl, $header_line){
+	protected function headerLine($curl, $header_line){
 		$header = explode(':', $header_line, 2);
 
 		if(count($header) === 2){
