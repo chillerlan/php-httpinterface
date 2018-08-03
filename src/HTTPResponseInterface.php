@@ -13,11 +13,13 @@
 namespace chillerlan\HTTP;
 
 /**
- * @property string    $url
- * @property \stdClass $headers
- * @property string    $body
- * @property \stdClass $json
- * @property array     $json_array
+ * @property string            $url
+ * @property \stdClass         $headers
+ * @property string            $body
+ * @property \stdClass         $json
+ * @property array             $json_array
+ * @property \SimpleXMLElement $xml
+ * @property array             $xml_array
  */
 interface HTTPResponseInterface{
 
