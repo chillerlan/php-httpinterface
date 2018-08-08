@@ -13,6 +13,7 @@
 namespace chillerlan\HTTP;
 
 use chillerlan\Traits\ContainerInterface;
+use stdClass;
 
 class StreamClient extends HTTPClientAbstract{
 
@@ -83,8 +84,8 @@ class StreamClient extends HTTPClientAbstract{
 	 *
 	 * @return \stdClass
 	 */
-	protected function parseResponseHeaders(array $headers):\stdClass {
-		$h = new \stdClass;
+	protected function parseResponseHeaders(array $headers):stdClass {
+		$h = new stdClass;
 
 		foreach($headers as $k => $v){
 
