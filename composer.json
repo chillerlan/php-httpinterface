@@ -18,17 +18,14 @@
 		"issues": "https://github.com/chillerlan/php-httpinterface/issues",
 		"source": "https://github.com/chillerlan/php-httpinterface"
 	},
-	"provide": {
-		"chillerlan/php-httpinterface": "1.0"
-	},
 	"require": {
-		"php": "^7.0.3",
+		"php": "^7.2.0",
 		"chillerlan/php-traits": "^2.0",
 		"psr/log": "^1.0"
 	},
 	"require-dev": {
 		"guzzlehttp/guzzle": "^6.3",
-		"phpunit/phpunit": "^6.5"
+		"phpunit/phpunit": "^7.3"
 	},
 	"autoload": {
 		"psr-4": {
