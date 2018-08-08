@@ -1,6 +1,6 @@
 # chillerlan/php-httpinterface
 
-A [http client wrapper](https://github.com/chillerlan/php-oauth/tree/afeb3efa7fb31710c7fd3d2909772e6177c8196a/src/HTTP) for PHP 7+.
+A [http client wrapper](https://github.com/chillerlan/php-oauth/tree/afeb3efa7fb31710c7fd3d2909772e6177c8196a/src/HTTP) for PHP 7.2+.
 
 [![version][packagist-badge]][packagist]
 [![license][license-badge]][license]
