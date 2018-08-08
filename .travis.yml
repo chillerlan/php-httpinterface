@@ -1,8 +1,11 @@
 language: php
 
-php:
-  - 7.2
-  - nightly
+matrix:
+  include:
+  - php: 7.2
+  - php: nightly
+  allow_failures:
+  - php: nightly
 
 before_install:
   - curl -o tests/cacert.pem https://curl.haxx.se/ca/cacert.pem
@@ -11,5 +14,3 @@ before_install:
 script: vendor/bin/phpunit --configuration phpunit.xml --coverage-clover clover.xml
 
 after_success: bash <(curl -s https://codecov.io/bash)
-
-
