@@ -12,10 +12,8 @@
 
 namespace chillerlan\HTTPTest;
 
-use chillerlan\HTTP\HTTPClientInterface;
-use chillerlan\HTTP\HTTPOptionsTrait;
-use chillerlan\Traits\Container;
-use chillerlan\Traits\ContainerInterface;
+use chillerlan\HTTP\{HTTPClientInterface, HTTPOptionsTrait};
+use chillerlan\Traits\{ImmutableSettingsContainer, ImmutableSettingsInterface};
 use PHPUnit\Framework\TestCase;
 
 abstract class HTTPClientTestAbstract extends TestCase{
@@ -29,7 +27,7 @@ abstract class HTTPClientTestAbstract extends TestCase{
 	protected $http;
 
 	/**
-	 * @var \chillerlan\Traits\ContainerInterface
+	 * @var \chillerlan\Traits\ImmutableSettingsInterface
 	 */
 	protected $options;
 
@@ -40,9 +38,9 @@ abstract class HTTPClientTestAbstract extends TestCase{
 		]);
 	}
 
-	protected function getOptions(array $arr = null):ContainerInterface{
-		return new class($arr ?? []) implements ContainerInterface{
-			use Container, HTTPOptionsTrait;
+	protected function getOptions(array $arr = null):ImmutableSettingsInterface{
+		return new class($arr ?? []) implements ImmutableSettingsInterface{
+			use ImmutableSettingsContainer, HTTPOptionsTrait;
 		};
 	}
 

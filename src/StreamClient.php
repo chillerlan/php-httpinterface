@@ -12,18 +12,18 @@
 
 namespace chillerlan\HTTP;
 
-use chillerlan\Traits\ContainerInterface;
+use chillerlan\Traits\ImmutableSettingsInterface;
 
 class StreamClient extends HTTPClientAbstract{
 
 	/**
 	 * StreamClient constructor.
 	 *
-	 * @param \chillerlan\Traits\ContainerInterface $options
+	 * @param \chillerlan\Traits\ImmutableSettingsInterface $options
 	 *
 	 * @throws \chillerlan\HTTP\HTTPClientException
 	 */
-	public function __construct(ContainerInterface $options){
+	public function __construct(ImmutableSettingsInterface $options){
 		parent::__construct($options);
 
 		if(!isset($this->options->ca_info) || !is_file($this->options->ca_info)){

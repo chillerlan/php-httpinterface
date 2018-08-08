@@ -12,7 +12,7 @@
 
 namespace chillerlan\HTTP;
 
-use chillerlan\Traits\ContainerInterface;
+use chillerlan\Traits\ImmutableSettingsInterface;
 use GuzzleHttp\Client;
 use Psr\Http\Message\StreamInterface;
 
@@ -24,10 +24,10 @@ class GuzzleClient extends HTTPClientAbstract{
 	/**
 	 * GuzzleClient constructor.
 	 *
-	 * @param \chillerlan\Traits\ContainerInterface $options
+	 * @param \chillerlan\Traits\ImmutableSettingsInterface $options
 	 * @param \GuzzleHttp\Client|null               $http
 	 */
-	public function __construct(ContainerInterface $options, Client $http = null){
+	public function __construct(ImmutableSettingsInterface $options, Client $http = null){
 		parent::__construct($options);
 
 		if($http instanceof Client){

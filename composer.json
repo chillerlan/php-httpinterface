@@ -23,11 +23,10 @@
 	},
 	"require": {
 		"php": "^7.0.3",
-		"chillerlan/php-traits": "^1.1",
+		"chillerlan/php-traits": "^2.0",
 		"psr/log": "^1.0"
 	},
 	"require-dev": {
-		"chillerlan/php-curl": "^1.0",
 		"guzzlehttp/guzzle": "^6.3",
 		"phpunit/phpunit": "^6.5"
 	},

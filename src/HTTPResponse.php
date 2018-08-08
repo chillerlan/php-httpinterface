@@ -13,11 +13,11 @@
 namespace chillerlan\HTTP;
 
 use chillerlan\Traits\{
-	Container, ContainerInterface
+	ImmutableSettingsContainer, ImmutableSettingsInterface
 };
 
-class HTTPResponse implements HTTPResponseInterface, ContainerInterface{
-	use Container{
+class HTTPResponse implements HTTPResponseInterface, ImmutableSettingsInterface{
+	use ImmutableSettingsContainer{
 		__get as containerGet;
 	}
 
