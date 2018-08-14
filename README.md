@@ -1,6 +1,6 @@
 # chillerlan/php-httpinterface
 
-A [http client wrapper](https://github.com/chillerlan/php-oauth/tree/afeb3efa7fb31710c7fd3d2909772e6177c8196a/src/HTTP) for PHP 7+.
+A http client wrapper/PSR-7/PSR-17 implementation for PHP 7.2+.
 
 [![version][packagist-badge]][packagist]
 [![license][license-badge]][license]
@@ -25,26 +25,3 @@ A [http client wrapper](https://github.com/chillerlan/php-oauth/tree/afeb3efa7fb
 [donate-badge]: https://img.shields.io/badge/donate-paypal-ff33aa.svg?style=flat-square
 [donate]: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WLYUNAT9ZTJZ4
 
-### `HTTPClientInterface`
-method | return 
------- | ------ 
-`request(string $url, array $params = null, string $method = null, $body = null, array $headers = null)` | `HTTPResponseInterface` 
-`normalizeRequestHeaders(array $headers)` | array
-`buildQuery(array $params, bool $urlencode = null, string $delimiter = null, string $enclosure = null)` | string
-`checkQueryParams(array $params, bool $booleans_as_string = null)` | array
-
-### `HTTPClientTrait`
-The `HTTPClientTrait` provides several (protected) shortcut methods for the `HTTPClientInterface`.
-
-method | return 
------- | ------ 
-`setHTTPClient(HTTPClientInterface $http)` | `$this`
-`httpRequest(string $url, array $params = null, string $method = null, $body = null, array $headers = null)` | `HTTPResponseInterface`
-`httpDELETE(string $url, array $params = null, array $headers = null)` | `HTTPResponseInterface`
-`httpGET(string $url, array $params = null, array $headers = null)` | `HTTPResponseInterface`
-`httpPATCH(string $url, array $params = null, $body = null, array $headers = null)` | `HTTPResponseInterface`
-`httpPOST(string $url, array $params = null, $body = null, array $headers = null)` | `HTTPResponseInterface`
-`httpPUT(string $url, array $params = null, $body = null, array $headers = null)` | `HTTPResponseInterface`
-`normalizeRequestHeaders(array $headers)` | array
-`checkQueryParams($params, bool $booleans_as_string = null)` | mixed
-`httpBuildQuery(array $params, bool $urlencode = null, string $delimiter = null, string $enclosure = null)` | string
