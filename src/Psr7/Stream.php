@@ -4,13 +4,13 @@
  *
  * @filesource   Stream.php
  * @created      11.08.2018
- * @package      chillerlan\HTTP
+ * @package      chillerlan\HTTP\Psr7
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2018 smiley
  * @license      MIT
  */
 
-namespace chillerlan\HTTP;
+namespace chillerlan\HTTP\Psr7;
 
 use Exception;
 use InvalidArgumentException;
@@ -341,57 +341,6 @@ final class Stream implements StreamInterface{
 		$meta = stream_get_meta_data($this->stream);
 
 		return isset($meta[$key]) ? $meta[$key] : null;
-	}
-
-	/**
-	 * @param string|null $content
-	 *
-	 * @return \Psr\Http\Message\StreamInterface
-	 */
-	public static function create(string $content = ''):StreamInterface{
-		$stream = fopen('php://temp', 'r+');
-
-		if($content !== ''){
-			fwrite($stream, $content);
-			fseek($stream, 0);
-		}
-
-		return new self($stream);
-	}
-
-	/**
-	 * @param mixed $in
-	 *
-	 * @return \Psr\Http\Message\StreamInterface
-	 */
-	public static function fromInputGuess($in = null):StreamInterface{
-		$in = $in ?? '';
-
-		if(is_string($in) && is_file($in) && is_readable($in)){
-			return new self(fopen($in, 'r'));
-		}
-
-		if(is_scalar($in)){
-			return self::create((string)$in);
-		}
-
-		$type = gettype($in);
-
-		if($type === 'resource'){
-			return new self($in);
-		}
-		elseif($type === 'object'){
-
-			if($in instanceof StreamInterface){
-				return $in;
-			}
-			elseif(method_exists($in, '__toString')){
-				return self::create((string)$in);
-			}
-
-		}
-
-		throw new InvalidArgumentException('Invalid resource type: '.$type);
 	}
 
 }

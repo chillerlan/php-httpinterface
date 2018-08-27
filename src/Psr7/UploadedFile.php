@@ -4,14 +4,15 @@
  *
  * @filesource   UploadedFile.php
  * @created      11.08.2018
- * @package      chillerlan\HTTP
+ * @package      chillerlan\HTTP\Psr7
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2018 smiley
  * @license      MIT
  */
 
-namespace chillerlan\HTTP;
+namespace chillerlan\HTTP\Psr7;
 
+use chillerlan\HTTP\Psr17\StreamFactory;
 use InvalidArgumentException;
 use Psr\Http\Message\{StreamInterface, UploadedFileInterface};
 use RuntimeException;
@@ -68,6 +69,11 @@ final class UploadedFile implements UploadedFileInterface{
 	private $moved = false;
 
 	/**
+	 * @var \chillerlan\HTTP\Psr17\StreamFactory
+	 */
+	protected $streamFactory;
+
+	/**
 	 * @param \Psr\Http\Message\StreamInterface|string|resource $file
 	 * @param int                                               $size
 	 * @param int                                               $error
@@ -87,13 +93,15 @@ final class UploadedFile implements UploadedFileInterface{
 		$this->clientFilename  = $filename;
 		$this->clientMediaType = $mediaType;
 
+		$this->streamFactory   = new StreamFactory;
+
 		if($this->error === UPLOAD_ERR_OK){
 
 			if(is_string($file)){
 				$this->file = $file;
 			}
 			else{
-				$this->stream = Stream::fromInputGuess($file);
+				$this->stream = $this->streamFactory->createStreamFromInputGuess($file);
 			}
 
 		}
@@ -111,7 +119,7 @@ final class UploadedFile implements UploadedFileInterface{
 			return $this->stream;
 		}
 
-		return new Stream(fopen($this->file, 'r+'));
+		return $this->streamFactory->createStreamFromFile($this->file, 'r+');
 	}
 
 	/**
@@ -125,13 +133,17 @@ final class UploadedFile implements UploadedFileInterface{
 			throw new InvalidArgumentException('Invalid path provided for move operation; must be a non-empty string');
 		}
 
+		if(!is_writable($targetPath)){
+			throw new RuntimeException(sprintf('Directory %s is not writable', $targetPath));
+		}
+
 		if($this->file !== null){
 			$this->moved = php_sapi_name() === 'cli'
 				? rename($this->file, $targetPath)
 				: move_uploaded_file($this->file, $targetPath);
 		}
 		else{
-			$this->copyToStream(new Stream(fopen($targetPath, 'r+')));
+			$this->copyToStream($this->streamFactory->createStreamFromFile($targetPath, 'r+'));
 			$this->moved = true;
 		}
 
@@ -183,82 +195,6 @@ final class UploadedFile implements UploadedFileInterface{
 			throw new RuntimeException('Cannot retrieve stream after it has already been moved');
 		}
 
-	}
-
-	/**
-	 * Return an UploadedFile instance array.
-	 *
-	 * @param array $files A array which respect $_FILES structure
-	 * @throws InvalidArgumentException for unrecognized values
-	 * @return array
-	 */
-	public static function normalizeFiles(array $files){
-		$normalized = [];
-
-		foreach($files as $key => $value){
-
-			if($value instanceof UploadedFileInterface){
-				$normalized[$key] = $value;
-			}
-			elseif(is_array($value) && isset($value['tmp_name'])){
-				$normalized[$key] = self::createUploadedFileFromSpec($value);
-			}
-			elseif(is_array($value)){
-				$normalized[$key] = self::normalizeFiles($value);
-				continue;
-			}
-			else{
-				throw new InvalidArgumentException('Invalid value in files specification');
-			}
-
-		}
-
-		return $normalized;
-	}
-
-	/**
-	 * Create and return an UploadedFile instance from a $_FILES specification.
-	 *
-	 * If the specification represents an array of values, this method will
-	 * delegate to normalizeNestedFileSpec() and return that return value.
-	 *
-	 * @param array $value $_FILES struct
-	 * @return array|UploadedFileInterface
-	 */
-	private static function createUploadedFileFromSpec(array $value){
-
-		if(is_array($value['tmp_name'])){
-			return self::normalizeNestedFileSpec($value);
-		}
-
-		return new UploadedFile($value['tmp_name'], (int)$value['size'], (int)$value['error'], $value['name'], $value['type']);
-	}
-
-	/**
-	 * Normalize an array of file specifications.
-	 *
-	 * Loops through all nested files and returns a normalized array of
-	 * UploadedFileInterface instances.
-	 *
-	 * @param array $files
-	 * @return UploadedFileInterface[]
-	 */
-	private static function normalizeNestedFileSpec(array $files = []):array{
-		$normalizedFiles = [];
-
-		foreach(array_keys($files['tmp_name']) as $key){
-			$spec = [
-				'tmp_name' => $files['tmp_name'][$key],
-				'size'     => $files['size'][$key],
-				'error'    => $files['error'][$key],
-				'name'     => $files['name'][$key],
-				'type'     => $files['type'][$key],
-			];
-
-			$normalizedFiles[$key] = self::createUploadedFileFromSpec($spec);
-		}
-
-		return $normalizedFiles;
 	}
 
 	/**

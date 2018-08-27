@@ -4,13 +4,13 @@
  *
  * @filesource   Uri.php
  * @created      10.08.2018
- * @package      chillerlan\HTTP
+ * @package      chillerlan\HTTP\Psr7
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2018 smiley
  * @license      MIT
  */
 
-namespace chillerlan\HTTP;
+namespace chillerlan\HTTP\Psr7;
 
 use InvalidArgumentException;
 use Psr\Http\Message\UriInterface;
@@ -557,7 +557,7 @@ final class Uri implements UriInterface{
 	 *
 	 * @param array $parts
 	 *
-	 * @return \Psr\Http\Message\UriInterface
+	 * @return \Psr\Http\Message\UriInterface|\chillerlan\HTTP\Psr7\Uri
 	 */
 	public static function fromParts(array $parts):UriInterface{
 		$uri = new self;
@@ -632,7 +632,7 @@ final class Uri implements UriInterface{
 	 *
 	 * @param string $key Query string key to remove.
 	 *
-	 * @return \chillerlan\HTTP\Uri
+	 * @return \Psr\Http\Message\UriInterface|\chillerlan\HTTP\Psr7\Uri
 	 */
 	public function withoutQueryValue($key):Uri{
 		$current = $this->getQuery();
@@ -663,7 +663,7 @@ final class Uri implements UriInterface{
 	 * @param string      $key   Key to set.
 	 * @param string|null $value Value to set
 	 *
-	 * @return \chillerlan\HTTP\Uri
+	 * @return \Psr\Http\Message\UriInterface|\chillerlan\HTTP\Psr7\Uri
 	 */
 	public function withQueryValue($key, $value):Uri{
 		$current = $this->getQuery();

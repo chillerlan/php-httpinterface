@@ -6,19 +6,30 @@
  *
  * @filesource   StreamTest.php
  * @created      12.08.2018
- * @package      chillerlan\HTTPTest
+ * @package      chillerlan\HTTPTest\Psr7
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2018 smiley
  * @license      MIT
  */
 
-namespace chillerlan\HTTPTest;
+namespace chillerlan\HTTPTest\Psr7;
 
-use chillerlan\HTTP\Stream;
+use chillerlan\HTTP\Psr7\Stream;
+use chillerlan\HTTP\Psr17\StreamFactory;
 use Exception;
 use Psr\Http\Message\StreamInterface;
+use PHPUnit\Framework\TestCase;
 
-class StreamTest extends HTTPTestAbstract{
+class StreamTest extends TestCase{
+
+	/**
+	 * @var \chillerlan\HTTP\Psr17\StreamFactory
+	 */
+	protected $streamFactory;
+
+	protected function setUp(){
+		$this->streamFactory   = new StreamFactory;
+	}
 
 	/**
 	 * @expectedException \InvalidArgumentException
@@ -31,7 +42,7 @@ class StreamTest extends HTTPTestAbstract{
 	public function testConstructorInitializesProperties(){
 		$handle = fopen('php://temp', 'r+');
 		fwrite($handle, 'data');
-		$stream = $this->factory->createStreamFromResource($handle); // HTTPFactory coverage
+		$stream = $this->streamFactory->createStreamFromResource($handle); // HTTPFactory coverage
 
 		$this->assertTrue($stream->isReadable());
 		$this->assertTrue($stream->isWritable());

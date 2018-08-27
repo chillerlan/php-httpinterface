@@ -6,22 +6,32 @@
  *
  * @filesource   RequestTest.php
  * @created      12.08.2018
- * @package      chillerlan\HTTPTest
+ * @package      chillerlan\HTTPTest\Psr7
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2018 smiley
  * @license      MIT
  */
 
-namespace chillerlan\HTTPTest;
+namespace chillerlan\HTTPTest\Psr7;
 
-use chillerlan\HTTP\Request;
-use chillerlan\HTTP\Uri;
+use chillerlan\HTTP\Psr7\{Request, Uri};
+use chillerlan\HTTP\Psr17\RequestFactory;
 use Psr\Http\Message\StreamInterface;
+use PHPUnit\Framework\TestCase;
 
-class RequestTest extends HTTPTestAbstract{
+class RequestTest extends TestCase{
+
+	/**
+	 * @var \chillerlan\HTTP\Psr17\RequestFactory
+	 */
+	protected $requestFactory;
+
+	protected function setUp(){
+		$this->requestFactory = new RequestFactory;
+	}
 
 	public function testRequestUriMayBeString(){
-		$this->assertEquals('/', (string)$this->factory->createRequest('GET', '/')->getUri()); // HTTPFactory coverage
+		$this->assertEquals('/', $this->requestFactory->createRequest($this->requestFactory::METHOD_GET, '/')->getUri()); // RequestFactory coverage
 	}
 
 	public function testRequestUriMayBeUri(){
@@ -186,6 +196,29 @@ class RequestTest extends HTTPTestAbstract{
 	 */
 	public function testWithMethodInvalidMethod(){
 		(new Request('GET', '/foo'))->withMethod([]);
+	}
+
+	public function headerDataProvider():array {
+		return [
+			[['content-Type' => 'application/x-www-form-urlencoded'], ['Content-type' => 'Content-type: application/x-www-form-urlencoded']],
+			[['lowercasekey' => 'lowercasevalue'], ['Lowercasekey' => 'Lowercasekey: lowercasevalue']],
+			[['UPPERCASEKEY' => 'UPPERCASEVALUE'], ['Uppercasekey' => 'Uppercasekey: UPPERCASEVALUE']],
+			[['mIxEdCaSeKey' => 'MiXeDcAsEvAlUe'], ['Mixedcasekey' => 'Mixedcasekey: MiXeDcAsEvAlUe']],
+			[['31i71casekey' => '31i71casevalue'], ['31i71casekey' => '31i71casekey: 31i71casevalue']],
+			[[1 => 'numericvalue:1'], ['Numericvalue'  => 'Numericvalue: 1']],
+			[[2 => 2], []],
+			[['what'], []],
+		];
+	}
+
+	/**
+	 * @dataProvider headerDataProvider
+	 *
+	 * @param array $header
+	 * @param array $normalized
+	 */
+	public function testNormalizeHeaders(array $header, array $normalized){
+		$this->assertSame($normalized, $this->requestFactory->normalizeRequestHeaders($header));
 	}
 
 }

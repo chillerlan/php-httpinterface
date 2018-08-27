@@ -4,13 +4,13 @@
  *
  * @filesource   Request.php
  * @created      11.08.2018
- * @package      chillerlan\HTTP
+ * @package      chillerlan\HTTP\Psr7
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2018 smiley
  * @license      MIT
  */
 
-namespace chillerlan\HTTP;
+namespace chillerlan\HTTP\Psr7;
 
 use Fig\Http\Message\RequestMethodInterface;
 use InvalidArgumentException;

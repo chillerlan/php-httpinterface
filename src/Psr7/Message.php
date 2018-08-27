@@ -4,14 +4,15 @@
  *
  * @filesource   Message.php
  * @created      11.08.2018
- * @package      chillerlan\HTTP
+ * @package      chillerlan\HTTP\Psr7
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2018 smiley
  * @license      MIT
  */
 
-namespace chillerlan\HTTP;
+namespace chillerlan\HTTP\Psr7;
 
+use chillerlan\HTTP\Psr17\StreamFactory;
 use Psr\Http\Message\{MessageInterface, StreamInterface};
 
 abstract class Message implements MessageInterface{
@@ -37,6 +38,11 @@ abstract class Message implements MessageInterface{
 	protected $body;
 
 	/**
+	 * @var \chillerlan\HTTP\Psr17\StreamFactory
+	 */
+	protected $streamFactory;
+
+	/**
 	 * Message constructor.
 	 *
 	 * @param array|null                                             $headers
@@ -48,8 +54,10 @@ abstract class Message implements MessageInterface{
 		$body          = $body ?? '';
 		$this->version = $version ?? '1.1';
 
+		$this->streamFactory = new StreamFactory;
+
 		if($body !== '' && $body !== null){
-			$this->body = Stream::fromInputGuess($body);
+			$this->body = $this->streamFactory->createStreamFromInputGuess($body);
 		}
 
 	}
@@ -120,7 +128,6 @@ abstract class Message implements MessageInterface{
 
 		$value      = $this->trimHeaderValues($value);
 		$normalized = strtolower($name);
-
 		$clone = clone $this;
 
 		if(isset($clone->headerNames[$normalized])){
@@ -182,7 +189,7 @@ abstract class Message implements MessageInterface{
 	public function getBody():StreamInterface{
 
 		if(!$this->body){
-			$this->body = Stream::create();
+			$this->body = $this->streamFactory->createStream();
 		}
 
 		return $this->body;

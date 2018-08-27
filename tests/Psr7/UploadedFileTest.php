@@ -6,24 +6,39 @@
  *
  * @filesource   UploadedFileTest.php
  * @created      12.08.2018
- * @package      chillerlan\HTTPTest
+ * @package      chillerlan\HTTPTest\Psr7
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2018 smiley
  * @license      MIT
  */
 
-namespace chillerlan\HTTPTest;
+namespace chillerlan\HTTPTest\Psr7;
 
-use chillerlan\HTTP\UploadedFile;
+use chillerlan\HTTP\Psr7\UploadedFile;
+use chillerlan\HTTP\Psr17\{StreamFactory, UploadedFileFactory};
+use PHPUnit\Framework\TestCase;
 
-class UploadedFileTest extends HTTPTestAbstract{
+class UploadedFileTest extends TestCase{
 
+	/**
+	 * @var array
+	 */
 	protected $cleanup;
 
-	protected function setUp(){
-		parent::setUp();
+	/**
+	 * @var \chillerlan\HTTP\Psr17\UploadedFileFactory
+	 */
+	protected $uploadedFileFactory;
 
+	/**
+	 * @var \chillerlan\HTTP\Psr17\StreamFactory
+	 */
+	protected $streamFactory;
+
+	protected function setUp(){
 		$this->cleanup = [];
+		$this->uploadedFileFactory = new UploadedFileFactory;
+		$this->streamFactory       = new StreamFactory;
 	}
 
 	protected function tearDown(){
@@ -49,25 +64,11 @@ class UploadedFileTest extends HTTPTestAbstract{
 	/**
 	 * @dataProvider invalidStreams
 	 * @expectedException \InvalidArgumentException
+	 *
+	 * @param $streamOrFile
 	 */
 	public function testRaisesExceptionOnInvalidStreamOrFile($streamOrFile){
 		new UploadedFile($streamOrFile, 0, UPLOAD_ERR_OK);
-	}
-
-	public function invalidSizes(){
-		return [
-			'null'   => [null],
-			'array'  => [[1]],
-			'object' => [(object)[1]],
-		];
-	}
-
-	/**
-	 * @dataProvider invalidSizes
-	 * @expectedException \TypeError
-	 */
-	public function testRaisesExceptionOnInvalidSize($size){
-		new UploadedFile(fopen('php://temp', 'wb+'), $size, UPLOAD_ERR_OK);
 	}
 
 	public function invalidErrorStatuses(){
@@ -80,13 +81,15 @@ class UploadedFileTest extends HTTPTestAbstract{
 	/**
 	 * @dataProvider invalidErrorStatuses
 	 * @expectedException \InvalidArgumentException
+	 *
+	 * @param int $status
 	 */
-	public function testRaisesExceptionOnInvalidErrorStatus($status){
+	public function testRaisesExceptionOnInvalidErrorStatus(int $status){
 		new UploadedFile(fopen('php://temp', 'wb+'), 0, $status);
 	}
 
 	public function testGetStreamReturnsOriginalStreamObject(){
-		$stream = $this->factory->createStream('');
+		$stream = $this->streamFactory->createStream('');
 		$upload = new UploadedFile($stream, 0, UPLOAD_ERR_OK);
 
 		$this->assertSame($stream, $upload->getStream());
@@ -101,8 +104,8 @@ class UploadedFileTest extends HTTPTestAbstract{
 	}
 
 	public function testSuccessful(){
-		$stream = $this->factory->createStream('Foo bar!');
-		$upload = $this->factory->createUploadedFile($stream, $stream->getSize(), UPLOAD_ERR_OK, 'filename.txt', 'text/plain');
+		$stream = $this->streamFactory->createStream('Foo bar!');
+		$upload = new UploadedFile($stream, $stream->getSize(), UPLOAD_ERR_OK, 'filename.txt', 'text/plain');
 
 		$this->assertEquals($stream->getSize(), $upload->getSize());
 		$this->assertEquals('filename.txt', $upload->getClientFilename());
@@ -116,7 +119,7 @@ class UploadedFileTest extends HTTPTestAbstract{
 	}
 
 	public function testMoveCannotBeCalledMoreThanOnce(){
-		$stream = $this->factory->createStream('Foo bar!');
+		$stream = $this->streamFactory->createStream('Foo bar!');
 		$upload = new UploadedFile($stream, 0, UPLOAD_ERR_OK);
 
 		$this->cleanup[] = $to = tempnam(sys_get_temp_dir(), 'diac');
@@ -129,7 +132,7 @@ class UploadedFileTest extends HTTPTestAbstract{
 	}
 
 	public function testCannotRetrieveStreamAfterMove(){
-		$stream = $this->factory->createStream('Foo bar!');
+		$stream = $this->streamFactory->createStream('Foo bar!');
 		$upload = new UploadedFile($stream, 0, UPLOAD_ERR_OK);
 
 		$this->cleanup[] = $to = tempnam(sys_get_temp_dir(), 'diac');
@@ -155,16 +158,20 @@ class UploadedFileTest extends HTTPTestAbstract{
 
 	/**
 	 * @dataProvider nonOkErrorStatus
+	 *
+	 * @param int $status
 	 */
-	public function testConstructorDoesNotRaiseExceptionForInvalidStreamWhenErrorStatusPresent($status){
+	public function testConstructorDoesNotRaiseExceptionForInvalidStreamWhenErrorStatusPresent(int $status){
 		$uploadedFile = new UploadedFile('not ok', 0, $status);
 		$this->assertSame($status, $uploadedFile->getError());
 	}
 
 	/**
 	 * @dataProvider nonOkErrorStatus
+	 *
+	 * @param int $status
 	 */
-	public function testMoveToRaisesExceptionWhenErrorStatusPresent($status){
+	public function testMoveToRaisesExceptionWhenErrorStatusPresent(int $status){
 		$uploadedFile = new UploadedFile('not ok', 0, $status);
 		$this->expectException(\RuntimeException::class);
 		$this->expectExceptionMessage('upload error');
@@ -173,8 +180,10 @@ class UploadedFileTest extends HTTPTestAbstract{
 
 	/**
 	 * @dataProvider nonOkErrorStatus
+	 *
+	 * @param int $status
 	 */
-	public function testGetStreamRaisesExceptionWhenErrorStatusPresent($status){
+	public function testGetStreamRaisesExceptionWhenErrorStatusPresent(int $status){
 		$uploadedFile = new UploadedFile('not ok', 0, $status);
 		$this->expectException(\RuntimeException::class);
 		$this->expectExceptionMessage('upload error');
@@ -439,9 +448,12 @@ class UploadedFileTest extends HTTPTestAbstract{
 
 	/**
 	 * @dataProvider dataNormalizeFiles
+	 *
+	 * @param array $files
+	 * @param array $expected
 	 */
-	public function testNormalizeFiles($files, $expected){
-		$result = UploadedFile::normalizeFiles($files);
+	public function testNormalizeFiles(array $files, array $expected){
+		$result = $this->uploadedFileFactory->normalizeFiles($files);
 
 		$this->assertEquals($expected, $result);
 	}
@@ -451,7 +463,7 @@ class UploadedFileTest extends HTTPTestAbstract{
 	 * @expectedExceptionMessage Invalid value in files specification
 	 */
 	public function testNormalizeFilesRaisesException(){
-		UploadedFile::normalizeFiles(['test' => 'something']);
+		$this->uploadedFileFactory->normalizeFiles(['test' => 'something']);
 	}
 
 }

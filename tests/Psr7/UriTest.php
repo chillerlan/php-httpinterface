@@ -7,23 +7,33 @@
  *
  * @filesource   UriTest.php
  * @created      10.08.2018
- * @package      chillerlan\HTTPTest
+ * @package      chillerlan\HTTPTest\Psr7
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2018 smiley
  * @license      MIT
  */
 
-namespace chillerlan\HTTPTest;
+namespace chillerlan\HTTPTest\Psr7;
 
-use chillerlan\HTTP\HTTPFactory;
-use chillerlan\HTTP\Uri;
+use chillerlan\HTTP\Psr7\Uri;
+use chillerlan\HTTP\Psr17\UriFactory;
 use InvalidArgumentException;
 use Psr\Http\Message\UriInterface;
+use PHPUnit\Framework\TestCase;
 
-class UriTest extends HTTPTestAbstract{
+class UriTest extends TestCase{
+
+	/**
+	 * @var \chillerlan\HTTP\Psr17\UriFactory
+	 */
+	protected $uriFactory;
+
+	protected function setUp(){
+		$this->uriFactory = new UriFactory;
+	}
 
 	public function testParsesProvidedUri(){
-		$uri = $this->factory->createUri('https://user:pass@example.com:8080/path/123?q=abc#test'); // HTTPFactory coverage
+		$uri = $this->uriFactory->createUri('https://user:pass@example.com:8080/path/123?q=abc#test'); // URIFactory coverage
 
 		$this->assertSame('https', $uri->getScheme());
 		$this->assertSame('user:pass@example.com:8080', $uri->getAuthority());
@@ -553,8 +563,15 @@ class UriTest extends HTTPTestAbstract{
 	 * scheme, it SHOULD NOT be included.
 	 *
 	 * @dataProvider authorityProvider
+	 *
+	 * @param string $scheme
+	 * @param string $user
+	 * @param string $pass
+	 * @param string $host
+	 * @param int    $port
+	 * @param string $authority
 	 */
-	public function testGetAuthority($scheme, $user, $pass, $host, $port, $authority){
+	public function testGetAuthority(string $scheme, string $user, string $pass, string $host, $port, string $authority){
 		$uri = (new Uri)
 			->withHost($host)
 			->withScheme($scheme)
@@ -641,8 +658,7 @@ class UriTest extends HTTPTestAbstract{
 		$this->assertTrue((new Uri(''))->isRelativePathReference());
 	}
 
-	public function testAddAndRemoveQueryValues()
-	{
+	public function testAddAndRemoveQueryValues(){
 		$uri = new Uri;
 		/** @var Uri $uri */
 		$uri = $uri->withQueryValue('a', 'b');
@@ -667,24 +683,21 @@ class UriTest extends HTTPTestAbstract{
 		$this->assertSame('c=d&a=e', $uri->getQuery());
 	}
 
-	public function testWithoutQueryValueRemovesAllSameKeys()
-	{
+	public function testWithoutQueryValueRemovesAllSameKeys(){
 		$uri = (new Uri)->withQuery('a=b&c=d&a=e');
 		/** @var Uri $uri */
 		$uri = $uri->withoutQueryValue('a');
 		$this->assertSame('c=d', $uri->getQuery());
 	}
 
-	public function testRemoveNonExistingQueryValue()
-	{
+	public function testRemoveNonExistingQueryValue(){
 		$uri = new Uri;
 		$uri = $uri->withQueryValue('a', 'b');
 		$uri = $uri->withoutQueryValue('c');
 		$this->assertSame('a=b', $uri->getQuery());
 	}
 
-	public function testWithQueryValueHandlesEncoding()
-	{
+	public function testWithQueryValueHandlesEncoding(){
 		$uri = new Uri;
 		$uri = $uri->withQueryValue('E=mc^2', 'ein&stein');
 		$this->assertSame('E%3Dmc%5E2=ein%26stein', $uri->getQuery(), 'Decoded key/value get encoded');
@@ -694,8 +707,7 @@ class UriTest extends HTTPTestAbstract{
 		$this->assertSame('E%3Dmc%5e2=ein%26stein', $uri->getQuery(), 'Encoded key/value do not get double-encoded');
 	}
 
-	public function testWithoutQueryValueHandlesEncoding()
-	{
+	public function testWithoutQueryValueHandlesEncoding(){
 		// It also tests that the case of the percent-encoding does not matter,
 		// i.e. both lowercase "%3d" and uppercase "%5E" can be removed.
 		$uri = (new Uri)->withQuery('E%3dmc%5E2=einstein&foo=bar');
@@ -779,11 +791,14 @@ class UriTest extends HTTPTestAbstract{
 
 	/**
 	 * @dataProvider dataGetUriFromGlobals
+	 *
+	 * @param string $expected
+	 * @param array  $serverParams
 	 */
-	public function testGetUriFromGlobals($expected, $serverParams){
+	public function testGetUriFromGlobals(string $expected, array $serverParams){
 		$_SERVER = $serverParams;
 
-		$this->assertEquals(new Uri($expected), $this->factory->createUriFromGlobals()); // HTTPFactory coverage
+		$this->assertEquals(new Uri($expected), $this->uriFactory->createUriFromGlobals()); // URIFactory coverage
 	}
 
 	/**
@@ -806,7 +821,7 @@ class UriTest extends HTTPTestAbstract{
 
 	public function testFilterHostIPv6(){
 		$parts['host'] = '::1';
-		$uri = $this->factory->createUriFromParts($parts); // HTTPFactory coverage
+		$uri = $this->uriFactory->createUriFromParts($parts); // URIFactory coverage
 
 		$this->assertSame('[::1]', $uri->getHost());
 	}

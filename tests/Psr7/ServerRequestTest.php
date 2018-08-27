@@ -6,17 +6,28 @@
  *
  * @filesource   ServerRequestTest.php
  * @created      12.08.2018
- * @package      chillerlan\HTTPTest
+ * @package      chillerlan\HTTPTest\Psr7
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2018 smiley
  * @license      MIT
  */
 
-namespace chillerlan\HTTPTest;
+namespace chillerlan\HTTPTest\Psr7;
 
-use chillerlan\HTTP\{ServerRequest, UploadedFile, Uri};
+use chillerlan\HTTP\Psr7\{ServerRequest, UploadedFile, Uri};
+use chillerlan\HTTP\Psr17\ServerRequestFactory;
+use PHPUnit\Framework\TestCase;
 
-class ServerRequestTest extends HTTPTestAbstract{
+class ServerRequestTest extends TestCase{
+
+	/**
+	 * @var \chillerlan\HTTP\Psr17\ServerRequestFactory
+	 */
+	protected $serverRequestFactory;
+
+	protected function setUp(){
+		$this->serverRequestFactory = new ServerRequestFactory;
+	}
 
 	public function testServerParams(){
 		$params = ['name' => 'value'];
@@ -26,7 +37,8 @@ class ServerRequestTest extends HTTPTestAbstract{
 	}
 
 	public function testCookieParams(){
-		$r1 = $this->factory->createServerRequest($this->factory::METHOD_GET, '/');
+		$r1 = $this->serverRequestFactory
+			->createServerRequest($this->serverRequestFactory::METHOD_GET, '/'); // ServerRequestFactory coverage
 
 		$params = ['name' => 'value'];
 
@@ -38,7 +50,7 @@ class ServerRequestTest extends HTTPTestAbstract{
 	}
 
 	public function testQueryParams(){
-		$r1 = $this->factory->createServerRequest($this->factory::METHOD_GET, '/');
+		$r1 = new ServerRequest('GET', '/');
 
 		$params = ['name' => 'value'];
 
@@ -50,7 +62,7 @@ class ServerRequestTest extends HTTPTestAbstract{
 	}
 
 	public function testParsedBody(){
-		$r1 = $this->factory->createServerRequest($this->factory::METHOD_GET, '/');
+		$r1 = new ServerRequest('GET', '/');
 
 		$params = ['name' => 'value'];
 
@@ -66,11 +78,11 @@ class ServerRequestTest extends HTTPTestAbstract{
 	 * @expectedExceptionMessage parsed body value must be an array, object or null
 	 */
 	public function testParsedBodyInvalidArg(){
-		$this->factory->createServerRequest($this->factory::METHOD_GET, '/')->withParsedBody('');
+		(new ServerRequest('GET', '/'))->withParsedBody('');
 	}
 
 	public function testAttributes(){
-		$r1 = $this->factory->createServerRequest($this->factory::METHOD_GET, '/');
+		$r1 = new ServerRequest('GET', '/');
 
 		$r2 = $r1->withAttribute('name', 'value');
 		$r3 = $r2->withAttribute('other', 'otherValue');
@@ -93,7 +105,7 @@ class ServerRequestTest extends HTTPTestAbstract{
 	}
 
 	public function testNullAttribute(){
-		$r = $this->factory->createServerRequest($this->factory::METHOD_GET, '/')->withAttribute('name', null);
+		$r = (new ServerRequest('GET', '/'))->withAttribute('name', null);
 
 		$this->assertSame(['name' => null], $r->getAttributes());
 		$this->assertNull($r->getAttribute('name', 'different-default'));
@@ -105,7 +117,7 @@ class ServerRequestTest extends HTTPTestAbstract{
 	}
 
 	public function testUploadedFiles(){
-		$r1 = $this->factory->createServerRequest($this->factory::METHOD_GET, '/');
+		$r1 = new ServerRequest('GET', '/');
 
 		$files = [
 			'file' => new UploadedFile('test', 123, UPLOAD_ERR_OK)
@@ -162,7 +174,7 @@ class ServerRequestTest extends HTTPTestAbstract{
 			]
 		];
 
-		$server = $this->factory->createServerRequestFromGlobals();
+		$server = $this->serverRequestFactory->createServerRequestFromGlobals();
 
 		$this->assertSame('POST', $server->getMethod());
 		$this->assertEquals(['Host' => ['www.example.org']], $server->getHeaders());
@@ -173,7 +185,7 @@ class ServerRequestTest extends HTTPTestAbstract{
 		$this->assertEquals($_GET, $server->getQueryParams());
 
 		$this->assertEquals(
-			$this->factory->createUri('https://www.example.org/blog/article.php?id=10&user=foo'),
+			new Uri('https://www.example.org/blog/article.php?id=10&user=foo'),
 			$server->getUri()
 		);
 

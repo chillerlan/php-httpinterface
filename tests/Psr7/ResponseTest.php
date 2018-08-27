@@ -6,21 +6,38 @@
  *
  * @filesource   ResponseTest.php
  * @created      12.08.2018
- * @package      chillerlan\HTTPTest
+ * @package      chillerlan\HTTPTest\Psr7
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2018 smiley
  * @license      MIT
  */
 
-namespace chillerlan\HTTPTest;
+namespace chillerlan\HTTPTest\Psr7;
 
-use chillerlan\HTTP\Response;
+use chillerlan\HTTP\Psr7\Response;
+use chillerlan\HTTP\Psr17\{StreamFactory, ResponseFactory};
 use Psr\Http\Message\StreamInterface;
+use PHPUnit\Framework\TestCase;
 
-class ResponseTest extends HTTPTestAbstract{
+class ResponseTest extends TestCase{
+
+	/**
+	 * @var \chillerlan\HTTP\Psr17\ResponseFactory
+	 */
+	protected $responseFactory;
+
+	/**
+	 * @var \chillerlan\HTTP\Psr17\StreamFactory
+	 */
+	protected $streamFactory;
+
+	protected function setUp(){
+		$this->responseFactory = new ResponseFactory;
+		$this->streamFactory   = new StreamFactory;
+	}
 
 	public function testDefaultConstructor(){
-		$r = $this->factory->createResponse();
+		$r = $this->responseFactory->createResponse();
 
 		$this->assertSame(200, $r->getStatusCode());
 		$this->assertSame('1.1', $r->getProtocolVersion());
@@ -31,7 +48,7 @@ class ResponseTest extends HTTPTestAbstract{
 	}
 
 	public function testCanConstructWithStatusCode(){
-		$r = $this->factory->createResponse(404);
+		$r = $this->responseFactory->createResponse(404);
 
 		$this->assertSame(404, $r->getStatusCode());
 		$this->assertSame('Not Found', $r->getReasonPhrase());
@@ -105,23 +122,23 @@ class ResponseTest extends HTTPTestAbstract{
 	}
 
 	public function testWithStatusCodeAndNoReason(){
-		$r = $this->factory->createResponse()->withStatus(201);
+		$r = (new Response)->withStatus(201);
 		$this->assertSame(201, $r->getStatusCode());
 		$this->assertSame('Created', $r->getReasonPhrase());
 	}
 
 	public function testWithStatusCodeAndReason(){
-		$r = $this->factory->createResponse()->withStatus(201, 'Foo');
+		$r = (new Response)->withStatus(201, 'Foo');
 		$this->assertSame(201, $r->getStatusCode());
 		$this->assertSame('Foo', $r->getReasonPhrase());
 
-		$r = $this->factory->createResponse()->withStatus(201, '0');
+		$r = (new Response)->withStatus(201, '0');
 		$this->assertSame(201, $r->getStatusCode());
 		$this->assertSame('0', $r->getReasonPhrase(), 'Falsey reason works');
 	}
 
 	public function testWithProtocolVersion(){
-		$r = $this->factory->createResponse()->withProtocolVersion('1000');
+		$r = (new Response)->withProtocolVersion('1000');
 		$this->assertSame('1000', $r->getProtocolVersion());
 	}
 
@@ -131,8 +148,8 @@ class ResponseTest extends HTTPTestAbstract{
 	}
 
 	public function testWithBody(){
-		$b = $this->factory->createStream('0');
-		$r = $this->factory->createResponse()->withBody($b);
+		$b = $this->streamFactory->createStream('0');
+		$r = (new Response)->withBody($b);
 		$this->assertInstanceOf(StreamInterface::class, $r->getBody());
 		$this->assertSame('0', (string) $r->getBody());
 	}
@@ -230,8 +247,8 @@ class ResponseTest extends HTTPTestAbstract{
 
 	public function testHeaderValuesAreTrimmed(){
 		$r1 = new Response(200, ['OWS' => " \t \tFoo\t \t "]);
-		$r2 = $this->factory->createResponse()->withHeader('OWS', " \t \tFoo\t \t ");
-		$r3 = $this->factory->createResponse()->withAddedHeader('OWS', " \t \tFoo\t \t ");;
+		$r2 = (new Response)->withHeader('OWS', " \t \tFoo\t \t ");
+		$r3 = (new Response)->withAddedHeader('OWS', " \t \tFoo\t \t ");;
 
 		foreach([$r1, $r2, $r3] as $r){
 			$this->assertSame(['OWS' => ['Foo']], $r->getHeaders());
