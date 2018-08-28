@@ -14,6 +14,7 @@
 
 namespace chillerlan\HTTPTest\Psr7;
 
+use chillerlan\HTTP\Psr7;
 use chillerlan\HTTP\Psr7\UploadedFile;
 use chillerlan\HTTP\Psr17\{StreamFactory, UploadedFileFactory};
 use PHPUnit\Framework\TestCase;
@@ -90,7 +91,7 @@ class UploadedFileTest extends TestCase{
 
 	public function testGetStreamReturnsOriginalStreamObject(){
 		$stream = $this->streamFactory->createStream('');
-		$upload = new UploadedFile($stream, 0, UPLOAD_ERR_OK);
+		$upload = $this->uploadedFileFactory->createUploadedFile($stream, 0, UPLOAD_ERR_OK); // coverage
 
 		$this->assertSame($stream, $upload->getStream());
 	}
@@ -453,7 +454,7 @@ class UploadedFileTest extends TestCase{
 	 * @param array $expected
 	 */
 	public function testNormalizeFiles(array $files, array $expected){
-		$result = $this->uploadedFileFactory->normalizeFiles($files);
+		$result = Psr7\normalize_files($files);
 
 		$this->assertEquals($expected, $result);
 	}
@@ -463,7 +464,7 @@ class UploadedFileTest extends TestCase{
 	 * @expectedExceptionMessage Invalid value in files specification
 	 */
 	public function testNormalizeFilesRaisesException(){
-		$this->uploadedFileFactory->normalizeFiles(['test' => 'something']);
+		Psr7\normalize_files(['test' => 'something']);
 	}
 
 }

@@ -14,6 +14,7 @@
 
 namespace chillerlan\HTTPTest\Psr7;
 
+use chillerlan\HTTP\Psr7;
 use chillerlan\HTTP\Psr7\{Request, Uri};
 use chillerlan\HTTP\Psr17\RequestFactory;
 use Psr\Http\Message\StreamInterface;
@@ -218,7 +219,7 @@ class RequestTest extends TestCase{
 	 * @param array $normalized
 	 */
 	public function testNormalizeHeaders(array $header, array $normalized){
-		$this->assertSame($normalized, $this->requestFactory->normalizeRequestHeaders($header));
+		$this->assertSame($normalized, Psr7\normalize_request_headers($header));
 	}
 
 }

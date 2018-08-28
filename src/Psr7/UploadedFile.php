@@ -22,7 +22,7 @@ final class UploadedFile implements UploadedFileInterface{
 	/**
 	 * @var int[]
 	 */
-	private const UPLOAD_ERRORS = [
+	public const UPLOAD_ERRORS = [
 		UPLOAD_ERR_OK,
 		UPLOAD_ERR_INI_SIZE,
 		UPLOAD_ERR_FORM_SIZE,
@@ -101,7 +101,7 @@ final class UploadedFile implements UploadedFileInterface{
 				$this->file = $file;
 			}
 			else{
-				$this->stream = $this->streamFactory->createStreamFromInputGuess($file);
+				$this->stream = $this->streamFactory->createStreamFromInput($file);
 			}
 
 		}

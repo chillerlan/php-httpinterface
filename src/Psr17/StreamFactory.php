@@ -13,7 +13,6 @@
 namespace chillerlan\HTTP\Psr17;
 
 use chillerlan\HTTP\Psr7\Stream;
-use InvalidArgumentException;
 use Psr\Http\Message\{StreamFactoryInterface, StreamInterface};
 
 final class StreamFactory implements StreamFactoryInterface{
@@ -25,17 +24,10 @@ final class StreamFactory implements StreamFactoryInterface{
 	 *
 	 * @param string $content String content with which to populate the stream.
 	 *
-	 * @return StreamInterface
+	 * @return \Psr\Http\Message\StreamInterface
 	 */
 	public function createStream(string $content = ''):StreamInterface{
-		$stream = fopen('php://temp', 'r+');
-
-		if($content !== ''){
-			fwrite($stream, $content);
-			fseek($stream, 0);
-		}
-
-		return new Stream($stream);
+		return create_stream($content);
 	}
 
 	/**
@@ -49,7 +41,7 @@ final class StreamFactory implements StreamFactoryInterface{
 	 * @param string $filename Filename or stream URI to use as basis of stream.
 	 * @param string $mode     Mode with which to open the underlying filename/stream.
 	 *
-	 * @return StreamInterface
+	 * @return \Psr\Http\Message\StreamInterface
 	 */
 	public function createStreamFromFile(string $filename, string $mode = 'r'):StreamInterface{
 		return new Stream(fopen($filename, $mode));
@@ -62,7 +54,7 @@ final class StreamFactory implements StreamFactoryInterface{
 	 *
 	 * @param resource $resource PHP resource to use as basis of stream.
 	 *
-	 * @return StreamInterface
+	 * @return \Psr\Http\Message\StreamInterface
 	 */
 	public function createStreamFromResource($resource):StreamInterface{
 		return new Stream($resource);
@@ -73,34 +65,8 @@ final class StreamFactory implements StreamFactoryInterface{
 	 *
 	 * @return \Psr\Http\Message\StreamInterface
 	 */
-	public function createStreamFromInputGuess($in = null):StreamInterface{
-		$in = $in ?? '';
-
-		if(is_string($in) && is_file($in) && is_readable($in)){
-			return new Stream(fopen($in, 'r'));
-		}
-
-		if(is_scalar($in)){
-			return $this->createStream((string)$in);
-		}
-
-		$type = gettype($in);
-
-		if($type === 'resource'){
-			return new Stream($in);
-		}
-		elseif($type === 'object'){
-
-			if($in instanceof StreamInterface){
-				return $in;
-			}
-			elseif(method_exists($in, '__toString')){
-				return $this->createStream((string)$in);
-			}
-
-		}
-
-		throw new InvalidArgumentException('Invalid resource type: '.$type);
+	public function createStreamFromInput($in = null):StreamInterface{
+		return create_stream_from_input($in);
 	}
 
 }

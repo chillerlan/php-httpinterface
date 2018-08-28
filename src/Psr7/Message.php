@@ -57,7 +57,7 @@ abstract class Message implements MessageInterface{
 		$this->streamFactory = new StreamFactory;
 
 		if($body !== '' && $body !== null){
-			$this->body = $this->streamFactory->createStreamFromInputGuess($body);
+			$this->body = $this->streamFactory->createStreamFromInput($body);
 		}
 
 	}

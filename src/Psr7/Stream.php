@@ -19,7 +19,7 @@ use RuntimeException;
 
 final class Stream implements StreamInterface{
 
-	private const MODES_READ = [
+	public const MODES_READ = [
 		'a+'  => true,
 		'c+'  => true,
 		'c+b' => true,
@@ -38,7 +38,7 @@ final class Stream implements StreamInterface{
 		'x+t' => true,
 	];
 
-	private const MODES_WRITE = [
+	public const MODES_WRITE = [
 		'a'   => true,
 		'a+'  => true,
 		'c+'  => true,

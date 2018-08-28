@@ -32,33 +32,4 @@ class RequestFactory implements RequestFactoryInterface, RequestMethodInterface{
 		return new Request($method, $uri);
 	}
 
-	/**
-	 * @param array $headers
-	 *
-	 * @return array
-	 */
-	public function normalizeRequestHeaders(array $headers):array {
-		$normalized_headers = [];
-
-		foreach($headers as $key => $val){
-
-			if(is_numeric($key)){
-				$header = explode(':', $val, 2);
-
-				if(count($header) !== 2){
-					continue;
-				}
-
-				$key = $header[0];
-				$val = $header[1];
-			}
-
-			$key = ucfirst(strtolower($key));
-
-			$normalized_headers[$key] = trim($key).': '.trim($val);
-		}
-
-		return $normalized_headers;
-	}
-
 }

@@ -48,22 +48,7 @@ final class ServerRequestFactory extends RequestFactory implements ServerRequest
 	 * @return \Psr\Http\Message\ServerRequestInterface|\chillerlan\HTTP\Psr7\ServerRequest
 	 */
 	public function createServerRequestFromGlobals():ServerRequestInterface{
-
-		$serverRequest = new ServerRequest(
-			isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : self::METHOD_GET,
-			(new UriFactory)->createUriFromGlobals(),
-			function_exists('getallheaders') ? getallheaders() : [],
-			(new StreamFactory)->createStream(),
-			isset($_SERVER['SERVER_PROTOCOL']) ? str_replace('HTTP/', '', $_SERVER['SERVER_PROTOCOL']) : '1.1',
-			$_SERVER
-		);
-
-		return $serverRequest
-			->withCookieParams($_COOKIE)
-			->withQueryParams($_GET)
-			->withParsedBody($_POST)
-			->withUploadedFiles((new UploadedFileFactory)->normalizeFiles($_FILES))
-			;
+		return create_server_request_from_globals();
 	}
 
 }
