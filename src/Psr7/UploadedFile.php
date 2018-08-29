@@ -92,7 +92,6 @@ final class UploadedFile implements UploadedFileInterface{
 		$this->error           = $error;
 		$this->clientFilename  = $filename;
 		$this->clientMediaType = $mediaType;
-
 		$this->streamFactory   = new StreamFactory;
 
 		if($this->error === UPLOAD_ERR_OK){

@@ -144,7 +144,7 @@ final class Response extends Message implements ResponseInterface, StatusCodeInt
 			$reasonPhrase = $this::REASON_PHRASES[$code];
 		}
 
-		$clone = clone $this;
+		$clone               = clone $this;
 		$clone->statusCode   = $code;
 		$clone->reasonPhrase = $reasonPhrase;
 

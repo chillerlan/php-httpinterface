@@ -160,6 +160,7 @@ final class Uri implements UriInterface{
 
 		$clone         = clone $this;
 		$clone->scheme = $scheme;
+
 		$clone->removeDefaultPort();
 		$clone->validateState();
 
@@ -242,6 +243,7 @@ final class Uri implements UriInterface{
 		$clone       = clone $this;
 		$clone->user = $user;
 		$clone->pass = $password;
+
 		$clone->validateState();
 
 		return $clone;
@@ -289,6 +291,7 @@ final class Uri implements UriInterface{
 
 		$clone       = clone $this;
 		$clone->host = $host;
+
 		$clone->validateState();
 
 		return $clone;
@@ -338,6 +341,7 @@ final class Uri implements UriInterface{
 
 		$clone       = clone $this;
 		$clone->port = $port;
+
 		$clone->removeDefaultPort();
 		$clone->validateState();
 
@@ -382,6 +386,7 @@ final class Uri implements UriInterface{
 
 		$clone       = clone $this;
 		$clone->path = $path;
+
 		$clone->validateState();
 
 		return $clone;
@@ -425,6 +430,7 @@ final class Uri implements UriInterface{
 
 		$clone        = clone $this;
 		$clone->query = $query;
+
 		$clone->validateState();
 
 		return $clone;
@@ -462,6 +468,7 @@ final class Uri implements UriInterface{
 
 		$clone           = clone $this;
 		$clone->fragment = $fragment;
+
 		$clone->validateState();
 
 		return $clone;

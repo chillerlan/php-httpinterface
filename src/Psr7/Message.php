@@ -30,7 +30,7 @@ abstract class Message implements MessageInterface{
 	/**
 	 * @var string
 	 */
-	protected $version = '1.1';
+	protected $version;
 
 	/**
 	 * @var \Psr\Http\Message\StreamInterface
@@ -51,15 +51,13 @@ abstract class Message implements MessageInterface{
 	 */
 	public function __construct(array $headers = null, $body = null, string $version = null){
 		$this->setHeaders($headers ?? []);
-		$body          = $body ?? '';
-		$this->version = $version ?? '1.1';
 
+		$this->version       = $version ?? '1.1';
 		$this->streamFactory = new StreamFactory;
 
-		if($body !== '' && $body !== null){
-			$this->body = $this->streamFactory->createStreamFromInput($body);
-		}
-
+		$this->body = $body !== null && $body !== ''
+			? $this->streamFactory->createStreamFromInput($body)
+			: $this->streamFactory->createStream();
 	}
 
 	/**
@@ -128,7 +126,7 @@ abstract class Message implements MessageInterface{
 
 		$value      = $this->trimHeaderValues($value);
 		$normalized = strtolower($name);
-		$clone = clone $this;
+		$clone      = clone $this;
 
 		if(isset($clone->headerNames[$normalized])){
 			unset($clone->headers[$clone->headerNames[$normalized]]);
@@ -187,11 +185,6 @@ abstract class Message implements MessageInterface{
 	 * @inheritdoc
 	 */
 	public function getBody():StreamInterface{
-
-		if(!$this->body){
-			$this->body = $this->streamFactory->createStream();
-		}
-
 		return $this->body;
 	}
 
@@ -204,7 +197,7 @@ abstract class Message implements MessageInterface{
 			return $this;
 		}
 
-		$clone = clone $this;
+		$clone       = clone $this;
 		$clone->body = $body;
 
 		return $clone;

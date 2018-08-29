@@ -9,6 +9,7 @@
 
 namespace chillerlan\HTTP;
 
+// @codeCoverageIgnoreStart
 if(!defined('PSR7_INCLUDES')){
 	require_once __DIR__.'/Psr7/message_helpers.php';
 }
@@ -16,3 +17,4 @@ if(!defined('PSR7_INCLUDES')){
 if(!defined('PSR17_INCLUDES')){
 	require_once __DIR__.'/Psr17/factory_helpers.php';
 }
+// @codeCoverageIgnoreEnd
