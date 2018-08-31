@@ -201,12 +201,12 @@ class RequestTest extends TestCase{
 
 	public function headerDataProvider():array {
 		return [
-			[['content-Type' => 'application/x-www-form-urlencoded'], ['Content-type' => 'Content-type: application/x-www-form-urlencoded']],
-			[['lowercasekey' => 'lowercasevalue'], ['Lowercasekey' => 'Lowercasekey: lowercasevalue']],
-			[['UPPERCASEKEY' => 'UPPERCASEVALUE'], ['Uppercasekey' => 'Uppercasekey: UPPERCASEVALUE']],
-			[['mIxEdCaSeKey' => 'MiXeDcAsEvAlUe'], ['Mixedcasekey' => 'Mixedcasekey: MiXeDcAsEvAlUe']],
-			[['31i71casekey' => '31i71casevalue'], ['31i71casekey' => '31i71casekey: 31i71casevalue']],
-			[[1 => 'numericvalue:1'], ['Numericvalue'  => 'Numericvalue: 1']],
+			[['content-Type' => 'application/x-www-form-urlencoded'], ['Content-type' => 'application/x-www-form-urlencoded']],
+			[['lowercasekey' => 'lowercasevalue'], ['Lowercasekey' => 'lowercasevalue']],
+			[['UPPERCASEKEY' => 'UPPERCASEVALUE'], ['Uppercasekey' => 'UPPERCASEVALUE']],
+			[['mIxEdCaSeKey' => 'MiXeDcAsEvAlUe'], ['Mixedcasekey' => 'MiXeDcAsEvAlUe']],
+			[['31i71casekey' => '31i71casevalue'], ['31i71casekey' => '31i71casevalue']],
+			[[1 => 'numericvalue:1'], ['Numericvalue'  => '1']],
 			[[2 => 2], []],
 			[['what'], []],
 		];

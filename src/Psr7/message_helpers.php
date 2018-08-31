@@ -39,7 +39,7 @@ function normalize_request_headers(array $headers):array{
 
 		$key = ucfirst(strtolower(trim($key)));
 
-		$normalized_headers[$key] = $key.': '.trim($val);
+		$normalized_headers[$key] = trim($val);
 	}
 
 	return $normalized_headers;
@@ -139,6 +139,27 @@ function clean_query_params(array $params, bool $booleans_as_string = null):arra
 	}
 
 	return $params;
+}
+
+/**
+ * merges additional query parameters into an existing query string
+ *
+ * @param string $uri
+ * @param array  $query
+ *
+ * @return string
+ */
+function merge_query(string $uri, array $query):string{
+	parse_str(parse_url($uri, PHP_URL_QUERY), $parsedquery);
+
+	$requestURI = explode('?', $uri)[0];
+	$params     = array_merge($parsedquery, $query);
+
+	if(!empty($params)){
+		$requestURI .= '?'.build_http_query($params);
+	}
+
+	return $requestURI;
 }
 
 /**
