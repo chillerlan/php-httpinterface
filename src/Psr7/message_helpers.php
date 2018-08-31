@@ -53,7 +53,7 @@ function normalize_request_headers(array $headers):array{
 function raw_urlencode($data){
 
 	if(is_array($data)){
-		return array_map('raw_urlencode', $data);
+		return array_map(__NAMESPACE__.'\\raw_urlencode', $data);
 	}
 	elseif(is_scalar($data)){
 		return rawurlencode($data);
