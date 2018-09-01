@@ -15,6 +15,7 @@
 namespace chillerlan\HTTPTest\Psr7;
 
 use chillerlan\HTTP\Psr7\{ServerRequest, UploadedFile, Uri};
+use chillerlan\HTTP\Psr17;
 use chillerlan\HTTP\Psr17\ServerRequestFactory;
 use PHPUnit\Framework\TestCase;
 
@@ -174,7 +175,7 @@ class ServerRequestTest extends TestCase{
 			]
 		];
 
-		$server = $this->serverRequestFactory->createServerRequestFromGlobals();
+		$server = Psr17\create_server_request_from_globals();
 
 		$this->assertSame('POST', $server->getMethod());
 		$this->assertEquals(['Host' => ['www.example.org']], $server->getHeaders());

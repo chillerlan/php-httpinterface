@@ -60,13 +60,4 @@ final class StreamFactory implements StreamFactoryInterface{
 		return new Stream($resource);
 	}
 
-	/**
-	 * @param mixed $in
-	 *
-	 * @return \Psr\Http\Message\StreamInterface
-	 */
-	public function createStreamFromInput($in = null):StreamInterface{
-		return create_stream_from_input($in);
-	}
-
 }

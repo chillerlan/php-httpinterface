@@ -12,6 +12,7 @@
 
 namespace chillerlan\HTTP\Psr7;
 
+use chillerlan\HTTP\Psr17;
 use chillerlan\HTTP\Psr17\StreamFactory;
 use Psr\Http\Message\{MessageInterface, StreamInterface};
 
@@ -56,7 +57,7 @@ abstract class Message implements MessageInterface{
 		$this->streamFactory = new StreamFactory;
 
 		$this->body = $body !== null && $body !== ''
-			? $this->streamFactory->createStreamFromInput($body)
+			? Psr17\create_stream_from_input($body)
 			: $this->streamFactory->createStream();
 	}
 

@@ -16,6 +16,7 @@
 namespace chillerlan\HTTPTest\Psr7;
 
 use chillerlan\HTTP\Psr7\Uri;
+use chillerlan\HTTP\Psr17;
 use chillerlan\HTTP\Psr17\UriFactory;
 use InvalidArgumentException;
 use Psr\Http\Message\UriInterface;
@@ -790,7 +791,7 @@ class UriTest extends TestCase{
 	public function testGetUriFromGlobals(string $expected, array $serverParams){
 		$_SERVER = $serverParams;
 
-		$this->assertEquals(new Uri($expected), $this->uriFactory->createUriFromGlobals()); // URIFactory coverage
+		$this->assertEquals(new Uri($expected), Psr17\create_uri_from_globals());
 	}
 
 	/**
@@ -813,7 +814,7 @@ class UriTest extends TestCase{
 
 	public function testFilterHostIPv6(){
 		$parts['host'] = '::1';
-		$uri = $this->uriFactory->createUriFromParts($parts); // URIFactory coverage
+		$uri = Uri::fromParts($parts);
 
 		$this->assertSame('[::1]', $uri->getHost());
 	}

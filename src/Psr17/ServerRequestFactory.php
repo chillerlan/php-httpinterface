@@ -37,18 +37,4 @@ final class ServerRequestFactory extends RequestFactory implements ServerRequest
 		return new ServerRequest($method, $uri, null, null, null, $serverParams);
 	}
 
-	/**
-	 * Return a ServerRequest populated with superglobals:
-	 * $_GET
-	 * $_POST
-	 * $_COOKIE
-	 * $_FILES
-	 * $_SERVER
-	 *
-	 * @return \Psr\Http\Message\ServerRequestInterface|\chillerlan\HTTP\Psr7\ServerRequest
-	 */
-	public function createServerRequestFromGlobals():ServerRequestInterface{
-		return create_server_request_from_globals();
-	}
-
 }

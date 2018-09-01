@@ -12,7 +12,7 @@ namespace chillerlan\HTTP\Psr17;
 use chillerlan\HTTP\Psr7;
 use chillerlan\HTTP\Psr7\{ServerRequest, Stream, Uri};
 use InvalidArgumentException;
-use Psr\Http\Message\{ServerRequestInterface, StreamInterface, UriInterface};
+use Psr\Http\Message\StreamInterface;
 
 const PSR17_INCLUDES = true;
 
@@ -24,13 +24,13 @@ const PSR17_INCLUDES = true;
  * $_FILES
  * $_SERVER
  *
- * @return \Psr\Http\Message\ServerRequestInterface|\chillerlan\HTTP\Psr7\ServerRequest
+ * @return \chillerlan\HTTP\Psr7\ServerRequest|\Psr\Http\Message\ServerRequestInterface
  */
-function create_server_request_from_globals():ServerRequestInterface{
+function create_server_request_from_globals():ServerRequest{
 
 	$serverRequest = new ServerRequest(
 		isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : ServerRequest::METHOD_GET,
-		(new UriFactory)->createUriFromGlobals(),
+		create_uri_from_globals(),
 		function_exists('getallheaders') ? getallheaders() : [],
 		(new StreamFactory)->createStream(),
 		isset($_SERVER['SERVER_PROTOCOL']) ? str_replace('HTTP/', '', $_SERVER['SERVER_PROTOCOL']) : '1.1',
@@ -48,9 +48,9 @@ function create_server_request_from_globals():ServerRequestInterface{
 /**
  * Get a Uri populated with values from $_SERVER.
  *
- * @return \Psr\Http\Message\UriInterface|\chillerlan\HTTP\Psr7\Uri
+ * @return \chillerlan\HTTP\Psr7\Uri|\Psr\Http\Message\UriInterface
  */
-function create_uri_from_globals():UriInterface{
+function create_uri_from_globals():Uri{
 	$parts    = [];
 	$hasPort  = false;
 	$hasQuery = false;
@@ -102,9 +102,9 @@ function create_uri_from_globals():UriInterface{
  *
  * @param string $content String content with which to populate the stream.
  *
- * @return \Psr\Http\Message\StreamInterface
+ * @return \chillerlan\HTTP\Psr7\Stream|\Psr\Http\Message\StreamInterface
  */
-function create_stream(string $content = ''):StreamInterface{
+function create_stream(string $content = ''):Stream{
 	$stream = fopen('php://temp', 'r+');
 
 	if($content !== ''){
@@ -118,7 +118,7 @@ function create_stream(string $content = ''):StreamInterface{
 /**
  * @param mixed $in
  *
- * @return \Psr\Http\Message\StreamInterface
+ * @return \chillerlan\HTTP\Psr7\Stream|\Psr\Http\Message\StreamInterface
  */
 function create_stream_from_input($in = null):StreamInterface{
 	$in = $in ?? '';

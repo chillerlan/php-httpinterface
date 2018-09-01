@@ -12,6 +12,7 @@
 
 namespace chillerlan\HTTP\Psr7;
 
+use chillerlan\HTTP\Psr17;
 use chillerlan\HTTP\Psr17\StreamFactory;
 use InvalidArgumentException;
 use Psr\Http\Message\{StreamInterface, UploadedFileInterface};
@@ -100,7 +101,7 @@ final class UploadedFile implements UploadedFileInterface{
 				$this->file = $file;
 			}
 			else{
-				$this->stream = $this->streamFactory->createStreamFromInput($file);
+				$this->stream = Psr17\create_stream_from_input($file);
 			}
 
 		}
