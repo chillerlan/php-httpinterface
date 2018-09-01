@@ -99,6 +99,8 @@ class UriTest extends TestCase{
 
 	/**
 	 * @dataProvider getValidUris
+	 *
+	 * @param $input
 	 */
 	public function testValidUrisStayValid($input){
 		$this->assertSame($input, (string)(new Uri($input)));
@@ -106,6 +108,8 @@ class UriTest extends TestCase{
 
 	/**
 	 * @dataProvider getValidUris
+	 *
+	 * @param $input
 	 */
 	public function testFromParts($input){
 		$this->assertSame($input, (string)(new Uri)->fromParts(parse_url($input)));
@@ -126,6 +130,8 @@ class UriTest extends TestCase{
 	 * @expectedException \InvalidArgumentException
 	 * @expectedExceptionMessage invalid URI
 	 * @dataProvider             getInvalidUris
+	 *
+	 * @param $invalidUri
 	 */
 	public function testInvalidUrisThrowException($invalidUri){
 		new Uri($invalidUri);
@@ -355,6 +361,12 @@ class UriTest extends TestCase{
 
 	/**
 	 * @dataProvider uriComponentsEncodingProvider
+	 *
+	 * @param $input
+	 * @param $path
+	 * @param $query
+	 * @param $fragment
+	 * @param $output
 	 */
 	public function testUriComponentsGetEncodedProperly($input, $path, $query, $fragment, $output){
 		$uri = new Uri($input);
@@ -544,6 +556,9 @@ class UriTest extends TestCase{
 	 * Section 3.2.2.
 	 *
 	 * @dataProvider hostProvider
+	 *
+	 * @param $host
+	 * @param $expected
 	 */
 	public function testGetHost($host, $expected){
 		$uri = (new Uri)->withHost($host);

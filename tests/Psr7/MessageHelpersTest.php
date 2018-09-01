@@ -57,6 +57,9 @@ class MessageHelpersTest extends TestCase{
 
 	/**
 	 * @dataProvider rawurlencodeDataProvider
+	 *
+	 * @param $data
+	 * @param $expected
 	 */
 	public function testRawurlencode($data, $expected){
 		$this->assertSame($expected, Psr7\raw_urlencode($data));
