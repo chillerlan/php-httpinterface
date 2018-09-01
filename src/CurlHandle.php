@@ -1,5 +1,6 @@
 <?php
 /**
+ * Class CurlHandle
  *
  * @filesource   CurlHandle.php
  * @created      30.08.2018
@@ -12,12 +13,8 @@
 namespace chillerlan\HTTP;
 
 use chillerlan\Settings\SettingsContainerInterface;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\{RequestInterface, ResponseInterface};
 
-/**
- * Class CurlHandle
- */
 class CurlHandle{
 
 	/**
@@ -55,9 +52,9 @@ class CurlHandle{
 		$this->options  = $options;
 		$this->ch       = curl_init();
 
-		$this->options->curl_options = is_array($this->options->curl_options)
-			? $this->options->curl_options
-			: [];
+		if(is_array($this->options->curl_options)){
+			curl_setopt_array($this->ch, $this->options->curl_options);
+		}
 	}
 
 	/**
