@@ -14,7 +14,6 @@
 
 namespace chillerlan\HTTPTest\Psr7;
 
-use chillerlan\HTTP\Psr7;
 use chillerlan\HTTP\Psr7\{Request, Uri};
 use chillerlan\HTTP\Psr17\RequestFactory;
 use Psr\Http\Message\StreamInterface;
@@ -197,29 +196,6 @@ class RequestTest extends TestCase{
 	 */
 	public function testWithMethodInvalidMethod(){
 		(new Request('GET', '/foo'))->withMethod([]);
-	}
-
-	public function headerDataProvider():array {
-		return [
-			[['content-Type' => 'application/x-www-form-urlencoded'], ['Content-type' => 'application/x-www-form-urlencoded']],
-			[['lowercasekey' => 'lowercasevalue'], ['Lowercasekey' => 'lowercasevalue']],
-			[['UPPERCASEKEY' => 'UPPERCASEVALUE'], ['Uppercasekey' => 'UPPERCASEVALUE']],
-			[['mIxEdCaSeKey' => 'MiXeDcAsEvAlUe'], ['Mixedcasekey' => 'MiXeDcAsEvAlUe']],
-			[['31i71casekey' => '31i71casevalue'], ['31i71casekey' => '31i71casevalue']],
-			[[1 => 'numericvalue:1'], ['Numericvalue'  => '1']],
-			[[2 => 2], []],
-			[['what'], []],
-		];
-	}
-
-	/**
-	 * @dataProvider headerDataProvider
-	 *
-	 * @param array $header
-	 * @param array $normalized
-	 */
-	public function testNormalizeHeaders(array $header, array $normalized){
-		$this->assertSame($normalized, Psr7\normalize_request_headers($header));
 	}
 
 }
