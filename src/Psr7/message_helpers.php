@@ -115,27 +115,30 @@ function build_http_query(array $params, bool $urlencode = null, string $delimit
 }
 
 /**
- * @param array     $params
+ * @param iterable  $params
  * @param bool|null $booleans_as_string - converts booleans to "true"/"false" strings if set to true, "0"/"1" otherwise.
  *
  * @return array
  */
-function clean_query_params(array $params, bool $booleans_as_string = null):array{
+function clean_query_params(iterable $params, bool $booleans_as_string = null):array{
+	$p = [];
 
 	foreach($params as $key => $value){
 
 		if(is_bool($value)){
-			$params[$key] = $booleans_as_string === true
+			$p[$key] = $booleans_as_string === true
 				? ($value ? 'true' : 'false')
 				: (string)(int)$value;
 		}
 		elseif($value === null || (!is_numeric($value) && empty($value))){
-			unset($params[$key]);
+			continue;
 		}
-
+		else{
+			$p[$key] = $value;
+		}
 	}
 
-	return $params;
+	return $p;
 }
 
 /**
