@@ -68,20 +68,6 @@ class UriTest extends TestCase{
 		$this->assertSame('https://user:pass@example.com:8080/path/123?q=abc#test', (string)$uri);
 	}
 
-	/**
-	 * @dataProvider getValidUris
-	 */
-	public function testValidUrisStayValid($input){
-		$this->assertSame($input, (string)(new Uri($input)));
-	}
-
-	/**
-	 * @dataProvider getValidUris
-	 */
-	public function testFromParts($input){
-		$this->assertSame($input, (string)(new Uri)->fromParts(parse_url($input)));
-	}
-
 	public function getValidUris(){
 		return [
 			['urn:path-rootless'],
@@ -111,12 +97,17 @@ class UriTest extends TestCase{
 	}
 
 	/**
-	 * @expectedException \InvalidArgumentException
-	 * @expectedExceptionMessage invalid URI
-	 * @dataProvider             getInvalidUris
+	 * @dataProvider getValidUris
 	 */
-	public function testInvalidUrisThrowException($invalidUri){
-		new Uri($invalidUri);
+	public function testValidUrisStayValid($input){
+		$this->assertSame($input, (string)(new Uri($input)));
+	}
+
+	/**
+	 * @dataProvider getValidUris
+	 */
+	public function testFromParts($input){
+		$this->assertSame($input, (string)(new Uri)->fromParts(parse_url($input)));
 	}
 
 	public function getInvalidUris(){
@@ -124,10 +115,19 @@ class UriTest extends TestCase{
 			// parse_url() requires the host component which makes sense for http(s)
 			// but not when the scheme is not known or different. So '//' or '///' is
 			// currently invalid as well but should not according to RFC 3986.
-			['http://'],
-			['urn://host:with:colon'],
+			'only scheme'     => ['http://'],
 			// host cannot contain ":"
+			'host with colon' => ['urn://host:with:colon'],
 		];
+	}
+
+	/**
+	 * @expectedException \InvalidArgumentException
+	 * @expectedExceptionMessage invalid URI
+	 * @dataProvider             getInvalidUris
+	 */
+	public function testInvalidUrisThrowException($invalidUri){
+		new Uri($invalidUri);
 	}
 
 	/**
@@ -300,56 +300,49 @@ class UriTest extends TestCase{
 		$unreserved = 'a-zA-Z0-9.-_~!$&\'()*+,;=:@';
 
 		return [
-			// Percent encode spaces
-			[
+			'Percent encode spaces' => [
 				'/pa th?q=va lue#frag ment',
 				'/pa%20th',
 				'q=va%20lue',
 				'frag%20ment',
 				'/pa%20th?q=va%20lue#frag%20ment',
 			],
-			// Percent encode multibyte
-			[
+			'Percent encode multibyte' => [
 				'/€?€#€',
 				'/%E2%82%AC',
 				'%E2%82%AC',
 				'%E2%82%AC',
 				'/%E2%82%AC?%E2%82%AC#%E2%82%AC',
 			],
-			// Don't encode something that's already encoded
-			[
+			'Don\'t encode already encoded' => [
 				'/pa%20th?q=va%20lue#frag%20ment',
 				'/pa%20th',
 				'q=va%20lue',
 				'frag%20ment',
 				'/pa%20th?q=va%20lue#frag%20ment',
 			],
-			// Percent encode invalid percent encodings
-			[
+			'Percent encode invalid percent encodings' => [
 				'/pa%2-th?q=va%2-lue#frag%2-ment',
 				'/pa%252-th',
 				'q=va%252-lue',
 				'frag%252-ment',
 				'/pa%252-th?q=va%252-lue#frag%252-ment',
 			],
-			// Don't encode path segments
-			[
+			'Don\'t encode path segments' => [
 				'/pa/th//two?q=va/lue#frag/ment',
 				'/pa/th//two',
 				'q=va/lue',
 				'frag/ment',
 				'/pa/th//two?q=va/lue#frag/ment',
 			],
-			// Don't encode unreserved chars or sub-delimiters
-			[
+			'Don\'t encode unreserved chars or sub-delimiters' => [
 				"/$unreserved?$unreserved#$unreserved",
 				"/$unreserved",
 				$unreserved,
 				$unreserved,
 				"/$unreserved?$unreserved#$unreserved",
 			],
-			// Encoded unreserved chars are not decoded
-			[
+			'Encoded unreserved chars are not decoded' => [
 				'/p%61th?q=v%61lue#fr%61gment',
 				'/p%61th',
 				'q=v%61lue',
@@ -528,19 +521,6 @@ class UriTest extends TestCase{
 		$this->assertSame('/foo', (string)$uri);
 	}
 
-	/**
-	 * The value returned MUST be normalized to lowercase, per RFC 3986
-	 * Section 3.2.2.
-	 *
-	 * @dataProvider hostProvider
-	 */
-	public function testGetHost($host, $expected){
-		$uri = (new Uri)->withHost($host);
-
-		$this->assertInstanceOf(UriInterface::class, $uri);
-		$this->assertSame($expected, $uri->getHost(), 'Host must be normalized according to RFC3986');
-	}
-
 	public function hostProvider(){
 		return [
 			'normalized host' => [
@@ -559,27 +539,16 @@ class UriTest extends TestCase{
 	}
 
 	/**
-	 * If the port component is not set or is the standard port for the current
-	 * scheme, it SHOULD NOT be included.
+	 * The value returned MUST be normalized to lowercase, per RFC 3986
+	 * Section 3.2.2.
 	 *
-	 * @dataProvider authorityProvider
-	 *
-	 * @param string $scheme
-	 * @param string $user
-	 * @param string $pass
-	 * @param string $host
-	 * @param int    $port
-	 * @param string $authority
+	 * @dataProvider hostProvider
 	 */
-	public function testGetAuthority(string $scheme, string $user, string $pass, string $host, $port, string $authority){
-		$uri = (new Uri)
-			->withHost($host)
-			->withScheme($scheme)
-			->withUserInfo($user, $pass)
-			->withPort($port)
-		;
+	public function testGetHost($host, $expected){
+		$uri = (new Uri)->withHost($host);
 
-		$this->assertSame($authority, $uri->getAuthority());
+		$this->assertInstanceOf(UriInterface::class, $uri);
+		$this->assertSame($expected, $uri->getHost(), 'Host must be normalized according to RFC3986');
 	}
 
 	public function authorityProvider(){
@@ -627,6 +596,29 @@ class UriTest extends TestCase{
 		];
 	}
 
+	/**
+	 * If the port component is not set or is the standard port for the current
+	 * scheme, it SHOULD NOT be included.
+	 *
+	 * @dataProvider authorityProvider
+	 *
+	 * @param string $scheme
+	 * @param string $user
+	 * @param string $pass
+	 * @param string $host
+	 * @param int    $port
+	 * @param string $authority
+	 */
+	public function testGetAuthority(string $scheme, string $user, string $pass, string $host, $port, string $authority){
+		$uri = (new Uri)
+			->withHost($host)
+			->withScheme($scheme)
+			->withUserInfo($user, $pass)
+			->withPort($port)
+		;
+
+		$this->assertSame($authority, $uri->getAuthority());
+	}
 
 	public function testIsAbsolute(){
 		$this->assertTrue((new Uri('http://example.org'))->isAbsolute());

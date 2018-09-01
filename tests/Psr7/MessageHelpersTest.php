@@ -19,14 +19,14 @@ class MessageHelpersTest extends TestCase{
 
 	public function headerDataProvider():array {
 		return [
-			[['content-Type' => 'application/x-www-form-urlencoded'], ['Content-type' => 'application/x-www-form-urlencoded']],
-			[['lowercasekey' => 'lowercasevalue'], ['Lowercasekey' => 'lowercasevalue']],
-			[['UPPERCASEKEY' => 'UPPERCASEVALUE'], ['Uppercasekey' => 'UPPERCASEVALUE']],
-			[['mIxEdCaSeKey' => 'MiXeDcAsEvAlUe'], ['Mixedcasekey' => 'MiXeDcAsEvAlUe']],
-			[['31i71casekey' => '31i71casevalue'], ['31i71casekey' => '31i71casevalue']],
-			[[1 => 'numericvalue:1'], ['Numericvalue'  => '1']],
-			[[2 => 2], []],
-			[['what'], []],
+			'content-Type'  => [['content-Type' => 'application/x-www-form-urlencoded'], ['Content-type' => 'application/x-www-form-urlencoded']],
+			'lowercasekey'  => [['lowercasekey' => 'lowercasevalue'], ['Lowercasekey' => 'lowercasevalue']],
+			'UPPERCASEKEY'  => [['UPPERCASEKEY' => 'UPPERCASEVALUE'], ['Uppercasekey' => 'UPPERCASEVALUE']],
+			'mIxEdCaSeKey'  => [['mIxEdCaSeKey' => 'MiXeDcAsEvAlUe'], ['Mixedcasekey' => 'MiXeDcAsEvAlUe']],
+			'31i71casekey'  => [['31i71casekey' => '31i71casevalue'], ['31i71casekey' => '31i71casevalue']],
+			'numericvalue'  => [[1 => 'numericvalue:1'], ['Numericvalue'  => '1']],
+			'invalid: 2'    => [[2 => 2], []],
+			'invalid: what' => [['what'], []],
 		];
 	}
 
@@ -50,8 +50,8 @@ class MessageHelpersTest extends TestCase{
 
 	public function rawurlencodeDataProvider(){
 		return [
-			['some test string!', 'some%20test%20string%21'],
-			[['some other', 'test string', ['oh wait!', 'this', ['is an', 'array!']]], ['some%20other', 'test%20string', ['oh%20wait%21', 'this', ['is%20an', 'array%21']]]],
+			'string' => ['some test string!', 'some%20test%20string%21'],
+			'array'  => [['some other', 'test string', ['oh wait!', 'this', ['is an', 'array!']]], ['some%20other', 'test%20string', ['oh%20wait%21', 'this', ['is%20an', 'array%21']]]],
 		];
 	}
 
