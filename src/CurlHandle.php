@@ -264,12 +264,8 @@ class CurlHandle{
 		$header = explode(':', $str, 2);
 
 		if(count($header) === 2){
-			$name  = trim($header[0]);
-			$value = trim($header[1]);
-
-			$this->response = $this->response->hasHeader($name)
-				? $this->response->withAddedHeader($name, $value)
-				: $this->response->withHeader($name, $value);
+			$this->response = $this->response
+				->withAddedHeader(trim($header[0]), trim($header[1]));
 		}
 		elseif(substr(strtoupper($str), 0, 5) === 'HTTP/'){
 			$status = explode(' ', $str, 3);
