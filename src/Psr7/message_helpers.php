@@ -27,14 +27,24 @@ function normalize_request_headers(array $headers):array{
 	foreach($headers as $key => $val){
 
 		if(is_numeric($key)){
-			$header = explode(':', $val, 2);
 
-			if(count($header) !== 2){
+			if(is_string($val)){
+				$header = explode(':', $val, 2);
+
+				if(count($header) !== 2){
+					continue;
+				}
+
+				$key = $header[0];
+				$val = $header[1];
+			}
+			elseif(is_array($val)){
+				$key = array_keys($val)[0];
+				$val = array_values($val)[0];
+			}
+			else{
 				continue;
 			}
-
-			$key = $header[0];
-			$val = $header[1];
 		}
 
 		$key = ucfirst(strtolower(trim($key)));
