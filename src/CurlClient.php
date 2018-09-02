@@ -13,12 +13,12 @@
 namespace chillerlan\HTTP;
 
 use chillerlan\HTTP\Psr17\{RequestFactory, ResponseFactory, StreamFactory};
-use chillerlan\HTTP\Psr7;
 use chillerlan\Settings\SettingsContainerInterface;
 use Psr\Http\Message\{RequestFactoryInterface, RequestInterface, ResponseFactoryInterface, ResponseInterface, StreamFactoryInterface};
 use Http\Client\Exception\{NetworkException, RequestException};
 
 class CurlClient implements HTTPClientInterface{
+	use HTTPRequestTrait;
 
 	/**
 	 * @var \chillerlan\HTTP\HTTPOptions
@@ -102,47 +102,6 @@ class CurlClient implements HTTPClientInterface{
 
 		return $handle->response;
 
-	}
-
-	/**
-	 * @param string      $uri
-	 * @param string|null $method
-	 * @param array|null  $query
-	 * @param mixed|null  $body
-	 * @param array|null  $headers
-	 *
-	 * @return \Psr\Http\Message\ResponseInterface
-	 */
-	public function request(string $uri, string $method = null, array $query = null, $body = null, array $headers = null):ResponseInterface{
-		$method    = strtoupper($method ?? 'GET');
-		$headers   = Psr7\normalize_request_headers($headers);
-		$request   = $this->requestFactory->createRequest($method, Psr7\merge_query($uri, $query ?? []));
-
-		if(in_array($method, ['DELETE', 'PATCH', 'POST', 'PUT'], true) && $body !== null){
-
-			if(is_array($body) || is_object($body)){
-
-				if(!isset($headers['Content-type'])){
-					$headers['Content-type'] = 'application/x-www-form-urlencoded';
-				}
-
-				if($headers['Content-type'] === 'application/x-www-form-urlencoded'){
-					$body = http_build_query($body, '', '&', PHP_QUERY_RFC1738);
-				}
-				elseif($headers['Content-type'] === 'application/json'){
-					$body = json_encode($body);
-				}
-
-			}
-
-			$request = $request->withBody($this->streamFactory->createStream((string)$body));
-		}
-
-		foreach($headers as $header => $value){
-			$request = $request->withAddedHeader($header, $value);
-		}
-
-		return $this->sendRequest($request);
 	}
 
 }
