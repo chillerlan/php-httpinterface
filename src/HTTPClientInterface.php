@@ -3,61 +3,38 @@
  * Interface HTTPClientInterface
  *
  * @filesource   HTTPClientInterface.php
- * @created      09.07.2017
+ * @created      27.08.2018
  * @package      chillerlan\HTTP
  * @author       Smiley <smiley@chillerlan.net>
- * @copyright    2017 Smiley
+ * @copyright    2018 Smiley
  * @license      MIT
  */
 
 namespace chillerlan\HTTP;
 
-interface HTTPClientInterface{
+use Fig\Http\Message\RequestMethodInterface;
+use Http\Client\HttpClient;
+use Psr\Http\Message\ResponseInterface;
 
-	const ALLOWED_SCHEMES = ['http', 'https'];
+/**
+ * ...waiting for PSR-18, going with HTTPlug for now
+ *
+ * @link https://github.com/php-fig/fig-standards/tree/master/proposed/http-client/
+ */
+interface HTTPClientInterface extends HttpClient, RequestMethodInterface{
 
 	/**
-	 * @param string      $url
-	 * @param array|null  $params
+	 * @param string      $uri
 	 * @param string|null $method
+	 * @param array|null  $query
 	 * @param mixed|null  $body
 	 * @param array|null  $headers
 	 *
-	 * @return \chillerlan\HTTP\HTTPResponseInterface
-	 * @throws \chillerlan\HTTP\HTTPClientException
-	 */
-	public function request(string $url, array $params = null, string $method = null, $body = null, array $headers = null):HTTPResponseInterface;
-
-	/**
-	 * @param array $headers
+	 * @return \Psr\Http\Message\ResponseInterface
 	 *
-	 * @return array
+	 * @throws \Http\Client\Exception If an error happens during processing the request.
+	 * @throws \Exception             If processing the request is impossible (eg. bad configuration).
 	 */
-	public function normalizeRequestHeaders(array $headers):array;
-
-	/**
-	 * @param mixed $data
-	 *
-	 * @return mixed
-	 */
-	public function rawurlencode($data);
-
-	/**
-	 * @param array       $params
-	 * @param bool|null   $urlencode
-	 * @param string|null $delimiter
-	 * @param string|null $enclosure
-	 *
-	 * @return string
-	 */
-	public function buildQuery(array $params, bool $urlencode = null, string $delimiter = null, string $enclosure = null):string;
-
-	/**
-	 * @param array     $params
-	 * @param bool|null $booleans_as_string - converts booleans to "true"/"false" strings if set to true, "0"/"1" otherwise.
-	 *
-	 * @return array
-	 */
-	public function checkQueryParams(array $params, bool $booleans_as_string = null):array;
+	public function request(string $uri, string $method = null, array $query = null, $body = null, array $headers = null):ResponseInterface;
 
 }

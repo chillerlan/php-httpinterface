@@ -1,142 +1,148 @@
 <?php
 /**
- * Class CurlClient
+ * Class HTTPClient
  *
- * @filesource   CurlClient.php
- * @created      21.10.2017
+ * @filesource   HTTPClient.php
+ * @created      27.08.2018
  * @package      chillerlan\HTTP
- * @author       Smiley <smiley@chillerlan.net>
- * @copyright    2017 Smiley
+ * @author       smiley <smiley@chillerlan.net>
+ * @copyright    2018 smiley
  * @license      MIT
  */
 
 namespace chillerlan\HTTP;
 
-use chillerlan\Traits\ImmutableSettingsInterface;
+use chillerlan\HTTP\Psr17\{RequestFactory, ResponseFactory, StreamFactory};
+use chillerlan\HTTP\Psr7;
+use chillerlan\Settings\SettingsContainerInterface;
+use Psr\Http\Message\{RequestFactoryInterface, RequestInterface, ResponseFactoryInterface, ResponseInterface, StreamFactoryInterface};
+use Http\Client\Exception\{NetworkException, RequestException};
 
-/**
- * @property resource $http
- */
-class CurlClient extends HTTPClientAbstract{
+class CurlClient implements HTTPClientInterface{
 
 	/**
-	 * @var \stdClass
+	 * @var \chillerlan\HTTP\HTTPOptions
 	 */
-	protected $responseHeaders;
+	protected $options;
+
+	/**
+	 * @var \Psr\Http\Message\RequestFactoryInterface
+	 */
+	protected $requestFactory;
+
+	/**
+	 * @var \Psr\Http\Message\ResponseFactoryInterface
+	 */
+	protected $responseFactory;
+
+	/**
+	 * @var \Psr\Http\Message\StreamFactoryInterface
+	 */
+	protected $streamFactory;
 
 	/**
 	 * CurlClient constructor.
 	 *
-	 * @param \chillerlan\Traits\ImmutableSettingsInterface $options
-	 *
-	 * @throws \chillerlan\HTTP\HTTPClientException
+	 * @param \chillerlan\Settings\SettingsContainerInterface|null $options
+	 * @param \Psr\Http\Message\RequestFactoryInterface|null       $requestFactory
+	 * @param \Psr\Http\Message\ResponseFactoryInterface|null      $responseFactory
+	 * @param \Psr\Http\Message\StreamFactoryInterface|null        $streamFactory
 	 */
-	public function __construct(ImmutableSettingsInterface $options){
-		parent::__construct($options);
-
-		if(!isset($this->options->ca_info) || !is_file($this->options->ca_info)){
-			throw new HTTPClientException('invalid CA file');
-		}
-
+	public function __construct(
+		SettingsContainerInterface $options = null,
+		RequestFactoryInterface $requestFactory = null,
+		ResponseFactoryInterface $responseFactory = null,
+		StreamFactoryInterface $streamFactory = null
+	){
+		$this->options         = $options ?? new HTTPOptions;
+		$this->requestFactory  = $requestFactory ?? new RequestFactory;
+		$this->responseFactory = $responseFactory ?? new ResponseFactory;
+		$this->streamFactory   = $streamFactory ?? new StreamFactory;
 	}
 
 	/**
-	 * @return void
+	 * Sends a PSR-7 request.
+	 *
+	 * @param \Psr\Http\Message\RequestInterface $request
+	 *
+	 * @return \Psr\Http\Message\ResponseInterface
+	 *
+	 * @throws \Http\Client\Exception If an error happens during processing the request.
+	 * @throws \Exception             If processing the request is impossible (eg. bad configuration).
 	 */
-	protected function initCurl(){
-		$this->http = curl_init();
+	public function sendRequest(RequestInterface $request):ResponseInterface{
+		$handle = new CurlHandle($request, $this->responseFactory->createResponse(), $this->options);
+		$handle->init();
 
-		curl_setopt_array($this->http, [
-			CURLOPT_HEADER         => false,
-			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_PROTOCOLS      => CURLPROTO_HTTP|CURLPROTO_HTTPS,
-			CURLOPT_CAINFO         => $this->options->ca_info,
-			CURLOPT_SSL_VERIFYPEER => true,
-			CURLOPT_SSL_VERIFYHOST => 2,
-			CURLOPT_TIMEOUT        => 5,
-			CURLOPT_USERAGENT      => $this->options->user_agent,
-		]);
+		curl_exec($handle->ch);
 
-		curl_setopt_array($this->http, $this->options->curl_options);
-	}
+		$errno = curl_errno($handle->ch);
 
-	/** @inheritdoc */
-	protected function getResponse():HTTPResponseInterface{
-		$this->responseHeaders = new \stdClass;
+		if($errno !== CURLE_OK){
+			$error = curl_error($handle->ch);
 
-		$headers = $this->normalizeRequestHeaders($this->requestHeaders);
+			$network_errors = [
+				CURLE_COULDNT_RESOLVE_PROXY,
+				CURLE_COULDNT_RESOLVE_HOST,
+				CURLE_COULDNT_CONNECT,
+				CURLE_OPERATION_TIMEOUTED,
+				CURLE_SSL_CONNECT_ERROR,
+				CURLE_GOT_NOTHING,
+			];
 
-		if(in_array($this->requestMethod, ['PATCH', 'POST', 'PUT', 'DELETE'])){
-
-			$options = in_array($this->requestMethod, ['PATCH', 'PUT', 'DELETE'])
-				? [CURLOPT_CUSTOMREQUEST => $this->requestMethod]
-				: [CURLOPT_POST => true];
-
-
-			if(!isset($headers['Content-type']) && $this->requestMethod === 'POST' && is_array($this->requestBody)){
-				$headers += ['Content-type: application/x-www-form-urlencoded'];
-				$this->requestBody = http_build_query($this->requestBody, '', '&', PHP_QUERY_RFC1738);
+			if(in_array($errno, $network_errors, true)){
+				throw new NetworkException($error, $request);
 			}
 
-			$options += [CURLOPT_POSTFIELDS => $this->requestBody];
-		}
-		else{
-			$options = [CURLOPT_CUSTOMREQUEST => $this->requestMethod];
+			throw new RequestException($error, $request);
 		}
 
-		$headers += [
-			'Host: '.$this->parsedURL['host'],
-			'Connection: close',
-		];
+		$handle->close();
+		$handle->response->getBody()->rewind();
 
-		parse_str($this->parsedURL['query'] ?? '', $parsedquery);
-		$params = array_merge($parsedquery, $this->requestParams);
+		return $handle->response;
 
-		$url = $this->requestURL.(!empty($params) ? '?'.$this->buildQuery($params) : '');
-
-		$options += [
-			CURLOPT_URL => $url,
-			CURLOPT_HTTPHEADER => $headers,
-			CURLOPT_HEADERFUNCTION => [$this, 'headerLine'],
-		];
-
-		$this->initCurl();
-		curl_setopt_array($this->http, $options);
-
-		$response  = curl_exec($this->http);
-		$curl_info = curl_getinfo($this->http);
-
-		return new HTTPResponse([
-			'url'       => $url,
-			'curl_info' => $curl_info,
-			'headers'   => $this->responseHeaders,
-			'body'      => $response,
-		]);
 	}
 
 	/**
-	 * @param resource $curl
-	 * @param string   $header_line
+	 * @param string      $uri
+	 * @param string|null $method
+	 * @param array|null  $query
+	 * @param mixed|null  $body
+	 * @param array|null  $headers
 	 *
-	 * @return int
-	 *
-	 * @link http://php.net/manual/function.curl-setopt.php CURLOPT_HEADERFUNCTION
+	 * @return \Psr\Http\Message\ResponseInterface
 	 */
-	protected function headerLine($curl, $header_line){
-		$header = explode(':', $header_line, 2);
+	public function request(string $uri, string $method = null, array $query = null, $body = null, array $headers = null):ResponseInterface{
+		$method    = strtoupper($method ?? 'GET');
+		$headers   = Psr7\normalize_request_headers($headers);
+		$request   = $this->requestFactory->createRequest($method, Psr7\merge_query($uri, $query ?? []));
 
-		if(count($header) === 2){
-			$this->responseHeaders->{trim(strtolower($header[0]))} = trim($header[1]);
+		if(in_array($method, ['DELETE', 'PATCH', 'POST', 'PUT'], true) && $body !== null){
+
+			if(is_array($body) || is_object($body)){
+
+				if(!isset($headers['Content-type'])){
+					$headers['Content-type'] = 'application/x-www-form-urlencoded';
+				}
+
+				if($headers['Content-type'] === 'application/x-www-form-urlencoded'){
+					$body = http_build_query($body, '', '&', PHP_QUERY_RFC1738);
+				}
+				elseif($headers['Content-type'] === 'application/json'){
+					$body = json_encode($body);
+				}
+
+			}
+
+			$request = $request->withBody($this->streamFactory->createStream((string)$body));
 		}
-		elseif(substr($header_line, 0, 4) === 'HTTP'){
-			$status = explode(' ', $header_line, 3);
 
-			$this->responseHeaders->httpversion = explode('/', $status[0], 2)[1];
-			$this->responseHeaders->statuscode  = intval($status[1]);
-			$this->responseHeaders->statustext  = trim($status[2]);
+		foreach($headers as $header => $value){
+			$request = $request->withAddedHeader($header, $value);
 		}
 
-		return strlen($header_line);
+		return $this->sendRequest($request);
 	}
 
 }

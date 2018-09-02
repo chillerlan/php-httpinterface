@@ -1,10 +1,10 @@
 {
 	"name": "chillerlan/php-httpinterface",
-	"description": "A http client interface for PHP7+",
+	"description": "A http PSR-7/17 client/interface for PHP7.2+",
 	"license": "MIT",
 	"type": "library",
 	"keywords": [
-		"http", "client", "wrapper"
+		"http", "client", "psr-7", "psr-17"
 	],
 	"minimum-stability": "stable",
 	"authors": [
@@ -18,16 +18,28 @@
 		"issues": "https://github.com/chillerlan/php-httpinterface/issues",
 		"source": "https://github.com/chillerlan/php-httpinterface"
 	},
+	"provide": {
+		"chillerlan/php-httpinterface": "2.0",
+		"psr/http-message-implementation": "1.0",
+		"psr/http-factory-implementation": "1.0"
+	},
 	"require": {
-		"php": "^7.2.0",
-		"chillerlan/php-traits": "^2.0",
+		"php": "^7.2",
+		"ext-curl":"*",
+		"chillerlan/php-settings-container":"^1.0",
+		"fig/http-message-util":"^1.1",
+		"php-http/httplug":"^1.1",
+		"psr/http-message": "^1.0",
+		"psr/http-factory":"^1.0",
 		"psr/log": "^1.0"
 	},
 	"require-dev": {
-		"guzzlehttp/guzzle": "^6.3",
 		"phpunit/phpunit": "^7.3"
 	},
 	"autoload": {
+		"files": [
+			"src/includes.php"
+		],
 		"psr-4": {
 			"chillerlan\\HTTP\\": "src/"
 		}
