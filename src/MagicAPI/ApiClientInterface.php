@@ -17,14 +17,6 @@ use Psr\Http\Message\ResponseInterface;
 interface ApiClientInterface{
 
 	/**
-	 * @param string $endpointMap
-	 *
-	 * @return \chillerlan\HTTP\MagicAPI\ApiClientInterface
-	 * @throws \chillerlan\HTTP\MagicAPI\ApiClientException
-	 */
-	public function loadEndpoints(string $endpointMap):ApiClientInterface;
-
-	/**
 	 * @param string $name
 	 * @param array  $arguments
 	 *
