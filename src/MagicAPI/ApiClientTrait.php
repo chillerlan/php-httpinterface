@@ -108,13 +108,33 @@ trait ApiClientTrait{
 				$body = Psr7\clean_query_params($body);
 			}
 
+
+			if((is_array($body) || is_object($body)) && !empty($body)){
+
+				if(!isset($headers['Content-type'])){
+					$headers['Content-type'] = 'application/x-www-form-urlencoded';
+				}
+
+				if($headers['Content-type'] === 'application/x-www-form-urlencoded'){
+					$body = http_build_query($body, '', '&', PHP_QUERY_RFC1738);
+				}
+				elseif($headers['Content-type'] === 'application/json'){
+					$body = json_encode($body);
+				}
+				else{
+					$body = null; // @todo
+				}
+
+			}
+
+
 		}
 
 		$params = Psr7\clean_query_params($params);
 
 		if($this->logger instanceof LoggerInterface){
 
-			$this->logger->debug(get_called_class().'::__call() -> '.(new ReflectionClass($this))->getShortName().'::'.$name.'()', [
+			$this->logger->debug('ApiClientTrait::__call() -> '.(new ReflectionClass($this))->getShortName().'::'.$name.'()', [
 				'$endpoint' => $endpoint, '$method' => $method, '$params' => $params, '$body' => $body, '$headers' => $headers,
 			]);
 
