@@ -19,12 +19,12 @@ class MessageHelpersTest extends TestCase{
 
 	public function headerDataProvider():array {
 		return [
-			'content-Type'  => [['content-Type' => 'application/x-www-form-urlencoded'], ['Content-type' => 'application/x-www-form-urlencoded']],
-			'lowercasekey'  => [['lowercasekey' => 'lowercasevalue'], ['Lowercasekey' => 'lowercasevalue']],
-			'UPPERCASEKEY'  => [['UPPERCASEKEY' => 'UPPERCASEVALUE'], ['Uppercasekey' => 'UPPERCASEVALUE']],
-			'mIxEdCaSeKey'  => [['mIxEdCaSeKey' => 'MiXeDcAsEvAlUe'], ['Mixedcasekey' => 'MiXeDcAsEvAlUe']],
+			'content-Type'  => [['Content-Type' => 'application/x-www-form-urlencoded'], ['content-type' => 'application/x-www-form-urlencoded']],
+			'lowercasekey'  => [['lowercasekey' => 'lowercasevalue'], ['lowercasekey' => 'lowercasevalue']],
+			'UPPERCASEKEY'  => [['UPPERCASEKEY' => 'UPPERCASEVALUE'], ['uppercasekey' => 'UPPERCASEVALUE']],
+			'mIxEdCaSeKey'  => [['mIxEdCaSeKey' => 'MiXeDcAsEvAlUe'], ['mixedcasekey' => 'MiXeDcAsEvAlUe']],
 			'31i71casekey'  => [['31i71casekey' => '31i71casevalue'], ['31i71casekey' => '31i71casevalue']],
-			'numericvalue'  => [[1 => 'numericvalue:1'], ['Numericvalue'  => '1']],
+			'numericvalue'  => [[1 => 'numericvalue:1'], ['numericvalue'  => '1']],
 			'invalid: 2'    => [[2 => 2], []],
 			'invalid: what' => [['what'], []],
 		];

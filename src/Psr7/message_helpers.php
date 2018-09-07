@@ -47,7 +47,7 @@ function normalize_request_headers(array $headers):array{
 			}
 		}
 
-		$key = ucfirst(strtolower(trim($key)));
+		$key = strtolower(trim($key));
 
 		$normalized_headers[$key] = trim($val);
 	}

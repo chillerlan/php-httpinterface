@@ -133,6 +133,9 @@ class CurlClient implements HTTPClientInterface{
 				elseif($headers['Content-type'] === 'application/json'){
 					$body = json_encode($body);
 				}
+				else{
+					$body = null; // @todo
+				}
 
 			}
 

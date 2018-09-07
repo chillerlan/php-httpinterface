@@ -100,7 +100,7 @@ class CurlClientTest extends TestCase{
 
 			if(in_array($method, ['patch', 'post', 'put'])){
 
-				if(isset($extra_headers['Content-type']) && $extra_headers['Content-type'] === 'application/json'){
+				if(isset($extra_headers['content-type']) && $extra_headers['content-type'] === 'application/json'){
 					$this->assertSame('wtf', $json->json->huh);
 				}
 				else{
