@@ -10,6 +10,7 @@
 namespace chillerlan\HTTP\Psr7;
 
 use InvalidArgumentException;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UploadedFileInterface;
 
 const PSR7_INCLUDES = true;
@@ -124,23 +125,46 @@ function build_http_query(array $params, bool $urlencode = null, string $delimit
 	return implode($delimiter ?? '&', $pairs);
 }
 
+const BOOLEANS_AS_BOOL = 0;
+const BOOLEANS_AS_INT = 1;
+const BOOLEANS_AS_STRING = 2;
+const BOOLEANS_AS_INT_STRING = 3;
 /**
  * @param iterable  $params
- * @param bool|null $booleans_as_string - converts booleans to "true"/"false" strings if set to true, "0"/"1" otherwise.
+ * @param int|null  $bool_cast converts booleans to a type determined like following:
+ *                             BOOLEANS_AS_BOOL      : unchanged boolean value (default)
+ *                             BOOLEANS_AS_INT       : integer values 0 or 1
+ *                             BOOLEANS_AS_STRING    : "true"/"false" strings
+ *                             BOOLEANS_AS_INT_STRING: "0"/"1"
+ *
+ * @param bool|null $remove_empty remove empty and NULL values
  *
  * @return array
  */
-function clean_query_params(iterable $params, bool $booleans_as_string = null):array{
+function clean_query_params(iterable $params, int $bool_cast = null, bool $remove_empty = null):array{
 	$p = [];
+	$bool_cast = $bool_cast ?? BOOLEANS_AS_BOOL;
+	$remove_empty = $remove_empty ?? true;
 
 	foreach($params as $key => $value){
 
 		if(is_bool($value)){
-			$p[$key] = $booleans_as_string === true
-				? ($value ? 'true' : 'false')
-				: (string)(int)$value;
+
+			if($bool_cast === BOOLEANS_AS_BOOL){
+				$p[$key] = $value;
+			}
+			elseif($bool_cast === BOOLEANS_AS_INT){
+				$p[$key] = (int)$value;
+			}
+			elseif($bool_cast === BOOLEANS_AS_STRING){
+				$p[$key] = $value ? 'true' : 'false';
+			}
+			elseif($bool_cast === BOOLEANS_AS_INT_STRING){
+				$p[$key] = (string)(int)$value;
+			}
+
 		}
-		elseif($value === null || (!is_numeric($value) && empty($value))){
+		elseif($remove_empty === true && ($value === null || (!is_numeric($value) && empty($value)))){
 			continue;
 		}
 		else{
@@ -249,4 +273,27 @@ function normalize_nested_file_spec(array $files = []):array{
 	}
 
 	return $normalizedFiles;
+}
+
+/**
+ * @todo
+ *
+ * @param \Psr\Http\Message\ResponseInterface $response
+ * @param bool|null                           $assoc
+ *
+ * @return mixed
+ */
+function get_json(ResponseInterface $response, bool $assoc = null){
+	return json_decode($response->getBody()->getContents(), $assoc);
+}
+
+/**
+ * @todo
+ *
+ * @param \Psr\Http\Message\ResponseInterface $response
+ *
+ * @return \SimpleXMLElement
+ */
+function get_xml(ResponseInterface $response){
+	return simplexml_load_string($response->getBody()->getContents());
 }

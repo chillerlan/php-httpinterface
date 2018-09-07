@@ -43,8 +43,14 @@ class MessageHelpersTest extends TestCase{
 	public function testCheckParams(){
 		$data = ['foo' => 'bar', 'whatever' => null, 'nope' => '', 'true' => true, 'false' => false];
 
-		$this->assertSame(['foo' => 'bar', 'true' => '1', 'false' => '0'], Psr7\clean_query_params($data));
-		$this->assertSame(['foo' => 'bar', 'true' => 'true', 'false' => 'false'], Psr7\clean_query_params($data, true));
+		// don't remove empty values
+		$this->assertSame(['foo' => 'bar', 'whatever' => null, 'nope' => '', 'true' => true, 'false' => false], Psr7\clean_query_params($data, Psr7\BOOLEANS_AS_BOOL, false));
+
+		// bool cast to types
+		$this->assertSame(['foo' => 'bar', 'true' => true, 'false' => false], Psr7\clean_query_params($data, Psr7\BOOLEANS_AS_BOOL));
+		$this->assertSame(['foo' => 'bar', 'true' => 1, 'false' => 0], Psr7\clean_query_params($data, Psr7\BOOLEANS_AS_INT));
+		$this->assertSame(['foo' => 'bar', 'true' => '1', 'false' => '0'], Psr7\clean_query_params($data, Psr7\BOOLEANS_AS_INT_STRING));
+		$this->assertSame(['foo' => 'bar', 'true' => 'true', 'false' => 'false'], Psr7\clean_query_params($data, Psr7\BOOLEANS_AS_STRING));
 	}
 
 
