@@ -12,11 +12,9 @@
 
 namespace chillerlan\HTTP\Psr7;
 
-use chillerlan\HTTP\Psr17;
-use chillerlan\HTTP\Psr17\StreamFactory;
-use InvalidArgumentException;
+use chillerlan\HTTP\{Psr17, Psr17\StreamFactory};
 use Psr\Http\Message\{StreamInterface, UploadedFileInterface};
-use RuntimeException;
+use InvalidArgumentException, RuntimeException;
 
 final class UploadedFile implements UploadedFileInterface{
 

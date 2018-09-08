@@ -12,10 +12,8 @@
 
 namespace chillerlan\HTTP\Psr7;
 
-use Exception;
-use InvalidArgumentException;
 use Psr\Http\Message\StreamInterface;
-use RuntimeException;
+use Exception, InvalidArgumentException, RuntimeException;
 
 final class Stream implements StreamInterface{
 

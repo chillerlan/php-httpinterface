@@ -12,8 +12,7 @@
 
 namespace chillerlan\HTTP\Psr7;
 
-use chillerlan\HTTP\Psr17;
-use chillerlan\HTTP\Psr17\StreamFactory;
+use chillerlan\HTTP\{Psr17, Psr17\StreamFactory};
 use Psr\Http\Message\{MessageInterface, StreamInterface};
 
 abstract class Message implements MessageInterface{
