@@ -51,7 +51,10 @@ class EndpointDocblock{
 
 		$str = '/**'.PHP_EOL;
 
-		foreach($this->endpointMap->toArray() as $methodName => $params){
+		$ep = $this->endpointMap->toArray();
+		ksort($ep);
+
+		foreach($ep as $methodName => $params){
 
 			if($methodName === 'API_BASE'){
 				continue;
@@ -106,7 +109,10 @@ class EndpointDocblock{
 		       .'use \\'.$returntype.';'.PHP_EOL.PHP_EOL
 		       .'interface '.$interfaceName.'{'.PHP_EOL.PHP_EOL;
 
-		foreach($this->endpointMap->toArray() as $methodName => $params){
+		$ep = $this->endpointMap->toArray();
+		ksort($ep);
+
+		foreach($ep as $methodName => $params){
 
 			if($methodName === 'API_BASE'){
 				continue;
