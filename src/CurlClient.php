@@ -15,7 +15,6 @@ namespace chillerlan\HTTP;
 use chillerlan\HTTP\Psr17\{RequestFactory, ResponseFactory, StreamFactory};
 use chillerlan\Settings\SettingsContainerInterface;
 use Psr\Http\Message\{RequestFactoryInterface, RequestInterface, ResponseFactoryInterface, ResponseInterface, StreamFactoryInterface};
-use Http\Client\Exception\{NetworkException, RequestException};
 
 class CurlClient implements HTTPClientInterface{
 
@@ -66,8 +65,8 @@ class CurlClient implements HTTPClientInterface{
 	 *
 	 * @return \Psr\Http\Message\ResponseInterface
 	 *
-	 * @throws \Http\Client\Exception If an error happens during processing the request.
-	 * @throws \Exception             If processing the request is impossible (eg. bad configuration).
+	 * @throws \Psr\Http\Client\ClientExceptionInterface If an error happens during processing the request.
+	 * @throws \Exception                                If processing the request is impossible (eg. bad configuration).
 	 */
 	public function sendRequest(RequestInterface $request):ResponseInterface{
 		$handle = new CurlHandle($request, $this->responseFactory->createResponse(), $this->options);

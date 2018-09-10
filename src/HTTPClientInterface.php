@@ -13,15 +13,10 @@
 namespace chillerlan\HTTP;
 
 use Fig\Http\Message\RequestMethodInterface;
-use Http\Client\HttpClient;
+use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\ResponseInterface;
 
-/**
- * ...waiting for PSR-18, going with HTTPlug for now
- *
- * @link https://github.com/php-fig/fig-standards/tree/master/proposed/http-client/
- */
-interface HTTPClientInterface extends HttpClient, RequestMethodInterface{
+interface HTTPClientInterface extends ClientInterface, RequestMethodInterface{
 
 	/**
 	 * @param string      $uri
@@ -32,8 +27,8 @@ interface HTTPClientInterface extends HttpClient, RequestMethodInterface{
 	 *
 	 * @return \Psr\Http\Message\ResponseInterface
 	 *
-	 * @throws \Http\Client\Exception If an error happens during processing the request.
-	 * @throws \Exception             If processing the request is impossible (eg. bad configuration).
+	 * @throws \Psr\Http\Client\ClientExceptionInterface If an error happens during processing the request.
+	 * @throws \Exception                                If processing the request is impossible (eg. bad configuration).
 	 */
 	public function request(string $uri, string $method = null, array $query = null, $body = null, array $headers = null):ResponseInterface;
 
