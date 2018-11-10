@@ -1,21 +1,21 @@
 <?php
 /**
- * Class HTTPClientTest
+ * Class HTTPClientTestAbstract
  *
- * @filesource   HTTPClientTest.php
- * @created      28.08.2018
- * @package      chillerlan\HTTPTest
+ * @filesource   HTTPClientTestAbstract.php
+ * @created      10.11.2018
+ * @package      chillerlan\HTTPTest\Client
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2018 smiley
  * @license      MIT
  */
 
-namespace chillerlan\HTTPTest;
+namespace chillerlan\HTTPTest\Client;
 
-use chillerlan\HTTP\{CurlClient, HTTPOptions, Psr7\Request};
+use chillerlan\HTTP\Psr7\Request;
 use PHPUnit\Framework\TestCase;
 
-class CurlClientTest extends TestCase{
+abstract class HTTPClientTestAbstract extends TestCase{
 
 	protected const USER_AGENT = 'chillerlanHttpTest/2.0';
 
@@ -23,15 +23,6 @@ class CurlClientTest extends TestCase{
 	 * @var \chillerlan\HTTP\HTTPClientInterface
 	 */
 	protected $http;
-
-	protected function setUp(){
-		$options = new HTTPOptions([
-			'ca_info' => __DIR__.'/cacert.pem',
-			'user_agent' => $this::USER_AGENT,
-		]);
-
-		$this->http = new CurlClient($options);
-	}
 
 	public function testSendRequest(){
 
