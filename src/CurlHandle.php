@@ -22,7 +22,7 @@ class CurlHandle{
 	 *
 	 * @var resource
 	 */
-	public $ch;
+	public $curl;
 
 	/**
 	 * @var \Psr\Http\Message\RequestInterface
@@ -50,10 +50,10 @@ class CurlHandle{
 		$this->request  = $request;
 		$this->response = $response;
 		$this->options  = $options;
-		$this->ch       = curl_init();
+		$this->curl     = curl_init();
 
 		if(is_array($this->options->curl_options)){
-			curl_setopt_array($this->ch, $this->options->curl_options);
+			curl_setopt_array($this->curl, $this->options->curl_options);
 		}
 	}
 
@@ -69,8 +69,8 @@ class CurlHandle{
 	 */
 	public function close():void{
 
-		if(is_resource($this->ch)){
-			curl_close($this->ch);
+		if(is_resource($this->curl)){
+			curl_close($this->curl);
 		}
 
 	}
@@ -80,16 +80,16 @@ class CurlHandle{
 	 */
 	public function reset():void{
 
-		if(is_resource($this->ch)){
+		if(is_resource($this->curl)){
 
-			curl_setopt_array($this->ch, [
+			curl_setopt_array($this->curl, [
 				CURLOPT_HEADERFUNCTION   => null,
 				CURLOPT_READFUNCTION     => null,
 				CURLOPT_WRITEFUNCTION    => null,
 				CURLOPT_PROGRESSFUNCTION => null,
 			]);
 
-			curl_reset($this->ch);
+			curl_reset($this->curl);
 		}
 
 	}
@@ -150,7 +150,7 @@ class CurlHandle{
 			}
 
 			// Message has non empty body.
-			if($bodySize === null || $bodySize > 1024 * 1024){
+			if($bodySize === null || $bodySize > 1 << 20){
 				// Avoid full loading large or unknown size body into memory
 				$options[CURLOPT_UPLOAD] = true;
 
@@ -223,9 +223,9 @@ class CurlHandle{
 			$options[CURLOPT_HTTPHEADER][] = 'Content-Type:';
 		}
 
-		curl_setopt_array($this->ch, $this->options->curl_options + $options);
+		curl_setopt_array($this->curl, $this->options->curl_options + $options);
 
-		return $this->ch;
+		return $this->curl;
 	}
 
 	/**
