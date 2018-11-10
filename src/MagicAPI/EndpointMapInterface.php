@@ -14,6 +14,9 @@ namespace chillerlan\HTTP\MagicAPI;
 
 use chillerlan\Settings\SettingsContainerInterface;
 
+/**
+ * @property string $API_BASE
+ */
 interface EndpointMapInterface extends SettingsContainerInterface{
 
 }

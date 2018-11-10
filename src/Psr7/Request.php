@@ -94,7 +94,7 @@ class Request extends Message implements RequestInterface, RequestMethodInterfac
 	/**
 	 * @inheritdoc
 	 */
-	public function getMethod(){
+	public function getMethod():string{
 		return $this->method;
 	}
 
