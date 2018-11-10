@@ -4,7 +4,7 @@
 	"license": "MIT",
 	"type": "library",
 	"keywords": [
-		"http", "client", "psr-7", "psr-17"
+		"http", "client", "psr-7", "psr-17", "psr-18"
 	],
 	"minimum-stability": "stable",
 	"authors": [
@@ -29,13 +29,13 @@
 		"ext-curl":"*",
 		"chillerlan/php-settings-container":"^1.0",
 		"fig/http-message-util":"^1.1",
-		"psr/http-client":"dev-master",
+		"psr/http-client":"^1.0",
 		"psr/http-message": "^1.0",
 		"psr/http-factory":"^1.0",
 		"psr/log": "^1.0"
 	},
 	"require-dev": {
-		"phpunit/phpunit": "^7.3"
+		"phpunit/phpunit": "^7.4"
 	},
 	"autoload": {
 		"files": [
