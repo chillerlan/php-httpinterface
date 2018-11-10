@@ -27,6 +27,7 @@
 	"require": {
 		"php": "^7.2",
 		"ext-curl":"*",
+		"ext-json":"*",
 		"chillerlan/php-settings-container":"^1.0",
 		"fig/http-message-util":"^1.1",
 		"psr/http-client":"^1.0",
