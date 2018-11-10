@@ -10,8 +10,9 @@
  * @license      MIT
  */
 
-namespace chillerlan\HTTP\MagicAPI;
+namespace chillerlan\HTTPTest\MagicAPI;
 
+use chillerlan\HTTP\MagicAPI\{ApiClientException, EndpointMap, EndpointMapInterface};
 use ReflectionClass;
 
 class EndpointDocblock{
