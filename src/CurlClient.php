@@ -72,12 +72,12 @@ class CurlClient implements HTTPClientInterface{
 		$handle = new CurlHandle($request, $this->responseFactory->createResponse(), $this->options);
 		$handle->init();
 
-		curl_exec($handle->ch);
+		curl_exec($handle->curl);
 
-		$errno = curl_errno($handle->ch);
+		$errno = curl_errno($handle->curl);
 
 		if($errno !== CURLE_OK){
-			$error = curl_error($handle->ch);
+			$error = curl_error($handle->curl);
 
 			$network_errors = [
 				CURLE_COULDNT_RESOLVE_PROXY,
@@ -99,7 +99,6 @@ class CurlClient implements HTTPClientInterface{
 		$handle->response->getBody()->rewind();
 
 		return $handle->response;
-
 	}
 
 	/**
