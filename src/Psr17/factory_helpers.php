@@ -123,6 +123,10 @@ function create_stream(string $content = ''):Stream{
 function create_stream_from_input($in = null):StreamInterface{
 	$in = $in ?? '';
 
+	// not sure about this one, it might cause:
+	// a) trouble if the given string accidentally matches a file path, and
+	// b) security implications because of the above.
+	// use with caution and never with user input!
 	if(is_string($in) && is_file($in) && is_readable($in)){
 		return new Stream(fopen($in, 'r'));
 	}
