@@ -16,10 +16,8 @@ use chillerlan\Settings\SettingsContainerAbstract;
 
 /**
  * @property string $user_agent
- * @property int    $timeout
  * @property array  $curl_options
  * @property string $ca_info
- * @property int    $max_redirects
  */
 class HTTPOptions extends SettingsContainerAbstract{
 	use HTTPOptionsTrait;

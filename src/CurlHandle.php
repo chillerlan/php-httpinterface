@@ -52,9 +52,7 @@ class CurlHandle{
 		$this->options  = $options;
 		$this->curl     = curl_init();
 
-		if(is_array($this->options->curl_options)){
-			curl_setopt_array($this->curl, $this->options->curl_options);
-		}
+		curl_setopt_array($this->curl, $this->options->curl_options);
 	}
 
 	/**
@@ -118,8 +116,8 @@ class CurlHandle{
 			CURLOPT_PROTOCOLS      => CURLPROTO_HTTP | CURLPROTO_HTTPS,
 			CURLOPT_SSL_VERIFYPEER => true,
 			CURLOPT_SSL_VERIFYHOST => 2,
-			CURLOPT_CAINFO         => is_file($this->options->ca_info) ? $this->options->ca_info : null,
-			CURLOPT_TIMEOUT        => (int)$this->options->timeout,
+			CURLOPT_CAINFO         => $this->options->ca_info,
+			CURLOPT_TIMEOUT        => 10,
 			CURLOPT_CONNECTTIMEOUT => 30,
 			CURLOPT_WRITEFUNCTION  => [$this, 'writefunction'],
 			CURLOPT_HEADERFUNCTION => [$this, 'headerfunction'],
@@ -223,7 +221,9 @@ class CurlHandle{
 			$options[CURLOPT_HTTPHEADER][] = 'Content-Type:';
 		}
 
-		curl_setopt_array($this->curl, $this->options->curl_options + $options);
+		// overwrite the default values with $curl_options
+		// @todo: callback/middleware for the cURL options array?
+		curl_setopt_array($this->curl, $options + $this->options->curl_options);
 
 		return $this->curl;
 	}

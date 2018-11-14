@@ -20,12 +20,10 @@ trait HTTPOptionsTrait{
 	public $user_agent = 'chillerlanHttpInterface/2.0 +https://github.com/chillerlan/php-httpinterface';
 
 	/**
-	 * @var int
-	 */
-	public $timeout = 10;
-
-	/**
 	 * options for each curl instance
+	 *
+	 * this array is being merged into the default options as the last thing before curl_exec().
+	 * none of the values (except existence of the CA file) will be checked - that's up to the implementation.
 	 *
 	 * @var array
 	 */
@@ -41,8 +39,29 @@ trait HTTPOptionsTrait{
 	public $ca_info = null;
 
 	/**
-	 * @var int
+	 * HTTPOptionsTrait constructor
+	 *
+	 * @throws \chillerlan\HTTP\ClientException
 	 */
-	public $max_redirects = 0;
+	protected function HTTPOptionsTrait():void{
+
+		if(!is_array($this->curl_options)){
+			$this->curl_options = [];
+		}
+
+		// we cannot verify a peer against a non-existent ca file, so turn it off in that case
+		if(!$this->ca_info || !is_file($this->ca_info)
+		   || (isset($this->curl_options[CURLOPT_CAINFO]) && !is_file($this->curl_options[CURLOPT_CAINFO]))){
+
+			$this->curl_options += [
+				CURLOPT_SSL_VERIFYPEER => false,
+				CURLOPT_CAINFO         => null,
+			];
+		}
+
+		if(!is_string($this->user_agent) || empty(trim($this->user_agent))){
+			throw new ClientException('invalid user agent');
+		}
+	}
 
 }
