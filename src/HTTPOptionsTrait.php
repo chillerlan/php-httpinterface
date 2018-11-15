@@ -17,7 +17,7 @@ trait HTTPOptionsTrait{
 	/**
 	 * @var string
 	 */
-	public $user_agent = 'chillerlanHttpInterface/2.0 +https://github.com/chillerlan/php-httpinterface';
+	protected $user_agent = 'chillerlanHttpInterface/2.0 +https://github.com/chillerlan/php-httpinterface';
 
 	/**
 	 * options for each curl instance
@@ -27,7 +27,7 @@ trait HTTPOptionsTrait{
 	 *
 	 * @var array
 	 */
-	public $curl_options = [];
+	protected $curl_options = [];
 
 	/**
 	 * CA Root Certificates for use with CURL/SSL (if not configured in php.ini)
@@ -36,7 +36,7 @@ trait HTTPOptionsTrait{
 	 * @link https://curl.haxx.se/ca/cacert.pem
 	 * @link https://raw.githubusercontent.com/bagder/ca-bundle/master/ca-bundle.crt
 	 */
-	public $ca_info = null;
+	protected $ca_info = null;
 
 	/**
 	 * HTTPOptionsTrait constructor
@@ -50,18 +50,15 @@ trait HTTPOptionsTrait{
 		}
 
 		// we cannot verify a peer against a non-existent ca file, so turn it off in that case
-		if(!$this->ca_info || !is_file($this->ca_info)
+/*		if(!$this->ca_info || !is_file($this->ca_info)
 		   || (isset($this->curl_options[CURLOPT_CAINFO]) && !is_file($this->curl_options[CURLOPT_CAINFO]))){
 
 			$this->curl_options += [
 				CURLOPT_SSL_VERIFYPEER => false,
 				CURLOPT_CAINFO         => null,
 			];
-		}
+		}*/
 
-		if(!is_string($this->user_agent) || empty(trim($this->user_agent))){
-			throw new ClientException('invalid user agent');
-		}
 	}
 
 }
