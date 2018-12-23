@@ -12,54 +12,12 @@
 
 namespace chillerlan\HTTP\Psr7;
 
-use Psr\Http\Message\StreamInterface;
 use Exception, InvalidArgumentException, RuntimeException;
 
-final class Stream implements StreamInterface{
-
-	public const MODES_READ = [
-		'a+'  => true,
-		'c+'  => true,
-		'c+b' => true,
-		'c+t' => true,
-		'r'   => true,
-		'r+'  => true,
-		'rb'  => true,
-		'rt'  => true,
-		'r+b' => true,
-		'r+t' => true,
-		'w+'  => true,
-		'w+b' => true,
-		'w+t' => true,
-		'x+'  => true,
-		'x+b' => true,
-		'x+t' => true,
-	];
-
-	public const MODES_WRITE = [
-		'a'   => true,
-		'a+'  => true,
-		'c+'  => true,
-		'c+b' => true,
-		'c+t' => true,
-		'r+'  => true,
-		'rw'  => true,
-		'r+b' => true,
-		'r+t' => true,
-		'w'   => true,
-		'w+'  => true,
-		'wb'  => true,
-		'w+b' => true,
-		'w+t' => true,
-		'x+'  => true,
-		'x+b' => true,
-		'x+t' => true,
-	];
-
-	/**
-	 * @var resource
-	 */
-	private $stream;
+/**
+ * @property resource $stream
+ */
+final class Stream extends StreamAbstract{
 
 	/**
 	 * @var bool
@@ -108,15 +66,6 @@ final class Stream implements StreamInterface{
 	}
 
 	/**
-	 * Closes the stream when the destructed
-	 *
-	 * @return void
-	 */
-	public function __destruct(){
-		$this->close();
-	}
-
-	/**
 	 * @inheritdoc
 	 */
 	public function __toString(){
@@ -126,11 +75,17 @@ final class Stream implements StreamInterface{
 		}
 
 		try{
-			$this->seek(0);
+
+			if($this->isSeekable()){
+				$this->seek(0);
+			}
 
 			return (string)stream_get_contents($this->stream);
 		}
 		catch(Exception $e){
+			// https://bugs.php.net/bug.php?id=53648
+			trigger_error('StreamDecoratorTrait::__toString exception: '.$e->getMessage(), E_USER_ERROR);
+
 			return '';
 		}
 
@@ -314,18 +269,7 @@ final class Stream implements StreamInterface{
 	}
 
 	/**
-	 * Get stream metadata as an associative array or retrieve a specific key.
-	 *
-	 * The keys returned are identical to the keys returned from PHP's
-	 * stream_get_meta_data() function.
-	 *
-	 * @link http://php.net/manual/en/function.stream-get-meta-data.php
-	 *
-	 * @param string $key Specific metadata to retrieve.
-	 *
-	 * @return array|mixed|null Returns an associative array if no key is
-	 *     provided. Returns a specific key value if a key is provided and the
-	 *     value is found, or null if the key is not found.
+	 * @inheritdoc
 	 */
 	public function getMetadata($key = null){
 
