@@ -171,7 +171,7 @@ trait HTTPOptionsTrait{
 			.'HTTPOptions::$ca_info or HTTPOptions::$curl_options. If you do not need a specific certificate bundle, '
 			.'then you can download a CA bundle over here: https://curl.haxx.se/docs/caextract.html. '
 			.'Once you have a CA bundle available on disk, you can set the "curl.cainfo" php.ini setting to point '
-			.'to the path to the file, allowing you to omit the $ca_info or $curl_options setting. '
+			.'to the path of the file, allowing you to omit the $ca_info or $curl_options setting. '
 			.'See http://curl.haxx.se/docs/sslcerts.html for more information.';
 
 		throw new ClientException($msg); // @codeCoverageIgnore
