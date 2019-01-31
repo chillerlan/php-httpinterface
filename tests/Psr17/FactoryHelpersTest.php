@@ -186,7 +186,7 @@ class FactoryHelpersTest extends TestCase{
 
 		return [
 			'string'          => ['stringtest', 'stringtest'],
-			'file'            => [__DIR__.'/streaminput.txt', 'filetest'."\r\n"],
+			'file'            => [__DIR__.'/streaminput.txt', 'filetest'.PHP_EOL],
 			'resource'        => [$fh, 'resourcetest'],
 			'streaminterface' => [Psr17\create_stream('streaminterfacetest'), 'streaminterfacetest'],
 			'tostring'        => [$xml->foo, 'bar'],
