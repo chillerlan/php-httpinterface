@@ -27,8 +27,27 @@ class MultipartStreamTest extends TestCase{
 		$this->assertSame('foo', (new MultipartStream([], 'foo'))->getBoundary());
 	}
 
-	public function testIsNotWritable(){
-		$this->assertFalse((new MultipartStream)->isWritable());
+	public function testIsAlwaysReadableNotWritable(){
+		$s = new MultipartStream;
+
+		$this->assertTrue($s->isReadable());
+		$this->assertFalse($s->isWritable());
+	}
+
+	/**
+	 * @expectedException \RuntimeException
+	 * @expectedExceptionMessage Cannot write to a MultipartStream, use the "addElement" method instead.
+	 */
+	public function testWriteError(){
+		(new MultipartStream)->write('foo');
+	}
+
+	/**
+	 * @expectedException \RuntimeException
+	 * @expectedExceptionMessage Stream already built
+	 */
+	public function testAlreadyBuiltError(){
+		(new MultipartStream)->build()->addElement([]);
 	}
 
 	public function testCanCreateEmptyStream(){
@@ -40,15 +59,17 @@ class MultipartStreamTest extends TestCase{
 
 	/**
 	 * @expectedException \InvalidArgumentException
+	 * @expectedExceptionMessage A "contents" element is required
 	 */
-	public function testValidatesFilesArrayElement(){
+	public function testEnsureContentsElement(){
 		new MultipartStream([['foo' => 'bar']]);
 	}
 
 	/**
 	 * @expectedException \InvalidArgumentException
+	 * @expectedExceptionMessage A "name" element is required
 	 */
-	public function testEnsuresFileHasName(){
+	public function testEnsureNameElement(){
 		new MultipartStream([['contents' => 'bar']]);
 	}
 
@@ -61,7 +82,8 @@ class MultipartStreamTest extends TestCase{
 		$this->assertEquals(
 			"--boundary\r\nContent-Disposition: form-data; name=\"foo\"\r\nContent-Length: 3\r\n\r\nbar\r\n".
 			"--boundary\r\nContent-Disposition: form-data; name=\"baz\"\r\nContent-Length: 3\r\n\r\nbam\r\n".
-			"--boundary--\r\n", (string)$stream
+			"--boundary--\r\n",
+			(string)$stream
 		);
 	}
 
