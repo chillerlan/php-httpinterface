@@ -41,9 +41,9 @@ final class MultipartStream extends StreamAbstract{
 	 * MultipartStream constructor.
 	 *
 	 * @param array        $elements [
-	 *                                   name => string,
+	 *                                   name     => string,
 	 *                                   contents => StreamInterface/resource/string,
-	 *                                   headers => array,
+	 *                                   headers  => array,
 	 *                                   filename => string
 	 *                               ]
 	 * @param string|null  $boundary
@@ -148,9 +148,15 @@ final class MultipartStream extends StreamAbstract{
 		return $this;
 	}
 
-
+	/**
+	 * @param array $headers
+	 * @param       $key
+	 *
+	 * @return bool
+	 */
 	private function hasHeader(array $headers, $key){
 		$lowercaseHeader = strtolower($key);
+
 		foreach ($headers as $k => $v) {
 			if (strtolower($k) === $lowercaseHeader) {
 				return true;

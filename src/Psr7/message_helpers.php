@@ -162,14 +162,14 @@ function normalize_request_headers(array $headers):array{
 }
 
 /**
- * @param mixed $data
+ * @param string|array $data
  *
- * @return mixed
+ * @return string|array
  */
-function raw_urlencode($data){
+function r_rawurlencode($data){
 
 	if(is_array($data)){
-		return array_map(__NAMESPACE__.'\\raw_urlencode', $data);
+		return array_map(__NAMESPACE__.'\\r_rawurlencode', $data);
 	}
 
 	return rawurlencode($data);
@@ -194,8 +194,8 @@ function build_http_query(array $params, bool $urlencode = null, string $delimit
 	// urlencode both keys and values
 	if($urlencode ?? true){
 		$params = array_combine(
-			raw_urlencode(array_keys($params)),
-			raw_urlencode(array_values($params))
+			r_rawurlencode(array_keys($params)),
+			r_rawurlencode(array_values($params))
 		);
 	}
 
@@ -246,7 +246,7 @@ const BOOLEANS_AS_INT_STRING = 3;
  *
  * @return array
  */
-function clean_query_params(iterable $params, int $bool_cast = null, bool $remove_empty = null):array{
+function clean_query_params(iterable $params, int $bool_cast = null, bool $remove_empty = null):iterable{
 	$p = [];
 	$bool_cast = $bool_cast ?? BOOLEANS_AS_BOOL;
 	$remove_empty = $remove_empty ?? true;
@@ -268,6 +268,9 @@ function clean_query_params(iterable $params, int $bool_cast = null, bool $remov
 				$p[$key] = (string)(int)$value;
 			}
 
+		}
+		elseif(is_iterable($value)){
+			$p[$key] = call_user_func_array(__NAMESPACE__.'\\clean_query_params', [$value, $bool_cast, $remove_empty]);
 		}
 		elseif($remove_empty === true && ($value === null || (!is_numeric($value) && empty($value)))){
 			continue;
@@ -410,7 +413,7 @@ function get_xml(ResponseInterface $response){
  *
  * @return string
  */
-function message_to_string(MessageInterface $message){
+function message_to_string(MessageInterface $message):string{
 
 	if($message instanceof RequestInterface){
 		$msg = trim($message->getMethod().' '.$message->getRequestTarget()).' HTTP/'.$message->getProtocolVersion();
@@ -423,13 +426,10 @@ function message_to_string(MessageInterface $message){
 	elseif($message instanceof ResponseInterface){
 		$msg = 'HTTP/'.$message->getProtocolVersion().' '.$message->getStatusCode().' '.$message->getReasonPhrase();
 	}
-	else{
-		throw new \InvalidArgumentException('Unknown message type');
-	}
 
 	foreach($message->getHeaders() as $name => $values){
-		$msg .= "\r\n{$name}: ".implode(', ', $values);
+		$msg .= "\r\n".$name.': '.implode(', ', $values);
 	}
 
-	return "{$msg}\r\n\r\n".$message->getBody();
+	return $msg."\r\n\r\n".$message->getBody();
 }
