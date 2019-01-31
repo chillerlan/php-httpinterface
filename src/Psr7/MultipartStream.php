@@ -149,12 +149,12 @@ final class MultipartStream extends StreamAbstract{
 	}
 
 	/**
-	 * @param array $headers
-	 * @param       $key
+	 * @param array  $headers
+	 * @param string $key
 	 *
 	 * @return bool
 	 */
-	private function hasHeader(array $headers, $key){
+	private function hasHeader(array $headers, string $key):bool{
 		$lowercaseHeader = strtolower($key);
 
 		foreach ($headers as $k => $v) {

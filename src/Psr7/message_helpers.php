@@ -409,11 +409,12 @@ function get_xml(ResponseInterface $response){
 /**
  * Returns the string representation of an HTTP message. (from Guzzle)
  *
- * @param MessageInterface $message Message to convert to a string.
+ * @param \Psr\Http\Message\MessageInterface $message Message to convert to a string.
  *
  * @return string
  */
 function message_to_string(MessageInterface $message):string{
+	$msg = '';
 
 	if($message instanceof RequestInterface){
 		$msg = trim($message->getMethod().' '.$message->getRequestTarget()).' HTTP/'.$message->getProtocolVersion();

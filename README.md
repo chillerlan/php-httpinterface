@@ -1,6 +1,6 @@
 # chillerlan/php-httpinterface
 
-A http client wrapper/PSR-7/PSR-17/PSR-18 implementation for PHP 7.2+.
+A [PSR-7](https://www.php-fig.org/psr/psr-7/)/[PSR-17](https://www.php-fig.org/psr/psr-17/)/[PSR-18](https://www.php-fig.org/psr/psr-18/) implementation for PHP 7.2+.
 
 [![version][packagist-badge]][packagist]
 [![license][license-badge]][license]
@@ -81,11 +81,26 @@ $http->request('https://www.example.com', $http::METHOD_GET, ['foo' => 'bar']);
 ```
 Both methods will return a PSR-7 `ResponseInterface`.
 
-### PSR-7 Message helpers
-These static methods can be found in the `chillerlan\HTTP\Psr7` namespace
+### [PSR-7](https://www.php-fig.org/psr/psr-7/) Message helpers
+These static methods can be found in the `chillerlan\HTTP\Psr7` namespace:
 
+- `normalize_request_headers(array $headers)`
+- `r_rawurlencode($data)` - recursive rawurlencode, accepts a string or an array as input
+- `build_http_query(array $params, bool $urlencode = null, string $delimiter = null, string $enclosure = null)` - see [abraham/twitteroauth](https://github.com/abraham/twitteroauth/blob/master/src/Util.php#L82)
+- `clean_query_params(iterable $params, int $bool_cast = null, bool $remove_empty = null)` - clean an array of parameters for URL queries (or JSON output etc.) using the following cast formats:
+  - `BOOLEANS_AS_BOOL` - bool types will be left untouched (default)
+  - `BOOLEANS_AS_INT` - cast to integer `1` and `0`
+  - `BOOLEANS_AS_STRING` - a string value `"true"` and `"false"`
+  - `BOOLEANS_AS_INT_STRING` - integer values, but as string,  `"1"` and `"0"`
+- `merge_query(string $uri, array $query)` - merges an array of parameters into an URL query string
+- `normalize_files(array $files)`
+- `create_uploaded_file_from_spec(array $value)`
+- `normalize_nested_file_spec(array $files = [])`
+- `get_json(ResponseInterface $response, bool $assoc = null)`
+- `get_xml(ResponseInterface $response)`
+- `message_to_string(MessageInterface $message)` - returns the string representation of a `MessageInterface`
 
-### PSR-17 Factory helpers
+### [PSR-17](https://www.php-fig.org/psr/psr-17/) Factory helpers
 These static methods can be found in the `chillerlan\HTTP\Psr17` namespace:
 
 - `create_server_request_from_globals()` - creates a PSR-7 `ServerRequestInterface` object that is populated with the GPCS superglobals.
