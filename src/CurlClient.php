@@ -69,7 +69,8 @@ class CurlClient implements HTTPClientInterface{
 	 * @throws \Exception                                If processing the request is impossible (eg. bad configuration).
 	 */
 	public function sendRequest(RequestInterface $request):ResponseInterface{
-		$handle = new CurlHandle($request, $this->responseFactory->createResponse(), $this->options);
+		/** @var \chillerlan\HTTP\CurlHandle $handle */
+		$handle = new $this->options->curlHandle($request, $this->responseFactory->createResponse(), $this->options);
 		$handle->init();
 
 		curl_exec($handle->curl);

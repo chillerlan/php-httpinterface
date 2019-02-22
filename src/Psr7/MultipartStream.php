@@ -18,7 +18,7 @@ use chillerlan\HTTP\Psr17;
 use InvalidArgumentException, RuntimeException;
 
 /**
- * @property \chillerlan\HTTP\Psr7\AppendStream $stream
+ * @property \chillerlan\HTTP\Psr7\Stream $stream
  */
 final class MultipartStream extends StreamAbstract{
 
@@ -26,11 +26,6 @@ final class MultipartStream extends StreamAbstract{
 	 * @var string
 	 */
 	protected $boundary;
-
-	/**
-	 * @var \Psr\Http\Message\StreamFactoryInterface
-	 */
-	protected $streamFactory;
 
 	/**
 	 * @var bool
@@ -72,11 +67,11 @@ final class MultipartStream extends StreamAbstract{
 
 		if(!$this->built){
 			$this->stream->write("--{$this->getBoundary()}--\r\n");
+
+			$this->built = true;
 		}
 
 		$this->stream->rewind();
-
-		$this->built = true;
 
 		return $this;
 	}
@@ -135,7 +130,6 @@ final class MultipartStream extends StreamAbstract{
 			}
 		}
 
-
 		$this->stream->write('--'.$this->boundary."\r\n");
 
 		foreach($e['headers'] as $key => $value){
@@ -143,7 +137,6 @@ final class MultipartStream extends StreamAbstract{
 		}
 
 		$this->stream->write("\r\n".$e['contents']->getContents()."\r\n");
-
 
 		return $this;
 	}
@@ -191,7 +184,7 @@ final class MultipartStream extends StreamAbstract{
 	 * @inheritdoc
 	 */
 	public function write($string):int{
-		throw new RuntimeException('Cannot write to a MultipartStream, use the "addElement" method instead.');
+		throw new RuntimeException('Cannot write to a MultipartStream, use MultipartStream::addElement() instead.');
 	}
 
 	/**

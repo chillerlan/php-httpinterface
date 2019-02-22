@@ -93,25 +93,22 @@ class CurlHandle{
 	}
 
 	/**
-	 * @return \Psr\Http\Message\ResponseInterface
+	 * @return array
 	 */
-	public function init(){
+	protected function initCurlOptions():array{
 
-		$v = $this->request->getProtocolVersion();
+		$v = [
+			'1.0' => CURL_HTTP_VERSION_1_0,
+			'1.1' => CURL_HTTP_VERSION_1_1,
+			'2.0' => CURL_HTTP_VERSION_2_0,
+		];
 
-		switch($v){
-			case '1.0': $v = CURL_HTTP_VERSION_1_0; break;
-			case '1.1': $v = CURL_HTTP_VERSION_1_1; break;
-			case '2.0': $v = CURL_HTTP_VERSION_2_0; break;
-			default:    $v = CURL_HTTP_VERSION_NONE;
-		}
-
-		$options = [
+		return [
 			CURLOPT_HEADER         => false,
 			CURLOPT_RETURNTRANSFER => false,
 			CURLOPT_FOLLOWLOCATION => false,
 			CURLOPT_URL            => (string)$this->request->getUri()->withFragment(''),
-			CURLOPT_HTTP_VERSION   => $v,
+			CURLOPT_HTTP_VERSION   => $v[$this->request->getProtocolVersion()] ?? CURL_HTTP_VERSION_NONE,
 			CURLOPT_USERAGENT      => $this->options->user_agent,
 			CURLOPT_PROTOCOLS      => CURLPROTO_HTTP | CURLPROTO_HTTPS,
 			CURLOPT_SSL_VERIFYPEER => true,
@@ -122,59 +119,50 @@ class CurlHandle{
 			CURLOPT_WRITEFUNCTION  => [$this, 'writefunction'],
 			CURLOPT_HEADERFUNCTION => [$this, 'headerfunction'],
 		];
+	}
 
-		$userinfo = $this->request->getUri()->getUserInfo();
-
-		if(!empty($userinfo)){
-			$options[CURLOPT_USERPWD] = $userinfo;
-		}
-
-		/*
-		 * Some HTTP methods cannot have payload:
-		 *
-		 * - GET   — cURL will automatically change method to PUT or POST
-		 *           if we set CURLOPT_UPLOAD or CURLOPT_POSTFIELDS.
-		 * - HEAD  — cURL treats HEAD as GET request with a same restrictions.
-		 * - TRACE — According to RFC7231: a client MUST NOT send a message body in a TRACE request.
-		 */
-		$method   = $this->request->getMethod();
+	/**
+	 * @param array $options
+	 *
+	 * @return void
+	 */
+	protected function setBodyOptions(array &$options):void{
 		$body     = $this->request->getBody();
 		$bodySize = $body->getSize();
 
-		if(in_array($method, ['DELETE', 'PATCH', 'POST', 'PUT'], true) && $bodySize !== 0){
-
-			if($body->isSeekable()){
-				$body->rewind();
-			}
-
-			// Message has non empty body.
-			if($bodySize === null || $bodySize > 1 << 20){
-				// Avoid full loading large or unknown size body into memory
-				$options[CURLOPT_UPLOAD] = true;
-
-				if($bodySize !== null){
-					$options[CURLOPT_INFILESIZE] = $bodySize;
-				}
-
-				$options[CURLOPT_READFUNCTION] = [$this, 'readfunction'];
-			}
-			// Small body can be loaded into memory
-			else{
-				$options[CURLOPT_POSTFIELDS] = (string)$body;
-			}
-
+		if($bodySize === 0){
+			return;
 		}
 
-		// This will set HTTP method to "HEAD".
-		if($method === 'HEAD'){
-			$options[CURLOPT_NOBODY] = true;
-		}
-		// GET is a default method. Other methods should be specified explicitly.
-		elseif($method !== 'GET'){
-			$options[CURLOPT_CUSTOMREQUEST] = $method;
+		if($body->isSeekable()){
+			$body->rewind();
 		}
 
-		$curlHeaders = [];
+		// Message has non empty body.
+		if($bodySize === null || $bodySize > 1 << 20){
+			// Avoid full loading large or unknown size body into memory
+			$options[CURLOPT_UPLOAD] = true;
+
+			if($bodySize !== null){
+				$options[CURLOPT_INFILESIZE] = $bodySize;
+			}
+
+			$options[CURLOPT_READFUNCTION] = [$this, 'readfunction'];
+		}
+		// Small body can be loaded into memory
+		else{
+			$options[CURLOPT_POSTFIELDS] = (string)$body;
+		}
+
+	}
+
+	/**
+	 * @param array $options
+	 *
+	 * @return array
+	 */
+	protected function initCurlHeaders(array $options):array{
+		$headers = [];
 
 		foreach($this->request->getHeaders() as $name => $values){
 			$header = strtolower($name);
@@ -202,22 +190,59 @@ class CurlHandle{
 
 				// cURL requires a special format for empty headers.
 				// See https://github.com/guzzle/guzzle/issues/1882 for more details.
-				$curlHeaders[] = $value === ''
-					? $name.';'
-					: $name.': '.$value;
+				$headers[] = $value === '' ? $name.';' : $name.': '.$value;
 			}
 
 		}
 
-		$options[CURLOPT_HTTPHEADER] = $curlHeaders;
+		return $headers;
+	}
+
+	/**
+	 * @return resource cURL handle
+	 */
+	public function init(){
+		$options = $this->initCurlOptions();
+
+		$userinfo = $this->request->getUri()->getUserInfo();
+
+		if(!empty($userinfo)){
+			$options[CURLOPT_USERPWD] = $userinfo;
+		}
+
+		/*
+		 * Some HTTP methods cannot have payload:
+		 *
+		 * - GET   — cURL will automatically change method to PUT or POST
+		 *           if we set CURLOPT_UPLOAD or CURLOPT_POSTFIELDS.
+		 * - HEAD  — cURL treats HEAD as GET request with a same restrictions.
+		 * - TRACE — According to RFC7231: a client MUST NOT send a message body in a TRACE request.
+		 */
+		$method = $this->request->getMethod();
+
+		if(in_array($method, ['DELETE', 'PATCH', 'POST', 'PUT'], true)){
+			$this->setBodyOptions($options);
+		}
+
+		// This will set HTTP method to "HEAD".
+		if($method === 'HEAD'){
+			$options[CURLOPT_NOBODY] = true;
+		}
+
+		// GET is a default method. Other methods should be specified explicitly.
+		if($method !== 'GET'){
+			$options[CURLOPT_CUSTOMREQUEST] = $method;
+		}
+
+		$options[CURLOPT_HTTPHEADER] = $this->initCurlHeaders($options);
 
 		// If the Expect header is not present, prevent curl from adding it
-		if (!$this->request->hasHeader('Expect')) {
+		if(!$this->request->hasHeader('Expect')){
 			$options[CURLOPT_HTTPHEADER][] = 'Expect:';
 		}
 
 		// cURL sometimes adds a content-type by default. Prevent this.
-		if (!$this->request->hasHeader('Content-Type')) {
+		if(!$this->request->hasHeader('Content-Type')){
 			$options[CURLOPT_HTTPHEADER][] = 'Content-Type:';
 		}
 

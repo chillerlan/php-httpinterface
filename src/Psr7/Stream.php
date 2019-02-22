@@ -84,7 +84,7 @@ final class Stream extends StreamAbstract{
 		}
 		catch(Exception $e){
 			// https://bugs.php.net/bug.php?id=53648
-			trigger_error('StreamDecoratorTrait::__toString exception: '.$e->getMessage(), E_USER_ERROR);
+			trigger_error('Stream::__toString exception: '.$e->getMessage(), E_USER_ERROR);
 
 			return '';
 		}

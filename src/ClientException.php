@@ -13,8 +13,5 @@
 namespace chillerlan\HTTP;
 
 use Psr\Http\Client\ClientExceptionInterface;
-use Exception;
 
-class ClientException extends Exception implements ClientExceptionInterface{
-
-}
+class ClientException extends \Exception implements ClientExceptionInterface{}

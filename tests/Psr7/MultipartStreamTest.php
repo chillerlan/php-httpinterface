@@ -36,7 +36,7 @@ class MultipartStreamTest extends TestCase{
 
 	/**
 	 * @expectedException \RuntimeException
-	 * @expectedExceptionMessage Cannot write to a MultipartStream, use the "addElement" method instead.
+	 * @expectedExceptionMessage Cannot write to a MultipartStream, use MultipartStream::addElement() instead.
 	 */
 	public function testWriteError(){
 		(new MultipartStream)->write('foo');

@@ -50,6 +50,13 @@ trait HTTPOptionsTrait{
 	protected $ssl_verifypeer = true;
 
 	/**
+	 * The CurlHandleInterface to use in CurlClient::sendRequest()
+	 *
+	 * @var string
+	 */
+	protected $curlHandle = CurlHandle::class;
+
+	/**
 	 * HTTPOptionsTrait constructor
 	 *
 	 * @throws \Psr\Http\Client\ClientExceptionInterface
@@ -166,6 +173,7 @@ trait HTTPOptionsTrait{
 			}
 		}
 
+		// @codeCoverageIgnoreStart
 		$msg = 'No system CA bundle could be found in any of the the common system locations. '
 			.'In order to verify peer certificates, you will need to supply the path on disk to a certificate bundle via  '
 			.'HTTPOptions::$ca_info or HTTPOptions::$curl_options. If you do not need a specific certificate bundle, '
@@ -174,7 +182,8 @@ trait HTTPOptionsTrait{
 			.'to the path of the file, allowing you to omit the $ca_info or $curl_options setting. '
 			.'See http://curl.haxx.se/docs/sslcerts.html for more information.';
 
-		throw new ClientException($msg); // @codeCoverageIgnore
+		throw new ClientException($msg);
+		// @codeCoverageIgnoreEnd
 	}
 
 }

@@ -19,6 +19,7 @@ use chillerlan\Settings\SettingsContainerAbstract;
  * @property array  $curl_options
  * @property string $ca_info
  * @property bool   $ssl_verifypeer
+ * @property string $curlHandle
  */
 class HTTPOptions extends SettingsContainerAbstract{
 	use HTTPOptionsTrait;
