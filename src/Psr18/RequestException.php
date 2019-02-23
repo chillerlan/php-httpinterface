@@ -16,6 +16,9 @@ use Exception;
 use Psr\Http\Client\RequestExceptionInterface;
 use Psr\Http\Message\RequestInterface;
 
+/**
+ * @codeCoverageIgnore
+ */
 class RequestException extends ClientException implements RequestExceptionInterface{
 
 	/**
