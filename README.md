@@ -63,7 +63,7 @@ $options = new HTTPOptions([
 	'user_agent' => 'my cool user agent 1.0',
 ]);
 
-$http = new CurlClient($options, $myRequestFactory, $myResponseFactory);
+$http = new CurlClient($options, $myResponseFactory);
 ```
 You can now fire a request via the implemented [PSR-18](https://www.php-fig.org/psr/psr-18/) method `ClientInterface::sendRequest()`,
 using an existing [PSR-7](https://www.php-fig.org/psr/psr-7/) `RequestInterface`...
