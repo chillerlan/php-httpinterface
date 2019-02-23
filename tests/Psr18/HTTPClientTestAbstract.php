@@ -103,5 +103,11 @@ abstract class HTTPClientTestAbstract extends TestCase{
 
 	}
 
+	/**
+	 * @expectedException \Psr\Http\Client\ClientExceptionInterface
+	 */
+	public function testNetworkError(){
+		$this->http->sendRequest(new Request(Request::METHOD_GET, 'http://foo'));
+	}
 
 }

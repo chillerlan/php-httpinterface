@@ -1,0 +1,129 @@
+<?php
+/**
+ * Class StreamClient
+ *
+ * @filesource   StreamClient.php
+ * @created      23.02.2019
+ * @package      chillerlan\HTTP\Psr18
+ * @author       smiley <smiley@chillerlan.net>
+ * @copyright    2019 smiley
+ * @license      MIT
+ */
+
+namespace chillerlan\HTTP\Psr18;
+
+use Psr\Http\Message\{RequestInterface, ResponseInterface};
+
+class StreamClient extends HTTPClientAbstract{
+
+	/**
+	 * @todo
+	 *
+	 * @inheritdoc
+	 */
+	public function sendRequest(RequestInterface $request):ResponseInterface{
+		$uri     = $request->getUri();
+		$method  = $request->getMethod();
+		$headers = $this->getRequestHeaders($request);
+
+		$body    = in_array($method, ['DELETE', 'PATCH', 'POST', 'PUT'], true)
+			? $request->getBody()->getContents()
+			: null;
+
+		$context = stream_context_create([
+			'http' => [
+				'method'           => $method,
+				'header'           => $headers,
+				'content'          => $body,
+				'protocol_version' => '1.1',
+				'user_agent'       => $this->options->user_agent,
+				'max_redirects'    => 0,
+				'timeout'          => 5,
+			],
+			'ssl' => [
+				'cafile'              => $this->options->ca_info,
+				'verify_peer'         => $this->options->ssl_verifypeer,
+				'verify_depth'        => 3,
+				'peer_name'           => $uri->getHost(),
+				'ciphers'             => 'HIGH:!SSLv2:!SSLv3',
+				'disable_compression' => true,
+			],
+		]);
+
+		$requestUri = (string)$uri->withFragment('');
+
+		set_error_handler(function ($severity, $msg, $file, $line){
+			throw new \ErrorException($msg, 0, $severity, $file, $line);
+		});
+
+		try{
+			$responseBody    = file_get_contents($requestUri, false, $context);
+			$responseHeaders = $this->parseResponseHeaders(get_headers($requestUri, 1, $context));
+		}catch(\Exception $e){
+			throw new ClientException($e->getMessage(), $e->getCode());
+		}
+
+		restore_error_handler();
+
+		$response = $this->responseFactory
+			->createResponse($responseHeaders['statuscode'], $responseHeaders['statustext'])
+			->withProtocolVersion($responseHeaders['httpversion'])
+		;
+
+		$response->getBody()->write($responseBody);
+		$response->getBody()->rewind();
+
+		return $response;
+	}
+
+	/**
+	 * @param \Psr\Http\Message\RequestInterface $request
+	 *
+	 * @return array
+	 */
+	protected function getRequestHeaders(RequestInterface $request):array{
+		$headers = [];
+
+		foreach($request->getHeaders() as $name => $values){
+			$name = strtolower($name);
+
+			foreach($values as $value){
+				$value = (string)$value;
+
+				// cURL requires a special format for empty headers.
+				// See https://github.com/guzzle/guzzle/issues/1882 for more details.
+				$headers[] = $value === '' ? $name.';' : $name.': '.$value;
+			}
+		}
+
+		return $headers;
+	}
+
+	/**
+	 * @param array $headers
+	 *
+	 * @return array
+	 */
+	protected function parseResponseHeaders(array $headers):array{
+		$h = [];
+
+		foreach($headers as $k => $v){
+
+			if($k === 0 && substr($v, 0, 4) === 'HTTP'){
+				$status = explode(' ', $v, 3);
+
+				$h['httpversion'] = explode('/', $status[0], 2)[1];
+				$h['statuscode']  = intval($status[1]);
+				$h['statustext']  = trim($status[2]);
+
+				continue;
+			}
+
+			$h[strtolower($k)] = $v;
+
+		}
+
+		return $h;
+	}
+
+}
