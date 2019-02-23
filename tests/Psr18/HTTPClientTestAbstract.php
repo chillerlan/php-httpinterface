@@ -4,13 +4,13 @@
  *
  * @filesource   HTTPClientTestAbstract.php
  * @created      10.11.2018
- * @package      chillerlan\HTTPTest\Client
+ * @package      chillerlan\HTTPTest\Psr18
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2018 smiley
  * @license      MIT
  */
 
-namespace chillerlan\HTTPTest\Client;
+namespace chillerlan\HTTPTest\Psr18;
 
 use chillerlan\HTTP\Psr7\Request;
 use PHPUnit\Framework\TestCase;
@@ -20,7 +20,7 @@ abstract class HTTPClientTestAbstract extends TestCase{
 	protected const USER_AGENT = 'chillerlanHttpTest/2.0';
 
 	/**
-	 * @var \chillerlan\HTTP\HTTPClientInterface
+	 * @var \chillerlan\HTTP\Psr18\HTTPClientInterface
 	 */
 	protected $http;
 

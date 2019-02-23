@@ -12,6 +12,8 @@
 
 namespace chillerlan\HTTP;
 
+use chillerlan\HTTP\Psr18\{ClientException, CurlHandle};
+
 trait HTTPOptionsTrait{
 
 	/**

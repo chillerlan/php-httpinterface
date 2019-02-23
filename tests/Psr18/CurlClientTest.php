@@ -4,15 +4,15 @@
  *
  * @filesource   HTTPClientTest.php
  * @created      28.08.2018
- * @package      chillerlan\HTTPTest
+ * @package      chillerlan\HTTPTest\Psr18
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2018 smiley
  * @license      MIT
  */
 
-namespace chillerlan\HTTPTest\Client;
+namespace chillerlan\HTTPTest\Psr18;
 
-use chillerlan\HTTP\{CurlClient, HTTPOptions};
+use chillerlan\HTTP\{HTTPOptions, Psr18\CurlClient};
 
 class CurlClientTest extends HTTPClientTestAbstract{
 

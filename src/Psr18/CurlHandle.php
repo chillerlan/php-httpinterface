@@ -10,7 +10,7 @@
  * @license      MIT
  */
 
-namespace chillerlan\HTTP;
+namespace chillerlan\HTTP\Psr18;
 
 use chillerlan\Settings\SettingsContainerInterface;
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
@@ -37,7 +37,7 @@ class CurlHandle{
 	/**
 	 * @var \chillerlan\HTTP\HTTPOptions
 	 */
-	public $options;
+	protected $options;
 
 	/**
 	 * CurlHandle constructor.

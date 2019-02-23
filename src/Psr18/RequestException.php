@@ -10,7 +10,7 @@
  * @license      MIT
  */
 
-namespace chillerlan\HTTP;
+namespace chillerlan\HTTP\Psr18;
 
 use Exception;
 use Psr\Http\Client\RequestExceptionInterface;

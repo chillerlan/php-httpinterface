@@ -10,7 +10,7 @@
  * @license      MIT
  */
 
-namespace chillerlan\HTTP;
+namespace chillerlan\HTTP\Psr18;
 
 use Fig\Http\Message\RequestMethodInterface;
 use Psr\Http\Client\ClientInterface;
