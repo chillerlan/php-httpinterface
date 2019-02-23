@@ -59,7 +59,10 @@ class StreamClient extends HTTPClientAbstract{
 		try{
 			$responseBody    = file_get_contents($requestUri, false, $context);
 			$responseHeaders = $this->parseResponseHeaders(get_headers($requestUri, 1, $context));
-		}catch(\Exception $e){
+		}
+		catch(\Exception $e){
+			$this->logger->error('StreamClient error #'.$e->getCode().': '.$e->getMessage());
+
 			throw new ClientException($e->getMessage(), $e->getCode());
 		}
 
