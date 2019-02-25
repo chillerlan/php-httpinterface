@@ -134,4 +134,29 @@ class MessageHelpersTest extends TestCase{
 		);
 	}
 
+	public function decompressDataProvider(){
+		return [
+			'compress' => ['gzcompress', 'compress'],
+			'deflate'  => ['gzdeflate', 'deflate'],
+			'gzip'     => ['gzencode', 'gzip'],
+			'none'     => [null, null],
+		];
+	}
+
+	/**
+	 * @dataProvider decompressDataProvider
+	 */
+	public function testDecompressContent($fn, $encoding){
+		$data = $expected = str_repeat('compressed string ', 100);
+		$response = (new Response);
+
+		if($fn){
+			$data     = $fn($data);
+			$response = $response->withHeader('Content-Encoding', $encoding);
+		}
+
+		$response = $response->withBody(Psr17\create_stream($data));
+
+		$this->assertSame($expected, Psr7\decompress_content($response));
+	}
 }
