@@ -112,6 +112,10 @@ class MessageHelpersTest extends TestCase{
 			->withBody(Psr17\create_stream('<?xml version="1.0" encoding="UTF-8"?><root><foo>bar</foo></root>'));
 
 		$this->assertSame('bar', Psr7\get_xml($r)->foo->__toString());
+
+		$r->getBody()->rewind();
+
+		$this->assertSame('bar', Psr7\get_xml($r, true)['foo']);
 	}
 
 	public function messageDataProvider(){
