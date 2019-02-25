@@ -434,3 +434,23 @@ function message_to_string(MessageInterface $message):string{
 
 	return $msg."\r\n\r\n".$message->getBody();
 }
+
+/**
+ * Decompresses the message content according to the Content-Encoding header and returns the decompressed data
+ *
+ * @param \Psr\Http\Message\MessageInterface $message
+ *
+ * @return string
+ */
+function decompress_content(MessageInterface $message):string{
+	$data = $message->getBody()->getContents();
+
+	switch($message->getHeaderLine('content-encoding')){
+#		case 'br'      : return brotli_uncompress($data); // @todo: https://github.com/kjdev/php-ext-brotli
+		case 'compress': return gzuncompress($data);
+		case 'deflate' : return gzinflate($data);
+		case 'gzip'    : return gzdecode($data);
+		default: return $data;
+	}
+
+}

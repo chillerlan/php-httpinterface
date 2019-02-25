@@ -99,6 +99,7 @@ These static methods can be found in the `chillerlan\HTTP\Psr7` namespace:
 - `get_json(ResponseInterface $response, bool $assoc = null)`
 - `get_xml(ResponseInterface $response)`
 - `message_to_string(MessageInterface $message)` - returns the string representation of a `MessageInterface`
+- `decompress_content(MessageInterface $message)` - decompresses the message content according to the `Content-Encoding` header and returns the decompressed data
 
 ### [PSR-17](https://www.php-fig.org/psr/psr-17/) Factory helpers
 These static methods can be found in the `chillerlan\HTTP\Psr17` namespace:
