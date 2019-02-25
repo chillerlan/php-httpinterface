@@ -104,6 +104,10 @@ class MessageHelpersTest extends TestCase{
 			->withBody(Psr17\create_stream('{"foo":"bar"}'));
 
 		$this->assertSame('bar', Psr7\get_json($r)->foo);
+
+		$r->getBody()->rewind();
+
+		$this->assertSame('bar', Psr7\get_json($r, true)['foo']);
 	}
 
 	public function testGetXML(){
