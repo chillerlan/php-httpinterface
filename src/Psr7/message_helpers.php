@@ -384,8 +384,6 @@ function normalize_nested_file_spec(array $files = []):array{
 }
 
 /**
- * @todo
- *
  * @param \Psr\Http\Message\ResponseInterface $response
  * @param bool|null                           $assoc
  *
@@ -400,8 +398,6 @@ function get_json(ResponseInterface $response, bool $assoc = null){
  * @param bool|null                           $assoc
  *
  * @return \SimpleXMLElement
- * @todo
- *
  */
 function get_xml(ResponseInterface $response, bool $assoc = null){
 	$data = simplexml_load_string($response->getBody()->getContents());
