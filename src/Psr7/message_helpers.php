@@ -396,14 +396,19 @@ function get_json(ResponseInterface $response, bool $assoc = null){
 }
 
 /**
- * @todo
- *
  * @param \Psr\Http\Message\ResponseInterface $response
+ * @param bool|null                           $assoc
  *
  * @return \SimpleXMLElement
+ * @todo
+ *
  */
-function get_xml(ResponseInterface $response){
-	return simplexml_load_string($response->getBody()->getContents());
+function get_xml(ResponseInterface $response, bool $assoc = null){
+	$data = simplexml_load_string($response->getBody()->getContents());
+
+	return $assoc === true
+		? json_decode(json_encode($data), true) // cruel
+		: $data;
 }
 
 /**
