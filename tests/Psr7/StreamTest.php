@@ -17,8 +17,10 @@ namespace chillerlan\HTTPTest\Psr7;
 use chillerlan\HTTP\Psr7\Stream;
 use chillerlan\HTTP\Psr17\StreamFactory;
 use Exception;
+use InvalidArgumentException;
 use Psr\Http\Message\StreamInterface;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 class StreamTest extends TestCase{
 
@@ -27,14 +29,13 @@ class StreamTest extends TestCase{
 	 */
 	protected $streamFactory;
 
-	protected function setUp(){
+	protected function setUp():void{
 		$this->streamFactory = new StreamFactory;
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testConstructorThrowsExceptionOnInvalidArgument(){
+		$this->expectException(InvalidArgumentException::class);
+
 		/** @noinspection PhpParamsInspection */
 		new Stream(true);
 	}
@@ -178,11 +179,10 @@ class StreamTest extends TestCase{
 		$stream->close();
 	}
 
-	/**
-	 * @expectedException \RuntimeException
-	 * @expectedExceptionMessage Length parameter cannot be negative
-	 */
 	public function testStreamReadingWithNegativeLength(){
+		$this->expectException(RuntimeException::class);
+		$this->expectExceptionMessage('Length parameter cannot be negative');
+
 		$r      = fopen('php://temp', 'r');
 		$stream = new Stream($r);
 

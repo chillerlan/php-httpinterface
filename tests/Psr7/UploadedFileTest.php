@@ -17,6 +17,7 @@ namespace chillerlan\HTTPTest\Psr7;
 use chillerlan\HTTP\Psr7;
 use chillerlan\HTTP\Psr7\UploadedFile;
 use chillerlan\HTTP\Psr17\{StreamFactory, UploadedFileFactory};
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 class UploadedFileTest extends TestCase{
@@ -36,13 +37,13 @@ class UploadedFileTest extends TestCase{
 	 */
 	protected $streamFactory;
 
-	protected function setUp(){
+	protected function setUp():void{
 		$this->cleanup = [];
 		$this->uploadedFileFactory = new UploadedFileFactory;
 		$this->streamFactory       = new StreamFactory;
 	}
 
-	protected function tearDown(){
+	protected function tearDown():void{
 		foreach($this->cleanup as $file){
 			if(is_scalar($file) && file_exists($file)){
 				unlink($file);
@@ -64,11 +65,12 @@ class UploadedFileTest extends TestCase{
 
 	/**
 	 * @dataProvider invalidStreams
-	 * @expectedException \InvalidArgumentException
 	 *
 	 * @param $streamOrFile
 	 */
 	public function testRaisesExceptionOnInvalidStreamOrFile($streamOrFile){
+		$this->expectException(InvalidArgumentException::class);
+
 		new UploadedFile($streamOrFile, 0, UPLOAD_ERR_OK);
 	}
 
@@ -81,11 +83,12 @@ class UploadedFileTest extends TestCase{
 
 	/**
 	 * @dataProvider invalidErrorStatuses
-	 * @expectedException \InvalidArgumentException
 	 *
 	 * @param int $status
 	 */
 	public function testRaisesExceptionOnInvalidErrorStatus(int $status){
+		$this->expectException(InvalidArgumentException::class);
+
 		new UploadedFile(fopen('php://temp', 'wb+'), 0, $status);
 	}
 
@@ -459,11 +462,10 @@ class UploadedFileTest extends TestCase{
 		$this->assertEquals($expected, $result);
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 * @expectedExceptionMessage Invalid value in files specification
-	 */
 	public function testNormalizeFilesRaisesException(){
+		$this->expectException(InvalidArgumentException::class);
+		$this->expectExceptionMessage('Invalid value in files specification');
+
 		Psr7\normalize_files(['test' => 'something']);
 	}
 

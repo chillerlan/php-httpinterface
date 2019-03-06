@@ -14,6 +14,7 @@ namespace chillerlan\HTTPTest;
 
 use chillerlan\HTTP\HTTPOptions;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Client\ClientExceptionInterface;
 
 class HTTPOptionsTest extends TestCase{
 
@@ -21,11 +22,10 @@ class HTTPOptionsTest extends TestCase{
 		$this->assertTrue(is_array((new HTTPOptions(['curl_options' => 'foo']))->curl_options)); //coverage
 	}
 
-	/**
-	 * @expectedException \Psr\Http\Client\ClientExceptionInterface
-	 * @expectedExceptionMessage invalid user agent
-	 */
 	public function testInvalidUserAgentException(){
+		$this->expectException(ClientExceptionInterface::class);
+		$this->expectExceptionMessage('invalid user agent');
+
 		new HTTPOptions(['user_agent' => false]);
 	}
 
@@ -64,11 +64,10 @@ class HTTPOptionsTest extends TestCase{
 		$this->assertArrayNotHasKey(CURLOPT_CAINFO, $o->curl_options);
 	}
 
-	/**
-	 * @expectedException \Psr\Http\Client\ClientExceptionInterface
-	 * @expectedExceptionMessage invalid path to SSL CA bundle (HTTPOptions::$ca_info): foo
-	 */
 	public function testCaInfoInvalidException(){
+		$this->expectException(ClientExceptionInterface::class);
+		$this->expectExceptionMessage('invalid path to SSL CA bundle (HTTPOptions::$ca_info): foo');
+
 		new HTTPOptions(['ca_info' => 'foo']);
 	}
 
@@ -92,11 +91,10 @@ class HTTPOptionsTest extends TestCase{
 		$this->assertArrayNotHasKey(CURLOPT_CAINFO, $o->curl_options);
 	}
 
-	/**
-	 * @expectedException \Psr\Http\Client\ClientExceptionInterface
-	 * @expectedExceptionMessage invalid path to SSL CA bundle (CURLOPT_CAPATH/CURLOPT_CAINFO): foo
-	 */
 	public function testCurloptCaInfoInvalidException(){
+		$this->expectException(ClientExceptionInterface::class);
+		$this->expectExceptionMessage('invalid path to SSL CA bundle (CURLOPT_CAPATH/CURLOPT_CAINFO): foo');
+
 		new HTTPOptions(['curl_options' => [CURLOPT_CAINFO => 'foo']]);
 	}
 

@@ -16,7 +16,7 @@ use chillerlan\HTTP\{HTTPOptions, Psr18\StreamClient};
 
 class StreamClientTest extends HTTPClientTestAbstract{
 
-	protected function setUp(){
+	protected function setUp():void{
 		$options = new HTTPOptions([
 			'ca_info' => __DIR__.'/../cacert.pem',
 			'user_agent' => $this::USER_AGENT,

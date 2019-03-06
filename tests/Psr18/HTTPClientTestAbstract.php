@@ -14,6 +14,7 @@ namespace chillerlan\HTTPTest\Psr18;
 
 use chillerlan\HTTP\Psr7\Request;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Client\ClientExceptionInterface;
 
 abstract class HTTPClientTestAbstract extends TestCase{
 
@@ -103,10 +104,9 @@ abstract class HTTPClientTestAbstract extends TestCase{
 
 	}
 
-	/**
-	 * @expectedException \Psr\Http\Client\ClientExceptionInterface
-	 */
 	public function testNetworkError(){
+		$this->expectException(ClientExceptionInterface::class);
+
 		$this->http->sendRequest(new Request(Request::METHOD_GET, 'http://foo'));
 	}
 

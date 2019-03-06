@@ -16,7 +16,6 @@
 namespace chillerlan\HTTPTest\Psr7;
 
 use chillerlan\HTTP\Psr7\Uri;
-use chillerlan\HTTP\Psr17;
 use chillerlan\HTTP\Psr17\UriFactory;
 use InvalidArgumentException;
 use Psr\Http\Message\UriInterface;
@@ -29,7 +28,7 @@ class UriTest extends TestCase{
 	 */
 	protected $uriFactory;
 
-	protected function setUp(){
+	protected function setUp():void{
 		$this->uriFactory = new UriFactory;
 	}
 
@@ -127,72 +126,65 @@ class UriTest extends TestCase{
 	}
 
 	/**
-	 * @expectedException \InvalidArgumentException
-	 * @expectedExceptionMessage invalid URI
 	 * @dataProvider             getInvalidUris
 	 *
 	 * @param $invalidUri
 	 */
 	public function testInvalidUrisThrowException($invalidUri){
+		$this->expectException(InvalidArgumentException::class);
+		$this->expectExceptionMessage('invalid URI');
+
 		new Uri($invalidUri);
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 * @expectedExceptionMessage invalid port: 82517
-	 */
 	public function testPortMustBeValid(){
+		$this->expectException(InvalidArgumentException::class);
+		$this->expectExceptionMessage('invalid port: 82517');
+
 		(new Uri)->withPort(82517);
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 * @expectedExceptionMessage invalid port: 0
-	 */
 	public function testWithPortCannotBeZero(){
+		$this->expectException(InvalidArgumentException::class);
+		$this->expectExceptionMessage('invalid port: 0');
+
 		(new Uri)->withPort(0);
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 * @expectedExceptionMessage invalid URI: "//example.com:0
-	 */
 	public function testParseUriPortCannotBeZero(){
+		$this->expectException(InvalidArgumentException::class);
+		$this->expectExceptionMessage('invalid URI: "//example.com:0');
+
 		new Uri('//example.com:0');
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testSchemeMustHaveCorrectType(){
+		$this->expectException(InvalidArgumentException::class);
+
 		(new Uri)->withScheme([]);
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testHostMustHaveCorrectType(){
+		$this->expectException(InvalidArgumentException::class);
+
 		(new Uri)->withHost([]);
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testPathMustHaveCorrectType(){
+		$this->expectException(InvalidArgumentException::class);
+
 		(new Uri)->withPath([]);
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testQueryMustHaveCorrectType(){
+		$this->expectException(InvalidArgumentException::class);
+
 		(new Uri)->withQuery([]);
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testFragmentMustHaveCorrectType(){
+		$this->expectException(InvalidArgumentException::class);
+
 		(new Uri)->withFragment([]);
 	}
 
@@ -474,11 +466,10 @@ class UriTest extends TestCase{
 		$this->assertSame('/path-not-host.com', $uri->getPath());
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 * @expectedExceptionMessage A relative URI must not have a path beginning with a segment containing a colon
-	 */
 	public function testRelativeUriWithPathBeginngWithColonSegmentIsInvalid(){
+		$this->expectException(InvalidArgumentException::class);
+		$this->expectExceptionMessage('A relative URI must not have a path beginning with a segment containing a colon');
+
 		(new Uri)->withPath('mailto:foo');
 	}
 
@@ -732,20 +723,18 @@ class UriTest extends TestCase{
 		$this->assertSame('', $uri->getQuery());
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 * @expectedExceptionMessage user must be a string
-	 */
 	public function testFilterUserInvalidType(){
+		$this->expectException(InvalidArgumentException::class);
+		$this->expectExceptionMessage('user must be a string');
+
 		$parts['user'] = [];
 		(new Uri)->fromParts($parts);
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 * @expectedExceptionMessage pass must be a string
-	 */
 	public function testFilterPassInvalidType(){
+		$this->expectException(InvalidArgumentException::class);
+		$this->expectExceptionMessage('pass must be a string');
+
 		$parts['pass'] = [];
 		(new Uri)->fromParts($parts);
 	}

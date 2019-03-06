@@ -15,7 +15,9 @@ namespace chillerlan\HTTPTest\Psr7;
 use chillerlan\HTTP\Psr17;
 use chillerlan\HTTP\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\FnStream;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 class MultipartStreamTest extends TestCase{
 
@@ -34,19 +36,17 @@ class MultipartStreamTest extends TestCase{
 		$this->assertFalse($s->isWritable());
 	}
 
-	/**
-	 * @expectedException \RuntimeException
-	 * @expectedExceptionMessage Cannot write to a MultipartStream, use MultipartStream::addElement() instead.
-	 */
 	public function testWriteError(){
+		$this->expectException(RuntimeException::class);
+		$this->expectExceptionMessage('Cannot write to a MultipartStream, use MultipartStream::addElement() instead.');
+
 		(new MultipartStream)->write('foo');
 	}
 
-	/**
-	 * @expectedException \RuntimeException
-	 * @expectedExceptionMessage Stream already built
-	 */
 	public function testAlreadyBuiltError(){
+		$this->expectException(RuntimeException::class);
+		$this->expectExceptionMessage('Stream already built');
+
 		(new MultipartStream)->build()->addElement([]);
 	}
 
@@ -57,19 +57,17 @@ class MultipartStreamTest extends TestCase{
 		$this->assertSame("--{$boundary}--\r\n", $stream->getContents());
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 * @expectedExceptionMessage A "contents" element is required
-	 */
 	public function testEnsureContentsElement(){
+		$this->expectException(InvalidArgumentException::class);
+		$this->expectExceptionMessage('A "contents" element is required');
+
 		new MultipartStream([['foo' => 'bar']]);
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 * @expectedExceptionMessage A "name" element is required
-	 */
 	public function testEnsureNameElement(){
+		$this->expectException(InvalidArgumentException::class);
+		$this->expectExceptionMessage('A "name" element is required');
+
 		new MultipartStream([['contents' => 'bar']]);
 	}
 

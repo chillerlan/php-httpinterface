@@ -16,6 +16,7 @@ namespace chillerlan\HTTPTest\Psr7;
 
 use chillerlan\HTTP\Psr7\{Request, Uri};
 use chillerlan\HTTP\Psr17\RequestFactory;
+use InvalidArgumentException;
 use Psr\Http\Message\StreamInterface;
 use PHPUnit\Framework\TestCase;
 
@@ -26,7 +27,7 @@ class RequestTest extends TestCase{
 	 */
 	protected $requestFactory;
 
-	protected function setUp(){
+	protected function setUp():void{
 		$this->requestFactory = new RequestFactory;
 	}
 
@@ -40,10 +41,9 @@ class RequestTest extends TestCase{
 		$this->assertSame($uri, (new Request('GET', $uri))->getUri());
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testValidateRequestUri(){
+		$this->expectException(InvalidArgumentException::class);
+
 		new Request('GET', '///');
 	}
 
@@ -110,10 +110,9 @@ class RequestTest extends TestCase{
 		$this->assertEquals('/', $r1->getRequestTarget());
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testRequestTargetDoesNotAllowSpaces(){
+		$this->expectException(InvalidArgumentException::class);
+
 		(new Request('GET', '/'))->withRequestTarget('/foo bar');
 	}
 
@@ -190,11 +189,10 @@ class RequestTest extends TestCase{
 		$this->assertEquals('foo.com:8125', $r->getHeaderLine('host'));
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 * @expectedExceptionMessage Method must be a string
-	 */
 	public function testWithMethodInvalidMethod(){
+		$this->expectException(InvalidArgumentException::class);
+		$this->expectExceptionMessage('Method must be a string');
+
 		(new Request('GET', '/foo'))->withMethod([]);
 	}
 

@@ -17,6 +17,7 @@ namespace chillerlan\HTTPTest\Psr7;
 use chillerlan\HTTP\Psr7\{ServerRequest, UploadedFile, Uri};
 use chillerlan\HTTP\Psr17;
 use chillerlan\HTTP\Psr17\ServerRequestFactory;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 class ServerRequestTest extends TestCase{
@@ -26,7 +27,7 @@ class ServerRequestTest extends TestCase{
 	 */
 	protected $serverRequestFactory;
 
-	protected function setUp(){
+	protected function setUp():void{
 		$this->serverRequestFactory = new ServerRequestFactory;
 	}
 
@@ -74,11 +75,10 @@ class ServerRequestTest extends TestCase{
 		$this->assertSame($params, $r2->getParsedBody());
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 * @expectedExceptionMessage parsed body value must be an array, object or null
-	 */
 	public function testParsedBodyInvalidArg(){
+		$this->expectException(InvalidArgumentException::class);
+		$this->expectExceptionMessage('parsed body value must be an array, object or null');
+
 		(new ServerRequest('GET', '/'))->withParsedBody('');
 	}
 

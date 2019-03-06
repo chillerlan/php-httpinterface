@@ -14,6 +14,7 @@ namespace chillerlan\HTTPTest\Psr17;
 
 use chillerlan\HTTP\Psr17;
 use chillerlan\HTTP\Psr7\{UploadedFile, Uri};
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\StreamInterface;
 
@@ -203,11 +204,10 @@ class FactoryHelpersTest extends TestCase{
 		$this->assertSame($content, Psr17\create_stream_from_input($input)->getContents());
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 * @expectedExceptionMessage Invalid resource type: object
-	 */
 	public function testCreateStreamFromInputException(){
+		$this->expectException(InvalidArgumentException::class);
+		$this->expectExceptionMessage('Invalid resource type: object');
+
 		Psr17\create_stream_from_input(new \stdClass());
 	}
 

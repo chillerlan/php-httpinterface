@@ -31,7 +31,7 @@ class ResponseTest extends TestCase{
 	 */
 	protected $streamFactory;
 
-	protected function setUp(){
+	protected function setUp():void{
 		$this->responseFactory = new ResponseFactory;
 		$this->streamFactory   = new StreamFactory;
 	}
