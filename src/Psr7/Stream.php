@@ -82,12 +82,14 @@ final class Stream extends StreamAbstract{
 
 			return (string)stream_get_contents($this->stream);
 		}
+		// @codeCoverageIgnoreStart
 		catch(Exception $e){
 			// https://bugs.php.net/bug.php?id=53648
 			trigger_error('Stream::__toString exception: '.$e->getMessage(), E_USER_ERROR);
 
 			return '';
 		}
+		// @codeCoverageIgnoreEnd
 
 	}
 
@@ -155,7 +157,7 @@ final class Stream extends StreamAbstract{
 		$result = ftell($this->stream);
 
 		if($result === false){
-			throw new RuntimeException('Unable to determine stream position');
+			throw new RuntimeException('Unable to determine stream position'); // @codeCoverageIgnore
 		}
 
 		return $result;
@@ -217,7 +219,7 @@ final class Stream extends StreamAbstract{
 		$result     = fwrite($this->stream, $string);
 
 		if($result === false){
-			throw new RuntimeException('Unable to write to stream');
+			throw new RuntimeException('Unable to write to stream'); // @codeCoverageIgnore
 		}
 
 		return $result;
@@ -262,7 +264,7 @@ final class Stream extends StreamAbstract{
 		$contents = stream_get_contents($this->stream);
 
 		if($contents === false){
-			throw new RuntimeException('Unable to read stream contents');
+			throw new RuntimeException('Unable to read stream contents'); // @codeCoverageIgnore
 		}
 
 		return $contents;

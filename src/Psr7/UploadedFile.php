@@ -215,7 +215,7 @@ final class UploadedFile implements UploadedFileInterface{
 		while(!$source->eof()){
 
 			if(!$dest->write($source->read(1048576))){
-				break;
+				break; // @codeCoverageIgnore
 			}
 
 		}
