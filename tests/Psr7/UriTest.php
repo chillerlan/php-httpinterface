@@ -15,8 +15,8 @@
 
 namespace chillerlan\HTTPTest\Psr7;
 
-use chillerlan\HTTP\Psr7\Uri;
 use chillerlan\HTTP\Psr17\UriFactory;
+use chillerlan\HTTP\Psr7\{Uri, UriExtended};
 use InvalidArgumentException;
 use Psr\Http\Message\UriInterface;
 use PHPUnit\Framework\TestCase;
@@ -111,7 +111,7 @@ class UriTest extends TestCase{
 	 * @param $input
 	 */
 	public function testFromParts($input){
-		$this->assertSame($input, (string)(new Uri)->fromParts(parse_url($input)));
+		$this->assertSame($input, (string)UriExtended::fromParts(parse_url($input)));
 	}
 
 	public function getInvalidUris(){
@@ -627,108 +627,13 @@ class UriTest extends TestCase{
 		$this->assertSame($authority, $uri->getAuthority());
 	}
 
-	public function testIsAbsolute(){
-		$this->assertTrue((new Uri('http://example.org'))->isAbsolute());
-		$this->assertFalse((new Uri('//example.org'))->isAbsolute());
-		$this->assertFalse((new Uri('/abs-path'))->isAbsolute());
-		$this->assertFalse((new Uri('rel-path'))->isAbsolute());
-	}
-
-	public function testIsNetworkPathReference(){
-		$this->assertFalse((new Uri('http://example.org'))->isNetworkPathReference());
-		$this->assertTrue((new Uri('//example.org'))->isNetworkPathReference());
-		$this->assertFalse((new Uri('/abs-path'))->isNetworkPathReference());
-		$this->assertFalse((new Uri('rel-path'))->isNetworkPathReference());
-	}
-
-	public function testIsAbsolutePathReference(){
-		$this->assertFalse((new Uri('http://example.org'))->isAbsolutePathReference());
-		$this->assertFalse((new Uri('//example.org'))->isAbsolutePathReference());
-		$this->assertTrue((new Uri('/abs-path'))->isAbsolutePathReference());
-		$this->assertTrue((new Uri('/'))->isAbsolutePathReference());
-		$this->assertFalse((new Uri('rel-path'))->isAbsolutePathReference());
-	}
-
-	public function testIsRelativePathReference(){
-		$this->assertFalse((new Uri('http://example.org'))->isRelativePathReference());
-		$this->assertFalse((new Uri('//example.org'))->isRelativePathReference());
-		$this->assertFalse((new Uri('/abs-path'))->isRelativePathReference());
-		$this->assertTrue((new Uri('rel-path'))->isRelativePathReference());
-		$this->assertTrue((new Uri(''))->isRelativePathReference());
-	}
-
-	public function testAddAndRemoveQueryValues(){
-		$uri = new Uri;
-		/** @var Uri $uri */
-		$uri = $uri->withQueryValue('a', 'b');
-		$uri = $uri->withQueryValue('c', 'd');
-		$uri = $uri->withQueryValue('e', null);
-		$this->assertSame('a=b&c=d&e', $uri->getQuery());
-
-		$uri = $uri->withoutQueryValue('c');
-		$this->assertSame('a=b&e', $uri->getQuery());
-		$uri = $uri->withoutQueryValue('e');
-		$this->assertSame('a=b', $uri->getQuery());
-		$uri = $uri->withoutQueryValue('a');
-		$this->assertSame('', $uri->getQuery());
-	}
-
-	public function testWithQueryValueReplacesSameKeys(){
-		$uri = new Uri;
-		/** @var Uri $uri */
-		$uri = $uri->withQueryValue('a', 'b');
-		$uri = $uri->withQueryValue('c', 'd');
-		$uri = $uri->withQueryValue('a', 'e');
-		$this->assertSame('c=d&a=e', $uri->getQuery());
-	}
-
-	public function testWithoutQueryValueRemovesAllSameKeys(){
-		$uri = (new Uri)->withQuery('a=b&c=d&a=e');
-		/** @var Uri $uri */
-		$uri = $uri->withoutQueryValue('a');
-		$this->assertSame('c=d', $uri->getQuery());
-	}
-
-	public function testRemoveNonExistingQueryValue(){
-		$uri = new Uri;
-		$uri = $uri->withQueryValue('a', 'b');
-		$uri = $uri->withoutQueryValue('c');
-		$this->assertSame('a=b', $uri->getQuery());
-	}
-
-	public function testWithQueryValueHandlesEncoding(){
-		$uri = new Uri;
-		$uri = $uri->withQueryValue('E=mc^2', 'ein&stein');
-		$this->assertSame('E%3Dmc%5E2=ein%26stein', $uri->getQuery(), 'Decoded key/value get encoded');
-
-		$uri = new Uri;
-		$uri = $uri->withQueryValue('E%3Dmc%5e2', 'ein%26stein');
-		$this->assertSame('E%3Dmc%5e2=ein%26stein', $uri->getQuery(), 'Encoded key/value do not get double-encoded');
-	}
-
-	public function testWithoutQueryValueHandlesEncoding(){
-		// It also tests that the case of the percent-encoding does not matter,
-		// i.e. both lowercase "%3d" and uppercase "%5E" can be removed.
-		$uri = (new Uri)->withQuery('E%3dmc%5E2=einstein&foo=bar');
-		/** @var Uri $uri */
-		$uri = $uri->withoutQueryValue('E=mc^2');
-		$this->assertSame('foo=bar', $uri->getQuery(), 'Handles key in decoded form');
-
-		$uri = (new Uri)->withQuery('E%3dmc%5E2=einstein&foo=bar');
-		/** @var Uri $uri */
-		$uri = $uri->withoutQueryValue('E%3Dmc%5e2');
-		$this->assertSame('foo=bar', $uri->getQuery(), 'Handles key in encoded form');
-
-		$uri = $uri->withoutQueryValue('foo')->withoutQueryValue(''); // coverage
-		$this->assertSame('', $uri->getQuery());
-	}
 
 	public function testFilterUserInvalidType(){
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('user must be a string');
 
 		$parts['user'] = [];
-		(new Uri)->fromParts($parts);
+		UriExtended::fromParts($parts);
 	}
 
 	public function testFilterPassInvalidType(){
@@ -736,12 +641,12 @@ class UriTest extends TestCase{
 		$this->expectExceptionMessage('pass must be a string');
 
 		$parts['pass'] = [];
-		(new Uri)->fromParts($parts);
+		UriExtended::fromParts($parts);
 	}
 
 	public function testFilterHostIPv6(){
 		$parts['host'] = '::1';
-		$uri = Uri::fromParts($parts);
+		$uri = UriExtended::fromParts($parts);
 
 		$this->assertSame('[::1]', $uri->getHost());
 	}

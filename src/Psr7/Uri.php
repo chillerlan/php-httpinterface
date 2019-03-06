@@ -15,9 +15,9 @@ namespace chillerlan\HTTP\Psr7;
 use InvalidArgumentException;
 use Psr\Http\Message\UriInterface;
 
-final class Uri implements UriInterface{
+class Uri implements UriInterface{
 
-	private const DEFAULT_PORTS = [
+	protected const DEFAULT_PORTS = [
 		'http'   => 80,
 		'https'  => 443,
 		'ftp'    => 21,
@@ -34,42 +34,42 @@ final class Uri implements UriInterface{
 	/**
 	 * @var string
 	 */
-	private $scheme = '';
+	protected $scheme = '';
 
 	/**
 	 * @var string
 	 */
-	private $user = '';
+	protected $user = '';
 
 	/**
 	 * @var string
 	 */
-	private $pass = '';
+	protected $pass = '';
 
 	/**
 	 * @var string
 	 */
-	private $host = '';
+	protected $host = '';
 
 	/**
 	 * @var int
 	 */
-	private $port = null;
+	protected $port = null;
 
 	/**
 	 * @var string
 	 */
-	private $path = '';
+	protected $path = '';
 
 	/**
 	 * @var string
 	 */
-	private $query = '';
+	protected $query = '';
 
 	/**
 	 * @var string
 	 */
-	private $fragment = '';
+	protected $fragment = '';
 
 	/**
 	 * Uri constructor.
@@ -132,7 +132,7 @@ final class Uri implements UriInterface{
 	 * @return string
 	 * @throws \InvalidArgumentException
 	 */
-	private function filterScheme($scheme):string{
+	protected function filterScheme($scheme):string{
 
 		if(!is_string($scheme)){
 			throw new InvalidArgumentException(sprintf('scheme must be a string'));
@@ -177,7 +177,7 @@ final class Uri implements UriInterface{
 	 * @return string
 	 * @throws \InvalidArgumentException
 	 */
-	private function filterUser($user):string{
+	protected function filterUser($user):string{
 
 		if(!is_string($user)){
 			throw new InvalidArgumentException(sprintf('user must be a string'));
@@ -192,7 +192,7 @@ final class Uri implements UriInterface{
 	 * @return string
 	 * @throws \InvalidArgumentException
 	 */
-	private function filterPass($pass):string{
+	protected function filterPass($pass):string{
 
 		if(!is_string($pass)){
 			throw new InvalidArgumentException(sprintf('pass must be a string'));
@@ -259,7 +259,7 @@ final class Uri implements UriInterface{
 	 * @return string
 	 * @throws \InvalidArgumentException
 	 */
-	private function filterHost($host):string{
+	protected function filterHost($host):string{
 
 		if(!is_string($host)){
 			throw new InvalidArgumentException('host must be a string');
@@ -307,7 +307,7 @@ final class Uri implements UriInterface{
 	 * @return int|null
 	 * @throws \InvalidArgumentException
 	 */
-	private function filterPort($port):?int{
+	protected function filterPort($port):?int{
 
 		if($port === null){
 			return null;
@@ -358,7 +358,7 @@ final class Uri implements UriInterface{
 	 * @return string
 	 * @throws \InvalidArgumentException
 	 */
-	private function filterPath($path):string{
+	protected function filterPath($path):string{
 
 		if(!is_string($path)){
 			throw new InvalidArgumentException('path must be a string');
@@ -402,7 +402,7 @@ final class Uri implements UriInterface{
 	 * @return string
 	 * @throws \InvalidArgumentException
 	 */
-	private function filterQuery($query):string{
+	protected function filterQuery($query):string{
 
 		if(!is_string($query)){
 			throw new InvalidArgumentException('query and fragment must be a string');
@@ -445,7 +445,7 @@ final class Uri implements UriInterface{
 	 *
 	 * @return string
 	 */
-	private function filterFragment($fragment):string{
+	protected function filterFragment($fragment):string{
 		return $this->filterQuery($fragment);
 	}
 
@@ -479,7 +479,7 @@ final class Uri implements UriInterface{
 	 *
 	 * @return void
 	 */
-	private function parseUriParts(array $parts):void{
+	protected function parseUriParts(array $parts):void{
 
 		foreach(['scheme', 'user', 'pass', 'host', 'port', 'path', 'query', 'fragment'] as $part){
 
@@ -499,7 +499,7 @@ final class Uri implements UriInterface{
 	 *
 	 * @return string
 	 */
-	private function replaceChars(string $str, bool $query = null):string{
+	protected function replaceChars(string $str, bool $query = null):string{
 		return preg_replace_callback(
 			'/(?:[^'
 			.'a-z\d_\-\.~'
@@ -517,7 +517,7 @@ final class Uri implements UriInterface{
 	/**
 	 * @return void
 	 */
-	private function removeDefaultPort():void{
+	protected function removeDefaultPort():void{
 
 		if($this->port !== null && (isset($this::DEFAULT_PORTS[$this->scheme]) && $this->port === $this::DEFAULT_PORTS[$this->scheme])){
 			$this->port = null;
@@ -528,7 +528,7 @@ final class Uri implements UriInterface{
 	/**
 	 * @return void
 	 */
-	private function validateState():void{
+	protected function validateState():void{
 
 		if(empty($this->host) && ($this->scheme === 'http' || $this->scheme === 'https')){
 			$this->host = 'localhost';
@@ -553,150 +553,6 @@ final class Uri implements UriInterface{
 
 		}
 
-	}
-
-	/**
-	 * Additional methods
-	 */
-
-	/**
-	 * @see \parse_url()
-	 *
-	 * @param array $parts
-	 *
-	 * @return \Psr\Http\Message\UriInterface|\chillerlan\HTTP\Psr7\Uri
-	 */
-	public static function fromParts(array $parts):UriInterface{
-		$uri = new self;
-
-		$uri->parseUriParts($parts);
-		$uri->validateState();
-
-		return $uri;
-	}
-
-	/**
-	 * Whether the URI is absolute, i.e. it has a scheme.
-	 *
-	 * An instance of UriInterface can either be an absolute URI or a relative reference. This method returns true
-	 * if it is the former. An absolute URI has a scheme. A relative reference is used to express a URI relative
-	 * to another URI, the base URI. Relative references can be divided into several forms:
-	 * - network-path references, e.g. '//example.com/path'
-	 * - absolute-path references, e.g. '/path'
-	 * - relative-path references, e.g. 'subpath'
-	 *
-	 * @return bool
-	 * @see  Uri::isNetworkPathReference
-	 * @see  Uri::isAbsolutePathReference
-	 * @see  Uri::isRelativePathReference
-	 * @link https://tools.ietf.org/html/rfc3986#section-4
-	 */
-	public function isAbsolute():bool{
-		return $this->getScheme() !== '';
-	}
-
-	/**
-	 * Whether the URI is a network-path reference.
-	 *
-	 * A relative reference that begins with two slash characters is termed an network-path reference.
-	 *
-	 * @return bool
-	 * @link https://tools.ietf.org/html/rfc3986#section-4.2
-	 */
-	public function isNetworkPathReference():bool{
-		return $this->getScheme() === '' && $this->getAuthority() !== '';
-	}
-
-	/**
-	 * Whether the URI is a absolute-path reference.
-	 *
-	 * A relative reference that begins with a single slash character is termed an absolute-path reference.
-	 *
-	 * @return bool
-	 * @link https://tools.ietf.org/html/rfc3986#section-4.2
-	 */
-	public function isAbsolutePathReference():bool{
-		return $this->getScheme() === '' && $this->getAuthority() === '' && isset($this->getPath()[0]) && $this->getPath()[0] === '/';
-	}
-
-	/**
-	 * Whether the URI is a relative-path reference.
-	 *
-	 * A relative reference that does not begin with a slash character is termed a relative-path reference.
-	 *
-	 * @return bool
-	 * @link https://tools.ietf.org/html/rfc3986#section-4.2
-	 */
-	public function isRelativePathReference():bool{
-		return $this->getScheme() === '' && $this->getAuthority() === '' && (!isset($this->getPath()[0]) || $this->getPath()[0] !== '/');
-	}
-
-	/**
-	 * removes a specific query string value.
-	 *
-	 * Any existing query string values that exactly match the provided key are
-	 * removed.
-	 *
-	 * @param string $key Query string key to remove.
-	 *
-	 * @return \Psr\Http\Message\UriInterface|\chillerlan\HTTP\Psr7\Uri
-	 */
-	public function withoutQueryValue($key):Uri{
-		$current = $this->getQuery();
-
-		if($current === ''){
-			return $this;
-		}
-
-		$decodedKey = rawurldecode($key);
-
-		$result = array_filter(explode('&', $current), function($part) use ($decodedKey){
-			return rawurldecode(explode('=', $part)[0]) !== $decodedKey;
-		});
-
-		/** @noinspection PhpIncompatibleReturnTypeInspection */
-		return $this->withQuery(implode('&', $result));
-	}
-
-	/**
-	 * adds a specific query string value.
-	 *
-	 * Any existing query string values that exactly match the provided key are
-	 * removed and replaced with the given key value pair.
-	 *
-	 * A value of null will set the query string key without a value, e.g. "key"
-	 * instead of "key=value".
-	 *
-	 * @param string      $key   Key to set.
-	 * @param string|null $value Value to set
-	 *
-	 * @return \Psr\Http\Message\UriInterface|\chillerlan\HTTP\Psr7\Uri
-	 */
-	public function withQueryValue($key, $value):Uri{
-		$current = $this->getQuery();
-
-		if($current === ''){
-			$result = [];
-		}
-		else{
-			$decodedKey = rawurldecode($key);
-			$result     = array_filter(explode('&', $current), function($part) use ($decodedKey){
-				return rawurldecode(explode('=', $part)[0]) !== $decodedKey;
-			});
-		}
-
-		// Query string separators ("=", "&") within the key or value need to be encoded
-		// (while preventing double-encoding) before setting the query string. All other
-		// chars that need percent-encoding will be encoded by withQuery().
-		$replaceQuery = ['=' => '%3D', '&' => '%26'];
-		$key          = strtr($key, $replaceQuery);
-
-		$result[] = $value !== null
-			? $key.'='.strtr($value, $replaceQuery)
-			: $key;
-
-		/** @noinspection PhpIncompatibleReturnTypeInspection */
-		return $this->withQuery(implode('&', $result));
 	}
 
 }
