@@ -13,7 +13,9 @@
 namespace chillerlan\HTTP\Psr17;
 
 use chillerlan\HTTP\Psr7\Stream;
+use InvalidArgumentException;
 use Psr\Http\Message\{StreamFactoryInterface, StreamInterface};
+use RuntimeException;
 
 final class StreamFactory implements StreamFactoryInterface{
 
@@ -44,6 +46,15 @@ final class StreamFactory implements StreamFactoryInterface{
 	 * @return \Psr\Http\Message\StreamInterface
 	 */
 	public function createStreamFromFile(string $filename, string $mode = 'r'):StreamInterface{
+
+		if(empty($filename) || !is_file($filename)){
+			throw new RuntimeException('invalid file');
+		}
+
+		if(!isset(Stream::MODES_WRITE[$mode]) && !isset(Stream::MODES_READ[$mode])){
+			throw new InvalidArgumentException('invalid mode');
+		}
+
 		return new Stream(fopen($filename, $mode));
 	}
 
