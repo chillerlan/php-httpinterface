@@ -4,7 +4,7 @@
 	"license": "MIT",
 	"type": "library",
 	"keywords": [
-		"http", "client", "psr-7", "psr-17", "psr-18"
+		"http", "message", "client", "factory", "psr-7", "psr-17", "psr-18"
 	],
 	"minimum-stability": "stable",
 	"authors": [
@@ -27,6 +27,8 @@
 	"require": {
 		"php": "^7.2",
 		"ext-json":"*",
+		"ext-simplexml":"*",
+		"ext-zlib":"*",
 		"chillerlan/php-settings-container":"^1.0",
 		"fig/http-message-util":"^1.1",
 		"psr/http-client":"^1.0",
