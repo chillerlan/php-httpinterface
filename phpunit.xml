@@ -16,7 +16,18 @@
 		<testsuite name="php-httpinterface test suite">
 			<directory suffix=".php">./tests</directory>
 		</testsuite>
+		<testsuite name="http-interop Integration tests">
+			<directory>./vendor/http-interop/http-factory-tests/test</directory>
+		</testsuite>
 	</testsuites>
+	<php>
+		<const name="REQUEST_FACTORY" value="chillerlan\HTTP\Psr17\RequestFactory"/>
+		<const name="RESPONSE_FACTORY" value="chillerlan\HTTP\Psr17\ResponseFactory"/>
+		<const name="SERVER_REQUEST_FACTORY" value="chillerlan\HTTP\Psr17\ServerRequestFactory"/>
+		<const name="STREAM_FACTORY" value="chillerlan\HTTP\Psr17\StreamFactory"/>
+		<const name="UPLOADED_FILE_FACTORY" value="chillerlan\HTTP\Psr17\UploadedFileFactory"/>
+		<const name="URI_FACTORY" value="chillerlan\HTTP\Psr17\UriFactory"/>
+	</php>
 	<filter>
 		<whitelist>
 			<directory suffix=".php">./src</directory>
