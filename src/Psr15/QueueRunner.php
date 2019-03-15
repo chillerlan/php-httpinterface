@@ -49,7 +49,7 @@ class QueueRunner implements RequestHandlerInterface{
 			return $this->fallbackHandler->handle($request);
 		}
 
-		$middleware = array_shift($this->middlewareStack);
+		$middleware = \array_shift($this->middlewareStack);
 
 		return $middleware->process($request, $this);
 	}
