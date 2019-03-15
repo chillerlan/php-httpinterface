@@ -31,25 +31,25 @@ class CurlClient extends HTTPClientAbstract{
 		$handle = new $this->options->curlHandle($request, $this->responseFactory->createResponse(), $this->options);
 		$handle->init();
 
-		curl_exec($handle->curl);
+		\curl_exec($handle->curl);
 
-		$errno = curl_errno($handle->curl);
+		$errno = \curl_errno($handle->curl);
 
-		if($errno !== CURLE_OK){
-			$error = curl_error($handle->curl);
+		if($errno !== \CURLE_OK){
+			$error = \curl_error($handle->curl);
 
 			$network_errors = [
-				CURLE_COULDNT_RESOLVE_PROXY,
-				CURLE_COULDNT_RESOLVE_HOST,
-				CURLE_COULDNT_CONNECT,
-				CURLE_OPERATION_TIMEOUTED,
-				CURLE_SSL_CONNECT_ERROR,
-				CURLE_GOT_NOTHING,
+				\CURLE_COULDNT_RESOLVE_PROXY,
+				\CURLE_COULDNT_RESOLVE_HOST,
+				\CURLE_COULDNT_CONNECT,
+				\CURLE_OPERATION_TIMEOUTED,
+				\CURLE_SSL_CONNECT_ERROR,
+				\CURLE_GOT_NOTHING,
 			];
 
 			$this->logger->error('cURL error #'.$errno.': '.$error);
 
-			if(in_array($errno, $network_errors, true)){
+			if(\in_array($errno, $network_errors, true)){
 				throw new NetworkException($error, $request);
 			}
 

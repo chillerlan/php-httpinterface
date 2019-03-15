@@ -22,14 +22,14 @@ final class UploadedFile implements UploadedFileInterface{
 	 * @var int[]
 	 */
 	public const UPLOAD_ERRORS = [
-		UPLOAD_ERR_OK,
-		UPLOAD_ERR_INI_SIZE,
-		UPLOAD_ERR_FORM_SIZE,
-		UPLOAD_ERR_PARTIAL,
-		UPLOAD_ERR_NO_FILE,
-		UPLOAD_ERR_NO_TMP_DIR,
-		UPLOAD_ERR_CANT_WRITE,
-		UPLOAD_ERR_EXTENSION,
+		\UPLOAD_ERR_OK,
+		\UPLOAD_ERR_INI_SIZE,
+		\UPLOAD_ERR_FORM_SIZE,
+		\UPLOAD_ERR_PARTIAL,
+		\UPLOAD_ERR_NO_FILE,
+		\UPLOAD_ERR_NO_TMP_DIR,
+		\UPLOAD_ERR_CANT_WRITE,
+		\UPLOAD_ERR_EXTENSION,
 	];
 
 	/**
@@ -93,9 +93,9 @@ final class UploadedFile implements UploadedFileInterface{
 		$this->clientMediaType = $mediaType;
 		$this->streamFactory   = new StreamFactory;
 
-		if($this->error === UPLOAD_ERR_OK){
+		if($this->error === \UPLOAD_ERR_OK){
 
-			if(is_string($file)){
+			if(\is_string($file)){
 				$this->file = $file;
 			}
 			else{
@@ -127,18 +127,18 @@ final class UploadedFile implements UploadedFileInterface{
 
 		$this->validateActive();
 
-		if(is_string($targetPath) && empty($targetPath)){
+		if(\is_string($targetPath) && empty($targetPath)){
 			throw new InvalidArgumentException('Invalid path provided for move operation; must be a non-empty string');
 		}
 
-		if(!is_writable($targetPath)){
-			throw new RuntimeException(sprintf('Directory %s is not writable', $targetPath));
+		if(!\is_writable($targetPath)){
+			throw new RuntimeException('Directory is not writable: '.$targetPath);
 		}
 
 		if($this->file !== null){
-			$this->moved = php_sapi_name() === 'cli'
-				? rename($this->file, $targetPath)
-				: move_uploaded_file($this->file, $targetPath);
+			$this->moved = \php_sapi_name() === 'cli'
+				? \rename($this->file, $targetPath)
+				: \move_uploaded_file($this->file, $targetPath);
 		}
 		else{
 			$this->copyToStream($this->streamFactory->createStreamFromFile($targetPath, 'r+'));
@@ -146,7 +146,7 @@ final class UploadedFile implements UploadedFileInterface{
 		}
 
 		if($this->moved === false){
-			throw new RuntimeException(sprintf('Uploaded file could not be moved to %s', $targetPath));
+			throw new RuntimeException('Uploaded file could not be moved to '.$targetPath);
 		}
 
 	}
@@ -185,7 +185,7 @@ final class UploadedFile implements UploadedFileInterface{
 	 */
 	private function validateActive():void{
 
-		if($this->error !== UPLOAD_ERR_OK){
+		if($this->error !== \UPLOAD_ERR_OK){
 			throw new RuntimeException('Cannot retrieve stream due to upload error');
 		}
 

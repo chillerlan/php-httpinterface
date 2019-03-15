@@ -31,9 +31,9 @@ function create_server_request_from_globals():ServerRequest{
 	$serverRequest = new ServerRequest(
 		isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : ServerRequest::METHOD_GET,
 		create_uri_from_globals(),
-		function_exists('getallheaders') ? getallheaders() : [],
+		\function_exists('getallheaders') ? \getallheaders() : [],
 		(new StreamFactory)->createStream(),
-		isset($_SERVER['SERVER_PROTOCOL']) ? str_replace('HTTP/', '', $_SERVER['SERVER_PROTOCOL']) : '1.1',
+		isset($_SERVER['SERVER_PROTOCOL']) ? \str_replace('HTTP/', '', $_SERVER['SERVER_PROTOCOL']) : '1.1',
 		$_SERVER
 	);
 
@@ -58,7 +58,7 @@ function create_uri_from_globals():UriExtended{
 	$parts['scheme'] = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https' : 'http';
 
 	if(isset($_SERVER['HTTP_HOST'])){
-		$hostHeaderParts = explode(':', $_SERVER['HTTP_HOST']);
+		$hostHeaderParts = \explode(':', $_SERVER['HTTP_HOST']);
 		$parts['host'] = $hostHeaderParts[0];
 
 		if(isset($hostHeaderParts[1])){
@@ -78,7 +78,7 @@ function create_uri_from_globals():UriExtended{
 	}
 
 	if(isset($_SERVER['REQUEST_URI'])){
-		$requestUriParts = explode('?', $_SERVER['REQUEST_URI']);
+		$requestUriParts = \explode('?', $_SERVER['REQUEST_URI']);
 		$parts['path']   = $requestUriParts[0];
 
 		if(isset($requestUriParts[1])){
@@ -105,11 +105,11 @@ function create_uri_from_globals():UriExtended{
  * @return \chillerlan\HTTP\Psr7\Stream|\Psr\Http\Message\StreamInterface
  */
 function create_stream(string $content = ''):Stream{
-	$stream = fopen('php://temp', 'r+');
+	$stream = \fopen('php://temp', 'r+');
 
 	if($content !== ''){
-		fwrite($stream, $content);
-		fseek($stream, 0);
+		\fwrite($stream, $content);
+		\fseek($stream, 0);
 	}
 
 	return new Stream($stream);
@@ -127,15 +127,15 @@ function create_stream_from_input($in = null):StreamInterface{
 	// a) trouble if the given string accidentally matches a file path, and
 	// b) security implications because of the above.
 	// use with caution and never with user input!
-	if(is_string($in) && is_file($in) && is_readable($in)){
+	if(\is_string($in) && \is_file($in) && \is_readable($in)){
 		return new Stream(fopen($in, 'r'));
 	}
 
-	if(is_scalar($in)){
+	if(\is_scalar($in)){
 		return create_stream((string)$in);
 	}
 
-	$type = gettype($in);
+	$type = \gettype($in);
 
 	if($type === 'resource'){
 		return new Stream($in);
@@ -145,7 +145,7 @@ function create_stream_from_input($in = null):StreamInterface{
 		if($in instanceof StreamInterface){
 			return $in;
 		}
-		elseif(method_exists($in, '__toString')){
+		elseif(\method_exists($in, '__toString')){
 			return create_stream((string)$in);
 		}
 

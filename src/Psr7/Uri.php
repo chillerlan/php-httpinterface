@@ -81,7 +81,7 @@ class Uri implements UriInterface{
 	public function __construct(string $uri = null){
 
 		if($uri !== ''){
-			$parts = parse_url($uri);
+			$parts = \parse_url($uri);
 
 			if($parts === false){
 				throw new InvalidArgumentException('invalid URI: "'.$uri.'"');
@@ -134,11 +134,11 @@ class Uri implements UriInterface{
 	 */
 	protected function filterScheme($scheme):string{
 
-		if(!is_string($scheme)){
-			throw new InvalidArgumentException(sprintf('scheme must be a string'));
+		if(!\is_string($scheme)){
+			throw new InvalidArgumentException('scheme must be a string');
 		}
 
-		return strtolower($scheme);
+		return \strtolower($scheme);
 	}
 
 	/**
@@ -179,8 +179,8 @@ class Uri implements UriInterface{
 	 */
 	protected function filterUser($user):string{
 
-		if(!is_string($user)){
-			throw new InvalidArgumentException(sprintf('user must be a string'));
+		if(!\is_string($user)){
+			throw new InvalidArgumentException('user must be a string');
 		}
 
 		return $user;
@@ -194,8 +194,8 @@ class Uri implements UriInterface{
 	 */
 	protected function filterPass($pass):string{
 
-		if(!is_string($pass)){
-			throw new InvalidArgumentException(sprintf('pass must be a string'));
+		if(!\is_string($pass)){
+			throw new InvalidArgumentException('pass must be a string');
 		}
 
 		return $pass;
@@ -261,15 +261,15 @@ class Uri implements UriInterface{
 	 */
 	protected function filterHost($host):string{
 
-		if(!is_string($host)){
+		if(!\is_string($host)){
 			throw new InvalidArgumentException('host must be a string');
 		}
 
-		if(filter_var($host, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)){
+		if(\filter_var($host, \FILTER_VALIDATE_IP, \FILTER_FLAG_IPV6)){
 			$host = '['.$host.']';
 		}
 
-		return strtolower($host);
+		return \strtolower($host);
 	}
 
 	/**
@@ -319,7 +319,7 @@ class Uri implements UriInterface{
 			return $port;
 		}
 
-		throw new InvalidArgumentException(sprintf('invalid port: %d', $port));
+		throw new InvalidArgumentException('invalid port: '.$port);
 	}
 
 	/**
@@ -360,7 +360,7 @@ class Uri implements UriInterface{
 	 */
 	protected function filterPath($path):string{
 
-		if(!is_string($path)){
+		if(!\is_string($path)){
 			throw new InvalidArgumentException('path must be a string');
 		}
 
@@ -404,7 +404,7 @@ class Uri implements UriInterface{
 	 */
 	protected function filterQuery($query):string{
 
-		if(!is_string($query)){
+		if(!\is_string($query)){
 			throw new InvalidArgumentException('query and fragment must be a string');
 		}
 
@@ -487,7 +487,7 @@ class Uri implements UriInterface{
 				continue;
 			}
 
-			$this->{$part} = call_user_func_array([$this, 'filter'.ucfirst($part)], [$parts[$part]]);
+			$this->{$part} = \call_user_func_array([$this, 'filter'.\ucfirst($part)], [$parts[$part]]);
 		}
 
 		$this->removeDefaultPort();
@@ -500,14 +500,14 @@ class Uri implements UriInterface{
 	 * @return string
 	 */
 	protected function replaceChars(string $str, bool $query = null):string{
-		return preg_replace_callback(
+		return \preg_replace_callback(
 			'/(?:[^'
 			.'a-z\d_\-\.~'
 			.'!\$&\'\(\)\*\+,;='
 			.'%:@\/'.($query ? '\?' : '')
 			.']++|%(?![a-f\d]{2}))/i',
 			function(array $match):string{
-				return rawurlencode($match[0]);
+				return \rawurlencode($match[0]);
 			},
 			$str
 		);
@@ -544,10 +544,10 @@ class Uri implements UriInterface{
 		else{
 
 			if(strpos($this->path, '//') === 0){
-				$this->path = '/'.ltrim($this->path, '/'); // automagically fix the path, unlike Guzzle
+				$this->path = '/'.\ltrim($this->path, '/'); // automagically fix the path, unlike Guzzle
 			}
 
-			if(empty($this->scheme) && strpos(explode('/', $this->path, 2)[0], ':') !== false){
+			if(empty($this->scheme) && \strpos(\explode('/', $this->path, 2)[0], ':') !== false){
 				throw new InvalidArgumentException('A relative URI must not have a path beginning with a segment containing a colon');
 			}
 

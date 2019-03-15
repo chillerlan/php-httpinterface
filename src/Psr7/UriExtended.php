@@ -110,14 +110,13 @@ class UriExtended extends Uri{
 			return $this;
 		}
 
-		$decodedKey = rawurldecode($key);
+		$decodedKey = \rawurldecode($key);
 
-		$result = array_filter(explode('&', $current), function($part) use ($decodedKey){
-			return rawurldecode(explode('=', $part)[0]) !== $decodedKey;
+		$result = \array_filter(\explode('&', $current), function($part) use ($decodedKey){
+			return \rawurldecode(\explode('=', $part)[0]) !== $decodedKey;
 		});
 
-		/** @noinspection PhpIncompatibleReturnTypeInspection */
-		return $this->withQuery(implode('&', $result));
+		return $this->withQuery(\implode('&', $result));
 	}
 
 	/**
@@ -141,9 +140,9 @@ class UriExtended extends Uri{
 			$result = [];
 		}
 		else{
-			$decodedKey = rawurldecode($key);
-			$result     = array_filter(explode('&', $current), function($part) use ($decodedKey){
-				return rawurldecode(explode('=', $part)[0]) !== $decodedKey;
+			$decodedKey = \rawurldecode($key);
+			$result     = \array_filter(\explode('&', $current), function($part) use ($decodedKey){
+				return \rawurldecode(\explode('=', $part)[0]) !== $decodedKey;
 			});
 		}
 
@@ -151,14 +150,13 @@ class UriExtended extends Uri{
 		// (while preventing double-encoding) before setting the query string. All other
 		// chars that need percent-encoding will be encoded by withQuery().
 		$replaceQuery = ['=' => '%3D', '&' => '%26'];
-		$key          = strtr($key, $replaceQuery);
+		$key          = \strtr($key, $replaceQuery);
 
 		$result[] = $value !== null
-			? $key.'='.strtr($value, $replaceQuery)
+			? $key.'='.\strtr($value, $replaceQuery)
 			: $key;
 
-		/** @noinspection PhpIncompatibleReturnTypeInspection */
-		return $this->withQuery(implode('&', $result));
+		return $this->withQuery(\implode('&', $result));
 	}
 
 }

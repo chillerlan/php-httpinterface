@@ -26,11 +26,11 @@ class StreamClient extends HTTPClientAbstract{
 		$method  = $request->getMethod();
 		$headers = $this->getRequestHeaders($request);
 
-		$body    = in_array($method, ['DELETE', 'PATCH', 'POST', 'PUT'], true)
+		$body    = \in_array($method, ['DELETE', 'PATCH', 'POST', 'PUT'], true)
 			? $request->getBody()->getContents()
 			: null;
 
-		$context = stream_context_create([
+		$context = \stream_context_create([
 			'http' => [
 				'method'           => $method,
 				'header'           => $headers,
@@ -52,13 +52,13 @@ class StreamClient extends HTTPClientAbstract{
 
 		$requestUri = (string)$uri->withFragment('');
 
-		set_error_handler(function ($severity, $msg, $file, $line){
+		\set_error_handler(function ($severity, $msg, $file, $line){
 			throw new \ErrorException($msg, 0, $severity, $file, $line);
 		});
 
 		try{
-			$responseBody    = file_get_contents($requestUri, false, $context);
-			$responseHeaders = $this->parseResponseHeaders(get_headers($requestUri, 1, $context));
+			$responseBody    = \file_get_contents($requestUri, false, $context);
+			$responseHeaders = $this->parseResponseHeaders(\get_headers($requestUri, 1, $context));
 		}
 		catch(\Exception $e){
 			$this->logger->error('StreamClient error #'.$e->getCode().': '.$e->getMessage());
@@ -66,7 +66,7 @@ class StreamClient extends HTTPClientAbstract{
 			throw new ClientException($e->getMessage(), $e->getCode());
 		}
 
-		restore_error_handler();
+		\restore_error_handler();
 
 		$response = $this->responseFactory
 			->createResponse($responseHeaders['statuscode'], $responseHeaders['statustext'])
@@ -88,7 +88,7 @@ class StreamClient extends HTTPClientAbstract{
 		$headers = [];
 
 		foreach($request->getHeaders() as $name => $values){
-			$name = strtolower($name);
+			$name = \strtolower($name);
 
 			foreach($values as $value){
 				$value = (string)$value;
@@ -112,17 +112,17 @@ class StreamClient extends HTTPClientAbstract{
 
 		foreach($headers as $k => $v){
 
-			if($k === 0 && substr($v, 0, 4) === 'HTTP'){
-				$status = explode(' ', $v, 3);
+			if($k === 0 && \substr($v, 0, 4) === 'HTTP'){
+				$status = \explode(' ', $v, 3);
 
-				$h['httpversion'] = explode('/', $status[0], 2)[1];
-				$h['statuscode']  = intval($status[1]);
-				$h['statustext']  = trim($status[2]);
+				$h['httpversion'] = \explode('/', $status[0], 2)[1];
+				$h['statuscode']  = \intval($status[1]);
+				$h['statustext']  = \trim($status[2]);
 
 				continue;
 			}
 
-			$h[strtolower($k)] = $v;
+			$h[\strtolower($k)] = $v;
 
 		}
 

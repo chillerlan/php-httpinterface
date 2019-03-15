@@ -44,7 +44,7 @@ final class MultipartStream extends StreamAbstract{
 	 * @param string|null  $boundary
 	 */
 	public function __construct(array $elements = null, string $boundary = null){
-		$this->boundary = $boundary ?? sha1(random_bytes(1024));
+		$this->boundary = $boundary ?? \sha1(\random_bytes(1024));
 		$this->stream   = Psr17\create_stream();
 
 		foreach($elements ?? [] as $element){
@@ -87,7 +87,7 @@ final class MultipartStream extends StreamAbstract{
 			throw new RuntimeException('Stream already built');
 		}
 
-		$e = array_merge(['filename' => null, 'headers' => []], $e);
+		$e = \array_merge(['filename' => null, 'headers' => []], $e);
 
 		foreach(['contents', 'name'] as $key){
 			if(!isset($e[$key])){
@@ -100,7 +100,7 @@ final class MultipartStream extends StreamAbstract{
 		if(empty($e['filename'])){
 			$uri = $e['contents']->getMetadata('uri');
 
-			if(substr($uri, 0, 6) !== 'php://'){
+			if(\substr($uri, 0, 6) !== 'php://'){
 				$e['filename'] = $uri;
 			}
 		}
@@ -109,7 +109,7 @@ final class MultipartStream extends StreamAbstract{
 
 		// Set a default content-disposition header if none was provided
 		if(!$this->hasHeader($e['headers'], 'content-disposition')){
-			$e['headers']['Content-Disposition'] = 'form-data; name="'.$e['name'].'"'.($hasFilename ? '; filename="'.basename($e['filename']).'"' : '');
+			$e['headers']['Content-Disposition'] = 'form-data; name="'.$e['name'].'"'.($hasFilename ? '; filename="'.\basename($e['filename']).'"' : '');
 		}
 
 		// Set a default content-length header if none was provided
@@ -123,7 +123,7 @@ final class MultipartStream extends StreamAbstract{
 
 		// Set a default Content-Type if none was supplied
 		if(!$this->hasHeader($e['headers'], 'content-type') && $hasFilename){
-			$type = MIMETYPES[pathinfo($e['filename'], PATHINFO_EXTENSION)] ?? null;
+			$type = MIMETYPES[\pathinfo($e['filename'], \PATHINFO_EXTENSION)] ?? null;
 
 			if($type){
 				$e['headers']['Content-Type'] = $type;
@@ -147,11 +147,11 @@ final class MultipartStream extends StreamAbstract{
 	 *
 	 * @return bool
 	 */
-	private function hasHeader(array $headers, string $key):bool{
-		$lowercaseHeader = strtolower($key);
+	protected function hasHeader(array $headers, string $key):bool{
+		$lowercaseHeader = \strtolower($key);
 
-		foreach ($headers as $k => $v) {
-			if (strtolower($k) === $lowercaseHeader) {
+		foreach($headers as $k => $v){
+			if(\strtolower($k) === $lowercaseHeader){
 				return true;
 			}
 		}
@@ -170,7 +170,7 @@ final class MultipartStream extends StreamAbstract{
 	 * @inheritdoc
 	 */
 	public function getSize():?int{
-		return $this->stream->getSize() + strlen($this->boundary) + 6;
+		return $this->stream->getSize() + \strlen($this->boundary) + 6;
 	}
 
 	/**

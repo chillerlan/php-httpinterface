@@ -130,7 +130,7 @@ abstract class StreamAbstract implements StreamInterface{
 	 * @inheritdoc
 	 * @codeCoverageIgnore
 	 */
-	public function seek($offset, $whence = SEEK_SET):void{
+	public function seek($offset, $whence = \SEEK_SET):void{
 		$this->stream->seek($offset, $whence);
 	}
 

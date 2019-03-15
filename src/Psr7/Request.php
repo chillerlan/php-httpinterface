@@ -45,7 +45,7 @@ class Request extends Message implements RequestInterface, RequestMethodInterfac
 	public function __construct(string $method, $uri, array $headers = null, $body = null, string $version = null){
 		parent::__construct($headers, $body, $version);
 
-		$this->method = strtoupper($method);
+		$this->method = \strtoupper($method);
 		$this->uri    = !$uri instanceof UriInterface ? new Uri($uri) : $uri;
 
 		if(!$this->hasHeader('Host')){
@@ -108,7 +108,7 @@ class Request extends Message implements RequestInterface, RequestMethodInterfac
 		}
 
 		$clone         = clone $this;
-		$clone->method = strtoupper($method);
+		$clone->method = \strtoupper($method);
 
 		return $clone;
 	}
