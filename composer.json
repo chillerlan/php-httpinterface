@@ -4,7 +4,7 @@
 	"license": "MIT",
 	"type": "library",
 	"keywords": [
-		"http", "message", "client", "factory", "psr-7", "psr-17", "psr-18"
+		"http", "message", "client", "factory", "handler", "psr-7", "psr-15", "psr-17", "psr-18"
 	],
 	"minimum-stability": "stable",
 	"authors": [
@@ -22,7 +22,9 @@
 		"chillerlan/php-httpinterface": "2.0",
 		"psr/http-client-implementation": "1.0",
 		"psr/http-factory-implementation": "1.0",
-		"psr/http-message-implementation": "1.0"
+		"psr/http-message-implementation": "1.0",
+		"psr/http-server-handler-implementation": "1.0",
+		"psr/http-server-middleware-implementation": "1.0"
 	},
 	"require": {
 		"php": "^7.2",
@@ -34,6 +36,8 @@
 		"psr/http-client":"^1.0",
 		"psr/http-message": "^1.0",
 		"psr/http-factory":"^1.0",
+		"psr/http-server-handler": "^1.0",
+		"psr/http-server-middleware": "^1.0",
 		"psr/log": "^1.0"
 	},
 	"require-dev": {
