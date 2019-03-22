@@ -171,6 +171,7 @@ trait HTTPOptionsTrait{
 		foreach($cafiles as $file){
 			if(\is_file($file) || (\is_link($file) && \is_file(\readlink($file)))){
 				$this->curl_options[\CURLOPT_CAINFO] = $file;
+				$this->ca_info = $file;
 				return;
 			}
 		}
