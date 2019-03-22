@@ -200,9 +200,9 @@ class CurlHandle{
 	 * @return resource cURL handle
 	 */
 	public function init(){
-		$options = $this->initCurlOptions();
-
+		$options  = $this->initCurlOptions();
 		$userinfo = $this->request->getUri()->getUserInfo();
+		$method   = $this->request->getMethod();
 
 		if(!empty($userinfo)){
 			$options[\CURLOPT_USERPWD] = $userinfo;
@@ -211,12 +211,11 @@ class CurlHandle{
 		/*
 		 * Some HTTP methods cannot have payload:
 		 *
-		 * - GET   — cURL will automatically change method to PUT or POST
+		 * - GET   — cURL will automatically change the method to PUT or POST
 		 *           if we set CURLOPT_UPLOAD or CURLOPT_POSTFIELDS.
-		 * - HEAD  — cURL treats HEAD as GET request with a same restrictions.
+		 * - HEAD  — cURL treats HEAD as a GET request with same restrictions.
 		 * - TRACE — According to RFC7231: a client MUST NOT send a message body in a TRACE request.
 		 */
-		$method = $this->request->getMethod();
 
 		if(\in_array($method, ['DELETE', 'PATCH', 'POST', 'PUT'], true)){
 			$this->setBodyOptions($options);
