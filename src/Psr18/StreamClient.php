@@ -40,14 +40,14 @@ class StreamClient extends HTTPClientAbstract{
 				'max_redirects'    => 0,
 				'timeout'          => 5,
 			],
-			'ssl' => [
+			'ssl' => array_filter([
 				'cafile'              => $this->options->ca_info,
 				'verify_peer'         => $this->options->ssl_verifypeer,
 				'verify_depth'        => 3,
 				'peer_name'           => $uri->getHost(),
 				'ciphers'             => 'HIGH:!SSLv2:!SSLv3',
 				'disable_compression' => true,
-			],
+			]),
 		]);
 
 		$requestUri = (string)$uri->withFragment('');
