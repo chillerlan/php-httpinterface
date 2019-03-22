@@ -247,7 +247,11 @@ class CurlHandle{
 		}
 
 		// overwrite the default values with $curl_options
-		\curl_setopt_array($this->curl, $options + $this->options->curl_options);
+		foreach($this->options->curl_options as $k => $v){
+			$options[$k] = $v;
+		}
+
+		\curl_setopt_array($this->curl, $options);
 
 		return $this->curl;
 	}
