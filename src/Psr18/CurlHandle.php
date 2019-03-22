@@ -51,8 +51,6 @@ class CurlHandle{
 		$this->response = $response;
 		$this->options  = $options;
 		$this->curl     = \curl_init();
-
-		\curl_setopt_array($this->curl, $this->options->curl_options);
 	}
 
 	/**
