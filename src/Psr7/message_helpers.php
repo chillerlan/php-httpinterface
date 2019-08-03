@@ -390,7 +390,12 @@ function normalize_nested_file_spec(array $files = []):array{
  * @return \stdClass|array|bool
  */
 function get_json(ResponseInterface $response, bool $assoc = null){
-	return \json_decode($response->getBody()->getContents(), $assoc);
+	$body = $response->getBody();
+	$data = \json_decode($body->getContents(), $assoc);
+
+	$body->rewind();
+
+	return $data;
 }
 
 /**
@@ -400,7 +405,10 @@ function get_json(ResponseInterface $response, bool $assoc = null){
  * @return \SimpleXMLElement|array|bool
  */
 function get_xml(ResponseInterface $response, bool $assoc = null){
-	$data = \simplexml_load_string($response->getBody()->getContents());
+	$body = $response->getBody();
+	$data = \simplexml_load_string($body->getContents());
+
+	$body->rewind();
 
 	return $assoc === true
 		? \json_decode(\json_encode($data), true) // cruel
