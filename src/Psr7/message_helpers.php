@@ -390,10 +390,9 @@ function normalize_nested_file_spec(array $files = []):array{
  * @return \stdClass|array|bool
  */
 function get_json(ResponseInterface $response, bool $assoc = null){
-	$body = $response->getBody();
-	$data = \json_decode($body->getContents(), $assoc);
+	$data = \json_decode($response->getBody()->__toString(), $assoc);
 
-	$body->rewind();
+	$response->getBody()->rewind();
 
 	return $data;
 }
@@ -405,10 +404,9 @@ function get_json(ResponseInterface $response, bool $assoc = null){
  * @return \SimpleXMLElement|array|bool
  */
 function get_xml(ResponseInterface $response, bool $assoc = null){
-	$body = $response->getBody();
-	$data = \simplexml_load_string($body->getContents());
+	$data = \simplexml_load_string($response->getBody()->__toString());
 
-	$body->rewind();
+	$response->getBody()->rewind();
 
 	return $assoc === true
 		? \json_decode(\json_encode($data), true) // cruel
@@ -441,7 +439,10 @@ function message_to_string(MessageInterface $message):string{
 		$msg .= "\r\n".$name.': '.\implode(', ', $values);
 	}
 
-	return $msg."\r\n\r\n".$message->getBody();
+	$data = $message->getBody()->__toString();
+	$message->getBody()->rewind();
+
+	return $msg."\r\n\r\n".$data;
 }
 
 /**
@@ -452,7 +453,8 @@ function message_to_string(MessageInterface $message):string{
  * @return string
  */
 function decompress_content(MessageInterface $message):string{
-	$data = $message->getBody()->getContents();
+	$data = $message->getBody()->__toString();
+	$message->getBody()->rewind();
 
 	switch($message->getHeaderLine('content-encoding')){
 #		case 'br'      : return \brotli_uncompress($data); // @todo: https://github.com/kjdev/php-ext-brotli
