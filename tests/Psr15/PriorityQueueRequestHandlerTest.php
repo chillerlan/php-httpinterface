@@ -12,9 +12,9 @@
 
 namespace chillerlan\HTTPTest\Psr15;
 
-use chillerlan\HTTP\{Psr15\QueueRunner, Psr17, Psr7};
-use chillerlan\HTTP\Psr15\PriorityQueueRequestHandler;
+use chillerlan\HTTP\Psr17;
 use chillerlan\HTTP\Psr15\Middleware\{MiddlewareException, PriorityMiddleware};
+use chillerlan\HTTP\Psr15\PriorityQueueRequestHandler;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};
 use Psr\Http\Server\{MiddlewareInterface, RequestHandlerInterface};

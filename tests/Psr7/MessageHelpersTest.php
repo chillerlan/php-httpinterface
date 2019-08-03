@@ -12,9 +12,9 @@
 
 namespace chillerlan\HTTPTest\Psr7;
 
-use chillerlan\HTTP\{Psr7, Psr7\Request, Psr7\Response, Psr17};
+use chillerlan\HTTP\{Psr17, Psr7, Psr7\Request, Psr7\Response};
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\{MessageInterface, ResponseInterface};
+use Psr\Http\Message\{MessageInterface};
 
 class MessageHelpersTest extends TestCase{
 

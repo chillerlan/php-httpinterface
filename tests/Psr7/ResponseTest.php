@@ -15,29 +15,14 @@
 namespace chillerlan\HTTPTest\Psr7;
 
 use chillerlan\HTTP\Psr7\Response;
-use chillerlan\HTTP\Psr17\{StreamFactory, ResponseFactory};
+use chillerlan\HTTP\Psr17;
 use Psr\Http\Message\StreamInterface;
 use PHPUnit\Framework\TestCase;
 
 class ResponseTest extends TestCase{
 
-	/**
-	 * @var \chillerlan\HTTP\Psr17\ResponseFactory
-	 */
-	protected $responseFactory;
-
-	/**
-	 * @var \chillerlan\HTTP\Psr17\StreamFactory
-	 */
-	protected $streamFactory;
-
-	protected function setUp():void{
-		$this->responseFactory = new ResponseFactory;
-		$this->streamFactory   = new StreamFactory;
-	}
-
 	public function testDefaultConstructor(){
-		$r = $this->responseFactory->createResponse();
+		$r = new Response;
 
 		$this->assertSame(200, $r->getStatusCode());
 		$this->assertSame('1.1', $r->getProtocolVersion());
@@ -48,7 +33,7 @@ class ResponseTest extends TestCase{
 	}
 
 	public function testCanConstructWithStatusCode(){
-		$r = $this->responseFactory->createResponse(404);
+		$r = new Response(404);
 
 		$this->assertSame(404, $r->getStatusCode());
 		$this->assertSame('Not Found', $r->getReasonPhrase());
@@ -148,8 +133,7 @@ class ResponseTest extends TestCase{
 	}
 
 	public function testWithBody(){
-		$b = $this->streamFactory->createStream('0');
-		$r = (new Response)->withBody($b);
+		$r = (new Response)->withBody(Psr17\create_stream('0'));
 		$this->assertInstanceOf(StreamInterface::class, $r->getBody());
 		$this->assertSame('0', (string) $r->getBody());
 	}

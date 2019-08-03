@@ -14,9 +14,9 @@
 
 namespace chillerlan\HTTPTest\Psr7;
 
+use chillerlan\HTTP\Psr17;
 use chillerlan\HTTP\Psr7;
 use chillerlan\HTTP\Psr7\UploadedFile;
-use chillerlan\HTTP\Psr17\{StreamFactory, UploadedFileFactory};
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
@@ -27,20 +27,8 @@ class UploadedFileTest extends TestCase{
 	 */
 	protected $cleanup;
 
-	/**
-	 * @var \chillerlan\HTTP\Psr17\UploadedFileFactory
-	 */
-	protected $uploadedFileFactory;
-
-	/**
-	 * @var \chillerlan\HTTP\Psr17\StreamFactory
-	 */
-	protected $streamFactory;
-
 	protected function setUp():void{
 		$this->cleanup = [];
-		$this->uploadedFileFactory = new UploadedFileFactory;
-		$this->streamFactory       = new StreamFactory;
 	}
 
 	protected function tearDown():void{
@@ -93,8 +81,8 @@ class UploadedFileTest extends TestCase{
 	}
 
 	public function testGetStreamReturnsOriginalStreamObject(){
-		$stream = $this->streamFactory->createStream('');
-		$upload = $this->uploadedFileFactory->createUploadedFile($stream, 0, UPLOAD_ERR_OK); // coverage
+		$stream = Psr17\create_stream('');
+		$upload = new UploadedFile($stream, 0, UPLOAD_ERR_OK);
 
 		$this->assertSame($stream, $upload->getStream());
 	}
@@ -108,7 +96,7 @@ class UploadedFileTest extends TestCase{
 	}
 
 	public function testSuccessful(){
-		$stream = $this->streamFactory->createStream('Foo bar!');
+		$stream = Psr17\create_stream('Foo bar!');
 		$upload = new UploadedFile($stream, $stream->getSize(), UPLOAD_ERR_OK, 'filename.txt', 'text/plain');
 
 		$this->assertEquals($stream->getSize(), $upload->getSize());
@@ -123,7 +111,7 @@ class UploadedFileTest extends TestCase{
 	}
 
 	public function testMoveCannotBeCalledMoreThanOnce(){
-		$stream = $this->streamFactory->createStream('Foo bar!');
+		$stream = Psr17\create_stream('Foo bar!');
 		$upload = new UploadedFile($stream, 0, UPLOAD_ERR_OK);
 
 		$this->cleanup[] = $to = tempnam(sys_get_temp_dir(), 'diac');
@@ -136,7 +124,7 @@ class UploadedFileTest extends TestCase{
 	}
 
 	public function testCannotRetrieveStreamAfterMove(){
-		$stream = $this->streamFactory->createStream('Foo bar!');
+		$stream = Psr17\create_stream('Foo bar!');
 		$upload = new UploadedFile($stream, 0, UPLOAD_ERR_OK);
 
 		$this->cleanup[] = $to = tempnam(sys_get_temp_dir(), 'diac');

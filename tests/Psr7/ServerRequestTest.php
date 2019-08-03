@@ -14,8 +14,7 @@
 
 namespace chillerlan\HTTPTest\Psr7;
 
-use chillerlan\HTTP\Psr7\{ServerRequest, UploadedFile, Uri};
-use chillerlan\HTTP\Psr17;
+use chillerlan\HTTP\Psr7\{ServerRequest, UploadedFile};
 use chillerlan\HTTP\Psr17\ServerRequestFactory;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;

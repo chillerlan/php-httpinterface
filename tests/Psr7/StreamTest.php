@@ -16,11 +16,9 @@ namespace chillerlan\HTTPTest\Psr7;
 
 use chillerlan\HTTP\Psr7\Stream;
 use chillerlan\HTTP\Psr17\StreamFactory;
-use Exception;
-use InvalidArgumentException;
 use Psr\Http\Message\StreamInterface;
 use PHPUnit\Framework\TestCase;
-use RuntimeException;
+use Exception, InvalidArgumentException, RuntimeException;
 
 class StreamTest extends TestCase{
 

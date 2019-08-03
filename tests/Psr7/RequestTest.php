@@ -15,24 +15,14 @@
 namespace chillerlan\HTTPTest\Psr7;
 
 use chillerlan\HTTP\Psr7\{Request, Uri};
-use chillerlan\HTTP\Psr17\RequestFactory;
 use InvalidArgumentException;
 use Psr\Http\Message\StreamInterface;
 use PHPUnit\Framework\TestCase;
 
 class RequestTest extends TestCase{
 
-	/**
-	 * @var \chillerlan\HTTP\Psr17\RequestFactory
-	 */
-	protected $requestFactory;
-
-	protected function setUp():void{
-		$this->requestFactory = new RequestFactory;
-	}
-
 	public function testRequestUriMayBeString(){
-		$this->assertEquals('/', $this->requestFactory->createRequest($this->requestFactory::METHOD_GET, '/')->getUri()); // RequestFactory coverage
+		$this->assertEquals('/', (new Request(Request::METHOD_GET, '/'))->getUri());
 	}
 
 	public function testRequestUriMayBeUri(){

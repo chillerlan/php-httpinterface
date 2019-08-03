@@ -13,7 +13,7 @@
 namespace chillerlan\HTTPTest\Psr17;
 
 use chillerlan\HTTP\Psr17;
-use chillerlan\HTTP\Psr7\{UploadedFile, Uri, UriExtended};
+use chillerlan\HTTP\Psr7\{UploadedFile, UriExtended};
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\StreamInterface;
