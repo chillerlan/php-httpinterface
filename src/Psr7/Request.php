@@ -46,7 +46,7 @@ class Request extends Message implements RequestInterface, RequestMethodInterfac
 		parent::__construct($headers, $body, $version);
 
 		$this->method = \strtoupper($method);
-		$this->uri    = !$uri instanceof UriInterface ? new Uri($uri) : $uri;
+		$this->uri    = $uri instanceof UriInterface ? $uri : new Uri($uri);
 
 		if(!$this->hasHeader('Host')){
 			$this->updateHostFromUri();

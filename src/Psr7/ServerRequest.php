@@ -51,7 +51,7 @@ final class ServerRequest extends Request implements ServerRequestInterface{
 	 * ServerRequest constructor.
 	 *
 	 * @param string                                                 $method
-	 * @param                                                        $uri
+	 * @param string|\Psr\Http\Message\UriInterface                  $uri
 	 * @param array|null                                             $headers
 	 * @param null|string|resource|\Psr\Http\Message\StreamInterface $body
 	 * @param string|null                                            $version

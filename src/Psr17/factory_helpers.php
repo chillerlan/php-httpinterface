@@ -29,7 +29,7 @@ const PSR17_INCLUDES = true;
 function create_server_request_from_globals():ServerRequest{
 
 	$serverRequest = new ServerRequest(
-		isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : ServerRequest::METHOD_GET,
+		$_SERVER['REQUEST_METHOD'] ?? ServerRequest::METHOD_GET,
 		create_uri_from_globals(),
 		\function_exists('getallheaders') ? \getallheaders() : [],
 		(new StreamFactory)->createStream(),

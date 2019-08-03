@@ -501,11 +501,7 @@ class Uri implements UriInterface{
 	 */
 	protected function replaceChars(string $str, bool $query = null):string{
 		return \preg_replace_callback(
-			'/(?:[^'
-			.'a-z\d_\-\.~'
-			.'!\$&\'\(\)\*\+,;='
-			.'%:@\/'.($query ? '\?' : '')
-			.']++|%(?![a-f\d]{2}))/i',
+			'/(?:[^a-z\d_\-\.~!\$&\'\(\)\*\+,;=%:@\/'.($query ? '\?' : '').']++|%(?![a-f\d]{2}))/i',
 			function(array $match):string{
 				return \rawurlencode($match[0]);
 			},

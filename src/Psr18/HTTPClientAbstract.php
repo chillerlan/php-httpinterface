@@ -66,9 +66,9 @@ abstract class HTTPClientAbstract implements HTTPClientInterface, LoggerAwareInt
 	 * @return \Psr\Http\Message\ResponseInterface
 	 */
 	public function request(string $uri, string $method = null, array $query = null, $body = null, array $headers = null):ResponseInterface{
-		$method    = \strtoupper($method ?? 'GET');
-		$headers   = Psr7\normalize_request_headers($headers);
-		$request   = new Request($method, Psr7\merge_query($uri, $query ?? []));
+		$method  = \strtoupper($method ?? 'GET');
+		$headers = Psr7\normalize_request_headers($headers);
+		$request = new Request($method, Psr7\merge_query($uri, $query ?? []));
 
 		if(\in_array($method, ['DELETE', 'PATCH', 'POST', 'PUT'], true) && $body !== null){
 

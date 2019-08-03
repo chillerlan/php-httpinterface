@@ -85,6 +85,7 @@ final class Stream extends StreamAbstract{
 		// @codeCoverageIgnoreStart
 		catch(Exception $e){
 			// https://bugs.php.net/bug.php?id=53648
+			// @todo: fixed in 7.4
 			\trigger_error('Stream::__toString exception: '.$e->getMessage(), \E_USER_ERROR);
 
 			return '';
@@ -240,6 +241,7 @@ final class Stream extends StreamAbstract{
 		if(!$this->readable){
 			throw new RuntimeException('Cannot read from non-readable stream');
 		}
+
 		if($length < 0){
 			throw new RuntimeException('Length parameter cannot be negative');
 		}
