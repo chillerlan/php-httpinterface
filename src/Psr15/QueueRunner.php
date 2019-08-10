@@ -17,6 +17,8 @@ namespace chillerlan\HTTP\Psr15;
 use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};
 use Psr\Http\Server\RequestHandlerInterface;
 
+use function array_shift;
+
 class QueueRunner implements RequestHandlerInterface{
 
 	/**
@@ -49,7 +51,7 @@ class QueueRunner implements RequestHandlerInterface{
 			return $this->fallbackHandler->handle($request);
 		}
 
-		$middleware = \array_shift($this->middlewareStack);
+		$middleware = array_shift($this->middlewareStack);
 
 		return $middleware->process($request, $this);
 	}

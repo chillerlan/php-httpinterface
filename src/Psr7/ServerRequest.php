@@ -15,6 +15,8 @@ namespace chillerlan\HTTP\Psr7;
 use InvalidArgumentException;
 use Psr\Http\Message\ServerRequestInterface;
 
+use function array_key_exists, is_array, is_object;
+
 final class ServerRequest extends Request implements ServerRequestInterface{
 
 	/**
@@ -133,7 +135,7 @@ final class ServerRequest extends Request implements ServerRequestInterface{
 	 */
 	public function withParsedBody($data):ServerRequestInterface{
 
-		if($data !== null && !\is_object($data) && !\is_array($data)){
+		if($data !== null && !is_object($data) && !is_array($data)){
 			throw new InvalidArgumentException('parsed body value must be an array, object or null');
 		}
 
@@ -155,7 +157,7 @@ final class ServerRequest extends Request implements ServerRequestInterface{
 	 */
 	public function getAttribute($name, $default = null){
 
-		if(\array_key_exists($name, $this->attributes)){
+		if(array_key_exists($name, $this->attributes)){
 			return $this->attributes[$name];
 		}
 
@@ -177,7 +179,7 @@ final class ServerRequest extends Request implements ServerRequestInterface{
 	 */
 	public function withoutAttribute($name):ServerRequestInterface{
 
-		if(\array_key_exists($name, $this->attributes)){
+		if(array_key_exists($name, $this->attributes)){
 			$clone = clone $this;
 			unset($clone->attributes[$name]);
 
@@ -186,6 +188,5 @@ final class ServerRequest extends Request implements ServerRequestInterface{
 
 		return $this;
 	}
-
 
 }

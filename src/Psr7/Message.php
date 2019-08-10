@@ -12,8 +12,12 @@
 
 namespace chillerlan\HTTP\Psr7;
 
-use chillerlan\HTTP\{Psr17, Psr17\StreamFactory};
+use chillerlan\HTTP\Psr17\StreamFactory;
 use Psr\Http\Message\{MessageInterface, StreamInterface};
+
+use function chillerlan\HTTP\Psr17\create_stream_from_input;
+
+use function array_map, array_merge, implode, is_array, strtolower, trim;
 
 abstract class Message implements MessageInterface{
 
@@ -56,7 +60,7 @@ abstract class Message implements MessageInterface{
 		$this->streamFactory = new StreamFactory;
 
 		$this->body = $body !== null && $body !== ''
-			? Psr17\create_stream_from_input($body)
+			? create_stream_from_input($body)
 			: $this->streamFactory->createStream();
 	}
 
@@ -93,7 +97,7 @@ abstract class Message implements MessageInterface{
 	 * @inheritdoc
 	 */
 	public function hasHeader($name):bool{
-		return isset($this->headerNames[\strtolower($name)]);
+		return isset($this->headerNames[strtolower($name)]);
 	}
 
 	/**
@@ -105,14 +109,14 @@ abstract class Message implements MessageInterface{
 			return [];
 		}
 
-		return $this->headers[$this->headerNames[\strtolower($name)]];
+		return $this->headers[$this->headerNames[strtolower($name)]];
 	}
 
 	/**
 	 * @inheritdoc
 	 */
 	public function getHeaderLine($name):string{
-		return \implode(', ', $this->getHeader($name));
+		return implode(', ', $this->getHeader($name));
 	}
 
 	/**
@@ -120,12 +124,12 @@ abstract class Message implements MessageInterface{
 	 */
 	public function withHeader($name, $value):MessageInterface{
 
-		if(!\is_array($value)){
+		if(!is_array($value)){
 			$value = [$value];
 		}
 
 		$value      = $this->trimHeaderValues($value);
-		$normalized = \strtolower($name);
+		$normalized = strtolower($name);
 		$clone      = clone $this;
 
 		if(isset($clone->headerNames[$normalized])){
@@ -143,17 +147,18 @@ abstract class Message implements MessageInterface{
 	 */
 	public function withAddedHeader($name, $value):MessageInterface{
 
-		if(!\is_array($value)){
+		if(!is_array($value)){
 			$value = [$value];
 		}
 
 		$value      = $this->trimHeaderValues($value);
-		$normalized = \strtolower($name);
+		$normalized = strtolower($name);
 		$clone      = clone $this;
 
+		/** @noinspection DuplicatedCode */
 		if(isset($clone->headerNames[$normalized])){
 			$name                  = $this->headerNames[$normalized];
-			$clone->headers[$name] = \array_merge($this->headers[$name], $value);
+			$clone->headers[$name] = array_merge($this->headers[$name], $value);
 		}
 		else{
 			$clone->headerNames[$normalized] = $name;
@@ -167,7 +172,7 @@ abstract class Message implements MessageInterface{
 	 * @inheritdoc
 	 */
 	public function withoutHeader($name):MessageInterface{
-		$normalized = \strtolower($name);
+		$normalized = strtolower($name);
 
 		if(!isset($this->headerNames[$normalized])){
 			return $this;
@@ -210,22 +215,23 @@ abstract class Message implements MessageInterface{
 		$this->headers     = [];
 		$this->headerNames = [];
 
-		foreach($headers as $header => $value){
+		foreach($headers as $name => $value){
 
-			if(!\is_array($value)){
+			if(!is_array($value)){
 				$value = [$value];
 			}
 
 			$value      = $this->trimHeaderValues($value);
-			$normalized = \strtolower($header);
+			$normalized = strtolower($name);
 
+			/** @noinspection DuplicatedCode */
 			if(isset($this->headerNames[$normalized])){
-				$header                 = $this->headerNames[$normalized];
-				$this->headers[$header] = \array_merge($this->headers[$header], $value);
+				$name                 = $this->headerNames[$normalized];
+				$this->headers[$name] = array_merge($this->headers[$name], $value);
 			}
 			else{
-				$this->headerNames[$normalized] = $header;
-				$this->headers[$header]         = $value;
+				$this->headerNames[$normalized] = $name;
+				$this->headers[$name]         = $value;
 			}
 
 		}
@@ -246,8 +252,8 @@ abstract class Message implements MessageInterface{
 	 * @see https://tools.ietf.org/html/rfc7230#section-3.2.4
 	 */
 	protected function trimHeaderValues(array $values):array{
-		return \array_map(function($value){
-			return \trim($value, " \t");
+		return array_map(function(string $value):string{
+			return trim($value, " \t");
 		}, $values);
 	}
 

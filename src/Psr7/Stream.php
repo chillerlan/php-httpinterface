@@ -14,6 +14,11 @@ namespace chillerlan\HTTP\Psr7;
 
 use Exception, InvalidArgumentException, RuntimeException;
 
+use function clearstatcache, fclose, feof, fread, fstat, ftell, fwrite, is_resource, stream_get_contents,
+	stream_get_meta_data, trigger_error;
+
+use const E_USER_ERROR, SEEK_SET;
+
 /**
  * @property resource $stream
  */
@@ -51,13 +56,13 @@ final class Stream extends StreamAbstract{
 	 */
 	public function __construct($stream){
 
-		if(!\is_resource($stream)){
+		if(!is_resource($stream)){
 			throw new InvalidArgumentException('Stream must be a resource');
 		}
 
 		$this->stream = $stream;
 
-		$meta = \stream_get_meta_data($this->stream);
+		$meta = stream_get_meta_data($this->stream);
 
 		$this->seekable = $meta['seekable'];
 		$this->readable = isset($this::MODES_READ[$meta['mode']]);
@@ -70,7 +75,7 @@ final class Stream extends StreamAbstract{
 	 */
 	public function __toString(){
 
-		if(!\is_resource($this->stream)){
+		if(!is_resource($this->stream)){
 			return '';
 		}
 
@@ -80,13 +85,13 @@ final class Stream extends StreamAbstract{
 				$this->seek(0);
 			}
 
-			return (string)\stream_get_contents($this->stream);
+			return (string)stream_get_contents($this->stream);
 		}
 		// @codeCoverageIgnoreStart
 		catch(Exception $e){
 			// https://bugs.php.net/bug.php?id=53648
 			// @todo: fixed in 7.4
-			\trigger_error('Stream::__toString exception: '.$e->getMessage(), \E_USER_ERROR);
+			trigger_error('Stream::__toString exception: '.$e->getMessage(), E_USER_ERROR);
 
 			return '';
 		}
@@ -99,8 +104,8 @@ final class Stream extends StreamAbstract{
 	 */
 	public function close():void{
 
-		if(\is_resource($this->stream)){
-			\fclose($this->stream);
+		if(is_resource($this->stream)){
+			fclose($this->stream);
 		}
 
 		$this->detach();
@@ -137,10 +142,10 @@ final class Stream extends StreamAbstract{
 
 		// Clear the stat cache if the stream has a URI
 		if($this->uri){
-			\clearstatcache(true, $this->uri);
+			clearstatcache(true, $this->uri);
 		}
 
-		$stats = \fstat($this->stream);
+		$stats = fstat($this->stream);
 
 		if(isset($stats['size'])){
 			$this->size = $stats['size'];
@@ -155,7 +160,7 @@ final class Stream extends StreamAbstract{
 	 * @inheritdoc
 	 */
 	public function tell():int{
-		$result = \ftell($this->stream);
+		$result = ftell($this->stream);
 
 		if($result === false){
 			throw new RuntimeException('Unable to determine stream position'); // @codeCoverageIgnore
@@ -168,7 +173,7 @@ final class Stream extends StreamAbstract{
 	 * @inheritdoc
 	 */
 	public function eof():bool{
-		return !$this->stream || \feof($this->stream);
+		return !$this->stream || feof($this->stream);
 	}
 
 	/**
@@ -181,7 +186,7 @@ final class Stream extends StreamAbstract{
 	/**
 	 * @inheritdoc
 	 */
-	public function seek($offset, $whence = \SEEK_SET):void{
+	public function seek($offset, $whence = SEEK_SET):void{
 
 		if(!$this->seekable){
 			throw new RuntimeException('Stream is not seekable');
@@ -217,7 +222,7 @@ final class Stream extends StreamAbstract{
 
 		// We can't know the size after writing anything
 		$this->size = null;
-		$result     = \fwrite($this->stream, $string);
+		$result     = fwrite($this->stream, $string);
 
 		if($result === false){
 			throw new RuntimeException('Unable to write to stream'); // @codeCoverageIgnore
@@ -250,7 +255,7 @@ final class Stream extends StreamAbstract{
 			return '';
 		}
 
-		$string = \fread($this->stream, $length);
+		$string = fread($this->stream, $length);
 
 		if($string === false){
 			throw new RuntimeException('Unable to read from stream');
@@ -263,7 +268,7 @@ final class Stream extends StreamAbstract{
 	 * @inheritdoc
 	 */
 	public function getContents():string{
-		$contents = \stream_get_contents($this->stream);
+		$contents = stream_get_contents($this->stream);
 
 		if($contents === false){
 			throw new RuntimeException('Unable to read stream contents'); // @codeCoverageIgnore
@@ -281,10 +286,10 @@ final class Stream extends StreamAbstract{
 			return $key ? null : [];
 		}
 		elseif($key === null){
-			return \stream_get_meta_data($this->stream);
+			return stream_get_meta_data($this->stream);
 		}
 
-		$meta = \stream_get_meta_data($this->stream);
+		$meta = stream_get_meta_data($this->stream);
 
 		return isset($meta[$key]) ? $meta[$key] : null;
 	}

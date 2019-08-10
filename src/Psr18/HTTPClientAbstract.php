@@ -12,12 +12,18 @@
 
 namespace chillerlan\HTTP\Psr18;
 
-use chillerlan\HTTP\{HTTPOptions, Psr7, Psr17};
+use chillerlan\HTTP\HTTPOptions;
 use chillerlan\HTTP\Psr7\Request;
 use chillerlan\HTTP\Psr17\ResponseFactory;
 use chillerlan\Settings\SettingsContainerInterface;
 use Psr\Http\Message\{ResponseFactoryInterface, ResponseInterface};
 use Psr\Log\{LoggerAwareInterface, LoggerAwareTrait, LoggerInterface, NullLogger};
+
+use function chillerlan\HTTP\Psr7\{merge_query, normalize_request_headers};
+use function chillerlan\HTTP\Psr17\create_stream;
+use function http_build_query, in_array, is_array, is_object, json_encode, strtoupper;
+
+use const PHP_QUERY_RFC1738;
 
 abstract class HTTPClientAbstract implements HTTPClientInterface, LoggerAwareInterface{
 	use LoggerAwareTrait;
@@ -66,23 +72,23 @@ abstract class HTTPClientAbstract implements HTTPClientInterface, LoggerAwareInt
 	 * @return \Psr\Http\Message\ResponseInterface
 	 */
 	public function request(string $uri, string $method = null, array $query = null, $body = null, array $headers = null):ResponseInterface{
-		$method  = \strtoupper($method ?? 'GET');
-		$headers = Psr7\normalize_request_headers($headers);
-		$request = new Request($method, Psr7\merge_query($uri, $query ?? []));
+		$method  = strtoupper($method ?? 'GET');
+		$headers = normalize_request_headers($headers);
+		$request = new Request($method, merge_query($uri, $query ?? []));
 
-		if(\in_array($method, ['DELETE', 'PATCH', 'POST', 'PUT'], true) && $body !== null){
+		if(in_array($method, ['DELETE', 'PATCH', 'POST', 'PUT'], true) && $body !== null){
 
-			if(\is_array($body) || \is_object($body)){
+			if(is_array($body) || is_object($body)){
 
 				if(!isset($headers['Content-type'])){
 					$headers['Content-type'] = 'application/x-www-form-urlencoded';
 				}
 
 				if($headers['Content-type'] === 'application/x-www-form-urlencoded'){
-					$body = \http_build_query($body, '', '&', \PHP_QUERY_RFC1738);
+					$body = http_build_query($body, '', '&', PHP_QUERY_RFC1738);
 				}
 				elseif($headers['Content-type'] === 'application/json'){
-					$body = \json_encode($body);
+					$body = json_encode($body);
 				}
 				else{
 					$body = null; // @todo
@@ -90,7 +96,7 @@ abstract class HTTPClientAbstract implements HTTPClientInterface, LoggerAwareInt
 
 			}
 
-			$request = $request->withBody(Psr17\create_stream((string)$body));
+			$request = $request->withBody(create_stream((string)$body));
 		}
 
 		foreach($headers as $header => $value){

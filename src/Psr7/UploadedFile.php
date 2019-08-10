@@ -12,9 +12,15 @@
 
 namespace chillerlan\HTTP\Psr7;
 
-use chillerlan\HTTP\{Psr17, Psr17\StreamFactory};
+use chillerlan\HTTP\Psr17\StreamFactory;
 use Psr\Http\Message\{StreamInterface, UploadedFileInterface};
 use InvalidArgumentException, RuntimeException;
+
+use function chillerlan\HTTP\Psr17\create_stream_from_input;
+use function in_array, is_string, is_writable, move_uploaded_file, php_sapi_name,rename;
+
+use const UPLOAD_ERR_CANT_WRITE, UPLOAD_ERR_EXTENSION, UPLOAD_ERR_FORM_SIZE, UPLOAD_ERR_INI_SIZE,
+	UPLOAD_ERR_NO_FILE, UPLOAD_ERR_NO_TMP_DIR, UPLOAD_ERR_OK, UPLOAD_ERR_PARTIAL;
 
 final class UploadedFile implements UploadedFileInterface{
 
@@ -22,14 +28,14 @@ final class UploadedFile implements UploadedFileInterface{
 	 * @var int[]
 	 */
 	public const UPLOAD_ERRORS = [
-		\UPLOAD_ERR_OK,
-		\UPLOAD_ERR_INI_SIZE,
-		\UPLOAD_ERR_FORM_SIZE,
-		\UPLOAD_ERR_PARTIAL,
-		\UPLOAD_ERR_NO_FILE,
-		\UPLOAD_ERR_NO_TMP_DIR,
-		\UPLOAD_ERR_CANT_WRITE,
-		\UPLOAD_ERR_EXTENSION,
+		UPLOAD_ERR_OK,
+		UPLOAD_ERR_INI_SIZE,
+		UPLOAD_ERR_FORM_SIZE,
+		UPLOAD_ERR_PARTIAL,
+		UPLOAD_ERR_NO_FILE,
+		UPLOAD_ERR_NO_TMP_DIR,
+		UPLOAD_ERR_CANT_WRITE,
+		UPLOAD_ERR_EXTENSION,
 	];
 
 	/**
@@ -93,13 +99,13 @@ final class UploadedFile implements UploadedFileInterface{
 		$this->clientMediaType = $mediaType;
 		$this->streamFactory   = new StreamFactory;
 
-		if($this->error === \UPLOAD_ERR_OK){
+		if($this->error === UPLOAD_ERR_OK){
 
-			if(\is_string($file)){
+			if(is_string($file)){
 				$this->file = $file;
 			}
 			else{
-				$this->stream = Psr17\create_stream_from_input($file);
+				$this->stream = create_stream_from_input($file);
 			}
 
 		}
@@ -127,18 +133,18 @@ final class UploadedFile implements UploadedFileInterface{
 
 		$this->validateActive();
 
-		if(\is_string($targetPath) && empty($targetPath)){
+		if(is_string($targetPath) && empty($targetPath)){
 			throw new InvalidArgumentException('Invalid path provided for move operation; must be a non-empty string');
 		}
 
-		if(!\is_writable($targetPath)){
+		if(!is_writable($targetPath)){
 			throw new RuntimeException('Directory is not writable: '.$targetPath);
 		}
 
 		if($this->file !== null){
-			$this->moved = \php_sapi_name() === 'cli'
-				? \rename($this->file, $targetPath)
-				: \move_uploaded_file($this->file, $targetPath);
+			$this->moved = php_sapi_name() === 'cli'
+				? rename($this->file, $targetPath)
+				: move_uploaded_file($this->file, $targetPath);
 		}
 		else{
 			$this->copyToStream($this->streamFactory->createStreamFromFile($targetPath, 'r+'));
@@ -185,7 +191,7 @@ final class UploadedFile implements UploadedFileInterface{
 	 */
 	private function validateActive():void{
 
-		if($this->error !== \UPLOAD_ERR_OK){
+		if($this->error !== UPLOAD_ERR_OK){
 			throw new RuntimeException('Cannot retrieve stream due to upload error');
 		}
 

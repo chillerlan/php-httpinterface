@@ -15,6 +15,16 @@ namespace chillerlan\HTTP\Psr18;
 use chillerlan\Settings\SettingsContainerInterface;
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
 
+use function array_key_exists, count, curl_close, curl_init, curl_reset, curl_setopt_array,
+	explode, in_array, is_resource, strlen, strtolower, strtoupper, substr, trim;
+
+use const CURL_HTTP_VERSION_1_0, CURL_HTTP_VERSION_1_1, CURL_HTTP_VERSION_2_0, CURL_HTTP_VERSION_NONE,
+	CURLOPT_CAINFO, CURLOPT_CONNECTTIMEOUT, CURLOPT_CUSTOMREQUEST, CURLOPT_FOLLOWLOCATION, CURLOPT_HEADER,
+	CURLOPT_HEADERFUNCTION, CURLOPT_HTTP_VERSION, CURLOPT_HTTPHEADER, CURLOPT_INFILESIZE, CURLOPT_NOBODY,
+	CURLOPT_POSTFIELDS, CURLOPT_PROGRESSFUNCTION, CURLOPT_PROTOCOLS, CURLOPT_READFUNCTION, CURLOPT_RETURNTRANSFER,
+	CURLOPT_SSL_VERIFYHOST, CURLOPT_SSL_VERIFYPEER, CURLOPT_TIMEOUT, CURLOPT_UPLOAD, CURLOPT_URL, CURLOPT_USERAGENT,
+	CURLOPT_USERPWD, CURLOPT_WRITEFUNCTION, CURLPROTO_HTTP, CURLPROTO_HTTPS;
+
 class CurlHandle{
 
 	/**
@@ -50,7 +60,7 @@ class CurlHandle{
 		$this->request  = $request;
 		$this->response = $response;
 		$this->options  = $options;
-		$this->curl     = \curl_init();
+		$this->curl     = curl_init();
 	}
 
 	/**
@@ -65,8 +75,8 @@ class CurlHandle{
 	 */
 	public function close():void{
 
-		if(\is_resource($this->curl)){
-			\curl_close($this->curl);
+		if(is_resource($this->curl)){
+			curl_close($this->curl);
 		}
 
 	}
@@ -76,16 +86,16 @@ class CurlHandle{
 	 */
 	public function reset():void{
 
-		if(\is_resource($this->curl)){
+		if(is_resource($this->curl)){
 
-			\curl_setopt_array($this->curl, [
-				\CURLOPT_HEADERFUNCTION   => null,
-				\CURLOPT_READFUNCTION     => null,
-				\CURLOPT_WRITEFUNCTION    => null,
-				\CURLOPT_PROGRESSFUNCTION => null,
+			curl_setopt_array($this->curl, [
+				CURLOPT_HEADERFUNCTION   => null,
+				CURLOPT_READFUNCTION     => null,
+				CURLOPT_WRITEFUNCTION    => null,
+				CURLOPT_PROGRESSFUNCTION => null,
 			]);
 
-			\curl_reset($this->curl);
+			curl_reset($this->curl);
 		}
 
 	}
@@ -96,26 +106,26 @@ class CurlHandle{
 	protected function initCurlOptions():array{
 
 		$v = [
-			'1.0' => \CURL_HTTP_VERSION_1_0,
-			'1.1' => \CURL_HTTP_VERSION_1_1,
-			'2.0' => \CURL_HTTP_VERSION_2_0,
+			'1.0' => CURL_HTTP_VERSION_1_0,
+			'1.1' => CURL_HTTP_VERSION_1_1,
+			'2.0' => CURL_HTTP_VERSION_2_0,
 		];
 
 		return [
-			\CURLOPT_HEADER         => false,
-			\CURLOPT_RETURNTRANSFER => false,
-			\CURLOPT_FOLLOWLOCATION => false,
-			\CURLOPT_URL            => (string)$this->request->getUri()->withFragment(''),
-			\CURLOPT_HTTP_VERSION   => $v[$this->request->getProtocolVersion()] ?? \CURL_HTTP_VERSION_NONE,
-			\CURLOPT_USERAGENT      => $this->options->user_agent,
-			\CURLOPT_PROTOCOLS      => \CURLPROTO_HTTP | \CURLPROTO_HTTPS,
-			\CURLOPT_SSL_VERIFYPEER => true,
-			\CURLOPT_SSL_VERIFYHOST => 2,
-			\CURLOPT_CAINFO         => $this->options->ca_info,
-			\CURLOPT_TIMEOUT        => 10,
-			\CURLOPT_CONNECTTIMEOUT => 30,
-			\CURLOPT_WRITEFUNCTION  => [$this, 'writefunction'],
-			\CURLOPT_HEADERFUNCTION => [$this, 'headerfunction'],
+			CURLOPT_HEADER         => false,
+			CURLOPT_RETURNTRANSFER => false,
+			CURLOPT_FOLLOWLOCATION => false,
+			CURLOPT_URL            => (string)$this->request->getUri()->withFragment(''),
+			CURLOPT_HTTP_VERSION   => $v[$this->request->getProtocolVersion()] ?? CURL_HTTP_VERSION_NONE,
+			CURLOPT_USERAGENT      => $this->options->user_agent,
+			CURLOPT_PROTOCOLS      => CURLPROTO_HTTP | CURLPROTO_HTTPS,
+			CURLOPT_SSL_VERIFYPEER => true,
+			CURLOPT_SSL_VERIFYHOST => 2,
+			CURLOPT_CAINFO         => $this->options->ca_info,
+			CURLOPT_TIMEOUT        => 10,
+			CURLOPT_CONNECTTIMEOUT => 30,
+			CURLOPT_WRITEFUNCTION  => [$this, 'writefunction'],
+			CURLOPT_HEADERFUNCTION => [$this, 'headerfunction'],
 		];
 	}
 
@@ -139,17 +149,17 @@ class CurlHandle{
 		// Message has non empty body.
 		if($bodySize === null || $bodySize > 1 << 20){
 			// Avoid full loading large or unknown size body into memory
-			$options[\CURLOPT_UPLOAD] = true;
+			$options[CURLOPT_UPLOAD] = true;
 
 			if($bodySize !== null){
-				$options[\CURLOPT_INFILESIZE] = $bodySize;
+				$options[CURLOPT_INFILESIZE] = $bodySize;
 			}
 
-			$options[\CURLOPT_READFUNCTION] = [$this, 'readfunction'];
+			$options[CURLOPT_READFUNCTION] = [$this, 'readfunction'];
 		}
 		// Small body can be loaded into memory
 		else{
-			$options[\CURLOPT_POSTFIELDS] = (string)$body;
+			$options[CURLOPT_POSTFIELDS] = (string)$body;
 		}
 
 	}
@@ -163,7 +173,7 @@ class CurlHandle{
 		$headers = [];
 
 		foreach($this->request->getHeaders() as $name => $values){
-			$header = \strtolower($name);
+			$header = strtolower($name);
 
 			// curl-client does not support "Expect-Continue", so dropping "expect" headers
 			if($header === 'expect'){
@@ -173,11 +183,11 @@ class CurlHandle{
 			if($header === 'content-length'){
 
 				// Small body content length can be calculated here.
-				if(\array_key_exists(\CURLOPT_POSTFIELDS, $options)){
-					$values = [\strlen($options[\CURLOPT_POSTFIELDS])];
+				if(array_key_exists(CURLOPT_POSTFIELDS, $options)){
+					$values = [strlen($options[CURLOPT_POSTFIELDS])];
 				}
 				// Else if there is no body, forcing "Content-length" to 0
-				elseif(!\array_key_exists(\CURLOPT_READFUNCTION, $options)){
+				elseif(!array_key_exists(CURLOPT_READFUNCTION, $options)){
 					$values = ['0'];
 				}
 
@@ -205,7 +215,7 @@ class CurlHandle{
 		$method   = $this->request->getMethod();
 
 		if(!empty($userinfo)){
-			$options[\CURLOPT_USERPWD] = $userinfo;
+			$options[CURLOPT_USERPWD] = $userinfo;
 		}
 
 		/*
@@ -217,30 +227,30 @@ class CurlHandle{
 		 * - TRACE — According to RFC7231: a client MUST NOT send a message body in a TRACE request.
 		 */
 
-		if(\in_array($method, ['DELETE', 'PATCH', 'POST', 'PUT'], true)){
+		if(in_array($method, ['DELETE', 'PATCH', 'POST', 'PUT'], true)){
 			$this->setBodyOptions($options);
 		}
 
 		// This will set HTTP method to "HEAD".
 		if($method === 'HEAD'){
-			$options[\CURLOPT_NOBODY] = true;
+			$options[CURLOPT_NOBODY] = true;
 		}
 
 		// GET is a default method. Other methods should be specified explicitly.
 		if($method !== 'GET'){
-			$options[\CURLOPT_CUSTOMREQUEST] = $method;
+			$options[CURLOPT_CUSTOMREQUEST] = $method;
 		}
 
-		$options[\CURLOPT_HTTPHEADER] = $this->initCurlHeaders($options);
+		$options[CURLOPT_HTTPHEADER] = $this->initCurlHeaders($options);
 
 		// If the Expect header is not present, prevent curl from adding it
 		if(!$this->request->hasHeader('Expect')){
-			$options[\CURLOPT_HTTPHEADER][] = 'Expect:';
+			$options[CURLOPT_HTTPHEADER][] = 'Expect:';
 		}
 
 		// cURL sometimes adds a content-type by default. Prevent this.
 		if(!$this->request->hasHeader('Content-Type')){
-			$options[\CURLOPT_HTTPHEADER][] = 'Content-Type:';
+			$options[CURLOPT_HTTPHEADER][] = 'Content-Type:';
 		}
 
 		// overwrite the default values with $curl_options
@@ -248,7 +258,7 @@ class CurlHandle{
 			$options[$k] = $v;
 		}
 
-		\curl_setopt_array($this->curl, $options);
+		curl_setopt_array($this->curl, $options);
 
 		return $this->curl;
 	}
@@ -282,23 +292,24 @@ class CurlHandle{
 	 */
 
 	public function headerfunction($curl, string $line):int{
-		$str    = \trim($line);
-		$header = \explode(':', $str, 2);
+		$str    = trim($line);
+		$header = explode(':', $str, 2);
 
-		if(\count($header) === 2){
+		if(count($header) === 2){
 			$this->response = $this->response
-				->withAddedHeader(\trim($header[0]), \trim($header[1]));
+				->withAddedHeader(trim($header[0]), trim($header[1]));
 		}
-		elseif(\substr(\strtoupper($str), 0, 5) === 'HTTP/'){
-			$status = \explode(' ', $str, 3);
-			$reason = \count($status) > 2 ? \trim($status[2]) : '';
+		elseif(substr(strtoupper($str), 0, 5) === 'HTTP/'){
+			$status = explode(' ', $str, 3);
+			$reason = count($status) > 2 ? trim($status[2]) : '';
 
 			$this->response = $this->response
 				->withStatus((int)$status[1], $reason)
-				->withProtocolVersion(\substr($status[0], 5));
+				->withProtocolVersion(substr($status[0], 5))
+			;
 		}
 
-		return \strlen($line);
+		return strlen($line);
 	}
 
 }

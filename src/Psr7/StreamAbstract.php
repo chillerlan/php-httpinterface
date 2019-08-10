@@ -14,6 +14,8 @@ namespace chillerlan\HTTP\Psr7;
 
 use Psr\Http\Message\StreamInterface;
 
+use const SEEK_SET;
+
 abstract class StreamAbstract implements StreamInterface{
 
 	public const MODES_READ = [
@@ -130,7 +132,7 @@ abstract class StreamAbstract implements StreamInterface{
 	 * @inheritdoc
 	 * @codeCoverageIgnore
 	 */
-	public function seek($offset, $whence = \SEEK_SET):void{
+	public function seek($offset, $whence = SEEK_SET):void{
 		$this->stream->seek($offset, $whence);
 	}
 
