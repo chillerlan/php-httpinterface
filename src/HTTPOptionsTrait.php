@@ -86,36 +86,15 @@ trait HTTPOptionsTrait{
 	 */
 	protected function setCA():void{
 
-		// disable verification if wanted so
-		if($this->ssl_verifypeer !== true || (isset($this->curl_options[CURLOPT_SSL_VERIFYPEER]) && !$this->curl_options[CURLOPT_SSL_VERIFYPEER])){
-			unset($this->curl_options[CURLOPT_CAINFO], $this->curl_options[CURLOPT_CAPATH]);
-
-			$this->curl_options[CURLOPT_SSL_VERIFYHOST] = 0;
-			$this->curl_options[CURLOPT_SSL_VERIFYPEER] = false;
-
+		if(!$this->checkVerifyEnabled()){
 			return;
 		}
-
-		$this->curl_options[CURLOPT_SSL_VERIFYHOST] = 2;
-		$this->curl_options[CURLOPT_SSL_VERIFYPEER] = true;
 
 		// a path/dir/link to a CA bundle is given, let's check that
 		if(is_string($this->ca_info)){
 
-			// if you - for whatever obscure reason - need to check Windows .lnk links,
-			// see http://php.net/manual/en/function.is-link.php#91249
-			switch(true){
-				case is_dir($this->ca_info):
-				case is_link($this->ca_info) && is_dir(readlink($this->ca_info)): // @codeCoverageIgnore
-					$this->curl_options[CURLOPT_CAPATH] = $this->ca_info;
-					unset($this->curl_options[CURLOPT_CAINFO]);
-					return;
-
-				case is_file($this->ca_info):
-				case is_link($this->ca_info) && is_file(readlink($this->ca_info)): // @codeCoverageIgnore
-					$this->curl_options[CURLOPT_CAINFO] = $this->ca_info;
-					unset($this->curl_options[CURLOPT_CAPATH]);
-					return;
+			if($this->setCaBundle()){
+				return;
 			}
 
 			throw new ClientException('invalid path to SSL CA bundle (HTTPOptions::$ca_info): '.$this->ca_info);
@@ -126,16 +105,8 @@ trait HTTPOptionsTrait{
 
 		if($ca){
 
-			// just check if the file/path exists
-			switch(true){
-				case is_dir($ca):
-				case is_link($ca) && is_dir(readlink($ca)): // @codeCoverageIgnore
-					unset($this->curl_options[CURLOPT_CAINFO]);
-					return;
-
-				case is_file($ca):
-				case is_link($ca) && is_file(readlink($ca)): // @codeCoverageIgnore
-					return;
+			if($this->setCaBundleCurl($ca)){
+				return;
 			}
 
 			throw new ClientException('invalid path to SSL CA bundle (CURLOPT_CAPATH/CURLOPT_CAINFO): '.$ca);
@@ -147,6 +118,28 @@ trait HTTPOptionsTrait{
 		}
 
 		// this is getting weird. as a last resort, we're going to check some default paths for a CA bundle file
+		if($this->checkCaDefaultLocations()){
+			return;
+		}
+
+		// @codeCoverageIgnoreStart
+		$msg = 'No system CA bundle could be found in any of the the common system locations. '
+		       .'In order to verify peer certificates, you will need to supply the path on disk to a certificate bundle via  '
+		       .'HTTPOptions::$ca_info or HTTPOptions::$curl_options. If you do not need a specific certificate bundle, '
+		       .'then you can download a CA bundle over here: https://curl.haxx.se/docs/caextract.html. '
+		       .'Once you have a CA bundle available on disk, you can set the "curl.cainfo" php.ini setting to point '
+		       .'to the path of the file, allowing you to omit the $ca_info or $curl_options setting. '
+		       .'See http://curl.haxx.se/docs/sslcerts.html for more information.';
+
+		throw new ClientException($msg);
+		// @codeCoverageIgnoreEnd
+	}
+
+	/**
+	 * @return bool
+	 */
+	protected function checkCaDefaultLocations():bool{
+
 		$cafiles = [
 			// check other php.ini settings
 			ini_get('openssl.cafile'),
@@ -173,24 +166,88 @@ trait HTTPOptionsTrait{
 		];
 
 		foreach($cafiles as $file){
+
 			if(is_file($file) || (is_link($file) && is_file(readlink($file)))){
 				$this->curl_options[CURLOPT_CAINFO] = $file;
 				$this->ca_info                      = $file;
-				return;
+
+				return true;
 			}
+
 		}
 
-		// @codeCoverageIgnoreStart
-		$msg = 'No system CA bundle could be found in any of the the common system locations. '
-		       .'In order to verify peer certificates, you will need to supply the path on disk to a certificate bundle via  '
-		       .'HTTPOptions::$ca_info or HTTPOptions::$curl_options. If you do not need a specific certificate bundle, '
-		       .'then you can download a CA bundle over here: https://curl.haxx.se/docs/caextract.html. '
-		       .'Once you have a CA bundle available on disk, you can set the "curl.cainfo" php.ini setting to point '
-		       .'to the path of the file, allowing you to omit the $ca_info or $curl_options setting. '
-		       .'See http://curl.haxx.se/docs/sslcerts.html for more information.';
+		return false;
+	}
 
-		throw new ClientException($msg);
-		// @codeCoverageIgnoreEnd
+	/**
+	 * @return bool
+	 */
+	protected function checkVerifyEnabled():bool{
+
+		// disable verification if wanted so
+		if($this->ssl_verifypeer !== true || (isset($this->curl_options[CURLOPT_SSL_VERIFYPEER]) && !$this->curl_options[CURLOPT_SSL_VERIFYPEER])){
+			unset($this->curl_options[CURLOPT_CAINFO], $this->curl_options[CURLOPT_CAPATH]);
+
+			$this->curl_options[CURLOPT_SSL_VERIFYHOST] = 0;
+			$this->curl_options[CURLOPT_SSL_VERIFYPEER] = false;
+
+			return false;
+		}
+
+		$this->curl_options[CURLOPT_SSL_VERIFYHOST] = 2;
+		$this->curl_options[CURLOPT_SSL_VERIFYPEER] = true;
+
+		return true;
+	}
+
+	/**
+	 * @return bool
+	 */
+	protected function setCaBundle():bool{
+
+		// if you - for whatever obscure reason - need to check Windows .lnk links,
+		// see http://php.net/manual/en/function.is-link.php#91249
+		switch(true){
+			case is_dir($this->ca_info):
+			case is_link($this->ca_info) && is_dir(readlink($this->ca_info)): // @codeCoverageIgnore
+				$this->curl_options[CURLOPT_CAPATH] = $this->ca_info;
+				unset($this->curl_options[CURLOPT_CAINFO]);
+
+				return true;
+
+			case is_file($this->ca_info):
+			case is_link($this->ca_info) && is_file(readlink($this->ca_info)): // @codeCoverageIgnore
+				$this->curl_options[CURLOPT_CAINFO] = $this->ca_info;
+				unset($this->curl_options[CURLOPT_CAPATH]);
+
+				return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * @param string $ca
+	 *
+	 * @return bool
+	 */
+	protected function setCaBundleCurl(string $ca):bool{
+
+		// just check if the file/path exists
+		switch(true){
+			case is_dir($ca):
+			case is_link($ca) && is_dir(readlink($ca)): // @codeCoverageIgnore
+				unset($this->curl_options[CURLOPT_CAINFO]);
+
+				return true;
+
+			case is_file($ca):
+			case is_link($ca) && is_file(readlink($ca)): // @codeCoverageIgnore
+
+				return true;
+		}
+
+		return false;
 	}
 
 }
