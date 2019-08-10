@@ -28,20 +28,16 @@ class LoggingClient implements ClientInterface, LoggerAwareInterface{
 
 	/** @var \Psr\Http\Client\ClientInterface */
 	protected $http;
-	/** @var \Psr\Http\Message\ResponseFactoryInterface|null */
-	protected $responseFactory;
 
 	/**
 	 * LoggingClient constructor.
 	 *
 	 * @param \Psr\Http\Client\ClientInterface                $http
 	 * @param \Psr\Log\LoggerInterface|null                   $logger
-	 * @param \Psr\Http\Message\ResponseFactoryInterface|null $responseFactory
 	 */
-	public function __construct(ClientInterface $http, LoggerInterface $logger = null, ResponseFactoryInterface $responseFactory = null){
+	public function __construct(ClientInterface $http, LoggerInterface $logger = null){
 		$this->http            = $http;
 		$this->logger          = $logger ?? new NullLogger;
-		$this->responseFactory = $responseFactory ?? new ResponseFactory;
 	}
 
 	/**
@@ -59,7 +55,7 @@ class LoggingClient implements ClientInterface, LoggerAwareInterface{
 			$this->logger->error($e->getTraceAsString());
 
 			if(!$e instanceof ClientExceptionInterface){
-				throw new ClientException('unexpected exception, does not implement "ClientExceptionInterface": '.get_class($e));
+				throw new ClientException('unexpected exception, does not implement "ClientExceptionInterface": '.get_class($e));  // @codeCoverageIgnore
 			}
 
 			/** @noinspection PhpUnhandledExceptionInspection */
