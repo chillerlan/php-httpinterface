@@ -164,42 +164,42 @@ final class MultipartStream extends StreamAbstract{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function __toString(){
 		return $this->getContents();
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getSize():?int{
 		return $this->stream->getSize() + strlen($this->boundary) + 6;
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function isWritable():bool{
 		return false;
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function write($string):int{
 		throw new RuntimeException('Cannot write to a MultipartStream, use MultipartStream::addElement() instead.');
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function isReadable():bool{
 		return true;
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getContents():string{
 		return $this->build()->stream->getContents();

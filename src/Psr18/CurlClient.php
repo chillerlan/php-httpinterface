@@ -22,14 +22,7 @@ use const CURLE_COULDNT_CONNECT, CURLE_COULDNT_RESOLVE_HOST, CURLE_COULDNT_RESOL
 class CurlClient extends HTTPClientAbstract{
 
 	/**
-	 * Sends a PSR-7 request.
-	 *
-	 * @param \Psr\Http\Message\RequestInterface $request
-	 *
-	 * @return \Psr\Http\Message\ResponseInterface
-	 *
-	 * @throws \Psr\Http\Client\ClientExceptionInterface If an error happens during processing the request.
-	 * @throws \Exception                                If processing the request is impossible (eg. bad configuration).
+	 * @inheritDoc
 	 */
 	public function sendRequest(RequestInterface $request):ResponseInterface{
 		/** @var \chillerlan\HTTP\Psr18\CurlHandle $handle */

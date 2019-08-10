@@ -71,7 +71,7 @@ final class Stream extends StreamAbstract{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function __toString(){
 
@@ -100,7 +100,7 @@ final class Stream extends StreamAbstract{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function close():void{
 
@@ -112,7 +112,7 @@ final class Stream extends StreamAbstract{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function detach(){
 		$oldResource = $this->stream;
@@ -128,7 +128,7 @@ final class Stream extends StreamAbstract{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getSize():?int{
 
@@ -157,7 +157,7 @@ final class Stream extends StreamAbstract{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function tell():int{
 		$result = ftell($this->stream);
@@ -170,21 +170,21 @@ final class Stream extends StreamAbstract{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function eof():bool{
 		return !$this->stream || feof($this->stream);
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function isSeekable():bool{
 		return $this->seekable;
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function seek($offset, $whence = SEEK_SET):void{
 
@@ -198,21 +198,21 @@ final class Stream extends StreamAbstract{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function rewind():void{
 		$this->seek(0);
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function isWritable():bool{
 		return $this->writable;
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function write($string):int{
 
@@ -232,14 +232,14 @@ final class Stream extends StreamAbstract{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function isReadable():bool{
 		return $this->readable;
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function read($length):string{
 
@@ -265,7 +265,7 @@ final class Stream extends StreamAbstract{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getContents():string{
 		$contents = stream_get_contents($this->stream);
@@ -278,7 +278,7 @@ final class Stream extends StreamAbstract{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getMetadata($key = null){
 

@@ -127,14 +127,14 @@ final class Response extends Message implements ResponseInterface, StatusCodeInt
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getStatusCode():int{
 		return $this->statusCode;
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function withStatus($code, $reasonPhrase = ''):ResponseInterface{
 		$code         = (int)$code;
@@ -152,7 +152,7 @@ final class Response extends Message implements ResponseInterface, StatusCodeInt
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getReasonPhrase():string{
 		return $this->reasonPhrase;

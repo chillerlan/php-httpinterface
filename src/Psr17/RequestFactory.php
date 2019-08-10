@@ -19,14 +19,7 @@ use Psr\Http\Message\{RequestFactoryInterface, RequestInterface};
 class RequestFactory implements RequestFactoryInterface, RequestMethodInterface{
 
 	/**
-	 * Create a new request.
-	 *
-	 * @param string                                $method The HTTP method associated with the request.
-	 * @param \Psr\Http\Message\UriInterface|string $uri    The URI associated with the request. If
-	 *                                                      the value is a string, the factory MUST create a
-	 *                                                      UriInterface instance based on it.
-	 *
-	 * @return \Psr\Http\Message\RequestInterface|\chillerlan\HTTP\Psr7\Request
+	 * @inheritDoc
 	 */
 	public function createRequest(string $method, $uri):RequestInterface{
 		return new Request($method, $uri);

@@ -113,7 +113,7 @@ final class UploadedFile implements UploadedFileInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getStream():StreamInterface{
 
@@ -127,7 +127,7 @@ final class UploadedFile implements UploadedFileInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function moveTo($targetPath):void{
 
@@ -158,28 +158,28 @@ final class UploadedFile implements UploadedFileInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getSize():?int{
 		return $this->size;
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getError():int{
 		return $this->error;
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getClientFilename():?string{
 		return $this->clientFilename;
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getClientMediaType():?string{
 		return $this->clientMediaType;

@@ -98,7 +98,7 @@ class Uri implements UriInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function __toString(){
 		$this->validateState();
@@ -147,14 +147,14 @@ class Uri implements UriInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getScheme():string{
 		return $this->scheme;
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function withScheme($scheme):UriInterface{
 		$scheme = $this->filterScheme($scheme);
@@ -207,7 +207,7 @@ class Uri implements UriInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getAuthority():string{
 		$authority = $this->host;
@@ -225,14 +225,14 @@ class Uri implements UriInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getUserInfo():string{
 		return (string)$this->user.($this->pass != '' ? ':'.$this->pass : '');
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function withUserInfo($user, $password = null):UriInterface{
 		$info = $user;
@@ -278,14 +278,14 @@ class Uri implements UriInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getHost():string{
 		return $this->host;
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function withHost($host):UriInterface{
 		$host = $this->filterHost($host);
@@ -328,14 +328,14 @@ class Uri implements UriInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getPort():?int{
 		return $this->port;
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function withPort($port):UriInterface{
 		$port = $this->filterPort($port);
@@ -373,14 +373,14 @@ class Uri implements UriInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getPath():string{
 		return $this->path;
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function withPath($path):UriInterface{
 		$path = $this->filterPath($path);
@@ -417,14 +417,14 @@ class Uri implements UriInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getQuery():string{
 		return $this->query;
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function withQuery($query):UriInterface{
 		$query = $this->filterQuery($query);
@@ -455,14 +455,14 @@ class Uri implements UriInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getFragment():string{
 		return $this->fragment;
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function withFragment($fragment):UriInterface{
 		$fragment = $this->filterFragment($fragment);

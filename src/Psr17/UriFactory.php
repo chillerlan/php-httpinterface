@@ -18,13 +18,7 @@ use Psr\Http\Message\{UriFactoryInterface, UriInterface};
 final class UriFactory implements UriFactoryInterface{
 
 	/**
-	 * Create a new URI.
-	 *
-	 * @param string $uri
-	 *
-	 * @return \Psr\Http\Message\UriInterface|\chillerlan\HTTP\Psr7\Uri
-	 *
-	 * @throws \InvalidArgumentException If the given URI cannot be parsed.
+	 * @inheritDoc
 	 */
 	public function createUri(string $uri = ''):UriInterface{
 		return new Uri($uri);

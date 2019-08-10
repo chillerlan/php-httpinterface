@@ -65,14 +65,14 @@ abstract class Message implements MessageInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getProtocolVersion():string{
 		return $this->version;
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function withProtocolVersion($version):MessageInterface{
 
@@ -87,21 +87,21 @@ abstract class Message implements MessageInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getHeaders():array{
 		return $this->headers;
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function hasHeader($name):bool{
 		return isset($this->headerNames[strtolower($name)]);
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getHeader($name):array{
 
@@ -113,14 +113,14 @@ abstract class Message implements MessageInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getHeaderLine($name):string{
 		return implode(', ', $this->getHeader($name));
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function withHeader($name, $value):MessageInterface{
 
@@ -143,7 +143,7 @@ abstract class Message implements MessageInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function withAddedHeader($name, $value):MessageInterface{
 
@@ -169,7 +169,7 @@ abstract class Message implements MessageInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function withoutHeader($name):MessageInterface{
 		$normalized = strtolower($name);
@@ -187,14 +187,14 @@ abstract class Message implements MessageInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getBody():StreamInterface{
 		return $this->body;
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function withBody(StreamInterface $body):MessageInterface{
 

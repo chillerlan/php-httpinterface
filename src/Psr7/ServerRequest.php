@@ -66,21 +66,21 @@ final class ServerRequest extends Request implements ServerRequestInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getServerParams():array{
 		return $this->serverParams;
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getCookieParams():array{
 		return $this->cookieParams;
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function withCookieParams(array $cookies):ServerRequestInterface{
 		$clone               = clone $this;
@@ -90,14 +90,14 @@ final class ServerRequest extends Request implements ServerRequestInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getQueryParams():array{
 		return $this->queryParams;
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function withQueryParams(array $query):ServerRequestInterface{
 		$clone              = clone $this;
@@ -107,14 +107,14 @@ final class ServerRequest extends Request implements ServerRequestInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getUploadedFiles():array{
 		return $this->uploadedFiles;
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function withUploadedFiles(array $uploadedFiles):ServerRequestInterface{
 		$clone                = clone $this;
@@ -124,14 +124,14 @@ final class ServerRequest extends Request implements ServerRequestInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getParsedBody(){
 		return $this->parsedBody;
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function withParsedBody($data):ServerRequestInterface{
 
@@ -146,14 +146,14 @@ final class ServerRequest extends Request implements ServerRequestInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getAttributes():array{
 		return $this->attributes;
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getAttribute($name, $default = null){
 
@@ -165,7 +165,7 @@ final class ServerRequest extends Request implements ServerRequestInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function withAttribute($name, $value):ServerRequestInterface{
 		$clone                    = clone $this;
@@ -175,7 +175,7 @@ final class ServerRequest extends Request implements ServerRequestInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function withoutAttribute($name):ServerRequestInterface{
 

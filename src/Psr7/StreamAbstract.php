@@ -72,7 +72,7 @@ abstract class StreamAbstract implements StreamInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 * @codeCoverageIgnore
 	 */
 	public function __toString(){
@@ -80,7 +80,7 @@ abstract class StreamAbstract implements StreamInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function close(){
 		if($this->stream instanceof StreamInterface){
@@ -89,7 +89,7 @@ abstract class StreamAbstract implements StreamInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 * @codeCoverageIgnore
 	 */
 	public function detach(){
@@ -97,7 +97,7 @@ abstract class StreamAbstract implements StreamInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 * @codeCoverageIgnore
 	 */
 	public function getSize():?int{
@@ -105,7 +105,7 @@ abstract class StreamAbstract implements StreamInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 * @codeCoverageIgnore
 	 */
 	public function tell():int{
@@ -113,7 +113,7 @@ abstract class StreamAbstract implements StreamInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 * @codeCoverageIgnore
 	 */
 	public function eof():bool{
@@ -121,7 +121,7 @@ abstract class StreamAbstract implements StreamInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 * @codeCoverageIgnore
 	 */
 	public function isSeekable():bool{
@@ -129,7 +129,7 @@ abstract class StreamAbstract implements StreamInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 * @codeCoverageIgnore
 	 */
 	public function seek($offset, $whence = SEEK_SET):void{
@@ -137,7 +137,7 @@ abstract class StreamAbstract implements StreamInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 * @codeCoverageIgnore
 	 */
 	public function rewind():void{
@@ -145,7 +145,7 @@ abstract class StreamAbstract implements StreamInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 * @codeCoverageIgnore
 	 */
 	public function isWritable():bool{
@@ -153,7 +153,7 @@ abstract class StreamAbstract implements StreamInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 * @codeCoverageIgnore
 	 */
 	public function write($string):int{
@@ -161,7 +161,7 @@ abstract class StreamAbstract implements StreamInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 * @codeCoverageIgnore
 	 */
 	public function isReadable():bool{
@@ -169,7 +169,7 @@ abstract class StreamAbstract implements StreamInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 * @codeCoverageIgnore
 	 */
 	public function read($length):string{
@@ -177,7 +177,7 @@ abstract class StreamAbstract implements StreamInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 * @codeCoverageIgnore
 	 */
 	public function getContents():string{
@@ -185,7 +185,7 @@ abstract class StreamAbstract implements StreamInterface{
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 * @codeCoverageIgnore
 	 */
 	public function getMetadata($key = null){

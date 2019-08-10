@@ -57,7 +57,7 @@ class Request extends Message implements RequestInterface, RequestMethodInterfac
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getRequestTarget():string{
 
@@ -79,7 +79,7 @@ class Request extends Message implements RequestInterface, RequestMethodInterfac
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function withRequestTarget($requestTarget):RequestInterface{
 
@@ -94,14 +94,14 @@ class Request extends Message implements RequestInterface, RequestMethodInterfac
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getMethod():string{
 		return $this->method;
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function withMethod($method):RequestInterface{
 
@@ -116,14 +116,14 @@ class Request extends Message implements RequestInterface, RequestMethodInterfac
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function getUri():UriInterface{
 		return $this->uri;
 	}
 
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function withUri(UriInterface $uri, $preserveHost = false):RequestInterface{
 

@@ -23,7 +23,7 @@ class StreamClient extends HTTPClientAbstract{
 	/**
 	 * @todo
 	 *
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	public function sendRequest(RequestInterface $request):ResponseInterface{
 		$uri     = $request->getUri();
