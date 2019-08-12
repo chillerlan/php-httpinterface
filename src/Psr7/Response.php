@@ -68,6 +68,7 @@ final class Response extends Message implements ResponseInterface, StatusCodeInt
 		self::STATUS_RANGE_NOT_SATISFIABLE           => 'Requested Range Not Satisfiable',
 		self::STATUS_EXPECTATION_FAILED              => 'Expectation Failed',
 		self::STATUS_IM_A_TEAPOT                     => 'I\'m a teapot',
+		420                                          => 'Enhance Your Calm', // https://http.cat/420
 		self::STATUS_MISDIRECTED_REQUEST             => 'Misdirected Request',
 		self::STATUS_UNPROCESSABLE_ENTITY            => 'Unprocessable Entity',
 		self::STATUS_LOCKED                          => 'Locked',
