@@ -52,7 +52,7 @@ trait HTTPOptionsTrait{
 	 * requires either HTTPOptions::$ca_info or a properly working system CA file
 	 *
 	 * @var bool
-	 * @link http://php.net/manual/en/function.curl-setopt.php
+	 * @link https://php.net/manual/function.curl-setopt.php
 	 */
 	protected $ssl_verifypeer = true;
 
@@ -62,6 +62,46 @@ trait HTTPOptionsTrait{
 	 * @var string
 	 */
 	protected $curlHandle = CurlHandle::class;
+
+	/**
+	 * options for the curl multi instance
+	 *
+	 * @link https://www.php.net/manual/function.curl-multi-setopt.php
+	 *
+	 * @var array
+	 */
+	protected $curl_multi_options = [];
+
+	/**
+	 * maximum of concurrent requests for curl_multi
+	 *
+	 * @var int
+	 */
+	protected $windowSize = 5;
+
+	/**
+	 * sleep timer (milliseconds) between each fired multi request on startup
+	 *
+	 * @var int
+	 */
+	protected $sleep = null;
+
+	/**
+	 * @var int
+	 */
+	protected $timeout = 10;
+
+	/**
+	 * @var int
+	 */
+	protected $retries = 3;
+
+	/**
+	 * a MultiResponseHandlerInterface FQCN
+	 *
+	 * @var string
+	 */
+	protected $multiResponseHandler;
 
 	/**
 	 * HTTPOptionsTrait constructor
@@ -177,7 +217,7 @@ trait HTTPOptionsTrait{
 
 		}
 
-		return false;
+		return false; // @codeCoverageIgnore
 	}
 
 	/**
