@@ -15,11 +15,17 @@ namespace chillerlan\HTTP;
 use chillerlan\Settings\SettingsContainerAbstract;
 
 /**
- * @property string $user_agent
- * @property array  $curl_options
- * @property string $ca_info
- * @property bool   $ssl_verifypeer
- * @property string $curlHandle
+ * @property string    $user_agent
+ * @property array     $curl_options
+ * @property string    $ca_info
+ * @property bool      $ssl_verifypeer
+ * @property string    $curlHandle
+ * @property int       $windowSize
+ * @property int|float $sleep
+ * @property int       $timeout
+ * @property int       $retries
+ * @property string    $multiResponseHandler
+ * @property array     $curl_multi_options
  */
 class HTTPOptions extends SettingsContainerAbstract{
 	use HTTPOptionsTrait;

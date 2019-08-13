@@ -201,7 +201,7 @@ class CurlHandle implements CurlHandleInterface{
 	}
 
 	/**
-	 * @return resource cURL handle
+	 * @return \chillerlan\HTTP\CurlUtils\CurlHandleInterface
 	 */
 	public function init():CurlHandleInterface{
 		$options  = $this->initCurlOptions();
