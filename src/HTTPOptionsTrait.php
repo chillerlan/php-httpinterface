@@ -12,7 +12,8 @@
 
 namespace chillerlan\HTTP;
 
-use chillerlan\HTTP\Psr18\{ClientException, CurlHandle};
+use chillerlan\HTTP\CurlUtils\CurlHandle;
+use chillerlan\HTTP\Psr18\ClientException;
 
 use function file_exists, ini_get, is_array, is_dir, is_file, is_link, is_string, readlink, trim;
 

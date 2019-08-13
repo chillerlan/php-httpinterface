@@ -4,13 +4,13 @@
  *
  * @filesource   CurlHandle.php
  * @created      30.08.2018
- * @package      chillerlan\HTTP
+ * @package      chillerlan\HTTP\CurlUtils
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2018 smiley
  * @license      MIT
  */
 
-namespace chillerlan\HTTP\Psr18;
+namespace chillerlan\HTTP\CurlUtils;
 
 use chillerlan\Settings\SettingsContainerInterface;
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
