@@ -235,6 +235,16 @@ class CurlHandle implements CurlHandleInterface{
 			$options[CURLOPT_CUSTOMREQUEST] = $method;
 		}
 
+		// overwrite the default values with $curl_options
+		foreach($this->options->curl_options as $k => $v){
+			// skip some options that are only set automatically
+			if(in_array($k, [CURLOPT_HTTPHEADER, CURLOPT_CUSTOMREQUEST, CURLOPT_NOBODY], true)){
+				continue;
+			}
+
+			$options[$k] = $v;
+		}
+
 		$options[CURLOPT_HTTPHEADER] = $this->initCurlHeaders($options);
 
 		// If the Expect header is not present, prevent curl from adding it
@@ -245,11 +255,6 @@ class CurlHandle implements CurlHandleInterface{
 		// cURL sometimes adds a content-type by default. Prevent this.
 		if(!$this->request->hasHeader('Content-Type')){
 			$options[CURLOPT_HTTPHEADER][] = 'Content-Type:';
-		}
-
-		// overwrite the default values with $curl_options
-		foreach($this->options->curl_options as $k => $v){
-			$options[$k] = $v;
 		}
 
 		curl_setopt_array($this->curl, $options);
