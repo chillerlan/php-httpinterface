@@ -116,7 +116,7 @@ class CurlHandle implements CurlHandleInterface{
 			CURLOPT_SSL_VERIFYPEER => true,
 			CURLOPT_SSL_VERIFYHOST => 2,
 			CURLOPT_CAINFO         => $this->options->ca_info,
-			CURLOPT_TIMEOUT        => 10,
+			CURLOPT_TIMEOUT        => $this->options->timeout,
 			CURLOPT_CONNECTTIMEOUT => 30,
 			CURLOPT_WRITEFUNCTION  => [$this, 'writefunction'],
 			CURLOPT_HEADERFUNCTION => [$this, 'headerfunction'],
