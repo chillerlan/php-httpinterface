@@ -34,6 +34,20 @@ class CurlHandle implements CurlHandleInterface{
 	public $curl;
 
 	/**
+	 * a handle ID (counter), used in CurlMultiClient
+	 *
+	 * @var int
+	 */
+	public $id;
+
+	/**
+	 * a retry counter, used in CurlMultiClient
+	 *
+	 * @var int
+	 */
+	public $retries;
+
+	/**
 	 * @var \Psr\Http\Message\RequestInterface
 	 */
 	public $request;
