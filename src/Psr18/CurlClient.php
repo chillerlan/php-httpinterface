@@ -16,8 +16,7 @@ use Psr\Http\Message\{RequestInterface, ResponseInterface};
 
 use function curl_errno, curl_error, curl_exec, in_array;
 
-use const CURLE_COULDNT_CONNECT, CURLE_COULDNT_RESOLVE_HOST, CURLE_COULDNT_RESOLVE_PROXY, CURLE_GOT_NOTHING,
-	CURLE_OK, CURLE_OPERATION_TIMEOUTED, CURLE_SSL_CONNECT_ERROR;
+use const CURLE_OK;
 
 class CurlClient extends HTTPClientAbstract{
 
@@ -36,18 +35,9 @@ class CurlClient extends HTTPClientAbstract{
 		if($errno !== CURLE_OK){
 			$error = curl_error($handle->curl);
 
-			$network_errors = [
-				CURLE_COULDNT_RESOLVE_PROXY,
-				CURLE_COULDNT_RESOLVE_HOST,
-				CURLE_COULDNT_CONNECT,
-				CURLE_OPERATION_TIMEOUTED,
-				CURLE_SSL_CONNECT_ERROR,
-				CURLE_GOT_NOTHING,
-			];
-
 			$this->logger->error('cURL error #'.$errno.': '.$error);
 
-			if(in_array($errno, $network_errors, true)){
+			if(in_array($errno, $handle::CURL_NETWORK_ERRORS, true)){
 				throw new NetworkException($error, $request);
 			}
 

@@ -25,7 +25,7 @@ use const CURL_HTTP_VERSION_1_0, CURL_HTTP_VERSION_1_1, CURL_HTTP_VERSION_2_0, C
 	CURLOPT_SSL_VERIFYHOST, CURLOPT_SSL_VERIFYPEER, CURLOPT_TIMEOUT, CURLOPT_UPLOAD, CURLOPT_URL, CURLOPT_USERAGENT,
 	CURLOPT_USERPWD, CURLOPT_WRITEFUNCTION, CURLPROTO_HTTP, CURLPROTO_HTTPS;
 
-class CurlHandle{
+class CurlHandle implements CurlHandleInterface{
 
 	/**
 	 * The cURL handle
@@ -73,18 +73,19 @@ class CurlHandle{
 	/**
 	 * @return void
 	 */
-	public function close():void{
+	public function close():CurlHandleInterface{
 
 		if(is_resource($this->curl)){
 			curl_close($this->curl);
 		}
 
+		return $this;
 	}
 
 	/**
 	 * @return void
 	 */
-	public function reset():void{
+	public function reset():CurlHandleInterface{
 
 		if(is_resource($this->curl)){
 
@@ -98,6 +99,7 @@ class CurlHandle{
 			curl_reset($this->curl);
 		}
 
+		return $this;
 	}
 
 	/**
@@ -209,7 +211,7 @@ class CurlHandle{
 	/**
 	 * @return resource cURL handle
 	 */
-	public function init(){
+	public function init():CurlHandleInterface{
 		$options  = $this->initCurlOptions();
 		$userinfo = $this->request->getUri()->getUserInfo();
 		$method   = $this->request->getMethod();
@@ -260,7 +262,7 @@ class CurlHandle{
 
 		curl_setopt_array($this->curl, $options);
 
-		return $this->curl;
+		return $this;
 	}
 
 	/**
