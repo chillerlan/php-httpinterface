@@ -97,13 +97,12 @@ class CurlMultiClient implements LoggerAwareInterface{
 	/**
 	 * @return void
 	 */
-	public function close():CurlMultiClient{
+	public function close():void{
 
 		if(is_resource($this->curl_multi)){
 			curl_multi_close($this->curl_multi);
 		}
 
-		return $this;
 	}
 
 	/**
