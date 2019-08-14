@@ -12,7 +12,6 @@
 
 namespace chillerlan\HTTP\CurlUtils;
 
-use chillerlan\Settings\SettingsContainerInterface;
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
 
 interface MultiResponseHandlerInterface{
