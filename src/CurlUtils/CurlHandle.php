@@ -121,7 +121,7 @@ class CurlHandle implements CurlHandleInterface{
 	protected function initCurlOptions():array{
 		return [
 			CURLOPT_HEADER         => false,
-			CURLOPT_RETURNTRANSFER => false,
+			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_FOLLOWLOCATION => false,
 			CURLOPT_URL            => (string)$this->request->getUri()->withFragment(''),
 			CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_2TLS,
