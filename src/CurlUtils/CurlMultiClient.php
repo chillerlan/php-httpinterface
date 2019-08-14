@@ -78,7 +78,7 @@ class CurlMultiClient implements LoggerAwareInterface{
 		$this->logger          = $logger ?? new NullLogger;
 		$this->curl_multi      = curl_multi_init();
 
-		curl_multi_setopt($this->curl_multi, CURLMOPT_PIPELINING, CURLPIPE_HTTP1 | CURLPIPE_MULTIPLEX);
+		curl_multi_setopt($this->curl_multi, CURLMOPT_PIPELINING, CURLPIPE_MULTIPLEX);
 		curl_multi_setopt($this->curl_multi, CURLMOPT_MAXCONNECTS, $this->options->windowSize);
 
 		foreach($this->options->curl_multi_options as $k => $v){
