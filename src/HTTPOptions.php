@@ -24,7 +24,6 @@ use chillerlan\Settings\SettingsContainerAbstract;
  * @property int|float $sleep
  * @property int       $timeout
  * @property int       $retries
- * @property string    $multiResponseHandler
  * @property array     $curl_multi_options
  */
 class HTTPOptions extends SettingsContainerAbstract{

@@ -97,13 +97,6 @@ trait HTTPOptionsTrait{
 	protected $retries = 3;
 
 	/**
-	 * a MultiResponseHandlerInterface FQCN
-	 *
-	 * @var string
-	 */
-	protected $multiResponseHandler;
-
-	/**
 	 * HTTPOptionsTrait constructor
 	 *
 	 * @throws \Psr\Http\Client\ClientExceptionInterface
