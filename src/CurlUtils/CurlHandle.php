@@ -84,7 +84,7 @@ class CurlHandle implements CurlHandleInterface{
 	}
 
 	/**
-	 * @return void
+	 * @return \chillerlan\HTTP\CurlUtils\CurlHandleInterface
 	 */
 	public function close():CurlHandleInterface{
 
@@ -96,7 +96,7 @@ class CurlHandle implements CurlHandleInterface{
 	}
 
 	/**
-	 * @return void
+	 * @return \chillerlan\HTTP\CurlUtils\CurlHandleInterface
 	 */
 	public function reset():CurlHandleInterface{
 
@@ -303,7 +303,6 @@ class CurlHandle implements CurlHandleInterface{
 	 *
 	 * @return int
 	 */
-
 	public function headerfunction($curl, string $line):int{
 		$str    = trim($line);
 		$header = explode(':', $str, 2);
