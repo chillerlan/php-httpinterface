@@ -38,7 +38,7 @@ abstract class HTTPClientTestAbstract extends TestCase{
 			$this->assertSame(200, $response->getStatusCode());
 		}
 		catch(\Exception $e){
-			$this->markTestSkipped('httpbin.org error: '.$e->getMessage());
+			$this->markTestSkipped('error: '.$e->getMessage());
 		}
 
 	}
@@ -76,7 +76,9 @@ abstract class HTTPClientTestAbstract extends TestCase{
 
 		}
 		catch(\Exception $e){
-			$this->markTestSkipped('httpbin.org error: '.$e->getMessage());
+			$this->markTestSkipped('error: '.$e->getMessage());
+
+			return;
 		}
 
 		$json = json_decode($response->getBody()->getContents());
