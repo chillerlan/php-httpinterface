@@ -105,5 +105,8 @@ class CurlMultiClientTest extends TestCase{
 		// i'll probably never know why this fails on travis
 		$this->assertSame(['de','en','es','fr','zh','de','en','es','fr','zh'], \array_column($responses, 'lang'));
 
+		// cover the destructor
+		unset($this->http);
+
 	}
 }
