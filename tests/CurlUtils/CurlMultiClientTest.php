@@ -16,6 +16,7 @@ use chillerlan\HTTP\CurlUtils\{CurlMultiClient, MultiResponseHandlerInterface};
 use chillerlan\HTTP\HTTPOptions;
 use chillerlan\HTTP\Psr7\Request;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
 use function chillerlan\HTTP\Psr7\build_http_query;
 
@@ -109,4 +110,20 @@ class CurlMultiClientTest extends TestCase{
 		unset($this->http);
 
 	}
+
+	public function testEmptyStackException(){
+		$this->expectException(ClientExceptionInterface::class);
+		$this->expectExceptionMessage('request stack is empty');
+
+		$this->http->process();
+	}
+
+
+	public function testNoResponseHandlerException(){
+		$this->expectException(ClientExceptionInterface::class);
+		$this->expectExceptionMessage('no response handler set');
+
+		$this->http->addRequest(new Request('GET', 'https://foo.bar'))->process();
+	}
+
 }
