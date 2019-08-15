@@ -65,7 +65,8 @@ class CurlMultiClientTest extends TestCase{
 
 				if(\in_array($response->getStatusCode(), [200, 206], true)){
 					$this->responses[$id]['lang'] = $response->getHeaderLine('content-language');
-					\var_dump($response->getHeaders());
+					// ok, so the headers are empty on travis???
+#					\var_dump($response->getHeaders());
 					// we got the response we expected, return nothing
 					return null;
 				}
