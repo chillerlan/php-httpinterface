@@ -65,7 +65,7 @@ class CurlMultiClientTest extends TestCase{
 
 				if(\in_array($response->getStatusCode(), [200, 206], true)){
 					$this->responses[$id]['lang'] = $response->getHeaderLine('content-language');
-#					\var_dump((string)$response->getBody());
+					\var_dump((string)$response->getHeaders());
 					// we got the response we expected, return nothing
 					return null;
 				}
