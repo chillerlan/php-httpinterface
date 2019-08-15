@@ -22,7 +22,7 @@ class LoggingClientTest extends CurlClientTest{
 
 		$logger = new class() extends AbstractLogger{
 			public function log($level, $message, array $context = []){
-				echo sprintf('[%s][%s] %s', date('Y-m-d H:i:s'), $level, trim($message))."\n";
+				echo sprintf('[%s][%s] %s', date('Y-m-d H:i:s'), $level, 'LoggingClientTest')."\n";
 			}
 		};
 
