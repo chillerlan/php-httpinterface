@@ -25,6 +25,9 @@ class URLExtractorTest extends HTTPClientTestAbstract{
 		$options = new HTTPOptions([
 			'ca_info'      => __DIR__.'/../cacert.pem',
 			'user_agent'   => $this::USER_AGENT,
+			'curl_options' => [
+				\CURLOPT_FOLLOWLOCATION => false,
+			]
 		]);
 
 		$this->http = new URLExtractor($options);
@@ -42,7 +45,12 @@ class URLExtractorTest extends HTTPClientTestAbstract{
 			'',
 		];
 
-		foreach($this->http->getResponses() as $i => $r){
+		$responses = $this->http->getResponses();
+
+		$this->assertCount(4, $responses);
+
+		foreach($responses as $i => $r){
+			\var_dump($r->getHeaders());
 			$this->assertSame($expected[$i], $r->getHeaderLine('location'));
 		}
 
