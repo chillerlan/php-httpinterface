@@ -18,8 +18,8 @@ class StreamClientNoCATest extends HTTPClientTestAbstract{
 
 	protected function setUp():void{
 		$options = new HTTPOptions([
-			'ca_info'    => null,
-			'user_agent' => $this::USER_AGENT,
+			'ssl_verifypeer' => false,
+			'user_agent'     => $this::USER_AGENT,
 		]);
 
 		$this->http = new StreamClient($options);
