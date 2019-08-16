@@ -140,14 +140,14 @@ class CurlHandle implements CurlHandleInterface{
 	/**
 	 * @param array $options
 	 *
-	 * @return void
+	 * @return array
 	 */
-	protected function setBodyOptions(array &$options):void{
+	protected function setBodyOptions(array $options):array{
 		$body     = $this->request->getBody();
 		$bodySize = $body->getSize();
 
 		if($bodySize === 0){
-			return;
+			return $options;
 		}
 
 		if($body->isSeekable()){
@@ -170,6 +170,7 @@ class CurlHandle implements CurlHandleInterface{
 			$options[CURLOPT_POSTFIELDS] = (string)$body;
 		}
 
+		return $options;
 	}
 
 	/**
@@ -177,7 +178,7 @@ class CurlHandle implements CurlHandleInterface{
 	 *
 	 * @return array
 	 */
-	protected function initCurlHeaders(array $options):array{
+	protected function setHeaderOptions(array $options):array{
 		$headers = [];
 
 		foreach($this->request->getHeaders() as $name => $values){
@@ -211,7 +212,19 @@ class CurlHandle implements CurlHandleInterface{
 
 		}
 
-		return $headers;
+		$options[CURLOPT_HTTPHEADER] = $headers;
+
+		// If the Expect header is not present, prevent curl from adding it
+		if(!$this->request->hasHeader('Expect')){
+			$options[CURLOPT_HTTPHEADER][] = 'Expect:';
+		}
+
+		// cURL sometimes adds a content-type by default. Prevent this.
+		if(!$this->request->hasHeader('Content-Type')){
+			$options[CURLOPT_HTTPHEADER][] = 'Content-Type:';
+		}
+
+		return $options;
 	}
 
 	/**
@@ -236,7 +249,7 @@ class CurlHandle implements CurlHandleInterface{
 		 */
 
 		if(in_array($method, ['DELETE', 'PATCH', 'POST', 'PUT'], true)){
-			$this->setBodyOptions($options);
+			$options = $this->setBodyOptions($options);
 		}
 
 		// This will set HTTP method to "HEAD".
@@ -259,17 +272,7 @@ class CurlHandle implements CurlHandleInterface{
 			$options[$k] = $v;
 		}
 
-		$options[CURLOPT_HTTPHEADER] = $this->initCurlHeaders($options);
-
-		// If the Expect header is not present, prevent curl from adding it
-		if(!$this->request->hasHeader('Expect')){
-			$options[CURLOPT_HTTPHEADER][] = 'Expect:';
-		}
-
-		// cURL sometimes adds a content-type by default. Prevent this.
-		if(!$this->request->hasHeader('Content-Type')){
-			$options[CURLOPT_HTTPHEADER][] = 'Content-Type:';
-		}
+		$options = $this->setHeaderOptions($options);
 
 		curl_setopt_array($this->curl, $options);
 
