@@ -17,7 +17,7 @@ namespace chillerlan\HTTP\Psr7;
 use InvalidArgumentException, RuntimeException;
 
 use function chillerlan\HTTP\Psr17\{create_stream, create_stream_from_input};
-use function array_merge, basename, pathinfo, random_bytes, sha1, strlen, strtolower, substr;
+use function array_merge, basename, is_string, pathinfo, random_bytes, sha1, strlen, strtolower, substr;
 
 use const PATHINFO_EXTENSION;
 
@@ -99,7 +99,10 @@ final class MultipartStream extends StreamAbstract{
 			}
 		}
 
-		$e['contents'] = create_stream_from_input($e['contents']);
+		// at this point we assume the string is already the file content and don't guess anymore
+		$e['contents'] = is_string($e['contents'])
+			? create_stream($e['contents'])
+			: create_stream_from_input($e['contents']);
 
 		if(empty($e['filename'])){
 			$uri = $e['contents']->getMetadata('uri');
