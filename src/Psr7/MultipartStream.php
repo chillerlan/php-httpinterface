@@ -70,7 +70,7 @@ final class MultipartStream extends StreamAbstract{
 	public function build():MultipartStream{
 
 		if(!$this->built){
-			$this->stream->write("--{$this->getBoundary()}--\r\n");
+			$this->stream->write('--'.$this->getBoundary()."--\r\n");
 
 			$this->built = true;
 		}
