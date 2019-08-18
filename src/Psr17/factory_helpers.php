@@ -14,8 +14,7 @@ use InvalidArgumentException;
 use Psr\Http\Message\StreamInterface;
 
 use function chillerlan\HTTP\Psr7\normalize_files;
-use function explode, fopen, fseek, function_exists, fwrite, getallheaders, gettype,
-	is_file, is_readable, is_scalar, is_string, method_exists, str_replace;
+use function explode, function_exists, getallheaders, is_file, is_readable, is_scalar, is_string, method_exists, str_replace;
 
 const PSR17_INCLUDES = true;
 
