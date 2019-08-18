@@ -143,13 +143,11 @@ function create_stream(string $content = '', string $mode = 'r+', bool $rewind =
 		throw new InvalidArgumentException('invalid mode');
 	}
 
-	$fh = fopen('php://temp', $mode);
+	$stream = new Stream(fopen('php://temp', $mode));
 
 	if($content !== ''){
-		fwrite($fh, $content);
+		$stream->write($content);
 	}
-
-	$stream = new Stream($fh);
 
 	if($rewind){
 		$stream->rewind();
