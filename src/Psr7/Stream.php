@@ -18,6 +18,7 @@ use function clearstatcache, fclose, feof, fread, fstat, ftell, fwrite, is_resou
 	stream_get_meta_data, trigger_error;
 
 use const E_USER_ERROR, SEEK_SET;
+use const chillerlan\HTTP\Psr17\{STREAM_MODES_READ, STREAM_MODES_WRITE};
 
 /**
  * @property resource $stream
@@ -65,8 +66,8 @@ final class Stream extends StreamAbstract{
 		$meta = stream_get_meta_data($this->stream);
 
 		$this->seekable = $meta['seekable'];
-		$this->readable = isset($this::MODES_READ[$meta['mode']]);
-		$this->writable = isset($this::MODES_WRITE[$meta['mode']]);
+		$this->readable = isset(STREAM_MODES_READ[$meta['mode']]);
+		$this->writable = isset(STREAM_MODES_WRITE[$meta['mode']]);
 		$this->uri      = $meta['uri'] ?? null;
 	}
 

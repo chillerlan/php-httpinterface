@@ -36,7 +36,7 @@ final class StreamFactory implements StreamFactoryInterface{
 			throw new RuntimeException('invalid file');
 		}
 
-		if(!isset(Stream::MODES_WRITE[$mode]) && !isset(Stream::MODES_READ[$mode])){
+		if(!isset(STREAM_MODES_WRITE[$mode]) && !isset(STREAM_MODES_READ[$mode])){
 			throw new InvalidArgumentException('invalid mode');
 		}
 

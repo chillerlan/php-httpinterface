@@ -18,45 +18,6 @@ use const SEEK_SET;
 
 abstract class StreamAbstract implements StreamInterface{
 
-	public const MODES_READ = [
-		'a+'  => true,
-		'c+'  => true,
-		'c+b' => true,
-		'c+t' => true,
-		'r'   => true,
-		'r+'  => true,
-		'rb'  => true,
-		'rt'  => true,
-		'r+b' => true,
-		'r+t' => true,
-		'w+'  => true,
-		'w+b' => true,
-		'w+t' => true,
-		'x+'  => true,
-		'x+b' => true,
-		'x+t' => true,
-	];
-
-	public const MODES_WRITE = [
-		'a'   => true,
-		'a+'  => true,
-		'c+'  => true,
-		'c+b' => true,
-		'c+t' => true,
-		'r+'  => true,
-		'rw'  => true,
-		'r+b' => true,
-		'r+t' => true,
-		'w'   => true,
-		'w+'  => true,
-		'wb'  => true,
-		'w+b' => true,
-		'w+t' => true,
-		'x+'  => true,
-		'x+b' => true,
-		'x+t' => true,
-	];
-
 	/**
 	 * @var \Psr\Http\Message\StreamInterface
 	 */

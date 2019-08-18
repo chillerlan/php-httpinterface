@@ -19,6 +19,35 @@ use function explode, fopen, fseek, function_exists, fwrite, getallheaders, gett
 
 const PSR17_INCLUDES = true;
 
+const STREAM_MODES_READ_WRITE = [
+	'a+'  => true,
+	'c+'  => true,
+	'c+b' => true,
+	'c+t' => true,
+	'r+'  => true,
+	'r+b' => true,
+	'r+t' => true,
+	'w+'  => true,
+	'w+b' => true,
+	'w+t' => true,
+	'x+'  => true,
+	'x+b' => true,
+	'x+t' => true,
+];
+
+const STREAM_MODES_READ = STREAM_MODES_READ_WRITE + [
+	'r'   => true,
+	'rb'  => true,
+	'rt'  => true,
+];
+
+const STREAM_MODES_WRITE = STREAM_MODES_READ_WRITE + [
+	'a'   => true,
+	'rw'  => true,
+	'w'   => true,
+	'wb'  => true,
+];
+
 /**
  * Return a ServerRequest populated with superglobals:
  * $_GET
