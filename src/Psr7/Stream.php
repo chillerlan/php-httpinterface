@@ -154,7 +154,7 @@ final class Stream extends StreamAbstract{
 			return $this->size;
 		}
 
-		return null;
+		return null; // @codeCoverageIgnore
 	}
 
 	/**
