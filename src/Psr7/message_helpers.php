@@ -14,7 +14,7 @@ use Psr\Http\Message\{MessageInterface, RequestInterface, ResponseInterface, Upl
 
 use function array_combine, array_keys, array_map, array_merge, array_values, call_user_func_array, count, explode,
 	gzdecode, gzinflate, gzuncompress, implode, is_array, is_bool, is_iterable, is_numeric, is_string, json_decode,
-	json_encode, parse_str, parse_url, rawurlencode, simplexml_load_string, sort, strtolower, trim, uksort;
+	json_encode, parse_str, parse_url, rawurlencode, simplexml_load_string, sort, strtolower, trim, ucfirst, uksort;
 
 use const PHP_URL_QUERY, SORT_STRING;
 
@@ -160,7 +160,7 @@ function normalize_request_headers(array $headers):array{
 		}
 
 		$key = array_map(function(string $v):string{
-			return \ucfirst(strtolower(trim($v)));
+			return ucfirst(strtolower(trim($v)));
 		}, explode('-', $key));
 
 		$normalized_headers[implode('-', $key)] = trim($val);
