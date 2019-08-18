@@ -19,6 +19,8 @@ use Psr\Http\Message\StreamInterface;
 use PHPUnit\Framework\TestCase;
 use Exception, InvalidArgumentException, RuntimeException;
 
+use function chillerlan\HTTP\Psr17\create_stream;
+
 class StreamTest extends TestCase{
 
 	public function testConstructorThrowsExceptionOnInvalidArgument(){
@@ -29,9 +31,7 @@ class StreamTest extends TestCase{
 	}
 
 	public function testConstructorInitializesProperties(){
-		$handle = fopen('php://temp', 'r+');
-		fwrite($handle, 'data');
-		$stream = new Stream($handle);
+		$stream = create_stream('data');
 
 		$this->assertTrue($stream->isReadable());
 		$this->assertTrue($stream->isWritable());
@@ -51,18 +51,14 @@ class StreamTest extends TestCase{
 	}
 
 	public function testConvertsToString(){
-		$handle = fopen('php://temp', 'w+');
-		fwrite($handle, 'data');
-		$stream = new Stream($handle);
+		$stream = create_stream('data', 'w+', false);
 		$this->assertEquals('data', (string)$stream);
 		$this->assertEquals('data', (string)$stream);
 		$stream->close();
 	}
 
 	public function testGetsContents(){
-		$handle = fopen('php://temp', 'w+');
-		fwrite($handle, 'data');
-		$stream = new Stream($handle);
+		$stream = create_stream('data', 'w+', false);
 		$this->assertEquals('', $stream->getContents());
 		$stream->seek(0);
 		$this->assertEquals('data', $stream->getContents());
@@ -70,9 +66,7 @@ class StreamTest extends TestCase{
 	}
 
 	public function testChecksEof(){
-		$handle = fopen('php://temp', 'w+');
-		fwrite($handle, 'data');
-		$stream = new Stream($handle);
+		$stream = create_stream('data', 'w+', false);
 		$this->assertFalse($stream->eof());
 		$stream->read(4);
 		$this->assertTrue($stream->eof());
@@ -113,12 +107,12 @@ class StreamTest extends TestCase{
 	}
 
 	public function testCanDetachStream(){
-		$r      = fopen('php://temp', 'w+');
-		$stream = new Stream($r);
+		$handle = fopen('php://temp', 'w+');
+		$stream = new Stream($handle);
 		$stream->write('foo');
 
 		$this->assertTrue($stream->isReadable());
-		$this->assertSame($r, $stream->detach());
+		$this->assertSame($handle, $stream->detach());
 
 		$stream->detach();
 
