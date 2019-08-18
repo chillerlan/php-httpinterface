@@ -112,11 +112,32 @@ final class MultipartStream extends StreamAbstract{
 			}
 		}
 
+		$e = $this->setElementHeaders($e);
+
+		$this->stream->write('--'.$this->boundary."\r\n");
+
+		foreach(normalize_request_headers($e['headers']) as $key => $value){
+			$this->stream->write($key.': '.$value."\r\n");
+		}
+
+		$this->stream->write("\r\n".$e['contents']->getContents()."\r\n");
+
+		return $this;
+	}
+
+	/**
+	 * @param array $e
+	 *
+	 * @return array
+	 */
+	protected function setElementHeaders(array $e):array{
 		$hasFilename = $e['filename'] === '0' || $e['filename'];
 
 		// Set a default content-disposition header if none was provided
 		if(!$this->hasHeader($e['headers'], 'content-disposition')){
-			$e['headers']['Content-Disposition'] = 'form-data; name="'.$e['name'].'"'.($hasFilename ? '; filename="'.basename($e['filename']).'"' : '');
+			$filename = $hasFilename ? '; filename="'.basename($e['filename']).'"' : '';
+
+			$e['headers']['Content-Disposition'] = 'form-data; name="'.$e['name'].'"'.$filename;
 		}
 
 		// Set a default content-length header if none was provided
@@ -137,15 +158,7 @@ final class MultipartStream extends StreamAbstract{
 			}
 		}
 
-		$this->stream->write('--'.$this->boundary."\r\n");
-
-		foreach(normalize_request_headers($e['headers']) as $key => $value){
-			$this->stream->write($key.': '.$value."\r\n");
-		}
-
-		$this->stream->write("\r\n".$e['contents']->getContents()."\r\n");
-
-		return $this;
+		return $e;
 	}
 
 	/**
