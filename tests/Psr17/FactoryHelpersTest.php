@@ -180,6 +180,13 @@ class FactoryHelpersTest extends TestCase{
 		$this->assertSame('test', $stream->getContents());
 	}
 
+	public function testCreateStreamInvalidModeException(){
+		$this->expectException(InvalidArgumentException::class);
+		$this->expectExceptionMessage('invalid mode');
+
+		create_stream('test', 'foo');
+	}
+
 	public function streamInputProvider(){
 
 		$fh = fopen('php://temp', 'r+');
