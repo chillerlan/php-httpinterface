@@ -159,9 +159,11 @@ function normalize_request_headers(array $headers):array{
 			}
 		}
 
-		$key = strtolower(trim($key));
+		$key = array_map(function(string $v):string{
+			return \ucfirst(strtolower(trim($v)));
+		}, explode('-', $key));
 
-		$normalized_headers[$key] = trim($val);
+		$normalized_headers[implode('-', $key)] = trim($val);
 	}
 
 	return $normalized_headers;

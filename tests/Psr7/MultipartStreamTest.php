@@ -77,7 +77,7 @@ class MultipartStreamTest extends TestCase{
 			['name' => 'baz', 'contents' => 'bam'],
 		], 'boundary');
 
-		$this->assertEquals(
+		$this->assertSame(
 			"--boundary\r\nContent-Disposition: form-data; name=\"foo\"\r\nContent-Length: 3\r\n\r\nbar\r\n".
 			"--boundary\r\nContent-Disposition: form-data; name=\"baz\"\r\nContent-Length: 3\r\n\r\nbam\r\n".
 			"--boundary--\r\n",
@@ -93,7 +93,7 @@ class MultipartStreamTest extends TestCase{
 			['name' => 'float', 'contents' => 1.1],
 		], 'boundary');
 
-		$this->assertEquals(
+		$this->assertSame(
 			"--boundary\r\nContent-Disposition: form-data; name=\"int\"\r\nContent-Length: 1\r\n\r\n1\r\n".
 			"--boundary\r\nContent-Disposition: form-data; name=\"bool\"\r\n\r\n\r\n".
 			"--boundary\r\nContent-Disposition: form-data; name=\"bool2\"\r\nContent-Length: 1\r\n\r\n1\r\n".
@@ -126,7 +126,7 @@ class MultipartStreamTest extends TestCase{
 			])],
 		], 'boundary');
 
-		$this->assertEquals(
+		$this->assertSame(
 			"--boundary\r\nContent-Disposition: form-data; name=\"foo\"; filename=\"bar.txt\"\r\nContent-Length: 3\r\n".
 			"Content-Type: text/plain\r\n\r\nfoo\r\n".
 			"--boundary\r\nContent-Disposition: form-data; name=\"qux\"; filename=\"baz.jpg\"\r\nContent-Length: 3\r\n".
@@ -151,8 +151,8 @@ class MultipartStreamTest extends TestCase{
 			'headers'  => ['x-foo' => 'bar', 'content-disposition' => 'custom']
 		]], 'boundary');
 
-		$this->assertEquals(
-			"--boundary\r\nx-foo: bar\r\ncontent-disposition: custom\r\nContent-Length: 3\r\n".
+		$this->assertSame(
+			"--boundary\r\nX-Foo: bar\r\nContent-Disposition: custom\r\nContent-Length: 3\r\n".
 			"Content-Type: text/plain\r\n\r\nfoo\r\n--boundary--\r\n",
 			(string)$stream
 		);
@@ -180,10 +180,10 @@ class MultipartStreamTest extends TestCase{
 			'headers'  => ['cOntenT-Type' => 'custom'],
 		]], 'boundary');
 
-		$this->assertEquals(
-			"--boundary\r\nx-foo: bar\r\ncontent-disposition: custom\r\nContent-Length: 3\r\n".
+		$this->assertSame(
+			"--boundary\r\nX-Foo: bar\r\nContent-Disposition: custom\r\nContent-Length: 3\r\n".
 			"Content-Type: text/plain\r\n\r\nfoo\r\n".
-			"--boundary\r\ncOntenT-Type: custom\r\nContent-Disposition: form-data; name=\"foo\"; ".
+			"--boundary\r\nContent-Type: custom\r\nContent-Disposition: form-data; name=\"foo\"; ".
 			"filename=\"baz.jpg\"\r\nContent-Length: 3\r\n\r\nbaz\r\n".
 			"--boundary--\r\n",
 			(string)$stream

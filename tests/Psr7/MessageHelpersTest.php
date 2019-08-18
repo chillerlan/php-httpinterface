@@ -20,13 +20,13 @@ class MessageHelpersTest extends TestCase{
 
 	public function headerDataProvider():array {
 		return [
-			'content-Type'  => [['Content-Type' => 'application/x-www-form-urlencoded'], ['content-type' => 'application/x-www-form-urlencoded']],
-			'lowercasekey'  => [['lowercasekey' => 'lowercasevalue'], ['lowercasekey' => 'lowercasevalue']],
-			'UPPERCASEKEY'  => [['UPPERCASEKEY' => 'UPPERCASEVALUE'], ['uppercasekey' => 'UPPERCASEVALUE']],
-			'mIxEdCaSeKey'  => [['mIxEdCaSeKey' => 'MiXeDcAsEvAlUe'], ['mixedcasekey' => 'MiXeDcAsEvAlUe']],
+			'content-Type'  => [['Content-Type' => 'application/x-www-form-urlencoded'], ['Content-Type' => 'application/x-www-form-urlencoded']],
+			'lowercasekey'  => [['lowercasekey' => 'lowercasevalue'], ['Lowercasekey' => 'lowercasevalue']],
+			'UPPERCASEKEY'  => [['UPPERCASEKEY' => 'UPPERCASEVALUE'], ['Uppercasekey' => 'UPPERCASEVALUE']],
+			'mIxEdCaSeKey'  => [['mIxEdCaSeKey' => 'MiXeDcAsEvAlUe'], ['Mixedcasekey' => 'MiXeDcAsEvAlUe']],
 			'31i71casekey'  => [['31i71casekey' => '31i71casevalue'], ['31i71casekey' => '31i71casevalue']],
-			'numericvalue'  => [['numericvalue:1'], ['numericvalue'  => '1']],
-			'arrayvalue'    => [[['foo' => 'bar']], ['foo' => 'bar']],
+			'numericvalue'  => [['numericvalue:1'], ['Numericvalue'  => '1']],
+			'arrayvalue'    => [[['foo' => 'bar']], ['Foo' => 'bar']],
 			'invalid: 2'    => [[2 => 2], []],
 			'invalid: what' => [['what'], []],
 		];
