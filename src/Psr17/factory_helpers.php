@@ -133,24 +133,29 @@ function create_uri_from_globals():UriExtended{
  *
  * @param string      $content String content with which to populate the stream.
  * @param string|null $mode    one of \chillerlan\HTTP\Psr17\STREAM_MODES_WRITE
+ * @param bool        $rewind  rewind the stream
  *
  * @return \chillerlan\HTTP\Psr7\Stream|\Psr\Http\Message\StreamInterface
  */
-function create_stream(string $content = '', string $mode = null):Stream{
-	$mode = $mode ?? 'r+';
+function create_stream(string $content = '', string $mode = 'r+', bool $rewind = true):Stream{
 
 	if(!isset(STREAM_MODES_WRITE[$mode])){
 		throw new InvalidArgumentException('invalid mode');
 	}
 
-	$stream = fopen('php://temp', $mode);
+	$fh = fopen('php://temp', $mode);
 
 	if($content !== ''){
-		fwrite($stream, $content);
-		fseek($stream, 0);
+		fwrite($fh, $content);
 	}
 
-	return new Stream($stream);
+	$stream = new Stream($fh);
+
+	if($rewind){
+		$stream->rewind();
+	}
+
+	return $stream;
 }
 
 /**
