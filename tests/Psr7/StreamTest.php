@@ -141,8 +141,7 @@ class StreamTest extends TestCase{
 	}
 
 	public function testCloseClearProperties(){
-		$handle = fopen('php://temp', 'r+');
-		$stream = new Stream($handle);
+		$stream = create_stream();
 		$stream->close();
 
 		$this->assertFalse($stream->isSeekable());
@@ -153,8 +152,7 @@ class StreamTest extends TestCase{
 	}
 
 	public function testStreamReadingWithZeroLength(){
-		$r      = fopen('php://temp', 'r');
-		$stream = new Stream($r);
+		$stream = create_stream();
 
 		$this->assertSame('', $stream->read(0));
 
@@ -165,19 +163,16 @@ class StreamTest extends TestCase{
 		$this->expectException(RuntimeException::class);
 		$this->expectExceptionMessage('Length parameter cannot be negative');
 
-		$r      = fopen('php://temp', 'r');
-		$stream = new Stream($r);
+		$stream = create_stream();
+		$stream->read(-1);
+	}
 
-		try{
-			$stream->read(-1);
-		}
-		catch(\Exception $e){
-			$stream->close();
-			/** @noinspection PhpUnhandledExceptionInspection */
-			throw $e;
-		}
+	public function testStreamSeekInvalidPosition(){
+		$this->expectException(RuntimeException::class);
+		$this->expectExceptionMessage('Unable to seek to stream position -1 with whence 0');
 
-		$stream->close();
+		$stream = create_stream();
+		$stream->seek(-1);
 	}
 
 }
