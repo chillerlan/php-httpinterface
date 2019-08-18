@@ -12,11 +12,14 @@
 
 namespace chillerlan\HTTPTest\Psr17;
 
-use chillerlan\HTTP\Psr17;
 use chillerlan\HTTP\Psr7\{UploadedFile, UriExtended};
-use InvalidArgumentException;
+use InvalidArgumentException, stdClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\StreamInterface;
+
+use function chillerlan\HTTP\Psr17\{
+	create_uri_from_globals, create_server_request_from_globals, create_stream, create_stream_from_input
+};
 
 class FactoryHelpersTest extends TestCase{
 
@@ -94,7 +97,7 @@ class FactoryHelpersTest extends TestCase{
 	public function testCreateUriFromGlobals(string $expected, array $serverParams){
 		$_SERVER = $serverParams;
 
-		$this->assertEquals(new UriExtended($expected), Psr17\create_uri_from_globals());
+		$this->assertEquals(new UriExtended($expected), create_uri_from_globals());
 	}
 
 	public function testCreateServerRequestFromGlobals(){
@@ -142,7 +145,7 @@ class FactoryHelpersTest extends TestCase{
 			]
 		];
 
-		$server = Psr17\create_server_request_from_globals();
+		$server = create_server_request_from_globals();
 
 		$this->assertSame('POST', $server->getMethod());
 		$this->assertEquals(['Host' => ['www.example.org']], $server->getHeaders());
@@ -171,7 +174,7 @@ class FactoryHelpersTest extends TestCase{
 	}
 
 	public function testCreateStream(){
-		$stream = Psr17\create_stream('test');
+		$stream = create_stream('test');
 
 		$this->assertInstanceOf(Streaminterface::class, $stream);
 		$this->assertSame('test', $stream->getContents());
@@ -189,7 +192,7 @@ class FactoryHelpersTest extends TestCase{
 			'string'          => ['stringtest', 'stringtest'],
 			'file'            => [__DIR__.'/streaminput.txt', 'filetest'.PHP_EOL],
 			'resource'        => [$fh, 'resourcetest'],
-			'streaminterface' => [Psr17\create_stream('streaminterfacetest'), 'streaminterfacetest'],
+			'streaminterface' => [create_stream('streaminterfacetest'), 'streaminterfacetest'],
 			'tostring'        => [$xml->foo, 'bar'],
 		];
 	}
@@ -201,14 +204,14 @@ class FactoryHelpersTest extends TestCase{
 	 * @param string $content
 	 */
 	public function testCreateStreamFromInput($input, string $content){
-		$this->assertSame($content, Psr17\create_stream_from_input($input)->getContents());
+		$this->assertSame($content, create_stream_from_input($input)->getContents());
 	}
 
 	public function testCreateStreamFromInputException(){
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('Invalid resource type: object');
 
-		Psr17\create_stream_from_input(new \stdClass());
+		create_stream_from_input(new stdClass);
 	}
 
 }
