@@ -15,20 +15,10 @@
 namespace chillerlan\HTTPTest\Psr7;
 
 use chillerlan\HTTP\Psr7\{ServerRequest, UploadedFile};
-use chillerlan\HTTP\Psr17\ServerRequestFactory;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 class ServerRequestTest extends TestCase{
-
-	/**
-	 * @var \chillerlan\HTTP\Psr17\ServerRequestFactory
-	 */
-	protected $serverRequestFactory;
-
-	protected function setUp():void{
-		$this->serverRequestFactory = new ServerRequestFactory;
-	}
 
 	public function testServerParams(){
 		$params = ['name' => 'value'];
@@ -38,8 +28,7 @@ class ServerRequestTest extends TestCase{
 	}
 
 	public function testCookieParams(){
-		$r1 = $this->serverRequestFactory
-			->createServerRequest($this->serverRequestFactory::METHOD_GET, '/'); // ServerRequestFactory coverage
+		$r1 = new ServerRequest('GET', '/');
 
 		$params = ['name' => 'value'];
 
