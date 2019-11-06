@@ -29,7 +29,7 @@ A [PSR-7](https://www.php-fig.org/psr/psr-7/)/[PSR-17](https://www.php-fig.org/p
 
 ## Requirements
 - PHP 7.2+
-  - the cURL extension if you plan to use the `CurlClient` class
+  - the cURL extension
 
 ## Installation
 **requires [composer](https://getcomposer.org)**
