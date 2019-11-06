@@ -393,29 +393,29 @@ function normalize_nested_file_spec(array $files = []):array{
 }
 
 /**
- * @param \Psr\Http\Message\ResponseInterface $response
- * @param bool|null                           $assoc
+ * @param \Psr\Http\Message\MessageInterface $message
+ * @param bool|null                          $assoc
  *
  * @return \stdClass|array|bool
  */
-function get_json(ResponseInterface $response, bool $assoc = null){
-	$data = json_decode($response->getBody()->__toString(), $assoc);
+function get_json(MessageInterface $message, bool $assoc = null){
+	$data = json_decode($message->getBody()->__toString(), $assoc);
 
-	$response->getBody()->rewind();
+	$message->getBody()->rewind();
 
 	return $data;
 }
 
 /**
- * @param \Psr\Http\Message\ResponseInterface $response
- * @param bool|null                           $assoc
+ * @param \Psr\Http\Message\MessageInterface $message
+ * @param bool|null                          $assoc
  *
  * @return \SimpleXMLElement|array|bool
  */
-function get_xml(ResponseInterface $response, bool $assoc = null){
-	$data = simplexml_load_string($response->getBody()->__toString());
+function get_xml(MessageInterface $message, bool $assoc = null){
+	$data = simplexml_load_string($message->getBody()->__toString());
 
-	$response->getBody()->rewind();
+	$message->getBody()->rewind();
 
 	return $assoc === true
 		? json_decode(json_encode($data), true) // cruel
