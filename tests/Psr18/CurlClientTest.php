@@ -12,7 +12,7 @@
 
 namespace chillerlan\HTTPTest\Psr18;
 
-use chillerlan\HTTP\{HTTPOptions, Psr18\CurlClient};
+use chillerlan\HTTP\{HTTPOptions, Psr18\CurlClient, Psr18\RequestException, Psr7\Request};
 
 class CurlClientTest extends HTTPClientTestAbstract{
 
@@ -23,6 +23,12 @@ class CurlClientTest extends HTTPClientTestAbstract{
 		]);
 
 		$this->http = new CurlClient($options);
+	}
+
+	public function testRequestError(){
+		$this->expectException(RequestException::class);
+
+		$this->http->sendRequest(new Request(Request::METHOD_GET, ''));
 	}
 
 }

@@ -12,9 +12,17 @@
 
 namespace chillerlan\HTTPTest\Psr7;
 
-use chillerlan\HTTP\{Psr17, Psr7, Psr7\Request, Psr7\Response};
+use chillerlan\HTTP\Psr7\{Request, Response};
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\{MessageInterface};
+use Psr\Http\Message\MessageInterface;
+
+use function chillerlan\HTTP\Psr17\create_stream;
+use function chillerlan\HTTP\Psr7\{
+	build_http_query, clean_query_params, decompress_content, get_json, get_xml,
+	message_to_string, normalize_request_headers, r_rawurlencode
+};
+
+use const chillerlan\HTTP\Psr7\{BOOLEANS_AS_BOOL, BOOLEANS_AS_INT, BOOLEANS_AS_INT_STRING, BOOLEANS_AS_STRING};
 
 class MessageHelpersTest extends TestCase{
 
@@ -39,18 +47,18 @@ class MessageHelpersTest extends TestCase{
 	 * @param array $normalized
 	 */
 	public function testNormalizeHeaders(array $header, array $normalized){
-		$this->assertSame($normalized, Psr7\normalize_request_headers($header));
+		$this->assertSame($normalized, normalize_request_headers($header));
 	}
 
 	public function queryParamDataProvider(){
 		return [
 			// don't remove empty values
-			'BOOLEANS_AS_BOOL (clean)' => [['whatever' => null, 'nope' => '', 'true' => true, 'false' => false, 'array' => ['value' => false]], Psr7\BOOLEANS_AS_BOOL, false],
+			'BOOLEANS_AS_BOOL (clean)' => [['whatever' => null, 'nope' => '', 'true' => true, 'false' => false, 'array' => ['value' => false]], BOOLEANS_AS_BOOL, false],
 			// bool cast to types
-			'BOOLEANS_AS_BOOL'         => [['true' => true, 'false' => false, 'array' => ['value' => false]], Psr7\BOOLEANS_AS_BOOL, true],
-			'BOOLEANS_AS_INT'          => [['true' => 1, 'false' => 0, 'array' => ['value' => 0]], Psr7\BOOLEANS_AS_INT, true],
-			'BOOLEANS_AS_INT_STRING'   => [['true' => '1', 'false' => '0', 'array' => ['value' => '0']], Psr7\BOOLEANS_AS_INT_STRING, true],
-			'BOOLEANS_AS_STRING'       => [['true' => 'true', 'false' => 'false', 'array' => ['value' => 'false']], Psr7\BOOLEANS_AS_STRING, true],
+			'BOOLEANS_AS_BOOL'         => [['true' => true, 'false' => false, 'array' => ['value' => false]], BOOLEANS_AS_BOOL, true],
+			'BOOLEANS_AS_INT'          => [['true' => 1, 'false' => 0, 'array' => ['value' => 0]], BOOLEANS_AS_INT, true],
+			'BOOLEANS_AS_INT_STRING'   => [['true' => '1', 'false' => '0', 'array' => ['value' => '0']], BOOLEANS_AS_INT_STRING, true],
+			'BOOLEANS_AS_STRING'       => [['true' => 'true', 'false' => 'false', 'array' => ['value' => 'false']], BOOLEANS_AS_STRING, true],
 		];
 	}
 
@@ -64,13 +72,16 @@ class MessageHelpersTest extends TestCase{
 	public function testCleanQueryParams(array $expected, int $bool_cast, bool $remove_empty){
 		$data = ['whatever' => null, 'nope' => '', 'true' => true, 'false' => false, 'array' => ['value' => false]];
 
-		$this->assertSame($expected, Psr7\clean_query_params($data, $bool_cast, $remove_empty));
+		$this->assertSame($expected, clean_query_params($data, $bool_cast, $remove_empty));
 	}
 
 	public function rawurlencodeDataProvider(){
 		return [
 			'string' => ['some test string!', 'some%20test%20string%21'],
-			'array'  => [['some other', 'test string', ['oh wait!', 'this', ['is an', 'array!']]], ['some%20other', 'test%20string', ['oh%20wait%21', 'this', ['is%20an', 'array%21']]]],
+			'array'  => [
+				['some other', 'test string', ['oh wait!', 'this', ['is an', 'array!']]],
+				['some%20other', 'test%20string', ['oh%20wait%21', 'this', ['is%20an', 'array%21']]],
+			],
 		];
 	}
 
@@ -81,45 +92,43 @@ class MessageHelpersTest extends TestCase{
 	 * @param $expected
 	 */
 	public function testRawurlencode($data, $expected){
-		$this->assertSame($expected, Psr7\r_rawurlencode($data));
+		$this->assertSame($expected, r_rawurlencode($data));
 	}
 
 	public function testBuildHttpQuery(){
 
 		$data = ['foo' => 'bar', 'whatever?' => 'nope!'];
 
-		$this->assertSame('', Psr7\build_http_query([]));
-		$this->assertSame('foo=bar&whatever%3F=nope%21', Psr7\build_http_query($data));
-		$this->assertSame('foo=bar&whatever?=nope!', Psr7\build_http_query($data, false));
-		$this->assertSame('foo=bar, whatever?=nope!', Psr7\build_http_query($data, false, ', '));
-		$this->assertSame('foo="bar", whatever?="nope!"', Psr7\build_http_query($data, false, ', ', '"'));
+		$this->assertSame('', build_http_query([]));
+		$this->assertSame('foo=bar&whatever%3F=nope%21', build_http_query($data));
+		$this->assertSame('foo=bar&whatever?=nope!', build_http_query($data, false));
+		$this->assertSame('foo=bar, whatever?=nope!', build_http_query($data, false, ', '));
+		$this->assertSame('foo="bar", whatever?="nope!"', build_http_query($data, false, ', ', '"'));
 
 		$data['florps']  = ['nope', 'nope', 'nah'];
-		$this->assertSame('florps="nah", florps="nope", florps="nope", foo="bar", whatever?="nope!"', Psr7\build_http_query($data, false, ', ', '"'));
+		$this->assertSame('florps="nah", florps="nope", florps="nope", foo="bar", whatever?="nope!"', build_http_query($data, false, ', ', '"'));
 	}
 
 	public function testGetJSON(){
 
-		$r = (new Response)
-			->withBody(Psr17\create_stream('{"foo":"bar"}'));
+		$r = (new Response)->withBody(create_stream('{"foo":"bar"}'));
 
-		$this->assertSame('bar', Psr7\get_json($r)->foo);
+		$this->assertSame('bar', get_json($r)->foo);
 
 		$r->getBody()->rewind();
 
-		$this->assertSame('bar', Psr7\get_json($r, true)['foo']);
+		$this->assertSame('bar', get_json($r, true)['foo']);
 	}
 
 	public function testGetXML(){
 
-		$r = (new Response)
-			->withBody(Psr17\create_stream('<?xml version="1.0" encoding="UTF-8"?><root><foo>bar</foo></root>'));
+		$r = (new Response)->withBody(create_stream('<?xml version="1.0" encoding="UTF-8"?><root><foo>bar</foo></root>'));
 
-		$this->assertSame('bar', Psr7\get_xml($r)->foo->__toString());
+		$this->assertSame('bar', get_xml($r)->foo->__toString());
 
 		$r->getBody()->rewind();
 
-		$this->assertSame('bar', Psr7\get_xml($r, true)['foo']);
+		$this->assertSame('bar', get_xml($r, true)['foo']);
 	}
 
 	public function messageDataProvider(){
@@ -138,7 +147,7 @@ class MessageHelpersTest extends TestCase{
 	public function testMessageToString(MessageInterface $message, string $expected){
 		$this->assertSame(
 			$expected,
-			Psr7\message_to_string($message->withAddedHeader('foo', 'bar')->withBody(Psr17\create_stream('testbody')))
+			message_to_string($message->withAddedHeader('foo', 'bar')->withBody(create_stream('testbody')))
 		);
 	}
 
@@ -163,8 +172,9 @@ class MessageHelpersTest extends TestCase{
 			$response = $response->withHeader('Content-Encoding', $encoding);
 		}
 
-		$response = $response->withBody(Psr17\create_stream($data));
+		$response = $response->withBody(create_stream($data));
 
-		$this->assertSame($expected, Psr7\decompress_content($response));
+		$this->assertSame($expected, decompress_content($response));
 	}
+
 }

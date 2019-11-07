@@ -14,11 +14,13 @@ namespace chillerlan\HTTPTest\Psr15;
 
 use chillerlan\HTTP\Psr15\{EmptyResponseHandler, QueueRequestHandler};
 use chillerlan\HTTP\Psr15\Middleware\MiddlewareException;
-use chillerlan\HTTP\Psr17;
 use chillerlan\HTTP\Psr17\ResponseFactory;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};
 use Psr\Http\Server\{MiddlewareInterface, RequestHandlerInterface};
+
+use function array_keys;
+use function chillerlan\HTTP\Psr17\create_server_request_from_globals;
 
 class QueueRequestHandlerTest extends TestCase{
 
@@ -61,7 +63,7 @@ class QueueRequestHandlerTest extends TestCase{
 		});
 
 		// execute it:
-		$response = $handler->handle(Psr17\create_server_request_from_globals());
+		$response = $handler->handle(create_server_request_from_globals());
 
 		$this->assertSame(
 			['X-Out-First', 'X-Out-Second', 'X-Out-Third'],

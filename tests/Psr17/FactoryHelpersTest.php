@@ -20,6 +20,9 @@ use Psr\Http\Message\StreamInterface;
 use function chillerlan\HTTP\Psr17\{
 	create_uri_from_globals, create_server_request_from_globals, create_stream, create_stream_from_input
 };
+use function fopen, fseek, fwrite, simplexml_load_string, time;
+
+use const UPLOAD_ERR_OK;
 
 class FactoryHelpersTest extends TestCase{
 
@@ -161,13 +164,7 @@ class FactoryHelpersTest extends TestCase{
 		);
 
 		$expectedFiles = [
-			'file' => new UploadedFile(
-				'/tmp/php/php1h4j1o',
-				123,
-				UPLOAD_ERR_OK,
-				'MyFile.txt',
-				'text/plain'
-			),
+			'file' => new UploadedFile('/tmp/php/php1h4j1o', 123, UPLOAD_ERR_OK, 'MyFile.txt', 'text/plain'),
 		];
 
 		$this->assertEquals($expectedFiles, $server->getUploadedFiles());

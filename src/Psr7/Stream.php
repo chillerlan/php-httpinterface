@@ -259,7 +259,7 @@ final class Stream extends StreamAbstract{
 		$string = fread($this->stream, $length);
 
 		if($string === false){
-			throw new RuntimeException('Unable to read from stream');
+			throw new RuntimeException('Unable to read from stream'); // @codeCoverageIgnore
 		}
 
 		return $string;

@@ -15,7 +15,6 @@
 
 namespace chillerlan\HTTPTest\Psr7;
 
-use chillerlan\HTTP\Psr17\UriFactory;
 use chillerlan\HTTP\Psr7\{Uri, UriExtended};
 use InvalidArgumentException;
 use Psr\Http\Message\UriInterface;
@@ -23,17 +22,8 @@ use PHPUnit\Framework\TestCase;
 
 class UriTest extends TestCase{
 
-	/**
-	 * @var \chillerlan\HTTP\Psr17\UriFactory
-	 */
-	protected $uriFactory;
-
-	protected function setUp():void{
-		$this->uriFactory = new UriFactory;
-	}
-
 	public function testParsesProvidedUri(){
-		$uri = $this->uriFactory->createUri('https://user:pass@example.com:8080/path/123?q=abc#test'); // URIFactory coverage
+		$uri = new Uri('https://user:pass@example.com:8080/path/123?q=abc#test');
 
 		$this->assertSame('https', $uri->getScheme());
 		$this->assertSame('user:pass@example.com:8080', $uri->getAuthority());
@@ -126,7 +116,7 @@ class UriTest extends TestCase{
 	}
 
 	/**
-	 * @dataProvider             getInvalidUris
+	 * @dataProvider getInvalidUris
 	 *
 	 * @param $invalidUri
 	 */
@@ -527,18 +517,9 @@ class UriTest extends TestCase{
 
 	public function hostProvider(){
 		return [
-			'normalized host' => [
-				"MaStEr.eXaMpLe.CoM",
-				"master.example.com",
-			],
-			"simple host"     => [
-				"www.example.com",
-				"www.example.com",
-			],
-			"IPv6 Host"       => [
-				"[::1]",
-				"[::1]",
-			],
+			'normalized host' => ['MaStEr.eXaMpLe.CoM', 'master.example.com',],
+			'simple host'     => ['www.example.com', 'www.example.com',],
+			'IPv6 Host'       => ['[::1]', '[::1]'],
 		];
 	}
 
@@ -584,7 +565,7 @@ class UriTest extends TestCase{
 				'port'      => 80,
 				'authority' => 'User:Pass@master.example.com',
 			],
-			"authority without pass"              => [
+			'authority without pass'              => [
 				'scheme'    => 'http',
 				'user'      => 'User',
 				'pass'      => '',
@@ -592,7 +573,7 @@ class UriTest extends TestCase{
 				'port'      => null,
 				'authority' => 'User@master.example.com',
 			],
-			"authority without port and userinfo" => [
+			'authority without port and userinfo' => [
 				'scheme'    => 'http',
 				'user'      => '',
 				'pass'      => '',

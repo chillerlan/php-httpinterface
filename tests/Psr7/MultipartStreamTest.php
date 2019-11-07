@@ -12,12 +12,13 @@
 
 namespace chillerlan\HTTPTest\Psr7;
 
-use chillerlan\HTTP\Psr17;
 use chillerlan\HTTP\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\FnStream;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
+
+use function chillerlan\HTTP\Psr17\create_stream_from_input;
 
 class MultipartStreamTest extends TestCase{
 
@@ -107,19 +108,19 @@ class MultipartStreamTest extends TestCase{
 
 		$stream = new MultipartStream([
 			['name' => 'foo', 'contents' => FnStream::decorate(
-				Psr17\create_stream_from_input('foo'), [
+				create_stream_from_input('foo'), [
 				'getMetadata' => function(){
 					return '/foo/bar.txt';
 				}
 			])],
 			['name' => 'qux', 'contents' => FnStream::decorate(
-				Psr17\create_stream_from_input('baz'), [
+				create_stream_from_input('baz'), [
 				'getMetadata' => function(){
 					return '/foo/baz.jpg';
 				}
 			])],
 			['name' => 'qux', 'contents' => FnStream::decorate(
-				Psr17\create_stream_from_input('bar'), [
+				create_stream_from_input('bar'), [
 				'getMetadata' => function(){
 					return '/foo/bar.gif';
 				}
@@ -143,7 +144,7 @@ class MultipartStreamTest extends TestCase{
 		$stream = new MultipartStream([[
 			'name'     => 'foo',
 			'contents' => FnStream::decorate(
-				Psr17\create_stream_from_input('foo'), [
+				create_stream_from_input('foo'), [
 				'getMetadata' => function(){
 					return '/foo/bar.txt';
 				}
@@ -163,7 +164,7 @@ class MultipartStreamTest extends TestCase{
 		$stream = new MultipartStream([[
 			'name'     => 'foo',
 			'contents' => FnStream::decorate(
-				Psr17\create_stream_from_input('foo'), [
+				create_stream_from_input('foo'), [
 				'getMetadata' => function(){
 					return '/foo/bar.txt';
 				}
@@ -172,7 +173,7 @@ class MultipartStreamTest extends TestCase{
 		], [
 			'name'     => 'foo',
 			'contents' => FnStream::decorate(
-				Psr17\create_stream_from_input('baz'), [
+				create_stream_from_input('baz'), [
 				'getMetadata' => function(){
 					return '/foo/baz.jpg';
 				}

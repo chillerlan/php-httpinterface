@@ -20,6 +20,7 @@ use PHPUnit\Framework\TestCase;
 use Exception, InvalidArgumentException, RuntimeException;
 
 use function chillerlan\HTTP\Psr17\create_stream;
+use function filesize, fopen, fwrite;
 
 class StreamTest extends TestCase{
 

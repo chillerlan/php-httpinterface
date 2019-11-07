@@ -12,12 +12,14 @@
 
 namespace chillerlan\HTTPTest\Psr15;
 
-use chillerlan\HTTP\Psr17;
 use chillerlan\HTTP\Psr15\Middleware\{MiddlewareException, PriorityMiddleware};
 use chillerlan\HTTP\Psr15\PriorityQueueRequestHandler;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};
 use Psr\Http\Server\{MiddlewareInterface, RequestHandlerInterface};
+
+use function array_keys;
+use function chillerlan\HTTP\Psr17\create_server_request_from_globals;
 
 class PriorityQueueRequestHandlerTest extends TestCase{
 
@@ -46,7 +48,7 @@ class PriorityQueueRequestHandlerTest extends TestCase{
 		});
 
 		// execute it:
-		$response = $handler->handle(Psr17\create_server_request_from_globals());
+		$response = $handler->handle(create_server_request_from_globals());
 
 		// highest priority shall be processed first and go out last
 		$this->assertSame(
@@ -72,7 +74,7 @@ class PriorityQueueRequestHandlerTest extends TestCase{
 		];
 
 		$handler  = new PriorityQueueRequestHandler($middlewareStack);
-		$response = $handler->handle(Psr17\create_server_request_from_globals());
+		$response = $handler->handle(create_server_request_from_globals());
 
 		$this->assertSame(
 			['X-Priority-1', 'X-Priority-11', 'X-Priority-22', 'X-Priority-33', 'X-Priority-3', 'X-Priority-4'],

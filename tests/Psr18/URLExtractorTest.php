@@ -16,6 +16,8 @@ use chillerlan\HTTP\HTTPOptions;
 use chillerlan\HTTP\Psr18\URLExtractor;
 use chillerlan\HTTP\Psr7\Request;
 
+use const CURLOPT_FOLLOWLOCATION;
+
 /**
  * @property \chillerlan\HTTP\Psr18\URLExtractor $http
  */
@@ -26,7 +28,7 @@ class URLExtractorTest extends HTTPClientTestAbstract{
 			'ca_info'      => __DIR__.'/../cacert.pem',
 			'user_agent'   => $this::USER_AGENT,
 			'curl_options' => [
-				\CURLOPT_FOLLOWLOCATION => false,
+				CURLOPT_FOLLOWLOCATION => false,
 			]
 		]);
 
@@ -52,7 +54,7 @@ class URLExtractorTest extends HTTPClientTestAbstract{
 		$this->assertCount(4, $responses);
 
 		foreach($responses as $i => $r){
-			\var_dump($r->getHeaders());
+#			\var_dump($r->getHeaders());
 			$this->assertSame($expected[$i], $r->getHeaderLine('location'));
 		}
 

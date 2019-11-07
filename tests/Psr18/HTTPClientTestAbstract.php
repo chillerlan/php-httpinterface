@@ -13,8 +13,12 @@
 namespace chillerlan\HTTPTest\Psr18;
 
 use chillerlan\HTTP\Psr7\Request;
+use Exception;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientExceptionInterface;
+
+use function chillerlan\HTTP\Psr7\get_json;
+use function in_array;
 
 abstract class HTTPClientTestAbstract extends TestCase{
 
@@ -30,14 +34,14 @@ abstract class HTTPClientTestAbstract extends TestCase{
 		try{
 			$url      = 'https://httpbin.org/get';
 			$response = $this->http->sendRequest(new Request(Request::METHOD_GET, $url));
-			$json     = json_decode($response->getBody()->getContents());
+			$json     = get_json($response);
 
 			$this->assertSame($url, $json->url);
 			$this->assertSame($this::USER_AGENT, $json->headers->{'User-Agent'});
 			$this->assertSame(200, $response->getStatusCode());
 			$this->assertSame(200, $response->getStatusCode());
 		}
-		catch(\Exception $e){
+		catch(Exception $e){
 			$this->markTestSkipped('error: '.$e->getMessage());
 		}
 
@@ -73,15 +77,14 @@ abstract class HTTPClientTestAbstract extends TestCase{
 				['huh' => 'wtf'],
 				['what' => 'nope'] + $extra_headers
 			);
-
 		}
-		catch(\Exception $e){
+		catch(Exception $e){
 			$this->markTestSkipped('error: '.$e->getMessage());
 
 			return;
 		}
 
-		$json = json_decode($response->getBody()->getContents());
+		$json = get_json($response);
 
 		if(!$json){
 			$this->markTestSkipped('empty response');
@@ -90,16 +93,13 @@ abstract class HTTPClientTestAbstract extends TestCase{
 			$this->assertSame('https://httpbin.org/'.$method.'?foo=bar', $json->url);
 			$this->assertSame('bar', $json->args->foo);
 			$this->assertSame('nope', $json->headers->What);
-			$this->assertSame(self::USER_AGENT, $json->headers->{'User-Agent'});
+			$this->assertSame($this::USER_AGENT, $json->headers->{'User-Agent'});
 
 			if(in_array($method, ['patch', 'post', 'put'])){
 
-				if(isset($extra_headers['content-type']) && $extra_headers['content-type'] === 'application/json'){
-					$this->assertSame('wtf', $json->json->huh);
-				}
-				else{
-					$this->assertSame('wtf', $json->form->huh);
-				}
+				isset($extra_headers['content-type']) && $extra_headers['content-type'] === 'application/json'
+					? $this->assertSame('wtf', $json->json->huh)
+					: $this->assertSame('wtf', $json->form->huh);
 
 			}
 		}

@@ -2,7 +2,7 @@
 /**
  * Class UploadedFileTest
  *
- * @link https://github.com/guzzle/psr7/blob/4b981cdeb8c13d22a6c193554f8c686f53d5c958/tests/UploadedFileTest.php
+ * @link         https://github.com/guzzle/psr7/blob/4b981cdeb8c13d22a6c193554f8c686f53d5c958/tests/UploadedFileTest.php
  *
  * @filesource   UploadedFileTest.php
  * @created      12.08.2018
@@ -14,11 +14,18 @@
 
 namespace chillerlan\HTTPTest\Psr7;
 
-use chillerlan\HTTP\Psr17;
-use chillerlan\HTTP\Psr7;
 use chillerlan\HTTP\Psr7\UploadedFile;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
+
+use function chillerlan\HTTP\Psr17\create_stream;
+use function chillerlan\HTTP\Psr7\normalize_files;
+
+use function basename, file_exists, fopen, is_scalar, sys_get_temp_dir, tempnam, uniqid, unlink;
+
+use const UPLOAD_ERR_CANT_WRITE, UPLOAD_ERR_EXTENSION, UPLOAD_ERR_FORM_SIZE, UPLOAD_ERR_INI_SIZE,
+	UPLOAD_ERR_NO_FILE, UPLOAD_ERR_NO_TMP_DIR, UPLOAD_ERR_OK, UPLOAD_ERR_PARTIAL;
 
 class UploadedFileTest extends TestCase{
 
@@ -59,7 +66,7 @@ class UploadedFileTest extends TestCase{
 	public function testRaisesExceptionOnInvalidStreamOrFile($streamOrFile){
 		$this->expectException(InvalidArgumentException::class);
 
-		new UploadedFile($streamOrFile, 0, UPLOAD_ERR_OK);
+		new UploadedFile($streamOrFile, 0);
 	}
 
 	public function invalidErrorStatuses(){
@@ -81,29 +88,29 @@ class UploadedFileTest extends TestCase{
 	}
 
 	public function testGetStreamReturnsOriginalStreamObject(){
-		$stream = Psr17\create_stream('');
-		$upload = new UploadedFile($stream, 0, UPLOAD_ERR_OK);
+		$stream = create_stream('');
+		$upload = new UploadedFile($stream, 0);
 
 		$this->assertSame($stream, $upload->getStream());
 	}
 
 	public function testGetStreamReturnsWrappedPhpStream(){
 		$stream       = fopen('php://temp', 'wb+');
-		$upload       = new UploadedFile($stream, 0, UPLOAD_ERR_OK);
+		$upload       = new UploadedFile($stream, 0);
 		$uploadStream = $upload->getStream()->detach();
 
 		$this->assertSame($stream, $uploadStream);
 	}
 
 	public function testSuccessful(){
-		$stream = Psr17\create_stream('Foo bar!');
+		$stream = create_stream('Foo bar!');
 		$upload = new UploadedFile($stream, $stream->getSize(), UPLOAD_ERR_OK, 'filename.txt', 'text/plain');
 
 		$this->assertEquals($stream->getSize(), $upload->getSize());
 		$this->assertEquals('filename.txt', $upload->getClientFilename());
 		$this->assertEquals('text/plain', $upload->getClientMediaType());
 
-		$to = tempnam(sys_get_temp_dir(), 'successful');
+		$to              = tempnam(sys_get_temp_dir(), 'successful');
 		$this->cleanup[] = $to;
 		$upload->moveTo($to);
 		$this->assertFileExists($to);
@@ -111,29 +118,38 @@ class UploadedFileTest extends TestCase{
 	}
 
 	public function testMoveCannotBeCalledMoreThanOnce(){
-		$stream = Psr17\create_stream('Foo bar!');
-		$upload = new UploadedFile($stream, 0, UPLOAD_ERR_OK);
+		$stream = create_stream('Foo bar!');
+		$upload = new UploadedFile($stream, 0);
 
 		$this->cleanup[] = $to = tempnam(sys_get_temp_dir(), 'diac');
 		$upload->moveTo($to);
 		$this->assertTrue(file_exists($to));
 
-		$this->expectException(\RuntimeException::class);
-		$this->expectExceptionMessage('moved');
+		$this->expectException(RuntimeException::class);
+		$this->expectExceptionMessage('Cannot retrieve stream after it has already been moved');
 		$upload->moveTo($to);
 	}
 
 	public function testCannotRetrieveStreamAfterMove(){
-		$stream = Psr17\create_stream('Foo bar!');
-		$upload = new UploadedFile($stream, 0, UPLOAD_ERR_OK);
+		$stream = create_stream('Foo bar!');
+		$upload = new UploadedFile($stream, 0);
 
 		$this->cleanup[] = $to = tempnam(sys_get_temp_dir(), 'diac');
 		$upload->moveTo($to);
 		$this->assertFileExists($to);
 
-		$this->expectException(\RuntimeException::class);
-		$this->expectExceptionMessage('moved');
+		$this->expectException(RuntimeException::class);
+		$this->expectExceptionMessage('Cannot retrieve stream after it has already been moved');
 		$upload->getStream();
+	}
+
+	public function testCannotMoveToEmptyTarget(){
+		$stream = create_stream('Foo bar!');
+		$upload = new UploadedFile($stream, 0);
+
+		$this->expectException(InvalidArgumentException::class);
+		$this->expectExceptionMessage('Invalid path provided for move operation; must be a non-empty string');
+		$upload->moveTo('');
 	}
 
 	public function nonOkErrorStatus(){
@@ -165,8 +181,8 @@ class UploadedFileTest extends TestCase{
 	 */
 	public function testMoveToRaisesExceptionWhenErrorStatusPresent(int $status){
 		$uploadedFile = new UploadedFile('not ok', 0, $status);
-		$this->expectException(\RuntimeException::class);
-		$this->expectExceptionMessage('upload error');
+		$this->expectException(RuntimeException::class);
+		$this->expectExceptionMessage('Cannot retrieve stream due to upload error');
 		$uploadedFile->moveTo(__DIR__.'/'.uniqid());
 	}
 
@@ -177,8 +193,8 @@ class UploadedFileTest extends TestCase{
 	 */
 	public function testGetStreamRaisesExceptionWhenErrorStatusPresent(int $status){
 		$uploadedFile = new UploadedFile('not ok', 0, $status);
-		$this->expectException(\RuntimeException::class);
-		$this->expectExceptionMessage('upload error');
+		$this->expectException(RuntimeException::class);
+		$this->expectExceptionMessage('Cannot retrieve stream due to upload error');
 		$uploadedFile->getStream();
 	}
 
@@ -200,143 +216,83 @@ class UploadedFileTest extends TestCase{
 			'Single file' => [
 				[
 					'file' => [
-						'name' => 'MyFile.txt',
-						'type' => 'text/plain',
+						'name'     => 'MyFile.txt',
+						'type'     => 'text/plain',
 						'tmp_name' => '/tmp/php/php1h4j1o',
-						'error' => '0',
-						'size' => '123'
-					]
+						'error'    => '0',
+						'size'     => '123',
+					],
 				],
 				[
-					'file' => new UploadedFile(
-						'/tmp/php/php1h4j1o',
-						123,
-						UPLOAD_ERR_OK,
-						'MyFile.txt',
-						'text/plain'
-					)
-				]
+					'file' => new UploadedFile('/tmp/php/php1h4j1o', 123, UPLOAD_ERR_OK, 'MyFile.txt', 'text/plain'),
+				],
 			],
 			'Empty file' => [
 				[
 					'image_file' => [
-						'name' => '',
-						'type' => '',
+						'name'     => '',
+						'type'     => '',
 						'tmp_name' => '',
-						'error' => '4',
-						'size' => '0'
-					]
+						'error'    => '4',
+						'size'     => '0',
+					],
 				],
 				[
-					'image_file' => new UploadedFile(
-						'',
-						0,
-						UPLOAD_ERR_NO_FILE,
-						'',
-						''
-					)
-				]
+					'image_file' => new UploadedFile('', 0, UPLOAD_ERR_NO_FILE, '', ''),
+				],
 			],
 			'Already Converted' => [
 				[
-					'file' => new UploadedFile(
-						'/tmp/php/php1h4j1o',
-						123,
-						UPLOAD_ERR_OK,
-						'MyFile.txt',
-						'text/plain'
-					)
+					'file' => new UploadedFile('/tmp/php/php1h4j1o', 123, UPLOAD_ERR_OK, 'MyFile.txt', 'text/plain'),
 				],
 				[
-					'file' => new UploadedFile(
-						'/tmp/php/php1h4j1o',
-						123,
-						UPLOAD_ERR_OK,
-						'MyFile.txt',
-						'text/plain'
-					)
-				]
+					'file' => new UploadedFile('/tmp/php/php1h4j1o', 123, UPLOAD_ERR_OK, 'MyFile.txt', 'text/plain'),
+				],
 			],
 			'Already Converted array' => [
 				[
 					'file' => [
-						new UploadedFile(
-							'/tmp/php/php1h4j1o',
-							123,
-							UPLOAD_ERR_OK,
-							'MyFile.txt',
-							'text/plain'
-						),
-						new UploadedFile(
-							'',
-							0,
-							UPLOAD_ERR_NO_FILE,
-							'',
-							''
-						)
+						new UploadedFile('/tmp/php/php1h4j1o', 123, UPLOAD_ERR_OK, 'MyFile.txt', 'text/plain'),
+						new UploadedFile('', 0, UPLOAD_ERR_NO_FILE, '', ''),
 					],
 				],
 				[
 					'file' => [
-						new UploadedFile(
-							'/tmp/php/php1h4j1o',
-							123,
-							UPLOAD_ERR_OK,
-							'MyFile.txt',
-							'text/plain'
-						),
-						new UploadedFile(
-							'',
-							0,
-							UPLOAD_ERR_NO_FILE,
-							'',
-							''
-						)
+						new UploadedFile('/tmp/php/php1h4j1o', 123, UPLOAD_ERR_OK, 'MyFile.txt', 'text/plain'),
+						new UploadedFile('', 0, UPLOAD_ERR_NO_FILE, '', ''),
 					],
-				]
+				],
 			],
 			'Multiple files' => [
 				[
-					'text_file' => [
-						'name' => 'MyFile.txt',
-						'type' => 'text/plain',
+					'text_file'  => [
+						'name'     => 'MyFile.txt',
+						'type'     => 'text/plain',
 						'tmp_name' => '/tmp/php/php1h4j1o',
-						'error' => '0',
-						'size' => '123'
+						'error'    => '0',
+						'size'     => '123',
 					],
 					'image_file' => [
-						'name' => '',
-						'type' => '',
+						'name'     => '',
+						'type'     => '',
 						'tmp_name' => '',
-						'error' => '4',
-						'size' => '0'
-					]
+						'error'    => '4',
+						'size'     => '0',
+					],
 				],
 				[
-					'text_file' => new UploadedFile(
-						'/tmp/php/php1h4j1o',
-						123,
-						UPLOAD_ERR_OK,
-						'MyFile.txt',
-						'text/plain'
-					),
-					'image_file' => new UploadedFile(
-						'',
-						0,
-						UPLOAD_ERR_NO_FILE,
-						'',
-						''
-					)
-				]
+					'text_file'  => new UploadedFile('/tmp/php/php1h4j1o', 123, UPLOAD_ERR_OK, 'MyFile.txt', 'text/plain'),
+					'image_file' => new UploadedFile('', 0, UPLOAD_ERR_NO_FILE, '', ''),
+				],
 			],
 			'Nested files' => [
 				[
-					'file' => [
-						'name' => [
+					'file'   => [
+						'name'     => [
 							0 => 'MyFile.txt',
 							1 => 'Image.png',
 						],
-						'type' => [
+						'type'     => [
 							0 => 'text/plain',
 							1 => 'image/png',
 						],
@@ -344,97 +300,67 @@ class UploadedFileTest extends TestCase{
 							0 => '/tmp/php/hp9hskjhf',
 							1 => '/tmp/php/php1h4j1o',
 						],
-						'error' => [
+						'error'    => [
 							0 => '0',
 							1 => '0',
 						],
-						'size' => [
+						'size'     => [
 							0 => '123',
 							1 => '7349',
 						],
 					],
 					'nested' => [
-						'name' => [
+						'name'     => [
 							'other' => 'Flag.txt',
-							'test' => [
+							'test'  => [
 								0 => 'Stuff.txt',
 								1 => '',
 							],
 						],
-						'type' => [
+						'type'     => [
 							'other' => 'text/plain',
-							'test' => [
+							'test'  => [
 								0 => 'text/plain',
 								1 => '',
 							],
 						],
 						'tmp_name' => [
 							'other' => '/tmp/php/hp9hskjhf',
-							'test' => [
+							'test'  => [
 								0 => '/tmp/php/asifu2gp3',
 								1 => '',
 							],
 						],
-						'error' => [
+						'error'    => [
 							'other' => '0',
-							'test' => [
+							'test'  => [
 								0 => '0',
 								1 => '4',
 							],
 						],
-						'size' => [
+						'size'     => [
 							'other' => '421',
-							'test' => [
+							'test'  => [
 								0 => '32',
 								1 => '0',
-							]
-						]
+							],
+						],
 					],
 				],
 				[
-					'file' => [
-						0 => new UploadedFile(
-							'/tmp/php/hp9hskjhf',
-							123,
-							UPLOAD_ERR_OK,
-							'MyFile.txt',
-							'text/plain'
-						),
-						1 => new UploadedFile(
-							'/tmp/php/php1h4j1o',
-							7349,
-							UPLOAD_ERR_OK,
-							'Image.png',
-							'image/png'
-						),
+					'file'   => [
+						new UploadedFile('/tmp/php/hp9hskjhf', 123, UPLOAD_ERR_OK, 'MyFile.txt', 'text/plain'),
+						new UploadedFile('/tmp/php/php1h4j1o', 7349, UPLOAD_ERR_OK, 'Image.png', 'image/png'),
 					],
 					'nested' => [
-						'other' => new UploadedFile(
-							'/tmp/php/hp9hskjhf',
-							421,
-							UPLOAD_ERR_OK,
-							'Flag.txt',
-							'text/plain'
-						),
-						'test' => [
-							0 => new UploadedFile(
-								'/tmp/php/asifu2gp3',
-								32,
-								UPLOAD_ERR_OK,
-								'Stuff.txt',
-								'text/plain'
-							),
-							1 => new UploadedFile(
-								'',
-								0,
-								UPLOAD_ERR_NO_FILE,
-								'',
-								''
-							),
-						]
-					]
-				]
-			]
+						'other' => new UploadedFile('/tmp/php/hp9hskjhf', 421, UPLOAD_ERR_OK, 'Flag.txt', 'text/plain'),
+						'test'  => [
+							new UploadedFile('/tmp/php/asifu2gp3', 32, UPLOAD_ERR_OK, 'Stuff.txt', 'text/plain'),
+							new UploadedFile('', 0, UPLOAD_ERR_NO_FILE, '', ''),
+						],
+					],
+				],
+			],
 		];
 	}
 
@@ -445,7 +371,7 @@ class UploadedFileTest extends TestCase{
 	 * @param array $expected
 	 */
 	public function testNormalizeFiles(array $files, array $expected){
-		$result = Psr7\normalize_files($files);
+		$result = normalize_files($files);
 
 		$this->assertEquals($expected, $result);
 	}
@@ -454,7 +380,7 @@ class UploadedFileTest extends TestCase{
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('Invalid value in files specification');
 
-		Psr7\normalize_files(['test' => 'something']);
+		normalize_files(['test' => 'something']);
 	}
 
 }

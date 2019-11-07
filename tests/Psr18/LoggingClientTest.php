@@ -15,6 +15,8 @@ namespace chillerlan\HTTPTest\Psr18;
 use chillerlan\HTTP\Psr18\LoggingClient;
 use Psr\Log\AbstractLogger;
 
+use function date, sprintf;
+
 class LoggingClientTest extends CurlClientTest{
 
 	protected function setUp():void{

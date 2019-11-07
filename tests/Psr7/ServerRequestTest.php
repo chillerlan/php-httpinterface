@@ -18,6 +18,8 @@ use chillerlan\HTTP\Psr7\{ServerRequest, UploadedFile};
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
+use const UPLOAD_ERR_OK;
+
 class ServerRequestTest extends TestCase{
 
 	public function testServerParams(){

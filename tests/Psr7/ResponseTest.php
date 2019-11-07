@@ -19,6 +19,8 @@ use chillerlan\HTTP\Psr17;
 use Psr\Http\Message\StreamInterface;
 use PHPUnit\Framework\TestCase;
 
+use function chillerlan\HTTP\Psr17\create_stream;
+
 class ResponseTest extends TestCase{
 
 	public function testDefaultConstructor(){
@@ -133,7 +135,7 @@ class ResponseTest extends TestCase{
 	}
 
 	public function testWithBody(){
-		$r = (new Response)->withBody(Psr17\create_stream('0'));
+		$r = (new Response)->withBody(create_stream('0'));
 		$this->assertInstanceOf(StreamInterface::class, $r->getBody());
 		$this->assertSame('0', (string) $r->getBody());
 	}

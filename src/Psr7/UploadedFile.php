@@ -17,7 +17,7 @@ use Psr\Http\Message\{StreamInterface, UploadedFileInterface};
 use InvalidArgumentException, RuntimeException;
 
 use function chillerlan\HTTP\Psr17\create_stream_from_input;
-use function in_array, is_string, is_writable, move_uploaded_file, php_sapi_name,rename;
+use function in_array, is_file, is_string, is_writable, move_uploaded_file, php_sapi_name,rename;
 
 use const UPLOAD_ERR_CANT_WRITE, UPLOAD_ERR_EXTENSION, UPLOAD_ERR_FORM_SIZE, UPLOAD_ERR_INI_SIZE,
 	UPLOAD_ERR_NO_FILE, UPLOAD_ERR_NO_TMP_DIR, UPLOAD_ERR_OK, UPLOAD_ERR_PARTIAL;
@@ -87,7 +87,7 @@ final class UploadedFile implements UploadedFileInterface{
 	 *
 	 * @throws \InvalidArgumentException
 	 */
-	public function __construct($file, int $size, int $error, string $filename = null, string $mediaType = null){
+	public function __construct($file, int $size, int $error = UPLOAD_ERR_OK, string $filename = null, string $mediaType = null){
 
 		if(!in_array($error, $this::UPLOAD_ERRORS, true)){
 			throw new InvalidArgumentException('Invalid error status for UploadedFile');
@@ -101,12 +101,9 @@ final class UploadedFile implements UploadedFileInterface{
 
 		if($this->error === UPLOAD_ERR_OK){
 
-			if(is_string($file)){
-				$this->file = $file;
-			}
-			else{
-				$this->stream = create_stream_from_input($file);
-			}
+			is_string($file)
+				? $this->file = $file
+				: $this->stream = create_stream_from_input($file);
 
 		}
 
@@ -123,7 +120,11 @@ final class UploadedFile implements UploadedFileInterface{
 			return $this->stream;
 		}
 
-		return $this->streamFactory->createStreamFromFile($this->file, 'r+');
+		if(is_file($this->file)){
+			return $this->streamFactory->createStreamFromFile($this->file, 'r+');
+		}
+
+		return $this->streamFactory->createStream($this->file);
 	}
 
 	/**
@@ -152,7 +153,7 @@ final class UploadedFile implements UploadedFileInterface{
 		}
 
 		if($this->moved === false){
-			throw new RuntimeException('Uploaded file could not be moved to '.$targetPath);
+			throw new RuntimeException('Uploaded file could not be moved to '.$targetPath); // @codeCoverageIgnore
 		}
 
 	}

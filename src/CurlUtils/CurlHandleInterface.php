@@ -18,6 +18,13 @@ use Psr\Http\Message\{RequestInterface, ResponseInterface};
 use const CURLE_COULDNT_CONNECT, CURLE_COULDNT_RESOLVE_HOST, CURLE_COULDNT_RESOLVE_PROXY,
 	CURLE_GOT_NOTHING, CURLE_OPERATION_TIMEOUTED, CURLE_SSL_CONNECT_ERROR;
 
+/**
+ * @property resource                            $curl
+ * @property int                                 $id
+ * @property int                                 $retries
+ * @property \Psr\Http\Message\RequestInterface  $request
+ * @property \Psr\Http\Message\ResponseInterface $response
+ */
 interface CurlHandleInterface{
 
 	const CURL_NETWORK_ERRORS = [

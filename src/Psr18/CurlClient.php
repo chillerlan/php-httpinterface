@@ -24,7 +24,7 @@ class CurlClient extends HTTPClientAbstract{
 	 * @inheritDoc
 	 */
 	public function sendRequest(RequestInterface $request):ResponseInterface{
-		/** @var \chillerlan\HTTP\CurlUtils\CurlHandle $handle */
+		/** @var \chillerlan\HTTP\CurlUtils\CurlHandleInterface $handle */
 		$handle = new $this->options->curlHandle($request, $this->responseFactory->createResponse(), $this->options);
 		$handle->init();
 
