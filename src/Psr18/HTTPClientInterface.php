@@ -1,5 +1,7 @@
 <?php
 /**
+ * @deprecated
+ *
  * Interface HTTPClientInterface
  *
  * @filesource   HTTPClientInterface.php

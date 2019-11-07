@@ -63,7 +63,7 @@ abstract class HTTPClientAbstract implements HTTPClientInterface, LoggerAwareInt
 	}
 
 	/**
-	 * @todo: files, content-type
+	 * @deprecated: messy, under-used, missing flexibility
 	 *
 	 * @param string      $uri
 	 * @param string|null $method
