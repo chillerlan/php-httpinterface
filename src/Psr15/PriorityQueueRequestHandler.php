@@ -14,7 +14,6 @@
 
 namespace chillerlan\HTTP\Psr15;
 
-use chillerlan\HTTP\Psr15\Middleware\{MiddlewareException, PriorityMiddleware, PriorityMiddlewareInterface};
 use Psr\Http\Server\MiddlewareInterface;
 
 class PriorityQueueRequestHandler extends QueueRequestHandler{

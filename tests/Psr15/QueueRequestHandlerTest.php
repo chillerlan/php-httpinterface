@@ -12,8 +12,7 @@
 
 namespace chillerlan\HTTPTest\Psr15;
 
-use chillerlan\HTTP\Psr15\{EmptyResponseHandler, QueueRequestHandler};
-use chillerlan\HTTP\Psr15\Middleware\MiddlewareException;
+use chillerlan\HTTP\Psr15\{EmptyResponseHandler, MiddlewareException, QueueRequestHandler};
 use chillerlan\HTTP\Psr17\ResponseFactory;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};

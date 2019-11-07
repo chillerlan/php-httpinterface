@@ -14,7 +14,6 @@
 
 namespace chillerlan\HTTP\Psr15;
 
-use chillerlan\HTTP\Psr15\Middleware\MiddlewareException;
 use chillerlan\HTTP\Psr17\ResponseFactory;
 use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};
 use Psr\Http\Server\{MiddlewareInterface, RequestHandlerInterface};
