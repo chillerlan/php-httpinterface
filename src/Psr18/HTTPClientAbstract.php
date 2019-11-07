@@ -13,10 +13,10 @@
 namespace chillerlan\HTTP\Psr18;
 
 use chillerlan\HTTP\HTTPOptions;
+use chillerlan\HTTP\Psr17\{RequestFactory, ResponseFactory};
 use chillerlan\HTTP\Psr7\Request;
-use chillerlan\HTTP\Psr17\ResponseFactory;
 use chillerlan\Settings\SettingsContainerInterface;
-use Psr\Http\Message\{ResponseFactoryInterface, ResponseInterface};
+use Psr\Http\Message\{RequestFactoryInterface, ResponseFactoryInterface, ResponseInterface};
 use Psr\Log\{LoggerAwareInterface, LoggerAwareTrait, LoggerInterface, NullLogger};
 
 use function chillerlan\HTTP\Psr7\{merge_query, normalize_request_headers};
@@ -44,18 +44,21 @@ abstract class HTTPClientAbstract implements HTTPClientInterface, LoggerAwareInt
 	protected $responseFactory;
 
 	/**
-	 * CurlClient constructor.
+	 * HTTPClientAbstract constructor.
 	 *
 	 * @param \chillerlan\Settings\SettingsContainerInterface|null $options
+	 * @param \Psr\Http\Message\RequestFactoryInterface|null       $requestFactory
 	 * @param \Psr\Http\Message\ResponseFactoryInterface|null      $responseFactory
 	 * @param \Psr\Log\LoggerInterface|null                        $logger
 	 */
 	public function __construct(
 		SettingsContainerInterface $options = null,
+		RequestFactoryInterface $requestFactory = null,
 		ResponseFactoryInterface $responseFactory = null,
 		LoggerInterface $logger = null
 	){
 		$this->options         = $options ?? new HTTPOptions;
+		$this->requestFactory  = $requestFactory ?? new RequestFactory;
 		$this->responseFactory = $responseFactory ?? new ResponseFactory;
 		$this->logger          = $logger ?? new NullLogger;
 	}
@@ -74,7 +77,7 @@ abstract class HTTPClientAbstract implements HTTPClientInterface, LoggerAwareInt
 	public function request(string $uri, string $method = null, array $query = null, $body = null, array $headers = null):ResponseInterface{
 		$method  = strtoupper($method ?? 'GET');
 		$headers = normalize_request_headers($headers);
-		$request = new Request($method, merge_query($uri, $query ?? []));
+		$request = $this->requestFactory->createRequest($method, merge_query($uri, $query ?? []));
 
 		if(in_array($method, ['DELETE', 'PATCH', 'POST', 'PUT'], true) && $body !== null){
 
