@@ -14,7 +14,6 @@ namespace chillerlan\HTTP\Psr18;
 
 use chillerlan\HTTP\HTTPOptions;
 use chillerlan\HTTP\Psr17\{RequestFactory, ResponseFactory};
-use chillerlan\HTTP\Psr7\Request;
 use chillerlan\Settings\SettingsContainerInterface;
 use Psr\Http\Message\{RequestFactoryInterface, ResponseFactoryInterface, ResponseInterface};
 use Psr\Log\{LoggerAwareInterface, LoggerAwareTrait, LoggerInterface, NullLogger};
