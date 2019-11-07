@@ -25,7 +25,7 @@ use function chillerlan\HTTP\Psr7\normalize_files;
 use function basename, file_exists, fopen, is_scalar, sys_get_temp_dir, tempnam, uniqid, unlink;
 
 use const UPLOAD_ERR_CANT_WRITE, UPLOAD_ERR_EXTENSION, UPLOAD_ERR_FORM_SIZE, UPLOAD_ERR_INI_SIZE,
-	UPLOAD_ERR_NO_FILE, UPLOAD_ERR_NO_TMP_DIR, UPLOAD_ERR_OK, UPLOAD_ERR_PARTIAL;
+	UPLOAD_ERR_NO_FILE, UPLOAD_ERR_NO_TMP_DIR, UPLOAD_ERR_OK, UPLOAD_ERR_PARTIAL, PHP_OS_FAMILY;
 
 class UploadedFileTest extends TestCase{
 
@@ -150,6 +150,20 @@ class UploadedFileTest extends TestCase{
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('Invalid path provided for move operation; must be a non-empty string');
 		$upload->moveTo('');
+	}
+
+	public function testCannotMoveToUnwritableDirectory(){
+
+		if(PHP_OS_FAMILY !== 'Linux'){
+			$this->markTestSkipped('testing Linux only');
+		}
+
+		$stream = create_stream('Foo bar!');
+		$upload = new UploadedFile($stream, 0);
+
+		$this->expectException(RuntimeException::class);
+		$this->expectExceptionMessage('Directory is not writable');
+		$upload->moveTo('/boot');
 	}
 
 	public function nonOkErrorStatus(){
