@@ -75,12 +75,28 @@ interface CurlHandleInterface{
 		50 => 'application verification failure',
 	];
 
+	/**
+	 * CurlHandleInterface constructor.
+	 *
+	 * @param \Psr\Http\Message\RequestInterface              $request
+	 * @param \Psr\Http\Message\ResponseInterface             $response
+	 * @param \chillerlan\Settings\SettingsContainerInterface $options
+	 */
 	public function __construct(RequestInterface $request, ResponseInterface $response, SettingsContainerInterface $options);
 
+	/**
+	 * @return \chillerlan\HTTP\CurlUtils\CurlHandleInterface
+	 */
 	public function init():CurlHandleInterface;
 
+	/**
+	 * @return \chillerlan\HTTP\CurlUtils\CurlHandleInterface
+	 */
 	public function close():CurlHandleInterface;
 
+	/**
+	 * @return \chillerlan\HTTP\CurlUtils\CurlHandleInterface
+	 */
 	public function reset():CurlHandleInterface;
 
 }

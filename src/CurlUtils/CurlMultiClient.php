@@ -216,7 +216,7 @@ class CurlMultiClient implements LoggerAwareInterface{
 			$request = array_shift($this->requests);
 		}
 
-		/** @var \chillerlan\HTTP\CurlUtils\CurlHandle $handle */
+		/** @var \chillerlan\HTTP\CurlUtils\CurlHandleInterface $handle */
 		$handle          = new $this->options->curlHandle($request, $this->responseFactory->createResponse(), $this->options);
 		$handle->id      = $id ?? $this->handleCounter++;
 		$handle->retries = $retries ?? 1;
