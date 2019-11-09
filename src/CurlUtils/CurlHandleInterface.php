@@ -94,9 +94,4 @@ interface CurlHandleInterface{
 	 */
 	public function close():CurlHandleInterface;
 
-	/**
-	 * @return \chillerlan\HTTP\CurlUtils\CurlHandleInterface
-	 */
-	public function reset():CurlHandleInterface;
-
 }
