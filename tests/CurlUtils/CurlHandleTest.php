@@ -21,7 +21,7 @@ use PHPUnit\Framework\TestCase;
 
 use function chillerlan\HTTP\Psr17\create_stream;
 use function chillerlan\HTTP\Psr7\get_json;
-use function strlen, strtolower;
+use function str_repeat, strlen, strtolower;
 
 class CurlHandleTest extends TestCase{
 
@@ -103,7 +103,6 @@ class CurlHandleTest extends TestCase{
 		try{
 			$url     = 'https://httpbin.org/'.strtolower($method);
 			$body    = 'foo=bar';
-
 			$request = $this->requestFactory->createRequest($method, $url)
 				->withHeader('Content-type', 'x-www-form-urlencoded')
 				->withHeader('Content-Length', strlen($body))
@@ -140,7 +139,6 @@ class CurlHandleTest extends TestCase{
 		try{
 			$url     = 'https://httpbin.org/'.strtolower($method);
 			$body    = '{"foo":"bar"}';
-
 			$request = $this->requestFactory->createRequest($method, $url)
 				->withHeader('Content-type', 'application/json')
 				->withBody(create_stream($body))
@@ -170,8 +168,7 @@ class CurlHandleTest extends TestCase{
 	public function testLargeBody(){
 
 		try{
-			$body = \str_repeat('*', (1 << 20) + 1);
-
+			$body    = str_repeat('*', (1 << 20) + 1);
 			$request = $this->requestFactory->createRequest('POST', 'https://httpbin.org/post')
 				->withHeader('Content-type', 'text/plain')
 				->withHeader('Content-Length', strlen($body))
