@@ -12,17 +12,17 @@
 
 namespace chillerlan\HTTPTest\Psr18;
 
-use chillerlan\HTTP\{HTTPOptions, Psr18\StreamClient};
+use chillerlan\HTTP\Psr18\StreamClient;
 
 class StreamClientNoCATest extends HTTPClientTestAbstract{
 
 	protected function setUp():void{
-		$options = new HTTPOptions([
-			'ssl_verifypeer' => false,
-			'user_agent'     => $this::USER_AGENT,
-		]);
+		parent::setUp();
 
-		$this->http = new StreamClient($options);
+		$this->options->ca_info = null;
+		$this->options->ssl_verifypeer = false;
+
+		$this->http = new StreamClient($this->options);
 	}
 
 }

@@ -12,7 +12,6 @@
 
 namespace chillerlan\HTTPTest\Psr18;
 
-use chillerlan\HTTP\HTTPOptions;
 use chillerlan\HTTP\Psr18\URLExtractor;
 use chillerlan\HTTP\Psr7\Request;
 
@@ -24,17 +23,12 @@ use const CURLOPT_FOLLOWLOCATION;
 class URLExtractorTest extends HTTPClientTestAbstract{
 
 	protected function setUp():void{
-		$options = new HTTPOptions([
-			'ca_info'      => __DIR__.'/../cacert.pem',
-			'user_agent'   => $this::USER_AGENT,
-			'curl_options' => [
-				CURLOPT_FOLLOWLOCATION => false,
-			]
-		]);
+		parent::setUp();
 
-		$this->http = new URLExtractor($options);
+		$this->options->curl_options = [CURLOPT_FOLLOWLOCATION => false];
+
+		$this->http = new URLExtractor($this->options);
 	}
-
 
 	public function testSendRequest(){
 		$this->markTestSkipped('i have no idea why the headers are empty on travis');

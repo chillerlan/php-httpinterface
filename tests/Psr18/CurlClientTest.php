@@ -12,17 +12,15 @@
 
 namespace chillerlan\HTTPTest\Psr18;
 
-use chillerlan\HTTP\{HTTPOptions, Psr18\CurlClient, Psr18\RequestException, Psr7\Request};
+use chillerlan\HTTP\Psr18\{CurlClient, RequestException};
+use chillerlan\HTTP\Psr7\Request;
 
 class CurlClientTest extends HTTPClientTestAbstract{
 
 	protected function setUp():void{
-		$options = new HTTPOptions([
-			'ca_info' => __DIR__.'/../cacert.pem',
-			'user_agent' => $this::USER_AGENT,
-		]);
+		parent::setUp();
 
-		$this->http = new CurlClient($options);
+		$this->http = new CurlClient($this->options);
 	}
 
 	public function testRequestError(){

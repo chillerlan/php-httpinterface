@@ -12,6 +12,7 @@
 
 namespace chillerlan\HTTPTest\Psr18;
 
+use chillerlan\HTTP\HTTPOptions;
 use chillerlan\HTTP\Psr7\Request;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -22,6 +23,20 @@ use function chillerlan\HTTP\Psr7\get_json;
 abstract class HTTPClientTestAbstract extends TestCase{
 
 	protected const USER_AGENT = 'chillerlanHttpTest/2.0';
+
+	/**
+	 * @var \chillerlan\HTTP\HTTPOptions
+	 */
+	protected $options;
+
+	protected function setUp():void{
+
+		$this->options = new HTTPOptions([
+			'ca_info' => __DIR__.'/../cacert.pem',
+			'user_agent' => $this::USER_AGENT,
+		]);
+
+	}
 
 	/**
 	 * @var \Psr\Http\Client\ClientInterface

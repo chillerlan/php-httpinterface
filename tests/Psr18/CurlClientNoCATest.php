@@ -12,17 +12,17 @@
 
 namespace chillerlan\HTTPTest\Psr18;
 
-use chillerlan\HTTP\{HTTPOptions, Psr18\CurlClient};
+use chillerlan\HTTP\Psr18\CurlClient;
 
 class CurlClientNoCATest extends HTTPClientTestAbstract{
 
 	protected function setUp():void{
-		$options = new HTTPOptions([
-			'ssl_verifypeer' => false,
-			'user_agent'     => $this::USER_AGENT,
-		]);
+		parent::setUp();
 
-		$this->http = new CurlClient($options);
+		$this->options->ca_info = null;
+		$this->options->ssl_verifypeer = false;
+
+		$this->http = new CurlClient($this->options);
 	}
 
 }
