@@ -18,7 +18,6 @@ use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientExceptionInterface;
 
 use function chillerlan\HTTP\Psr7\get_json;
-use function in_array;
 
 abstract class HTTPClientTestAbstract extends TestCase{
 
