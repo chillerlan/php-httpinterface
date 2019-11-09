@@ -31,14 +31,4 @@ class LoggingClientTest extends CurlClientTest{
 		$this->http = new LoggingClient($this->http, $logger);
 	}
 
-	/**
-	 * @dataProvider requestDataProvider
-	 *
-	 * @param $method
-	 * @param $extra_headers
-	 */
-	public function testRequest(string $method, array $extra_headers){
-		$this->markTestSkipped('N/A');
-	}
-
 }

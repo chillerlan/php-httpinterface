@@ -25,7 +25,7 @@ abstract class HTTPClientTestAbstract extends TestCase{
 	protected const USER_AGENT = 'chillerlanHttpTest/2.0';
 
 	/**
-	 * @var \chillerlan\HTTP\Psr18\HTTPClientInterface
+	 * @var \Psr\Http\Client\ClientInterface
 	 */
 	protected $http;
 
@@ -43,65 +43,6 @@ abstract class HTTPClientTestAbstract extends TestCase{
 		}
 		catch(Exception $e){
 			$this->markTestSkipped('error: '.$e->getMessage());
-		}
-
-	}
-
-	public function requestDataProvider():array {
-		return [
-			'get'        => ['get',    []],
-			'post'       => ['post',   []],
-			'post-json'  => ['post',   ['Content-type' => 'application/json']],
-			'post-form'  => ['post',   ['Content-type' => 'application/x-www-form-urlencoded']],
-			'put-json'   => ['put',    ['Content-type' => 'application/json']],
-			'put-form'   => ['put',    ['Content-type' => 'application/x-www-form-urlencoded']],
-			'patch-json' => ['patch',  ['Content-type' => 'application/json']],
-			'patch-form' => ['patch',  ['Content-type' => 'application/x-www-form-urlencoded']],
-			'delete'     => ['delete', []],
-		];
-	}
-
-	/**
-	 * @dataProvider requestDataProvider
-	 *
-	 * @param $method
-	 * @param $extra_headers
-	 */
-	public function testRequest(string $method, array $extra_headers){
-
-		try{
-			$response = $this->http->request(
-				'https://httpbin.org/'.$method,
-				$method,
-				['foo' => 'bar'],
-				['huh' => 'wtf'],
-				['what' => 'nope'] + $extra_headers
-			);
-		}
-		catch(Exception $e){
-			$this->markTestSkipped('error: '.$e->getMessage());
-
-			return;
-		}
-
-		$json = get_json($response);
-
-		if(!$json){
-			$this->markTestSkipped('empty response');
-		}
-		else{
-			$this->assertSame('https://httpbin.org/'.$method.'?foo=bar', $json->url);
-			$this->assertSame('bar', $json->args->foo);
-			$this->assertSame('nope', $json->headers->What);
-			$this->assertSame($this::USER_AGENT, $json->headers->{'User-Agent'});
-
-			if(in_array($method, ['patch', 'post', 'put'])){
-
-				isset($extra_headers['content-type']) && $extra_headers['content-type'] === 'application/json'
-					? $this->assertSame('wtf', $json->json->huh)
-					: $this->assertSame('wtf', $json->form->huh);
-
-			}
 		}
 
 	}
