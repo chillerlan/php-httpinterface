@@ -54,8 +54,18 @@ Profit!
 
 ## API
 
-### [PSR-7](https://www.php-fig.org/psr/psr-7/) Message helpers
-These static methods can be found in the `chillerlan\HTTP\Psr7` namespace, along with implementations for each of the PSR-7 interfaces:
+### [PSR-7](https://www.php-fig.org/psr/psr-7/) Message interfaces & helpers
+PSR-7 interface | class/signature
+----------------|----------------
+`RequestInterface` | `Request(string $method, $uri, array $headers = null, $body = null, string $version = null)`
+`ServerRequestInterface` | `ServerRequest(string $method, $uri, array $headers = null, $body = null, string $version = null, array $serverParams = null)`
+`ResponseInterface` | `Response(int $status = null, array $headers = null, $body = null, string $version = null, string $reason = null)`
+`StreamInterface` | `Stream($stream)`
+`StreamInterface` | `MultipartStream(array $elements = null, string $boundary = null)`
+`UploadedFileInterface` | `UploadedFile($file, int $size, int $error = UPLOAD_ERR_OK, string $filename = null, string $mediaType = null)`
+`UriInterface` | `Uri(string $uri = null)`
+
+These static helper methods can be found in the `chillerlan\HTTP\Psr7` namespace:
 
 function | description
 ---------|------------
@@ -75,13 +85,13 @@ function | description
 ### [PSR-15](https://www.php-fig.org/psr/psr-15/) Request handlers and middleware
 These classes can be found in the `chillerlan\HTTP\Psr15` namespace:
 
-class | PSR-15 type | description
-------|-------------|------------
-`EmptyResponseHandler` | `RequestHandlerInterface` |
-`QueueRunner` | `RequestHandlerInterface` | utilized by `QueueRequestHandler`
-`QueueRequestHandler` | `RequestHandlerInterface`, `MiddlewareInterface` |
-`PriorityQueueRequestHandler` | `RequestHandlerInterface`, `MiddlewareInterface` | extends `QueueRequestHandler`
-`PriorityMiddleware` | `MiddlewareInterface` | implements `PriorityMiddlewareInterface`
+PSR-15 interface | class/signature 
+-----------------|----------------
+`RequestHandlerInterface` | `EmptyResponseHandler(ResponseFactoryInterface $responseFactory, int $status)` 
+`RequestHandlerInterface` | `QueueRunner(array $middlewareStack, RequestHandlerInterface $fallbackHandler)`
+`RequestHandlerInterface`, `MiddlewareInterface` | `QueueRequestHandler(iterable $middlewareStack = null, RequestHandlerInterface $fallbackHandler = null)` 
+`RequestHandlerInterface`, `MiddlewareInterface` | `PriorityQueueRequestHandler(iterable $middlewareStack = null, RequestHandlerInterface $fallbackHandler = null)`
+`MiddlewareInterface` | `PriorityMiddleware(MiddlewareInterface $middleware, int $priority = null)`
 
 #### QueueRequestHandler example
 
@@ -105,8 +115,17 @@ $response = $handler->handle($serverRequestInterface);
 ```
 The `PriorityQueueRequestHandler` works similar, with the difference that it also accepts `PriorityMiddlewareInterface` in the middleware stack, which allows you to specify a priority to control the order of execution.
 
-### [PSR-17](https://www.php-fig.org/psr/psr-17/) Factory helpers
-These static methods can be found in the `chillerlan\HTTP\Psr17` namespace, along with implementations for each of the PSR-17 interfaces:
+### [PSR-17](https://www.php-fig.org/psr/psr-17/) Factories & helpers
+PSR-17 interface | class/signature
+-----------------|----------------
+`RequestFactoryInterface` | `RequestFactory()`
+`ResponseFactoryInterface` | `ResponseFactory()`
+`ServerRequestFactoryInterface` | `ServerRequestFactory()`
+`StreamFactoryInterface` | `StreamFactory()`
+`UploadedFileFactoryInterface` | `UploadedFileFactory()`
+`UriFactoryInterface` | `UriFactory()`
+
+These static methods can be found in the `chillerlan\HTTP\Psr17` namespace:
 
 function | description
 ---------|------------
@@ -118,8 +137,8 @@ function | description
 ### [PSR-18](https://www.php-fig.org/psr/psr-18/) HTTP Clients
 These classes can be found in the `chillerlan\HTTP\Psr18` namespace:
 
-class | description
-------|------------
+class/signature | description
+----------------|------------
 `CurlClient` | a native cURL client
 `StreamClient` | a client that uses PHP's stream methods (still requires cURL)
 `URLExtractor` | a client that resolves shortened links (such as `t.co` or `goo.gl`) and returns the response for the last (deepest) URL
