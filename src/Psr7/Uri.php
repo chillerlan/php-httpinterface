@@ -505,6 +505,7 @@ class Uri implements UriInterface{
 	 * @return string
 	 */
 	protected function replaceChars(string $str, bool $query = null):string{
+		/** @noinspection RegExpRedundantEscape */
 		return preg_replace_callback(
 			'/(?:[^a-z\d_\-\.~!\$&\'\(\)\*\+,;=%:@\/'.($query ? '\?' : '').']++|%(?![a-f\d]{2}))/i',
 			function(array $match):string{

@@ -12,4 +12,6 @@
 
 namespace chillerlan\HTTP\Psr15;
 
-class MiddlewareException extends \Exception{}
+use Exception;
+
+class MiddlewareException extends Exception{}

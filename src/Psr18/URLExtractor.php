@@ -15,6 +15,8 @@ namespace chillerlan\HTTP\Psr18;
 use chillerlan\HTTP\Psr7\Request;
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
 
+use function in_array;
+
 class URLExtractor extends CurlClient{
 
 	/**
@@ -32,7 +34,7 @@ class URLExtractor extends CurlClient{
 			$request  = new Request($request->getMethod(), $response->getHeaderLine('location'));
 			$this->responses[] = $response;
 		}
-		while(\in_array($response->getStatusCode(), [301, 302, 303, 307, 308], true));
+		while(in_array($response->getStatusCode(), [301, 302, 303, 307, 308], true));
 
 		return $response;
 	}

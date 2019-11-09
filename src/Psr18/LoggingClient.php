@@ -15,7 +15,7 @@
 namespace chillerlan\HTTP\Psr18;
 
 use Psr\Http\Client\{ClientExceptionInterface, ClientInterface};
-use Psr\Http\Message\{RequestInterface, ResponseFactoryInterface, ResponseInterface};
+use Psr\Http\Message\{RequestInterface, ResponseInterface};
 use Psr\Log\{LoggerAwareInterface, LoggerAwareTrait, LoggerInterface, NullLogger};
 use Throwable;
 

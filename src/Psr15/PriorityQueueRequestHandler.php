@@ -15,6 +15,7 @@
 namespace chillerlan\HTTP\Psr15;
 
 use Psr\Http\Server\MiddlewareInterface;
+use function usort;
 
 class PriorityQueueRequestHandler extends QueueRequestHandler{
 
@@ -61,7 +62,7 @@ class PriorityQueueRequestHandler extends QueueRequestHandler{
 	 * @return void
 	 */
 	protected function sortMiddleware():void{
-		\usort($this->middlewareStack, function(PriorityMiddlewareInterface $a, PriorityMiddlewareInterface $b){
+		usort($this->middlewareStack, function(PriorityMiddlewareInterface $a, PriorityMiddlewareInterface $b){
 			return $a->getPriority() < $b->getPriority();
 		});
 	}
