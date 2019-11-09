@@ -96,26 +96,6 @@ class CurlHandle implements CurlHandleInterface{
 	}
 
 	/**
-	 * @return \chillerlan\HTTP\CurlUtils\CurlHandleInterface
-	 */
-	public function reset():CurlHandleInterface{
-
-		if(is_resource($this->curl)){
-
-			curl_setopt_array($this->curl, [
-				CURLOPT_HEADERFUNCTION   => null,
-				CURLOPT_READFUNCTION     => null,
-				CURLOPT_WRITEFUNCTION    => null,
-				CURLOPT_PROGRESSFUNCTION => null,
-			]);
-
-			curl_reset($this->curl);
-		}
-
-		return $this;
-	}
-
-	/**
 	 * @return array
 	 */
 	protected function initCurlOptions():array{
