@@ -52,11 +52,91 @@ Download the desired version of the package from [master](https://github.com/chi
 
 Profit!
 
-## Usage
+## API
 
-### [`HTTPClientInterface`](https://github.com/chillerlan/php-httpinterface/blob/master/src/HTTPClientInterface.php)
-A `HTTPClientInterface` is usually invoked with a [`HTTPOptions`](https://github.com/chillerlan/php-httpinterface/blob/master/src/HTTPOptions.php) object as the first (optional) parameter,
-and - depending on the client - followed by one or more optional [PSR-17](https://www.php-fig.org/psr/psr-17/) message factories.
+### [PSR-7](https://www.php-fig.org/psr/psr-7/) Message helpers
+These static methods can be found in the `chillerlan\HTTP\Psr7` namespace, along with implementations for each of the PSR-7 interfaces:
+
+function | description
+---------|------------
+`normalize_request_headers(array $headers)` | 
+`r_rawurlencode($data)` |  recursive rawurlencode, accepts a string or an array as input
+`build_http_query(array $params, bool $urlencode = null, string $delimiter = null, string $enclosure = null)` |  see [abraham/twitteroauth](https://github.com/abraham/twitteroauth/blob/master/src/Util.php#L82)
+`clean_query_params(iterable $params, int $bool_cast = null, bool $remove_empty = null)` | clean an array of parameters for URL queries (or JSON output etc.) using the following cast formats:<br>`BOOLEANS_AS_BOOL` - bool types will be left untouched (default)<br>`BOOLEANS_AS_INT` - cast to integer `1` and `0`<br>`BOOLEANS_AS_STRING` - a string value `"true"` and `"false"`<br>`BOOLEANS_AS_INT_STRING` - integer values, but as string,  `"1"` and `"0"`
+`merge_query(string $uri, array $query)` | merges an array of query parameters into an URL query string
+`normalize_files(array $files)` | 
+`create_uploaded_file_from_spec(array $value)` | 
+`normalize_nested_file_spec(array $files = [])` | 
+`get_json(ResponseInterface $response, bool $assoc = null)` | 
+`get_xml(ResponseInterface $response)` | 
+`message_to_string(MessageInterface $message)` | returns the string representation of a `MessageInterface`
+`decompress_content(MessageInterface $message)` | decompresses the message content according to the `Content-Encoding` header and returns the decompressed data
+
+### [PSR-15](https://www.php-fig.org/psr/psr-15/) Request handlers and middleware
+These classes can be found in the `chillerlan\HTTP\Psr15` namespace:
+
+class | PSR-15 type | description
+------|-------------|------------
+`EmptyResponseHandler` | `RequestHandlerInterface` |
+`QueueRunner` | `RequestHandlerInterface` | utilized by `QueueRequestHandler`
+`QueueRequestHandler` | `RequestHandlerInterface`, `MiddlewareInterface` |
+`PriorityQueueRequestHandler` | `RequestHandlerInterface`, `MiddlewareInterface` | extends `QueueRequestHandler`
+`PriorityMiddleware` | `MiddlewareInterface` | implements `PriorityMiddlewareInterface`
+
+#### QueueRequestHandler example
+
+```php
+// an iterable that contains several PSR-15 MiddlewareInterfaces
+$middlewareStack = [
+    // ...
+];
+
+// Fallback handler, using a PSR-17 ResponseFactory:
+$fallbackHandler = new EmptyResponseHandler($responseFactoryInterface, 200);
+
+// Create request handler instance:
+$handler = new QueueRequestHandler($middlewareStack, $fallbackHandler);
+
+// manually add a middleware
+$handler->add($middlewareInterface);
+
+// execute it:
+$response = $handler->handle($serverRequestInterface);
+```
+The `PriorityQueueRequestHandler` works similar, with the difference that it also accepts `PriorityMiddlewareInterface` in the middleware stack, which allows you to specify a priority to control the order of execution.
+
+### [PSR-17](https://www.php-fig.org/psr/psr-17/) Factory helpers
+These static methods can be found in the `chillerlan\HTTP\Psr17` namespace, along with implementations for each of the PSR-17 interfaces:
+
+function | description
+---------|------------
+`create_server_request_from_globals()` | creates a PSR-7 `ServerRequestInterface` object that is populated with the GPCS superglobals
+`create_uri_from_globals()` | creates a PSR-7 `UriInterface` object that is populated with values from `$_SERVER`
+`create_stream(string $content = '')` | creates a PSR-7 `StreamInterface` object from a string
+`create_stream_from_input($in = null)` | creates a PSR-7 `StreamInterface` object from guessed input (string/scalar, resource, object)
+
+### [PSR-18](https://www.php-fig.org/psr/psr-18/) HTTP Clients
+These classes can be found in the `chillerlan\HTTP\Psr18` namespace:
+
+class | description
+------|------------
+`CurlClient` | a native cURL client
+`StreamClient` | a client that uses PHP's stream methods (still requires cURL)
+`URLExtractor` | a client that resolves shortened links (such as `t.co` or `goo.gl`) and returns the response for the last (deepest) URL
+`LoggingClient` | a logger client that wraps another `ClientInterface` and utilizes a `LoggerInterface` to log the request and response objects
+
+The namespace `chillerlan\HTTP\CurlUtils` contains several classes related to `CurlClient`
+
+class | description
+------|------------
+`CurlHandle` | used in `CurlClient` and `CurlMultiClient` 
+`CurlMultiClient` | a `curl_multi` / "[Rolling Curl](http://www.onlineaspect.com/2009/01/26/how-to-use-curl_multi-without-blocking/)" implementation
+`MultiResponseHandlerInterface` | the response handler for `CurlMultiClient`
+
+#### HTTP client example
+The built-in HTTP clients are usually invoked with a [`HTTPOptions`](https://github.com/chillerlan/php-httpinterface/blob/master/src/HTTPOptions.php) object as the first (optional) parameter,
+and - depending on the client - followed by one or more optional [PSR-17](https://www.php-fig.org/psr/psr-17/) message factories and a 
+PSR-3 `LoggerInterface`.
 ```php
 $options = new HTTPOptions([
 	'ca_info'    => '/path/to/cacert.pem',
@@ -65,8 +145,8 @@ $options = new HTTPOptions([
 
 $http = new CurlClient($options, $myResponseFactory);
 ```
-You can now fire a request via the implemented [PSR-18](https://www.php-fig.org/psr/psr-18/) method `ClientInterface::sendRequest()`,
-using an existing [PSR-7](https://www.php-fig.org/psr/psr-7/) `RequestInterface`...
+You can now fire a request via the implemented PSR-18 method `ClientInterface::sendRequest()`,
+using an existing PSR-7 `RequestInterface` and expect a PSR-7 `ResponseInterface`.
 ```php
 use chillerlan\HTTP\Psr7\Request;
 
@@ -74,37 +154,3 @@ $request = new Request('GET', 'https://www.example.com?foo=bar');
 
 $http->sendRequest($request);
 ```
-...or you can use the `HTTPClientInterface::request()` method, which creates a new request using the provided (if any) factories.
-The `HTTPClientInterface` also provides constants for the HTTP methods via the [`RequestMethodInterface`](https://github.com/php-fig/http-message-util/blob/master/src/RequestMethodInterface.php).
-```php
-$http->request('https://www.example.com', $http::METHOD_GET, ['foo' => 'bar']);
-```
-Both methods will return a PSR-7 `ResponseInterface`.
-
-### [PSR-7](https://www.php-fig.org/psr/psr-7/) Message helpers
-These static methods can be found in the `chillerlan\HTTP\Psr7` namespace:
-
-- `normalize_request_headers(array $headers)`
-- `r_rawurlencode($data)` - recursive rawurlencode, accepts a string or an array as input
-- `build_http_query(array $params, bool $urlencode = null, string $delimiter = null, string $enclosure = null)` - see [abraham/twitteroauth](https://github.com/abraham/twitteroauth/blob/master/src/Util.php#L82)
-- `clean_query_params(iterable $params, int $bool_cast = null, bool $remove_empty = null)` - clean an array of parameters for URL queries (or JSON output etc.) using the following cast formats:
-  - `BOOLEANS_AS_BOOL` - bool types will be left untouched (default)
-  - `BOOLEANS_AS_INT` - cast to integer `1` and `0`
-  - `BOOLEANS_AS_STRING` - a string value `"true"` and `"false"`
-  - `BOOLEANS_AS_INT_STRING` - integer values, but as string,  `"1"` and `"0"`
-- `merge_query(string $uri, array $query)` - merges an array of parameters into an URL query string
-- `normalize_files(array $files)`
-- `create_uploaded_file_from_spec(array $value)`
-- `normalize_nested_file_spec(array $files = [])`
-- `get_json(ResponseInterface $response, bool $assoc = null)`
-- `get_xml(ResponseInterface $response)`
-- `message_to_string(MessageInterface $message)` - returns the string representation of a `MessageInterface`
-- `decompress_content(MessageInterface $message)` - decompresses the message content according to the `Content-Encoding` header and returns the decompressed data
-
-### [PSR-17](https://www.php-fig.org/psr/psr-17/) Factory helpers
-These static methods can be found in the `chillerlan\HTTP\Psr17` namespace:
-
-- `create_server_request_from_globals()` - creates a PSR-7 `ServerRequestInterface` object that is populated with the GPCS superglobals.
-- `create_uri_from_globals()` - creates a PSR-7 `UriInterface` object that is populated with values from `$_SERVER`.
-- `create_stream(string $content = '')` - creates a PSR-7 `StreamInterface` object from a string.
-- `create_stream_from_input($in = null)` - creates a PSR-7 `StreamInterface` object from guessed input (string/scalar, file path, resource, object)
