@@ -280,6 +280,8 @@ class CurlHandle implements CurlHandleInterface{
 	}
 
 	/**
+	 * @internal
+	 *
 	 * @param resource $curl
 	 * @param resource $stream
 	 * @param int      $length
@@ -291,6 +293,8 @@ class CurlHandle implements CurlHandleInterface{
 	}
 
 	/**
+	 * @internal
+	 *
 	 * @param resource $curl
 	 * @param string   $data
 	 *
@@ -301,6 +305,8 @@ class CurlHandle implements CurlHandleInterface{
 	}
 
 	/**
+	 * @internal
+	 *
 	 * @param resource $curl
 	 * @param string   $line
 	 *
