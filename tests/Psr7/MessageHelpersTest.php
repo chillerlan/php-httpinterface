@@ -89,8 +89,12 @@ class MessageHelpersTest extends TestCase{
 
 	/**
 	 * @dataProvider mergeQueryDataProvider
+	 *
+	 * @param string $uri
+	 * @param array  $params
+	 * @param string $expected
 	 */
-	public function testMergeQuery($uri, $params, $expected){
+	public function testMergeQuery(string $uri, array $params, string $expected){
 		$merged = merge_query($uri, $params);
 		$this->assertSame($expected, $merged);
 	}
