@@ -19,7 +19,7 @@ use Psr\Http\Message\MessageInterface;
 use function chillerlan\HTTP\Psr17\create_stream;
 use function chillerlan\HTTP\Psr7\{
 	build_http_query, clean_query_params, decompress_content, get_json, get_xml,
-	message_to_string, normalize_request_headers, r_rawurlencode
+	merge_query, message_to_string, normalize_request_headers, r_rawurlencode
 };
 
 use const chillerlan\HTTP\Psr7\{BOOLEANS_AS_BOOL, BOOLEANS_AS_INT, BOOLEANS_AS_INT_STRING, BOOLEANS_AS_STRING};
@@ -73,6 +73,26 @@ class MessageHelpersTest extends TestCase{
 		$data = ['whatever' => null, 'nope' => '', 'true' => true, 'false' => false, 'array' => ['value' => false]];
 
 		$this->assertSame($expected, clean_query_params($data, $bool_cast, $remove_empty));
+	}
+
+	public function mergeQueryDataProvider():array{
+		$uri    = 'http://localhost/whatever/';
+		$params = ['foo' => 'bar'];
+
+		return [
+			'add nothing and clear the trailing question mark' => [$uri.'?', [], $uri],
+			'add to URI without query'                         => [$uri, $params, $uri.'?foo=bar'],
+			'overwrite existing param'                         => [$uri.'?foo=nope', $params, $uri.'?foo=bar'],
+			'add to existing param'                            => [$uri.'?what=nope', $params, $uri.'?foo=bar&what=nope'],
+		];
+	}
+
+	/**
+	 * @dataProvider mergeQueryDataProvider
+	 */
+	public function testMergeQuery($uri, $params, $expected){
+		$merged = merge_query($uri, $params);
+		$this->assertSame($expected, $merged);
 	}
 
 	public function rawurlencodeDataProvider(){
