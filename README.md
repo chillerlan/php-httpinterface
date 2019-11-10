@@ -65,7 +65,7 @@ PSR-7 interface | class/signature
 `UploadedFileInterface` | `UploadedFile($file, int $size, int $error = UPLOAD_ERR_OK, string $filename = null, string $mediaType = null)`
 `UriInterface` | `Uri(string $uri = null)`
 
-These static helper methods can be found in the `chillerlan\HTTP\Psr7` namespace:
+These static helper functions can be found in the `chillerlan\HTTP\Psr7` namespace:
 
 function | description
 ---------|------------
@@ -125,7 +125,7 @@ PSR-17 interface | class/signature
 `UploadedFileFactoryInterface` | `UploadedFileFactory()`
 `UriFactoryInterface` | `UriFactory()`
 
-These static methods can be found in the `chillerlan\HTTP\Psr17` namespace:
+These static functions can be found in the `chillerlan\HTTP\Psr17` namespace:
 
 function | description
 ---------|------------
