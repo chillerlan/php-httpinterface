@@ -50,6 +50,19 @@ class MessageHelpersTest extends TestCase{
 		$this->assertSame($normalized, normalize_request_headers($header));
 	}
 
+	public function testCombineHeaderFields(){
+
+		$headers = [
+			'accept:',
+			'Accept: foo',
+			'accept' => 'bar',
+			'x-Whatever:nope',
+			'X-whatever' => '',
+		];
+
+		$this->assertSame(['Accept' => 'foo, bar', 'X-Whatever' => 'nope'], normalize_request_headers($headers));
+	}
+
 	public function queryParamDataProvider(){
 		return [
 			// don't remove empty values

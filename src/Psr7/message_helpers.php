@@ -163,7 +163,19 @@ function normalize_request_headers(array $headers):array{
 			return ucfirst(strtolower(trim($v)));
 		}, explode('-', $key));
 
-		$normalized_headers[implode('-', $key)] = trim($val);
+		$key = implode('-', $key);
+		$val = trim($val);
+
+		// skip if the header already exists but the current value is empty
+		if(isset($normalized_headers[$key]) && empty($val)){
+			continue;
+		}
+
+		// combine header fields with the same name
+		// https://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2
+		isset($normalized_headers[$key]) && !empty($normalized_headers[$key])
+			? $normalized_headers[$key] .= ', '.$val
+			: $normalized_headers[$key] = $val;
 	}
 
 	return $normalized_headers;
