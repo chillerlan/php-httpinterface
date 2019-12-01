@@ -14,6 +14,6 @@ before_install:
   - curl -o tests/cacert.pem https://curl.haxx.se/ca/cacert.pem
   - travis_retry composer install --no-interaction --prefer-source
 
-script: vendor/bin/phpunit --configuration phpunit.xml --coverage-clover clover.xml
+script: vendor/bin/phpunit --configuration phpunit.xml
 
 after_success: bash <(curl -s https://codecov.io/bash)
