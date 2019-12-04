@@ -10,6 +10,8 @@ A [PSR-7](https://www.php-fig.org/psr/psr-7/)/[PSR-17](https://www.php-fig.org/p
 [![Packagist downloads][downloads-badge]][downloads]
 [![PayPal donate][donate-badge]][donate]
 
+[![Continuous Integration][gh-action-badge]][gh-action]
+
 [packagist-badge]: https://img.shields.io/packagist/v/chillerlan/php-httpinterface.svg?style=flat-square
 [packagist]: https://packagist.org/packages/chillerlan/php-httpinterface
 [license-badge]: https://img.shields.io/github/license/chillerlan/php-httpinterface.svg?style=flat-square
@@ -24,6 +26,8 @@ A [PSR-7](https://www.php-fig.org/psr/psr-7/)/[PSR-17](https://www.php-fig.org/p
 [downloads]: https://packagist.org/packages/chillerlan/php-httpinterface/stats
 [donate-badge]: https://img.shields.io/badge/donate-paypal-ff33aa.svg?style=flat-square
 [donate]: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WLYUNAT9ZTJZ4
+[gh-action-badge]: https://github.com/chillerlan/php-httpinterface/workflows/Continuous%20Integration/badge.svg
+[gh-action]: https://github.com/chillerlan/php-httpinterface/actions
 
 # Documentation
 
