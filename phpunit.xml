@@ -1,7 +1,7 @@
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
 		 bootstrap="vendor/autoload.php"
-		 cacheResultFile="./.build/phpunit.cache"
+		 cacheResultFile=".build/phpunit.result.cache"
 		 colors="true"
 		 verbose="true"
 >
@@ -9,10 +9,20 @@
 		<testsuite name="php-httpinterface test suite">
 			<directory>./tests</directory>
 		</testsuite>
-		<testsuite name="http-interop Integration tests">
+		<testsuite name="http-interop integration tests">
 			<directory>./vendor/http-interop/http-factory-tests/test</directory>
 		</testsuite>
 	</testsuites>
+	<filter>
+		<whitelist>
+			<directory suffix=".php">./src</directory>
+		</whitelist>
+	</filter>
+	<logging>
+		<log type="coverage-clover" target=".build/coverage/clover.xml"/>
+		<log type="coverage-xml" target=".build/coverage/coverage-xml"/>
+		<log type="junit" target=".build/logs/junit.xml"/>
+	</logging>
 	<php>
 		<const name="REQUEST_FACTORY" value="chillerlan\HTTP\Psr17\RequestFactory"/>
 		<const name="RESPONSE_FACTORY" value="chillerlan\HTTP\Psr17\ResponseFactory"/>
@@ -21,12 +31,4 @@
 		<const name="UPLOADED_FILE_FACTORY" value="chillerlan\HTTP\Psr17\UploadedFileFactory"/>
 		<const name="URI_FACTORY" value="chillerlan\HTTP\Psr17\UriFactory"/>
 	</php>
-	<filter>
-		<whitelist>
-			<directory suffix=".php">./src</directory>
-		</whitelist>
-	</filter>
-	<logging>
-		<log type="coverage-clover" target="./.build/clover.xml"/>
-	</logging>
 </phpunit>
