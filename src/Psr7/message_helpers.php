@@ -127,7 +127,7 @@ const MIMETYPES = [
 ];
 
 /**
- * Normalizes an array of header lines to format "Name: Value"
+ * Normalizes an array of header lines to format ["Name" => "Value (, Value2, Value3, ...)", ...]
  *
  * @param array $headers
  *
@@ -138,8 +138,10 @@ function normalize_message_headers(array $headers):array{
 
 	foreach($headers as $key => $val){
 
+		// the key is numeric, so $val is either a string or an array
 		if(is_numeric($key)){
 
+			// "key: val"
 			if(is_string($val)){
 				$header = explode(':', $val, 2);
 
@@ -150,6 +152,7 @@ function normalize_message_headers(array $headers):array{
 				$key = $header[0];
 				$val = $header[1];
 			}
+			// [$key, $val], ["key" => $key, "val" => $val]
 			elseif(is_array($val)){
 				$key = array_keys($val)[0];
 				$val = array_values($val)[0];
@@ -158,7 +161,14 @@ function normalize_message_headers(array $headers):array{
 				continue;
 			}
 		}
+		// the key is named, so we assume $val holds the header values only, either as string or array
+		else{
+			if(is_array($val)){
+				$val = implode(', ', array_values($val));
+			}
+		}
 
+		// PHP 7.4 -> fn()
 		$key = array_map(function(string $v):string{
 			return ucfirst(strtolower(trim($v)));
 		}, explode('-', $key));

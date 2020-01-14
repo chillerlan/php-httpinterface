@@ -34,7 +34,9 @@ class MessageHelpersTest extends TestCase{
 			'mIxEdCaSeKey'  => [['mIxEdCaSeKey' => 'MiXeDcAsEvAlUe'], ['Mixedcasekey' => 'MiXeDcAsEvAlUe']],
 			'31i71casekey'  => [['31i71casekey' => '31i71casevalue'], ['31i71casekey' => '31i71casevalue']],
 			'numericvalue'  => [['numericvalue:1'], ['Numericvalue'  => '1']],
-			'arrayvalue'    => [[['foo' => 'bar']], ['Foo' => 'bar']],
+			'numericvalue2' => [['numericvalue' => 2], ['Numericvalue'  => '2']],
+			'keyvaluearray' => [[['foo' => 'bar']], ['Foo' => 'bar']],
+			'arrayvalue'    => [['foo' => ['bar', 'baz']], ['Foo' => 'bar, baz']],
 			'invalid: 2'    => [[2 => 2], []],
 			'invalid: what' => [['what'], []],
 		];
@@ -43,11 +45,11 @@ class MessageHelpersTest extends TestCase{
 	/**
 	 * @dataProvider headerDataProvider
 	 *
-	 * @param array $header
+	 * @param array $headers
 	 * @param array $normalized
 	 */
-	public function testNormalizeHeaders(array $header, array $normalized){
-		$this->assertSame($normalized, normalize_message_headers($header));
+	public function testNormalizeHeaders(array $headers, array $normalized){
+		$this->assertSame($normalized, normalize_message_headers($headers));
 	}
 
 	public function testCombineHeaderFields(){
@@ -56,11 +58,18 @@ class MessageHelpersTest extends TestCase{
 			'accept:',
 			'Accept: foo',
 			'accept' => 'bar',
-			'x-Whatever:nope',
+			'x-Whatever :nope',
 			'X-whatever' => '',
+			'x-foo' => 'bar',
+			'x - fOO: baz ',
+			' x-foo ' => ['what', 'nope'],
 		];
 
-		$this->assertSame(['Accept' => 'foo, bar', 'X-Whatever' => 'nope'], normalize_message_headers($headers));
+		$this->assertSame([
+			'Accept'     => 'foo, bar',
+			'X-Whatever' => 'nope',
+			'X-Foo'      => 'bar, baz, what, nope'
+		], normalize_message_headers($headers));
 	}
 
 	public function queryParamDataProvider(){
