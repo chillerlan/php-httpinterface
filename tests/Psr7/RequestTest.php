@@ -157,7 +157,7 @@ class RequestTest extends TestCase{
 	public function testAggregatesHeaders(){
 		$r = new Request('GET', '', ['ZOO' => 'zoobar', 'zoo' => ['foobar', 'zoobar']]);
 
-		$this->assertEquals(['ZOO' => ['zoobar', 'foobar', 'zoobar']], $r->getHeaders());
+		$this->assertEquals(['Zoo' => ['zoobar, foobar, zoobar']], $r->getHeaders());
 		$this->assertEquals('zoobar, foobar, zoobar', $r->getHeaderLine('zoo'));
 	}
 

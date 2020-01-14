@@ -69,9 +69,9 @@ class ResponseTest extends TestCase{
 	public function testCanConstructWithHeadersAsArray(){
 		$r = new Response(200, ['Foo' => ['baz', 'bar']]);
 
-		$this->assertSame(['Foo' => ['baz', 'bar']], $r->getHeaders());
+		$this->assertSame(['Foo' => ['baz, bar']], $r->getHeaders());
 		$this->assertSame('baz, bar', $r->getHeaderLine('Foo'));
-		$this->assertSame(['baz', 'bar'], $r->getHeader('Foo'));
+		$this->assertSame(['baz, bar'], $r->getHeader('Foo'));
 	}
 
 	public function testCanConstructWithBody(){
@@ -232,14 +232,14 @@ class ResponseTest extends TestCase{
 	}
 
 	public function testHeaderValuesAreTrimmed(){
-		$r1 = new Response(200, ['OWS' => " \t \tFoo\t \t "]);
-		$r2 = (new Response)->withHeader('OWS', " \t \tFoo\t \t ");
-		$r3 = (new Response)->withAddedHeader('OWS', " \t \tFoo\t \t ");;
+		$r1 = new Response(200, ['Bar' => " \t \tFoo\t \t "]);
+		$r2 = (new Response)->withHeader('Bar', " \t \tFoo\t \t ");
+		$r3 = (new Response)->withAddedHeader('Bar', " \t \tFoo\t \t ");;
 
 		foreach([$r1, $r2, $r3] as $r){
-			$this->assertSame(['OWS' => ['Foo']], $r->getHeaders());
-			$this->assertSame('Foo', $r->getHeaderLine('OWS'));
-			$this->assertSame(['Foo'], $r->getHeader('OWS'));
+			$this->assertSame(['Bar' => ['Foo']], $r->getHeaders());
+			$this->assertSame('Foo', $r->getHeaderLine('Bar'));
+			$this->assertSame(['Foo'], $r->getHeader('Bar'));
 		}
 	}
 
