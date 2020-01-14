@@ -54,7 +54,7 @@ abstract class Message implements MessageInterface{
 	 * @param string|null                                            $version
 	 */
 	public function __construct(array $headers = null, $body = null, string $version = null){
-		$this->setHeaders($headers ?? []);
+		$this->setHeaders(normalize_message_headers($headers ?? []));
 
 		$this->version       = $version ?? '1.1';
 		$this->streamFactory = new StreamFactory;
@@ -231,7 +231,7 @@ abstract class Message implements MessageInterface{
 			}
 			else{
 				$this->headerNames[$normalized] = $name;
-				$this->headers[$name]         = $value;
+				$this->headers[$name]           = $value;
 			}
 
 		}
