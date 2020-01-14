@@ -151,12 +151,12 @@ class FactoryHelpersTest extends TestCase{
 		$server = create_server_request_from_globals();
 
 		$this->assertSame('POST', $server->getMethod());
-		$this->assertEquals(['Host' => ['www.example.org']], $server->getHeaders());
+		$this->assertSame(['Host' => ['www.example.org']], $server->getHeaders());
 		$this->assertSame('', (string) $server->getBody());
 		$this->assertSame('1.1', $server->getProtocolVersion());
-		$this->assertEquals($_COOKIE, $server->getCookieParams());
-		$this->assertEquals($_POST, $server->getParsedBody());
-		$this->assertEquals($_GET, $server->getQueryParams());
+		$this->assertSame($_COOKIE, $server->getCookieParams());
+		$this->assertSame($_POST, $server->getParsedBody());
+		$this->assertSame($_GET, $server->getQueryParams());
 
 		$this->assertEquals(
 			new UriExtended('https://www.example.org/blog/article.php?id=10&user=foo'),

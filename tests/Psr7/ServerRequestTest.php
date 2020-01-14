@@ -91,7 +91,7 @@ class ServerRequestTest extends TestCase{
 
 		$this->assertSame('value', $r2->getAttribute('name'));
 		$this->assertSame(['name' => 'value'], $r2->getAttributes());
-		$this->assertEquals(['name' => 'value', 'other' => 'otherValue'], $r3->getAttributes());
+		$this->assertSame(['name' => 'value', 'other' => 'otherValue'], $r3->getAttributes());
 		$this->assertSame(['name' => 'value'], $r4->getAttributes());
 	}
 

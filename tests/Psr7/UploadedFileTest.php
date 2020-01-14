@@ -106,15 +106,15 @@ class UploadedFileTest extends TestCase{
 		$stream = create_stream('Foo bar!');
 		$upload = new UploadedFile($stream, $stream->getSize(), UPLOAD_ERR_OK, 'filename.txt', 'text/plain');
 
-		$this->assertEquals($stream->getSize(), $upload->getSize());
-		$this->assertEquals('filename.txt', $upload->getClientFilename());
-		$this->assertEquals('text/plain', $upload->getClientMediaType());
+		$this->assertSame($stream->getSize(), $upload->getSize());
+		$this->assertSame('filename.txt', $upload->getClientFilename());
+		$this->assertSame('text/plain', $upload->getClientMediaType());
 
 		$to              = tempnam(sys_get_temp_dir(), 'successful');
 		$this->cleanup[] = $to;
 		$upload->moveTo($to);
 		$this->assertFileExists($to);
-		$this->assertEquals($stream->__toString(), file_get_contents($to));
+		$this->assertSame($stream->__toString(), file_get_contents($to));
 	}
 
 	public function testMoveCannotBeCalledMoreThanOnce(){

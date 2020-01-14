@@ -37,9 +37,9 @@ class StreamTest extends TestCase{
 		$this->assertTrue($stream->isReadable());
 		$this->assertTrue($stream->isWritable());
 		$this->assertTrue($stream->isSeekable());
-		$this->assertEquals('php://temp', $stream->getMetadata('uri'));
+		$this->assertSame('php://temp', $stream->getMetadata('uri'));
 		$this->assertIsArray($stream->getMetadata());
-		$this->assertEquals(4, $stream->getSize());
+		$this->assertSame(4, $stream->getSize());
 		$this->assertFalse($stream->eof());
 		$stream->close();
 	}
@@ -53,17 +53,17 @@ class StreamTest extends TestCase{
 
 	public function testConvertsToString(){
 		$stream = create_stream('data', 'w+', false);
-		$this->assertEquals('data', (string)$stream);
-		$this->assertEquals('data', (string)$stream);
+		$this->assertSame('data', (string)$stream);
+		$this->assertSame('data', (string)$stream);
 		$stream->close();
 	}
 
 	public function testGetsContents(){
 		$stream = create_stream('data', 'w+', false);
-		$this->assertEquals('', $stream->getContents());
+		$this->assertSame('', $stream->getContents());
 		$stream->seek(0);
-		$this->assertEquals('data', $stream->getContents());
-		$this->assertEquals('', $stream->getContents());
+		$this->assertSame('data', $stream->getContents());
+		$this->assertSame('', $stream->getContents());
 	}
 
 	public function testChecksEof(){
@@ -78,31 +78,31 @@ class StreamTest extends TestCase{
 		$size   = filesize(__FILE__);
 		$handle = fopen(__FILE__, 'r');
 		$stream = new Stream($handle);
-		$this->assertEquals($size, $stream->getSize());
+		$this->assertSame($size, $stream->getSize());
 		// Load from cache
-		$this->assertEquals($size, $stream->getSize());
+		$this->assertSame($size, $stream->getSize());
 		$stream->close();
 	}
 
 	public function testEnsuresSizeIsConsistent(){
 		$h = fopen('php://temp', 'w+');
-		$this->assertEquals(3, fwrite($h, 'foo'));
+		$this->assertSame(3, fwrite($h, 'foo'));
 		$stream = new Stream($h);
-		$this->assertEquals(3, $stream->getSize());
-		$this->assertEquals(4, $stream->write('test'));
-		$this->assertEquals(7, $stream->getSize());
-		$this->assertEquals(7, $stream->getSize());
+		$this->assertSame(3, $stream->getSize());
+		$this->assertSame(4, $stream->write('test'));
+		$this->assertSame(7, $stream->getSize());
+		$this->assertSame(7, $stream->getSize());
 		$stream->close();
 	}
 
 	public function testProvidesStreamPosition(){
 		$handle = fopen('php://temp', 'w+');
 		$stream = new Stream($handle);
-		$this->assertEquals(0, $stream->tell());
+		$this->assertSame(0, $stream->tell());
 		$stream->write('foo');
-		$this->assertEquals(3, $stream->tell());
+		$this->assertSame(3, $stream->tell());
 		$stream->seek(1);
-		$this->assertEquals(1, $stream->tell());
+		$this->assertSame(1, $stream->tell());
 		$this->assertSame(ftell($handle), $stream->tell());
 		$stream->close();
 	}
