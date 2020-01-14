@@ -133,7 +133,7 @@ const MIMETYPES = [
  *
  * @return array
  */
-function normalize_request_headers(array $headers):array{
+function normalize_message_headers(array $headers):array{
 	$normalized_headers = [];
 
 	foreach($headers as $key => $val){

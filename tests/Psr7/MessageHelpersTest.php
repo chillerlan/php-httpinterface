@@ -19,7 +19,7 @@ use Psr\Http\Message\MessageInterface;
 use function chillerlan\HTTP\Psr17\create_stream;
 use function chillerlan\HTTP\Psr7\{
 	build_http_query, clean_query_params, decompress_content, get_json, get_xml,
-	merge_query, message_to_string, normalize_request_headers, r_rawurlencode
+	merge_query, message_to_string, normalize_message_headers, r_rawurlencode
 };
 
 use const chillerlan\HTTP\Psr7\{BOOLEANS_AS_BOOL, BOOLEANS_AS_INT, BOOLEANS_AS_INT_STRING, BOOLEANS_AS_STRING};
@@ -47,7 +47,7 @@ class MessageHelpersTest extends TestCase{
 	 * @param array $normalized
 	 */
 	public function testNormalizeHeaders(array $header, array $normalized){
-		$this->assertSame($normalized, normalize_request_headers($header));
+		$this->assertSame($normalized, normalize_message_headers($header));
 	}
 
 	public function testCombineHeaderFields(){
@@ -60,7 +60,7 @@ class MessageHelpersTest extends TestCase{
 			'X-whatever' => '',
 		];
 
-		$this->assertSame(['Accept' => 'foo, bar', 'X-Whatever' => 'nope'], normalize_request_headers($headers));
+		$this->assertSame(['Accept' => 'foo, bar', 'X-Whatever' => 'nope'], normalize_message_headers($headers));
 	}
 
 	public function queryParamDataProvider(){

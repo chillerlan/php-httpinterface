@@ -116,7 +116,7 @@ final class MultipartStream extends StreamAbstract{
 
 		$this->stream->write('--'.$this->boundary."\r\n");
 
-		foreach(normalize_request_headers($e['headers']) as $key => $value){
+		foreach(normalize_message_headers($e['headers']) as $key => $value){
 			$this->stream->write($key.': '.$value."\r\n");
 		}
 
