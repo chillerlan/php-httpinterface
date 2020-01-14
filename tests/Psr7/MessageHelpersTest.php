@@ -70,6 +70,19 @@ class MessageHelpersTest extends TestCase{
 			'X-Whatever' => 'nope',
 			'X-Foo'      => 'bar, baz, what, nope'
 		], normalize_message_headers($headers));
+
+		$r = new Response;
+
+		foreach(normalize_message_headers($headers) as $k => $v){
+			$r = $r->withAddedHeader($k, $v);
+		}
+
+		$this->assertSame( [
+			'Accept'     => ['foo, bar'],
+			'X-Whatever' => ['nope'],
+			'X-Foo'      => ['bar, baz, what, nope']
+		], $r->getHeaders());
+
 	}
 
 	public function queryParamDataProvider(){
