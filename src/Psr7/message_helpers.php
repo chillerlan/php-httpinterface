@@ -128,6 +128,8 @@ const MIMETYPES = [
 
 /**
  * Normalizes an array of header lines to format ["Name" => "Value (, Value2, Value3, ...)", ...]
+ * An exception is being made for Set-Cookie, which holds an array of values for each cookie.
+ * For multiple cookies with the same name, only the last value will be kept.
  *
  * @param array $headers
  *
@@ -181,11 +183,19 @@ function normalize_message_headers(array $headers):array{
 			continue;
 		}
 
+		// cookie headers may appear multiple times
+		// https://tools.ietf.org/html/rfc6265#section-4.1.2
+		if($key === 'Set-Cookie'){
+			// i'll just collect the last value here and leave parsing up to you :P
+			$normalized_headers[$key][strtolower(explode('=', $val, 2)[0])] = $val;
+		}
 		// combine header fields with the same name
 		// https://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2
-		isset($normalized_headers[$key]) && !empty($normalized_headers[$key])
-			? $normalized_headers[$key] .= ', '.$val
-			: $normalized_headers[$key] = $val;
+		else{
+			isset($normalized_headers[$key]) && !empty($normalized_headers[$key])
+				? $normalized_headers[$key] .= ', '.$val
+				: $normalized_headers[$key] = $val;
+		}
 	}
 
 	return $normalized_headers;

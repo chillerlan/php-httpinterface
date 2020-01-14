@@ -85,6 +85,22 @@ class MessageHelpersTest extends TestCase{
 
 	}
 
+	public function testCombinedCookieHeaders(){
+
+		$headers = [
+			'Set-Cookie: foo=bar',
+			'Set-Cookie: foo=baz',
+			'Set-Cookie: whatever=nope; HttpOnly',
+		];
+
+		$this->assertSame([
+			'Set-Cookie' => [
+				'foo'      => 'foo=baz',
+				'whatever' => 'whatever=nope; HttpOnly'
+			]
+		], normalize_message_headers($headers));
+	}
+
 	public function queryParamDataProvider(){
 		return [
 			// don't remove empty values
