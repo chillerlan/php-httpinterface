@@ -23,7 +23,7 @@ use function chillerlan\HTTP\Psr17\create_stream_from_input;
 class MultipartStreamTest extends TestCase{
 
 	public function testCreatesDefaultBoundary(){
-		$this->assertRegExp('/^[a-f\d]{40}$/', (new MultipartStream)->getBoundary());
+		$this->assertMatchesRegularExpression('/^[a-f\d]{40}$/', (new MultipartStream)->getBoundary());
 	}
 
 	public function testCanProvideBoundary(){
