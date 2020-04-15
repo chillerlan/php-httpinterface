@@ -63,9 +63,10 @@ class PriorityQueueRequestHandler extends QueueRequestHandler{
 	 * @return void
 	 */
 	protected function sortMiddleware():void{
-		usort($this->middlewareStack, function(PriorityMiddlewareInterface $a, PriorityMiddlewareInterface $b){
-			return $a->getPriority() < $b->getPriority();
-		});
+		usort(
+			$this->middlewareStack,
+			fn(PriorityMiddlewareInterface $a, PriorityMiddlewareInterface $b) => $a->getPriority() < $b->getPriority()
+		);
 	}
 
 }
