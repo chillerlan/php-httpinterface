@@ -19,21 +19,16 @@ use chillerlan\HTTP\Psr7\Request;
 use Exception;
 use PHPUnit\Framework\TestCase;
 
+use Psr\Http\Client\ClientInterface;
 use function chillerlan\HTTP\Psr17\create_stream;
 use function chillerlan\HTTP\Psr7\get_json;
 use function str_repeat, strlen, strtolower;
 
 class CurlHandleTest extends TestCase{
 
-	/**
-	 * @var \Psr\Http\Client\ClientInterface
-	 */
-	protected $http;
+	protected ClientInterface $http;
 
-	/**
-	 * @var \chillerlan\HTTP\Psr17\RequestFactory
-	 */
-	protected $requestFactory;
+	protected RequestFactory $requestFactory;
 
 	protected function setUp():void{
 		$options = new HTTPOptions([

@@ -14,9 +14,10 @@ namespace chillerlan\HTTPTest\Psr18;
 
 use chillerlan\HTTP\HTTPOptions;
 use chillerlan\HTTP\Psr7\Request;
+use chillerlan\Settings\SettingsContainerInterface;
 use Exception;
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Client\ClientExceptionInterface;
+use Psr\Http\Client\{ClientExceptionInterface, ClientInterface};
 
 use function chillerlan\HTTP\Psr7\get_json;
 
@@ -24,10 +25,8 @@ abstract class HTTPClientTestAbstract extends TestCase{
 
 	protected const USER_AGENT = 'chillerlanHttpTest/2.0';
 
-	/**
-	 * @var \chillerlan\HTTP\HTTPOptions
-	 */
-	protected $options;
+	/** @var \chillerlan\Settings\SettingsContainerInterface|\chillerlan\HTTP\HTTPOptions */
+	protected SettingsContainerInterface $options;
 
 	protected function setUp():void{
 
@@ -38,10 +37,7 @@ abstract class HTTPClientTestAbstract extends TestCase{
 
 	}
 
-	/**
-	 * @var \Psr\Http\Client\ClientInterface
-	 */
-	protected $http;
+	protected ClientInterface $http;
 
 	public function testSendRequest(){
 

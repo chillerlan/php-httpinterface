@@ -24,10 +24,7 @@ use function array_column, implode, in_array, ksort;
 
 class CurlMultiClientTest extends TestCase{
 
-	/**
-	 * @var \chillerlan\HTTP\CurlUtils\CurlMultiClient
-	 */
-	protected $http;
+	protected CurlMultiClient $http;
 
 	protected function setUp():void{
 

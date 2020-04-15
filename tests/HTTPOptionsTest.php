@@ -16,15 +16,11 @@ use chillerlan\HTTP\HTTPOptions;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientExceptionInterface;
 
-use function file_exists, ini_get, is_array;
+use function file_exists, ini_get;
 
 use const CURLOPT_CAINFO, CURLOPT_CAPATH, CURLOPT_SSL_VERIFYHOST, CURLOPT_SSL_VERIFYPEER;
 
 class HTTPOptionsTest extends TestCase{
-
-	public function testConvertInvalidCurlOptionsValueToArray(){
-		$this->assertTrue(is_array((new HTTPOptions(['curl_options' => 'foo']))->curl_options)); //coverage
-	}
 
 	public function testInvalidUserAgentException(){
 		$this->expectException(ClientExceptionInterface::class);

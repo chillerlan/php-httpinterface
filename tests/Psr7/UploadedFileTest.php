@@ -29,10 +29,7 @@ use const UPLOAD_ERR_CANT_WRITE, UPLOAD_ERR_EXTENSION, UPLOAD_ERR_FORM_SIZE, UPL
 
 class UploadedFileTest extends TestCase{
 
-	/**
-	 * @var array
-	 */
-	protected $cleanup;
+	protected array $cleanup;
 
 	protected function setUp():void{
 		$this->cleanup = [];
