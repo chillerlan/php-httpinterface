@@ -50,7 +50,7 @@ class PriorityQueueRequestHandlerTest extends TestCase{
 		$response = $handler->handle(create_server_request_from_globals());
 
 		// highest priority shall be processed first and go out last
-		$this->assertSame(
+		$this::assertSame(
 			['X-Priority-none1', 'X-Priority-none0', 'X-Priority-1', 'X-Priority-2', 'X-Priority-3'],
 			array_keys($response->getHeaders())
 		);
@@ -75,7 +75,7 @@ class PriorityQueueRequestHandlerTest extends TestCase{
 		$handler  = new PriorityQueueRequestHandler($middlewareStack);
 		$response = $handler->handle(create_server_request_from_globals());
 
-		$this->assertSame(
+		$this::assertSame(
 			['X-Priority-1', 'X-Priority-11', 'X-Priority-22', 'X-Priority-33', 'X-Priority-3', 'X-Priority-4'],
 			array_keys($response->getHeaders())
 		);
@@ -85,7 +85,7 @@ class PriorityQueueRequestHandlerTest extends TestCase{
 
 		$middleware = new class($priority) implements MiddlewareInterface{
 
-			protected $priority;
+			protected int $priority;
 
 			public function __construct(int $priority){
 				$this->priority = $priority;
