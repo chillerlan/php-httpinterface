@@ -170,12 +170,7 @@ function normalize_message_headers(array $headers):array{
 			}
 		}
 
-		// PHP 7.4 -> fn()
-		$key = array_map(function(string $v):string{
-			return ucfirst(strtolower(trim($v)));
-		}, explode('-', $key));
-
-		$key = implode('-', $key);
+		$key = implode('-', array_map(fn(string $v):string => ucfirst(strtolower(trim($v))), explode('-', $key)));
 		$val = trim($val);
 
 		// skip if the header already exists but the current value is empty
