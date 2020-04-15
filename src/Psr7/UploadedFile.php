@@ -41,42 +41,42 @@ final class UploadedFile implements UploadedFileInterface{
 	/**
 	 * @var int
 	 */
-	private $error;
+	private int $error;
 
 	/**
 	 * @var int
 	 */
-	private $size;
+	private int $size;
 
 	/**
 	 * @var null|string
 	 */
-	private $clientFilename;
+	private ?string $clientFilename;
 
 	/**
 	 * @var null|string
 	 */
-	private $clientMediaType;
+	private ?string $clientMediaType;
 
 	/**
 	 * @var null|string
 	 */
-	private $file;
+	private ?string $file = null;
 
 	/**
 	 * @var null|\Psr\Http\Message\StreamInterface
 	 */
-	private $stream;
+	private ?StreamInterface $stream;
 
 	/**
 	 * @var bool
 	 */
-	private $moved = false;
+	private bool $moved = false;
 
 	/**
 	 * @var \chillerlan\HTTP\Psr17\StreamFactory
 	 */
-	protected $streamFactory;
+	protected StreamFactory $streamFactory;
 
 	/**
 	 * @param \Psr\Http\Message\StreamInterface|string|resource $file

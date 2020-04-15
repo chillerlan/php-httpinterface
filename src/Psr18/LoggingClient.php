@@ -26,7 +26,7 @@ class LoggingClient implements ClientInterface, LoggerAwareInterface{
 	use LoggerAwareTrait;
 
 	/** @var \Psr\Http\Client\ClientInterface */
-	protected $http;
+	protected ClientInterface $http;
 
 	/**
 	 * LoggingClient constructor.

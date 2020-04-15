@@ -29,12 +29,12 @@ final class MultipartStream extends StreamAbstract{
 	/**
 	 * @var string
 	 */
-	protected $boundary;
+	protected string $boundary;
 
 	/**
 	 * @var bool
 	 */
-	protected $built = false;
+	protected bool $built = false;
 
 	/**
 	 * MultipartStream constructor.

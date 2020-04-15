@@ -20,12 +20,12 @@ class EmptyResponseHandler implements RequestHandlerInterface{
 	/**
 	 * @var \Psr\Http\Message\ResponseFactoryInterface
 	 */
-	protected $responseFactory;
+	protected ResponseFactoryInterface $responseFactory;
 
 	/**
 	 * @var int
 	 */
-	protected $status;
+	protected int $status;
 
 	/**
 	 * EmptyResponseHandler constructor.

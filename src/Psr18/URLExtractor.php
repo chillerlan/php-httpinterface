@@ -22,7 +22,7 @@ class URLExtractor extends CurlClient{
 	/**
 	 * @var \Psr\Http\Message\ResponseInterface[]
 	 */
-	protected $responses = [];
+	protected array $responses = [];
 
 	/**
 	 * @inheritDoc

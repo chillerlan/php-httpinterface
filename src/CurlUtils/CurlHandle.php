@@ -38,29 +38,29 @@ class CurlHandle implements CurlHandleInterface{
 	 *
 	 * @var int
 	 */
-	public $id;
+	public int $id;
 
 	/**
 	 * a retry counter, used in CurlMultiClient
 	 *
 	 * @var int
 	 */
-	public $retries;
+	public int $retries;
 
 	/**
 	 * @var \Psr\Http\Message\RequestInterface
 	 */
-	public $request;
+	public RequestInterface $request;
 
 	/**
 	 * @var \Psr\Http\Message\ResponseInterface
 	 */
-	public $response;
+	public ResponseInterface $response;
 
 	/**
-	 * @var \chillerlan\HTTP\HTTPOptions
+	 * @var \chillerlan\Settings\SettingsContainerInterface|\chillerlan\HTTP\HTTPOptions
 	 */
-	protected $options;
+	protected SettingsContainerInterface $options;
 
 	/**
 	 * CurlHandle constructor.

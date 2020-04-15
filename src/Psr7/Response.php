@@ -99,12 +99,12 @@ final class Response extends Message implements ResponseInterface, StatusCodeInt
 	/**
 	 * @var string
 	 */
-	private $reasonPhrase = '';
+	private string $reasonPhrase;
 
 	/**
 	 * @var int
 	 */
-	private $statusCode = self::STATUS_OK;
+	private int $statusCode;
 
 	/**
 	 * Response constructor.

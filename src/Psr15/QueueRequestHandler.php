@@ -23,12 +23,12 @@ class QueueRequestHandler implements MiddlewareInterface, RequestHandlerInterfac
 	/**
 	 * @var \Psr\Http\Server\MiddlewareInterface[]
 	 */
-	protected $middlewareStack = [];
+	protected array $middlewareStack = [];
 
 	/**
 	 * @var \Psr\Http\Server\RequestHandlerInterface
 	 */
-	protected $fallbackHandler;
+	protected RequestHandlerInterface $fallbackHandler;
 
 	/**
 	 * QueueRequestHandler constructor.

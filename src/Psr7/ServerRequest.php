@@ -22,17 +22,17 @@ final class ServerRequest extends Request implements ServerRequestInterface{
 	/**
 	 * @var array
 	 */
-	private $serverParams;
+	private array $serverParams;
 
 	/**
 	 * @var array
 	 */
-	private $cookieParams = [];
+	private array $cookieParams = [];
 
 	/**
 	 * @var array
 	 */
-	private $queryParams = [];
+	private array $queryParams = [];
 
 	/**
 	 * @var null|array|object
@@ -42,12 +42,12 @@ final class ServerRequest extends Request implements ServerRequestInterface{
 	/**
 	 * @var array
 	 */
-	private $attributes = [];
+	private array $attributes = [];
 
 	/**
 	 * @var array
 	 */
-	private $uploadedFiles = [];
+	private array $uploadedFiles = [];
 
 	/**
 	 * ServerRequest constructor.

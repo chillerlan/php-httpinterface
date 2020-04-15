@@ -24,7 +24,7 @@ class NetworkException extends ClientException implements NetworkExceptionInterf
 	/**
 	 * @var \Psr\Http\Message\RequestInterface
 	 */
-	private $request;
+	private RequestInterface $request;
 
 	/**
 	 * @param string                             $message

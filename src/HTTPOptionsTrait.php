@@ -24,77 +24,64 @@ trait HTTPOptionsTrait{
 	/**
 	 * @var string
 	 */
-	protected $user_agent = 'chillerlanHttpInterface/2.0 +https://github.com/chillerlan/php-httpinterface';
+	protected string $user_agent = 'chillerlanHttpInterface/2.0 +https://github.com/chillerlan/php-httpinterface';
 
 	/**
 	 * options for each curl instance
 	 *
 	 * this array is being merged into the default options as the last thing before curl_exec().
 	 * none of the values (except existence of the CA file) will be checked - that's up to the implementation.
-	 *
-	 * @var array
 	 */
-	protected $curl_options = [];
+	protected array $curl_options = [];
 
 	/**
 	 * CA Root Certificates for use with CURL/SSL (if not configured in php.ini or available in a default path)
-	 *
-	 * @var string
 	 *
 	 * @link https://curl.haxx.se/docs/caextract.html
 	 * @link https://curl.haxx.se/ca/cacert.pem
 	 * @link https://raw.githubusercontent.com/bagder/ca-bundle/master/ca-bundle.crt
 	 */
-	protected $ca_info = null;
+	protected ?string $ca_info = null;
 
 	/**
 	 * see CURLOPT_SSL_VERIFYPEER
 	 * requires either HTTPOptions::$ca_info or a properly working system CA file
 	 *
-	 * @var bool
 	 * @link https://php.net/manual/function.curl-setopt.php
 	 */
-	protected $ssl_verifypeer = true;
+	protected bool $ssl_verifypeer = true;
 
 	/**
 	 * The CurlHandleInterface to use in CurlClient::sendRequest()
-	 *
-	 * @var string
 	 */
-	protected $curlHandle = CurlHandle::class;
+	protected string $curlHandle = CurlHandle::class;
 
 	/**
 	 * options for the curl multi instance
 	 *
 	 * @link https://www.php.net/manual/function.curl-multi-setopt.php
-	 *
-	 * @var array
 	 */
-	protected $curl_multi_options = [];
+	protected array $curl_multi_options = [];
 
 	/**
 	 * maximum of concurrent requests for curl_multi
-	 *
-	 * @var int
 	 */
-	protected $windowSize = 5;
+	protected int $windowSize = 5;
 
 	/**
 	 * sleep timer (milliseconds) between each fired multi request on startup
+	 */
+	protected ?int $sleep = null;
+
+	/**
 	 *
-	 * @var int
 	 */
-	protected $sleep = null;
+	protected int $timeout = 10;
 
 	/**
-	 * @var int
+	 *
 	 */
-	protected $timeout = 10;
-
-	/**
-	 * @var int
-	 */
-	protected $retries = 3;
+	protected int $retries = 3;
 
 	/**
 	 * HTTPOptionsTrait constructor

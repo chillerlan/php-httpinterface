@@ -28,27 +28,27 @@ final class Stream extends StreamAbstract{
 	/**
 	 * @var bool
 	 */
-	private $seekable;
+	private bool $seekable;
 
 	/**
 	 * @var bool
 	 */
-	private $readable;
+	private bool $readable;
 
 	/**
 	 * @var bool
 	 */
-	private $writable;
+	private bool $writable;
 
 	/**
 	 * @var string|null
 	 */
-	private $uri;
+	private ?string $uri = null;
 
 	/**
 	 * @var int|null
 	 */
-	private $size;
+	private ?int $size = null;
 
 	/**
 	 * Stream constructor.

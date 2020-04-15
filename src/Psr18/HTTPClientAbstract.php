@@ -24,14 +24,14 @@ abstract class HTTPClientAbstract implements ClientInterface, LoggerAwareInterfa
 	use LoggerAwareTrait;
 
 	/**
-	 * @var \chillerlan\HTTP\HTTPOptions
+	 * @var \chillerlan\Settings\SettingsContainerInterface|\chillerlan\HTTP\HTTPOptions
 	 */
-	protected $options;
+	protected SettingsContainerInterface $options;
 
 	/**
 	 * @var \Psr\Http\Message\ResponseFactoryInterface
 	 */
-	protected $responseFactory;
+	protected ResponseFactoryInterface $responseFactory;
 
 	/**
 	 * HTTPClientAbstract constructor.

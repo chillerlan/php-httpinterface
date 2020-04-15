@@ -19,7 +19,7 @@ use const SEEK_SET;
 abstract class StreamAbstract implements StreamInterface{
 
 	/**
-	 * @var \Psr\Http\Message\StreamInterface
+	 * @var \Psr\Http\Message\StreamInterface|resource
 	 */
 	protected $stream;
 

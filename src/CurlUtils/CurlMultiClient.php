@@ -26,14 +26,14 @@ use const CURLM_OK, CURLMOPT_MAXCONNECTS, CURLMOPT_PIPELINING, CURLPIPE_MULTIPLE
 class CurlMultiClient implements LoggerAwareInterface{
 	use LoggerAwareTrait;
 
-	/** @var \chillerlan\HTTP\HTTPOptions */
-	protected $options;
+	/** @var \chillerlan\Settings\SettingsContainerInterface|\chillerlan\HTTP\HTTPOptions */
+	protected SettingsContainerInterface $options;
 
 	/** @var \Psr\Http\Message\ResponseFactoryInterface */
-	protected $responseFactory;
+	protected ResponseFactoryInterface $responseFactory;
 
 	/** @var \chillerlan\HTTP\CurlUtils\MultiResponseHandlerInterface */
-	protected $multiResponseHandler;
+	protected ?MultiResponseHandlerInterface $multiResponseHandler = null;
 
 	/**
 	 * the curl_multi master handle
@@ -47,19 +47,19 @@ class CurlMultiClient implements LoggerAwareInterface{
 	 *
 	 * @var \Psr\Http\Message\RequestInterface[]
 	 */
-	protected $requests = [];
+	protected array $requests = [];
 
 	/**
 	 * the stack of running handles
 	 *
 	 * @var \chillerlan\HTTP\CurlUtils\CurlHandle[]
 	 */
-	protected $handles = [];
+	protected array $handles = [];
 
 	/**
 	 * @var int
 	 */
-	protected $handleCounter = 0;
+	protected int $handleCounter = 0;
 
 	/**
 	 * CurlMultiClient constructor.

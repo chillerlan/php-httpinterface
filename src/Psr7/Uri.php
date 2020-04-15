@@ -39,42 +39,42 @@ class Uri implements UriInterface{
 	/**
 	 * @var string
 	 */
-	protected $scheme = '';
+	protected string $scheme = '';
 
 	/**
 	 * @var string
 	 */
-	protected $user = '';
+	protected string $user = '';
 
 	/**
 	 * @var string
 	 */
-	protected $pass = '';
+	protected ?string $pass = null;
 
 	/**
 	 * @var string
 	 */
-	protected $host = '';
+	protected string $host = '';
 
 	/**
 	 * @var int
 	 */
-	protected $port = null;
+	protected ?int $port = null;
 
 	/**
 	 * @var string
 	 */
-	protected $path = '';
+	protected string $path = '';
 
 	/**
 	 * @var string
 	 */
-	protected $query = '';
+	protected string $query = '';
 
 	/**
 	 * @var string
 	 */
-	protected $fragment = '';
+	protected string $fragment = '';
 
 	/**
 	 * Uri constructor.
@@ -237,7 +237,7 @@ class Uri implements UriInterface{
 	public function withUserInfo($user, $password = null):UriInterface{
 		$info = $user;
 
-		if($password !== ''){
+		if($password !== null && $password !== ''){
 			$info .= ':'.$password;
 		}
 

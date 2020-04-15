@@ -24,12 +24,12 @@ class QueueRunner implements RequestHandlerInterface{
 	/**
 	 * @var \Psr\Http\Server\MiddlewareInterface[]
 	 */
-	private $middlewareStack;
+	private array $middlewareStack;
 
 	/**
 	 * @var \Psr\Http\Server\RequestHandlerInterface
 	 */
-	private $fallbackHandler;
+	private RequestHandlerInterface $fallbackHandler;
 
 	/**
 	 *  constructor.

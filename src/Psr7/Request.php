@@ -23,17 +23,17 @@ class Request extends Message implements RequestInterface, RequestMethodInterfac
 	/**
 	 * @var string
 	 */
-	protected $method;
+	protected string $method;
 
 	/**
 	 * @var \Psr\Http\Message\UriInterface
 	 */
-	protected $uri;
+	protected UriInterface $uri;
 
 	/**
 	 * @var string
 	 */
-	protected $requestTarget;
+	protected ?string $requestTarget = null;
 
 	/**
 	 * Request constructor.

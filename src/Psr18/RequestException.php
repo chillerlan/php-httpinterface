@@ -24,7 +24,7 @@ class RequestException extends ClientException implements RequestExceptionInterf
 	/**
 	 * @var \Psr\Http\Message\RequestInterface
 	 */
-	private $request;
+	private RequestInterface $request;
 
 	/**
 	 * @param string                             $message

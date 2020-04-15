@@ -22,12 +22,12 @@ class PriorityMiddleware implements PriorityMiddlewareInterface{
 	/**
 	 * @var \Psr\Http\Server\MiddlewareInterface
 	 */
-	protected $middleware;
+	protected MiddlewareInterface $middleware;
 
 	/**
 	 * @var int
 	 */
-	protected $priority;
+	protected int $priority;
 
 	/**
 	 * PriorityMiddleware constructor.
