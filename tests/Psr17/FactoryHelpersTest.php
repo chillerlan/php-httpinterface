@@ -100,7 +100,7 @@ class FactoryHelpersTest extends TestCase{
 	public function testCreateUriFromGlobals(string $expected, array $serverParams){
 		$_SERVER = $serverParams;
 
-		$this->assertEquals(new UriExtended($expected), create_uri_from_globals());
+		$this::assertEquals(new UriExtended($expected), create_uri_from_globals());
 	}
 
 	public function testCreateServerRequestFromGlobals(){
@@ -150,15 +150,15 @@ class FactoryHelpersTest extends TestCase{
 
 		$server = create_server_request_from_globals();
 
-		$this->assertSame('POST', $server->getMethod());
-		$this->assertSame(['Host' => ['www.example.org']], $server->getHeaders());
-		$this->assertSame('', (string) $server->getBody());
-		$this->assertSame('1.1', $server->getProtocolVersion());
-		$this->assertSame($_COOKIE, $server->getCookieParams());
-		$this->assertSame($_POST, $server->getParsedBody());
-		$this->assertSame($_GET, $server->getQueryParams());
+		$this::assertSame('POST', $server->getMethod());
+		$this::assertSame(['Host' => ['www.example.org']], $server->getHeaders());
+		$this::assertSame('', (string) $server->getBody());
+		$this::assertSame('1.1', $server->getProtocolVersion());
+		$this::assertSame($_COOKIE, $server->getCookieParams());
+		$this::assertSame($_POST, $server->getParsedBody());
+		$this::assertSame($_GET, $server->getQueryParams());
 
-		$this->assertEquals(
+		$this::assertEquals(
 			new UriExtended('https://www.example.org/blog/article.php?id=10&user=foo'),
 			$server->getUri()
 		);
@@ -167,14 +167,14 @@ class FactoryHelpersTest extends TestCase{
 			'file' => new UploadedFile('/tmp/php/php1h4j1o', 123, UPLOAD_ERR_OK, 'MyFile.txt', 'text/plain'),
 		];
 
-		$this->assertEquals($expectedFiles, $server->getUploadedFiles());
+		$this::assertEquals($expectedFiles, $server->getUploadedFiles());
 	}
 
 	public function testCreateStream(){
 		$stream = create_stream('test');
 
-		$this->assertInstanceOf(Streaminterface::class, $stream);
-		$this->assertSame('test', $stream->getContents());
+		$this::assertInstanceOf(Streaminterface::class, $stream);
+		$this::assertSame('test', $stream->getContents());
 	}
 
 	public function testCreateStreamInvalidModeException(){
@@ -208,7 +208,7 @@ class FactoryHelpersTest extends TestCase{
 	 * @param string $content
 	 */
 	public function testCreateStreamFromInput($input, string $content){
-		$this->assertSame($content, create_stream_from_input($input)->getContents());
+		$this::assertSame($content, create_stream_from_input($input)->getContents());
 	}
 
 	public function testCreateStreamFromInputException(){

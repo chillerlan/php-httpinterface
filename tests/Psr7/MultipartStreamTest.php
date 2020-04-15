@@ -23,18 +23,18 @@ use function chillerlan\HTTP\Psr17\create_stream_from_input;
 class MultipartStreamTest extends TestCase{
 
 	public function testCreatesDefaultBoundary(){
-		$this->assertMatchesRegularExpression('/^[a-f\d]{40}$/', (new MultipartStream)->getBoundary());
+		$this::assertMatchesRegularExpression('/^[a-f\d]{40}$/', (new MultipartStream)->getBoundary());
 	}
 
 	public function testCanProvideBoundary(){
-		$this->assertSame('foo', (new MultipartStream([], 'foo'))->getBoundary());
+		$this::assertSame('foo', (new MultipartStream([], 'foo'))->getBoundary());
 	}
 
 	public function testIsAlwaysReadableNotWritable(){
 		$s = new MultipartStream;
 
-		$this->assertTrue($s->isReadable());
-		$this->assertFalse($s->isWritable());
+		$this::assertTrue($s->isReadable());
+		$this::assertFalse($s->isWritable());
 	}
 
 	public function testWriteError(){
@@ -54,8 +54,8 @@ class MultipartStreamTest extends TestCase{
 	public function testCanCreateEmptyStream(){
 		$stream   = new MultipartStream;
 		$boundary = $stream->getBoundary();
-		$this->assertSame(strlen($boundary) + 6, $stream->getSize());
-		$this->assertSame("--{$boundary}--\r\n", $stream->getContents());
+		$this::assertSame(strlen($boundary) + 6, $stream->getSize());
+		$this::assertSame("--{$boundary}--\r\n", $stream->getContents());
 	}
 
 	public function testEnsureContentsElement(){
@@ -78,7 +78,7 @@ class MultipartStreamTest extends TestCase{
 			['name' => 'baz', 'contents' => 'bam'],
 		], 'boundary');
 
-		$this->assertSame(
+		$this::assertSame(
 			"--boundary\r\nContent-Disposition: form-data; name=\"foo\"\r\nContent-Length: 3\r\n\r\nbar\r\n".
 			"--boundary\r\nContent-Disposition: form-data; name=\"baz\"\r\nContent-Length: 3\r\n\r\nbam\r\n".
 			"--boundary--\r\n",
@@ -94,7 +94,7 @@ class MultipartStreamTest extends TestCase{
 			['name' => 'float', 'contents' => 1.1],
 		], 'boundary');
 
-		$this->assertSame(
+		$this::assertSame(
 			"--boundary\r\nContent-Disposition: form-data; name=\"int\"\r\nContent-Length: 1\r\n\r\n1\r\n".
 			"--boundary\r\nContent-Disposition: form-data; name=\"bool\"\r\n\r\n\r\n".
 			"--boundary\r\nContent-Disposition: form-data; name=\"bool2\"\r\nContent-Length: 1\r\n\r\n1\r\n".
@@ -127,7 +127,7 @@ class MultipartStreamTest extends TestCase{
 			])],
 		], 'boundary');
 
-		$this->assertSame(
+		$this::assertSame(
 			"--boundary\r\nContent-Disposition: form-data; name=\"foo\"; filename=\"bar.txt\"\r\nContent-Length: 3\r\n".
 			"Content-Type: text/plain\r\n\r\nfoo\r\n".
 			"--boundary\r\nContent-Disposition: form-data; name=\"qux\"; filename=\"baz.jpg\"\r\nContent-Length: 3\r\n".
@@ -152,7 +152,7 @@ class MultipartStreamTest extends TestCase{
 			'headers'  => ['x-foo' => 'bar', 'content-disposition' => 'custom']
 		]], 'boundary');
 
-		$this->assertSame(
+		$this::assertSame(
 			"--boundary\r\nX-Foo: bar\r\nContent-Disposition: custom\r\nContent-Length: 3\r\n".
 			"Content-Type: text/plain\r\n\r\nfoo\r\n--boundary--\r\n",
 			(string)$stream
@@ -181,7 +181,7 @@ class MultipartStreamTest extends TestCase{
 			'headers'  => ['cOntenT-Type' => 'custom'],
 		]], 'boundary');
 
-		$this->assertSame(
+		$this::assertSame(
 			"--boundary\r\nX-Foo: bar\r\nContent-Disposition: custom\r\nContent-Length: 3\r\n".
 			"Content-Type: text/plain\r\n\r\nfoo\r\n".
 			"--boundary\r\nContent-Type: custom\r\nContent-Disposition: form-data; name=\"foo\"; ".

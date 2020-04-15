@@ -45,11 +45,11 @@ class URLExtractorTest extends HTTPClientTestAbstract{
 
 		$responses = $this->http->getResponses();
 
-		$this->assertCount(4, $responses);
+		$this::assertCount(4, $responses);
 
 		foreach($responses as $i => $r){
 #			\var_dump($r->getHeaders());
-			$this->assertSame($expected[$i], $r->getHeaderLine('location'));
+			$this::assertSame($expected[$i], $r->getHeaderLine('location'));
 		}
 
 	}

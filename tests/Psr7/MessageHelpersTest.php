@@ -49,7 +49,7 @@ class MessageHelpersTest extends TestCase{
 	 * @param array $normalized
 	 */
 	public function testNormalizeHeaders(array $headers, array $normalized){
-		$this->assertSame($normalized, normalize_message_headers($headers));
+		$this::assertSame($normalized, normalize_message_headers($headers));
 	}
 
 	public function testCombineHeaderFields(){
@@ -65,7 +65,7 @@ class MessageHelpersTest extends TestCase{
 			' x-foo ' => ['what', 'nope'],
 		];
 
-		$this->assertSame([
+		$this::assertSame([
 			'Accept'     => 'foo, bar',
 			'X-Whatever' => 'nope',
 			'X-Foo'      => 'bar, baz, what, nope'
@@ -77,7 +77,7 @@ class MessageHelpersTest extends TestCase{
 			$r = $r->withAddedHeader($k, $v);
 		}
 
-		$this->assertSame( [
+		$this::assertSame( [
 			'Accept'     => ['foo, bar'],
 			'X-Whatever' => ['nope'],
 			'X-Foo'      => ['bar, baz, what, nope']
@@ -93,7 +93,7 @@ class MessageHelpersTest extends TestCase{
 			'Set-Cookie: whatever=nope; HttpOnly',
 		];
 
-		$this->assertSame([
+		$this::assertSame([
 			'Set-Cookie' => [
 				'foo'      => 'foo=baz',
 				'whatever' => 'whatever=nope; HttpOnly'
@@ -123,7 +123,7 @@ class MessageHelpersTest extends TestCase{
 	public function testCleanQueryParams(array $expected, int $bool_cast, bool $remove_empty){
 		$data = ['whatever' => null, 'nope' => '', 'true' => true, 'false' => false, 'array' => ['value' => false]];
 
-		$this->assertSame($expected, clean_query_params($data, $bool_cast, $remove_empty));
+		$this::assertSame($expected, clean_query_params($data, $bool_cast, $remove_empty));
 	}
 
 	public function mergeQueryDataProvider():array{
@@ -147,7 +147,7 @@ class MessageHelpersTest extends TestCase{
 	 */
 	public function testMergeQuery(string $uri, array $params, string $expected){
 		$merged = merge_query($uri, $params);
-		$this->assertSame($expected, $merged);
+		$this::assertSame($expected, $merged);
 	}
 
 	public function rawurlencodeDataProvider(){
@@ -167,43 +167,43 @@ class MessageHelpersTest extends TestCase{
 	 * @param $expected
 	 */
 	public function testRawurlencode($data, $expected){
-		$this->assertSame($expected, r_rawurlencode($data));
+		$this::assertSame($expected, r_rawurlencode($data));
 	}
 
 	public function testBuildHttpQuery(){
 
 		$data = ['foo' => 'bar', 'whatever?' => 'nope!'];
 
-		$this->assertSame('', build_http_query([]));
-		$this->assertSame('foo=bar&whatever%3F=nope%21', build_http_query($data));
-		$this->assertSame('foo=bar&whatever?=nope!', build_http_query($data, false));
-		$this->assertSame('foo=bar, whatever?=nope!', build_http_query($data, false, ', '));
-		$this->assertSame('foo="bar", whatever?="nope!"', build_http_query($data, false, ', ', '"'));
+		$this::assertSame('', build_http_query([]));
+		$this::assertSame('foo=bar&whatever%3F=nope%21', build_http_query($data));
+		$this::assertSame('foo=bar&whatever?=nope!', build_http_query($data, false));
+		$this::assertSame('foo=bar, whatever?=nope!', build_http_query($data, false, ', '));
+		$this::assertSame('foo="bar", whatever?="nope!"', build_http_query($data, false, ', ', '"'));
 
 		$data['florps']  = ['nope', 'nope', 'nah'];
-		$this->assertSame('florps="nah", florps="nope", florps="nope", foo="bar", whatever?="nope!"', build_http_query($data, false, ', ', '"'));
+		$this::assertSame('florps="nah", florps="nope", florps="nope", foo="bar", whatever?="nope!"', build_http_query($data, false, ', ', '"'));
 	}
 
 	public function testGetJSON(){
 
 		$r = (new Response)->withBody(create_stream('{"foo":"bar"}'));
 
-		$this->assertSame('bar', get_json($r)->foo);
+		$this::assertSame('bar', get_json($r)->foo);
 
 		$r->getBody()->rewind();
 
-		$this->assertSame('bar', get_json($r, true)['foo']);
+		$this::assertSame('bar', get_json($r, true)['foo']);
 	}
 
 	public function testGetXML(){
 
 		$r = (new Response)->withBody(create_stream('<?xml version="1.0" encoding="UTF-8"?><root><foo>bar</foo></root>'));
 
-		$this->assertSame('bar', get_xml($r)->foo->__toString());
+		$this::assertSame('bar', get_xml($r)->foo->__toString());
 
 		$r->getBody()->rewind();
 
-		$this->assertSame('bar', get_xml($r, true)['foo']);
+		$this::assertSame('bar', get_xml($r, true)['foo']);
 	}
 
 	public function messageDataProvider(){
@@ -220,7 +220,7 @@ class MessageHelpersTest extends TestCase{
 	 * @param string                             $expected
 	 */
 	public function testMessageToString(MessageInterface $message, string $expected){
-		$this->assertSame(
+		$this::assertSame(
 			$expected,
 			message_to_string($message->withAddedHeader('foo', 'bar')->withBody(create_stream('testbody')))
 		);
@@ -249,7 +249,7 @@ class MessageHelpersTest extends TestCase{
 
 		$response = $response->withBody(create_stream($data));
 
-		$this->assertSame($expected, decompress_content($response));
+		$this::assertSame($expected, decompress_content($response));
 	}
 
 }

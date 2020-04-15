@@ -34,13 +34,13 @@ class StreamTest extends TestCase{
 	public function testConstructorInitializesProperties(){
 		$stream = create_stream('data');
 
-		$this->assertTrue($stream->isReadable());
-		$this->assertTrue($stream->isWritable());
-		$this->assertTrue($stream->isSeekable());
-		$this->assertSame('php://temp', $stream->getMetadata('uri'));
-		$this->assertIsArray($stream->getMetadata());
-		$this->assertSame(4, $stream->getSize());
-		$this->assertFalse($stream->eof());
+		$this::assertTrue($stream->isReadable());
+		$this::assertTrue($stream->isWritable());
+		$this::assertTrue($stream->isSeekable());
+		$this::assertSame('php://temp', $stream->getMetadata('uri'));
+		$this::assertIsArray($stream->getMetadata());
+		$this::assertSame(4, $stream->getSize());
+		$this::assertFalse($stream->eof());
 		$stream->close();
 	}
 
@@ -48,29 +48,29 @@ class StreamTest extends TestCase{
 		$handle = fopen('php://temp', 'r');
 		$stream = new Stream($handle);
 		unset($stream);
-		$this->assertFalse(is_resource($handle));
+		$this::assertFalse(is_resource($handle));
 	}
 
 	public function testConvertsToString(){
 		$stream = create_stream('data', 'w+', false);
-		$this->assertSame('data', (string)$stream);
-		$this->assertSame('data', (string)$stream);
+		$this::assertSame('data', (string)$stream);
+		$this::assertSame('data', (string)$stream);
 		$stream->close();
 	}
 
 	public function testGetsContents(){
 		$stream = create_stream('data', 'w+', false);
-		$this->assertSame('', $stream->getContents());
+		$this::assertSame('', $stream->getContents());
 		$stream->seek(0);
-		$this->assertSame('data', $stream->getContents());
-		$this->assertSame('', $stream->getContents());
+		$this::assertSame('data', $stream->getContents());
+		$this::assertSame('', $stream->getContents());
 	}
 
 	public function testChecksEof(){
 		$stream = create_stream('data', 'w+', false);
-		$this->assertFalse($stream->eof());
+		$this::assertFalse($stream->eof());
 		$stream->read(4);
-		$this->assertTrue($stream->eof());
+		$this::assertTrue($stream->eof());
 		$stream->close();
 	}
 
@@ -78,32 +78,32 @@ class StreamTest extends TestCase{
 		$size   = filesize(__FILE__);
 		$handle = fopen(__FILE__, 'r');
 		$stream = new Stream($handle);
-		$this->assertSame($size, $stream->getSize());
+		$this::assertSame($size, $stream->getSize());
 		// Load from cache
-		$this->assertSame($size, $stream->getSize());
+		$this::assertSame($size, $stream->getSize());
 		$stream->close();
 	}
 
 	public function testEnsuresSizeIsConsistent(){
 		$h = fopen('php://temp', 'w+');
-		$this->assertSame(3, fwrite($h, 'foo'));
+		$this::assertSame(3, fwrite($h, 'foo'));
 		$stream = new Stream($h);
-		$this->assertSame(3, $stream->getSize());
-		$this->assertSame(4, $stream->write('test'));
-		$this->assertSame(7, $stream->getSize());
-		$this->assertSame(7, $stream->getSize());
+		$this::assertSame(3, $stream->getSize());
+		$this::assertSame(4, $stream->write('test'));
+		$this::assertSame(7, $stream->getSize());
+		$this::assertSame(7, $stream->getSize());
 		$stream->close();
 	}
 
 	public function testProvidesStreamPosition(){
 		$handle = fopen('php://temp', 'w+');
 		$stream = new Stream($handle);
-		$this->assertSame(0, $stream->tell());
+		$this::assertSame(0, $stream->tell());
 		$stream->write('foo');
-		$this->assertSame(3, $stream->tell());
+		$this::assertSame(3, $stream->tell());
 		$stream->seek(1);
-		$this->assertSame(1, $stream->tell());
-		$this->assertSame(ftell($handle), $stream->tell());
+		$this::assertSame(1, $stream->tell());
+		$this::assertSame(ftell($handle), $stream->tell());
 		$stream->close();
 	}
 
@@ -112,14 +112,14 @@ class StreamTest extends TestCase{
 		$stream = new Stream($handle);
 		$stream->write('foo');
 
-		$this->assertTrue($stream->isReadable());
-		$this->assertSame($handle, $stream->detach());
+		$this::assertTrue($stream->isReadable());
+		$this::assertSame($handle, $stream->detach());
 
 		$stream->detach();
 
-		$this->assertFalse($stream->isReadable());
-		$this->assertFalse($stream->isWritable());
-		$this->assertFalse($stream->isSeekable());
+		$this::assertFalse($stream->isReadable());
+		$this::assertFalse($stream->isWritable());
+		$this::assertFalse($stream->isSeekable());
 
 		$throws = function(callable $fn) use ($stream){
 			try{
@@ -137,7 +137,7 @@ class StreamTest extends TestCase{
 		$throws(function(StreamInterface $stream){$stream->getSize();});
 		$throws(function(StreamInterface $stream){$stream->getContents();});
 
-		$this->assertSame('', (string)$stream);
+		$this::assertSame('', (string)$stream);
 		$stream->close();
 	}
 
@@ -145,17 +145,17 @@ class StreamTest extends TestCase{
 		$stream = create_stream();
 		$stream->close();
 
-		$this->assertFalse($stream->isSeekable());
-		$this->assertFalse($stream->isReadable());
-		$this->assertFalse($stream->isWritable());
-		$this->assertNull($stream->getSize());
-		$this->assertEmpty($stream->getMetadata());
+		$this::assertFalse($stream->isSeekable());
+		$this::assertFalse($stream->isReadable());
+		$this::assertFalse($stream->isWritable());
+		$this::assertNull($stream->getSize());
+		$this::assertEmpty($stream->getMetadata());
 	}
 
 	public function testStreamReadingWithZeroLength(){
 		$stream = create_stream();
 
-		$this->assertSame('', $stream->read(0));
+		$this::assertSame('', $stream->read(0));
 
 		$stream->close();
 	}

@@ -88,7 +88,7 @@ class UploadedFileTest extends TestCase{
 		$stream = create_stream('');
 		$upload = new UploadedFile($stream, 0);
 
-		$this->assertSame($stream, $upload->getStream());
+		$this::assertSame($stream, $upload->getStream());
 	}
 
 	public function testGetStreamReturnsWrappedPhpStream(){
@@ -96,22 +96,22 @@ class UploadedFileTest extends TestCase{
 		$upload       = new UploadedFile($stream, 0);
 		$uploadStream = $upload->getStream()->detach();
 
-		$this->assertSame($stream, $uploadStream);
+		$this::assertSame($stream, $uploadStream);
 	}
 
 	public function testSuccessful(){
 		$stream = create_stream('Foo bar!');
 		$upload = new UploadedFile($stream, $stream->getSize(), UPLOAD_ERR_OK, 'filename.txt', 'text/plain');
 
-		$this->assertSame($stream->getSize(), $upload->getSize());
-		$this->assertSame('filename.txt', $upload->getClientFilename());
-		$this->assertSame('text/plain', $upload->getClientMediaType());
+		$this::assertSame($stream->getSize(), $upload->getSize());
+		$this::assertSame('filename.txt', $upload->getClientFilename());
+		$this::assertSame('text/plain', $upload->getClientMediaType());
 
 		$to              = tempnam(sys_get_temp_dir(), 'successful');
 		$this->cleanup[] = $to;
 		$upload->moveTo($to);
-		$this->assertFileExists($to);
-		$this->assertSame($stream->__toString(), file_get_contents($to));
+		$this::assertFileExists($to);
+		$this::assertSame($stream->__toString(), file_get_contents($to));
 	}
 
 	public function testMoveCannotBeCalledMoreThanOnce(){
@@ -120,7 +120,7 @@ class UploadedFileTest extends TestCase{
 
 		$this->cleanup[] = $to = tempnam(sys_get_temp_dir(), 'diac');
 		$upload->moveTo($to);
-		$this->assertTrue(file_exists($to));
+		$this::assertTrue(file_exists($to));
 
 		$this->expectException(RuntimeException::class);
 		$this->expectExceptionMessage('Cannot retrieve stream after it has already been moved');
@@ -133,7 +133,7 @@ class UploadedFileTest extends TestCase{
 
 		$this->cleanup[] = $to = tempnam(sys_get_temp_dir(), 'diac');
 		$upload->moveTo($to);
-		$this->assertFileExists($to);
+		$this::assertFileExists($to);
 
 		$this->expectException(RuntimeException::class);
 		$this->expectExceptionMessage('Cannot retrieve stream after it has already been moved');
@@ -182,7 +182,7 @@ class UploadedFileTest extends TestCase{
 	 */
 	public function testConstructorDoesNotRaiseExceptionForInvalidStreamWhenErrorStatusPresent(int $status){
 		$uploadedFile = new UploadedFile('not ok', 0, $status);
-		$this->assertSame($status, $uploadedFile->getError());
+		$this::assertSame($status, $uploadedFile->getError());
 	}
 
 	/**
@@ -218,7 +218,7 @@ class UploadedFileTest extends TestCase{
 		$uploadedFile = new UploadedFile($from, 100, UPLOAD_ERR_OK, basename($from), 'text/plain');
 		$uploadedFile->moveTo($to);
 
-		$this->assertFileEquals(__FILE__, $to);
+		$this::assertFileEquals(__FILE__, $to);
 	}
 
 	public function dataNormalizeFiles(){
@@ -384,7 +384,7 @@ class UploadedFileTest extends TestCase{
 	public function testNormalizeFiles(array $files, array $expected){
 		$result = normalize_files($files);
 
-		$this->assertEquals($expected, $result);
+		$this::assertEquals($expected, $result);
 	}
 
 	public function testNormalizeFilesRaisesException(){

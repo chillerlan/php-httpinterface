@@ -70,8 +70,8 @@ class CurlHandleTest extends TestCase{
 
 			$data = get_json($response);
 
-			$this->assertSame($url, $data->url);
-			$this->assertSame('bar', $data->args->foo);
+			$this::assertSame($url, $data->url);
+			$this::assertSame('bar', $data->args->foo);
 		}
 		catch(Exception $e){
 			$this->markTestSkipped('error: '.$e->getMessage());
@@ -113,10 +113,10 @@ class CurlHandleTest extends TestCase{
 
 			$data = get_json($response);
 
-			$this->assertSame($url, $data->url);
-			$this->assertSame('x-www-form-urlencoded', $data->headers->{'Content-Type'});
-			$this->assertSame(strlen($body), (int)$data->headers->{'Content-Length'});
-			$this->assertSame($body, $data->data);
+			$this::assertSame($url, $data->url);
+			$this::assertSame('x-www-form-urlencoded', $data->headers->{'Content-Type'});
+			$this::assertSame(strlen($body), (int)$data->headers->{'Content-Length'});
+			$this::assertSame($body, $data->data);
 		}
 		catch(Exception $e){
 			$this->markTestSkipped('error: '.$e->getMessage());
@@ -148,11 +148,11 @@ class CurlHandleTest extends TestCase{
 
 			$data = get_json($response);
 
-			$this->assertSame($url, $data->url);
-			$this->assertSame('application/json', $data->headers->{'Content-Type'});
-			$this->assertSame(strlen($body), (int)$data->headers->{'Content-Length'});
-			$this->assertSame($body, $data->data);
-			$this->assertSame('bar', $data->json->foo);
+			$this::assertSame($url, $data->url);
+			$this::assertSame('application/json', $data->headers->{'Content-Type'});
+			$this::assertSame(strlen($body), (int)$data->headers->{'Content-Length'});
+			$this::assertSame($body, $data->data);
+			$this::assertSame('bar', $data->json->foo);
 		}
 		catch(Exception $e){
 			$this->markTestSkipped('error: '.$e->getMessage());
@@ -179,12 +179,12 @@ class CurlHandleTest extends TestCase{
 
 			$data = get_json($response);
 
-			$this->assertSame(strlen($body), (int)$data->headers->{'Content-Length'});
+			$this::assertSame(strlen($body), (int)$data->headers->{'Content-Length'});
 		}
 		catch(Exception $e){
 			// httpbin times out after 10 seconds and will most likely fail to transfer 1MB of data
 			// so fool the code coverage if that happens, as we're only interested in request creation
-			$this->assertTrue(true);
+			$this::assertTrue(true);
 #			$this->markTestSkipped('error: '.$e->getMessage());
 		}
 	}

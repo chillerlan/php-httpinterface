@@ -38,30 +38,30 @@ class HTTPOptionsTest extends TestCase{
 			],
 		]);
 
-		$this->assertSame(0, $o->curl_options[CURLOPT_SSL_VERIFYHOST]);
-		$this->assertSame(false, $o->curl_options[CURLOPT_SSL_VERIFYPEER]);
-		$this->assertArrayNotHasKey(CURLOPT_CAINFO, $o->curl_options);
-		$this->assertArrayNotHasKey(CURLOPT_CAPATH, $o->curl_options);
+		$this::assertSame(0, $o->curl_options[CURLOPT_SSL_VERIFYHOST]);
+		$this::assertSame(false, $o->curl_options[CURLOPT_SSL_VERIFYPEER]);
+		$this::assertArrayNotHasKey(CURLOPT_CAINFO, $o->curl_options);
+		$this::assertArrayNotHasKey(CURLOPT_CAPATH, $o->curl_options);
 	}
 
 	public function testCaInfoFile(){
 		$file = __DIR__.'/cacert.pem';
 		$o    = new HTTPOptions(['ca_info' => $file]);
 
-		$this->assertSame($file, $o->curl_options[CURLOPT_CAINFO]);
-		$this->assertSame(2, $o->curl_options[CURLOPT_SSL_VERIFYHOST]);
-		$this->assertSame(true, $o->curl_options[CURLOPT_SSL_VERIFYPEER]);
-		$this->assertArrayNotHasKey(CURLOPT_CAPATH, $o->curl_options);
+		$this::assertSame($file, $o->curl_options[CURLOPT_CAINFO]);
+		$this::assertSame(2, $o->curl_options[CURLOPT_SSL_VERIFYHOST]);
+		$this::assertSame(true, $o->curl_options[CURLOPT_SSL_VERIFYPEER]);
+		$this::assertArrayNotHasKey(CURLOPT_CAPATH, $o->curl_options);
 	}
 
 	public function testCaInfoDir(){
 		$dir = __DIR__;
 		$o   = new HTTPOptions(['ca_info' => $dir]);
 
-		$this->assertSame($dir, $o->curl_options[CURLOPT_CAPATH]);
-		$this->assertSame(2, $o->curl_options[CURLOPT_SSL_VERIFYHOST]);
-		$this->assertSame(true, $o->curl_options[CURLOPT_SSL_VERIFYPEER]);
-		$this->assertArrayNotHasKey(CURLOPT_CAINFO, $o->curl_options);
+		$this::assertSame($dir, $o->curl_options[CURLOPT_CAPATH]);
+		$this::assertSame(2, $o->curl_options[CURLOPT_SSL_VERIFYHOST]);
+		$this::assertSame(true, $o->curl_options[CURLOPT_SSL_VERIFYPEER]);
+		$this::assertArrayNotHasKey(CURLOPT_CAINFO, $o->curl_options);
 	}
 
 	public function testCaInfoInvalidException(){
@@ -75,20 +75,20 @@ class HTTPOptionsTest extends TestCase{
 		$file = __DIR__.'/cacert.pem';
 		$o    = new HTTPOptions(['curl_options' => [CURLOPT_CAINFO => $file]]);
 
-		$this->assertSame($file, $o->curl_options[CURLOPT_CAINFO]);
-		$this->assertSame(2, $o->curl_options[CURLOPT_SSL_VERIFYHOST]);
-		$this->assertSame(true, $o->curl_options[CURLOPT_SSL_VERIFYPEER]);
-		$this->assertArrayNotHasKey(CURLOPT_CAPATH, $o->curl_options);
+		$this::assertSame($file, $o->curl_options[CURLOPT_CAINFO]);
+		$this::assertSame(2, $o->curl_options[CURLOPT_SSL_VERIFYHOST]);
+		$this::assertSame(true, $o->curl_options[CURLOPT_SSL_VERIFYPEER]);
+		$this::assertArrayNotHasKey(CURLOPT_CAPATH, $o->curl_options);
 	}
 
 	public function testCurloptCaInfoDir(){
 		$dir = __DIR__;
 		$o   = new HTTPOptions(['curl_options' => [CURLOPT_CAPATH => $dir]]);
 
-		$this->assertSame($dir, $o->curl_options[CURLOPT_CAPATH]);
-		$this->assertSame(2, $o->curl_options[CURLOPT_SSL_VERIFYHOST]);
-		$this->assertSame(true, $o->curl_options[CURLOPT_SSL_VERIFYPEER]);
-		$this->assertArrayNotHasKey(CURLOPT_CAINFO, $o->curl_options);
+		$this::assertSame($dir, $o->curl_options[CURLOPT_CAPATH]);
+		$this::assertSame(2, $o->curl_options[CURLOPT_SSL_VERIFYHOST]);
+		$this::assertSame(true, $o->curl_options[CURLOPT_SSL_VERIFYPEER]);
+		$this::assertArrayNotHasKey(CURLOPT_CAINFO, $o->curl_options);
 	}
 
 	public function testCurloptCaInfoInvalidException(){
@@ -106,9 +106,9 @@ class HTTPOptionsTest extends TestCase{
 
 		$o = new HTTPOptions;
 
-		$this->assertFileExists($o->curl_options[CURLOPT_CAINFO]);
-		$this->assertSame(2, $o->curl_options[CURLOPT_SSL_VERIFYHOST]);
-		$this->assertSame(true, $o->curl_options[CURLOPT_SSL_VERIFYPEER]);
+		$this::assertFileExists($o->curl_options[CURLOPT_CAINFO]);
+		$this::assertSame(2, $o->curl_options[CURLOPT_SSL_VERIFYHOST]);
+		$this::assertSame(true, $o->curl_options[CURLOPT_SSL_VERIFYPEER]);
 	}
 
 }

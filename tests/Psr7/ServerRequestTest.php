@@ -26,7 +26,7 @@ class ServerRequestTest extends TestCase{
 		$params = ['name' => 'value'];
 
 		$r = new ServerRequest(ServerRequest::METHOD_GET, '/', [], null, '1.1', $params);
-		$this->assertSame($params, $r->getServerParams());
+		$this::assertSame($params, $r->getServerParams());
 	}
 
 	public function testCookieParams(){
@@ -36,9 +36,9 @@ class ServerRequestTest extends TestCase{
 
 		$r2 = $r1->withCookieParams($params);
 
-		$this->assertNotSame($r2, $r1);
-		$this->assertEmpty($r1->getCookieParams());
-		$this->assertSame($params, $r2->getCookieParams());
+		$this::assertNotSame($r2, $r1);
+		$this::assertEmpty($r1->getCookieParams());
+		$this::assertSame($params, $r2->getCookieParams());
 	}
 
 	public function testQueryParams(){
@@ -48,9 +48,9 @@ class ServerRequestTest extends TestCase{
 
 		$r2 = $r1->withQueryParams($params);
 
-		$this->assertNotSame($r2, $r1);
-		$this->assertEmpty($r1->getQueryParams());
-		$this->assertSame($params, $r2->getQueryParams());
+		$this::assertNotSame($r2, $r1);
+		$this::assertEmpty($r1->getQueryParams());
+		$this::assertSame($params, $r2->getQueryParams());
 	}
 
 	public function testParsedBody(){
@@ -60,9 +60,9 @@ class ServerRequestTest extends TestCase{
 
 		$r2 = $r1->withParsedBody($params);
 
-		$this->assertNotSame($r2, $r1);
-		$this->assertEmpty($r1->getParsedBody());
-		$this->assertSame($params, $r2->getParsedBody());
+		$this::assertNotSame($r2, $r1);
+		$this::assertEmpty($r1->getParsedBody());
+		$this::assertSame($params, $r2->getParsedBody());
 	}
 
 	public function testParsedBodyInvalidArg(){
@@ -80,31 +80,31 @@ class ServerRequestTest extends TestCase{
 		$r4 = $r3->withoutAttribute('other');
 		$r5 = $r3->withoutAttribute('unknown');
 
-		$this->assertNotSame($r2, $r1);
-		$this->assertNotSame($r3, $r2);
-		$this->assertNotSame($r4, $r3);
-		$this->assertSame($r5, $r3);
+		$this::assertNotSame($r2, $r1);
+		$this::assertNotSame($r3, $r2);
+		$this::assertNotSame($r4, $r3);
+		$this::assertSame($r5, $r3);
 
-		$this->assertSame([], $r1->getAttributes());
-		$this->assertNull($r1->getAttribute('name'));
-		$this->assertSame('something', $r1->getAttribute('name', 'something'), 'Should return the default value');
+		$this::assertSame([], $r1->getAttributes());
+		$this::assertNull($r1->getAttribute('name'));
+		$this::assertSame('something', $r1->getAttribute('name', 'something'), 'Should return the default value');
 
-		$this->assertSame('value', $r2->getAttribute('name'));
-		$this->assertSame(['name' => 'value'], $r2->getAttributes());
-		$this->assertSame(['name' => 'value', 'other' => 'otherValue'], $r3->getAttributes());
-		$this->assertSame(['name' => 'value'], $r4->getAttributes());
+		$this::assertSame('value', $r2->getAttribute('name'));
+		$this::assertSame(['name' => 'value'], $r2->getAttributes());
+		$this::assertSame(['name' => 'value', 'other' => 'otherValue'], $r3->getAttributes());
+		$this::assertSame(['name' => 'value'], $r4->getAttributes());
 	}
 
 	public function testNullAttribute(){
 		$r = (new ServerRequest('GET', '/'))->withAttribute('name', null);
 
-		$this->assertSame(['name' => null], $r->getAttributes());
-		$this->assertNull($r->getAttribute('name', 'different-default'));
+		$this::assertSame(['name' => null], $r->getAttributes());
+		$this::assertNull($r->getAttribute('name', 'different-default'));
 
 		$requestWithoutAttribute = $r->withoutAttribute('name');
 
-		$this->assertSame([], $requestWithoutAttribute->getAttributes());
-		$this->assertSame('different-default', $requestWithoutAttribute->getAttribute('name', 'different-default'));
+		$this::assertSame([], $requestWithoutAttribute->getAttributes());
+		$this::assertSame('different-default', $requestWithoutAttribute->getAttribute('name', 'different-default'));
 	}
 
 	public function testUploadedFiles(){
@@ -116,9 +116,9 @@ class ServerRequestTest extends TestCase{
 
 		$r2 = $r1->withUploadedFiles($files);
 
-		$this->assertNotSame($r2, $r1);
-		$this->assertSame([], $r1->getUploadedFiles());
-		$this->assertSame($files, $r2->getUploadedFiles());
+		$this::assertNotSame($r2, $r1);
+		$this::assertSame([], $r1->getUploadedFiles());
+		$this::assertSame($files, $r2->getUploadedFiles());
 	}
 
 }
