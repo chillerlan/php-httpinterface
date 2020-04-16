@@ -212,13 +212,6 @@ function r_rawurlencode($data){
 
 /**
  * from https://github.com/abraham/twitteroauth/blob/master/src/Util.php
- *
- * @param array  $params
- * @param bool   $urlencode
- * @param string $delimiter
- * @param string $enclosure
- *
- * @return string
  */
 function build_http_query(array $params, bool $urlencode = null, string $delimiter = null, string $enclosure = null):string{
 

@@ -36,44 +36,20 @@ class Uri implements UriInterface{
 		'ldap'   => 389,
 	];
 
-	/**
-	 * @var string
-	 */
 	protected string $scheme = '';
 
-	/**
-	 * @var string
-	 */
 	protected string $user = '';
 
-	/**
-	 * @var string
-	 */
 	protected ?string $pass = null;
 
-	/**
-	 * @var string
-	 */
 	protected string $host = '';
 
-	/**
-	 * @var int
-	 */
 	protected ?int $port = null;
 
-	/**
-	 * @var string
-	 */
 	protected string $path = '';
 
-	/**
-	 * @var string
-	 */
 	protected string $query = '';
 
-	/**
-	 * @var string
-	 */
 	protected string $fragment = '';
 
 	/**
@@ -85,7 +61,7 @@ class Uri implements UriInterface{
 	 */
 	public function __construct(string $uri = null){
 
-		if($uri !== ''){
+		if($uri !== null && $uri !== ''){
 			$parts = parse_url($uri);
 
 			if($parts === false){

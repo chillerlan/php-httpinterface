@@ -29,10 +29,8 @@ class CurlMultiClient implements LoggerAwareInterface{
 	/** @var \chillerlan\Settings\SettingsContainerInterface|\chillerlan\HTTP\HTTPOptions */
 	protected SettingsContainerInterface $options;
 
-	/** @var \Psr\Http\Message\ResponseFactoryInterface */
 	protected ResponseFactoryInterface $responseFactory;
 
-	/** @var \chillerlan\HTTP\CurlUtils\MultiResponseHandlerInterface */
 	protected ?MultiResponseHandlerInterface $multiResponseHandler = null;
 
 	/**
@@ -199,11 +197,7 @@ class CurlMultiClient implements LoggerAwareInterface{
 	}
 
 	/**
-	 * @param \Psr\Http\Message\RequestInterface $request
-	 * @param int|null                           $id
-	 * @param int|null                           $retries
 	 *
-	 * @return void
 	 */
 	protected function createHandle(RequestInterface $request = null, int $id = null, int $retries = null):void{
 
@@ -216,7 +210,6 @@ class CurlMultiClient implements LoggerAwareInterface{
 			$request = array_shift($this->requests);
 		}
 
-		/** @var \chillerlan\HTTP\CurlUtils\CurlHandleInterface $handle */
 		$handle          = new $this->options->curlHandle($request, $this->responseFactory->createResponse(), $this->options);
 		$handle->id      = $id ?? $this->handleCounter++;
 		$handle->retries = $retries ?? 1;

@@ -20,19 +20,10 @@ use function is_string, preg_match, strtoupper;
 
 class Request extends Message implements RequestInterface, RequestMethodInterface{
 
-	/**
-	 * @var string
-	 */
 	protected string $method;
 
-	/**
-	 * @var \Psr\Http\Message\UriInterface
-	 */
 	protected UriInterface $uri;
 
-	/**
-	 * @var string
-	 */
 	protected ?string $requestTarget = null;
 
 	/**

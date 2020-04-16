@@ -22,7 +22,7 @@ use function array_merge, basename, is_string, pathinfo, random_bytes, sha1, str
 use const PATHINFO_EXTENSION;
 
 /**
- * @property \chillerlan\HTTP\Psr7\Stream $stream
+ * @property \chillerlan\HTTP\Psr7\Stream|null $stream
  */
 final class MultipartStream extends StreamAbstract{
 
@@ -39,7 +39,7 @@ final class MultipartStream extends StreamAbstract{
 	/**
 	 * MultipartStream constructor.
 	 *
-	 * @param array        $elements [
+	 * @param array|null   $elements [
 	 *                                   name     => string,
 	 *                                   contents => StreamInterface/resource/string,
 	 *                                   headers  => array,

@@ -103,7 +103,7 @@ class UriExtended extends Uri{
 	 *
 	 * @param string $key Query string key to remove.
 	 *
-	 * @return \Psr\Http\Message\UriInterface|\chillerlan\HTTP\Psr7\UriExtended
+	 * @return \chillerlan\HTTP\Psr7\UriExtended
 	 */
 	public function withoutQueryValue($key):UriExtended{
 		$current = $this->getQuery();
@@ -133,7 +133,7 @@ class UriExtended extends Uri{
 	 * @param string      $key   Key to set.
 	 * @param string|null $value Value to set
 	 *
-	 * @return \Psr\Http\Message\UriInterface|\chillerlan\HTTP\Psr7\UriExtended
+	 * @return \chillerlan\HTTP\Psr7\UriExtended
 	 */
 	public function withQueryValue($key, $value):UriExtended{
 		$current = $this->getQuery();

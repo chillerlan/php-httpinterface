@@ -9,12 +9,13 @@
 
 namespace chillerlan\HTTP\Psr17;
 
+use Psr\Http\Message\ServerRequestInterface;
 use chillerlan\HTTP\Psr7\{ServerRequest, Stream, UriExtended};
 use InvalidArgumentException;
 use Psr\Http\Message\StreamInterface;
 
 use function chillerlan\HTTP\Psr7\normalize_files;
-use function explode, function_exists, getallheaders, is_file, is_readable, is_scalar, is_string, method_exists, str_replace;
+use function explode, function_exists, getallheaders, is_scalar, method_exists, str_replace;
 
 const PSR17_INCLUDES = true;
 
@@ -54,10 +55,8 @@ const STREAM_MODES_WRITE = STREAM_MODES_READ_WRITE + [
  * $_COOKIE
  * $_FILES
  * $_SERVER
- *
- * @return \chillerlan\HTTP\Psr7\ServerRequest|\Psr\Http\Message\ServerRequestInterface
  */
-function create_server_request_from_globals():ServerRequest{
+function create_server_request_from_globals():ServerRequestInterface{
 
 	$serverRequest = new ServerRequest(
 		$_SERVER['REQUEST_METHOD'] ?? ServerRequest::METHOD_GET,
@@ -78,8 +77,6 @@ function create_server_request_from_globals():ServerRequest{
 
 /**
  * Get a Uri populated with values from $_SERVER.
- *
- * @return \chillerlan\HTTP\Psr7\UriExtended|\Psr\Http\Message\UriInterface
  */
 function create_uri_from_globals():UriExtended{
 	$parts    = [];
@@ -122,6 +119,7 @@ function create_uri_from_globals():UriExtended{
 		$parts['query'] = $_SERVER['QUERY_STRING'];
 	}
 
+	/** @noinspection PhpIncompatibleReturnTypeInspection */
 	return UriExtended::fromParts($parts);
 }
 
@@ -130,13 +128,13 @@ function create_uri_from_globals():UriExtended{
  *
  * The stream SHOULD be created with a temporary resource.
  *
- * @param string      $content String content with which to populate the stream.
- * @param string|null $mode    one of \chillerlan\HTTP\Psr17\STREAM_MODES_WRITE
- * @param bool        $rewind  rewind the stream
+ * @param string $content String content with which to populate the stream.
+ * @param string $mode    one of \chillerlan\HTTP\Psr17\STREAM_MODES_WRITE
+ * @param bool   $rewind  rewind the stream
  *
- * @return \chillerlan\HTTP\Psr7\Stream|\Psr\Http\Message\StreamInterface
+ * @return \Psr\Http\Message\StreamInterface
  */
-function create_stream(string $content = '', string $mode = 'r+', bool $rewind = true):Stream{
+function create_stream(string $content = '', string $mode = 'r+', bool $rewind = true):StreamInterface{
 
 	if(!isset(STREAM_MODES_WRITE[$mode])){
 		throw new InvalidArgumentException('invalid mode');
@@ -158,7 +156,7 @@ function create_stream(string $content = '', string $mode = 'r+', bool $rewind =
 /**
  * @param mixed $in
  *
- * @return \chillerlan\HTTP\Psr7\Stream|\Psr\Http\Message\StreamInterface
+ * @return \Psr\Http\Message\StreamInterface
  */
 function create_stream_from_input($in = null):StreamInterface{
 	$in = $in ?? '';
@@ -167,8 +165,8 @@ function create_stream_from_input($in = null):StreamInterface{
 	// a) trouble if the given string accidentally matches a file path, and
 	// b) security implications because of the above.
 	// use with caution and never with user input!
-#	if(is_string($in) && is_file($in) && is_readable($in)){
-#		return new Stream(fopen($in, 'r'));
+#	if(\is_string($in) && \is_file($in) && \is_readable($in)){
+#		return new Stream(\fopen($in, 'r'));
 #	}
 
 	if(is_scalar($in)){

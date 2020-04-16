@@ -14,40 +14,24 @@ namespace chillerlan\HTTP\Psr7;
 
 use Exception, InvalidArgumentException, RuntimeException;
 
-use function clearstatcache, fclose, feof, fread, fstat, ftell, fwrite, is_resource, stream_get_contents,
-	stream_get_meta_data, trigger_error;
+use function clearstatcache, fclose, feof, fread, fstat, ftell, fwrite, is_resource, stream_get_contents, stream_get_meta_data;
 
-use const E_USER_ERROR, SEEK_SET;
+use const SEEK_SET;
 use const chillerlan\HTTP\Psr17\{STREAM_MODES_READ, STREAM_MODES_WRITE};
 
 /**
- * @property resource $stream
+ * @property resource|null $stream
  */
 final class Stream extends StreamAbstract{
 
-	/**
-	 * @var bool
-	 */
 	private bool $seekable;
 
-	/**
-	 * @var bool
-	 */
 	private bool $readable;
 
-	/**
-	 * @var bool
-	 */
 	private bool $writable;
 
-	/**
-	 * @var string|null
-	 */
 	private ?string $uri = null;
 
-	/**
-	 * @var int|null
-	 */
 	private ?int $size = null;
 
 	/**
@@ -90,11 +74,7 @@ final class Stream extends StreamAbstract{
 		}
 		// @codeCoverageIgnoreStart
 		catch(Exception $e){
-			// https://bugs.php.net/bug.php?id=53648
-			// @todo: fixed in 7.4
-			trigger_error('Stream::__toString exception: '.$e->getMessage(), E_USER_ERROR);
-
-			return '';
+			throw new RuntimeException('Stream::__toString exception: '.$e->getMessage());
 		}
 		// @codeCoverageIgnoreEnd
 

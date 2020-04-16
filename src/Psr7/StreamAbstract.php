@@ -19,9 +19,9 @@ use const SEEK_SET;
 abstract class StreamAbstract implements StreamInterface{
 
 	/**
-	 * @var \Psr\Http\Message\StreamInterface|resource
+	 * @var \Psr\Http\Message\StreamInterface|resource|null
 	 */
-	protected $stream;
+	protected $stream = null;
 
 	/**
 	 * Closes the stream when the destructed

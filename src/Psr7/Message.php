@@ -21,30 +21,15 @@ use function array_map, array_merge, implode, is_array, strtolower, trim;
 
 abstract class Message implements MessageInterface{
 
-	/**
-	 * @var array
-	 */
-	protected $headers = [];
+	protected array $headers = [];
+	/** @var string[] */
+	protected array $headerNames = [];
 
-	/**
-	 * @var array
-	 */
-	protected $headerNames = [];
+	protected string $version;
 
-	/**
-	 * @var string
-	 */
-	protected $version;
+	protected StreamInterface $body;
 
-	/**
-	 * @var \Psr\Http\Message\StreamInterface
-	 */
-	protected $body;
-
-	/**
-	 * @var \chillerlan\HTTP\Psr17\StreamFactory
-	 */
-	protected $streamFactory;
+	protected StreamFactory $streamFactory;
 
 	/**
 	 * Message constructor.
@@ -252,9 +237,7 @@ abstract class Message implements MessageInterface{
 	 * @see https://tools.ietf.org/html/rfc7230#section-3.2.4
 	 */
 	protected function trimHeaderValues(array $values):array{
-		return array_map(function(string $value):string{
-			return trim($value, " \t");
-		}, $values);
+		return array_map(fn(string $value):string => trim($value, " \t"), $values);
 	}
 
 }
