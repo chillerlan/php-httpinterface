@@ -68,6 +68,8 @@ class QueueRequestHandlerTest extends TestCase{
 
 		// coverage
 		$handler->add($middleware3);
+		// reverse the stack (reversed behaviour is similar to MiddlewareDispatcher)
+#		$handler->reverseStack();
 
 		// execute it:
 		$response = $handler->handle(create_server_request_from_globals());

@@ -18,6 +18,8 @@ use chillerlan\HTTP\Psr17\ResponseFactory;
 use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};
 use Psr\Http\Server\{MiddlewareInterface, RequestHandlerInterface};
 
+use function array_reverse;
+
 class QueueRequestHandler implements MiddlewareInterface, RequestHandlerInterface{
 
 	/**
@@ -69,6 +71,15 @@ class QueueRequestHandler implements MiddlewareInterface, RequestHandlerInterfac
 	 */
 	public function add(MiddlewareInterface $middleware):QueueRequestHandler{
 		$this->middlewareStack[] = $middleware;
+
+		return $this;
+	}
+
+	/**
+	 * @return \chillerlan\HTTP\Psr15\QueueRequestHandler
+	 */
+	public function reverseStack():QueueRequestHandler{
+		$this->middlewareStack = array_reverse($this->middlewareStack);
 
 		return $this;
 	}
