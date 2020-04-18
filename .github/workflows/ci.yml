@@ -34,7 +34,7 @@ jobs:
         run: ${{ matrix.php-binary }} $(which composer) update --no-interaction --no-progress --no-suggest
 
       - name: "Run unit tests with phpunit"
-        run: ${{ matrix.php-binary }} vendor/bin/phpunit --configuration=phpunit.xml --no-coverage
+        run: ${{ matrix.php-binary }} vendor/bin/phpunit --configuration=phpunit.xml.dist --no-coverage
 
 
   code-coverage:
@@ -52,10 +52,10 @@ jobs:
         run: php7.4 $(which composer) install --no-interaction --no-progress --no-suggest
 
       - name: "Dump Xdebug filter with phpunit/phpunit"
-        run: php7.4 vendor/bin/phpunit --configuration=phpunit.xml --dump-xdebug-filter=.build/phpunit/xdebug-filter.php
+        run: php7.4 vendor/bin/phpunit --configuration=phpunit.xml.dist --dump-xdebug-filter=.build/phpunit/xdebug-filter.php
 
       - name: "Collect code coverage with Xdebug and phpunit/phpunit"
-        run: php7.4 vendor/bin/phpunit --configuration=phpunit.xml --prepend=.build/phpunit/xdebug-filter.php
+        run: php7.4 vendor/bin/phpunit --configuration=phpunit.xml.dist --prepend=.build/phpunit/xdebug-filter.php
 
       - name: "Send code coverage report to Codecov.io"
         env:
