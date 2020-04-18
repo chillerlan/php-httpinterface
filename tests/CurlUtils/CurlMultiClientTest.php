@@ -22,6 +22,9 @@ use Psr\Http\Message\{RequestInterface, ResponseInterface};
 use function chillerlan\HTTP\Psr7\build_http_query;
 use function array_column, implode, in_array, ksort;
 
+/**
+ * @group slow
+ */
 class CurlMultiClientTest extends TestCase{
 
 	protected CurlMultiClient $http;

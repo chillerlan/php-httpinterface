@@ -24,6 +24,9 @@ use function chillerlan\HTTP\Psr17\create_stream;
 use function chillerlan\HTTP\Psr7\get_json;
 use function str_repeat, strlen, strtolower;
 
+/**
+ * @group slow
+ */
 class CurlHandleTest extends TestCase{
 
 	protected ClientInterface $http;

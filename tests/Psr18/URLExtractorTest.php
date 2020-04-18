@@ -18,6 +18,8 @@ use chillerlan\HTTP\Psr7\Request;
 use const CURLOPT_FOLLOWLOCATION;
 
 /**
+ * @group slow
+ *
  * @property \chillerlan\HTTP\Psr18\URLExtractor $http
  */
 class URLExtractorTest extends HTTPClientTestAbstract{

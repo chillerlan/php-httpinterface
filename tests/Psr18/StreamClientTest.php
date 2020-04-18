@@ -14,6 +14,9 @@ namespace chillerlan\HTTPTest\Psr18;
 
 use chillerlan\HTTP\Psr18\StreamClient;
 
+/**
+ * @group slow
+ */
 class StreamClientTest extends HTTPClientTestAbstract{
 
 	protected function setUp():void{

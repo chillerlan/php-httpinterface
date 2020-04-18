@@ -14,6 +14,9 @@ namespace chillerlan\HTTPTest\Psr18;
 
 use chillerlan\HTTP\Psr18\CurlClient;
 
+/**
+ * @group slow
+ */
 class CurlClientNoCATest extends HTTPClientTestAbstract{
 
 	protected function setUp():void{
