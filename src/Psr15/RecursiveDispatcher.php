@@ -1,12 +1,12 @@
 <?php
 /**
- * Class MiddlewareDispatcher
+ * Class RecursiveDispatcher
  *
  * A simple middleware dispatcher based on Slim
  *
  * @see https://github.com/slimphp/Slim/blob/de07f779d229ec06080259a816b0740de830438c/Slim/MiddlewareDispatcher.php
  *
- * @filesource   MiddlewareDispatcher.php
+ * @filesource   RecursiveDispatcher.php
  * @created      15.04.2020
  * @package      chillerlan\HTTP\Psr15;
  * @author       smiley <smiley@chillerlan.net>
@@ -19,7 +19,7 @@ namespace chillerlan\HTTP\Psr15;;
 use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};
 use Psr\Http\Server\{MiddlewareInterface, RequestHandlerInterface};
 
-class MiddlewareDispatcher implements RequestHandlerInterface{
+class RecursiveDispatcher implements RequestHandlerInterface{
 
 	/**
 	 * Tip of the middleware call stack
@@ -27,7 +27,7 @@ class MiddlewareDispatcher implements RequestHandlerInterface{
 	protected RequestHandlerInterface $tip;
 
 	/**
-	 * MiddlewareDispatcher constructor.
+	 * RecursiveDispatcher constructor.
 	 */
 	public function __construct(RequestHandlerInterface $kernel){
 		$this->tip = $kernel;
@@ -40,7 +40,7 @@ class MiddlewareDispatcher implements RequestHandlerInterface{
 	 * that have been added before will be executed after the newly
 	 * added one (last in, first out).
 	 */
-	public function add(MiddlewareInterface $middleware):MiddlewareDispatcher{
+	public function add(MiddlewareInterface $middleware):RecursiveDispatcher{
 
 		$this->tip = new class ($middleware, $this->tip) implements RequestHandlerInterface{
 
@@ -63,10 +63,10 @@ class MiddlewareDispatcher implements RequestHandlerInterface{
 	/**
 	 * @param \Psr\Http\Server\MiddlewareInterface[] $middlewareStack
 	 *
-	 * @return \chillerlan\HTTP\Psr15\MiddlewareDispatcher
+	 * @return \chillerlan\HTTP\Psr15\RecursiveDispatcher
 	 * @throws \chillerlan\HTTP\Psr15\MiddlewareException
 	 */
-	public function addStack(iterable $middlewareStack):MiddlewareDispatcher{
+	public function addStack(iterable $middlewareStack):RecursiveDispatcher{
 
 		foreach($middlewareStack as $middleware){
 

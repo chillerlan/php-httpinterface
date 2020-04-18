@@ -68,7 +68,7 @@ class QueueRequestHandlerTest extends TestCase{
 
 		// coverage
 		$handler->add($middleware3);
-		// reverse the stack (reversed behaviour is similar to MiddlewareDispatcher)
+		// reverse the stack (reversed behaviour is similar to RecursiveDispatcher)
 #		$handler->reverseStack();
 
 		// execute it:

@@ -1,8 +1,8 @@
 <?php
 /**
- * Class MiddlewareDispatcherTest
+ * Class RecursiveDispatcherTest
  *
- * @filesource   MiddlewareDispatcherTest.php
+ * @filesource   RecursiveDispatcherTest.php
  * @created      15.04.2020
  * @package      chillerlan\HTTPTest\Psr15
  * @author       smiley <smiley@chillerlan.net>
@@ -12,7 +12,7 @@
 
 namespace chillerlan\HTTPTest\Psr15;
 
-use chillerlan\HTTP\Psr15\MiddlewareDispatcher;
+use chillerlan\HTTP\Psr15\RecursiveDispatcher;
 use chillerlan\HTTP\Psr15\MiddlewareException;
 use chillerlan\HTTP\Psr7\Response;
 use PHPUnit\Framework\TestCase;
@@ -22,7 +22,7 @@ use Psr\Http\Server\{MiddlewareInterface, RequestHandlerInterface};
 use function array_keys;
 use function chillerlan\HTTP\Psr17\create_server_request_from_globals;
 
-class MiddlewareDispatcherTest extends TestCase{
+class RecursiveDispatcherTest extends TestCase{
 
 	public function testHandler(){
 
@@ -65,7 +65,7 @@ class MiddlewareDispatcherTest extends TestCase{
 			}
 		};
 
-		$dispatcher = new MiddlewareDispatcher($handler);
+		$dispatcher = new RecursiveDispatcher($handler);
 
 		$dispatcher->addStack($middlewareStack);
 
@@ -90,7 +90,7 @@ class MiddlewareDispatcherTest extends TestCase{
 			}
 		};
 
-		$dispatcher = new MiddlewareDispatcher($handler);
+		$dispatcher = new RecursiveDispatcher($handler);
 
 		$dispatcher->addStack(['foo']);
 	}
