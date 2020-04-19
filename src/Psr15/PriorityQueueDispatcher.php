@@ -1,10 +1,10 @@
 <?php
 /**
- * Class PriorityQueueRequestHandler
+ * Class PriorityQueueDispatcher
  *
  * @link https://github.com/libreworks/caridea-dispatch
  *
- * @filesource   PriorityQueueRequestHandler.php
+ * @filesource   PriorityQueueDispatcher.php
  * @created      10.03.2019
  * @package      chillerlan\HTTP\Psr15
  * @author       smiley <smiley@chillerlan.net>
@@ -18,12 +18,12 @@ use Psr\Http\Server\MiddlewareInterface;
 
 use function usort;
 
-class PriorityQueueRequestHandler extends QueueRequestHandler{
+class PriorityQueueDispatcher extends QueueDispatcher{
 
 	/**
 	 * @inheritDoc
 	 */
-	public function addStack(iterable $middlewareStack):QueueRequestHandler{
+	public function addStack(iterable $middlewareStack):QueueDispatcher{
 
 		foreach($middlewareStack as $middleware){
 
@@ -46,7 +46,7 @@ class PriorityQueueRequestHandler extends QueueRequestHandler{
 	/**
 	 * @inheritDoc
 	 */
-	public function add(MiddlewareInterface $middleware):QueueRequestHandler{
+	public function add(MiddlewareInterface $middleware):QueueDispatcher{
 
 		if(!$middleware instanceof PriorityMiddlewareInterface){
 			$middleware = new PriorityMiddleware($middleware);

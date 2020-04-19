@@ -13,7 +13,7 @@
 namespace chillerlan\HTTPTest\Psr15;
 
 use chillerlan\HTTP\Psr7\Response;
-use chillerlan\HTTP\Psr15\{MiddlewareException, QueueRequestHandler};
+use chillerlan\HTTP\Psr15\{MiddlewareException, QueueDispatcher};
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};
 use Psr\Http\Server\{MiddlewareInterface, RequestHandlerInterface};
@@ -23,56 +23,26 @@ use function chillerlan\HTTP\Psr17\create_server_request_from_globals;
 
 class QueueRequestHandlerTest extends TestCase{
 
-	public function testHandler(){
+	protected RequestHandlerInterface $dispatcher;
 
-		$middlewareStack = [
-			new class() implements MiddlewareInterface{
-				public function process(ServerRequestInterface $request, RequestHandlerInterface $handler):ResponseInterface{
-					TestCase::assertSame([], $request->getAttributes());
-					$r = $handler->handle($request->withAttribute('foo1', 'bar1'));
-					TestCase::assertTrue($r->hasHeader('X-Out-Second'));
+	protected function setUp():void{
+		$this->dispatcher = $this->getDispatcher();
+ 	}
 
-					return $r->withHeader('X-Out-Third', '1');
-				}
-			},
-			new class() implements MiddlewareInterface{
-				public function process(ServerRequestInterface $request, RequestHandlerInterface $handler):ResponseInterface{
-					TestCase::assertSame(['foo1' => 'bar1'], $request->getAttributes());
-					$r = $handler->handle($request->withAttribute('foo2', 'bar2'));
-					TestCase::assertTrue($r->hasHeader('X-Out-First'));
+ 	protected function getDispatcher():RequestHandlerInterface{
+	    // Create request handler instance:
+	    $dispatcher = new QueueDispatcher($this->getTestMiddlewareStack(), $this->getTestFallbackHandler());
 
-					return $r->withHeader('X-Out-Second', '1');
-				}
-			},
-		];
+	    // coverage
+	    $dispatcher->add($this->getTestMiddleware());
 
-		$middleware3 = new class() implements MiddlewareInterface{
-			public function process(ServerRequestInterface $request, RequestHandlerInterface $handler):ResponseInterface{
-				TestCase::assertSame(['foo1' => 'bar1', 'foo2' => 'bar2'], $request->getAttributes());
-				$r = $handler->handle($request->withAttribute('foo3', 'bar3'));
+	    return $dispatcher;
+	}
 
-				return $r->withHeader('X-Out-First', '1');
-			}
-		};
-
-		// Fallback handler:
-		$fallbackHandler = new class() implements RequestHandlerInterface{
-			public function handle(ServerRequestInterface $request):ResponseInterface{
-				TestCase::assertSame(['foo1' => 'bar1', 'foo2' => 'bar2', 'foo3' => 'bar3'], $request->getAttributes());
-				return new Response(200);
-			}
-		};
-
-		// Create request handler instance:
-		$handler = new QueueRequestHandler($middlewareStack, $fallbackHandler);
-
-		// coverage
-		$handler->add($middleware3);
-		// reverse the stack (reversed behaviour is similar to RecursiveDispatcher)
-#		$handler->reverseStack();
+	public function testDispatcher():void{
 
 		// execute it:
-		$response = $handler->handle(create_server_request_from_globals());
+		$response = $this->dispatcher->handle(create_server_request_from_globals());
 
 		$this::assertSame(
 			['X-Out-First', 'X-Out-Second', 'X-Out-Third'],
@@ -80,11 +50,55 @@ class QueueRequestHandlerTest extends TestCase{
 		);
 	}
 
-	public function testInvalidMiddlewareException(){
+	protected function getTestMiddlewareStack():array{
+		return [
+			new class() implements MiddlewareInterface{
+				public function process(ServerRequestInterface $request, RequestHandlerInterface $handler):ResponseInterface{
+					TestCase::assertSame(['foo3' => 'bar3', 'foo2' => 'bar2'], $request->getAttributes());
+					$r = $handler->handle($request->withAttribute('foo1', 'bar1'));
+					TestCase::assertSame([], array_keys($r->getHeaders()));
+
+					return $r->withHeader('X-Out-First', '1');
+				}
+			},
+			new class() implements MiddlewareInterface{
+				public function process(ServerRequestInterface $request, RequestHandlerInterface $handler):ResponseInterface{
+					TestCase::assertSame(['foo3' => 'bar3'], $request->getAttributes());
+					$r = $handler->handle($request->withAttribute('foo2', 'bar2'));
+					TestCase::assertSame(['X-Out-First'], array_keys($r->getHeaders()));
+
+					return $r->withHeader('X-Out-Second', '1');
+				}
+			},
+		];
+	}
+
+	protected function getTestMiddleware():MiddlewareInterface{
+		return new class() implements MiddlewareInterface{
+			public function process(ServerRequestInterface $request, RequestHandlerInterface $handler):ResponseInterface{
+				TestCase::assertSame([], $request->getAttributes());
+				$r = $handler->handle($request->withAttribute('foo3', 'bar3'));
+				TestCase::assertSame(['X-Out-First', 'X-Out-Second'], array_keys($r->getHeaders()));
+
+				return $r->withHeader('X-Out-Third', '1');
+			}
+		};
+	}
+
+	protected function getTestFallbackHandler():RequestHandlerInterface{
+		return new class() implements RequestHandlerInterface{
+			public function handle(ServerRequestInterface $request):ResponseInterface{
+				TestCase::assertSame(['foo3' => 'bar3', 'foo2' => 'bar2', 'foo1' => 'bar1'], $request->getAttributes());
+				return new Response(200);
+			}
+		};
+	}
+
+	public function testInvalidMiddlewareException():void{
 		$this->expectException(MiddlewareException::class);
 		$this->expectExceptionMessage('invalid middleware');
 
-		new QueueRequestHandler(['foo']);
+		new QueueDispatcher(['foo']);
 	}
 
 }

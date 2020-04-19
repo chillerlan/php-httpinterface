@@ -12,7 +12,7 @@
 
 namespace chillerlan\HTTPTest\Psr15;
 
-use chillerlan\HTTP\Psr15\{MiddlewareException, PriorityMiddleware, PriorityQueueRequestHandler};
+use chillerlan\HTTP\Psr15\{MiddlewareException, PriorityMiddleware, PriorityMiddlewareInterface, PriorityQueueDispatcher};
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};
 use Psr\Http\Server\{MiddlewareInterface, RequestHandlerInterface};
@@ -25,33 +25,30 @@ class PriorityQueueRequestHandlerTest extends TestCase{
 	public function testHandler(){
 
 		$middlewareStack = [
-			// coverage
-			new class() implements MiddlewareInterface{
-				public function process(ServerRequestInterface $request, RequestHandlerInterface $handler):ResponseInterface{
-					return $handler->handle($request)->withHeader('X-Priority-none0', '0');
-				}
-			},
+			$this->getNonPriorityMiddleware(0),
 			$this->getPriorityMiddleware(2),
 			$this->getPriorityMiddleware(3),
 			$this->getPriorityMiddleware(1),
 		];
 
 		// Create request handler instance:
-		$handler = new PriorityQueueRequestHandler($middlewareStack);
+		$handler = new PriorityQueueDispatcher($middlewareStack);
 
 		// coverage
-		$handler->add(new class() implements MiddlewareInterface{
-			public function process(ServerRequestInterface $request, RequestHandlerInterface $handler):ResponseInterface{
-				return $handler->handle($request)->withHeader('X-Priority-none1', '0');
-			}
-		});
+		$handler->add($this->getNonPriorityMiddleware(1));
 
 		// execute it:
 		$response = $handler->handle(create_server_request_from_globals());
 
 		// highest priority shall be processed first and go out last
 		$this::assertSame(
-			['X-Priority-none1', 'X-Priority-none0', 'X-Priority-1', 'X-Priority-2', 'X-Priority-3'],
+			[
+				'X-Priority-3',
+				'X-Priority-2',
+				'X-Priority-1',
+				'X-Priority-None-0',
+				'X-Priority-None-1'
+			],
 			array_keys($response->getHeaders())
 		);
 	}
@@ -60,8 +57,9 @@ class PriorityQueueRequestHandlerTest extends TestCase{
 
 		$middlewareStack = [
 			new PriorityMiddleware(
-				new PriorityQueueRequestHandler([
+				new PriorityQueueDispatcher([
 					$this->getPriorityMiddleware(22),
+					$this->getNonPriorityMiddleware(0),
 					$this->getPriorityMiddleware(33),
 					$this->getPriorityMiddleware(11),
 				]),
@@ -69,19 +67,44 @@ class PriorityQueueRequestHandlerTest extends TestCase{
 			),
 			$this->getPriorityMiddleware(4),
 			$this->getPriorityMiddleware(1),
+			$this->getNonPriorityMiddleware(1),
 			$this->getPriorityMiddleware(3),
 		];
 
-		$handler  = new PriorityQueueRequestHandler($middlewareStack);
+		$handler  = new PriorityQueueDispatcher($middlewareStack);
 		$response = $handler->handle(create_server_request_from_globals());
 
 		$this::assertSame(
-			['X-Priority-1', 'X-Priority-11', 'X-Priority-22', 'X-Priority-33', 'X-Priority-3', 'X-Priority-4'],
+			[
+				'X-Priority-4',
+				'X-Priority-3',
+				'X-Priority-33',
+				'X-Priority-22',
+				'X-Priority-11',
+				'X-Priority-None-0',
+				'X-Priority-1',
+				'X-Priority-None-1'
+			],
 			array_keys($response->getHeaders())
 		);
 	}
 
-	protected function getPriorityMiddleware(int $priority):MiddlewareInterface{
+	protected function getNonPriorityMiddleware(int $id):MiddlewareInterface{
+		return new class($id) implements MiddlewareInterface{
+
+			protected int $id;
+
+			public function __construct(int $id){
+				$this->id = $id;
+			}
+
+			public function process(ServerRequestInterface $request, RequestHandlerInterface $handler):ResponseInterface{
+				return $handler->handle($request)->withHeader('X-Priority-None-'.$this->id, '0');
+			}
+		};
+	}
+
+	protected function getPriorityMiddleware(int $priority):PriorityMiddlewareInterface{
 
 		$middleware = new class($priority) implements MiddlewareInterface{
 
@@ -103,7 +126,7 @@ class PriorityQueueRequestHandlerTest extends TestCase{
 		$this->expectException(MiddlewareException::class);
 		$this->expectExceptionMessage('invalid middleware');
 
-		new PriorityQueueRequestHandler(['foo']);
+		new PriorityQueueDispatcher(['foo']);
 	}
 
 }

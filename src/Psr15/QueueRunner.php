@@ -14,10 +14,11 @@
 
 namespace chillerlan\HTTP\Psr15;
 
+use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};
 use Psr\Http\Server\RequestHandlerInterface;
 
-use function array_shift;
+use function array_pop;
 
 class QueueRunner implements RequestHandlerInterface{
 
@@ -51,9 +52,14 @@ class QueueRunner implements RequestHandlerInterface{
 			return $this->fallbackHandler->handle($request);
 		}
 
-		$middleware = array_shift($this->middlewareStack);
+		return $this->getMiddleware()->process($request, $this);
+	}
 
-		return $middleware->process($request, $this);
+	/**
+	 * @return \Psr\Http\Server\MiddlewareInterface
+	 */
+	protected function getMiddleware():MiddlewareInterface{
+		return array_pop($this->middlewareStack);
 	}
 
 }
