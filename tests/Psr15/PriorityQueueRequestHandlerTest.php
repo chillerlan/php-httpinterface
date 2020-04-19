@@ -122,7 +122,7 @@ class PriorityQueueRequestHandlerTest extends TestCase{
 		return new PriorityMiddleware($middleware, $priority);
 	}
 
-	public function testInvalidMiddlewareException(){
+	public function testInvalidMiddlewareException():void{
 		$this->expectException(MiddlewareException::class);
 		$this->expectExceptionMessage('invalid middleware');
 
