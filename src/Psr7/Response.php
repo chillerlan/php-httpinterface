@@ -27,6 +27,7 @@ final class Response extends Message implements ResponseInterface, StatusCodeInt
 		self::STATUS_CONTINUE                        => 'Continue',
 		self::STATUS_SWITCHING_PROTOCOLS             => 'Switching Protocols',
 		self::STATUS_PROCESSING                      => 'Processing',
+		self::STATUS_EARLY_HINTS                     => 'Early Hints',
 		//Successful 2xx
 		self::STATUS_OK                              => 'OK',
 		self::STATUS_CREATED                         => 'Created',
@@ -73,7 +74,7 @@ final class Response extends Message implements ResponseInterface, StatusCodeInt
 		self::STATUS_UNPROCESSABLE_ENTITY            => 'Unprocessable Entity',
 		self::STATUS_LOCKED                          => 'Locked',
 		self::STATUS_FAILED_DEPENDENCY               => 'Failed Dependency',
-		425                                          => 'Unordered Collection',
+		self::STATUS_TOO_EARLY                       => 'Too Early',
 		self::STATUS_UPGRADE_REQUIRED                => 'Upgrade Required',
 		self::STATUS_PRECONDITION_REQUIRED           => 'Precondition Required',
 		self::STATUS_TOO_MANY_REQUESTS               => 'Too Many Requests',
