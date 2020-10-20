@@ -1,6 +1,6 @@
 # chillerlan/php-httpinterface
 
-A [PSR-7](https://www.php-fig.org/psr/psr-7/)/[PSR-17](https://www.php-fig.org/psr/psr-17/)/[PSR-18](https://www.php-fig.org/psr/psr-18/) implementation for PHP 7.2+.
+A [PSR-7](https://www.php-fig.org/psr/psr-7/)/[PSR-17](https://www.php-fig.org/psr/psr-17/)/[PSR-18](https://www.php-fig.org/psr/psr-18/) implementation for PHP 7.4+.
 
 [![version][packagist-badge]][packagist]
 [![license][license-badge]][license]
@@ -32,7 +32,7 @@ A [PSR-7](https://www.php-fig.org/psr/psr-7/)/[PSR-17](https://www.php-fig.org/p
 # Documentation
 
 ## Requirements
-- PHP 7.2+
+- PHP 7.4+
   - the cURL extension
 
 ## Installation
@@ -93,11 +93,11 @@ PSR-15 interface | class/signature
 -----------------|----------------
 `RequestHandlerInterface` | `EmptyResponseHandler(ResponseFactoryInterface $responseFactory, int $status)` 
 `RequestHandlerInterface` | `QueueRunner(array $middlewareStack, RequestHandlerInterface $fallbackHandler)`
-`RequestHandlerInterface`, `MiddlewareInterface` | `QueueRequestHandler(iterable $middlewareStack = null, RequestHandlerInterface $fallbackHandler = null)` 
-`RequestHandlerInterface`, `MiddlewareInterface` | `PriorityQueueRequestHandler(iterable $middlewareStack = null, RequestHandlerInterface $fallbackHandler = null)`
+`RequestHandlerInterface`, `MiddlewareInterface` | `QueueDispatcher(iterable $middlewareStack = null, RequestHandlerInterface $fallbackHandler = null)` 
+`RequestHandlerInterface`, `MiddlewareInterface` | `PriorityQueueDispatcher(iterable $middlewareStack = null, RequestHandlerInterface $fallbackHandler = null)`
 `MiddlewareInterface` | `PriorityMiddleware(MiddlewareInterface $middleware, int $priority = null)`
 
-#### QueueRequestHandler example
+#### QueueDispatcher example
 
 ```php
 // an iterable that contains several PSR-15 MiddlewareInterfaces
@@ -109,7 +109,7 @@ $middlewareStack = [
 $fallbackHandler = new EmptyResponseHandler($responseFactoryInterface, 200);
 
 // Create request handler instance:
-$handler = new QueueRequestHandler($middlewareStack, $fallbackHandler);
+$handler = new QueueDispatcher($middlewareStack, $fallbackHandler);
 
 // manually add a middleware
 $handler->add($middlewareInterface);
@@ -117,7 +117,7 @@ $handler->add($middlewareInterface);
 // execute it:
 $response = $handler->handle($serverRequestInterface);
 ```
-The `PriorityQueueRequestHandler` works similar, with the difference that it also accepts `PriorityMiddlewareInterface` in the middleware stack, which allows you to specify a priority to control the order of execution.
+The `PriorityQueueDispatcher` works similar, with the difference that it also accepts `PriorityMiddlewareInterface` in the middleware stack, which allows you to specify a priority to control the order of execution.
 
 ### [PSR-17](https://www.php-fig.org/psr/psr-17/) Factories & helpers
 PSR-17 interface | class/signature
