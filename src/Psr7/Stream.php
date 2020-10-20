@@ -117,7 +117,7 @@ final class Stream extends StreamAbstract{
 			return $this->size;
 		}
 
-		if(!isset($this->stream)){
+		if(!is_resource($this->stream)){
 			return null;
 		}
 
@@ -141,6 +141,11 @@ final class Stream extends StreamAbstract{
 	 * @inheritDoc
 	 */
 	public function tell():int{
+
+		if(!is_resource($this->stream)){
+			throw new RuntimeException('Invalid stream'); // @codeCoverageIgnore
+		}
+
 		$result = ftell($this->stream);
 
 		if($result === false){
@@ -168,6 +173,10 @@ final class Stream extends StreamAbstract{
 	 * @inheritDoc
 	 */
 	public function seek($offset, $whence = SEEK_SET):void{
+
+		if(!is_resource($this->stream)){
+			throw new RuntimeException('Invalid stream'); // @codeCoverageIgnore
+		}
 
 		if(!$this->seekable){
 			throw new RuntimeException('Stream is not seekable');
@@ -197,6 +206,10 @@ final class Stream extends StreamAbstract{
 	 */
 	public function write($string):int{
 
+		if(!is_resource($this->stream)){
+			throw new RuntimeException('Invalid stream'); // @codeCoverageIgnore
+		}
+
 		if(!$this->writable){
 			throw new RuntimeException('Cannot write to a non-writable stream');
 		}
@@ -224,6 +237,10 @@ final class Stream extends StreamAbstract{
 	 */
 	public function read($length):string{
 
+		if(!is_resource($this->stream)){
+			throw new RuntimeException('Invalid stream'); // @codeCoverageIgnore
+		}
+
 		if(!$this->readable){
 			throw new RuntimeException('Cannot read from non-readable stream');
 		}
@@ -249,6 +266,11 @@ final class Stream extends StreamAbstract{
 	 * @inheritDoc
 	 */
 	public function getContents():string{
+
+		if(!is_resource($this->stream)){
+			throw new RuntimeException('Invalid stream'); // @codeCoverageIgnore
+		}
+
 		$contents = stream_get_contents($this->stream);
 
 		if($contents === false){
@@ -263,7 +285,7 @@ final class Stream extends StreamAbstract{
 	 */
 	public function getMetadata($key = null){
 
-		if(!isset($this->stream)){
+		if(!is_resource($this->stream)){
 			return $key ? null : [];
 		}
 		elseif($key === null){
