@@ -3,6 +3,9 @@ language: php
 matrix:
   include:
     - php: 7.4
+    - php: nightly
+  allow_failures:
+    - php: nightly
 
 before_install:
   - curl -o tests/cacert.pem https://curl.haxx.se/ca/cacert.pem
