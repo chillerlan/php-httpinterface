@@ -91,11 +91,11 @@ jobs:
 
       - name: "Install lowest dependencies with composer"
         if: matrix.dependencies == 'lowest'
-        run: composer update --no-ansi --no-interaction --no-progress --no-suggest --prefer-lowest
+        run: composer update --no-ansi --no-interaction --no-progress --no-suggest --prefer-lowest --ignore-platform-reqs
 
       - name: "Install highest dependencies with composer"
         if: matrix.dependencies == 'highest'
-        run: composer update --no-ansi --no-interaction --no-progress --no-suggest
+        run: composer update --no-ansi --no-interaction --no-progress --no-suggest --ignore-platform-reqs
 
       - name: "Run tests with phpunit"
         run: php vendor/bin/phpunit --configuration=phpunit.xml.dist
