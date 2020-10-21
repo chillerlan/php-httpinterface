@@ -63,7 +63,6 @@ class Uri implements UriInterface{
 
 		if($uri !== null && $uri !== ''){
 			$parts = parse_url($uri);
-			\var_dump($parts);
 
 			if($parts === false){
 				throw new InvalidArgumentException('invalid URI: "'.$uri.'"');
