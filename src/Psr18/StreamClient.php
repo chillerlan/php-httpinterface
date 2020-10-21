@@ -56,6 +56,7 @@ class StreamClient extends HTTPClientAbstract{
 
 		$requestUri = (string)$uri->withFragment('');
 
+		/** @phan-suppress-next-line PhanTypeMismatchArgumentInternal */
 		set_error_handler(function(int $severity, string $msg, string $file, int $line):void{
 			throw new ErrorException($msg, 0, $severity, $file, $line);
 		});

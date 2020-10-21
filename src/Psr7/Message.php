@@ -8,6 +8,8 @@
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2018 smiley
  * @license      MIT
+ *
+ * @phan-file-suppress PhanParamSignatureMismatch
  */
 
 namespace chillerlan\HTTP\Psr7;
@@ -212,6 +214,7 @@ abstract class Message implements MessageInterface{
 			/** @noinspection DuplicatedCode */
 			if(isset($this->headerNames[$normalized])){
 				$name                 = $this->headerNames[$normalized];
+				/** @phan-suppress-next-line PhanTypeInvalidDimOffset */
 				$this->headers[$name] = array_merge($this->headers[$name], $value);
 			}
 			else{

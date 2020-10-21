@@ -8,6 +8,8 @@
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2018 smiley
  * @license      MIT
+ *
+ * @phan-file-suppress PhanParamSignatureMismatch
  */
 
 namespace chillerlan\HTTP\Psr7;
