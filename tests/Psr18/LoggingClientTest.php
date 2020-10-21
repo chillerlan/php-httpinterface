@@ -34,4 +34,12 @@ class LoggingClientTest extends CurlClientTest{
 		$this->http = new LoggingClient($this->http, $logger);
 	}
 
+	public function testNetworkError(){
+		$this::markTestSkipped('N/A');
+	}
+
+	public function testRequestError(){
+		$this::markTestSkipped('N/A');
+	}
+
 }
