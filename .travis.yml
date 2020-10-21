@@ -9,7 +9,7 @@ matrix:
 
 before_install:
   - curl -o tests/cacert.pem https://curl.haxx.se/ca/cacert.pem
-  - travis_retry composer install --no-interaction --prefer-source
+  - composer install --no-interaction --prefer-source --ignore-platform-reqs
 
 script: vendor/bin/phpunit --configuration phpunit.xml.dist
 
