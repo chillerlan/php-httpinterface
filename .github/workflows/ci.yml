@@ -51,9 +51,6 @@ jobs:
         php-version:
           - "7.4"
           - "8.0"
-        dependencies:
-          - lowest
-          - highest
 
     steps:
       - name: "Configure git to avoid issues with line endings"
@@ -89,12 +86,7 @@ jobs:
           key: php${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
           restore-keys: php${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-
 
-      - name: "Install lowest dependencies with composer"
-        if: matrix.dependencies == 'lowest'
-        run: composer update --no-ansi --no-interaction --no-progress --no-suggest --prefer-lowest --ignore-platform-reqs
-
-      - name: "Install highest dependencies with composer"
-        if: matrix.dependencies == 'highest'
+      - name: "Install dependencies with composer"
         run: composer update --no-ansi --no-interaction --no-progress --no-suggest --ignore-platform-reqs
 
       - name: "Run tests with phpunit"
