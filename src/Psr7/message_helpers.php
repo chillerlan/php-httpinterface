@@ -9,12 +9,13 @@
 
 namespace chillerlan\HTTP\Psr7;
 
-use InvalidArgumentException;
+use InvalidArgumentException, TypeError;
 use Psr\Http\Message\{MessageInterface, RequestInterface, ResponseInterface, UploadedFileInterface};
 
 use function array_combine, array_keys, array_map, array_merge, array_values, call_user_func_array, count, explode,
-	gzdecode, gzinflate, gzuncompress, implode, is_array, is_bool, is_iterable, is_numeric, is_string, json_decode,
-	json_encode, parse_str, parse_url, rawurlencode, simplexml_load_string, sort, strtolower, trim, ucfirst, uksort;
+	gzdecode, gzinflate, gzuncompress, implode, is_array, is_bool, is_iterable, is_numeric, is_scalar, is_string,
+	json_decode, json_encode, parse_str, parse_url, rawurlencode, simplexml_load_string, sort, strtolower, trim,
+	ucfirst, uksort;
 
 use const PHP_URL_QUERY, SORT_STRING;
 
@@ -197,9 +198,10 @@ function normalize_message_headers(array $headers):array{
 }
 
 /**
- * @param string|array $data
+ * @param string|string[] $data
  *
- * @return string|array
+ * @return string|string[]
+ * @throws \TypeError
  */
 function r_rawurlencode($data){
 
@@ -208,7 +210,11 @@ function r_rawurlencode($data){
 		return array_map(__FUNCTION__, $data);
 	}
 
-	return rawurlencode($data);
+	if(!is_scalar($data)){
+		throw new TypeError('$data is not scalar');
+	}
+
+	return rawurlencode((string)$data);
 }
 
 /**
