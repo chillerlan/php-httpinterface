@@ -6,7 +6,8 @@
 	"keywords": [
 		"http", "message", "client", "factory", "handler", "psr-7", "psr-15", "psr-17", "psr-18"
 	],
-	"minimum-stability": "stable",
+	"minimum-stability": "dev",
+	"prefer-stable": true,
 	"authors": [
 		{
 			"name": "smiley",
@@ -43,7 +44,7 @@
 	"require-dev": {
 		"guzzlehttp/psr7": "^1.7",
 		"http-interop/http-factory-tests": "^0.7",
-		"phan/phan": "^3.2.2",
+		"phan/phan": "dev-master",
 		"phpunit/phpunit": "^9.4"
 	},
 	"autoload": {

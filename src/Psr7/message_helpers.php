@@ -206,7 +206,6 @@ function normalize_message_headers(array $headers):array{
 function r_rawurlencode($data){
 
 	if(is_array($data)){
-		/** @phan-suppress-next-line PhanUndeclaredFunctionInCallable */
 		return array_map(__FUNCTION__, $data);
 	}
 
@@ -306,7 +305,6 @@ function clean_query_params(iterable $params, int $bool_cast = null, bool $remov
 
 		}
 		elseif(is_iterable($value)){
-			/** @phan-suppress-next-line PhanUndeclaredFunctionInCallable */
 			$p[$key] = call_user_func_array(__FUNCTION__, [$value, $bool_cast, $remove_empty]);
 		}
 		elseif($remove_empty === true && ($value === null || (!is_numeric($value) && empty($value)))){
