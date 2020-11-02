@@ -142,6 +142,12 @@ class UriTest extends TestCase{
 	}
 
 	public function testParseUriPortCannotBeZero(){
+
+		if(\PHP_MAJOR_VERSION > 7){
+			$this::markTestSkipped('https://bugs.php.net/bug.php?id=80266');
+			return;
+		}
+
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('invalid URI: "//example.com:0');
 
