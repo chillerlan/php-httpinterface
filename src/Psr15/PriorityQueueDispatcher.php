@@ -66,7 +66,7 @@ class PriorityQueueDispatcher extends QueueDispatcher{
 		usort(
 			$this->middlewareStack,
 			/** @phan-suppress-next-line PhanTypeMismatchArgumentInternal */
-			fn(PriorityMiddlewareInterface $a, PriorityMiddlewareInterface $b) => $a->getPriority() < $b->getPriority()
+			fn(PriorityMiddlewareInterface $a, PriorityMiddlewareInterface $b) => $b->getPriority() <=> $a->getPriority()
 		);
 	}
 
