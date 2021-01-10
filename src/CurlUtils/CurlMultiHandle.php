@@ -8,8 +8,6 @@
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2020 smiley
  * @license      MIT
- *
- * @phan-suppress PhanTypeInvalidThrowsIsInterface
  */
 
 namespace chillerlan\HTTP\CurlUtils;

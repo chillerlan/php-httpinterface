@@ -133,6 +133,7 @@ final class CurlMultiClient implements LoggerAwareInterface{
 	}
 
 	/**
+	 * @phan-suppress PhanTypeInvalidThrowsIsInterface
 	 * @throws \Psr\Http\Client\ClientExceptionInterface
 	 */
 	public function process():CurlMultiClient{

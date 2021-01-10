@@ -65,6 +65,7 @@ class StreamClient extends HTTPClientAbstract{
 
 		try{
 			$responseBody    = file_get_contents($requestUri, false, $context);
+			/** @phan-suppress-next-line PhanTypeMismatchArgumentInternal https://github.com/phan/phan/issues/3273 */
 			$responseHeaders = $this->parseResponseHeaders(get_headers($requestUri, 1, $context));
 		}
 		catch(Exception $e){
