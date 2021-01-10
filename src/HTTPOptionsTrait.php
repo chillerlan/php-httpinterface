@@ -14,7 +14,6 @@
 
 namespace chillerlan\HTTP;
 
-use chillerlan\HTTP\CurlUtils\CurlHandle;
 use chillerlan\HTTP\Psr18\ClientException;
 
 use function file_exists, ini_get, is_array, is_dir, is_file, is_link, is_string, readlink, trim;
@@ -52,11 +51,6 @@ trait HTTPOptionsTrait{
 	 * @link https://php.net/manual/function.curl-setopt.php
 	 */
 	protected bool $ssl_verifypeer = true;
-
-	/**
-	 * The CurlHandleInterface to use in CurlClient::sendRequest()
-	 */
-	protected string $curlHandle = CurlHandle::class;
 
 	/**
 	 * options for the curl multi instance

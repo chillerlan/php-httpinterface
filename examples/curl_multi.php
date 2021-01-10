@@ -19,7 +19,6 @@ use function chillerlan\HTTP\Psr7\{build_http_query, get_json};
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-
 // invoke the http clients
 $options = new HTTPOptions([
 	'ca_info'    => __DIR__.'/cacert.pem',
@@ -27,9 +26,7 @@ $options = new HTTPOptions([
 #	'user_agent' => 'my fancy http client',
 ]);
 
-$client      = new CurlClient($options);
-$multiClient = new CurlMultiClient($options);
-
+$client = new CurlClient($options);
 
 // request the list of item ids
 $endpoint     = 'https://api.guildwars2.com/v2/items';
@@ -91,8 +88,7 @@ $handler = new class() implements MultiResponseHandlerInterface{
 
 
 // run the whole thing
-$multiClient
-	->setMultiResponseHandler($handler)
+(new CurlMultiClient($handler, $options))
 	->addRequests($requests)
 	->process()
 ;

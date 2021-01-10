@@ -77,7 +77,7 @@ class CurlHandleTest extends TestCase{
 			$this::assertSame('bar', $data->args->foo);
 		}
 		catch(Exception $e){
-			$this->markTestSkipped('error: '.$e->getMessage());
+			$this->markTestSkipped('httpbin-error: '.$e->getMessage());
 		}
 
 	}
@@ -122,7 +122,7 @@ class CurlHandleTest extends TestCase{
 			$this::assertSame($body, $data->data);
 		}
 		catch(Exception $e){
-			$this->markTestSkipped('error: '.$e->getMessage());
+			$this->markTestSkipped('httpbin-error: '.$e->getMessage());
 		}
 
 	}
@@ -158,7 +158,7 @@ class CurlHandleTest extends TestCase{
 			$this::assertSame('bar', $data->json->foo);
 		}
 		catch(Exception $e){
-			$this->markTestSkipped('error: '.$e->getMessage());
+			$this->markTestSkipped('httpbin-error: '.$e->getMessage());
 		}
 
 	}
@@ -188,7 +188,7 @@ class CurlHandleTest extends TestCase{
 			// httpbin times out after 10 seconds and will most likely fail to transfer 1MB of data
 			// so fool the code coverage if that happens, as we're only interested in request creation
 			$this::assertTrue(true);
-#			$this->markTestSkipped('error: '.$e->getMessage());
+#			$this->markTestSkipped('httpbin-error: '.$e->getMessage());
 		}
 	}
 

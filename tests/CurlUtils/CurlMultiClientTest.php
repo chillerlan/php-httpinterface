@@ -28,6 +28,7 @@ use function array_column, implode, in_array, ksort;
 class CurlMultiClientTest extends TestCase{
 
 	protected CurlMultiClient $http;
+	protected MultiResponseHandlerInterface $multiResponseHandler;
 
 	protected function setUp():void{
 
@@ -36,7 +37,9 @@ class CurlMultiClientTest extends TestCase{
 			'sleep'   => 60 / 300 * 1000000,
 		]);
 
-		$this->http = new CurlMultiClient($options);
+		$this->multiResponseHandler = $this->getTestResponseHandler();
+
+		$this->http = new CurlMultiClient($this->multiResponseHandler, $options);
 	}
 
 	protected function getRequests():array{
@@ -64,7 +67,7 @@ class CurlMultiClientTest extends TestCase{
 
 		return new class() implements MultiResponseHandlerInterface{
 
-			protected $responses = [];
+			protected array $responses = [];
 
 			public function handleResponse(ResponseInterface $response, RequestInterface $request, int $id, array $curl_info):?RequestInterface{
 
@@ -95,15 +98,13 @@ class CurlMultiClientTest extends TestCase{
 	 */
 	public function testMultiRequest(){
 		$requests = $this->getRequests();
-		$handler  = $this->getTestResponseHandler();
 
 		$this->http
-			->setMultiResponseHandler($handler)
 			->addRequests($requests)
 			->process()
 		;
 
-		$responses = $handler->getResponses();
+		$responses = $this->multiResponseHandler->getResponses();
 
 		$this::assertCount(10, $requests);
 		$this::assertCount(10, $responses);
@@ -122,13 +123,6 @@ class CurlMultiClientTest extends TestCase{
 		$this->expectExceptionMessage('request stack is empty');
 
 		$this->http->process();
-	}
-
-	public function testNoResponseHandlerException(){
-		$this->expectException(ClientExceptionInterface::class);
-		$this->expectExceptionMessage('no response handler set');
-
-		$this->http->addRequest(new Request('GET', 'https://foo.bar'))->process();
 	}
 
 }

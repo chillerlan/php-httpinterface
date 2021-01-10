@@ -12,6 +12,7 @@
 
 namespace chillerlan\HTTP\Psr18;
 
+use chillerlan\HTTP\CurlUtils\CurlHandle;
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
 
 use function curl_errno, curl_error, curl_exec, in_array;
@@ -20,34 +21,45 @@ use const CURLE_OK;
 
 class CurlClient extends HTTPClientAbstract{
 
+	protected CurlHandle $handle;
+
 	/**
 	 * @inheritDoc
 	 */
 	public function sendRequest(RequestInterface $request):ResponseInterface{
-		/** @var \chillerlan\HTTP\CurlUtils\CurlHandleInterface $handle */
-		$handle = new $this->options->curlHandle($request, $this->responseFactory->createResponse(), $this->options);
-		$handle->init();
+		$this->handle = $this->createHandle($request);
+		$this->handle->init();
 
-		curl_exec($handle->curl);
+		$curl = $this->handle->getCurlResource();
 
-		$errno = curl_errno($handle->curl);
+		curl_exec($curl);
+
+		$errno = curl_errno($curl);
 
 		if($errno !== CURLE_OK){
-			$error = curl_error($handle->curl);
+			$error = curl_error($curl);
 
 			$this->logger->error('cURL error #'.$errno.': '.$error);
 
-			if(in_array($errno, $handle::CURL_NETWORK_ERRORS, true)){
+			if(in_array($errno, $this->handle::CURL_NETWORK_ERRORS, true)){
 				throw new NetworkException($error, $request);
 			}
 
 			throw new RequestException($error, $request);
 		}
 
-		$handle->close();
-		$handle->response->getBody()->rewind();
+		$this->handle->close();
+		$r = $this->handle->getResponse();
+		$r->getBody()->rewind();
 
-		return $handle->response;
+		return $r;
+	}
+
+	/**
+	 *
+	 */
+	protected function createHandle(RequestInterface $request):CurlHandle{
+		return new CurlHandle($request, $this->responseFactory->createResponse(), $this->options);
 	}
 
 }

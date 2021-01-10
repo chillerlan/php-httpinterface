@@ -17,9 +17,9 @@ use chillerlan\Settings\SettingsContainerInterface;
 use Psr\Http\Message\{RequestInterface, ResponseFactoryInterface};
 use Psr\Log\{LoggerAwareInterface, LoggerAwareTrait, LoggerInterface, NullLogger};
 
-use function array_shift, curl_close, curl_getinfo, curl_multi_add_handle, curl_multi_close, curl_multi_exec,
+use function array_shift, curl_close, curl_multi_add_handle, curl_multi_close, curl_multi_exec,
 	curl_multi_info_read, curl_multi_init, curl_multi_remove_handle, curl_multi_select, curl_multi_setopt,
-	is_array, is_resource, usleep;
+	is_resource, usleep;
 
 use const CURLM_OK, CURLMOPT_MAXCONNECTS, CURLMOPT_PIPELINING, CURLPIPE_MULTIPLEX;
 
@@ -31,7 +31,7 @@ class CurlMultiClient implements LoggerAwareInterface{
 
 	protected ResponseFactoryInterface $responseFactory;
 
-	protected ?MultiResponseHandlerInterface $multiResponseHandler = null;
+	protected MultiResponseHandlerInterface $multiResponseHandler;
 
 	/**
 	 * the curl_multi master handle
@@ -55,26 +55,24 @@ class CurlMultiClient implements LoggerAwareInterface{
 	protected array $handles = [];
 
 	/**
-	 * @var int
+	 *
 	 */
 	protected int $handleCounter = 0;
 
 	/**
 	 * CurlMultiClient constructor.
-	 *
-	 * @param \chillerlan\Settings\SettingsContainerInterface|null $options
-	 * @param \Psr\Http\Message\ResponseFactoryInterface|null      $responseFactory
-	 * @param \Psr\Log\LoggerInterface|null                        $logger
 	 */
 	public function __construct(
+		MultiResponseHandlerInterface $multiResponseHandler,
 		SettingsContainerInterface $options = null,
 		ResponseFactoryInterface $responseFactory = null,
 		LoggerInterface $logger = null
 	){
-		$this->options         = $options ?? new HTTPOptions;
-		$this->responseFactory = $responseFactory ?? new ResponseFactory;
-		$this->logger          = $logger ?? new NullLogger;
-		$this->curl_multi      = curl_multi_init();
+		$this->multiResponseHandler = $multiResponseHandler;
+		$this->options              = $options ?? new HTTPOptions;
+		$this->responseFactory      = $responseFactory ?? new ResponseFactory;
+		$this->logger               = $logger ?? new NullLogger;
+		$this->curl_multi           = curl_multi_init();
 
 		$curl_multi_options = [
 			CURLMOPT_PIPELINING  => CURLPIPE_MULTIPLEX,
@@ -103,17 +101,6 @@ class CurlMultiClient implements LoggerAwareInterface{
 			curl_multi_close($this->curl_multi);
 		}
 
-	}
-
-	/**
-	 * @param \chillerlan\HTTP\CurlUtils\MultiResponseHandlerInterface $handler
-	 *
-	 * @return \chillerlan\HTTP\CurlUtils\CurlMultiClient
-	 */
-	public function setMultiResponseHandler(MultiResponseHandlerInterface $handler):CurlMultiClient{
-		$this->multiResponseHandler = $handler;
-
-		return $this;
 	}
 
 	/**
@@ -146,16 +133,12 @@ class CurlMultiClient implements LoggerAwareInterface{
 	}
 
 	/**
-	 * @throws \chillerlan\HTTP\Psr18\ClientException
+	 * @throws \Psr\Http\Client\ClientExceptionInterface
 	 */
 	public function process():CurlMultiClient{
 
 		if(empty($this->requests)){
 			throw new ClientException('request stack is empty');
-		}
-
-		if(!$this->multiResponseHandler instanceof MultiResponseHandlerInterface){
-			throw new ClientException('no response handler set');
 		}
 
 		// shoot out the first batch of requests
@@ -174,15 +157,14 @@ class CurlMultiClient implements LoggerAwareInterface{
 			while($state = curl_multi_info_read($this->curl_multi)){
 				$id     = (int)$state['handle'];
 				$handle = $this->handles[$id];
-				$info   = curl_getinfo($handle->curl);
-				$result = $this->multiResponseHandler->handleResponse($handle->response, $handle->request, $handle->id, (is_array($info) ? $info : []));
+				$result = $handle->handleResponse();
 
 				curl_multi_remove_handle($this->curl_multi, $state['handle']);
 				curl_close($state['handle']);
 				unset($this->handles[$id]);
 
-				if($result instanceof RequestInterface && $handle->retries < $this->options->retries){
-					$this->createHandle($result, $handle->id, ++$handle->retries);
+				if($result instanceof RequestInterface && $handle->getRetries() < $this->options->retries){
+					$this->createHandle($result, $handle->getID(), $handle->addRetry());
 
 					continue;
 				}
@@ -210,14 +192,24 @@ class CurlMultiClient implements LoggerAwareInterface{
 			$request = array_shift($this->requests);
 		}
 
-		$handle          = new $this->options->curlHandle($request, $this->responseFactory->createResponse(), $this->options);
-		$handle->id      = $id ?? $this->handleCounter++;
-		$handle->retries = $retries ?? 1;
+		$handle = new CurlMultiHandle(
+			$this->multiResponseHandler,
+			$request,
+			$this->responseFactory->createResponse(),
+			$this->options
+		);
 
-		$handle->init();
-		curl_multi_add_handle($this->curl_multi, $handle->curl);
+		$handle
+			->setID($id ?? $this->handleCounter++)
+			->setRetries($retries ?? 1)
+			->init()
+		;
 
-		$this->handles[(int)$handle->curl] = $handle;
+		$curl = $handle->getCurlResource();
+
+		curl_multi_add_handle($this->curl_multi, $curl);
+
+		$this->handles[(int)$curl] = $handle;
 
 		if($this->options->sleep > 0){
 			usleep($this->options->sleep);
