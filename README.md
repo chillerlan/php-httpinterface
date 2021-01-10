@@ -2,30 +2,29 @@
 
 A [PSR-7](https://www.php-fig.org/psr/psr-7/)/[PSR-17](https://www.php-fig.org/psr/psr-17/)/[PSR-18](https://www.php-fig.org/psr/psr-18/) implementation for PHP 7.4+.
 
+[![PHP Version Support][php-badge]][php]
 [![version][packagist-badge]][packagist]
 [![license][license-badge]][license]
 [![Travis][travis-badge]][travis]
 [![Coverage][coverage-badge]][coverage]
 [![Scrunitizer][scrutinizer-badge]][scrutinizer]
-[![Packagist downloads][downloads-badge]][downloads]
-[![PayPal donate][donate-badge]][donate]
-
+[![Packagist downloads][downloads-badge]][downloads]<br/>
 [![Continuous Integration][gh-action-badge]][gh-action]
 
-[packagist-badge]: https://img.shields.io/packagist/v/chillerlan/php-httpinterface.svg?style=flat-square
+[php-badge]: https://img.shields.io/packagist/php-v/chillerlan/php-httpinterface?logo=php&color=8892BF
+[php]: https://www.php.net/supported-versions.php
+[packagist-badge]: https://img.shields.io/packagist/v/chillerlan/php-httpinterface.svg
 [packagist]: https://packagist.org/packages/chillerlan/php-httpinterface
-[license-badge]: https://img.shields.io/github/license/chillerlan/php-httpinterface.svg?style=flat-square
+[license-badge]: https://img.shields.io/github/license/chillerlan/php-httpinterface.svg
 [license]: https://github.com/chillerlan/php-httpinterface/blob/master/LICENSE
-[travis-badge]: https://img.shields.io/travis/chillerlan/php-httpinterface.svg?style=flat-square
+[travis-badge]: https://img.shields.io/travis/com/chillerlan/php-httpinterface/main.svg?logo=travis
 [travis]: https://travis-ci.org/chillerlan/php-httpinterface
-[coverage-badge]: https://img.shields.io/codecov/c/github/chillerlan/php-httpinterface.svg?style=flat-square
+[coverage-badge]: https://img.shields.io/codecov/c/github/chillerlan/php-httpinterface.svg?logo=codecov
 [coverage]: https://codecov.io/github/chillerlan/php-httpinterface
-[scrutinizer-badge]: https://img.shields.io/scrutinizer/g/chillerlan/php-httpinterface.svg?style=flat-square
+[scrutinizer-badge]: https://img.shields.io/scrutinizer/g/chillerlan/php-httpinterface.svg?logo=scrutinizer
 [scrutinizer]: https://scrutinizer-ci.com/g/chillerlan/php-httpinterface
-[downloads-badge]: https://img.shields.io/packagist/dt/chillerlan/php-httpinterface.svg?style=flat-square
+[downloads-badge]: https://img.shields.io/packagist/dt/chillerlan/php-httpinterface.svg
 [downloads]: https://packagist.org/packages/chillerlan/php-httpinterface/stats
-[donate-badge]: https://img.shields.io/badge/donate-paypal-ff33aa.svg?style=flat-square
-[donate]: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WLYUNAT9ZTJZ4
 [gh-action-badge]: https://github.com/chillerlan/php-httpinterface/workflows/Continuous%20Integration/badge.svg
 [gh-action]: https://github.com/chillerlan/php-httpinterface/actions
 
@@ -42,17 +41,11 @@ A [PSR-7](https://www.php-fig.org/psr/psr-7/)/[PSR-17](https://www.php-fig.org/p
 ```json
 {
 	"require": {
-		"php": "^7.2",
+		"php": "^7.4",
 		"chillerlan/php-httpinterface": "dev-master"
 	}
 }
 ```
-
-### Manual installation
-Download the desired version of the package from [master](https://github.com/chillerlan/php-httpinterface/archive/master.zip) or
-[release](https://github.com/chillerlan/php-httpinterface/releases) and extract the contents to your project folder.  After that:
-- run `composer install` to install the required dependencies and generate `/vendor/autoload.php`.
-- if you use a custom autoloader, point the namespace `chillerlan\HTTP` to the folder `src` of the package
 
 Profit!
 
