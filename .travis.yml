@@ -1,8 +1,13 @@
 language: php
 
+env:
+  global:
+    - PHAN_ALLOW_XDEBUG=0 PHAN_DISABLE_XDEBUG_WARN=1
+
 matrix:
   include:
     - php: 7.4
+    - php: 8.0
     - php: nightly
   allow_failures:
     - php: nightly
