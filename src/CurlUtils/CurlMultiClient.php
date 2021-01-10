@@ -23,41 +23,41 @@ use function array_shift, curl_close, curl_multi_add_handle, curl_multi_close, c
 
 use const CURLM_OK, CURLMOPT_MAXCONNECTS, CURLMOPT_PIPELINING, CURLPIPE_MULTIPLEX;
 
-class CurlMultiClient implements LoggerAwareInterface{
+final class CurlMultiClient implements LoggerAwareInterface{
 	use LoggerAwareTrait;
 
 	/** @var \chillerlan\Settings\SettingsContainerInterface|\chillerlan\HTTP\HTTPOptions */
-	protected SettingsContainerInterface $options;
+	private SettingsContainerInterface $options;
 
-	protected ResponseFactoryInterface $responseFactory;
+	private ResponseFactoryInterface $responseFactory;
 
-	protected MultiResponseHandlerInterface $multiResponseHandler;
+	private MultiResponseHandlerInterface $multiResponseHandler;
 
 	/**
 	 * the curl_multi master handle
 	 *
 	 * @var resource
 	 */
-	protected $curl_multi;
+	private $curl_multi;
 
 	/**
 	 * An array of RequestInterface to run
 	 *
 	 * @var \Psr\Http\Message\RequestInterface[]
 	 */
-	protected array $requests = [];
+	private array $requests = [];
 
 	/**
 	 * the stack of running handles
 	 *
 	 * @var \chillerlan\HTTP\CurlUtils\CurlHandle[]
 	 */
-	protected array $handles = [];
+	private array $handles = [];
 
 	/**
 	 *
 	 */
-	protected int $handleCounter = 0;
+	private int $handleCounter = 0;
 
 	/**
 	 * CurlMultiClient constructor.
@@ -181,7 +181,7 @@ class CurlMultiClient implements LoggerAwareInterface{
 	/**
 	 *
 	 */
-	protected function createHandle(RequestInterface $request = null, int $id = null, int $retries = null):void{
+	private function createHandle(RequestInterface $request = null, int $id = null, int $retries = null):void{
 
 		if($request === null){
 

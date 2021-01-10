@@ -17,9 +17,9 @@ namespace chillerlan\HTTP\CurlUtils;
 use chillerlan\Settings\SettingsContainerInterface;
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
 
-class CurlMultiHandle extends CurlHandle{
+final class CurlMultiHandle extends CurlHandle{
 
-	protected MultiResponseHandlerInterface $multiResponseHandler;
+	private MultiResponseHandlerInterface $multiResponseHandler;
 
 	public function __construct(
 		MultiResponseHandlerInterface $multiResponseHandler,
@@ -35,12 +35,12 @@ class CurlMultiHandle extends CurlHandle{
 	/**
 	 * a handle ID (counter), used in CurlMultiClient
 	 */
-	protected ?int $id = null;
+	private ?int $id = null;
 
 	/**
 	 * a retry counter, used in CurlMultiClient
 	 */
-	protected int $retries = 0;
+	private int $retries = 0;
 
 	/**
 	 *
