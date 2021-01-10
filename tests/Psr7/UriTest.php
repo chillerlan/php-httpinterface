@@ -143,7 +143,9 @@ class UriTest extends TestCase{
 
 	public function testParseUriPortCannotBeZero(){
 
-		if(\PHP_MAJOR_VERSION > 7){
+		// @todo: this test can either be removed ot the behaviour changed in the Uri class.
+
+		if(\PHP_VERSION_ID < 70413){ // fixed in 7.4.13, 7.3.25
 			$this::markTestSkipped('https://bugs.php.net/bug.php?id=80266');
 			return;
 		}
