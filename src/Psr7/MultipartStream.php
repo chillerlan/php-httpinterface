@@ -26,14 +26,8 @@ use const PATHINFO_EXTENSION;
  */
 final class MultipartStream extends StreamAbstract{
 
-	/**
-	 * @var string
-	 */
 	protected string $boundary;
 
-	/**
-	 * @var bool
-	 */
 	protected bool $built = false;
 
 	/**
@@ -58,14 +52,14 @@ final class MultipartStream extends StreamAbstract{
 	}
 
 	/**
-	 * @return string
+	 *
 	 */
 	public function getBoundary():string{
 		return $this->boundary;
 	}
 
 	/**
-	 * @return \chillerlan\HTTP\Psr7\MultipartStream
+	 *
 	 */
 	public function build():MultipartStream{
 
@@ -81,9 +75,7 @@ final class MultipartStream extends StreamAbstract{
 	}
 
 	/**
-	 * @param array $e
 	 *
-	 * @return \chillerlan\HTTP\Psr7\MultipartStream
 	 */
 	public function addElement(array $e):MultipartStream{
 
@@ -126,9 +118,7 @@ final class MultipartStream extends StreamAbstract{
 	}
 
 	/**
-	 * @param array $e
 	 *
-	 * @return array
 	 */
 	protected function setElementHeaders(array $e):array{
 		$hasFilename = $e['filename'] === '0' || $e['filename'];
@@ -162,10 +152,7 @@ final class MultipartStream extends StreamAbstract{
 	}
 
 	/**
-	 * @param array  $headers
-	 * @param string $key
 	 *
-	 * @return bool
 	 */
 	protected function hasHeader(array $headers, string $key):bool{
 		$lowercaseHeader = strtolower($key);

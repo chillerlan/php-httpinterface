@@ -25,14 +25,10 @@ use function get_class;
 class LoggingClient implements ClientInterface, LoggerAwareInterface{
 	use LoggerAwareTrait;
 
-	/** @var \Psr\Http\Client\ClientInterface */
 	protected ClientInterface $http;
 
 	/**
 	 * LoggingClient constructor.
-	 *
-	 * @param \Psr\Http\Client\ClientInterface                $http
-	 * @param \Psr\Log\LoggerInterface|null                   $logger
 	 */
 	public function __construct(ClientInterface $http, LoggerInterface $logger = null){
 		$this->http            = $http;
@@ -57,7 +53,6 @@ class LoggingClient implements ClientInterface, LoggerAwareInterface{
 				throw new ClientException('unexpected exception, does not implement "ClientExceptionInterface": '.get_class($e));  // @codeCoverageIgnore
 			}
 
-			/** @noinspection PhpUnhandledExceptionInspection */
 			throw $e;
 		}
 

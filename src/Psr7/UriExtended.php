@@ -28,7 +28,7 @@ class UriExtended extends Uri{
 	 *
 	 * @param array $parts
 	 *
-	 * @return \Psr\Http\Message\UriInterface|\chillerlan\HTTP\Psr7\Uri
+	 * @return \Psr\Http\Message\UriInterface|\chillerlan\HTTP\Psr7\UriExtended
 	 */
 	public static function fromParts(array $parts):UriInterface{
 		$uri = new self;
@@ -49,7 +49,6 @@ class UriExtended extends Uri{
 	 * - absolute-path references, e.g. '/path'
 	 * - relative-path references, e.g. 'subpath'
 	 *
-	 * @return bool
 	 * @see  Uri::isNetworkPathReference
 	 * @see  Uri::isAbsolutePathReference
 	 * @see  Uri::isRelativePathReference
@@ -64,7 +63,6 @@ class UriExtended extends Uri{
 	 *
 	 * A relative reference that begins with two slash characters is termed an network-path reference.
 	 *
-	 * @return bool
 	 * @link https://tools.ietf.org/html/rfc3986#section-4.2
 	 */
 	public function isNetworkPathReference():bool{
@@ -76,7 +74,6 @@ class UriExtended extends Uri{
 	 *
 	 * A relative reference that begins with a single slash character is termed an absolute-path reference.
 	 *
-	 * @return bool
 	 * @link https://tools.ietf.org/html/rfc3986#section-4.2
 	 */
 	public function isAbsolutePathReference():bool{

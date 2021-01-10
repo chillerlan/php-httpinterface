@@ -17,7 +17,7 @@ use Psr\Http\Server\MiddlewareInterface;
 interface PriorityMiddlewareInterface extends MiddlewareInterface{
 
 	/**
-	 * @return int
+	 *
 	 */
 	public function getPriority():int;
 

@@ -24,7 +24,7 @@ use const CURLOPT_CAINFO, CURLOPT_CAPATH, CURLOPT_SSL_VERIFYHOST, CURLOPT_SSL_VE
 trait HTTPOptionsTrait{
 
 	/**
-	 * @var string
+	 * A custom user agent string
 	 */
 	protected string $user_agent = 'chillerlanHttpInterface/2.0 +https://github.com/chillerlan/php-httpinterface';
 
@@ -76,12 +76,14 @@ trait HTTPOptionsTrait{
 	protected ?int $sleep = null;
 
 	/**
+	 * Timeout value
 	 *
+	 * @see \CURLOPT_TIMEOUT
 	 */
 	protected int $timeout = 10;
 
 	/**
-	 *
+	 * Number of retries (multi fetch)
 	 */
 	protected int $retries = 3;
 
@@ -104,7 +106,6 @@ trait HTTPOptionsTrait{
 	}
 
 	/**
-	 * @return void
 	 * @throws \Psr\Http\Client\ClientExceptionInterface
 	 */
 	protected function setCA():void{
@@ -159,7 +160,9 @@ trait HTTPOptionsTrait{
 	}
 
 	/**
-	 * @return bool
+	 * Check default locations for the CA bundle
+	 *
+	 * @internal
 	 */
 	protected function checkCaDefaultLocations():bool{
 
@@ -203,7 +206,7 @@ trait HTTPOptionsTrait{
 	}
 
 	/**
-	 * @return bool
+	 * @internal
 	 */
 	protected function checkVerifyEnabled():bool{
 
@@ -224,7 +227,7 @@ trait HTTPOptionsTrait{
 	}
 
 	/**
-	 * @return bool
+	 * @internal
 	 */
 	protected function setCaBundle():bool{
 
@@ -250,9 +253,7 @@ trait HTTPOptionsTrait{
 	}
 
 	/**
-	 * @param string $ca
-	 *
-	 * @return bool
+	 * @internal
 	 */
 	protected function setCaBundleCurl(string $ca):bool{
 

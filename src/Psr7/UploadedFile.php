@@ -24,9 +24,7 @@ use const UPLOAD_ERR_CANT_WRITE, UPLOAD_ERR_EXTENSION, UPLOAD_ERR_FORM_SIZE, UPL
 
 final class UploadedFile implements UploadedFileInterface{
 
-	/**
-	 * @var int[]
-	 */
+	/** @var int[] */
 	public const UPLOAD_ERRORS = [
 		UPLOAD_ERR_OK,
 		UPLOAD_ERR_INI_SIZE,
@@ -38,44 +36,20 @@ final class UploadedFile implements UploadedFileInterface{
 		UPLOAD_ERR_EXTENSION,
 	];
 
-	/**
-	 * @var int
-	 */
 	private int $error;
 
-	/**
-	 * @var int
-	 */
 	private int $size;
 
-	/**
-	 * @var null|string
-	 */
 	private ?string $clientFilename;
 
-	/**
-	 * @var null|string
-	 */
 	private ?string $clientMediaType;
 
-	/**
-	 * @var null|string
-	 */
 	private ?string $file = null;
 
-	/**
-	 * @var null|\Psr\Http\Message\StreamInterface
-	 */
 	private ?StreamInterface $stream;
 
-	/**
-	 * @var bool
-	 */
 	private bool $moved = false;
 
-	/**
-	 * @var \chillerlan\HTTP\Psr17\StreamFactory
-	 */
 	protected StreamFactory $streamFactory;
 
 	/**
@@ -187,7 +161,6 @@ final class UploadedFile implements UploadedFileInterface{
 	}
 
 	/**
-	 * @return void
 	 * @throws RuntimeException if is moved or not ok
 	 */
 	private function validateActive():void{

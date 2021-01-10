@@ -60,7 +60,7 @@ class PriorityQueueDispatcher extends QueueDispatcher{
 	}
 
 	/**
-	 * @return void
+	 *
 	 */
 	protected function sortMiddleware():void{
 		usort(

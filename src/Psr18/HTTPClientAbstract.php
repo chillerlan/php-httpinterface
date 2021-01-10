@@ -23,22 +23,13 @@ use Psr\Log\{LoggerAwareInterface, LoggerAwareTrait, LoggerInterface, NullLogger
 abstract class HTTPClientAbstract implements ClientInterface, LoggerAwareInterface, RequestMethodInterface{
 	use LoggerAwareTrait;
 
-	/**
-	 * @var \chillerlan\Settings\SettingsContainerInterface|\chillerlan\HTTP\HTTPOptions
-	 */
+	/** @var \chillerlan\Settings\SettingsContainerInterface|\chillerlan\HTTP\HTTPOptions */
 	protected SettingsContainerInterface $options;
 
-	/**
-	 * @var \Psr\Http\Message\ResponseFactoryInterface
-	 */
 	protected ResponseFactoryInterface $responseFactory;
 
 	/**
 	 * HTTPClientAbstract constructor.
-	 *
-	 * @param \chillerlan\Settings\SettingsContainerInterface|null $options
-	 * @param \Psr\Http\Message\ResponseFactoryInterface|null      $responseFactory
-	 * @param \Psr\Log\LoggerInterface|null                        $logger
 	 */
 	public function __construct(
 		SettingsContainerInterface $options = null,

@@ -17,21 +17,12 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class EmptyResponseHandler implements RequestHandlerInterface{
 
-	/**
-	 * @var \Psr\Http\Message\ResponseFactoryInterface
-	 */
 	protected ResponseFactoryInterface $responseFactory;
 
-	/**
-	 * @var int
-	 */
 	protected int $status;
 
 	/**
 	 * EmptyResponseHandler constructor.
-	 *
-	 * @param \Psr\Http\Message\ResponseFactoryInterface $responseFactory
-	 * @param int                                        $status
 	 */
 	public function __construct(ResponseFactoryInterface $responseFactory, int $status){
 		$this->responseFactory = $responseFactory;

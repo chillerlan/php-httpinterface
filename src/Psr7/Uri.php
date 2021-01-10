@@ -55,8 +55,6 @@ class Uri implements UriInterface{
 	/**
 	 * Uri constructor.
 	 *
-	 * @param string|null $uri
-	 *
 	 * @throws \InvalidArgumentException
 	 */
 	public function __construct(string $uri = null){
@@ -76,7 +74,7 @@ class Uri implements UriInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function __toString(){
+	public function __toString():string{
 		$this->validateState();
 
 		$uri       = '';
@@ -377,7 +375,7 @@ class Uri implements UriInterface{
 	 */
 
 	/**
-	 * @param $query
+	 * @param mixed $query
 	 *
 	 * @return string
 	 * @throws \InvalidArgumentException
@@ -421,7 +419,7 @@ class Uri implements UriInterface{
 	 */
 
 	/**
-	 * @param $fragment
+	 * @param mixed $fragment
 	 *
 	 * @return string
 	 */

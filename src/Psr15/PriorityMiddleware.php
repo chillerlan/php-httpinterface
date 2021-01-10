@@ -19,21 +19,12 @@ use const PHP_INT_MIN;
 
 class PriorityMiddleware implements PriorityMiddlewareInterface{
 
-	/**
-	 * @var \Psr\Http\Server\MiddlewareInterface
-	 */
 	protected MiddlewareInterface $middleware;
 
-	/**
-	 * @var int
-	 */
 	protected int $priority;
 
 	/**
 	 * PriorityMiddleware constructor.
-	 *
-	 * @param \Psr\Http\Server\MiddlewareInterface $middleware
-	 * @param int|null                             $priority
 	 */
 	public function __construct(MiddlewareInterface $middleware, int $priority = null){
 		$this->middleware = $middleware;

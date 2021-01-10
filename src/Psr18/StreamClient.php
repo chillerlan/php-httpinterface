@@ -8,6 +8,8 @@
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2019 smiley
  * @license      MIT
+ *
+ * @phan-file-suppress PhanTypeInvalidThrowsIsInterface
  */
 
 namespace chillerlan\HTTP\Psr18;
@@ -21,9 +23,9 @@ use function explode, file_get_contents, get_headers, in_array, intval, restore_
 class StreamClient extends HTTPClientAbstract{
 
 	/**
-	 * @todo
-	 *
 	 * @inheritDoc
+	 * @throws \Psr\Http\Client\ClientExceptionInterface
+	 *
 	 */
 	public function sendRequest(RequestInterface $request):ResponseInterface{
 		$uri     = $request->getUri();
@@ -85,9 +87,7 @@ class StreamClient extends HTTPClientAbstract{
 	}
 
 	/**
-	 * @param \Psr\Http\Message\RequestInterface $request
 	 *
-	 * @return array
 	 */
 	protected function getRequestHeaders(RequestInterface $request):array{
 		$headers = [];
@@ -108,9 +108,7 @@ class StreamClient extends HTTPClientAbstract{
 	}
 
 	/**
-	 * @param array $headers
-	 *
-	 * @return array
+	 * @param string[] $headers
 	 */
 	protected function parseResponseHeaders(array $headers):array{
 		$h = [];

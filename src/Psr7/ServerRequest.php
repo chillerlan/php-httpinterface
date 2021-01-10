@@ -19,34 +19,16 @@ use function array_key_exists, is_array, is_object;
 
 final class ServerRequest extends Request implements ServerRequestInterface{
 
-	/**
-	 * @var array
-	 */
 	private array $serverParams;
 
-	/**
-	 * @var array
-	 */
 	private array $cookieParams = [];
 
-	/**
-	 * @var array
-	 */
 	private array $queryParams = [];
-
-	/**
-	 * @var null|array|object
-	 */
+	/** @var null|array|object */
 	private $parsedBody;
 
-	/**
-	 * @var array
-	 */
 	private array $attributes = [];
 
-	/**
-	 * @var array
-	 */
 	private array $uploadedFiles = [];
 
 	/**

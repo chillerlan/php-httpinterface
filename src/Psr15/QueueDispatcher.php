@@ -20,21 +20,13 @@ use Psr\Http\Server\{MiddlewareInterface, RequestHandlerInterface};
 
 class QueueDispatcher implements MiddlewareInterface, RequestHandlerInterface{
 
-	/**
-	 * @var \Psr\Http\Server\MiddlewareInterface[]
-	 */
+	/** @var \Psr\Http\Server\MiddlewareInterface[] */
 	protected array $middlewareStack = [];
 
-	/**
-	 * @var \Psr\Http\Server\RequestHandlerInterface
-	 */
 	protected RequestHandlerInterface $fallbackHandler;
 
 	/**
 	 * QueueDispatcher constructor.
-	 *
-	 * @param iterable|null                                 $middlewareStack
-	 * @param \Psr\Http\Server\RequestHandlerInterface|null $fallbackHandler
 	 */
 	public function __construct(iterable $middlewareStack = null, RequestHandlerInterface $fallbackHandler = null){
 		$this
@@ -44,9 +36,7 @@ class QueueDispatcher implements MiddlewareInterface, RequestHandlerInterface{
 	}
 
 	/**
-	 * @param \Psr\Http\Server\RequestHandlerInterface $fallbackHandler
 	 *
-	 * @return \chillerlan\HTTP\Psr15\QueueDispatcher
 	 */
 	public function setFallbackHandler(RequestHandlerInterface $fallbackHandler):QueueDispatcher{
 		$this->fallbackHandler = $fallbackHandler;
@@ -55,10 +45,7 @@ class QueueDispatcher implements MiddlewareInterface, RequestHandlerInterface{
 	}
 
 	/**
-	 * @param \Psr\Http\Server\MiddlewareInterface[] $middlewareStack
-	 *
-	 * @return \chillerlan\HTTP\Psr15\QueueDispatcher
-	 * @throws \Exception
+	 * @throws \chillerlan\HTTP\Psr15\MiddlewareException
 	 */
 	public function addStack(iterable $middlewareStack):QueueDispatcher{
 
@@ -75,9 +62,7 @@ class QueueDispatcher implements MiddlewareInterface, RequestHandlerInterface{
 	}
 
 	/**
-	 * @param \Psr\Http\Server\MiddlewareInterface $middleware
 	 *
-	 * @return \chillerlan\HTTP\Psr15\QueueDispatcher
 	 */
 	public function add(MiddlewareInterface $middleware):QueueDispatcher{
 		$this->middlewareStack[] = $middleware;
@@ -100,9 +85,7 @@ class QueueDispatcher implements MiddlewareInterface, RequestHandlerInterface{
 	}
 
 	/**
-	 * @param \Psr\Http\Server\RequestHandlerInterface $handler
 	 *
-	 * @return \chillerlan\HTTP\Psr15\QueueRunner
 	 */
 	protected function getRunner(RequestHandlerInterface $handler):QueueRunner{
 		return new QueueRunner($this->middlewareStack, $handler);
