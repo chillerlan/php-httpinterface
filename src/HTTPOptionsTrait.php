@@ -2,9 +2,7 @@
 /**
  * Trait HTTPOptionsTrait
  *
- * @filesource   HTTPOptionsTrait.php
  * @created      28.08.2018
- * @package      chillerlan\HTTP
  * @author       Smiley <smiley@chillerlan.net>
  * @copyright    2018 Smiley
  * @license      MIT

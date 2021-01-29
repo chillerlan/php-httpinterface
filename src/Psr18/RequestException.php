@@ -2,9 +2,7 @@
 /**
  * Class RequestException
  *
- * @filesource   RequestException.php
  * @created      10.09.2018
- * @package      chillerlan\HTTP
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2018 smiley
  * @license      MIT

@@ -6,9 +6,7 @@
  *
  * @see https://github.com/slimphp/Slim/blob/de07f779d229ec06080259a816b0740de830438c/Slim/MiddlewareDispatcher.php
  *
- * @filesource   RecursiveDispatcher.php
  * @created      15.04.2020
- * @package      chillerlan\HTTP\Psr15;
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2020 smiley
  * @license      MIT

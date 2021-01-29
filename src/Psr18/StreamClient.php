@@ -2,9 +2,7 @@
 /**
  * Class StreamClient
  *
- * @filesource   StreamClient.php
  * @created      23.02.2019
- * @package      chillerlan\HTTP\Psr18
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2019 smiley
  * @license      MIT

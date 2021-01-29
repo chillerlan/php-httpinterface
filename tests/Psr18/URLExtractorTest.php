@@ -2,9 +2,7 @@
 /**
  * Class URLExtractorTest
  *
- * @filesource   URLExtractorTest.php
  * @created      15.08.2019
- * @package      chillerlan\HTTPTest\Psr18
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2019 smiley
  * @license      MIT

@@ -4,9 +4,7 @@
  *
  * @link https://www.php-fig.org/psr/psr-15/meta/
  *
- * @filesource   QueueRunner.php
  * @created      10.03.2019
- * @package      chillerlan\HTTP\Psr15
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2019 smiley
  * @license      MIT

@@ -2,9 +2,7 @@
 /**
  * Class CurlMultiClientTest
  *
- * @filesource   CurlMultiClientTest.php
  * @created      11.08.2019
- * @package      chillerlan\HTTPTest\CurlUtils
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2019 smiley
  * @license      MIT

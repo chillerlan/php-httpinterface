@@ -2,9 +2,7 @@
 /**
  * Class HTTPClientTest
  *
- * @filesource   HTTPClientTest.php
  * @created      28.08.2018
- * @package      chillerlan\HTTPTest\Psr18
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2018 smiley
  * @license      MIT

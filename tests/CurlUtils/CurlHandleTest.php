@@ -2,9 +2,7 @@
 /**
  * Class CurlHandleTest
  *
- * @filesource   CurlHandleTest.php
  * @created      09.11.2019
- * @package      chillerlan\HTTPTest\CurlUtils
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2019 smiley
  * @license      MIT

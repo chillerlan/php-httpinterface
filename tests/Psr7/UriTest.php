@@ -5,9 +5,7 @@
  * @link https://github.com/guzzle/psr7/blob/4b981cdeb8c13d22a6c193554f8c686f53d5c958/tests/UriTest.php
  * @link https://github.com/bakame-php/psr7-uri-interface-tests/blob/5a556fdfe668a6c6a14772efeba6134c0b7dae34/tests/AbstractUriTestCase.php
  *
- * @filesource   UriTest.php
  * @created      10.08.2018
- * @package      chillerlan\HTTPTest\Psr7
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2018 smiley
  * @license      MIT

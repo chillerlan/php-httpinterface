@@ -4,9 +4,7 @@
  *
  * @link https://github.com/libreworks/caridea-dispatch
  *
- * @filesource   QueueDispatcher.php
  * @created      08.03.2019
- * @package      chillerlan\HTTP\Psr15
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2019 smiley
  * @license      MIT

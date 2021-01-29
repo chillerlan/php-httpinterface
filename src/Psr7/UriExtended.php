@@ -4,9 +4,7 @@
  *
  * @see https://github.com/guzzle/psr7/blob/31ea59d632d3ac145300fffb2873a195172c0814/src/Uri.php
  *
- * @filesource   UriExtended.php
  * @created      06.03.2019
- * @package      chillerlan\HTTP\Psr7
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2019 smiley
  * @license      MIT

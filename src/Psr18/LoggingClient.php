@@ -4,9 +4,7 @@
  *
  * a silly logging wrapper (do not use in production!)
  *
- * @filesource   LoggingClient.php
  * @created      07.08.2019
- * @package      chillerlan\HTTP\Psr18
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2019 smiley
  * @license      MIT
@@ -31,8 +29,8 @@ class LoggingClient implements ClientInterface, LoggerAwareInterface{
 	 * LoggingClient constructor.
 	 */
 	public function __construct(ClientInterface $http, LoggerInterface $logger = null){
-		$this->http            = $http;
-		$this->logger          = $logger ?? new NullLogger;
+		$this->http   = $http;
+		$this->logger = $logger ?? new NullLogger;
 	}
 
 	/**

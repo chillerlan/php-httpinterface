@@ -2,9 +2,7 @@
 /**
  * Class PriorityQueueRequestHandlerTest
  *
- * @filesource   PriorityQueueRequestHandlerTest.php
  * @created      13.03.2019
- * @package      chillerlan\HTTPTest\Psr15
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2019 smiley
  * @license      MIT

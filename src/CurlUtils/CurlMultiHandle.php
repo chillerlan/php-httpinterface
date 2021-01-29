@@ -2,9 +2,7 @@
 /**
  * Class CurlMultiHandle
  *
- * @filesource   CurlMultiHandle.php
  * @created      03.11.2020
- * @package      chillerlan\HTTP\CurlUtils
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2020 smiley
  * @license      MIT

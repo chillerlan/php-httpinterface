@@ -2,9 +2,7 @@
 /**
  * Class HTTPClient
  *
- * @filesource   HTTPClient.php
  * @created      27.08.2018
- * @package      chillerlan\HTTP
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2018 smiley
  * @license      MIT

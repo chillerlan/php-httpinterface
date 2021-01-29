@@ -1,9 +1,8 @@
 <?php
 /**
+ * Class UriExtendedTest
  *
- * @filesource   UriExtendedTest.php
  * @created      06.03.2019
- * @package      chillerlan\HTTPTest\Psr7
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2019 smiley
  * @license      MIT
@@ -14,9 +13,6 @@ namespace chillerlan\HTTPTest\Psr7;
 use chillerlan\HTTP\Psr7\UriExtended;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class UriExtendedTest
- */
 class UriExtendedTest extends TestCase{
 
 	public function testIsAbsolute(){

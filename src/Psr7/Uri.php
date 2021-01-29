@@ -2,9 +2,7 @@
 /**
  * Class Uri
  *
- * @filesource   Uri.php
  * @created      10.08.2018
- * @package      chillerlan\HTTP\Psr7
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2018 smiley
  * @license      MIT

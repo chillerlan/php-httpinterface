@@ -2,9 +2,7 @@
 /**
  * Class HTTPClientAbstract
  *
- * @filesource   HTTPClientAbstract.php
  * @created      22.02.2019
- * @package      chillerlan\HTTP\Psr18
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2019 smiley
  * @license      MIT

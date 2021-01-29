@@ -2,9 +2,7 @@
 /**
  * Class MessageHelpersTest
  *
- * @filesource   MessageHelpersTest.php
  * @created      01.09.2018
- * @package      chillerlan\HTTPTest\Psr7
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2018 smiley
  * @license      MIT

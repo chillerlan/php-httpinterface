@@ -4,9 +4,7 @@
  *
  * @link https://github.com/guzzle/psr7/blob/master/src/MultipartStream.php
  *
- * @filesource   MultipartStream.php
  * @created      20.12.2018
- * @package      chillerlan\HTTP\Psr7
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2018 smiley
  * @license      MIT

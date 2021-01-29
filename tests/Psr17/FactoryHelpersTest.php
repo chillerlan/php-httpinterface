@@ -2,9 +2,7 @@
 /**
  * Class FactoryHelpersTest
  *
- * @filesource   FactoryHelpersTest.php
  * @created      31.01.2019
- * @package      chillerlan\HTTPTest\Psr17
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2019 smiley
  * @license      MIT
