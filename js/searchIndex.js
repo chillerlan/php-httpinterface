@@ -2186,6 +2186,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr7-MessageHelpersTest.html#method_testRawurlencode"
         },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageHelpersTest\u003A\u003AtestRawurlencodeTypeErrorException\u0028\u0029",
+            "name": "testRawurlencodeTypeErrorException",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-MessageHelpersTest.html#method_testRawurlencodeTypeErrorException"
+        },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageHelpersTest\u003A\u003AtestBuildHttpQuery\u0028\u0029",
             "name": "testBuildHttpQuery",
             "summary": "",
