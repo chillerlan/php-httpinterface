@@ -95,6 +95,7 @@ class CurlMultiClientTest extends TestCase{
 	 * @todo
 	 */
 	public function testMultiRequest(){
+		$this::markAsRisky();
 		$requests = $this->getRequests();
 
 		$this->http
@@ -113,7 +114,6 @@ class CurlMultiClientTest extends TestCase{
 
 		// cover the destructor
 		unset($this->http);
-
 	}
 
 	public function testEmptyStackException(){
