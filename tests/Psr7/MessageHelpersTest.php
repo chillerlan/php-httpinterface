@@ -13,6 +13,7 @@ namespace chillerlan\HTTPTest\Psr7;
 use chillerlan\HTTP\Psr7\{Request, Response};
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\MessageInterface;
+use TypeError;
 
 use function chillerlan\HTTP\Psr17\create_stream;
 use function chillerlan\HTTP\Psr7\{
@@ -150,8 +151,13 @@ class MessageHelpersTest extends TestCase{
 
 	public function rawurlencodeDataProvider(){
 		return [
-			'string' => ['some test string!', 'some%20test%20string%21'],
-			'array'  => [
+			'null'         => [null, ''],
+			'bool (false)' => [false, ''],
+			'bool (true)'  => [true, '1'],
+			'int'          => [42, '42'],
+			'float'        => [42.42, '42.42'],
+			'string'       => ['some test string!', 'some%20test%20string%21'],
+			'array'        => [
 				['some other', 'test string', ['oh wait!', 'this', ['is an', 'array!']]],
 				['some%20other', 'test%20string', ['oh%20wait%21', 'this', ['is%20an', 'array%21']]],
 			],
@@ -166,6 +172,12 @@ class MessageHelpersTest extends TestCase{
 	 */
 	public function testRawurlencode($data, $expected){
 		$this::assertSame($expected, r_rawurlencode($data));
+	}
+
+	public function testRawurlencodeTypeErrorException(){
+		$this::expectException(TypeError::class);
+
+		r_rawurlencode(new \stdClass());
 	}
 
 	public function testBuildHttpQuery(){

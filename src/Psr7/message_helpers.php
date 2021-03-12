@@ -208,8 +208,8 @@ function r_rawurlencode($data){
 		return array_map(__FUNCTION__, $data);
 	}
 
-	if(!is_scalar($data)){
-		throw new TypeError('$data is not scalar');
+	if(!is_scalar($data) && $data !== null){
+		throw new TypeError('$data is neither scalar nor null');
 	}
 
 	return rawurlencode((string)$data);
