@@ -18,7 +18,7 @@ A [PSR-7](https://www.php-fig.org/psr/psr-7/)/[PSR-17](https://www.php-fig.org/p
 [license-badge]: https://img.shields.io/github/license/chillerlan/php-httpinterface.svg
 [license]: https://github.com/chillerlan/php-httpinterface/blob/master/LICENSE
 [travis-badge]: https://img.shields.io/travis/com/chillerlan/php-httpinterface/main.svg?logo=travis
-[travis]: https://travis-ci.org/chillerlan/php-httpinterface
+[travis]: https://travis-ci.com/github/chillerlan/php-httpinterface
 [coverage-badge]: https://img.shields.io/codecov/c/github/chillerlan/php-httpinterface.svg?logo=codecov
 [coverage]: https://codecov.io/github/chillerlan/php-httpinterface
 [scrutinizer-badge]: https://img.shields.io/scrutinizer/g/chillerlan/php-httpinterface.svg?logo=scrutinizer
