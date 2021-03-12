@@ -1,4 +1,5 @@
 .build/*
+.docs/*
 .idea/*
 vendor/*
 composer.lock
