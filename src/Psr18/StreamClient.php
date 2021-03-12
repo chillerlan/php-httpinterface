@@ -95,8 +95,6 @@ class StreamClient extends HTTPClientAbstract{
 			$name = strtolower($name);
 
 			foreach($values as $value){
-				$value = (string)$value;
-
 				// cURL requires a special format for empty headers.
 				// See https://github.com/guzzle/guzzle/issues/1882 for more details.
 				$headers[] = $value === '' ? $name.';' : $name.': '.$value;
