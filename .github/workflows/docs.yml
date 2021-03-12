@@ -19,10 +19,10 @@ jobs:
           fetch-depth: 1
 
       - name: "Fetch phpDocumentor"
-        run: wget -q https://github.com/phpDocumentor/phpDocumentor/releases/download/v3.0.0/phpDocumentor.phar -O phpDocumentor
+        run: wget -q https://github.com/phpDocumentor/phpDocumentor/releases/download/v3.0.0/phpDocumentor.phar -O ./phpDocumentor
 
       - name: "Build Docs"
-        run: php phpdocumentor --config=phpdoc.xml
+        run: php ./phpdocumentor --config=phpdoc.xml
 
       - name: "Publish Docs to gh-pages"
         uses: JamesIves/github-pages-deploy-action@3.7.1
