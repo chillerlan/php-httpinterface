@@ -95,7 +95,7 @@ class CurlMultiClientTest extends TestCase{
 	 * @todo
 	 */
 	public function testMultiRequest(){
-		$this::markAsRisky();
+		$this::markTestIncomplete();
 		$requests = $this->getRequests();
 
 		$this->http
