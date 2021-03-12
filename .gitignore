@@ -1,7 +1,0 @@
-.build/*
-.docs/*
-.idea/*
-vendor/*
-composer.lock
-*cacert.pem
-phpunit.xml
