@@ -214,6 +214,7 @@ class UploadedFileTest extends TestCase{
 		copy(__FILE__, $from);
 
 		$uploadedFile = new UploadedFile($from, 100, UPLOAD_ERR_OK, basename($from), 'text/plain');
+		// why does this produce an error under windows when running with coverage???
 		$uploadedFile->moveTo($to);
 
 		$this::assertFileEquals(__FILE__, $to);
