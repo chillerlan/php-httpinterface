@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="../">
+    <link rel="icon" href="images/favicon.ico"/>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/base.css">
+            <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/template.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
+                <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
+        <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/js/all.min.js" integrity="sha256-0vuk8LXoyrmCjp1f0O300qo1M75ZQyhH9X3J6d+scmk=" crossorigin="anonymous"></script>
+        <script src="js/search.js"></script>
+        <script defer src="js/searchIndex.js"></script>
+    </head>
+<body id="top">
+    <header class="phpdocumentor-header phpdocumentor-section">
+    <h1 class="phpdocumentor-title"><a href="" class="phpdocumentor-title__link">Documentation</a></h1>
+    <input class="phpdocumentor-header__menu-button" type="checkbox" id="menu-button" name="menu-button" />
+    <label class="phpdocumentor-header__menu-icon" for="menu-button">
+        <i class="fas fa-bars"></i>
+    </label>
+    <section data-search-form class="phpdocumentor-search">
+    <label>
+        <span class="visually-hidden">Search for</span>
+        <svg class="phpdocumentor-search__icon" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="7.5" cy="7.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <line x1="12.4892" y1="12.2727" x2="19.1559" y2="18.9393" stroke="currentColor" stroke-width="3"/>
+        </svg>
+        <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+    </label>
+</section>
+
+    <nav class="phpdocumentor-topnav">
+    <ul class="phpdocumentor-topnav__menu">
+        </ul>
+</nav>
+</header>
+
+    <main class="phpdocumentor">
+        <div class="phpdocumentor-section">
+            <input class="phpdocumentor-sidebar__menu-button" type="checkbox" id="sidebar-button" name="sidebar-button" />
+<label class="phpdocumentor-sidebar__menu-icon" for="sidebar-button">
+    Menu
+</label>
+<aside class="phpdocumentor-column -four phpdocumentor-sidebar">
+    
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                                                <h4 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/chillerlan.html"><abbr title="\chillerlan">chillerlan</abbr></a></h4>
+                <ul class="phpdocumentor-list">
+                                            <li><a href="namespaces/chillerlan-http.html"><abbr title="\chillerlan\HTTP">HTTP</abbr></a></li>
+                                            <li><a href="namespaces/chillerlan-httptest.html"><abbr title="\chillerlan\HTTPTest">HTTPTest</abbr></a></li>
+                                    </ul>
+                        </section>
+
+    
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
+    </section>
+
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="indices/files.html">Files</a></h3>
+    </section>
+</aside>
+
+            <div class="phpdocumentor-column -eight phpdocumentor-content">
+                    <ul class="phpdocumentor-breadcrumbs">
+    </ul>
+
+    <article class="phpdocumentor-element -file">
+        <h2 class="phpdocumentor-content__title">message_helpers.php</h2>
+
+        
+
+
+
+<h3 id="toc">
+    Table of Contents
+    <a href="#toc" class="headerlink"><i class="fas fa-link"></i></a>
+</h3>
+
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a href="namespaces/chillerlan-http-psr7.html#constant_BOOLEANS_AS_BOOL">BOOLEANS_AS_BOOL</a>
+    <span>
+        &nbsp;= 0                    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a href="namespaces/chillerlan-http-psr7.html#constant_BOOLEANS_AS_INT">BOOLEANS_AS_INT</a>
+    <span>
+        &nbsp;= 1                    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a href="namespaces/chillerlan-http-psr7.html#constant_BOOLEANS_AS_INT_STRING">BOOLEANS_AS_INT_STRING</a>
+    <span>
+        &nbsp;= 3                    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a href="namespaces/chillerlan-http-psr7.html#constant_BOOLEANS_AS_STRING">BOOLEANS_AS_STRING</a>
+    <span>
+        &nbsp;= 2                    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a href="namespaces/chillerlan-http-psr7.html#constant_MIMETYPES">MIMETYPES</a>
+    <span>
+        &nbsp;= [&#039;3gp&#039; =&gt; &#039;video/3gpp&#039;, &#039;7z&#039; =&gt; &#039;application/x-7z-compressed&#039;, &#039;aac&#039; =&gt; &#039;audio/x-aac&#039;, &#039;ai&#039; =&gt; &#039;application/postscript&#039;, &#039;aif&#039; =&gt; &#039;audio/x-aiff&#039;, &#039;asc&#039; =&gt; &#039;text/plain&#039;, &#039;asf&#039; =&gt; &#039;video/x-ms-asf&#039;, &#039;atom&#039; =&gt; &#039;application/atom+xml&#039;, &#039;avi&#039; =&gt; &#039;video/x-msvideo&#039;, &#039;bmp&#039; =&gt; &#039;image/bmp&#039;, &#039;bz2&#039; =&gt; &#039;application/x-bzip2&#039;, &#039;cer&#039; =&gt; &#039;application/pkix-cert&#039;, &#039;crl&#039; =&gt; &#039;application/pkix-crl&#039;, &#039;crt&#039; =&gt; &#039;application/x-x509-ca-cert&#039;, &#039;css&#039; =&gt; &#039;text/css&#039;, &#039;csv&#039; =&gt; &#039;text/csv&#039;, &#039;cu&#039; =&gt; &#039;application/cu-seeme&#039;, &#039;deb&#039; =&gt; &#039;application/x-debian-package&#039;, &#039;doc&#039; =&gt; &#039;application/msword&#039;, &#039;docx&#039; =&gt; &#039;application/vnd.openxmlformats-officedocument.wordprocessingml.document&#039;, &#039;dvi&#039; =&gt; &#039;application/x-dvi&#039;, &#039;eot&#039; =&gt; &#039;application/vnd.ms-fontobject&#039;, &#039;eps&#039; =&gt; &#039;application/postscript&#039;, &#039;epub&#039; =&gt; &#039;application/epub+zip&#039;, &#039;etx&#039; =&gt; &#039;text/x-setext&#039;, &#039;flac&#039; =&gt; &#039;audio/flac&#039;, &#039;flv&#039; =&gt; &#039;video/x-flv&#039;, &#039;gif&#039; =&gt; &#039;image/gif&#039;, &#039;gz&#039; =&gt; &#039;application/gzip&#039;, &#039;htm&#039; =&gt; &#039;text/html&#039;, &#039;html&#039; =&gt; &#039;text/html&#039;, &#039;ico&#039; =&gt; &#039;image/x-icon&#039;, &#039;ics&#039; =&gt; &#039;text/calendar&#039;, &#039;ini&#039; =&gt; &#039;text/plain&#039;, &#039;iso&#039; =&gt; &#039;application/x-iso9660-image&#039;, &#039;jar&#039; =&gt; &#039;application/java-archive&#039;, &#039;jpe&#039; =&gt; &#039;image/jpeg&#039;, &#039;jpeg&#039; =&gt; &#039;image/jpeg&#039;, &#039;jpg&#039; =&gt; &#039;image/jpeg&#039;, &#039;js&#039; =&gt; &#039;text/javascript&#039;, &#039;json&#039; =&gt; &#039;application/json&#039;, &#039;latex&#039; =&gt; &#039;application/x-latex&#039;, &#039;log&#039; =&gt; &#039;text/plain&#039;, &#039;m4a&#039; =&gt; &#039;audio/mp4&#039;, &#039;m4v&#039; =&gt; &#039;video/mp4&#039;, &#039;mid&#039; =&gt; &#039;audio/midi&#039;, &#039;midi&#039; =&gt; &#039;audio/midi&#039;, &#039;mov&#039; =&gt; &#039;video/quicktime&#039;, &#039;mkv&#039; =&gt; &#039;video/x-matroska&#039;, &#039;mp3&#039; =&gt; &#039;audio/mpeg&#039;, &#039;mp4&#039; =&gt; &#039;video/mp4&#039;, &#039;mp4a&#039; =&gt; &#039;audio/mp4&#039;, &#039;mp4v&#039; =&gt; &#039;video/mp4&#039;, &#039;mpe&#039; =&gt; &#039;video/mpeg&#039;, &#039;mpeg&#039; =&gt; &#039;video/mpeg&#039;, &#039;mpg&#039; =&gt; &#039;video/mpeg&#039;, &#039;mpg4&#039; =&gt; &#039;video/mp4&#039;, &#039;oga&#039; =&gt; &#039;audio/ogg&#039;, &#039;ogg&#039; =&gt; &#039;audio/ogg&#039;, &#039;ogv&#039; =&gt; &#039;video/ogg&#039;, &#039;ogx&#039; =&gt; &#039;application/ogg&#039;, &#039;pbm&#039; =&gt; &#039;image/x-portable-bitmap&#039;, &#039;pdf&#039; =&gt; &#039;application/pdf&#039;, &#039;pgm&#039; =&gt; &#039;image/x-portable-graymap&#039;, &#039;png&#039; =&gt; &#039;image/png&#039;, &#039;pnm&#039; =&gt; &#039;image/x-portable-anymap&#039;, &#039;ppm&#039; =&gt; &#039;image/x-portable-pixmap&#039;, &#039;ppt&#039; =&gt; &#039;application/vnd.ms-powerpoint&#039;, &#039;pptx&#039; =&gt; &#039;application/vnd.openxmlformats-officedocument.presentationml.presentation&#039;, &#039;ps&#039; =&gt; &#039;application/postscript&#039;, &#039;qt&#039; =&gt; &#039;video/quicktime&#039;, &#039;rar&#039; =&gt; &#039;application/x-rar-compressed&#039;, &#039;ras&#039; =&gt; &#039;image/x-cmu-raster&#039;, &#039;rss&#039; =&gt; &#039;application/rss+xml&#039;, &#039;rtf&#039; =&gt; &#039;application/rtf&#039;, &#039;sgm&#039; =&gt; &#039;text/sgml&#039;, &#039;sgml&#039; =&gt; &#039;text/sgml&#039;, &#039;svg&#039; =&gt; &#039;image/svg+xml&#039;, &#039;swf&#039; =&gt; &#039;application/x-shockwave-flash&#039;, &#039;tar&#039; =&gt; &#039;application/x-tar&#039;, &#039;tif&#039; =&gt; &#039;image/tiff&#039;, &#039;tiff&#039; =&gt; &#039;image/tiff&#039;, &#039;torrent&#039; =&gt; &#039;application/x-bittorrent&#039;, &#039;ttf&#039; =&gt; &#039;application/x-font-ttf&#039;, &#039;txt&#039; =&gt; &#039;text/plain&#039;, &#039;wav&#039; =&gt; &#039;audio/x-wav&#039;, &#039;webm&#039; =&gt; &#039;video/webm&#039;, &#039;wma&#039; =&gt; &#039;audio/x-ms-wma&#039;, &#039;wmv&#039; =&gt; &#039;video/x-ms-wmv&#039;, &#039;woff&#039; =&gt; &#039;application/x-font-woff&#039;, &#039;wsdl&#039; =&gt; &#039;application/wsdl+xml&#039;, &#039;xbm&#039; =&gt; &#039;image/x-xbitmap&#039;, &#039;xls&#039; =&gt; &#039;application/vnd.ms-excel&#039;, &#039;xlsx&#039; =&gt; &#039;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&#039;, &#039;xml&#039; =&gt; &#039;application/xml&#039;, &#039;xpm&#039; =&gt; &#039;image/x-xpixmap&#039;, &#039;xwd&#039; =&gt; &#039;image/x-xwindowdump&#039;, &#039;yaml&#039; =&gt; &#039;text/yaml&#039;, &#039;yml&#039; =&gt; &#039;text/yaml&#039;, &#039;zip&#039; =&gt; &#039;application/zip&#039;]                    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a href="namespaces/chillerlan-http-psr7.html#constant_PSR7_INCLUDES">PSR7_INCLUDES</a>
+    <span>
+        &nbsp;= true                    </span>
+</dt>
+<dd></dd>
+
+                        <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/chillerlan-http-psr7.html#function_normalize_message_headers">normalize_message_headers()</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+<dd>Normalizes an array of header lines to format [&quot;Name&quot; =&gt; &quot;Value (, Value2, Value3, ...)&quot;, ...]
+An exception is being made for Set-Cookie, which holds an array of values for each cookie.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/chillerlan-http-psr7.html#function_r_rawurlencode">r_rawurlencode()</a>
+    <span>
+                        &nbsp;: string|array&lt;string|int, string&gt;    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/chillerlan-http-psr7.html#function_build_http_query">build_http_query()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd>from https://github.com/abraham/twitteroauth/blob/master/src/Util.php</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/chillerlan-http-psr7.html#function_clean_query_params">clean_query_params()</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/chillerlan-http-psr7.html#function_merge_query">merge_query()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd>merges additional query parameters into an existing query string</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/chillerlan-http-psr7.html#function_normalize_files">normalize_files()</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+<dd>Return an UploadedFile instance array.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/chillerlan-http-psr7.html#function_create_uploaded_file_from_spec">create_uploaded_file_from_spec()</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|<abbr title="\Psr\Http\Message\UploadedFileInterface">UploadedFileInterface</abbr>    </span>
+</dt>
+<dd>Create and return an UploadedFile instance from a $_FILES specification.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/chillerlan-http-psr7.html#function_normalize_nested_file_spec">normalize_nested_file_spec()</a>
+    <span>
+                        &nbsp;: array&lt;string|int, <abbr title="\Psr\Http\Message\UploadedFileInterface">UploadedFileInterface</abbr>&gt;    </span>
+</dt>
+<dd>Normalize an array of file specifications.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/chillerlan-http-psr7.html#function_get_json">get_json()</a>
+    <span>
+                        &nbsp;: <abbr title="\stdClass">stdClass</abbr>|array&lt;string|int, mixed&gt;|bool    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/chillerlan-http-psr7.html#function_get_xml">get_xml()</a>
+    <span>
+                        &nbsp;: <abbr title="\SimpleXMLElement">SimpleXMLElement</abbr>|array&lt;string|int, mixed&gt;|bool    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/chillerlan-http-psr7.html#function_message_to_string">message_to_string()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd>Returns the string representation of an HTTP message. (from Guzzle)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/chillerlan-http-psr7.html#function_decompress_content">decompress_content()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd>Decompresses the message content according to the Content-Encoding header and returns the decompressed data</dd>
+
+    </dl>
+
+
+        
+    <section class="phpdocumentor-constants">
+        <h3 class="phpdocumentor-elements__header" id="constants">
+            Constants
+            <a href="files/src-psr7-message-helpers.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
+        </h3>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_BOOLEANS_AS_BOOL">
+        BOOLEANS_AS_BOOL
+        <a href="namespaces/chillerlan-http-psr7.html#constant_BOOLEANS_AS_BOOL" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">266</span>
+</aside>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">BOOLEANS_AS_BOOL</span>
+    = <span class="phpdocumentor-signature__default-value">""</span>
+</code>
+
+
+    
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_BOOLEANS_AS_INT">
+        BOOLEANS_AS_INT
+        <a href="namespaces/chillerlan-http-psr7.html#constant_BOOLEANS_AS_INT" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">267</span>
+</aside>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">BOOLEANS_AS_INT</span>
+    = <span class="phpdocumentor-signature__default-value">1</span>
+</code>
+
+
+    
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_BOOLEANS_AS_INT_STRING">
+        BOOLEANS_AS_INT_STRING
+        <a href="namespaces/chillerlan-http-psr7.html#constant_BOOLEANS_AS_INT_STRING" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">269</span>
+</aside>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">BOOLEANS_AS_INT_STRING</span>
+    = <span class="phpdocumentor-signature__default-value">3</span>
+</code>
+
+
+    
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_BOOLEANS_AS_STRING">
+        BOOLEANS_AS_STRING
+        <a href="namespaces/chillerlan-http-psr7.html#constant_BOOLEANS_AS_STRING" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">268</span>
+</aside>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">BOOLEANS_AS_STRING</span>
+    = <span class="phpdocumentor-signature__default-value">2</span>
+</code>
+
+
+    
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_MIMETYPES">
+        MIMETYPES
+        <a href="namespaces/chillerlan-http-psr7.html#constant_MIMETYPES" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">26</span>
+</aside>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">MIMETYPES</span>
+    = <span class="phpdocumentor-signature__default-value">[&#039;3gp&#039; =&gt; &#039;video/3gpp&#039;, &#039;7z&#039; =&gt; &#039;application/x-7z-compressed&#039;, &#039;aac&#039; =&gt; &#039;audio/x-aac&#039;, &#039;ai&#039; =&gt; &#039;application/postscript&#039;, &#039;aif&#039; =&gt; &#039;audio/x-aiff&#039;, &#039;asc&#039; =&gt; &#039;text/plain&#039;, &#039;asf&#039; =&gt; &#039;video/x-ms-asf&#039;, &#039;atom&#039; =&gt; &#039;application/atom+xml&#039;, &#039;avi&#039; =&gt; &#039;video/x-msvideo&#039;, &#039;bmp&#039; =&gt; &#039;image/bmp&#039;, &#039;bz2&#039; =&gt; &#039;application/x-bzip2&#039;, &#039;cer&#039; =&gt; &#039;application/pkix-cert&#039;, &#039;crl&#039; =&gt; &#039;application/pkix-crl&#039;, &#039;crt&#039; =&gt; &#039;application/x-x509-ca-cert&#039;, &#039;css&#039; =&gt; &#039;text/css&#039;, &#039;csv&#039; =&gt; &#039;text/csv&#039;, &#039;cu&#039; =&gt; &#039;application/cu-seeme&#039;, &#039;deb&#039; =&gt; &#039;application/x-debian-package&#039;, &#039;doc&#039; =&gt; &#039;application/msword&#039;, &#039;docx&#039; =&gt; &#039;application/vnd.openxmlformats-officedocument.wordprocessingml.document&#039;, &#039;dvi&#039; =&gt; &#039;application/x-dvi&#039;, &#039;eot&#039; =&gt; &#039;application/vnd.ms-fontobject&#039;, &#039;eps&#039; =&gt; &#039;application/postscript&#039;, &#039;epub&#039; =&gt; &#039;application/epub+zip&#039;, &#039;etx&#039; =&gt; &#039;text/x-setext&#039;, &#039;flac&#039; =&gt; &#039;audio/flac&#039;, &#039;flv&#039; =&gt; &#039;video/x-flv&#039;, &#039;gif&#039; =&gt; &#039;image/gif&#039;, &#039;gz&#039; =&gt; &#039;application/gzip&#039;, &#039;htm&#039; =&gt; &#039;text/html&#039;, &#039;html&#039; =&gt; &#039;text/html&#039;, &#039;ico&#039; =&gt; &#039;image/x-icon&#039;, &#039;ics&#039; =&gt; &#039;text/calendar&#039;, &#039;ini&#039; =&gt; &#039;text/plain&#039;, &#039;iso&#039; =&gt; &#039;application/x-iso9660-image&#039;, &#039;jar&#039; =&gt; &#039;application/java-archive&#039;, &#039;jpe&#039; =&gt; &#039;image/jpeg&#039;, &#039;jpeg&#039; =&gt; &#039;image/jpeg&#039;, &#039;jpg&#039; =&gt; &#039;image/jpeg&#039;, &#039;js&#039; =&gt; &#039;text/javascript&#039;, &#039;json&#039; =&gt; &#039;application/json&#039;, &#039;latex&#039; =&gt; &#039;application/x-latex&#039;, &#039;log&#039; =&gt; &#039;text/plain&#039;, &#039;m4a&#039; =&gt; &#039;audio/mp4&#039;, &#039;m4v&#039; =&gt; &#039;video/mp4&#039;, &#039;mid&#039; =&gt; &#039;audio/midi&#039;, &#039;midi&#039; =&gt; &#039;audio/midi&#039;, &#039;mov&#039; =&gt; &#039;video/quicktime&#039;, &#039;mkv&#039; =&gt; &#039;video/x-matroska&#039;, &#039;mp3&#039; =&gt; &#039;audio/mpeg&#039;, &#039;mp4&#039; =&gt; &#039;video/mp4&#039;, &#039;mp4a&#039; =&gt; &#039;audio/mp4&#039;, &#039;mp4v&#039; =&gt; &#039;video/mp4&#039;, &#039;mpe&#039; =&gt; &#039;video/mpeg&#039;, &#039;mpeg&#039; =&gt; &#039;video/mpeg&#039;, &#039;mpg&#039; =&gt; &#039;video/mpeg&#039;, &#039;mpg4&#039; =&gt; &#039;video/mp4&#039;, &#039;oga&#039; =&gt; &#039;audio/ogg&#039;, &#039;ogg&#039; =&gt; &#039;audio/ogg&#039;, &#039;ogv&#039; =&gt; &#039;video/ogg&#039;, &#039;ogx&#039; =&gt; &#039;application/ogg&#039;, &#039;pbm&#039; =&gt; &#039;image/x-portable-bitmap&#039;, &#039;pdf&#039; =&gt; &#039;application/pdf&#039;, &#039;pgm&#039; =&gt; &#039;image/x-portable-graymap&#039;, &#039;png&#039; =&gt; &#039;image/png&#039;, &#039;pnm&#039; =&gt; &#039;image/x-portable-anymap&#039;, &#039;ppm&#039; =&gt; &#039;image/x-portable-pixmap&#039;, &#039;ppt&#039; =&gt; &#039;application/vnd.ms-powerpoint&#039;, &#039;pptx&#039; =&gt; &#039;application/vnd.openxmlformats-officedocument.presentationml.presentation&#039;, &#039;ps&#039; =&gt; &#039;application/postscript&#039;, &#039;qt&#039; =&gt; &#039;video/quicktime&#039;, &#039;rar&#039; =&gt; &#039;application/x-rar-compressed&#039;, &#039;ras&#039; =&gt; &#039;image/x-cmu-raster&#039;, &#039;rss&#039; =&gt; &#039;application/rss+xml&#039;, &#039;rtf&#039; =&gt; &#039;application/rtf&#039;, &#039;sgm&#039; =&gt; &#039;text/sgml&#039;, &#039;sgml&#039; =&gt; &#039;text/sgml&#039;, &#039;svg&#039; =&gt; &#039;image/svg+xml&#039;, &#039;swf&#039; =&gt; &#039;application/x-shockwave-flash&#039;, &#039;tar&#039; =&gt; &#039;application/x-tar&#039;, &#039;tif&#039; =&gt; &#039;image/tiff&#039;, &#039;tiff&#039; =&gt; &#039;image/tiff&#039;, &#039;torrent&#039; =&gt; &#039;application/x-bittorrent&#039;, &#039;ttf&#039; =&gt; &#039;application/x-font-ttf&#039;, &#039;txt&#039; =&gt; &#039;text/plain&#039;, &#039;wav&#039; =&gt; &#039;audio/x-wav&#039;, &#039;webm&#039; =&gt; &#039;video/webm&#039;, &#039;wma&#039; =&gt; &#039;audio/x-ms-wma&#039;, &#039;wmv&#039; =&gt; &#039;video/x-ms-wmv&#039;, &#039;woff&#039; =&gt; &#039;application/x-font-woff&#039;, &#039;wsdl&#039; =&gt; &#039;application/wsdl+xml&#039;, &#039;xbm&#039; =&gt; &#039;image/x-xbitmap&#039;, &#039;xls&#039; =&gt; &#039;application/vnd.ms-excel&#039;, &#039;xlsx&#039; =&gt; &#039;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&#039;, &#039;xml&#039; =&gt; &#039;application/xml&#039;, &#039;xpm&#039; =&gt; &#039;image/x-xpixmap&#039;, &#039;xwd&#039; =&gt; &#039;image/x-xwindowdump&#039;, &#039;yaml&#039; =&gt; &#039;text/yaml&#039;, &#039;yml&#039; =&gt; &#039;text/yaml&#039;, &#039;zip&#039; =&gt; &#039;application/zip&#039;]</span>
+</code>
+
+
+        <section class="phpdocumentor-description"></section>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">link</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                                        <a class="phpdocumentor-tag-link" href="http://svn.apache.org/repos/asf/httpd/httpd/branches/1.3.x/conf/mime.types"> http://svn.apache.org/repos/asf/httpd/httpd/branches/1.3.x/conf/mime.types </a>
+                    
+                                    </dd>
+                        </dl>
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_PSR7_INCLUDES">
+        PSR7_INCLUDES
+        <a href="namespaces/chillerlan-http-psr7.html#constant_PSR7_INCLUDES" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">21</span>
+</aside>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">PSR7_INCLUDES</span>
+    = <span class="phpdocumentor-signature__default-value">true</span>
+</code>
+
+
+    
+    
+
+</article>
+            </section>
+
+            <section class="phpdocumentor-functions">
+        <h3 class="phpdocumentor-elements__header" id="functions">
+            Functions
+            <a href="files/src-psr7-message-helpers.html#functions" class="headerlink"><i class="fas fa-link"></i></a>
+        </h3>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_normalize_message_headers">
+        normalize_message_headers()
+        <a href="namespaces/chillerlan-http-psr7.html#function_normalize_message_headers" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">138</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Normalizes an array of header lines to format [&quot;Name&quot; =&gt; &quot;Value (, Value2, Value3, ...)&quot;, ...]
+An exception is being made for Set-Cookie, which holds an array of values for each cookie.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">normalize_message_headers</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$headers</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+        <section class="phpdocumentor-description"><p>For multiple cookies with the same name, only the last value will be kept.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$headers</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_r_rawurlencode">
+        r_rawurlencode()
+        <a href="namespaces/chillerlan-http-psr7.html#function_r_rawurlencode" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">205</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">r_rawurlencode</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string|array&lt;string|int, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|array&lt;string|int, string&gt;</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$data</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|array&lt;string|int, string&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\TypeError">TypeError</abbr></span>
+                                                            
+                                                 <section class="phpdocumentor-description"></section>
+
+                                    </dd>
+                        </dl>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_build_http_query">
+        build_http_query()
+        <a href="namespaces/chillerlan-http-psr7.html#function_build_http_query" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">221</span>
+</aside>
+
+        <p class="phpdocumentor-summary">from https://github.com/abraham/twitteroauth/blob/master/src/Util.php</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">build_http_query</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$params</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$urlencode</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$delimiter</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$enclosure</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$params</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$urlencode</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$delimiter</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$enclosure</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_clean_query_params">
+        clean_query_params()
+        <a href="namespaces/chillerlan-http-psr7.html#function_clean_query_params" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">283</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">clean_query_params</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">iteratable&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$params</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$bool_cast</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$remove_empty</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$params</span>
+                : <span class="phpdocumentor-signature__argument__return-type">iteratable&lt;string|int, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$bool_cast</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>converts booleans to a type determined like following:
+BOOLEANS_AS_BOOL      : unchanged boolean value (default)
+BOOLEANS_AS_INT       : integer values 0 or 1
+BOOLEANS_AS_STRING    : &quot;true&quot;/&quot;false&quot; strings
+BOOLEANS_AS_INT_STRING: &quot;0&quot;/&quot;1&quot;</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$remove_empty</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>remove empty and NULL values</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_merge_query">
+        merge_query()
+        <a href="namespaces/chillerlan-http-psr7.html#function_merge_query" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">328</span>
+</aside>
+
+        <p class="phpdocumentor-summary">merges additional query parameters into an existing query string</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">merge_query</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$uri</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$query</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$uri</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$query</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_normalize_files">
+        normalize_files()
+        <a href="namespaces/chillerlan-http-psr7.html#function_normalize_files" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">349</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Return an UploadedFile instance array.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">normalize_files</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$files</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$files</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>A array which respect $_FILES structure</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\InvalidArgumentException">InvalidArgumentException</abbr></span>
+                                                            
+                                                 <section class="phpdocumentor-description"><p>for unrecognized values</p>
+</section>
+
+                                    </dd>
+                        </dl>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_create_uploaded_file_from_spec">
+        create_uploaded_file_from_spec()
+        <a href="namespaces/chillerlan-http-psr7.html#function_create_uploaded_file_from_spec" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">383</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Create and return an UploadedFile instance from a $_FILES specification.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">create_uploaded_file_from_spec</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$value</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;|<abbr title="\Psr\Http\Message\UploadedFileInterface">UploadedFileInterface</abbr></span></code>
+
+        <section class="phpdocumentor-description"><p>If the specification represents an array of values, this method will
+delegate to normalizeNestedFileSpec() and return that return value.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$value</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>$_FILES struct</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_normalize_nested_file_spec">
+        normalize_nested_file_spec()
+        <a href="namespaces/chillerlan-http-psr7.html#function_normalize_nested_file_spec" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">402</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Normalize an array of file specifications.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">normalize_nested_file_spec</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$files</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <abbr title="\Psr\Http\Message\UploadedFileInterface">UploadedFileInterface</abbr>&gt;</span></code>
+
+        <section class="phpdocumentor-description"><p>Loops through all nested files and returns a normalized array of
+UploadedFileInterface instances.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$files</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">[]</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_get_json">
+        get_json()
+        <a href="namespaces/chillerlan-http-psr7.html#function_get_json" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">426</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">get_json</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\MessageInterface">MessageInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$message</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$assoc</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\stdClass">stdClass</abbr>|array&lt;string|int, mixed&gt;|bool</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$message</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\MessageInterface">MessageInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$assoc</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_get_xml">
+        get_xml()
+        <a href="namespaces/chillerlan-http-psr7.html#function_get_xml" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">440</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">get_xml</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\MessageInterface">MessageInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$message</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$assoc</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\SimpleXMLElement">SimpleXMLElement</abbr>|array&lt;string|int, mixed&gt;|bool</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$message</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\MessageInterface">MessageInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$assoc</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_message_to_string">
+        message_to_string()
+        <a href="namespaces/chillerlan-http-psr7.html#function_message_to_string" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">457</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Returns the string representation of an HTTP message. (from Guzzle)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">message_to_string</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\MessageInterface">MessageInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$message</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$message</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\MessageInterface">MessageInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Message to convert to a string.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_decompress_content">
+        decompress_content()
+        <a href="namespaces/chillerlan-http-psr7.html#function_decompress_content" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">489</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Decompresses the message content according to the Content-Encoding header and returns the decompressed data</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">decompress_content</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\MessageInterface">MessageInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$message</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$message</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\MessageInterface">MessageInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+            </section>
+
+    </article>
+                <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+    <section class="phpdocumentor-search-results__dialog">
+        <header class="phpdocumentor-search-results__header">
+            <h2 class="phpdocumentor-search-results__title">Search results</h2>
+            <button class="phpdocumentor-search-results__close"><i class="fas fa-times"></i></button>
+        </header>
+        <section class="phpdocumentor-search-results__body">
+            <ul class="phpdocumentor-search-results__entries"></ul>
+        </section>
+    </section>
+</section>
+            </div>
+        </div>
+        <a href="files/src-psr7-message-helpers.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+
+    </main>
+
+    <script>
+        cssVars({});
+    </script>
+</body>
+</html>

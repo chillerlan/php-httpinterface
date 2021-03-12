@@ -1,0 +1,63 @@
+{
+	"name": "chillerlan/php-httpinterface",
+	"description": "A http PSR-7/17/18 client/interface for PHP7.4+",
+	"license": "MIT",
+	"type": "library",
+	"keywords": [
+		"http", "message", "client", "factory", "handler", "psr-7", "psr-15", "psr-17", "psr-18"
+	],
+	"minimum-stability": "stable",
+	"authors": [
+		{
+			"name": "smiley",
+			"email": "smiley@chillerlan.net",
+			"homepage": "https://github.com/codemasher"
+		}
+	],
+	"support": {
+		"issues": "https://github.com/chillerlan/php-httpinterface/issues",
+		"source": "https://github.com/chillerlan/php-httpinterface"
+	},
+	"provide": {
+		"psr/http-client-implementation": "1.0",
+		"psr/http-factory-implementation": "1.0",
+		"psr/http-message-implementation": "1.0",
+		"psr/http-server-handler-implementation": "1.0",
+		"psr/http-server-middleware-implementation": "1.0"
+	},
+	"require": {
+		"php": "^7.4 || ^8.0",
+		"ext-curl":"*",
+		"ext-json":"*",
+		"ext-simplexml":"*",
+		"ext-zlib":"*",
+		"chillerlan/php-settings-container":"^2.1",
+		"fig/http-message-util":"^1.1.5",
+		"psr/http-client":"^1.0",
+		"psr/http-message": "^1.0",
+		"psr/http-factory":"^1.0",
+		"psr/http-server-handler": "^1.0",
+		"psr/http-server-middleware": "^1.0",
+		"psr/log": "^1.1"
+	},
+	"require-dev": {
+		"guzzlehttp/psr7": "^1.7",
+		"http-interop/http-factory-tests": "^0.7",
+		"phan/phan": "^4.0",
+		"phpunit/phpunit": "^9.5"
+	},
+	"autoload": {
+		"files": [
+			"src/includes.php"
+		],
+		"psr-4": {
+			"chillerlan\\HTTP\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"chillerlan\\HTTPTest\\": "tests/",
+			"chillerlan\\HTTPExamples\\": "examples/"
+		}
+	}
+}
