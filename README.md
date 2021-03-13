@@ -38,7 +38,7 @@ An API documentation created with [phpDocumentor](https://www.phpdoc.org/) can b
 
 ## Requirements
 - PHP 7.4+
-  - the cURL extension
+  - the [`cURL`](https://www.php.net/manual/book.curl.php), [`json`](https://www.php.net/manual/book.json.php), [`simplexml`](https://www.php.net/manual/book.simplexml.php) and [`zlib`](https://www.php.net/manual/book.zlib.php) extensions
 
 ## Installation
 **requires [composer](https://getcomposer.org)**
