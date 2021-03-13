@@ -34,6 +34,7 @@
 		<junit outputFile=".build/logs/junit.xml"/>
 	</logging>
 	<php>
+		<const name="TEST_IS_CI" value="true"/>
 		<const name="REQUEST_FACTORY" value="chillerlan\HTTP\Psr17\RequestFactory"/>
 		<const name="RESPONSE_FACTORY" value="chillerlan\HTTP\Psr17\ResponseFactory"/>
 		<const name="SERVER_REQUEST_FACTORY" value="chillerlan\HTTP\Psr17\ServerRequestFactory"/>

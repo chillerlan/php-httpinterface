@@ -18,7 +18,7 @@ use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
 
 use function chillerlan\HTTP\Psr7\build_http_query;
-use function array_column, implode, in_array, ksort;
+use function array_column, defined, implode, in_array, ksort;
 
 /**
  * @group slow
@@ -95,7 +95,13 @@ class CurlMultiClientTest extends TestCase{
 	 * @todo
 	 */
 	public function testMultiRequest(){
-#		$this::markTestIncomplete();
+
+		if(defined('TEST_IS_CI') && TEST_IS_CI === true){
+			$this::markTestIncomplete();
+
+			return;
+		}
+
 		$requests = $this->getRequests();
 
 		$this->http
@@ -110,7 +116,7 @@ class CurlMultiClientTest extends TestCase{
 
 		// the responses are ordered
 		// i'll probably never know why this fails on travis
-#		$this::assertSame(['de', 'en', 'es', 'fr', 'zh', 'de', 'en', 'es', 'fr', 'zh'], array_column($responses, 'lang'));
+		$this::assertSame(['de', 'en', 'es', 'fr', 'zh', 'de', 'en', 'es', 'fr', 'zh'], array_column($responses, 'lang'));
 
 		// cover the destructor
 		unset($this->http);
