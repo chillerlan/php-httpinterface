@@ -1,0 +1,21 @@
+language: php
+
+env:
+  global:
+    - PHAN_ALLOW_XDEBUG=0 PHAN_DISABLE_XDEBUG_WARN=1
+
+matrix:
+  include:
+    - php: 7.4
+    - php: 8.0
+    - php: nightly
+  allow_failures:
+    - php: nightly
+
+before_install:
+  - curl -o tests/cacert.pem https://curl.haxx.se/ca/cacert.pem
+  - composer install --no-interaction --prefer-source --ignore-platform-reqs
+
+script: vendor/bin/phpunit --configuration phpunit.xml.dist
+
+after_success: bash <(curl -s https://codecov.io/bash)
