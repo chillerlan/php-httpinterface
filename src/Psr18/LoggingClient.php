@@ -19,7 +19,6 @@ use Throwable;
 
 use function chillerlan\HTTP\Psr7\message_to_string;
 use function get_class;
-use const PHP_EOL;
 
 /**
  * @codeCoverageIgnore
