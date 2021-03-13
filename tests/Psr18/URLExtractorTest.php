@@ -12,7 +12,7 @@ namespace chillerlan\HTTPTest\Psr18;
 
 use chillerlan\HTTP\Psr18\URLExtractor;
 use chillerlan\HTTP\Psr7\Request;
-
+use function defined;
 use const CURLOPT_FOLLOWLOCATION;
 
 /**
@@ -30,8 +30,13 @@ class URLExtractorTest extends HTTPClientTestAbstract{
 		$this->http = new URLExtractor($this->options);
 	}
 
-	public function testSendRequest(){
-		$this->markTestSkipped('i have no idea why the headers are empty on travis');
+	public function testSendRequest():void{
+
+		if(defined('TEST_IS_CI') && TEST_IS_CI === true){
+			$this->markTestSkipped('i have no idea why the headers are empty on travis');
+
+			return;
+		}
 
 		// reminder: twitter does not delete shortened URLs of deleted tweets (this one was deleted in 2016)
 		$this->http->sendRequest(new Request('GET', 'https://t.co/ZSS6nVOcVp'));
@@ -50,9 +55,8 @@ class URLExtractorTest extends HTTPClientTestAbstract{
 		$this::assertCount(5, $responses);
 
 		foreach($responses as $i => $r){
-			\var_dump($r->getHeaderLine('location'));
 #			\var_dump($r->getHeaders());
-#			$this::assertSame($expected[$i], $r->getHeaderLine('location'));
+			$this::assertSame($expected[$i], $r->getHeaderLine('location'));
 		}
 
 	}

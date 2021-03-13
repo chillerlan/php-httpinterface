@@ -97,7 +97,7 @@ class CurlMultiClientTest extends TestCase{
 	public function testMultiRequest():void{
 
 		if(defined('TEST_IS_CI') && TEST_IS_CI === true){
-			$this::markTestIncomplete();
+			$this->markTestSkipped('i have no idea why the headers are empty on travis');
 
 			return;
 		}
