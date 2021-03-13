@@ -47,7 +47,6 @@ abstract class HTTPClientTestAbstract extends TestCase{
 			$this::assertSame($url, $json->url);
 			$this::assertSame($this::USER_AGENT, $json->headers->{'User-Agent'});
 			$this::assertSame(200, $response->getStatusCode());
-			$this::assertSame(200, $response->getStatusCode());
 		}
 		catch(Exception $e){
 			$this->markTestSkipped('error: '.$e->getMessage());
