@@ -26,6 +26,8 @@ abstract class HTTPClientTestAbstract extends TestCase{
 	/** @var \chillerlan\Settings\SettingsContainerInterface|\chillerlan\HTTP\HTTPOptions */
 	protected SettingsContainerInterface $options;
 
+	protected ClientInterface $http;
+
 	protected function setUp():void{
 
 		$this->options = new HTTPOptions([
@@ -35,9 +37,7 @@ abstract class HTTPClientTestAbstract extends TestCase{
 
 	}
 
-	protected ClientInterface $http;
-
-	public function testSendRequest(){
+	public function testSendRequest():void{
 
 		try{
 			$url      = 'https://httpbin.org/get';
@@ -55,7 +55,7 @@ abstract class HTTPClientTestAbstract extends TestCase{
 
 	}
 
-	public function testNetworkError(){
+	public function testNetworkError():void{
 		$this->expectException(ClientExceptionInterface::class);
 
 		$this->http->sendRequest(new Request(Request::METHOD_GET, 'http://foo'));

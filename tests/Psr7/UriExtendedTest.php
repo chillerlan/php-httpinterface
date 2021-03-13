@@ -15,21 +15,21 @@ use PHPUnit\Framework\TestCase;
 
 class UriExtendedTest extends TestCase{
 
-	public function testIsAbsolute(){
+	public function testIsAbsolute():void{
 		$this::assertTrue((new UriExtended('http://example.org'))->isAbsolute());
 		$this::assertFalse((new UriExtended('//example.org'))->isAbsolute());
 		$this::assertFalse((new UriExtended('/abs-path'))->isAbsolute());
 		$this::assertFalse((new UriExtended('rel-path'))->isAbsolute());
 	}
 
-	public function testIsNetworkPathReference(){
+	public function testIsNetworkPathReference():void{
 		$this::assertFalse((new UriExtended('http://example.org'))->isNetworkPathReference());
 		$this::assertTrue((new UriExtended('//example.org'))->isNetworkPathReference());
 		$this::assertFalse((new UriExtended('/abs-path'))->isNetworkPathReference());
 		$this::assertFalse((new UriExtended('rel-path'))->isNetworkPathReference());
 	}
 
-	public function testIsAbsolutePathReference(){
+	public function testIsAbsolutePathReference():void{
 		$this::assertFalse((new UriExtended('http://example.org'))->isAbsolutePathReference());
 		$this::assertFalse((new UriExtended('//example.org'))->isAbsolutePathReference());
 		$this::assertTrue((new UriExtended('/abs-path'))->isAbsolutePathReference());
@@ -37,7 +37,7 @@ class UriExtendedTest extends TestCase{
 		$this::assertFalse((new UriExtended('rel-path'))->isAbsolutePathReference());
 	}
 
-	public function testIsRelativePathReference(){
+	public function testIsRelativePathReference():void{
 		$this::assertFalse((new UriExtended('http://example.org'))->isRelativePathReference());
 		$this::assertFalse((new UriExtended('//example.org'))->isRelativePathReference());
 		$this::assertFalse((new UriExtended('/abs-path'))->isRelativePathReference());
@@ -45,7 +45,7 @@ class UriExtendedTest extends TestCase{
 		$this::assertTrue((new UriExtended(''))->isRelativePathReference());
 	}
 
-	public function testAddAndRemoveQueryValues(){
+	public function testAddAndRemoveQueryValues():void{
 		$uri = new UriExtended;
 		/** @var UriExtended $uri */
 		$uri = $uri->withQueryValue('a', 'b');
@@ -61,7 +61,7 @@ class UriExtendedTest extends TestCase{
 		$this::assertSame('', $uri->getQuery());
 	}
 
-	public function testWithQueryValueReplacesSameKeys(){
+	public function testWithQueryValueReplacesSameKeys():void{
 		$uri = new UriExtended;
 		/** @var UriExtended $uri */
 		$uri = $uri->withQueryValue('a', 'b');
@@ -70,21 +70,21 @@ class UriExtendedTest extends TestCase{
 		$this::assertSame('c=d&a=e', $uri->getQuery());
 	}
 
-	public function testWithoutQueryValueRemovesAllSameKeys(){
+	public function testWithoutQueryValueRemovesAllSameKeys():void{
 		$uri = (new UriExtended)->withQuery('a=b&c=d&a=e');
 		/** @var UriExtended $uri */
 		$uri = $uri->withoutQueryValue('a');
 		$this::assertSame('c=d', $uri->getQuery());
 	}
 
-	public function testRemoveNonExistingQueryValue(){
+	public function testRemoveNonExistingQueryValue():void{
 		$uri = new UriExtended;
 		$uri = $uri->withQueryValue('a', 'b');
 		$uri = $uri->withoutQueryValue('c');
 		$this::assertSame('a=b', $uri->getQuery());
 	}
 
-	public function testWithQueryValueHandlesEncoding(){
+	public function testWithQueryValueHandlesEncoding():void{
 		$uri = new UriExtended;
 		$uri = $uri->withQueryValue('E=mc^2', 'ein&stein');
 		$this::assertSame('E%3Dmc%5E2=ein%26stein', $uri->getQuery(), 'Decoded key/value get encoded');
@@ -94,7 +94,7 @@ class UriExtendedTest extends TestCase{
 		$this::assertSame('E%3Dmc%5e2=ein%26stein', $uri->getQuery(), 'Encoded key/value do not get double-encoded');
 	}
 
-	public function testWithoutQueryValueHandlesEncoding(){
+	public function testWithoutQueryValueHandlesEncoding():void{
 		// It also tests that the case of the percent-encoding does not matter,
 		// i.e. both lowercase "%3d" and uppercase "%5E" can be removed.
 		$uri = (new UriExtended)->withQuery('E%3dmc%5E2=einstein&foo=bar');

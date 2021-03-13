@@ -25,7 +25,7 @@ use const chillerlan\HTTP\Psr7\{BOOLEANS_AS_BOOL, BOOLEANS_AS_INT, BOOLEANS_AS_I
 
 class MessageHelpersTest extends TestCase{
 
-	public function headerDataProvider():array {
+	public function headerDataProvider():array{
 		return [
 			'content-Type'  => [['Content-Type' => 'application/x-www-form-urlencoded'], ['Content-Type' => 'application/x-www-form-urlencoded']],
 			'lowercasekey'  => [['lowercasekey' => 'lowercasevalue'], ['Lowercasekey' => 'lowercasevalue']],
@@ -47,11 +47,11 @@ class MessageHelpersTest extends TestCase{
 	 * @param array $headers
 	 * @param array $normalized
 	 */
-	public function testNormalizeHeaders(array $headers, array $normalized){
+	public function testNormalizeHeaders(array $headers, array $normalized):void{
 		$this::assertSame($normalized, normalize_message_headers($headers));
 	}
 
-	public function testCombineHeaderFields(){
+	public function testCombineHeaderFields():void{
 
 		$headers = [
 			'accept:',
@@ -84,7 +84,7 @@ class MessageHelpersTest extends TestCase{
 
 	}
 
-	public function testCombinedCookieHeaders(){
+	public function testCombinedCookieHeaders():void{
 
 		$headers = [
 			'Set-Cookie: foo=bar',
@@ -100,7 +100,7 @@ class MessageHelpersTest extends TestCase{
 		], normalize_message_headers($headers));
 	}
 
-	public function queryParamDataProvider(){
+	public function queryParamDataProvider():array{
 		return [
 			// don't remove empty values
 			'BOOLEANS_AS_BOOL (clean)' => [['whatever' => null, 'nope' => '', 'true' => true, 'false' => false, 'array' => ['value' => false]], BOOLEANS_AS_BOOL, false],
@@ -119,7 +119,7 @@ class MessageHelpersTest extends TestCase{
 	 * @param int   $bool_cast
 	 * @param bool  $remove_empty
 	 */
-	public function testCleanQueryParams(array $expected, int $bool_cast, bool $remove_empty){
+	public function testCleanQueryParams(array $expected, int $bool_cast, bool $remove_empty):void{
 		$data = ['whatever' => null, 'nope' => '', 'true' => true, 'false' => false, 'array' => ['value' => false]];
 
 		$this::assertSame($expected, clean_query_params($data, $bool_cast, $remove_empty));
@@ -144,12 +144,12 @@ class MessageHelpersTest extends TestCase{
 	 * @param array  $params
 	 * @param string $expected
 	 */
-	public function testMergeQuery(string $uri, array $params, string $expected){
+	public function testMergeQuery(string $uri, array $params, string $expected):void{
 		$merged = merge_query($uri, $params);
 		$this::assertSame($expected, $merged);
 	}
 
-	public function rawurlencodeDataProvider(){
+	public function rawurlencodeDataProvider():array{
 		return [
 			'null'         => [null, ''],
 			'bool (false)' => [false, ''],
@@ -170,17 +170,17 @@ class MessageHelpersTest extends TestCase{
 	 * @param $data
 	 * @param $expected
 	 */
-	public function testRawurlencode($data, $expected){
+	public function testRawurlencode($data, $expected):void{
 		$this::assertSame($expected, r_rawurlencode($data));
 	}
 
-	public function testRawurlencodeTypeErrorException(){
+	public function testRawurlencodeTypeErrorException():void{
 		$this::expectException(TypeError::class);
 
 		r_rawurlencode(new \stdClass());
 	}
 
-	public function testBuildHttpQuery(){
+	public function testBuildHttpQuery():void{
 
 		$data = ['foo' => 'bar', 'whatever?' => 'nope!'];
 
@@ -194,7 +194,7 @@ class MessageHelpersTest extends TestCase{
 		$this::assertSame('florps="nah", florps="nope", florps="nope", foo="bar", whatever?="nope!"', build_http_query($data, false, ', ', '"'));
 	}
 
-	public function testGetJSON(){
+	public function testGetJSON():void{
 
 		$r = (new Response)->withBody(create_stream('{"foo":"bar"}'));
 
@@ -205,7 +205,7 @@ class MessageHelpersTest extends TestCase{
 		$this::assertSame('bar', get_json($r, true)['foo']);
 	}
 
-	public function testGetXML(){
+	public function testGetXML():void{
 
 		$r = (new Response)->withBody(create_stream('<?xml version="1.0" encoding="UTF-8"?><root><foo>bar</foo></root>'));
 
@@ -216,7 +216,7 @@ class MessageHelpersTest extends TestCase{
 		$this::assertSame('bar', get_xml($r, true)['foo']);
 	}
 
-	public function messageDataProvider(){
+	public function messageDataProvider():array{
 		return [
 			'Request'  => [new Request('GET', 'https://localhost/foo'), 'GET /foo HTTP/1.1'."\r\n".'Host: localhost'."\r\n".'foo: bar'."\r\n\r\n".'testbody'],
 			'Response' => [new Response, 'HTTP/1.1 200 OK'."\r\n".'foo: bar'."\r\n\r\n".'testbody'],
@@ -229,26 +229,26 @@ class MessageHelpersTest extends TestCase{
 	 * @param \Psr\Http\Message\MessageInterface $message
 	 * @param string                             $expected
 	 */
-	public function testMessageToString(MessageInterface $message, string $expected){
+	public function testMessageToString(MessageInterface $message, string $expected):void{
 		$this::assertSame(
 			$expected,
 			message_to_string($message->withAddedHeader('foo', 'bar')->withBody(create_stream('testbody')))
 		);
 	}
 
-	public function decompressDataProvider(){
+	public function decompressDataProvider():array{
 		return [
 			'compress' => ['gzcompress', 'compress'],
 			'deflate'  => ['gzdeflate', 'deflate'],
 			'gzip'     => ['gzencode', 'gzip'],
-			'none'     => [null, null],
+			'none'     => ['', ''],
 		];
 	}
 
 	/**
 	 * @dataProvider decompressDataProvider
 	 */
-	public function testDecompressContent($fn, $encoding){
+	public function testDecompressContent(string $fn, string $encoding):void{
 		$data = $expected = str_repeat('compressed string ', 100);
 		$response = (new Response);
 

@@ -20,7 +20,7 @@ use function chillerlan\HTTP\Psr17\create_server_request_from_globals;
 
 class PriorityQueueRequestHandlerTest extends TestCase{
 
-	public function testHandler(){
+	public function testHandler():void{
 
 		$middlewareStack = [
 			$this->getNonPriorityMiddleware(0),
@@ -51,7 +51,7 @@ class PriorityQueueRequestHandlerTest extends TestCase{
 		);
 	}
 
-	public function testNestedHandler(){
+	public function testNestedHandler():void{
 
 		$middlewareStack = [
 			new PriorityMiddleware(

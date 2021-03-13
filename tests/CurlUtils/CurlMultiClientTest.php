@@ -94,7 +94,7 @@ class CurlMultiClientTest extends TestCase{
 	/**
 	 * @todo
 	 */
-	public function testMultiRequest(){
+	public function testMultiRequest():void{
 
 		if(defined('TEST_IS_CI') && TEST_IS_CI === true){
 			$this::markTestIncomplete();
@@ -122,7 +122,7 @@ class CurlMultiClientTest extends TestCase{
 		unset($this->http);
 	}
 
-	public function testEmptyStackException(){
+	public function testEmptyStackException():void{
 		$this->expectException(ClientExceptionInterface::class);
 		$this->expectExceptionMessage('request stack is empty');
 

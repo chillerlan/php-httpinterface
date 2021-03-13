@@ -24,7 +24,7 @@ class CurlClientTest extends HTTPClientTestAbstract{
 		$this->http = new CurlClient($this->options);
 	}
 
-	public function testRequestError(){
+	public function testRequestError():void{
 		$this->expectException(RequestException::class);
 
 		$this->http->sendRequest(new Request(Request::METHOD_GET, ''));

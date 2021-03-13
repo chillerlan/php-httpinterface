@@ -20,14 +20,14 @@ use const UPLOAD_ERR_OK;
 
 class ServerRequestTest extends TestCase{
 
-	public function testServerParams(){
+	public function testServerParams():void{
 		$params = ['name' => 'value'];
 
 		$r = new ServerRequest(ServerRequest::METHOD_GET, '/', [], null, '1.1', $params);
 		$this::assertSame($params, $r->getServerParams());
 	}
 
-	public function testCookieParams(){
+	public function testCookieParams():void{
 		$r1 = new ServerRequest('GET', '/');
 
 		$params = ['name' => 'value'];
@@ -39,7 +39,7 @@ class ServerRequestTest extends TestCase{
 		$this::assertSame($params, $r2->getCookieParams());
 	}
 
-	public function testQueryParams(){
+	public function testQueryParams():void{
 		$r1 = new ServerRequest('GET', '/');
 
 		$params = ['name' => 'value'];
@@ -51,7 +51,7 @@ class ServerRequestTest extends TestCase{
 		$this::assertSame($params, $r2->getQueryParams());
 	}
 
-	public function testParsedBody(){
+	public function testParsedBody():void{
 		$r1 = new ServerRequest('GET', '/');
 
 		$params = ['name' => 'value'];
@@ -63,14 +63,14 @@ class ServerRequestTest extends TestCase{
 		$this::assertSame($params, $r2->getParsedBody());
 	}
 
-	public function testParsedBodyInvalidArg(){
+	public function testParsedBodyInvalidArg():void{
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('parsed body value must be an array, object or null');
 
 		(new ServerRequest('GET', '/'))->withParsedBody('');
 	}
 
-	public function testAttributes(){
+	public function testAttributes():void{
 		$r1 = new ServerRequest('GET', '/');
 
 		$r2 = $r1->withAttribute('name', 'value');
@@ -93,7 +93,7 @@ class ServerRequestTest extends TestCase{
 		$this::assertSame(['name' => 'value'], $r4->getAttributes());
 	}
 
-	public function testNullAttribute(){
+	public function testNullAttribute():void{
 		$r = (new ServerRequest('GET', '/'))->withAttribute('name', null);
 
 		$this::assertSame(['name' => null], $r->getAttributes());
@@ -105,7 +105,7 @@ class ServerRequestTest extends TestCase{
 		$this::assertSame('different-default', $requestWithoutAttribute->getAttribute('name', 'different-default'));
 	}
 
-	public function testUploadedFiles(){
+	public function testUploadedFiles():void{
 		$r1 = new ServerRequest('GET', '/');
 
 		$files = [

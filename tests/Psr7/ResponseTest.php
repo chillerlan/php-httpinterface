@@ -21,7 +21,7 @@ use function chillerlan\HTTP\Psr17\create_stream;
 
 class ResponseTest extends TestCase{
 
-	public function testDefaultConstructor(){
+	public function testDefaultConstructor():void{
 		$r = new Response;
 
 		$this::assertSame(200, $r->getStatusCode());
@@ -32,21 +32,21 @@ class ResponseTest extends TestCase{
 		$this::assertSame('', (string)$r->getBody());
 	}
 
-	public function testCanConstructWithStatusCode(){
+	public function testCanConstructWithStatusCode():void{
 		$r = new Response(404);
 
 		$this::assertSame(404, $r->getStatusCode());
 		$this::assertSame('Not Found', $r->getReasonPhrase());
 	}
 
-	public function testConstructorDoesNotReadStreamBody(){
+	public function testConstructorDoesNotReadStreamBody():void{
 		$body = $this->getMockBuilder(StreamInterface::class)->getMock();
 		$body->expects($this->never())->method('__toString');
 
 		$this::assertSame($body, (new Response(200, [], $body))->getBody());
 	}
 
-	public function testStatusCanBeNumericString(){
+	public function testStatusCanBeNumericString():void{
 		$r  = new Response('404');
 		$r2 = $r->withStatus('201');
 
@@ -56,7 +56,7 @@ class ResponseTest extends TestCase{
 		$this::assertSame('Created', $r2->getReasonPhrase());
 	}
 
-	public function testCanConstructWithHeaders(){
+	public function testCanConstructWithHeaders():void{
 		$r = new Response(200, ['Foo' => 'Bar']);
 
 		$this::assertSame(['Foo' => ['Bar']], $r->getHeaders());
@@ -64,7 +64,7 @@ class ResponseTest extends TestCase{
 		$this::assertSame(['Bar'], $r->getHeader('Foo'));
 	}
 
-	public function testCanConstructWithHeadersAsArray(){
+	public function testCanConstructWithHeadersAsArray():void{
 		$r = new Response(200, ['Foo' => ['baz', 'bar']]);
 
 		$this::assertSame(['Foo' => ['baz, bar']], $r->getHeaders());
@@ -72,28 +72,28 @@ class ResponseTest extends TestCase{
 		$this::assertSame(['baz, bar'], $r->getHeader('Foo'));
 	}
 
-	public function testCanConstructWithBody(){
+	public function testCanConstructWithBody():void{
 		$r = new Response(200, [], 'baz');
 
 		$this::assertInstanceOf(StreamInterface::class, $r->getBody());
 		$this::assertSame('baz', (string)$r->getBody());
 	}
 
-	public function testNullBody(){
+	public function testNullBody():void{
 		$r = new Response(200, [], null);
 
 		$this::assertInstanceOf(StreamInterface::class, $r->getBody());
 		$this::assertSame('', (string)$r->getBody());
 	}
 
-	public function testFalseyBody(){
+	public function testFalseyBody():void{
 		$r = new Response(200, [], '0');
 
 		$this::assertInstanceOf(StreamInterface::class, $r->getBody());
 		$this::assertSame('0', (string)$r->getBody());
 	}
 
-	public function testCanConstructWithReason(){
+	public function testCanConstructWithReason():void{
 		$r = new Response(200, [], null, '1.1', 'bar');
 		$this::assertSame('bar', $r->getReasonPhrase());
 
@@ -101,18 +101,18 @@ class ResponseTest extends TestCase{
 		$this::assertSame('0', $r->getReasonPhrase(), 'Falsey reason works');
 	}
 
-	public function testCanConstructWithProtocolVersion(){
+	public function testCanConstructWithProtocolVersion():void{
 		$r = new Response(200, [], null, '1000');
 		$this::assertSame('1000', $r->getProtocolVersion());
 	}
 
-	public function testWithStatusCodeAndNoReason(){
+	public function testWithStatusCodeAndNoReason():void{
 		$r = (new Response)->withStatus(201);
 		$this::assertSame(201, $r->getStatusCode());
 		$this::assertSame('Created', $r->getReasonPhrase());
 	}
 
-	public function testWithStatusCodeAndReason(){
+	public function testWithStatusCodeAndReason():void{
 		$r = (new Response)->withStatus(201, 'Foo');
 		$this::assertSame(201, $r->getStatusCode());
 		$this::assertSame('Foo', $r->getReasonPhrase());
@@ -122,30 +122,30 @@ class ResponseTest extends TestCase{
 		$this::assertSame('0', $r->getReasonPhrase(), 'Falsey reason works');
 	}
 
-	public function testWithProtocolVersion(){
+	public function testWithProtocolVersion():void{
 		$r = (new Response)->withProtocolVersion('1000');
 		$this::assertSame('1000', $r->getProtocolVersion());
 	}
 
-	public function testSameInstanceWhenSameProtocol(){
+	public function testSameInstanceWhenSameProtocol():void{
 		$r = new Response();
 		$this::assertSame($r, $r->withProtocolVersion('1.1'));
 	}
 
-	public function testWithBody(){
+	public function testWithBody():void{
 		$r = (new Response)->withBody(create_stream('0'));
 		$this::assertInstanceOf(StreamInterface::class, $r->getBody());
 		$this::assertSame('0', (string) $r->getBody());
 	}
 
-	public function testSameInstanceWhenSameBody(){
+	public function testSameInstanceWhenSameBody():void{
 		$r = new Response();
 
 		$b = $r->getBody();
 		$this::assertSame($r, $r->withBody($b));
 	}
 
-	public function testWithHeader(){
+	public function testWithHeader():void{
 		$r  = new Response(200, ['Foo' => 'Bar']);
 		$r2 = $r->withHeader('baZ', 'Bam');
 
@@ -155,7 +155,7 @@ class ResponseTest extends TestCase{
 		$this::assertSame(['Bam'], $r2->getHeader('baz'));
 	}
 
-	public function testWithHeaderAsArray(){
+	public function testWithHeaderAsArray():void{
 		$r  = new Response(200, ['Foo' => 'Bar']);
 		$r2 = $r->withHeader('baZ', ['Bam', 'Bar']);
 
@@ -165,7 +165,7 @@ class ResponseTest extends TestCase{
 		$this::assertSame(['Bam', 'Bar'], $r2->getHeader('baz'));
 	}
 
-	public function testWithHeaderReplacesDifferentCase(){
+	public function testWithHeaderReplacesDifferentCase():void{
 		$r  = new Response(200, ['Foo' => 'Bar']);
 		$r2 = $r->withHeader('foO', 'Bam');
 
@@ -175,7 +175,7 @@ class ResponseTest extends TestCase{
 		$this::assertSame(['Bam'], $r2->getHeader('foo'));
 	}
 
-	public function testWithAddedHeader(){
+	public function testWithAddedHeader():void{
 		$r  = new Response(200, ['Foo' => 'Bar']);
 		$r2 = $r->withAddedHeader('foO', 'Baz');
 
@@ -185,7 +185,7 @@ class ResponseTest extends TestCase{
 		$this::assertSame(['Bar', 'Baz'], $r2->getHeader('foo'));
 	}
 
-	public function testWithAddedHeaderAsArray(){
+	public function testWithAddedHeaderAsArray():void{
 		$r  = new Response(200, ['Foo' => 'Bar']);
 		$r2 = $r->withAddedHeader('foO', ['Baz', 'Bam',]);
 
@@ -195,7 +195,7 @@ class ResponseTest extends TestCase{
 		$this::assertSame(['Bar', 'Baz', 'Bam'], $r2->getHeader('foo'));
 	}
 
-	public function testWithAddedHeaderThatDoesNotExist(){
+	public function testWithAddedHeaderThatDoesNotExist():void{
 		$r  = new Response(200, ['Foo' => 'Bar']);
 		$r2 = $r->withAddedHeader('nEw', 'Baz');
 
@@ -205,7 +205,7 @@ class ResponseTest extends TestCase{
 		$this::assertSame(['Baz'], $r2->getHeader('new'));
 	}
 
-	public function testWithoutHeaderThatExists(){
+	public function testWithoutHeaderThatExists():void{
 		$r  = new Response(200, ['Foo' => 'Bar', 'Baz' => 'Bam']);
 		$r2 = $r->withoutHeader('foO');
 
@@ -215,7 +215,7 @@ class ResponseTest extends TestCase{
 		$this::assertSame(['Baz' => ['Bam']], $r2->getHeaders());
 	}
 
-	public function testWithoutHeaderThatDoesNotExist(){
+	public function testWithoutHeaderThatDoesNotExist():void{
 		$r  = new Response(200, ['Baz' => 'Bam']);
 		$r2 = $r->withoutHeader('foO');
 
@@ -224,12 +224,12 @@ class ResponseTest extends TestCase{
 		$this::assertSame(['Baz' => ['Bam']], $r2->getHeaders());
 	}
 
-	public function testSameInstanceWhenRemovingMissingHeader(){
+	public function testSameInstanceWhenRemovingMissingHeader():void{
 		$r = new Response();
 		$this::assertSame($r, $r->withoutHeader('foo'));
 	}
 
-	public function testHeaderValuesAreTrimmed(){
+	public function testHeaderValuesAreTrimmed():void{
 		$r1 = new Response(200, ['Bar' => " \t \tFoo\t \t "]);
 		$r2 = (new Response)->withHeader('Bar', " \t \tFoo\t \t ");
 		$r3 = (new Response)->withAddedHeader('Bar', " \t \tFoo\t \t ");;

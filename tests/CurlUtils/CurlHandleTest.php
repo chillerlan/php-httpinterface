@@ -57,7 +57,7 @@ class CurlHandleTest extends TestCase{
 	 *
 	 * @param string $method
 	 */
-	public function testRequestMethods(string $method){
+	public function testRequestMethods(string $method):void{
 
 		try{
 			$url      = 'https://httpbin.org/'.strtolower($method).'?foo=bar';
@@ -94,7 +94,7 @@ class CurlHandleTest extends TestCase{
 	 *
 	 * @param string $method
 	 */
-	public function testRequestMethodsWithFormBody(string $method){
+	public function testRequestMethodsWithFormBody(string $method):void{
 
 		try{
 			$url     = 'https://httpbin.org/'.strtolower($method);
@@ -130,7 +130,7 @@ class CurlHandleTest extends TestCase{
 	 *
 	 * @param string $method
 	 */
-	public function testRequestMethodsWithJsonBody(string $method){
+	public function testRequestMethodsWithJsonBody(string $method):void{
 
 		try{
 			$url     = 'https://httpbin.org/'.strtolower($method);
@@ -161,7 +161,7 @@ class CurlHandleTest extends TestCase{
 
 	}
 
-	public function testLargeBody(){
+	public function testLargeBody():void{
 
 		try{
 			$body    = str_repeat('*', (1 << 20) + 1);

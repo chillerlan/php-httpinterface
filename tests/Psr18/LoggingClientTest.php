@@ -32,11 +32,11 @@ class LoggingClientTest extends CurlClientTest{
 		$this->http = new LoggingClient($this->http, $logger);
 	}
 
-	public function testNetworkError(){
+	public function testNetworkError():void{
 		$this::markTestSkipped('N/A');
 	}
 
-	public function testRequestError(){
+	public function testRequestError():void{
 		$this::markTestSkipped('N/A');
 	}
 

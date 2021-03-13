@@ -24,7 +24,7 @@ use const UPLOAD_ERR_OK;
 
 class FactoryHelpersTest extends TestCase{
 
-	public function dataGetUriFromGlobals(){
+	public function dataGetUriFromGlobals():array{
 
 		$server = [
 			'REQUEST_URI'     => '/blog/article.php?id=10&user=foo',
@@ -101,7 +101,7 @@ class FactoryHelpersTest extends TestCase{
 		$this::assertEquals(new UriExtended($expected), create_uri_from_globals());
 	}
 
-	public function testCreateServerRequestFromGlobals(){
+	public function testCreateServerRequestFromGlobals():void{
 
 		$_SERVER = [
 			'REQUEST_URI'     => '/blog/article.php?id=10&user=foo',
@@ -168,21 +168,21 @@ class FactoryHelpersTest extends TestCase{
 		$this::assertEquals($expectedFiles, $server->getUploadedFiles());
 	}
 
-	public function testCreateStream(){
+	public function testCreateStream():void{
 		$stream = create_stream('test');
 
 		$this::assertInstanceOf(Streaminterface::class, $stream);
 		$this::assertSame('test', $stream->getContents());
 	}
 
-	public function testCreateStreamInvalidModeException(){
+	public function testCreateStreamInvalidModeException():void{
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('invalid mode');
 
 		create_stream('test', 'foo');
 	}
 
-	public function streamInputProvider(){
+	public function streamInputProvider():array{
 
 		$fh = fopen('php://temp', 'r+');
 		fwrite($fh, 'resourcetest');
@@ -205,11 +205,11 @@ class FactoryHelpersTest extends TestCase{
 	 * @param        $input
 	 * @param string $content
 	 */
-	public function testCreateStreamFromInput($input, string $content){
+	public function testCreateStreamFromInput($input, string $content):void{
 		$this::assertSame($content, create_stream_from_input($input)->getContents());
 	}
 
-	public function testCreateStreamFromInputException(){
+	public function testCreateStreamFromInputException():void{
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('Invalid resource type: object');
 

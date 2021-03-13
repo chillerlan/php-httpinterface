@@ -41,7 +41,7 @@ class UploadedFileTest extends TestCase{
 		}
 	}
 
-	public function invalidStreams(){
+	public function invalidStreams():array{
 		return [
 #			'null'   => [null],
 #			'true'   => [true],
@@ -64,7 +64,7 @@ class UploadedFileTest extends TestCase{
 		new UploadedFile($streamOrFile, 0);
 	}
 
-	public function invalidErrorStatuses(){
+	public function invalidErrorStatuses():array{
 		return [
 			'negative' => [-1],
 			'too-big'  => [9],
@@ -76,20 +76,20 @@ class UploadedFileTest extends TestCase{
 	 *
 	 * @param int $status
 	 */
-	public function testRaisesExceptionOnInvalidErrorStatus(int $status){
+	public function testRaisesExceptionOnInvalidErrorStatus(int $status):void{
 		$this->expectException(InvalidArgumentException::class);
 
 		new UploadedFile(fopen('php://temp', 'wb+'), 0, $status);
 	}
 
-	public function testGetStreamReturnsOriginalStreamObject(){
+	public function testGetStreamReturnsOriginalStreamObject():void{
 		$stream = create_stream('');
 		$upload = new UploadedFile($stream, 0);
 
 		$this::assertSame($stream, $upload->getStream());
 	}
 
-	public function testGetStreamReturnsWrappedPhpStream(){
+	public function testGetStreamReturnsWrappedPhpStream():void{
 		$stream       = fopen('php://temp', 'wb+');
 		$upload       = new UploadedFile($stream, 0);
 		$uploadStream = $upload->getStream()->detach();
@@ -97,7 +97,7 @@ class UploadedFileTest extends TestCase{
 		$this::assertSame($stream, $uploadStream);
 	}
 
-	public function testSuccessful(){
+	public function testSuccessful():void{
 		$stream = create_stream('Foo bar!');
 		$upload = new UploadedFile($stream, $stream->getSize(), UPLOAD_ERR_OK, 'filename.txt', 'text/plain');
 
@@ -112,7 +112,7 @@ class UploadedFileTest extends TestCase{
 		$this::assertSame($stream->__toString(), file_get_contents($to));
 	}
 
-	public function testMoveCannotBeCalledMoreThanOnce(){
+	public function testMoveCannotBeCalledMoreThanOnce():void{
 		$stream = create_stream('Foo bar!');
 		$upload = new UploadedFile($stream, 0);
 
@@ -125,7 +125,7 @@ class UploadedFileTest extends TestCase{
 		$upload->moveTo($to);
 	}
 
-	public function testCannotRetrieveStreamAfterMove(){
+	public function testCannotRetrieveStreamAfterMove():void{
 		$stream = create_stream('Foo bar!');
 		$upload = new UploadedFile($stream, 0);
 
@@ -138,7 +138,7 @@ class UploadedFileTest extends TestCase{
 		$upload->getStream();
 	}
 
-	public function testCannotMoveToEmptyTarget(){
+	public function testCannotMoveToEmptyTarget():void{
 		$stream = create_stream('Foo bar!');
 		$upload = new UploadedFile($stream, 0);
 
@@ -147,7 +147,7 @@ class UploadedFileTest extends TestCase{
 		$upload->moveTo('');
 	}
 
-	public function testCannotMoveToUnwritableDirectory(){
+	public function testCannotMoveToUnwritableDirectory():void{
 
 		if(PHP_OS_FAMILY !== 'Linux'){
 			$this->markTestSkipped('testing Linux only');
@@ -161,7 +161,7 @@ class UploadedFileTest extends TestCase{
 		$upload->moveTo('/boot');
 	}
 
-	public function nonOkErrorStatus(){
+	public function nonOkErrorStatus():array{
 		return [
 			'UPLOAD_ERR_INI_SIZE'   => [UPLOAD_ERR_INI_SIZE],
 			'UPLOAD_ERR_FORM_SIZE'  => [UPLOAD_ERR_FORM_SIZE],
@@ -200,14 +200,14 @@ class UploadedFileTest extends TestCase{
 	 *
 	 * @param int $status
 	 */
-	public function testGetStreamRaisesExceptionWhenErrorStatusPresent(int $status){
+	public function testGetStreamRaisesExceptionWhenErrorStatusPresent(int $status):void{
 		$uploadedFile = new UploadedFile('not ok', 0, $status);
 		$this->expectException(RuntimeException::class);
 		$this->expectExceptionMessage('Cannot retrieve stream due to upload error');
 		$uploadedFile->getStream();
 	}
 
-	public function testMoveToCreatesStreamIfOnlyAFilenameWasProvided(){
+	public function testMoveToCreatesStreamIfOnlyAFilenameWasProvided():void{
 		$this->cleanup[] = $from = tempnam(sys_get_temp_dir(), 'copy_from');
 		$this->cleanup[] = $to = tempnam(sys_get_temp_dir(), 'copy_to');
 
@@ -220,7 +220,7 @@ class UploadedFileTest extends TestCase{
 		$this::assertFileEquals(__FILE__, $to);
 	}
 
-	public function dataNormalizeFiles(){
+	public function dataNormalizeFiles():array{
 
 		return [
 			'Single file' => [
@@ -380,13 +380,13 @@ class UploadedFileTest extends TestCase{
 	 * @param array $files
 	 * @param array $expected
 	 */
-	public function testNormalizeFiles(array $files, array $expected){
+	public function testNormalizeFiles(array $files, array $expected):void{
 		$result = normalize_files($files);
 
 		$this::assertEquals($expected, $result);
 	}
 
-	public function testNormalizeFilesRaisesException(){
+	public function testNormalizeFilesRaisesException():void{
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('Invalid value in files specification');
 

@@ -22,14 +22,14 @@ use function filesize, fopen, fwrite;
 
 class StreamTest extends TestCase{
 
-	public function testConstructorThrowsExceptionOnInvalidArgument(){
+	public function testConstructorThrowsExceptionOnInvalidArgument():void{
 		$this->expectException(InvalidArgumentException::class);
 
 		/** @noinspection PhpParamsInspection */
 		new Stream(true);
 	}
 
-	public function testConstructorInitializesProperties(){
+	public function testConstructorInitializesProperties():void{
 		$stream = create_stream('data');
 
 		$this::assertTrue($stream->isReadable());
@@ -42,21 +42,21 @@ class StreamTest extends TestCase{
 		$stream->close();
 	}
 
-	public function testStreamClosesHandleOnDestruct(){
+	public function testStreamClosesHandleOnDestruct():void{
 		$handle = fopen('php://temp', 'r');
 		$stream = new Stream($handle);
 		unset($stream);
 		$this::assertFalse(is_resource($handle));
 	}
 
-	public function testConvertsToString(){
+	public function testConvertsToString():void{
 		$stream = create_stream('data', 'w+', false);
 		$this::assertSame('data', (string)$stream);
 		$this::assertSame('data', (string)$stream);
 		$stream->close();
 	}
 
-	public function testGetsContents(){
+	public function testGetsContents():void{
 		$stream = create_stream('data', 'w+', false);
 		$this::assertSame('', $stream->getContents());
 		$stream->seek(0);
@@ -64,7 +64,7 @@ class StreamTest extends TestCase{
 		$this::assertSame('', $stream->getContents());
 	}
 
-	public function testChecksEof(){
+	public function testChecksEof():void{
 		$stream = create_stream('data', 'w+', false);
 		$this::assertFalse($stream->eof());
 		$stream->read(4);
@@ -72,7 +72,7 @@ class StreamTest extends TestCase{
 		$stream->close();
 	}
 
-	public function testGetSize(){
+	public function testGetSize():void{
 		$size   = filesize(__FILE__);
 		$handle = fopen(__FILE__, 'r');
 		$stream = new Stream($handle);
@@ -82,7 +82,7 @@ class StreamTest extends TestCase{
 		$stream->close();
 	}
 
-	public function testEnsuresSizeIsConsistent(){
+	public function testEnsuresSizeIsConsistent():void{
 		$h = fopen('php://temp', 'w+');
 		$this::assertSame(3, fwrite($h, 'foo'));
 		$stream = new Stream($h);
@@ -93,7 +93,7 @@ class StreamTest extends TestCase{
 		$stream->close();
 	}
 
-	public function testProvidesStreamPosition(){
+	public function testProvidesStreamPosition():void{
 		$handle = fopen('php://temp', 'w+');
 		$stream = new Stream($handle);
 		$this::assertSame(0, $stream->tell());
@@ -105,7 +105,7 @@ class StreamTest extends TestCase{
 		$stream->close();
 	}
 
-	public function testCanDetachStream(){
+	public function testCanDetachStream():void{
 		$handle = fopen('php://temp', 'w+');
 		$stream = new Stream($handle);
 		$stream->write('foo');
@@ -139,7 +139,7 @@ class StreamTest extends TestCase{
 		$stream->close();
 	}
 
-	public function testCloseClearProperties(){
+	public function testCloseClearProperties():void{
 		$stream = create_stream();
 		$stream->close();
 
@@ -150,7 +150,7 @@ class StreamTest extends TestCase{
 		$this::assertEmpty($stream->getMetadata());
 	}
 
-	public function testStreamReadingWithZeroLength(){
+	public function testStreamReadingWithZeroLength():void{
 		$stream = create_stream();
 
 		$this::assertSame('', $stream->read(0));
@@ -158,7 +158,7 @@ class StreamTest extends TestCase{
 		$stream->close();
 	}
 
-	public function testStreamReadingWithNegativeLength(){
+	public function testStreamReadingWithNegativeLength():void{
 		$this->expectException(RuntimeException::class);
 		$this->expectExceptionMessage('Length parameter cannot be negative');
 
@@ -166,7 +166,7 @@ class StreamTest extends TestCase{
 		$stream->read(-1);
 	}
 
-	public function testStreamSeekInvalidPosition(){
+	public function testStreamSeekInvalidPosition():void{
 		$this->expectException(RuntimeException::class);
 		$this->expectExceptionMessage('Unable to seek to stream position -1 with whence 0');
 

@@ -20,14 +20,14 @@ use const CURLOPT_CAINFO, CURLOPT_CAPATH, CURLOPT_SSL_VERIFYHOST, CURLOPT_SSL_VE
 
 class HTTPOptionsTest extends TestCase{
 
-	public function testInvalidUserAgentException(){
+	public function testInvalidUserAgentException():void{
 		$this->expectException(ClientExceptionInterface::class);
 		$this->expectExceptionMessage('invalid user agent');
 
 		new HTTPOptions(['user_agent' => false]);
 	}
 
-	public function testCaDisable(){
+	public function testCaDisable():void{
 		$o = new HTTPOptions([
 			'ssl_verifypeer' => false,
 			'curl_options'   => [
@@ -42,7 +42,7 @@ class HTTPOptionsTest extends TestCase{
 		$this::assertArrayNotHasKey(CURLOPT_CAPATH, $o->curl_options);
 	}
 
-	public function testCaInfoFile(){
+	public function testCaInfoFile():void{
 		$file = __DIR__.'/cacert.pem';
 		$o    = new HTTPOptions(['ca_info' => $file]);
 
@@ -52,7 +52,7 @@ class HTTPOptionsTest extends TestCase{
 		$this::assertArrayNotHasKey(CURLOPT_CAPATH, $o->curl_options);
 	}
 
-	public function testCaInfoDir(){
+	public function testCaInfoDir():void{
 		$dir = __DIR__;
 		$o   = new HTTPOptions(['ca_info' => $dir]);
 
@@ -62,14 +62,14 @@ class HTTPOptionsTest extends TestCase{
 		$this::assertArrayNotHasKey(CURLOPT_CAINFO, $o->curl_options);
 	}
 
-	public function testCaInfoInvalidException(){
+	public function testCaInfoInvalidException():void{
 		$this->expectException(ClientExceptionInterface::class);
 		$this->expectExceptionMessage('invalid path to SSL CA bundle (HTTPOptions::$ca_info): foo');
 
 		new HTTPOptions(['ca_info' => 'foo']);
 	}
 
-	public function testCurloptCaInfoFile(){
+	public function testCurloptCaInfoFile():void{
 		$file = __DIR__.'/cacert.pem';
 		$o    = new HTTPOptions(['curl_options' => [CURLOPT_CAINFO => $file]]);
 
@@ -79,7 +79,7 @@ class HTTPOptionsTest extends TestCase{
 		$this::assertArrayNotHasKey(CURLOPT_CAPATH, $o->curl_options);
 	}
 
-	public function testCurloptCaInfoDir(){
+	public function testCurloptCaInfoDir():void{
 		$dir = __DIR__;
 		$o   = new HTTPOptions(['curl_options' => [CURLOPT_CAPATH => $dir]]);
 
@@ -89,14 +89,14 @@ class HTTPOptionsTest extends TestCase{
 		$this::assertArrayNotHasKey(CURLOPT_CAINFO, $o->curl_options);
 	}
 
-	public function testCurloptCaInfoInvalidException(){
+	public function testCurloptCaInfoInvalidException():void{
 		$this->expectException(ClientExceptionInterface::class);
 		$this->expectExceptionMessage('invalid path to SSL CA bundle (CURLOPT_CAPATH/CURLOPT_CAINFO): foo');
 
 		new HTTPOptions(['curl_options' => [CURLOPT_CAINFO => 'foo']]);
 	}
 
-	public function testCaInfoFallback(){
+	public function testCaInfoFallback():void{
 
 		if(file_exists(ini_get('curl.cainfo'))){
 			$this->markTestSkipped('curl.cainfo set');

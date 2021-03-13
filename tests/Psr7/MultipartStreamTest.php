@@ -20,57 +20,57 @@ use function chillerlan\HTTP\Psr17\create_stream_from_input;
 
 class MultipartStreamTest extends TestCase{
 
-	public function testCreatesDefaultBoundary(){
+	public function testCreatesDefaultBoundary():void{
 		$this::assertMatchesRegularExpression('/^[a-f\d]{40}$/', (new MultipartStream)->getBoundary());
 	}
 
-	public function testCanProvideBoundary(){
+	public function testCanProvideBoundary():void{
 		$this::assertSame('foo', (new MultipartStream([], 'foo'))->getBoundary());
 	}
 
-	public function testIsAlwaysReadableNotWritable(){
+	public function testIsAlwaysReadableNotWritable():void{
 		$s = new MultipartStream;
 
 		$this::assertTrue($s->isReadable());
 		$this::assertFalse($s->isWritable());
 	}
 
-	public function testWriteError(){
+	public function testWriteError():void{
 		$this->expectException(RuntimeException::class);
 		$this->expectExceptionMessage('Cannot write to a MultipartStream, use MultipartStream::addElement() instead.');
 
 		(new MultipartStream)->write('foo');
 	}
 
-	public function testAlreadyBuiltError(){
+	public function testAlreadyBuiltError():void{
 		$this->expectException(RuntimeException::class);
 		$this->expectExceptionMessage('Stream already built');
 
 		(new MultipartStream)->build()->addElement([]);
 	}
 
-	public function testCanCreateEmptyStream(){
+	public function testCanCreateEmptyStream():void{
 		$stream   = new MultipartStream;
 		$boundary = $stream->getBoundary();
 		$this::assertSame(strlen($boundary) + 6, $stream->getSize());
 		$this::assertSame("--{$boundary}--\r\n", $stream->getContents());
 	}
 
-	public function testEnsureContentsElement(){
+	public function testEnsureContentsElement():void{
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('A "contents" element is required');
 
 		new MultipartStream([['foo' => 'bar']]);
 	}
 
-	public function testEnsureNameElement(){
+	public function testEnsureNameElement():void{
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('A "name" element is required');
 
 		new MultipartStream([['contents' => 'bar']]);
 	}
 
-	public function testSerializesFields(){
+	public function testSerializesFields():void{
 		$stream = new MultipartStream([
 			['name' => 'foo', 'contents' => 'bar'],
 			['name' => 'baz', 'contents' => 'bam'],
@@ -84,7 +84,7 @@ class MultipartStreamTest extends TestCase{
 		);
 	}
 
-	public function testSerializesNonStringFields(){
+	public function testSerializesNonStringFields():void{
 		$stream = new MultipartStream([
 			['name' => 'int', 'contents' => 1],
 			['name' => 'bool', 'contents' => false],
@@ -102,7 +102,7 @@ class MultipartStreamTest extends TestCase{
 		);
 	}
 
-	public function testSerializesFiles(){
+	public function testSerializesFiles():void{
 
 		$stream = new MultipartStream([
 			['name' => 'foo', 'contents' => FnStream::decorate(
@@ -137,7 +137,7 @@ class MultipartStreamTest extends TestCase{
 		);
 	}
 
-	public function testSerializesFilesWithCustomHeaders(){
+	public function testSerializesFilesWithCustomHeaders():void{
 
 		$stream = new MultipartStream([[
 			'name'     => 'foo',
@@ -157,7 +157,7 @@ class MultipartStreamTest extends TestCase{
 		);
 	}
 
-	public function testSerializesFilesWithCustomHeadersAndMultipleValues(){
+	public function testSerializesFilesWithCustomHeadersAndMultipleValues():void{
 
 		$stream = new MultipartStream([[
 			'name'     => 'foo',
