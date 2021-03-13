@@ -121,20 +121,21 @@ class CurlHandle{
 
 	/**
 	 * @return resource|null
+	 * @codeCoverageIgnore
 	 */
 	public function getCurlResource(){
 		return $this->curl;
 	}
 
 	/**
-	 *
+	 * @codeCoverageIgnore
 	 */
 	public function getRequest():RequestInterface{
 		return $this->request;
 	}
 
 	/**
-	 *
+	 * @codeCoverageIgnore
 	 */
 	public function getResponse():ResponseInterface{
 		return $this->response;

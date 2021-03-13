@@ -19,7 +19,11 @@ use Throwable;
 
 use function chillerlan\HTTP\Psr7\message_to_string;
 use function get_class;
+use const PHP_EOL;
 
+/**
+ * @codeCoverageIgnore
+ */
 class LoggingClient implements ClientInterface, LoggerAwareInterface{
 	use LoggerAwareTrait;
 
@@ -48,7 +52,7 @@ class LoggingClient implements ClientInterface, LoggerAwareInterface{
 			$this->logger->error($e->getTraceAsString());
 
 			if(!$e instanceof ClientExceptionInterface){
-				throw new ClientException('unexpected exception, does not implement "ClientExceptionInterface": '.get_class($e));  // @codeCoverageIgnore
+				throw new ClientException('unexpected exception, does not implement "ClientExceptionInterface": '.get_class($e));
 			}
 
 			throw $e;
