@@ -87,7 +87,7 @@ class UriTest extends TestCase{
 	/**
 	 * @dataProvider getValidUris
 	 *
-	 * @param $input
+	 * @param string $input
 	 */
 	public function testValidUrisStayValid(string $input):void{
 		$this::assertSame($input, (string)(new Uri($input)));
@@ -96,10 +96,10 @@ class UriTest extends TestCase{
 	/**
 	 * @dataProvider getValidUris
 	 *
-	 * @param $input
+	 * @param string $input
 	 */
-	public function testFromParts($input){
-		$this::assertSame($input, (string)UriExtended::fromParts(parse_url($input)));
+	public function testFromParts(string $input){
+		$this::assertSame($input, (string)(new Uri(parse_url($input))));
 	}
 
 	public function getInvalidUris():array{
