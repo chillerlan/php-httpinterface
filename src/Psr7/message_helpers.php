@@ -500,6 +500,27 @@ function decompress_content(MessageInterface $message):string{
 
 }
 
+const URI_DEFAULT_PORTS = [
+	'http'   => 80,
+	'https'  => 443,
+	'ftp'    => 21,
+	'gopher' => 70,
+	'nntp'   => 119,
+	'news'   => 119,
+	'telnet' => 23,
+	'tn3270' => 23,
+	'imap'   => 143,
+	'pop'    => 110,
+	'ldap'   => 389,
+];
+
+function uriIsDefaultPort(UriInterface $uri):bool{
+	$port   = $uri->getPort();
+	$scheme = $uri->getScheme();
+
+	return $port === null || (isset(URI_DEFAULT_PORTS[$scheme]) && $port === URI_DEFAULT_PORTS[$scheme]);
+}
+
 /**
  * Whether the URI is absolute, i.e. it has a scheme.
  *
