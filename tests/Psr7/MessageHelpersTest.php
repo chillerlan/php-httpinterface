@@ -10,20 +10,19 @@
 
 namespace chillerlan\HTTPTest\Psr7;
 
-use chillerlan\HTTP\Psr7\{Request, Response, Uri};
+use chillerlan\HTTP\Psr7\{Query, Request, Response, Uri};
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\MessageInterface;
 use TypeError;
 
 use function chillerlan\HTTP\Psr17\create_stream;
 use function chillerlan\HTTP\Psr7\{
-	build_http_query, clean_query_params, decompress_content, get_json, get_xml,
-	merge_query, message_to_string, normalize_message_headers, r_rawurlencode,
+	decompress_content, get_json, get_xml,
+	message_to_string, normalize_message_headers, r_rawurlencode,
 	uriIsAbsolute, uriIsAbsolutePathReference, uriIsNetworkPathReference,
 	uriIsRelativePathReference, uriWithoutQueryValue, uriWithQueryValue
 };
 
-use const chillerlan\HTTP\Psr7\{BOOLEANS_AS_BOOL, BOOLEANS_AS_INT, BOOLEANS_AS_INT_STRING, BOOLEANS_AS_STRING};
 
 class MessageHelpersTest extends TestCase{
 
@@ -102,55 +101,6 @@ class MessageHelpersTest extends TestCase{
 		], normalize_message_headers($headers));
 	}
 
-	public function queryParamDataProvider():array{
-		return [
-			// don't remove empty values
-			'BOOLEANS_AS_BOOL (clean)' => [['whatever' => null, 'nope' => '', 'true' => true, 'false' => false, 'array' => ['value' => false]], BOOLEANS_AS_BOOL, false],
-			// bool cast to types
-			'BOOLEANS_AS_BOOL'         => [['true' => true, 'false' => false, 'array' => ['value' => false]], BOOLEANS_AS_BOOL, true],
-			'BOOLEANS_AS_INT'          => [['true' => 1, 'false' => 0, 'array' => ['value' => 0]], BOOLEANS_AS_INT, true],
-			'BOOLEANS_AS_INT_STRING'   => [['true' => '1', 'false' => '0', 'array' => ['value' => '0']], BOOLEANS_AS_INT_STRING, true],
-			'BOOLEANS_AS_STRING'       => [['true' => 'true', 'false' => 'false', 'array' => ['value' => 'false']], BOOLEANS_AS_STRING, true],
-		];
-	}
-
-	/**
-	 * @dataProvider queryParamDataProvider
-	 *
-	 * @param array $expected
-	 * @param int   $bool_cast
-	 * @param bool  $remove_empty
-	 */
-	public function testCleanQueryParams(array $expected, int $bool_cast, bool $remove_empty):void{
-		$data = ['whatever' => null, 'nope' => '', 'true' => true, 'false' => false, 'array' => ['value' => false]];
-
-		$this::assertSame($expected, clean_query_params($data, $bool_cast, $remove_empty));
-	}
-
-	public function mergeQueryDataProvider():array{
-		$uri    = 'http://localhost/whatever/';
-		$params = ['foo' => 'bar'];
-
-		return [
-			'add nothing and clear the trailing question mark' => [$uri.'?', [], $uri],
-			'add to URI without query'                         => [$uri, $params, $uri.'?foo=bar'],
-			'overwrite existing param'                         => [$uri.'?foo=nope', $params, $uri.'?foo=bar'],
-			'add to existing param'                            => [$uri.'?what=nope', $params, $uri.'?foo=bar&what=nope'],
-		];
-	}
-
-	/**
-	 * @dataProvider mergeQueryDataProvider
-	 *
-	 * @param string $uri
-	 * @param array  $params
-	 * @param string $expected
-	 */
-	public function testMergeQuery(string $uri, array $params, string $expected):void{
-		$merged = merge_query($uri, $params);
-		$this::assertSame($expected, $merged);
-	}
-
 	public function rawurlencodeDataProvider():array{
 		return [
 			'null'         => [null, ''],
@@ -180,20 +130,6 @@ class MessageHelpersTest extends TestCase{
 		$this::expectException(TypeError::class);
 
 		r_rawurlencode(new \stdClass());
-	}
-
-	public function testBuildHttpQuery():void{
-
-		$data = ['foo' => 'bar', 'whatever?' => 'nope!'];
-
-		$this::assertSame('', build_http_query([]));
-		$this::assertSame('foo=bar&whatever%3F=nope%21', build_http_query($data));
-		$this::assertSame('foo=bar&whatever?=nope!', build_http_query($data, false));
-		$this::assertSame('foo=bar, whatever?=nope!', build_http_query($data, false, ', '));
-		$this::assertSame('foo="bar", whatever?="nope!"', build_http_query($data, false, ', ', '"'));
-
-		$data['florps']  = ['nope', 'nope', 'nah'];
-		$this::assertSame('florps="nah", florps="nope", florps="nope", foo="bar", whatever?="nope!"', build_http_query($data, false, ', ', '"'));
 	}
 
 	public function testGetJSON():void{

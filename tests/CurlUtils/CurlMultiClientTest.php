@@ -12,12 +12,11 @@ namespace chillerlan\HTTPTest\CurlUtils;
 
 use chillerlan\HTTP\CurlUtils\{CurlMultiClient, MultiResponseHandlerInterface};
 use chillerlan\HTTP\HTTPOptions;
-use chillerlan\HTTP\Psr7\Request;
+use chillerlan\HTTP\Psr7\{Request, Query};
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
 
-use function chillerlan\HTTP\Psr7\build_http_query;
 use function array_column, defined, implode, in_array, ksort;
 
 /**
@@ -53,7 +52,7 @@ class CurlMultiClientTest extends TestCase{
 			foreach(['de', 'en', 'es', 'fr', 'zh'] as $lang){
 				$requests[] = new Request(
 					Request::METHOD_GET,
-					'https://api.guildwars2.com/v2/items?'.build_http_query(['lang' => $lang, 'ids' => implode(',', $chunk)])
+					'https://api.guildwars2.com/v2/items?'.Query::build(['lang' => $lang, 'ids' => implode(',', $chunk)])
 				);
 			}
 		}
@@ -98,8 +97,6 @@ class CurlMultiClientTest extends TestCase{
 
 		if(defined('TEST_IS_CI') && TEST_IS_CI === true){
 			$this->markTestSkipped('i have no idea why the headers are empty on travis');
-
-			return;
 		}
 
 		$requests = $this->getRequests();
