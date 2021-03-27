@@ -851,25 +851,10 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/chillerlan-http-psr7.html#constant_MIMETYPES"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\BOOLEANS_AS_BOOL",
-            "name": "BOOLEANS_AS_BOOL",
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\URI_DEFAULT_PORTS",
+            "name": "URI_DEFAULT_PORTS",
             "summary": "",
-            "url": "namespaces/chillerlan-http-psr7.html#constant_BOOLEANS_AS_BOOL"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\BOOLEANS_AS_INT",
-            "name": "BOOLEANS_AS_INT",
-            "summary": "",
-            "url": "namespaces/chillerlan-http-psr7.html#constant_BOOLEANS_AS_INT"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\BOOLEANS_AS_STRING",
-            "name": "BOOLEANS_AS_STRING",
-            "summary": "",
-            "url": "namespaces/chillerlan-http-psr7.html#constant_BOOLEANS_AS_STRING"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\BOOLEANS_AS_INT_STRING",
-            "name": "BOOLEANS_AS_INT_STRING",
-            "summary": "",
-            "url": "namespaces/chillerlan-http-psr7.html#constant_BOOLEANS_AS_INT_STRING"
+            "url": "namespaces/chillerlan-http-psr7.html#constant_URI_DEFAULT_PORTS"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr7\\normalize_message_headers\u0028\u0029",
             "name": "normalize_message_headers",
@@ -880,21 +865,6 @@ Search.appendIndex(
             "name": "r_rawurlencode",
             "summary": "",
             "url": "namespaces/chillerlan-http-psr7.html#function_r_rawurlencode"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\build_http_query\u0028\u0029",
-            "name": "build_http_query",
-            "summary": "from\u0020https\u003A\/\/github.com\/abraham\/twitteroauth\/blob\/master\/src\/Util.php",
-            "url": "namespaces/chillerlan-http-psr7.html#function_build_http_query"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\clean_query_params\u0028\u0029",
-            "name": "clean_query_params",
-            "summary": "",
-            "url": "namespaces/chillerlan-http-psr7.html#function_clean_query_params"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\merge_query\u0028\u0029",
-            "name": "merge_query",
-            "summary": "merges\u0020additional\u0020query\u0020parameters\u0020into\u0020an\u0020existing\u0020query\u0020string",
-            "url": "namespaces/chillerlan-http-psr7.html#function_merge_query"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr7\\normalize_files\u0028\u0029",
             "name": "normalize_files",
@@ -930,6 +900,41 @@ Search.appendIndex(
             "name": "decompress_content",
             "summary": "Decompresses\u0020the\u0020message\u0020content\u0020according\u0020to\u0020the\u0020Content\u002DEncoding\u0020header\u0020and\u0020returns\u0020the\u0020decompressed\u0020data",
             "url": "namespaces/chillerlan-http-psr7.html#function_decompress_content"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\uriIsDefaultPort\u0028\u0029",
+            "name": "uriIsDefaultPort",
+            "summary": "",
+            "url": "namespaces/chillerlan-http-psr7.html#function_uriIsDefaultPort"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\uriIsAbsolute\u0028\u0029",
+            "name": "uriIsAbsolute",
+            "summary": "Whether\u0020the\u0020URI\u0020is\u0020absolute,\u0020i.e.\u0020it\u0020has\u0020a\u0020scheme.",
+            "url": "namespaces/chillerlan-http-psr7.html#function_uriIsAbsolute"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\uriIsNetworkPathReference\u0028\u0029",
+            "name": "uriIsNetworkPathReference",
+            "summary": "Whether\u0020the\u0020URI\u0020is\u0020a\u0020network\u002Dpath\u0020reference.",
+            "url": "namespaces/chillerlan-http-psr7.html#function_uriIsNetworkPathReference"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\uriIsAbsolutePathReference\u0028\u0029",
+            "name": "uriIsAbsolutePathReference",
+            "summary": "Whether\u0020the\u0020URI\u0020is\u0020a\u0020absolute\u002Dpath\u0020reference.",
+            "url": "namespaces/chillerlan-http-psr7.html#function_uriIsAbsolutePathReference"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\uriIsRelativePathReference\u0028\u0029",
+            "name": "uriIsRelativePathReference",
+            "summary": "Whether\u0020the\u0020URI\u0020is\u0020a\u0020relative\u002Dpath\u0020reference.",
+            "url": "namespaces/chillerlan-http-psr7.html#function_uriIsRelativePathReference"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\uriWithoutQueryValue\u0028\u0029",
+            "name": "uriWithoutQueryValue",
+            "summary": "removes\u0020a\u0020specific\u0020query\u0020string\u0020value.",
+            "url": "namespaces/chillerlan-http-psr7.html#function_uriWithoutQueryValue"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\uriWithQueryValue\u0028\u0029",
+            "name": "uriWithQueryValue",
+            "summary": "adds\u0020a\u0020specific\u0020query\u0020string\u0020value.",
+            "url": "namespaces/chillerlan-http-psr7.html#function_uriWithQueryValue"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr7\\MultipartStream",
             "name": "MultipartStream",
@@ -1005,6 +1010,51 @@ Search.appendIndex(
             "name": "built",
             "summary": "",
             "url": "classes/chillerlan-HTTP-Psr7-MultipartStream.html#property_built"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\Query",
+            "name": "Query",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr7-Query.html"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\Query\u003A\u003AcleanParams\u0028\u0029",
+            "name": "cleanParams",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr7-Query.html#method_cleanParams"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\Query\u003A\u003Abuild\u0028\u0029",
+            "name": "build",
+            "summary": "from\u0020https\u003A\/\/github.com\/abraham\/twitteroauth\/blob\/master\/src\/Util.php",
+            "url": "classes/chillerlan-HTTP-Psr7-Query.html#method_build"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\Query\u003A\u003Amerge\u0028\u0029",
+            "name": "merge",
+            "summary": "merges\u0020additional\u0020query\u0020parameters\u0020into\u0020an\u0020existing\u0020query\u0020string",
+            "url": "classes/chillerlan-HTTP-Psr7-Query.html#method_merge"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\Query\u003A\u003Aparse\u0028\u0029",
+            "name": "parse",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr7-Query.html#method_parse"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\Query\u003A\u003ABOOLEANS_AS_BOOL",
+            "name": "BOOLEANS_AS_BOOL",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr7-Query.html#constant_BOOLEANS_AS_BOOL"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\Query\u003A\u003ABOOLEANS_AS_INT",
+            "name": "BOOLEANS_AS_INT",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr7-Query.html#constant_BOOLEANS_AS_INT"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\Query\u003A\u003ABOOLEANS_AS_STRING",
+            "name": "BOOLEANS_AS_STRING",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr7-Query.html#constant_BOOLEANS_AS_STRING"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\Query\u003A\u003ABOOLEANS_AS_INT_STRING",
+            "name": "BOOLEANS_AS_INT_STRING",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr7-Query.html#constant_BOOLEANS_AS_INT_STRING"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr7\\Request",
             "name": "Request",
@@ -1656,11 +1706,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTP-Psr7-Uri.html#method_validateState"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\Uri\u003A\u003ADEFAULT_PORTS",
-            "name": "DEFAULT_PORTS",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr7-Uri.html#constant_DEFAULT_PORTS"
-        },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr7\\Uri\u003A\u003A\u0024scheme",
             "name": "scheme",
             "summary": "",
@@ -1700,46 +1745,6 @@ Search.appendIndex(
             "name": "fragment",
             "summary": "",
             "url": "classes/chillerlan-HTTP-Psr7-Uri.html#property_fragment"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\UriExtended",
-            "name": "UriExtended",
-            "summary": "Additional\u0020non\u002DPSR\u0020Uri\u0020methods",
-            "url": "classes/chillerlan-HTTP-Psr7-UriExtended.html"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\UriExtended\u003A\u003AfromParts\u0028\u0029",
-            "name": "fromParts",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr7-UriExtended.html#method_fromParts"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\UriExtended\u003A\u003AisAbsolute\u0028\u0029",
-            "name": "isAbsolute",
-            "summary": "Whether\u0020the\u0020URI\u0020is\u0020absolute,\u0020i.e.\u0020it\u0020has\u0020a\u0020scheme.",
-            "url": "classes/chillerlan-HTTP-Psr7-UriExtended.html#method_isAbsolute"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\UriExtended\u003A\u003AisNetworkPathReference\u0028\u0029",
-            "name": "isNetworkPathReference",
-            "summary": "Whether\u0020the\u0020URI\u0020is\u0020a\u0020network\u002Dpath\u0020reference.",
-            "url": "classes/chillerlan-HTTP-Psr7-UriExtended.html#method_isNetworkPathReference"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\UriExtended\u003A\u003AisAbsolutePathReference\u0028\u0029",
-            "name": "isAbsolutePathReference",
-            "summary": "Whether\u0020the\u0020URI\u0020is\u0020a\u0020absolute\u002Dpath\u0020reference.",
-            "url": "classes/chillerlan-HTTP-Psr7-UriExtended.html#method_isAbsolutePathReference"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\UriExtended\u003A\u003AisRelativePathReference\u0028\u0029",
-            "name": "isRelativePathReference",
-            "summary": "Whether\u0020the\u0020URI\u0020is\u0020a\u0020relative\u002Dpath\u0020reference.",
-            "url": "classes/chillerlan-HTTP-Psr7-UriExtended.html#method_isRelativePathReference"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\UriExtended\u003A\u003AwithoutQueryValue\u0028\u0029",
-            "name": "withoutQueryValue",
-            "summary": "removes\u0020a\u0020specific\u0020query\u0020string\u0020value.",
-            "url": "classes/chillerlan-HTTP-Psr7-UriExtended.html#method_withoutQueryValue"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\UriExtended\u003A\u003AwithQueryValue\u0028\u0029",
-            "name": "withQueryValue",
-            "summary": "adds\u0020a\u0020specific\u0020query\u0020string\u0020value.",
-            "url": "classes/chillerlan-HTTP-Psr7-UriExtended.html#method_withQueryValue"
         },                {
             "fqsen": "\\chillerlan\\HTTPTest\\CurlUtils\\CurlHandleTest",
             "name": "CurlHandleTest",
@@ -2156,26 +2161,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr7-MessageHelpersTest.html#method_testCombinedCookieHeaders"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageHelpersTest\u003A\u003AqueryParamDataProvider\u0028\u0029",
-            "name": "queryParamDataProvider",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-MessageHelpersTest.html#method_queryParamDataProvider"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageHelpersTest\u003A\u003AtestCleanQueryParams\u0028\u0029",
-            "name": "testCleanQueryParams",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-MessageHelpersTest.html#method_testCleanQueryParams"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageHelpersTest\u003A\u003AmergeQueryDataProvider\u0028\u0029",
-            "name": "mergeQueryDataProvider",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-MessageHelpersTest.html#method_mergeQueryDataProvider"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageHelpersTest\u003A\u003AtestMergeQuery\u0028\u0029",
-            "name": "testMergeQuery",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-MessageHelpersTest.html#method_testMergeQuery"
-        },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageHelpersTest\u003A\u003ArawurlencodeDataProvider\u0028\u0029",
             "name": "rawurlencodeDataProvider",
             "summary": "",
@@ -2190,11 +2175,6 @@ Search.appendIndex(
             "name": "testRawurlencodeTypeErrorException",
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr7-MessageHelpersTest.html#method_testRawurlencodeTypeErrorException"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageHelpersTest\u003A\u003AtestBuildHttpQuery\u0028\u0029",
-            "name": "testBuildHttpQuery",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-MessageHelpersTest.html#method_testBuildHttpQuery"
         },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageHelpersTest\u003A\u003AtestGetJSON\u0028\u0029",
             "name": "testGetJSON",
@@ -2225,6 +2205,56 @@ Search.appendIndex(
             "name": "testDecompressContent",
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr7-MessageHelpersTest.html#method_testDecompressContent"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageHelpersTest\u003A\u003AtestUriIsAbsolute\u0028\u0029",
+            "name": "testUriIsAbsolute",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-MessageHelpersTest.html#method_testUriIsAbsolute"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageHelpersTest\u003A\u003AtestUriIsNetworkPathReference\u0028\u0029",
+            "name": "testUriIsNetworkPathReference",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-MessageHelpersTest.html#method_testUriIsNetworkPathReference"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageHelpersTest\u003A\u003AtestUriIsAbsolutePathReference\u0028\u0029",
+            "name": "testUriIsAbsolutePathReference",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-MessageHelpersTest.html#method_testUriIsAbsolutePathReference"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageHelpersTest\u003A\u003AtestUriIsRelativePathReference\u0028\u0029",
+            "name": "testUriIsRelativePathReference",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-MessageHelpersTest.html#method_testUriIsRelativePathReference"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageHelpersTest\u003A\u003AtestUriAddAndRemoveQueryValues\u0028\u0029",
+            "name": "testUriAddAndRemoveQueryValues",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-MessageHelpersTest.html#method_testUriAddAndRemoveQueryValues"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageHelpersTest\u003A\u003AtestUriWithQueryValueReplacesSameKeys\u0028\u0029",
+            "name": "testUriWithQueryValueReplacesSameKeys",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-MessageHelpersTest.html#method_testUriWithQueryValueReplacesSameKeys"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageHelpersTest\u003A\u003AtestUriWithoutQueryValueRemovesAllSameKeys\u0028\u0029",
+            "name": "testUriWithoutQueryValueRemovesAllSameKeys",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-MessageHelpersTest.html#method_testUriWithoutQueryValueRemovesAllSameKeys"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageHelpersTest\u003A\u003AtestUriRemoveNonExistingQueryValue\u0028\u0029",
+            "name": "testUriRemoveNonExistingQueryValue",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-MessageHelpersTest.html#method_testUriRemoveNonExistingQueryValue"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageHelpersTest\u003A\u003AtestUriWithQueryValueHandlesEncoding\u0028\u0029",
+            "name": "testUriWithQueryValueHandlesEncoding",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-MessageHelpersTest.html#method_testUriWithQueryValueHandlesEncoding"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageHelpersTest\u003A\u003AtestUriWithoutQueryValueHandlesEncoding\u0028\u0029",
+            "name": "testUriWithoutQueryValueHandlesEncoding",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-MessageHelpersTest.html#method_testUriWithoutQueryValueHandlesEncoding"
         },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MultipartStreamTest",
             "name": "MultipartStreamTest",
@@ -2295,6 +2325,36 @@ Search.appendIndex(
             "name": "testSerializesFilesWithCustomHeadersAndMultipleValues",
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr7-MultipartStreamTest.html#method_testSerializesFilesWithCustomHeadersAndMultipleValues"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\QueryTest",
+            "name": "QueryTest",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-QueryTest.html"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\QueryTest\u003A\u003AqueryParamDataProvider\u0028\u0029",
+            "name": "queryParamDataProvider",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-QueryTest.html#method_queryParamDataProvider"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\QueryTest\u003A\u003AtestCleanQueryParams\u0028\u0029",
+            "name": "testCleanQueryParams",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-QueryTest.html#method_testCleanQueryParams"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\QueryTest\u003A\u003AtestBuildHttpQuery\u0028\u0029",
+            "name": "testBuildHttpQuery",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-QueryTest.html#method_testBuildHttpQuery"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\QueryTest\u003A\u003AmergeQueryDataProvider\u0028\u0029",
+            "name": "mergeQueryDataProvider",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-QueryTest.html#method_mergeQueryDataProvider"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\QueryTest\u003A\u003AtestMergeQuery\u0028\u0029",
+            "name": "testMergeQuery",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-QueryTest.html#method_testMergeQuery"
         },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\RequestTest",
             "name": "RequestTest",
@@ -2800,61 +2860,6 @@ Search.appendIndex(
             "name": "cleanup",
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#property_cleanup"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\UriExtendedTest",
-            "name": "UriExtendedTest",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-UriExtendedTest.html"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\UriExtendedTest\u003A\u003AtestIsAbsolute\u0028\u0029",
-            "name": "testIsAbsolute",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-UriExtendedTest.html#method_testIsAbsolute"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\UriExtendedTest\u003A\u003AtestIsNetworkPathReference\u0028\u0029",
-            "name": "testIsNetworkPathReference",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-UriExtendedTest.html#method_testIsNetworkPathReference"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\UriExtendedTest\u003A\u003AtestIsAbsolutePathReference\u0028\u0029",
-            "name": "testIsAbsolutePathReference",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-UriExtendedTest.html#method_testIsAbsolutePathReference"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\UriExtendedTest\u003A\u003AtestIsRelativePathReference\u0028\u0029",
-            "name": "testIsRelativePathReference",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-UriExtendedTest.html#method_testIsRelativePathReference"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\UriExtendedTest\u003A\u003AtestAddAndRemoveQueryValues\u0028\u0029",
-            "name": "testAddAndRemoveQueryValues",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-UriExtendedTest.html#method_testAddAndRemoveQueryValues"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\UriExtendedTest\u003A\u003AtestWithQueryValueReplacesSameKeys\u0028\u0029",
-            "name": "testWithQueryValueReplacesSameKeys",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-UriExtendedTest.html#method_testWithQueryValueReplacesSameKeys"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\UriExtendedTest\u003A\u003AtestWithoutQueryValueRemovesAllSameKeys\u0028\u0029",
-            "name": "testWithoutQueryValueRemovesAllSameKeys",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-UriExtendedTest.html#method_testWithoutQueryValueRemovesAllSameKeys"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\UriExtendedTest\u003A\u003AtestRemoveNonExistingQueryValue\u0028\u0029",
-            "name": "testRemoveNonExistingQueryValue",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-UriExtendedTest.html#method_testRemoveNonExistingQueryValue"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\UriExtendedTest\u003A\u003AtestWithQueryValueHandlesEncoding\u0028\u0029",
-            "name": "testWithQueryValueHandlesEncoding",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-UriExtendedTest.html#method_testWithQueryValueHandlesEncoding"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\UriExtendedTest\u003A\u003AtestWithoutQueryValueHandlesEncoding\u0028\u0029",
-            "name": "testWithoutQueryValueHandlesEncoding",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-UriExtendedTest.html#method_testWithoutQueryValueHandlesEncoding"
         },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\UriTest",
             "name": "UriTest",

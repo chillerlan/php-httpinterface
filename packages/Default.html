@@ -146,6 +146,8 @@
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/chillerlan-HTTP-Psr7-MultipartStream.html"><abbr title="\chillerlan\HTTP\Psr7\MultipartStream">MultipartStream</abbr></a></dt>
         <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/chillerlan-HTTP-Psr7-Query.html"><abbr title="\chillerlan\HTTP\Psr7\Query">Query</abbr></a></dt>
+        <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/chillerlan-HTTP-Psr7-Request.html"><abbr title="\chillerlan\HTTP\Psr7\Request">Request</abbr></a></dt>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/chillerlan-HTTP-Psr7-Response.html"><abbr title="\chillerlan\HTTP\Psr7\Response">Response</abbr></a></dt>
@@ -160,8 +162,6 @@
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/chillerlan-HTTP-Psr7-Uri.html"><abbr title="\chillerlan\HTTP\Psr7\Uri">Uri</abbr></a></dt>
         <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/chillerlan-HTTP-Psr7-UriExtended.html"><abbr title="\chillerlan\HTTP\Psr7\UriExtended">UriExtended</abbr></a></dt>
-        <dd>Additional non-PSR Uri methods</dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/chillerlan-HTTPTest-CurlUtils-CurlHandleTest.html"><abbr title="\chillerlan\HTTPTest\CurlUtils\CurlHandleTest">CurlHandleTest</abbr></a></dt>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/chillerlan-HTTPTest-CurlUtils-CurlMultiClientTest.html"><abbr title="\chillerlan\HTTPTest\CurlUtils\CurlMultiClientTest">CurlMultiClientTest</abbr></a></dt>
@@ -194,6 +194,8 @@
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/chillerlan-HTTPTest-Psr7-MultipartStreamTest.html"><abbr title="\chillerlan\HTTPTest\Psr7\MultipartStreamTest">MultipartStreamTest</abbr></a></dt>
         <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/chillerlan-HTTPTest-Psr7-QueryTest.html"><abbr title="\chillerlan\HTTPTest\Psr7\QueryTest">QueryTest</abbr></a></dt>
+        <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/chillerlan-HTTPTest-Psr7-RequestTest.html"><abbr title="\chillerlan\HTTPTest\Psr7\RequestTest">RequestTest</abbr></a></dt>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/chillerlan-HTTPTest-Psr7-ResponseTest.html"><abbr title="\chillerlan\HTTPTest\Psr7\ResponseTest">ResponseTest</abbr></a></dt>
@@ -203,8 +205,6 @@
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/chillerlan-HTTPTest-Psr7-StreamTest.html"><abbr title="\chillerlan\HTTPTest\Psr7\StreamTest">StreamTest</abbr></a></dt>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html"><abbr title="\chillerlan\HTTPTest\Psr7\UploadedFileTest">UploadedFileTest</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/chillerlan-HTTPTest-Psr7-UriExtendedTest.html"><abbr title="\chillerlan\HTTPTest\Psr7\UriExtendedTest">UriExtendedTest</abbr></a></dt>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/chillerlan-HTTPTest-Psr7-UriTest.html"><abbr title="\chillerlan\HTTPTest\Psr7\UriTest">UriTest</abbr></a></dt>
         <dd></dd>
@@ -220,34 +220,6 @@
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a href="namespaces/chillerlan-http-psr7.html#constant_BOOLEANS_AS_BOOL">BOOLEANS_AS_BOOL</a>
-    <span>
-        &nbsp;= 0                    </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a href="namespaces/chillerlan-http-psr7.html#constant_BOOLEANS_AS_INT">BOOLEANS_AS_INT</a>
-    <span>
-        &nbsp;= 1                    </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a href="namespaces/chillerlan-http-psr7.html#constant_BOOLEANS_AS_INT_STRING">BOOLEANS_AS_INT_STRING</a>
-    <span>
-        &nbsp;= 3                    </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a href="namespaces/chillerlan-http-psr7.html#constant_BOOLEANS_AS_STRING">BOOLEANS_AS_STRING</a>
-    <span>
-        &nbsp;= 2                    </span>
-</dt>
-<dd></dd>
-
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a href="namespaces/chillerlan-http-psr7.html#constant_MIMETYPES">MIMETYPES</a>
     <span>
@@ -290,6 +262,13 @@
 </dt>
 <dd></dd>
 
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a href="namespaces/chillerlan-http-psr7.html#constant_URI_DEFAULT_PORTS">URI_DEFAULT_PORTS</a>
+    <span>
+        &nbsp;= [&#039;http&#039; =&gt; 80, &#039;https&#039; =&gt; 443, &#039;ftp&#039; =&gt; 21, &#039;gopher&#039; =&gt; 70, &#039;nntp&#039; =&gt; 119, &#039;news&#039; =&gt; 119, &#039;telnet&#039; =&gt; 23, &#039;tn3270&#039; =&gt; 23, &#039;imap&#039; =&gt; 143, &#039;pop&#039; =&gt; 110, &#039;ldap&#039; =&gt; 389]                    </span>
+</dt>
+<dd></dd>
+
                         <dt class="phpdocumentor-table-of-contents__entry -function -">
     <a href="namespaces/chillerlan-http-psr17.html#function_create_server_request_from_globals">create_server_request_from_globals()</a>
     <span>
@@ -305,7 +284,7 @@ $_SERVER</dd>
             <dt class="phpdocumentor-table-of-contents__entry -function -">
     <a href="namespaces/chillerlan-http-psr17.html#function_create_uri_from_globals">create_uri_from_globals()</a>
     <span>
-                        &nbsp;: <a href="classes/chillerlan-HTTP-Psr7-UriExtended.html"><abbr title="\chillerlan\HTTP\Psr7\UriExtended">UriExtended</abbr></a>    </span>
+                        &nbsp;: <a href="classes/chillerlan-HTTP-Psr7-Uri.html"><abbr title="\chillerlan\HTTP\Psr7\Uri">Uri</abbr></a>    </span>
 </dt>
 <dd>Get a Uri populated with values from $_SERVER.</dd>
 
@@ -337,27 +316,6 @@ An exception is being made for Set-Cookie, which holds an array of values for ea
                         &nbsp;: string|array&lt;string|int, string&gt;    </span>
 </dt>
 <dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -function -">
-    <a href="namespaces/chillerlan-http-psr7.html#function_build_http_query">build_http_query()</a>
-    <span>
-                        &nbsp;: string    </span>
-</dt>
-<dd>from https://github.com/abraham/twitteroauth/blob/master/src/Util.php</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -function -">
-    <a href="namespaces/chillerlan-http-psr7.html#function_clean_query_params">clean_query_params()</a>
-    <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;    </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -function -">
-    <a href="namespaces/chillerlan-http-psr7.html#function_merge_query">merge_query()</a>
-    <span>
-                        &nbsp;: string    </span>
-</dt>
-<dd>merges additional query parameters into an existing query string</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -function -">
     <a href="namespaces/chillerlan-http-psr7.html#function_normalize_files">normalize_files()</a>
@@ -408,6 +366,55 @@ An exception is being made for Set-Cookie, which holds an array of values for ea
 </dt>
 <dd>Decompresses the message content according to the Content-Encoding header and returns the decompressed data</dd>
 
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/chillerlan-http-psr7.html#function_uriIsDefaultPort">uriIsDefaultPort()</a>
+    <span>
+                        &nbsp;: bool    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/chillerlan-http-psr7.html#function_uriIsAbsolute">uriIsAbsolute()</a>
+    <span>
+                        &nbsp;: bool    </span>
+</dt>
+<dd>Whether the URI is absolute, i.e. it has a scheme.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/chillerlan-http-psr7.html#function_uriIsNetworkPathReference">uriIsNetworkPathReference()</a>
+    <span>
+                        &nbsp;: bool    </span>
+</dt>
+<dd>Whether the URI is a network-path reference.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/chillerlan-http-psr7.html#function_uriIsAbsolutePathReference">uriIsAbsolutePathReference()</a>
+    <span>
+                        &nbsp;: bool    </span>
+</dt>
+<dd>Whether the URI is a absolute-path reference.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/chillerlan-http-psr7.html#function_uriIsRelativePathReference">uriIsRelativePathReference()</a>
+    <span>
+                        &nbsp;: bool    </span>
+</dt>
+<dd>Whether the URI is a relative-path reference.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/chillerlan-http-psr7.html#function_uriWithoutQueryValue">uriWithoutQueryValue()</a>
+    <span>
+                        &nbsp;: <abbr title="\Psr\Http\Message\UriInterface">UriInterface</abbr>    </span>
+</dt>
+<dd>removes a specific query string value.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/chillerlan-http-psr7.html#function_uriWithQueryValue">uriWithQueryValue()</a>
+    <span>
+                        &nbsp;: <abbr title="\Psr\Http\Message\UriInterface">UriInterface</abbr>    </span>
+</dt>
+<dd>adds a specific query string value.</dd>
+
     </dl>
 
         
@@ -417,106 +424,6 @@ An exception is being made for Set-Cookie, which holds an array of values for ea
             <a href="packages/Default.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_BOOLEANS_AS_BOOL">
-        BOOLEANS_AS_BOOL
-        <a href="namespaces/chillerlan-http-psr7.html#constant_BOOLEANS_AS_BOOL" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">266</span>
-</aside>
-
-    
-    <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-    <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">BOOLEANS_AS_BOOL</span>
-    = <span class="phpdocumentor-signature__default-value">""</span>
-</code>
-
-
-    
-    
-
-</article>
-                    <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_BOOLEANS_AS_INT">
-        BOOLEANS_AS_INT
-        <a href="namespaces/chillerlan-http-psr7.html#constant_BOOLEANS_AS_INT" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">267</span>
-</aside>
-
-    
-    <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-    <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">BOOLEANS_AS_INT</span>
-    = <span class="phpdocumentor-signature__default-value">1</span>
-</code>
-
-
-    
-    
-
-</article>
-                    <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_BOOLEANS_AS_INT_STRING">
-        BOOLEANS_AS_INT_STRING
-        <a href="namespaces/chillerlan-http-psr7.html#constant_BOOLEANS_AS_INT_STRING" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">269</span>
-</aside>
-
-    
-    <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-    <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">BOOLEANS_AS_INT_STRING</span>
-    = <span class="phpdocumentor-signature__default-value">3</span>
-</code>
-
-
-    
-    
-
-</article>
-                    <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_BOOLEANS_AS_STRING">
-        BOOLEANS_AS_STRING
-        <a href="namespaces/chillerlan-http-psr7.html#constant_BOOLEANS_AS_STRING" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">268</span>
-</aside>
-
-    
-    <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-    <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">BOOLEANS_AS_STRING</span>
-    = <span class="phpdocumentor-signature__default-value">2</span>
-</code>
-
-
-    
-    
-
-</article>
-                    <article class="phpdocumentor-element -constant -public ">
     <h4 class="phpdocumentor-element__name" id="constant_MIMETYPES">
         MIMETYPES
         <a href="namespaces/chillerlan-http-psr7.html#constant_MIMETYPES" class="headerlink"><i class="fas fa-link"></i></a>
@@ -525,7 +432,7 @@ An exception is being made for Set-Cookie, which holds an array of values for ea
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">26</span>
+    <span class="phpdocumentor-element-found-in__line">24</span>
 </aside>
 
     
@@ -589,7 +496,7 @@ An exception is being made for Set-Cookie, which holds an array of values for ea
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">21</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 </aside>
 
     
@@ -680,6 +587,31 @@ An exception is being made for Set-Cookie, which holds an array of values for ea
     
 
 </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_URI_DEFAULT_PORTS">
+        URI_DEFAULT_PORTS
+        <a href="namespaces/chillerlan-http-psr7.html#constant_URI_DEFAULT_PORTS" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">378</span>
+</aside>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">URI_DEFAULT_PORTS</span>
+    = <span class="phpdocumentor-signature__default-value">[&#039;http&#039; =&gt; 80, &#039;https&#039; =&gt; 443, &#039;ftp&#039; =&gt; 21, &#039;gopher&#039; =&gt; 70, &#039;nntp&#039; =&gt; 119, &#039;news&#039; =&gt; 119, &#039;telnet&#039; =&gt; 23, &#039;tn3270&#039; =&gt; 23, &#039;imap&#039; =&gt; 143, &#039;pop&#039; =&gt; 110, &#039;ldap&#039; =&gt; 389]</span>
+</code>
+
+
+    
+    
+
+</article>
             </section>
 
             <section class="phpdocumentor-functions">
@@ -731,7 +663,7 @@ $_SERVER</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility"></span>
-                <span class="phpdocumentor-signature__name">create_uri_from_globals</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/chillerlan-HTTP-Psr7-UriExtended.html"><abbr title="\chillerlan\HTTP\Psr7\UriExtended">UriExtended</abbr></a></span></code>
+                <span class="phpdocumentor-signature__name">create_uri_from_globals</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/chillerlan-HTTP-Psr7-Uri.html"><abbr title="\chillerlan\HTTP\Psr7\Uri">Uri</abbr></a></span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -748,7 +680,7 @@ $_SERVER</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr17/factory_helpers.php"><a href="files/src-psr17-factory-helpers.html"><abbr title="src/Psr17/factory_helpers.php">factory_helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">136</span>
+    <span class="phpdocumentor-element-found-in__line">135</span>
 </aside>
 
         <p class="phpdocumentor-summary">Create a new writable stream from a string.</p>
@@ -803,7 +735,7 @@ $_SERVER</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr17/factory_helpers.php"><a href="files/src-psr17-factory-helpers.html"><abbr title="src/Psr17/factory_helpers.php">factory_helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">160</span>
+    <span class="phpdocumentor-element-found-in__line">159</span>
 </aside>
 
     
@@ -837,7 +769,7 @@ $_SERVER</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">138</span>
+    <span class="phpdocumentor-element-found-in__line">136</span>
 </aside>
 
         <p class="phpdocumentor-summary">Normalizes an array of header lines to format [&quot;Name&quot; =&gt; &quot;Value (, Value2, Value3, ...)&quot;, ...]
@@ -874,7 +806,7 @@ An exception is being made for Set-Cookie, which holds an array of values for ea
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">205</span>
+    <span class="phpdocumentor-element-found-in__line">203</span>
 </aside>
 
     
@@ -916,160 +848,6 @@ An exception is being made for Set-Cookie, which holds an array of values for ea
     
 </article>
                     <article class="phpdocumentor-element -function - ">
-    <h4 class="phpdocumentor-element__name" id="function_build_http_query">
-        build_http_query()
-        <a href="namespaces/chillerlan-http-psr7.html#function_build_http_query" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">221</span>
-</aside>
-
-        <p class="phpdocumentor-summary">from https://github.com/abraham/twitteroauth/blob/master/src/Util.php</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility"></span>
-                <span class="phpdocumentor-signature__name">build_http_query</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$params</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$urlencode</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$delimiter</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$enclosure</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$params</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$urlencode</span>
-                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$delimiter</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$enclosure</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-    
-</article>
-                    <article class="phpdocumentor-element -function - ">
-    <h4 class="phpdocumentor-element__name" id="function_clean_query_params">
-        clean_query_params()
-        <a href="namespaces/chillerlan-http-psr7.html#function_clean_query_params" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">283</span>
-</aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility"></span>
-                <span class="phpdocumentor-signature__name">clean_query_params</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">iteratable&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$params</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$bool_cast</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$remove_empty</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$params</span>
-                : <span class="phpdocumentor-signature__argument__return-type">iteratable&lt;string|int, mixed&gt;</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$bool_cast</span>
-                : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>converts booleans to a type determined like following:
-BOOLEANS_AS_BOOL      : unchanged boolean value (default)
-BOOLEANS_AS_INT       : integer values 0 or 1
-BOOLEANS_AS_STRING    : &quot;true&quot;/&quot;false&quot; strings
-BOOLEANS_AS_INT_STRING: &quot;0&quot;/&quot;1&quot;</p>
-</section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$remove_empty</span>
-                : <span class="phpdocumentor-signature__argument__return-type">bool|null</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>remove empty and NULL values</p>
-</section>
-
-            </dd>
-            </dl>
-
-    
-
-    
-</article>
-                    <article class="phpdocumentor-element -function - ">
-    <h4 class="phpdocumentor-element__name" id="function_merge_query">
-        merge_query()
-        <a href="namespaces/chillerlan-http-psr7.html#function_merge_query" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">328</span>
-</aside>
-
-        <p class="phpdocumentor-summary">merges additional query parameters into an existing query string</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility"></span>
-                <span class="phpdocumentor-signature__name">merge_query</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$uri</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$query</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$uri</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$query</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-
-    
-</article>
-                    <article class="phpdocumentor-element -function - ">
     <h4 class="phpdocumentor-element__name" id="function_normalize_files">
         normalize_files()
         <a href="namespaces/chillerlan-http-psr7.html#function_normalize_files" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1077,7 +855,7 @@ BOOLEANS_AS_INT_STRING: &quot;0&quot;/&quot;1&quot;</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">349</span>
+    <span class="phpdocumentor-element-found-in__line">224</span>
 </aside>
 
         <p class="phpdocumentor-summary">Return an UploadedFile instance array.</p>
@@ -1129,7 +907,7 @@ BOOLEANS_AS_INT_STRING: &quot;0&quot;/&quot;1&quot;</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">383</span>
+    <span class="phpdocumentor-element-found-in__line">258</span>
 </aside>
 
         <p class="phpdocumentor-summary">Create and return an UploadedFile instance from a $_FILES specification.</p>
@@ -1167,7 +945,7 @@ delegate to normalizeNestedFileSpec() and return that return value.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">402</span>
+    <span class="phpdocumentor-element-found-in__line">277</span>
 </aside>
 
         <p class="phpdocumentor-summary">Normalize an array of file specifications.</p>
@@ -1204,7 +982,7 @@ UploadedFileInterface instances.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">426</span>
+    <span class="phpdocumentor-element-found-in__line">301</span>
 </aside>
 
     
@@ -1246,7 +1024,7 @@ UploadedFileInterface instances.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">440</span>
+    <span class="phpdocumentor-element-found-in__line">315</span>
 </aside>
 
     
@@ -1288,7 +1066,7 @@ UploadedFileInterface instances.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">457</span>
+    <span class="phpdocumentor-element-found-in__line">332</span>
 </aside>
 
         <p class="phpdocumentor-summary">Returns the string representation of an HTTP message. (from Guzzle)</p>
@@ -1324,7 +1102,7 @@ UploadedFileInterface instances.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">489</span>
+    <span class="phpdocumentor-element-found-in__line">364</span>
 </aside>
 
         <p class="phpdocumentor-summary">Decompresses the message content according to the Content-Encoding header and returns the decompressed data</p>
@@ -1343,6 +1121,365 @@ UploadedFileInterface instances.</p>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_uriIsDefaultPort">
+        uriIsDefaultPort()
+        <a href="namespaces/chillerlan-http-psr7.html#function_uriIsDefaultPort" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">392</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">uriIsDefaultPort</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\UriInterface">UriInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$uri</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$uri</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\UriInterface">UriInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_uriIsAbsolute">
+        uriIsAbsolute()
+        <a href="namespaces/chillerlan-http-psr7.html#function_uriIsAbsolute" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">414</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Whether the URI is absolute, i.e. it has a scheme.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">uriIsAbsolute</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\UriInterface">UriInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$uri</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+        <section class="phpdocumentor-description"><p>An instance of UriInterface can either be an absolute URI or a relative reference. This method returns true
+if it is the former. An absolute URI has a scheme. A relative reference is used to express a URI relative
+to another URI, the base URI. Relative references can be divided into several forms:</p>
+<ul>
+<li>network-path references, e.g. '//example.com/path'</li>
+<li>absolute-path references, e.g. '/path'</li>
+<li>relative-path references, e.g. 'subpath'</li>
+</ul>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$uri</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\UriInterface">UriInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><abbr title="\chillerlan\HTTP\Psr7\Uri::isNetworkPathReference">Uri::isNetworkPathReference</abbr></span>
+                                        
+                                                 <section class="phpdocumentor-description"></section>
+
+                                    </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><abbr title="\chillerlan\HTTP\Psr7\Uri::isAbsolutePathReference">Uri::isAbsolutePathReference</abbr></span>
+                                        
+                                                 <section class="phpdocumentor-description"></section>
+
+                                    </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><abbr title="\chillerlan\HTTP\Psr7\Uri::isRelativePathReference">Uri::isRelativePathReference</abbr></span>
+                                        
+                                                 <section class="phpdocumentor-description"></section>
+
+                                    </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">link</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                                        <a class="phpdocumentor-tag-link" href="https://tools.ietf.org/html/rfc3986#section-4"> https://tools.ietf.org/html/rfc3986#section-4 </a>
+                    
+                                    </dd>
+                        </dl>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_uriIsNetworkPathReference">
+        uriIsNetworkPathReference()
+        <a href="namespaces/chillerlan-http-psr7.html#function_uriIsNetworkPathReference" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">425</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Whether the URI is a network-path reference.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">uriIsNetworkPathReference</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\UriInterface">UriInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$uri</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+        <section class="phpdocumentor-description"><p>A relative reference that begins with two slash characters is termed an network-path reference.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$uri</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\UriInterface">UriInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">link</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                                        <a class="phpdocumentor-tag-link" href="https://tools.ietf.org/html/rfc3986#section-4.2"> https://tools.ietf.org/html/rfc3986#section-4.2 </a>
+                    
+                                    </dd>
+                        </dl>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_uriIsAbsolutePathReference">
+        uriIsAbsolutePathReference()
+        <a href="namespaces/chillerlan-http-psr7.html#function_uriIsAbsolutePathReference" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">436</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Whether the URI is a absolute-path reference.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">uriIsAbsolutePathReference</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\UriInterface">UriInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$uri</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+        <section class="phpdocumentor-description"><p>A relative reference that begins with a single slash character is termed an absolute-path reference.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$uri</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\UriInterface">UriInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">link</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                                        <a class="phpdocumentor-tag-link" href="https://tools.ietf.org/html/rfc3986#section-4.2"> https://tools.ietf.org/html/rfc3986#section-4.2 </a>
+                    
+                                    </dd>
+                        </dl>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_uriIsRelativePathReference">
+        uriIsRelativePathReference()
+        <a href="namespaces/chillerlan-http-psr7.html#function_uriIsRelativePathReference" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">448</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Whether the URI is a relative-path reference.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">uriIsRelativePathReference</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\UriInterface">UriInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$uri</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+        <section class="phpdocumentor-description"><p>A relative reference that does not begin with a slash character is termed a relative-path reference.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$uri</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\UriInterface">UriInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">link</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                                        <a class="phpdocumentor-tag-link" href="https://tools.ietf.org/html/rfc3986#section-4.2"> https://tools.ietf.org/html/rfc3986#section-4.2 </a>
+                    
+                                    </dd>
+                        </dl>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_uriWithoutQueryValue">
+        uriWithoutQueryValue()
+        <a href="namespaces/chillerlan-http-psr7.html#function_uriWithoutQueryValue" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">460</span>
+</aside>
+
+        <p class="phpdocumentor-summary">removes a specific query string value.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">uriWithoutQueryValue</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\UriInterface">UriInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$uri</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$key</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Http\Message\UriInterface">UriInterface</abbr></span></code>
+
+        <section class="phpdocumentor-description"><p>Any existing query string values that exactly match the provided key are
+removed.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$uri</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\UriInterface">UriInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$key</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Query string key to remove.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_uriWithQueryValue">
+        uriWithQueryValue()
+        <a href="namespaces/chillerlan-http-psr7.html#function_uriWithQueryValue" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/message_helpers.php"><a href="files/src-psr7-message-helpers.html"><abbr title="src/Psr7/message_helpers.php">message_helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">488</span>
+</aside>
+
+        <p class="phpdocumentor-summary">adds a specific query string value.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">uriWithQueryValue</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\UriInterface">UriInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$uri</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$key</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$value</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Http\Message\UriInterface">UriInterface</abbr></span></code>
+
+        <section class="phpdocumentor-description"><p>Any existing query string values that exactly match the provided key are
+removed and replaced with the given key value pair.</p>
+<p>A value of null will set the query string key without a value, e.g. &quot;key&quot;
+instead of &quot;key=value&quot;.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$uri</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\UriInterface">UriInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$key</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Key to set.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$value</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Value to set</p>
+</section>
 
             </dd>
             </dl>
