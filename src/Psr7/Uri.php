@@ -14,7 +14,7 @@ use InvalidArgumentException;
 use Psr\Http\Message\UriInterface;
 
 use function call_user_func_array, explode, filter_var, is_array, is_string, ltrim, parse_url,
-	preg_replace_callback, rawurlencode, strpos, strtolower, ucfirst;
+	preg_replace_callback, rawurlencode, strpos, strtolower, ucfirst, var_export;
 
 use const FILTER_FLAG_IPV6, FILTER_VALIDATE_IP;
 
@@ -52,7 +52,7 @@ class Uri implements UriInterface{
 			}
 
 			if(!is_array($uri)){
-				throw new InvalidArgumentException('invalid URI: "'.$uri.'"');
+				throw new InvalidArgumentException('invalid URI: '.var_export($uri, true));
 			}
 
 			$this->parseUriParts($uri);

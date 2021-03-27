@@ -13,9 +13,9 @@
 use chillerlan\HTTP\CurlUtils\{CurlMultiClient, MultiResponseHandlerInterface};
 use chillerlan\HTTP\HTTPOptions;
 use chillerlan\HTTP\Psr18\CurlClient;
-use chillerlan\HTTP\Psr7\Request;
+use chillerlan\HTTP\Psr7\{Request, Query};
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
-use function chillerlan\HTTP\Psr7\{build_http_query, get_json};
+use function chillerlan\HTTP\Psr7\get_json;
 
 require_once __DIR__.'/../vendor/autoload.php';
 
@@ -43,7 +43,7 @@ $requests  = [];
 
 foreach(array_chunk(get_json($itemResponse), 200) as $chunk){
 	foreach($languages as $lang){
-		$requests[] = new Request('GET', $endpoint.'?'.build_http_query(['lang' => $lang, 'ids' => implode(',', $chunk)]));
+		$requests[] = new Request('GET', $endpoint.'?'.Query::build(['lang' => $lang, 'ids' => implode(',', $chunk)]));
 	}
 }
 
