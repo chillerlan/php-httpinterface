@@ -280,7 +280,7 @@ const BOOLEANS_AS_INT_STRING = 3;
  *
  * @return array
  */
-function clean_query_params(iterable $params, int $bool_cast = null, bool $remove_empty = null):iterable{
+function clean_query_params(iterable $params, int $bool_cast = null, bool $remove_empty = null):array{
 	$p            = [];
 	$bool_cast    = $bool_cast ?? BOOLEANS_AS_BOOL;
 	$remove_empty = $remove_empty ?? true;
