@@ -41,7 +41,7 @@
 		"psr/log": "^1.1"
 	},
 	"require-dev": {
-		"guzzlehttp/psr7": "^1.7",
+		"guzzlehttp/psr7": "^1.8",
 		"http-interop/http-factory-tests": "^0.7",
 		"phan/phan": "^4.0",
 		"phpunit/phpunit": "^9.5"

@@ -1,7 +1,7 @@
 # https://hub.docker.com/r/phpdoc/phpdoc
 FROM phpdoc/phpdoc:3.0
 
-LABEL "repository"="https://github.com/chillerlan/php-qrcode"
+LABEL "repository"="https://github.com/chillerlan/php-httpinterface"
 
 LABEL "com.github.actions.name"="Build Docs"
 LABEL "com.github.actions.description"="Build Docs with phpDocumentor"
