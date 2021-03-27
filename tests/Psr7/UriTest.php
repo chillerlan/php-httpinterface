@@ -13,7 +13,7 @@
 
 namespace chillerlan\HTTPTest\Psr7;
 
-use chillerlan\HTTP\Psr7\{Uri, UriExtended};
+use chillerlan\HTTP\Psr7\Uri;
 use InvalidArgumentException;
 use Psr\Http\Message\UriInterface;
 use PHPUnit\Framework\TestCase;
@@ -626,7 +626,7 @@ class UriTest extends TestCase{
 		$this->expectExceptionMessage('user must be a string');
 
 		$parts['user'] = [];
-		UriExtended::fromParts($parts);
+		new Uri($parts);
 	}
 
 	public function testFilterPassInvalidType():void{
@@ -634,12 +634,12 @@ class UriTest extends TestCase{
 		$this->expectExceptionMessage('pass must be a string');
 
 		$parts['pass'] = [];
-		UriExtended::fromParts($parts);
+		new Uri($parts);
 	}
 
 	public function testFilterHostIPv6():void{
 		$parts['host'] = '::1';
-		$uri = UriExtended::fromParts($parts);
+		$uri = new Uri($parts);
 
 		$this::assertSame('[::1]', $uri->getHost());
 	}

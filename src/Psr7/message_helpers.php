@@ -9,11 +9,11 @@
 namespace chillerlan\HTTP\Psr7;
 
 use InvalidArgumentException, TypeError;
-use Psr\Http\Message\{MessageInterface, RequestInterface, ResponseInterface, UploadedFileInterface};
+use Psr\Http\Message\{MessageInterface, RequestInterface, ResponseInterface, UploadedFileInterface, UriInterface};
 
-use function array_combine, array_keys, array_map, array_merge, array_values, call_user_func_array, count, explode,
+use function array_combine, array_filter, array_keys, array_map, array_merge, array_values, call_user_func_array, count, explode,
 	gzdecode, gzinflate, gzuncompress, implode, is_array, is_bool, is_iterable, is_numeric, is_scalar, is_string,
-	json_decode, json_encode, parse_str, parse_url, rawurlencode, simplexml_load_string, sort, strtolower, trim,
+	json_decode, json_encode, parse_str, parse_url, rawurldecode, rawurlencode, simplexml_load_string, sort, strtolower, trim,
 	ucfirst, uksort;
 
 use const PHP_URL_QUERY, SORT_STRING;
@@ -499,3 +499,119 @@ function decompress_content(MessageInterface $message):string{
 	}
 
 }
+
+/**
+ * Whether the URI is absolute, i.e. it has a scheme.
+ *
+ * An instance of UriInterface can either be an absolute URI or a relative reference. This method returns true
+ * if it is the former. An absolute URI has a scheme. A relative reference is used to express a URI relative
+ * to another URI, the base URI. Relative references can be divided into several forms:
+ * - network-path references, e.g. '//example.com/path'
+ * - absolute-path references, e.g. '/path'
+ * - relative-path references, e.g. 'subpath'
+ *
+ * @see  Uri::isNetworkPathReference
+ * @see  Uri::isAbsolutePathReference
+ * @see  Uri::isRelativePathReference
+ * @link https://tools.ietf.org/html/rfc3986#section-4
+ */
+function uriIsAbsolute(UriInterface $uri):bool{
+	return $uri->getScheme() !== '';
+}
+
+/**
+ * Whether the URI is a network-path reference.
+ *
+ * A relative reference that begins with two slash characters is termed an network-path reference.
+ *
+ * @link https://tools.ietf.org/html/rfc3986#section-4.2
+ */
+function uriIsNetworkPathReference(UriInterface $uri):bool{
+	return $uri->getScheme() === '' && $uri->getAuthority() !== '';
+}
+
+/**
+ * Whether the URI is a absolute-path reference.
+ *
+ * A relative reference that begins with a single slash character is termed an absolute-path reference.
+ *
+ * @link https://tools.ietf.org/html/rfc3986#section-4.2
+ */
+function uriIsAbsolutePathReference(UriInterface $uri):bool{
+	return $uri->getScheme() === '' && $uri->getAuthority() === '' && isset($uri->getPath()[0]) && $uri->getPath()[0] === '/';
+}
+
+/**
+ * Whether the URI is a relative-path reference.
+ *
+ * A relative reference that does not begin with a slash character is termed a relative-path reference.
+ *
+ * @return bool
+ * @link https://tools.ietf.org/html/rfc3986#section-4.2
+ */
+function uriIsRelativePathReference(UriInterface $uri):bool{
+	return $uri->getScheme() === '' && $uri->getAuthority() === '' && (!isset($uri->getPath()[0]) || $uri->getPath()[0] !== '/');
+}
+
+/**
+ * removes a specific query string value.
+ *
+ * Any existing query string values that exactly match the provided key are
+ * removed.
+ *
+ * @param string $key Query string key to remove.
+ */
+function uriWithoutQueryValue(UriInterface $uri, string $key):UriInterface{
+	$current = $uri->getQuery();
+
+	if($current === ''){
+		return $uri;
+	}
+
+	$decodedKey = rawurldecode($key);
+
+	$result = array_filter(explode('&', $current), function($part) use ($decodedKey){
+		return rawurldecode(explode('=', $part)[0]) !== $decodedKey;
+	});
+
+	return $uri->withQuery(implode('&', $result));
+}
+
+/**
+ * adds a specific query string value.
+ *
+ * Any existing query string values that exactly match the provided key are
+ * removed and replaced with the given key value pair.
+ *
+ * A value of null will set the query string key without a value, e.g. "key"
+ * instead of "key=value".
+ *
+ * @param string      $key   Key to set.
+ * @param string|null $value Value to set
+ */
+function uriWithQueryValue(UriInterface $uri, string $key, string $value = null):UriInterface{
+	$current = $uri->getQuery();
+
+	if($current === ''){
+		$result = [];
+	}
+	else{
+		$decodedKey = rawurldecode($key);
+		$result     = array_filter(explode('&', $current), function($part) use ($decodedKey){
+			return rawurldecode(explode('=', $part)[0]) !== $decodedKey;
+		});
+	}
+
+	// Query string separators ("=", "&") within the key or value need to be encoded
+	// (while preventing double-encoding) before setting the query string. All other
+	// chars that need percent-encoding will be encoded by withQuery().
+	$replaceQuery = ['=' => '%3D', '&' => '%26'];
+	$key          = strtr($key, $replaceQuery);
+
+	$result[] = $value !== null
+		? $key.'='.strtr($value, $replaceQuery)
+		: $key;
+
+	return $uri->withQuery(implode('&', $result));
+}
+

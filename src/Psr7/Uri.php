@@ -13,7 +13,7 @@ namespace chillerlan\HTTP\Psr7;
 use InvalidArgumentException;
 use Psr\Http\Message\UriInterface;
 
-use function call_user_func_array, explode, filter_var, is_string, ltrim, parse_url,
+use function call_user_func_array, explode, filter_var, is_array, is_string, ltrim, parse_url,
 	preg_replace_callback, rawurlencode, strpos, strtolower, ucfirst;
 
 use const FILTER_FLAG_IPV6, FILTER_VALIDATE_IP;
@@ -53,18 +53,24 @@ class Uri implements UriInterface{
 	/**
 	 * Uri constructor.
 	 *
+	 * @param string|array $uri
+	 *
 	 * @throws \InvalidArgumentException
 	 */
-	public function __construct(string $uri = null){
+	public function __construct($uri = null){
 
-		if($uri !== null && $uri !== ''){
-			$parts = parse_url($uri);
+		if($uri !== null){
 
-			if($parts === false){
+			if(is_string($uri)){
+				$uri = parse_url($uri);
+			}
+
+			if(!is_array($uri)){
 				throw new InvalidArgumentException('invalid URI: "'.$uri.'"');
 			}
 
-			$this->parseUriParts($parts);
+			$this->parseUriParts($uri);
+			$this->validateState();
 		}
 
 	}

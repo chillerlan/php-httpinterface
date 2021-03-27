@@ -10,7 +10,7 @@
 
 namespace chillerlan\HTTPTest\Psr7;
 
-use chillerlan\HTTP\Psr7\{Request, Response};
+use chillerlan\HTTP\Psr7\{Request, Response, Uri};
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\MessageInterface;
 use TypeError;
@@ -18,7 +18,9 @@ use TypeError;
 use function chillerlan\HTTP\Psr17\create_stream;
 use function chillerlan\HTTP\Psr7\{
 	build_http_query, clean_query_params, decompress_content, get_json, get_xml,
-	merge_query, message_to_string, normalize_message_headers, r_rawurlencode
+	merge_query, message_to_string, normalize_message_headers, r_rawurlencode,
+	uriIsAbsolute, uriIsAbsolutePathReference, uriIsNetworkPathReference,
+	uriIsRelativePathReference, uriWithoutQueryValue, uriWithQueryValue
 };
 
 use const chillerlan\HTTP\Psr7\{BOOLEANS_AS_BOOL, BOOLEANS_AS_INT, BOOLEANS_AS_INT_STRING, BOOLEANS_AS_STRING};
@@ -260,6 +262,100 @@ class MessageHelpersTest extends TestCase{
 		$response = $response->withBody(create_stream($data));
 
 		$this::assertSame($expected, decompress_content($response));
+	}
+
+	public function testUriIsAbsolute():void{
+		$this::assertTrue(uriIsAbsolute(new Uri('http://example.org')));
+		$this::assertFalse(uriIsAbsolute(new Uri('//example.org')));
+		$this::assertFalse(uriIsAbsolute(new Uri('/abs-path')));
+		$this::assertFalse(uriIsAbsolute(new Uri('rel-path')));
+	}
+
+	public function testUriIsNetworkPathReference():void{
+		$this::assertFalse(uriIsNetworkPathReference(new Uri('http://example.org')));
+		$this::assertTrue(uriIsNetworkPathReference(new Uri('//example.org')));
+		$this::assertFalse(uriIsNetworkPathReference(new Uri('/abs-path')));
+		$this::assertFalse(uriIsNetworkPathReference(new Uri('rel-path')));
+	}
+
+	public function testUriIsAbsolutePathReference():void{
+		$this::assertFalse(uriIsAbsolutePathReference(new Uri('http://example.org')));
+		$this::assertFalse(uriIsAbsolutePathReference(new Uri('//example.org')));
+		$this::assertTrue(uriIsAbsolutePathReference(new Uri('/abs-path')));
+		$this::assertTrue(uriIsAbsolutePathReference(new Uri('/')));
+		$this::assertFalse(uriIsAbsolutePathReference(new Uri('rel-path')));
+	}
+
+	public function testUriIsRelativePathReference():void{
+		$this::assertFalse(uriIsRelativePathReference(new Uri('http://example.org')));
+		$this::assertFalse(uriIsRelativePathReference(new Uri('//example.org')));
+		$this::assertFalse(uriIsRelativePathReference(new Uri('/abs-path')));
+		$this::assertTrue(uriIsRelativePathReference(new Uri('rel-path')));
+		$this::assertTrue(uriIsRelativePathReference(new Uri('')));
+	}
+
+	public function testUriAddAndRemoveQueryValues():void{
+		$uri = new Uri;
+
+		$uri = uriWithQueryValue($uri, 'a', 'b');
+		$uri = uriWithQueryValue($uri, 'c', 'd');
+		$uri = uriWithQueryValue($uri, 'e', null);
+		$this::assertSame('a=b&c=d&e', $uri->getQuery());
+
+		$uri = uriWithoutQueryValue($uri, 'c');
+		$this::assertSame('a=b&e', $uri->getQuery());
+		$uri = uriWithoutQueryValue($uri, 'e');
+		$this::assertSame('a=b', $uri->getQuery());
+		$uri = uriWithoutQueryValue($uri, 'a');
+		$this::assertSame('', $uri->getQuery());
+	}
+
+	public function testUriWithQueryValueReplacesSameKeys():void{
+		$uri = new Uri;
+
+		$uri = uriWithQueryValue($uri, 'a', 'b');
+		$uri = uriWithQueryValue($uri, 'c', 'd');
+		$uri = uriWithQueryValue($uri, 'a', 'e');
+		$this::assertSame('c=d&a=e', $uri->getQuery());
+	}
+
+	public function testUriWithoutQueryValueRemovesAllSameKeys():void{
+		$uri = (new Uri)->withQuery('a=b&c=d&a=e');
+
+		$uri = uriWithoutQueryValue($uri, 'a');
+		$this::assertSame('c=d', $uri->getQuery());
+	}
+
+	public function testUriRemoveNonExistingQueryValue():void{
+		$uri = new Uri;
+		$uri = uriWithQueryValue($uri, 'a', 'b');
+		$uri = uriWithoutQueryValue($uri, 'c');
+		$this::assertSame('a=b', $uri->getQuery());
+	}
+
+	public function testUriWithQueryValueHandlesEncoding():void{
+		$uri = new Uri;
+		$uri = uriWithQueryValue($uri, 'E=mc^2', 'ein&stein');
+		$this::assertSame('E%3Dmc%5E2=ein%26stein', $uri->getQuery(), 'Decoded key/value get encoded');
+
+		$uri = new Uri;
+		$uri = uriWithQueryValue($uri, 'E%3Dmc%5e2', 'ein%26stein');
+		$this::assertSame('E%3Dmc%5e2=ein%26stein', $uri->getQuery(), 'Encoded key/value do not get double-encoded');
+	}
+
+	public function testUriWithoutQueryValueHandlesEncoding():void{
+		// It also tests that the case of the percent-encoding does not matter,
+		// i.e. both lowercase "%3d" and uppercase "%5E" can be removed.
+		$uri = (new Uri)->withQuery('E%3dmc%5E2=einstein&foo=bar');
+		$uri = uriWithoutQueryValue($uri, 'E=mc^2');
+		$this::assertSame('foo=bar', $uri->getQuery(), 'Handles key in decoded form');
+
+		$uri = (new Uri)->withQuery('E%3dmc%5E2=einstein&foo=bar');
+		$uri = uriWithoutQueryValue($uri, 'E%3Dmc%5e2');
+		$this::assertSame('foo=bar', $uri->getQuery(), 'Handles key in encoded form');
+
+		$uri = uriWithoutQueryValue(uriWithoutQueryValue($uri, 'foo'), ''); // coverage
+		$this::assertSame('', $uri->getQuery());
 	}
 
 }

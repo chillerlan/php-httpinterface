@@ -10,7 +10,7 @@
 
 namespace chillerlan\HTTPTest\Psr17;
 
-use chillerlan\HTTP\Psr7\{UploadedFile, UriExtended};
+use chillerlan\HTTP\Psr7\{UploadedFile, Uri};
 use InvalidArgumentException, stdClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\StreamInterface;
@@ -98,7 +98,7 @@ class FactoryHelpersTest extends TestCase{
 	public function testCreateUriFromGlobals(string $expected, array $serverParams){
 		$_SERVER = $serverParams;
 
-		$this::assertEquals(new UriExtended($expected), create_uri_from_globals());
+		$this::assertEquals(new Uri($expected), create_uri_from_globals());
 	}
 
 	public function testCreateServerRequestFromGlobals():void{
@@ -157,7 +157,7 @@ class FactoryHelpersTest extends TestCase{
 		$this::assertSame($_GET, $server->getQueryParams());
 
 		$this::assertEquals(
-			new UriExtended('https://www.example.org/blog/article.php?id=10&user=foo'),
+			new Uri('https://www.example.org/blog/article.php?id=10&user=foo'),
 			$server->getUri()
 		);
 

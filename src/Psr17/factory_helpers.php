@@ -9,7 +9,7 @@
 namespace chillerlan\HTTP\Psr17;
 
 use Psr\Http\Message\ServerRequestInterface;
-use chillerlan\HTTP\Psr7\{ServerRequest, Stream, UriExtended};
+use chillerlan\HTTP\Psr7\{ServerRequest, Stream, Uri};
 use InvalidArgumentException;
 use Psr\Http\Message\StreamInterface;
 
@@ -77,7 +77,7 @@ function create_server_request_from_globals():ServerRequestInterface{
 /**
  * Get a Uri populated with values from $_SERVER.
  */
-function create_uri_from_globals():UriExtended{
+function create_uri_from_globals():Uri{
 	$parts    = [];
 	$hasPort  = false;
 	$hasQuery = false;
@@ -118,8 +118,7 @@ function create_uri_from_globals():UriExtended{
 		$parts['query'] = $_SERVER['QUERY_STRING'];
 	}
 
-	/** @noinspection PhpIncompatibleReturnTypeInspection */
-	return UriExtended::fromParts($parts);
+	return new Uri($parts);
 }
 
 /**
