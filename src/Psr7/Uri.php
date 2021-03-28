@@ -192,7 +192,7 @@ class Uri implements UriInterface{
 	 * @inheritDoc
 	 */
 	public function getUserInfo():string{
-		return (string)$this->user.($this->pass != '' ? ':'.$this->pass : '');
+		return $this->user.($this->pass != '' ? ':'.$this->pass : '');
 	}
 
 	/**
@@ -283,6 +283,7 @@ class Uri implements UriInterface{
 		}
 
 		$port = (int)$port;
+
 		if($port >= 1 && $port <= 0xffff){
 			return $port;
 		}
@@ -468,12 +469,10 @@ class Uri implements UriInterface{
 	 * @return string
 	 */
 	protected function replaceChars(string $str, bool $query = null):string{
-		/** @noinspection RegExpRedundantEscape */
+		/** @noinspection RegExpRedundantEscape, RegExpUnnecessaryNonCapturingGroup */
 		return preg_replace_callback(
 			'/(?:[^a-z\d_\-\.~!\$&\'\(\)\*\+,;=%:@\/'.($query ? '\?' : '').']++|%(?![a-f\d]{2}))/i',
-			function(array $match):string{
-				return rawurlencode($match[0]);
-			},
+			fn(array $match):string => rawurlencode($match[0]),
 			$str
 		);
 
