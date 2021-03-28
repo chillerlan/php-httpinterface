@@ -24,9 +24,9 @@ use const PATHINFO_EXTENSION;
  */
 final class MultipartStream extends StreamAbstract{
 
-	protected string $boundary;
+	private string $boundary;
 
-	protected bool $built = false;
+	private bool $built = false;
 
 	/**
 	 * MultipartStream constructor.
@@ -118,7 +118,7 @@ final class MultipartStream extends StreamAbstract{
 	/**
 	 *
 	 */
-	protected function setElementHeaders(array $e):array{
+	private function setElementHeaders(array $e):array{
 		$hasFilename = $e['filename'] === '0' || $e['filename'];
 
 		// Set a default content-disposition header if none was provided
@@ -152,7 +152,7 @@ final class MultipartStream extends StreamAbstract{
 	/**
 	 *
 	 */
-	protected function hasHeader(array $headers, string $key):bool{
+	private function hasHeader(array $headers, string $key):bool{
 		$lowercaseHeader = strtolower($key);
 
 		foreach($headers as $k => $v){

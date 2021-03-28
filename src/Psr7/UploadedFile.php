@@ -48,7 +48,7 @@ final class UploadedFile implements UploadedFileInterface{
 
 	private bool $moved = false;
 
-	protected StreamFactory $streamFactory;
+	private StreamFactory $streamFactory;
 
 	/**
 	 * @param \Psr\Http\Message\StreamInterface|string|resource $file

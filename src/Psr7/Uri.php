@@ -18,23 +18,23 @@ use function call_user_func_array, explode, filter_var, is_array, is_string, ltr
 
 use const FILTER_FLAG_IPV6, FILTER_VALIDATE_IP;
 
-class Uri implements UriInterface{
+final class Uri implements UriInterface{
 
-	protected string $scheme = '';
+	private string $scheme = '';
 
-	protected string $user = '';
+	private string $user = '';
 
-	protected ?string $pass = null;
+	private ?string $pass = null;
 
-	protected string $host = '';
+	private string $host = '';
 
-	protected ?int $port = null;
+	private ?int $port = null;
 
-	protected string $path = '';
+	private string $path = '';
 
-	protected string $query = '';
+	private string $query = '';
 
-	protected string $fragment = '';
+	private string $fragment = '';
 
 	/**
 	 * Uri constructor.
@@ -101,7 +101,7 @@ class Uri implements UriInterface{
 	 * @return string
 	 * @throws \InvalidArgumentException
 	 */
-	protected function filterScheme($scheme):string{
+	private function filterScheme($scheme):string{
 
 		if(!is_string($scheme)){
 			throw new InvalidArgumentException('scheme must be a string');
@@ -146,7 +146,7 @@ class Uri implements UriInterface{
 	 * @return string
 	 * @throws \InvalidArgumentException
 	 */
-	protected function filterUser($user):string{
+	private function filterUser($user):string{
 
 		if(!is_string($user)){
 			throw new InvalidArgumentException('user must be a string');
@@ -161,7 +161,7 @@ class Uri implements UriInterface{
 	 * @return string
 	 * @throws \InvalidArgumentException
 	 */
-	protected function filterPass($pass):string{
+	private function filterPass($pass):string{
 
 		if(!is_string($pass)){
 			throw new InvalidArgumentException('pass must be a string');
@@ -228,7 +228,7 @@ class Uri implements UriInterface{
 	 * @return string
 	 * @throws \InvalidArgumentException
 	 */
-	protected function filterHost($host):string{
+	private function filterHost($host):string{
 
 		if(!is_string($host)){
 			throw new InvalidArgumentException('host must be a string');
@@ -276,7 +276,7 @@ class Uri implements UriInterface{
 	 * @return int|null
 	 * @throws \InvalidArgumentException
 	 */
-	protected function filterPort($port):?int{
+	private function filterPort($port):?int{
 
 		if($port === null){
 			return null;
@@ -327,7 +327,7 @@ class Uri implements UriInterface{
 	 * @return string
 	 * @throws \InvalidArgumentException
 	 */
-	protected function filterPath($path):string{
+	private function filterPath($path):string{
 
 		if(!is_string($path)){
 			throw new InvalidArgumentException('path must be a string');
@@ -371,7 +371,7 @@ class Uri implements UriInterface{
 	 * @return string
 	 * @throws \InvalidArgumentException
 	 */
-	protected function filterQuery($query):string{
+	private function filterQuery($query):string{
 
 		if(!is_string($query)){
 			throw new InvalidArgumentException('query and fragment must be a string');
@@ -414,7 +414,7 @@ class Uri implements UriInterface{
 	 *
 	 * @return string
 	 */
-	protected function filterFragment($fragment):string{
+	private function filterFragment($fragment):string{
 		return $this->filterQuery($fragment);
 	}
 
@@ -448,7 +448,7 @@ class Uri implements UriInterface{
 	 *
 	 * @return void
 	 */
-	protected function parseUriParts(array $parts):void{
+	private function parseUriParts(array $parts):void{
 
 		foreach(['scheme', 'user', 'pass', 'host', 'port', 'path', 'query', 'fragment'] as $part){
 
@@ -468,7 +468,7 @@ class Uri implements UriInterface{
 	 *
 	 * @return string
 	 */
-	protected function replaceChars(string $str, bool $query = null):string{
+	private function replaceChars(string $str, bool $query = null):string{
 		/** @noinspection RegExpRedundantEscape, RegExpUnnecessaryNonCapturingGroup */
 		return preg_replace_callback(
 			'/(?:[^a-z\d_\-\.~!\$&\'\(\)\*\+,;=%:@\/'.($query ? '\?' : '').']++|%(?![a-f\d]{2}))/i',
@@ -481,7 +481,7 @@ class Uri implements UriInterface{
 	/**
 	 * @return void
 	 */
-	protected function removeDefaultPort():void{
+	private function removeDefaultPort():void{
 
 		if(uriIsDefaultPort($this)){
 			$this->port = null;
@@ -492,7 +492,7 @@ class Uri implements UriInterface{
 	/**
 	 * @return void
 	 */
-	protected function validateState():void{
+	private function validateState():void{
 
 		if(empty($this->host) && ($this->scheme === 'http' || $this->scheme === 'https')){
 			$this->host = 'localhost';
