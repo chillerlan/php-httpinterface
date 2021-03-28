@@ -12,14 +12,12 @@
 
 namespace chillerlan\HTTPTest\Psr7;
 
-use chillerlan\HTTP\Psr7\UploadedFile;
+use chillerlan\HTTP\Psr7\{File, UploadedFile};
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
 use function chillerlan\HTTP\Psr17\create_stream;
-use function chillerlan\HTTP\Psr7\normalize_files;
-
 use function basename, file_exists, fopen, is_scalar, sys_get_temp_dir, tempnam, uniqid, unlink;
 
 use const UPLOAD_ERR_CANT_WRITE, UPLOAD_ERR_EXTENSION, UPLOAD_ERR_FORM_SIZE, UPLOAD_ERR_INI_SIZE,
@@ -381,7 +379,7 @@ class UploadedFileTest extends TestCase{
 	 * @param array $expected
 	 */
 	public function testNormalizeFiles(array $files, array $expected):void{
-		$result = normalize_files($files);
+		$result = File::normalize($files);
 
 		$this::assertEquals($expected, $result);
 	}
@@ -390,7 +388,7 @@ class UploadedFileTest extends TestCase{
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('Invalid value in files specification');
 
-		normalize_files(['test' => 'something']);
+		File::normalize(['test' => 'something']);
 	}
 
 }

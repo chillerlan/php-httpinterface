@@ -9,11 +9,10 @@
 namespace chillerlan\HTTP\Psr17;
 
 use Psr\Http\Message\ServerRequestInterface;
-use chillerlan\HTTP\Psr7\{ServerRequest, Stream, Uri};
+use chillerlan\HTTP\Psr7\{File, ServerRequest, Stream, Uri};
 use InvalidArgumentException;
 use Psr\Http\Message\StreamInterface;
 
-use function chillerlan\HTTP\Psr7\normalize_files;
 use function explode, function_exists, getallheaders, is_scalar, method_exists, str_replace;
 
 const PSR17_INCLUDES = true;
@@ -70,7 +69,7 @@ function create_server_request_from_globals():ServerRequestInterface{
 		->withCookieParams($_COOKIE)
 		->withQueryParams($_GET)
 		->withParsedBody($_POST)
-		->withUploadedFiles(normalize_files($_FILES))
+		->withUploadedFiles(File::normalize($_FILES))
 	;
 }
 

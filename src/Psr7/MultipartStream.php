@@ -106,7 +106,7 @@ final class MultipartStream extends StreamAbstract{
 
 		$this->stream->write('--'.$this->boundary."\r\n");
 
-		foreach(normalize_message_headers($e['headers']) as $key => $value){
+		foreach(Header::normalize($e['headers']) as $key => $value){
 			$this->stream->write($key.': '.$value."\r\n");
 		}
 
@@ -139,7 +139,7 @@ final class MultipartStream extends StreamAbstract{
 
 		// Set a default Content-Type if none was supplied
 		if(!$this->hasHeader($e['headers'], 'content-type') && $hasFilename){
-			$type = MIMETYPES[pathinfo($e['filename'], PATHINFO_EXTENSION)] ?? null;
+			$type = File::MIMETYPES[pathinfo($e['filename'], PATHINFO_EXTENSION)] ?? null;
 
 			if($type){
 				$e['headers']['Content-Type'] = $type;
