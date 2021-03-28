@@ -39,7 +39,7 @@ abstract class Message implements MessageInterface{
 	 * @param string|null                                            $version
 	 */
 	public function __construct(array $headers = null, $body = null, string $version = null){
-		$this->setHeaders(normalize_message_headers($headers ?? []));
+		$this->setHeaders(Header::normalize($headers ?? []));
 
 		$this->version       = $version ?? '1.1';
 		$this->streamFactory = new StreamFactory;
