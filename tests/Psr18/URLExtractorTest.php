@@ -34,8 +34,6 @@ class URLExtractorTest extends HTTPClientTestAbstract{
 
 		if(defined('TEST_IS_CI') && TEST_IS_CI === true){
 			$this->markTestSkipped('i have no idea why the headers are empty on travis');
-
-			return;
 		}
 
 		// reminder: twitter does not delete shortened URLs of deleted tweets (this one was deleted in 2016)

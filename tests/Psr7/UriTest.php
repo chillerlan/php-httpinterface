@@ -139,48 +139,33 @@ class UriTest extends TestCase{
 		(new Uri)->withPort(0);
 	}
 
-/*	public function testParseUriPortCannotBeZero():void{
-
-		// @todo: this test can either be removed ot the behaviour changed in the Uri class.
-
-		if(\PHP_VERSION_ID < 70413){ // fixed in 7.4.13, 7.3.25
-			$this::markTestSkipped('https://bugs.php.net/bug.php?id=80266');
-			return;
-		}
-
-		$this->expectException(InvalidArgumentException::class);
-		$this->expectExceptionMessage('invalid URI: "//example.com:0');
-
-		new Uri('//example.com:0');
-	}*/
-
 	public function testSchemeMustHaveCorrectType():void{
 		$this->expectException(InvalidArgumentException::class);
-
+		/** @noinspection PhpParamsInspection */
 		(new Uri)->withScheme([]);
 	}
 
 	public function testHostMustHaveCorrectType():void{
 		$this->expectException(InvalidArgumentException::class);
-
+		/** @noinspection PhpParamsInspection */
 		(new Uri)->withHost([]);
 	}
 
 	public function testPathMustHaveCorrectType():void{
 		$this->expectException(InvalidArgumentException::class);
-
+		/** @noinspection PhpParamsInspection */
 		(new Uri)->withPath([]);
 	}
 
 	public function testQueryMustHaveCorrectType():void{
 		$this->expectException(InvalidArgumentException::class);
-
+		/** @noinspection PhpParamsInspection */
 		(new Uri)->withQuery([]);
 	}
 
 	public function testFragmentMustHaveCorrectType():void{
 		$this->expectException(InvalidArgumentException::class);
-
+		/** @noinspection PhpParamsInspection */
 		(new Uri)->withFragment([]);
 	}
 
@@ -349,12 +334,6 @@ class UriTest extends TestCase{
 
 	/**
 	 * @dataProvider uriComponentsEncodingProvider
-	 *
-	 * @param $input
-	 * @param $path
-	 * @param $query
-	 * @param $fragment
-	 * @param $output
 	 */
 	public function testUriComponentsGetEncodedProperly(
 		string $input,
