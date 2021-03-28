@@ -2,7 +2,7 @@
 /**
  * Class UriTest
  *
- * @link https://github.com/guzzle/psr7/blob/4b981cdeb8c13d22a6c193554f8c686f53d5c958/tests/UriTest.php
+ * @link https://github.com/guzzle/psr7/blob/c0dcda9f54d145bd4d062a6d15f54931a67732f9/tests/UriTest.php
  * @link https://github.com/bakame-php/psr7-uri-interface-tests/blob/5a556fdfe668a6c6a14772efeba6134c0b7dae34/tests/AbstractUriTestCase.php
  *
  * @created      10.08.2018
@@ -660,6 +660,24 @@ class UriTest extends TestCase{
 
 		$uri->withFragment('bar');
 		$this::assertSame($expected, (string)$uri);
+	}
+
+	public function testInternationalizedDomainName():void{
+		$uri = new Uri('https://яндекс.рф');
+		self::assertSame('яндекс.рф', $uri->getHost());
+
+		$uri = new Uri('https://яндекAс.рф');
+		self::assertSame('яндекaс.рф', $uri->getHost());
+	}
+
+	public function testIPv6Host():void{
+		$uri = new Uri('https://[2a00:f48:1008::212:183:10]');
+		self::assertSame('[2a00:f48:1008::212:183:10]', $uri->getHost());
+
+		$uri = new Uri('http://[2a00:f48:1008::212:183:10]:56?foo=bar');
+		self::assertSame('[2a00:f48:1008::212:183:10]', $uri->getHost());
+		self::assertSame(56, $uri->getPort());
+		self::assertSame('foo=bar', $uri->getQuery());
 	}
 
 }

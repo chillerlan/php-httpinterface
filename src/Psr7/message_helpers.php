@@ -13,8 +13,8 @@ use Psr\Http\Message\{MessageInterface, RequestInterface, ResponseInterface, Upl
 
 use function array_filter, array_keys, array_map, array_values, count, explode,
 	gzdecode, gzinflate, gzuncompress, implode, is_array, is_numeric, is_scalar, is_string,
-	json_decode, json_encode, rawurldecode, rawurlencode, simplexml_load_string, strtolower, trim,
-	ucfirst;
+	json_decode, json_encode, parse_url, preg_match, preg_replace_callback, rawurldecode, rawurlencode,
+	simplexml_load_string, strtolower, trim, ucfirst, urlencode;
 
 const PSR7_INCLUDES = true;
 
@@ -511,3 +511,37 @@ function uriWithQueryValue(UriInterface $uri, string $key, string $value = null)
 	return $uri->withQuery(implode('&', $result));
 }
 
+/**
+ * UTF-8 aware \parse_url() replacement.
+ *
+ * The internal function produces broken output for non ASCII domain names
+ * (IDN) when used with locales other than "C".
+ *
+ * On the other hand, cURL understands IDN correctly only when UTF-8 locale
+ * is configured ("C.UTF-8", "en_US.UTF-8", etc.).
+ *
+ * @see https://bugs.php.net/bug.php?id=52923
+ * @see https://www.php.net/manual/en/function.parse-url.php#114817
+ * @see https://curl.haxx.se/libcurl/c/CURLOPT_URL.html#ENCODING
+ *
+ * @link https://github.com/guzzle/psr7/blob/c0dcda9f54d145bd4d062a6d15f54931a67732f9/src/Uri.php#L89-L130
+ */
+function parseUrl(string $url):?array{
+	// If IPv6
+	$prefix = '';
+	/** @noinspection RegExpRedundantEscape */
+	if(preg_match('%^(.*://\[[0-9:a-f]+\])(.*?)$%', $url, $matches)){
+		/** @var array{0:string, 1:string, 2:string} $matches */
+		$prefix = $matches[1];
+		$url    = $matches[2];
+	}
+
+	$encodedUrl = preg_replace_callback('%[^:/@?&=#]+%usD', fn($matches) => urlencode($matches[0]), $url);
+	$result     = parse_url($prefix.$encodedUrl);
+
+	if($result === false){
+		return null;
+	}
+
+	return array_map('urldecode', $result);
+}

@@ -13,7 +13,7 @@ namespace chillerlan\HTTP\Psr7;
 use InvalidArgumentException;
 use Psr\Http\Message\UriInterface;
 
-use function call_user_func_array, explode, filter_var, is_array, is_string, ltrim, parse_url,
+use function call_user_func_array, explode, filter_var, is_array, is_string, ltrim, mb_strtolower,
 	preg_replace_callback, rawurlencode, strpos, strtolower, ucfirst, var_export;
 
 use const FILTER_FLAG_IPV6, FILTER_VALIDATE_IP;
@@ -48,7 +48,7 @@ class Uri implements UriInterface{
 		if($uri !== null){
 
 			if(is_string($uri)){
-				$uri = parse_url($uri);
+				$uri = parseUrl($uri);
 			}
 
 			if(!is_array($uri)){
@@ -238,7 +238,7 @@ class Uri implements UriInterface{
 			$host = '['.$host.']';
 		}
 
-		return strtolower($host);
+		return mb_strtolower($host);
 	}
 
 	/**
