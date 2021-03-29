@@ -12,12 +12,13 @@
 
 namespace chillerlan\HTTPTest\Psr7;
 
+use chillerlan\HTTP\Psr17\StreamFactory;
 use chillerlan\HTTP\Psr7\{File, UploadedFile};
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\StreamFactoryInterface;
 use RuntimeException;
 
-use function chillerlan\HTTP\Psr17\create_stream;
 use function basename, file_exists, fopen, is_scalar, sys_get_temp_dir, tempnam, uniqid, unlink;
 
 use const UPLOAD_ERR_CANT_WRITE, UPLOAD_ERR_EXTENSION, UPLOAD_ERR_FORM_SIZE, UPLOAD_ERR_INI_SIZE,
@@ -25,9 +26,11 @@ use const UPLOAD_ERR_CANT_WRITE, UPLOAD_ERR_EXTENSION, UPLOAD_ERR_FORM_SIZE, UPL
 
 class UploadedFileTest extends TestCase{
 
+	protected StreamFactoryInterface $streamFactory;
 	protected array $cleanup;
 
 	protected function setUp():void{
+		$this->streamFactory = new StreamFactory;
 		$this->cleanup = [];
 	}
 
@@ -81,7 +84,7 @@ class UploadedFileTest extends TestCase{
 	}
 
 	public function testGetStreamReturnsOriginalStreamObject():void{
-		$stream = create_stream('');
+		$stream = $this->streamFactory->createStream();
 		$upload = new UploadedFile($stream, 0);
 
 		$this::assertSame($stream, $upload->getStream());
@@ -96,7 +99,7 @@ class UploadedFileTest extends TestCase{
 	}
 
 	public function testSuccessful():void{
-		$stream = create_stream('Foo bar!');
+		$stream = $this->streamFactory->createStream('Foo bar!');
 		$upload = new UploadedFile($stream, $stream->getSize(), UPLOAD_ERR_OK, 'filename.txt', 'text/plain');
 
 		$this::assertSame($stream->getSize(), $upload->getSize());
@@ -111,7 +114,7 @@ class UploadedFileTest extends TestCase{
 	}
 
 	public function testMoveCannotBeCalledMoreThanOnce():void{
-		$stream = create_stream('Foo bar!');
+		$stream = $this->streamFactory->createStream('Foo bar!');
 		$upload = new UploadedFile($stream, 0);
 
 		$this->cleanup[] = $to = tempnam(sys_get_temp_dir(), 'diac');
@@ -124,7 +127,7 @@ class UploadedFileTest extends TestCase{
 	}
 
 	public function testCannotRetrieveStreamAfterMove():void{
-		$stream = create_stream('Foo bar!');
+		$stream = $this->streamFactory->createStream('Foo bar!');
 		$upload = new UploadedFile($stream, 0);
 
 		$this->cleanup[] = $to = tempnam(sys_get_temp_dir(), 'diac');
@@ -137,7 +140,7 @@ class UploadedFileTest extends TestCase{
 	}
 
 	public function testCannotMoveToEmptyTarget():void{
-		$stream = create_stream('Foo bar!');
+		$stream = $this->streamFactory->createStream('Foo bar!');
 		$upload = new UploadedFile($stream, 0);
 
 		$this->expectException(InvalidArgumentException::class);
@@ -151,7 +154,7 @@ class UploadedFileTest extends TestCase{
 			$this->markTestSkipped('testing Linux only');
 		}
 
-		$stream = create_stream('Foo bar!');
+		$stream = $this->streamFactory->createStream('Foo bar!');
 		$upload = new UploadedFile($stream, 0);
 
 		$this->expectException(RuntimeException::class);

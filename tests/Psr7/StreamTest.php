@@ -12,15 +12,21 @@
 
 namespace chillerlan\HTTPTest\Psr7;
 
+use chillerlan\HTTP\Psr17\StreamFactory;
 use chillerlan\HTTP\Psr7\Stream;
-use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\{StreamFactoryInterface, StreamInterface};
 use PHPUnit\Framework\TestCase;
 use Exception, InvalidArgumentException, RuntimeException;
 
-use function chillerlan\HTTP\Psr17\create_stream;
 use function filesize, fopen, fwrite;
 
 class StreamTest extends TestCase{
+
+	protected StreamFactoryInterface $streamFactory;
+
+	protected function setUp():void{
+		$this->streamFactory = new StreamFactory;
+	}
 
 	public function testConstructorThrowsExceptionOnInvalidArgument():void{
 		$this->expectException(InvalidArgumentException::class);
@@ -30,7 +36,7 @@ class StreamTest extends TestCase{
 	}
 
 	public function testConstructorInitializesProperties():void{
-		$stream = create_stream('data');
+		$stream = $this->streamFactory->createStream('data');
 
 		$this::assertTrue($stream->isReadable());
 		$this::assertTrue($stream->isWritable());
@@ -50,14 +56,14 @@ class StreamTest extends TestCase{
 	}
 
 	public function testConvertsToString():void{
-		$stream = create_stream('data', 'w+', false);
+		$stream = $this->streamFactory->createStream('data');
 		$this::assertSame('data', (string)$stream);
 		$this::assertSame('data', (string)$stream);
 		$stream->close();
 	}
 
 	public function testGetsContents():void{
-		$stream = create_stream('data', 'w+', false);
+		$stream = $this->streamFactory->createStream('data');
 		$this::assertSame('', $stream->getContents());
 		$stream->seek(0);
 		$this::assertSame('data', $stream->getContents());
@@ -65,7 +71,7 @@ class StreamTest extends TestCase{
 	}
 
 	public function testChecksEof():void{
-		$stream = create_stream('data', 'w+', false);
+		$stream = $this->streamFactory->createStream('data');
 		$this::assertFalse($stream->eof());
 		$stream->read(4);
 		$this::assertTrue($stream->eof());
@@ -140,7 +146,7 @@ class StreamTest extends TestCase{
 	}
 
 	public function testCloseClearProperties():void{
-		$stream = create_stream();
+		$stream = $this->streamFactory->createStream();
 		$stream->close();
 
 		$this::assertFalse($stream->isSeekable());
@@ -151,7 +157,7 @@ class StreamTest extends TestCase{
 	}
 
 	public function testStreamReadingWithZeroLength():void{
-		$stream = create_stream();
+		$stream = $this->streamFactory->createStream();
 
 		$this::assertSame('', $stream->read(0));
 
@@ -162,7 +168,7 @@ class StreamTest extends TestCase{
 		$this->expectException(RuntimeException::class);
 		$this->expectExceptionMessage('Length parameter cannot be negative');
 
-		$stream = create_stream();
+		$stream = $this->streamFactory->createStream();
 		$stream->read(-1);
 	}
 
@@ -170,7 +176,7 @@ class StreamTest extends TestCase{
 		$this->expectException(RuntimeException::class);
 		$this->expectExceptionMessage('Unable to seek to stream position -1 with whence 0');
 
-		$stream = create_stream();
+		$stream = $this->streamFactory->createStream();
 		$stream->seek(-1);
 	}
 

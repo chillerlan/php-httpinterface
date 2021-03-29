@@ -10,12 +10,12 @@
 
 namespace chillerlan\HTTPTest\Psr7;
 
-use chillerlan\HTTP\Psr7\{Request, Response, Uri};
+use chillerlan\HTTP\Psr17\{RequestFactory, ResponseFactory, StreamFactory, UriFactory};
+use Psr\Http\Message\{RequestFactoryInterface, ResponseFactoryInterface, StreamFactoryInterface, UriFactoryInterface};
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\MessageInterface;
 use TypeError;
 
-use function chillerlan\HTTP\Psr17\create_stream;
 use function chillerlan\HTTP\Psr7\{
 	decompress_content, get_json, get_xml, message_to_string, r_rawurlencode,
 	uriIsAbsolute, uriIsAbsolutePathReference, uriIsNetworkPathReference,
@@ -24,6 +24,18 @@ use function chillerlan\HTTP\Psr7\{
 
 
 class MessageHelpersTest extends TestCase{
+
+	protected RequestFactoryInterface $requestFactory;
+	protected ResponseFactoryInterface $responseFactory;
+	protected StreamFactoryInterface $streamFactory;
+	protected UriFactoryInterface $uriFactory;
+
+	protected function setUp():void{
+		$this->requestFactory  = new RequestFactory;
+		$this->responseFactory = new ResponseFactory;
+		$this->streamFactory   = new StreamFactory;
+		$this->uriFactory      = new UriFactory;
+	}
 
 	public function rawurlencodeDataProvider():array{
 		return [
@@ -59,7 +71,7 @@ class MessageHelpersTest extends TestCase{
 
 	public function testGetJSON():void{
 
-		$r = (new Response)->withBody(create_stream('{"foo":"bar"}'));
+		$r = $this->responseFactory->createResponse()->withBody($this->streamFactory->createStream('{"foo":"bar"}'));
 
 		$this::assertSame('bar', get_json($r)->foo);
 
@@ -70,7 +82,9 @@ class MessageHelpersTest extends TestCase{
 
 	public function testGetXML():void{
 
-		$r = (new Response)->withBody(create_stream('<?xml version="1.0" encoding="UTF-8"?><root><foo>bar</foo></root>'));
+		$r = $this->responseFactory
+			->createResponse()
+			->withBody($this->streamFactory->createStream('<?xml version="1.0" encoding="UTF-8"?><root><foo>bar</foo></root>'));
 
 		$this::assertSame('bar', get_xml($r)->foo->__toString());
 
@@ -79,23 +93,29 @@ class MessageHelpersTest extends TestCase{
 		$this::assertSame('bar', get_xml($r, true)['foo']);
 	}
 
-	public function messageDataProvider():array{
-		return [
-			'Request'  => [new Request('GET', 'https://localhost/foo'), 'GET /foo HTTP/1.1'."\r\n".'Host: localhost'."\r\n".'foo: bar'."\r\n\r\n".'testbody'],
-			'Response' => [new Response, 'HTTP/1.1 200 OK'."\r\n".'foo: bar'."\r\n\r\n".'testbody'],
-		];
-	}
+	public function testMessageToString():void{
+		$body = $this->streamFactory->createStream('testbody');
 
-	/**
-	 * @dataProvider messageDataProvider
-	 *
-	 * @param \Psr\Http\Message\MessageInterface $message
-	 * @param string                             $expected
-	 */
-	public function testMessageToString(MessageInterface $message, string $expected):void{
+		$request = $this->requestFactory
+			->createRequest('GET', 'https://localhost/foo')
+			->withAddedHeader('foo', 'bar')
+			->withBody($body)
+		;
+
 		$this::assertSame(
-			$expected,
-			message_to_string($message->withAddedHeader('foo', 'bar')->withBody(create_stream('testbody')))
+			'GET /foo HTTP/1.1'."\r\n".'Host: localhost'."\r\n".'foo: bar'."\r\n\r\n".'testbody',
+			message_to_string($request)
+		);
+
+		$response = $this->responseFactory
+			->createResponse()
+			->withAddedHeader('foo', 'bar')
+			->withBody($body)
+		;
+
+		$this::assertSame(
+			'HTTP/1.1 200 OK'."\r\n".'foo: bar'."\r\n\r\n".'testbody',
+			message_to_string($response)
 		);
 	}
 
@@ -113,50 +133,50 @@ class MessageHelpersTest extends TestCase{
 	 */
 	public function testDecompressContent(string $fn, string $encoding):void{
 		$data = $expected = str_repeat('compressed string ', 100);
-		$response = (new Response);
+		$response = $this->responseFactory->createResponse();
 
 		if($fn){
 			$data     = $fn($data);
 			$response = $response->withHeader('Content-Encoding', $encoding);
 		}
 
-		$response = $response->withBody(create_stream($data));
+		$response = $response->withBody($this->streamFactory->createStream($data));
 
 		$this::assertSame($expected, decompress_content($response));
 	}
 
 	public function testUriIsAbsolute():void{
-		$this::assertTrue(uriIsAbsolute(new Uri('http://example.org')));
-		$this::assertFalse(uriIsAbsolute(new Uri('//example.org')));
-		$this::assertFalse(uriIsAbsolute(new Uri('/abs-path')));
-		$this::assertFalse(uriIsAbsolute(new Uri('rel-path')));
+		$this::assertTrue(uriIsAbsolute($this->uriFactory->createUri('http://example.org')));
+		$this::assertFalse(uriIsAbsolute($this->uriFactory->createUri('//example.org')));
+		$this::assertFalse(uriIsAbsolute($this->uriFactory->createUri('/abs-path')));
+		$this::assertFalse(uriIsAbsolute($this->uriFactory->createUri('rel-path')));
 	}
 
 	public function testUriIsNetworkPathReference():void{
-		$this::assertFalse(uriIsNetworkPathReference(new Uri('http://example.org')));
-		$this::assertTrue(uriIsNetworkPathReference(new Uri('//example.org')));
-		$this::assertFalse(uriIsNetworkPathReference(new Uri('/abs-path')));
-		$this::assertFalse(uriIsNetworkPathReference(new Uri('rel-path')));
+		$this::assertFalse(uriIsNetworkPathReference($this->uriFactory->createUri('http://example.org')));
+		$this::assertTrue(uriIsNetworkPathReference($this->uriFactory->createUri('//example.org')));
+		$this::assertFalse(uriIsNetworkPathReference($this->uriFactory->createUri('/abs-path')));
+		$this::assertFalse(uriIsNetworkPathReference($this->uriFactory->createUri('rel-path')));
 	}
 
 	public function testUriIsAbsolutePathReference():void{
-		$this::assertFalse(uriIsAbsolutePathReference(new Uri('http://example.org')));
-		$this::assertFalse(uriIsAbsolutePathReference(new Uri('//example.org')));
-		$this::assertTrue(uriIsAbsolutePathReference(new Uri('/abs-path')));
-		$this::assertTrue(uriIsAbsolutePathReference(new Uri('/')));
-		$this::assertFalse(uriIsAbsolutePathReference(new Uri('rel-path')));
+		$this::assertFalse(uriIsAbsolutePathReference($this->uriFactory->createUri('http://example.org')));
+		$this::assertFalse(uriIsAbsolutePathReference($this->uriFactory->createUri('//example.org')));
+		$this::assertTrue(uriIsAbsolutePathReference($this->uriFactory->createUri('/abs-path')));
+		$this::assertTrue(uriIsAbsolutePathReference($this->uriFactory->createUri('/')));
+		$this::assertFalse(uriIsAbsolutePathReference($this->uriFactory->createUri('rel-path')));
 	}
 
 	public function testUriIsRelativePathReference():void{
-		$this::assertFalse(uriIsRelativePathReference(new Uri('http://example.org')));
-		$this::assertFalse(uriIsRelativePathReference(new Uri('//example.org')));
-		$this::assertFalse(uriIsRelativePathReference(new Uri('/abs-path')));
-		$this::assertTrue(uriIsRelativePathReference(new Uri('rel-path')));
-		$this::assertTrue(uriIsRelativePathReference(new Uri('')));
+		$this::assertFalse(uriIsRelativePathReference($this->uriFactory->createUri('http://example.org')));
+		$this::assertFalse(uriIsRelativePathReference($this->uriFactory->createUri('//example.org')));
+		$this::assertFalse(uriIsRelativePathReference($this->uriFactory->createUri('/abs-path')));
+		$this::assertTrue(uriIsRelativePathReference($this->uriFactory->createUri('rel-path')));
+		$this::assertTrue(uriIsRelativePathReference($this->uriFactory->createUri('')));
 	}
 
 	public function testUriAddAndRemoveQueryValues():void{
-		$uri = new Uri;
+		$uri = $this->uriFactory->createUri();
 
 		$uri = uriWithQueryValue($uri, 'a', 'b');
 		$uri = uriWithQueryValue($uri, 'c', 'd');
@@ -172,7 +192,7 @@ class MessageHelpersTest extends TestCase{
 	}
 
 	public function testUriWithQueryValueReplacesSameKeys():void{
-		$uri = new Uri;
+		$uri = $this->uriFactory->createUri();
 
 		$uri = uriWithQueryValue($uri, 'a', 'b');
 		$uri = uriWithQueryValue($uri, 'c', 'd');
@@ -181,25 +201,25 @@ class MessageHelpersTest extends TestCase{
 	}
 
 	public function testUriWithoutQueryValueRemovesAllSameKeys():void{
-		$uri = (new Uri)->withQuery('a=b&c=d&a=e');
+		$uri = $this->uriFactory->createUri()->withQuery('a=b&c=d&a=e');
 
 		$uri = uriWithoutQueryValue($uri, 'a');
 		$this::assertSame('c=d', $uri->getQuery());
 	}
 
 	public function testUriRemoveNonExistingQueryValue():void{
-		$uri = new Uri;
+		$uri = $this->uriFactory->createUri();
 		$uri = uriWithQueryValue($uri, 'a', 'b');
 		$uri = uriWithoutQueryValue($uri, 'c');
 		$this::assertSame('a=b', $uri->getQuery());
 	}
 
 	public function testUriWithQueryValueHandlesEncoding():void{
-		$uri = new Uri;
+		$uri = $this->uriFactory->createUri();
 		$uri = uriWithQueryValue($uri, 'E=mc^2', 'ein&stein');
 		$this::assertSame('E%3Dmc%5E2=ein%26stein', $uri->getQuery(), 'Decoded key/value get encoded');
 
-		$uri = new Uri;
+		$uri = $this->uriFactory->createUri();
 		$uri = uriWithQueryValue($uri, 'E%3Dmc%5e2', 'ein%26stein');
 		$this::assertSame('E%3Dmc%5e2=ein%26stein', $uri->getQuery(), 'Encoded key/value do not get double-encoded');
 	}
@@ -207,11 +227,11 @@ class MessageHelpersTest extends TestCase{
 	public function testUriWithoutQueryValueHandlesEncoding():void{
 		// It also tests that the case of the percent-encoding does not matter,
 		// i.e. both lowercase "%3d" and uppercase "%5E" can be removed.
-		$uri = (new Uri)->withQuery('E%3dmc%5E2=einstein&foo=bar');
+		$uri = $this->uriFactory->createUri()->withQuery('E%3dmc%5E2=einstein&foo=bar');
 		$uri = uriWithoutQueryValue($uri, 'E=mc^2');
 		$this::assertSame('foo=bar', $uri->getQuery(), 'Handles key in decoded form');
 
-		$uri = (new Uri)->withQuery('E%3dmc%5E2=einstein&foo=bar');
+		$uri = $this->uriFactory->createUri()->withQuery('E%3dmc%5E2=einstein&foo=bar');
 		$uri = uriWithoutQueryValue($uri, 'E%3Dmc%5e2');
 		$this::assertSame('foo=bar', $uri->getQuery(), 'Handles key in encoded form');
 

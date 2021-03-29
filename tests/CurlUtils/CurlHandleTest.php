@@ -11,14 +11,14 @@
 namespace chillerlan\HTTPTest\CurlUtils;
 
 use chillerlan\HTTP\HTTPOptions;
-use chillerlan\HTTP\Psr17\RequestFactory;
+use chillerlan\HTTP\Psr17\{RequestFactory, StreamFactory};
 use chillerlan\HTTP\Psr18\CurlClient;
 use chillerlan\HTTP\Psr7\Request;
 use Exception;
 use PHPUnit\Framework\TestCase;
-
 use Psr\Http\Client\ClientInterface;
-use function chillerlan\HTTP\Psr17\create_stream;
+use Psr\Http\Message\{RequestFactoryInterface, StreamFactoryInterface};
+
 use function chillerlan\HTTP\Psr7\get_json;
 use function str_repeat, strlen, strtolower;
 
@@ -28,8 +28,8 @@ use function str_repeat, strlen, strtolower;
 class CurlHandleTest extends TestCase{
 
 	protected ClientInterface $http;
-
-	protected RequestFactory $requestFactory;
+	protected RequestFactoryInterface $requestFactory;
+	protected StreamFactoryInterface $streamFactory;
 
 	protected function setUp():void{
 		$options = new HTTPOptions([
@@ -38,6 +38,7 @@ class CurlHandleTest extends TestCase{
 
 		$this->http           = new CurlClient($options);
 		$this->requestFactory = new RequestFactory;
+		$this->streamFactory  = new StreamFactory;
 	}
 
 	public function requestMethodProvider():array{
@@ -102,7 +103,7 @@ class CurlHandleTest extends TestCase{
 			$request = $this->requestFactory->createRequest($method, $url)
 				->withHeader('Content-type', 'x-www-form-urlencoded')
 				->withHeader('Content-Length', strlen($body))
-				->withBody(create_stream($body))
+				->withBody($this->streamFactory->createStream($body))
 			;
 
 			$response = $this->http->sendRequest($request);
@@ -137,7 +138,7 @@ class CurlHandleTest extends TestCase{
 			$body    = '{"foo":"bar"}';
 			$request = $this->requestFactory->createRequest($method, $url)
 				->withHeader('Content-type', 'application/json')
-				->withBody(create_stream($body))
+				->withBody($this->streamFactory->createStream($body))
 			;
 
 			$response = $this->http->sendRequest($request);
@@ -168,7 +169,7 @@ class CurlHandleTest extends TestCase{
 			$request = $this->requestFactory->createRequest('POST', 'https://httpbin.org/post')
 				->withHeader('Content-type', 'text/plain')
 				->withHeader('Content-Length', strlen($body))
-				->withBody(create_stream($body))
+				->withBody($this->streamFactory->createStream($body))
 			;
 
 			$response = $this->http->sendRequest($request);

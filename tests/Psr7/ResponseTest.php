@@ -12,13 +12,18 @@
 
 namespace chillerlan\HTTPTest\Psr7;
 
+use chillerlan\HTTP\Psr17\StreamFactory;
 use chillerlan\HTTP\Psr7\Response;
-use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\{StreamFactoryInterface, StreamInterface};
 use PHPUnit\Framework\TestCase;
 
-use function chillerlan\HTTP\Psr17\create_stream;
-
 class ResponseTest extends TestCase{
+
+	protected StreamFactoryInterface $streamFactory;
+
+	protected function setUp():void{
+		$this->streamFactory = new StreamFactory;
+	}
 
 	public function testDefaultConstructor():void{
 		$r = new Response;
@@ -132,7 +137,7 @@ class ResponseTest extends TestCase{
 	}
 
 	public function testWithBody():void{
-		$r = (new Response)->withBody(create_stream('0'));
+		$r = (new Response)->withBody($this->streamFactory->createStream('0'));
 		$this::assertInstanceOf(StreamInterface::class, $r->getBody());
 		$this::assertSame('0', (string) $r->getBody());
 	}
