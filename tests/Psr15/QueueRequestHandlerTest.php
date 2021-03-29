@@ -10,6 +10,7 @@
 
 namespace chillerlan\HTTPTest\Psr15;
 
+use chillerlan\HTTP\Psr17\{ServerRequestFactory, UriFactory};
 use chillerlan\HTTP\Psr7\Response;
 use chillerlan\HTTP\Psr15\{MiddlewareException, QueueDispatcher};
 use PHPUnit\Framework\TestCase;
@@ -40,7 +41,7 @@ class QueueRequestHandlerTest extends TestCase{
 	public function testDispatcher():void{
 
 		// execute it:
-		$response = $this->dispatcher->handle(create_server_request_from_globals());
+		$response = $this->dispatcher->handle(create_server_request_from_globals(new ServerRequestFactory, new UriFactory));
 
 		$this::assertSame(
 			['X-Out-First', 'X-Out-Second', 'X-Out-Third'],

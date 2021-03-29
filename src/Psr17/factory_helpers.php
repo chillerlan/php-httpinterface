@@ -8,12 +8,13 @@
 
 namespace chillerlan\HTTP\Psr17;
 
-use Psr\Http\Message\ServerRequestInterface;
-use chillerlan\HTTP\Psr7\{File, ServerRequest, Stream, Uri};
+use Psr\Http\Message\{
+	ServerRequestFactoryInterface, ServerRequestInterface, StreamInterface, UriInterface, UriFactoryInterface
+};
+use chillerlan\HTTP\Psr7\{File, Stream};
 use InvalidArgumentException;
-use Psr\Http\Message\StreamInterface;
 
-use function explode, function_exists, getallheaders, is_scalar, method_exists, str_replace;
+use function explode, function_exists, getallheaders, is_scalar, method_exists, substr;
 
 const PSR17_INCLUDES = true;
 
@@ -54,18 +55,25 @@ const STREAM_MODES_WRITE = STREAM_MODES_READ_WRITE + [
  * $_FILES
  * $_SERVER
  */
-function create_server_request_from_globals():ServerRequestInterface{
+function create_server_request_from_globals(
+	ServerRequestFactoryInterface $serverRequestFactory,
+	UriFactoryInterface $uriFactory
+):ServerRequestInterface{
 
-	$serverRequest = new ServerRequest(
-		$_SERVER['REQUEST_METHOD'] ?? ServerRequest::METHOD_GET,
-		create_uri_from_globals(),
-		function_exists('getallheaders') ? getallheaders() : [],
-		(new StreamFactory)->createStream(),
-		isset($_SERVER['SERVER_PROTOCOL']) ? str_replace('HTTP/', '', $_SERVER['SERVER_PROTOCOL']) : '1.1',
+	$serverRequest = $serverRequestFactory->createServerRequest(
+		$_SERVER['REQUEST_METHOD'] ?? 'GET',
+		create_uri_from_globals($uriFactory),
 		$_SERVER
 	);
 
+	if(function_exists('getallheaders')){
+		foreach(getallheaders() ?: [] as $name => $value){
+			$serverRequest = $serverRequest->withHeader($name, $value);
+		}
+	}
+
 	return $serverRequest
+		->withProtocolVersion(isset($_SERVER['SERVER_PROTOCOL']) ? substr($_SERVER['SERVER_PROTOCOL'], 5) : '1.1')
 		->withCookieParams($_COOKIE)
 		->withQueryParams($_GET)
 		->withParsedBody($_POST)
@@ -74,50 +82,50 @@ function create_server_request_from_globals():ServerRequestInterface{
 }
 
 /**
- * Get a Uri populated with values from $_SERVER.
+ * Create a Uri populated with values from $_SERVER.
  */
-function create_uri_from_globals():Uri{
-	$parts    = [];
+function create_uri_from_globals(UriFactoryInterface $uriFactory):UriInterface{
 	$hasPort  = false;
 	$hasQuery = false;
 
-	$parts['scheme'] = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https' : 'http';
+	$uri = $uriFactory->createUri()
+		->withScheme(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https' : 'http');
 
 	if(isset($_SERVER['HTTP_HOST'])){
 		$hostHeaderParts = explode(':', $_SERVER['HTTP_HOST']);
-		$parts['host']   = $hostHeaderParts[0];
+		$uri = $uri->withHost($hostHeaderParts[0]);
 
 		if(isset($hostHeaderParts[1])){
 			$hasPort       = true;
-			$parts['port'] = $hostHeaderParts[1];
+			$uri = $uri->withPort($hostHeaderParts[1]);
 		}
 	}
 	elseif(isset($_SERVER['SERVER_NAME'])){
-		$parts['host'] = $_SERVER['SERVER_NAME'];
+		$uri = $uri->withHost($_SERVER['SERVER_NAME']);
 	}
 	elseif(isset($_SERVER['SERVER_ADDR'])){
-		$parts['host'] = $_SERVER['SERVER_ADDR'];
+		$uri = $uri->withHost($_SERVER['SERVER_ADDR']);
 	}
 
 	if(!$hasPort && isset($_SERVER['SERVER_PORT'])){
-		$parts['port'] = $_SERVER['SERVER_PORT'];
+		$uri = $uri->withPort($_SERVER['SERVER_PORT']);
 	}
 
 	if(isset($_SERVER['REQUEST_URI'])){
 		$requestUriParts = explode('?', $_SERVER['REQUEST_URI']);
-		$parts['path']   = $requestUriParts[0];
+		$uri = $uri->withPath($requestUriParts[0]);
 
 		if(isset($requestUriParts[1])){
 			$hasQuery       = true;
-			$parts['query'] = $requestUriParts[1];
+			$uri = $uri->withQuery($requestUriParts[1]);
 		}
 	}
 
 	if(!$hasQuery && isset($_SERVER['QUERY_STRING'])){
-		$parts['query'] = $_SERVER['QUERY_STRING'];
+		$uri = $uri->withQuery($_SERVER['QUERY_STRING']);
 	}
 
-	return new Uri($parts);
+	return $uri;
 }
 
 /**

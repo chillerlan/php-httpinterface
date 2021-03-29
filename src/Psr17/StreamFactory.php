@@ -22,7 +22,13 @@ final class StreamFactory implements StreamFactoryInterface{
 	 * @inheritDoc
 	 */
 	public function createStream(string $content = ''):StreamInterface{
-		return create_stream($content);
+		$stream = new Stream(fopen('php://temp', 'r+'));
+
+		if($content !== ''){
+			$stream->write($content);
+		}
+
+		return $stream;
 	}
 
 	/**
