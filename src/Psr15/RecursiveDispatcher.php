@@ -12,7 +12,7 @@
  * @license      MIT
  */
 
-namespace chillerlan\HTTP\Psr15;;
+namespace chillerlan\HTTP\Psr15;
 
 use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};
 use Psr\Http\Server\{MiddlewareInterface, RequestHandlerInterface};

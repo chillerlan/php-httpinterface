@@ -13,7 +13,6 @@
 namespace chillerlan\HTTPTest\Psr7;
 
 use chillerlan\HTTP\Psr7\Response;
-use chillerlan\HTTP\Psr17;
 use Psr\Http\Message\StreamInterface;
 use PHPUnit\Framework\TestCase;
 
