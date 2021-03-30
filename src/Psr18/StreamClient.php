@@ -22,7 +22,7 @@ class StreamClient extends HTTPClientAbstract{
 
 	/**
 	 * @inheritDoc
-	 * @throws \Psr\Http\Client\ClientExceptionInterface
+	 * @throws \Psr\Http\Client\ClientExceptionInterface|\ErrorException
 	 *
 	 */
 	public function sendRequest(RequestInterface $request):ResponseInterface{

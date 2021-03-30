@@ -14,7 +14,7 @@ use InvalidArgumentException;
 
 use function is_scalar, method_exists;
 
-const PSR17_INCLUDES = true;
+const CHILLERLAN_PSR17_INCLUDES = true;
 
 const STREAM_MODES_READ_WRITE = [
 	'a+'  => true,
@@ -81,7 +81,7 @@ function create_stream(string $content = '', string $mode = 'r+', bool $rewind =
  * @return \Psr\Http\Message\StreamInterface
  */
 function create_stream_from_input($in = null):StreamInterface{
-	$in = $in ?? '';
+	$in ??= '';
 
 	// not sure about this one, it might cause:
 	// a) trouble if the given string accidentally matches a file path, and
