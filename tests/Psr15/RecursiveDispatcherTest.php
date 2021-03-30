@@ -12,7 +12,7 @@ namespace chillerlan\HTTPTest\Psr15;
 
 use chillerlan\HTTP\Psr15\{MiddlewareException, RecursiveDispatcher};
 use chillerlan\HTTP\Psr7\Response;
-use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};
+use Psr\Http\Message\{ResponseFactoryInterface, ResponseInterface, ServerRequestInterface};
 use Psr\Http\Server\RequestHandlerInterface;
 
 class RecursiveDispatcherTest extends QueueRequestHandlerTest{
@@ -29,9 +29,15 @@ class RecursiveDispatcherTest extends QueueRequestHandlerTest{
 		$this->expectException(MiddlewareException::class);
 		$this->expectExceptionMessage('invalid middleware');
 
-		$handler = new class() implements RequestHandlerInterface{
+		$handler = new class($this->responseFactory) implements RequestHandlerInterface{
+			private ResponseFactoryInterface $responseFactory;
+
+			public function __construct(ResponseFactoryInterface $responseFactory){
+				$this->responseFactory = $responseFactory;
+			}
+
 			public function handle(ServerRequestInterface $request):ResponseInterface{
-				return new Response(200);
+				return $this->responseFactory->createResponse();
 			}
 		};
 

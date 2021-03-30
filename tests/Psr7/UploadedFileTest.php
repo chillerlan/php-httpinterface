@@ -13,9 +13,9 @@
 namespace chillerlan\HTTPTest\Psr7;
 
 use chillerlan\HTTP\Psr17\StreamFactory;
-use chillerlan\HTTP\Psr7\{File, UploadedFile};
+use chillerlan\HTTPTest\TestAbstract;
+use chillerlan\HTTP\Psr7\UploadedFile;
 use InvalidArgumentException;
-use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\StreamFactoryInterface;
 use RuntimeException;
 
@@ -24,13 +24,14 @@ use function basename, file_exists, fopen, is_scalar, sys_get_temp_dir, tempnam,
 use const UPLOAD_ERR_CANT_WRITE, UPLOAD_ERR_EXTENSION, UPLOAD_ERR_FORM_SIZE, UPLOAD_ERR_INI_SIZE,
 	UPLOAD_ERR_NO_FILE, UPLOAD_ERR_NO_TMP_DIR, UPLOAD_ERR_OK, UPLOAD_ERR_PARTIAL, PHP_OS_FAMILY;
 
-class UploadedFileTest extends TestCase{
+class UploadedFileTest extends TestAbstract{
 
 	protected StreamFactoryInterface $streamFactory;
 	protected array $cleanup;
 
 	protected function setUp():void{
-		$this->streamFactory = new StreamFactory;
+		parent::setUp();
+
 		$this->cleanup = [];
 	}
 
@@ -221,177 +222,11 @@ class UploadedFileTest extends TestCase{
 		$this::assertFileEquals(__FILE__, $to);
 	}
 
-	public function dataNormalizeFiles():array{
-
-		return [
-			'Single file' => [
-				[
-					'file' => [
-						'name'     => 'MyFile.txt',
-						'type'     => 'text/plain',
-						'tmp_name' => '/tmp/php/php1h4j1o',
-						'error'    => '0',
-						'size'     => '123',
-					],
-				],
-				[
-					'file' => new UploadedFile('/tmp/php/php1h4j1o', 123, UPLOAD_ERR_OK, 'MyFile.txt', 'text/plain'),
-				],
-			],
-			'Empty file' => [
-				[
-					'image_file' => [
-						'name'     => '',
-						'type'     => '',
-						'tmp_name' => '',
-						'error'    => '4',
-						'size'     => '0',
-					],
-				],
-				[
-					'image_file' => new UploadedFile('', 0, UPLOAD_ERR_NO_FILE, '', ''),
-				],
-			],
-			'Already Converted' => [
-				[
-					'file' => new UploadedFile('/tmp/php/php1h4j1o', 123, UPLOAD_ERR_OK, 'MyFile.txt', 'text/plain'),
-				],
-				[
-					'file' => new UploadedFile('/tmp/php/php1h4j1o', 123, UPLOAD_ERR_OK, 'MyFile.txt', 'text/plain'),
-				],
-			],
-			'Already Converted array' => [
-				[
-					'file' => [
-						new UploadedFile('/tmp/php/php1h4j1o', 123, UPLOAD_ERR_OK, 'MyFile.txt', 'text/plain'),
-						new UploadedFile('', 0, UPLOAD_ERR_NO_FILE, '', ''),
-					],
-				],
-				[
-					'file' => [
-						new UploadedFile('/tmp/php/php1h4j1o', 123, UPLOAD_ERR_OK, 'MyFile.txt', 'text/plain'),
-						new UploadedFile('', 0, UPLOAD_ERR_NO_FILE, '', ''),
-					],
-				],
-			],
-			'Multiple files' => [
-				[
-					'text_file'  => [
-						'name'     => 'MyFile.txt',
-						'type'     => 'text/plain',
-						'tmp_name' => '/tmp/php/php1h4j1o',
-						'error'    => '0',
-						'size'     => '123',
-					],
-					'image_file' => [
-						'name'     => '',
-						'type'     => '',
-						'tmp_name' => '',
-						'error'    => '4',
-						'size'     => '0',
-					],
-				],
-				[
-					'text_file'  => new UploadedFile('/tmp/php/php1h4j1o', 123, UPLOAD_ERR_OK, 'MyFile.txt', 'text/plain'),
-					'image_file' => new UploadedFile('', 0, UPLOAD_ERR_NO_FILE, '', ''),
-				],
-			],
-			'Nested files' => [
-				[
-					'file'   => [
-						'name'     => [
-							0 => 'MyFile.txt',
-							1 => 'Image.png',
-						],
-						'type'     => [
-							0 => 'text/plain',
-							1 => 'image/png',
-						],
-						'tmp_name' => [
-							0 => '/tmp/php/hp9hskjhf',
-							1 => '/tmp/php/php1h4j1o',
-						],
-						'error'    => [
-							0 => '0',
-							1 => '0',
-						],
-						'size'     => [
-							0 => '123',
-							1 => '7349',
-						],
-					],
-					'nested' => [
-						'name'     => [
-							'other' => 'Flag.txt',
-							'test'  => [
-								0 => 'Stuff.txt',
-								1 => '',
-							],
-						],
-						'type'     => [
-							'other' => 'text/plain',
-							'test'  => [
-								0 => 'text/plain',
-								1 => '',
-							],
-						],
-						'tmp_name' => [
-							'other' => '/tmp/php/hp9hskjhf',
-							'test'  => [
-								0 => '/tmp/php/asifu2gp3',
-								1 => '',
-							],
-						],
-						'error'    => [
-							'other' => '0',
-							'test'  => [
-								0 => '0',
-								1 => '4',
-							],
-						],
-						'size'     => [
-							'other' => '421',
-							'test'  => [
-								0 => '32',
-								1 => '0',
-							],
-						],
-					],
-				],
-				[
-					'file'   => [
-						new UploadedFile('/tmp/php/hp9hskjhf', 123, UPLOAD_ERR_OK, 'MyFile.txt', 'text/plain'),
-						new UploadedFile('/tmp/php/php1h4j1o', 7349, UPLOAD_ERR_OK, 'Image.png', 'image/png'),
-					],
-					'nested' => [
-						'other' => new UploadedFile('/tmp/php/hp9hskjhf', 421, UPLOAD_ERR_OK, 'Flag.txt', 'text/plain'),
-						'test'  => [
-							new UploadedFile('/tmp/php/asifu2gp3', 32, UPLOAD_ERR_OK, 'Stuff.txt', 'text/plain'),
-							new UploadedFile('', 0, UPLOAD_ERR_NO_FILE, '', ''),
-						],
-					],
-				],
-			],
-		];
-	}
-
-	/**
-	 * @dataProvider dataNormalizeFiles
-	 *
-	 * @param array $files
-	 * @param array $expected
-	 */
-	public function testNormalizeFiles(array $files, array $expected):void{
-		$result = File::normalize($files);
-
-		$this::assertEquals($expected, $result);
-	}
-
 	public function testNormalizeFilesRaisesException():void{
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('Invalid value in files specification');
 
-		File::normalize(['test' => 'something']);
+		$this->server->normalizeFiles(['test' => 'something']);
 	}
 
 }

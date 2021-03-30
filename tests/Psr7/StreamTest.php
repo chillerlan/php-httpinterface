@@ -12,21 +12,14 @@
 
 namespace chillerlan\HTTPTest\Psr7;
 
-use chillerlan\HTTP\Psr17\StreamFactory;
 use chillerlan\HTTP\Psr7\Stream;
-use Psr\Http\Message\{StreamFactoryInterface, StreamInterface};
-use PHPUnit\Framework\TestCase;
+use chillerlan\HTTPTest\TestAbstract;
+use Psr\Http\Message\StreamInterface;
 use Exception, InvalidArgumentException, RuntimeException;
 
 use function filesize, fopen, fwrite;
 
-class StreamTest extends TestCase{
-
-	protected StreamFactoryInterface $streamFactory;
-
-	protected function setUp():void{
-		$this->streamFactory = new StreamFactory;
-	}
+class StreamTest extends TestAbstract{
 
 	public function testConstructorThrowsExceptionOnInvalidArgument():void{
 		$this->expectException(InvalidArgumentException::class);

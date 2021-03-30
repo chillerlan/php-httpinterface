@@ -8,13 +8,11 @@
 
 namespace chillerlan\HTTP\Psr17;
 
-use Psr\Http\Message\{
-	ServerRequestFactoryInterface, ServerRequestInterface, StreamInterface, UriInterface, UriFactoryInterface
-};
-use chillerlan\HTTP\Psr7\{File, Stream};
+use Psr\Http\Message\StreamInterface;
+use chillerlan\HTTP\Psr7\Stream;
 use InvalidArgumentException;
 
-use function explode, function_exists, getallheaders, is_scalar, method_exists, substr;
+use function is_scalar, method_exists;
 
 const PSR17_INCLUDES = true;
 
@@ -46,87 +44,6 @@ const STREAM_MODES_WRITE = STREAM_MODES_READ_WRITE + [
 	'w'   => true,
 	'wb'  => true,
 ];
-
-/**
- * Return a ServerRequest populated with superglobals:
- * $_GET
- * $_POST
- * $_COOKIE
- * $_FILES
- * $_SERVER
- */
-function create_server_request_from_globals(
-	ServerRequestFactoryInterface $serverRequestFactory,
-	UriFactoryInterface $uriFactory
-):ServerRequestInterface{
-
-	$serverRequest = $serverRequestFactory->createServerRequest(
-		$_SERVER['REQUEST_METHOD'] ?? 'GET',
-		create_uri_from_globals($uriFactory),
-		$_SERVER
-	);
-
-	if(function_exists('getallheaders')){
-		foreach(getallheaders() ?: [] as $name => $value){
-			$serverRequest = $serverRequest->withHeader($name, $value);
-		}
-	}
-
-	return $serverRequest
-		->withProtocolVersion(isset($_SERVER['SERVER_PROTOCOL']) ? substr($_SERVER['SERVER_PROTOCOL'], 5) : '1.1')
-		->withCookieParams($_COOKIE)
-		->withQueryParams($_GET)
-		->withParsedBody($_POST)
-		->withUploadedFiles(File::normalize($_FILES))
-	;
-}
-
-/**
- * Create a Uri populated with values from $_SERVER.
- */
-function create_uri_from_globals(UriFactoryInterface $uriFactory):UriInterface{
-	$hasPort  = false;
-	$hasQuery = false;
-
-	$uri = $uriFactory->createUri()
-		->withScheme(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https' : 'http');
-
-	if(isset($_SERVER['HTTP_HOST'])){
-		$hostHeaderParts = explode(':', $_SERVER['HTTP_HOST']);
-		$uri = $uri->withHost($hostHeaderParts[0]);
-
-		if(isset($hostHeaderParts[1])){
-			$hasPort       = true;
-			$uri = $uri->withPort($hostHeaderParts[1]);
-		}
-	}
-	elseif(isset($_SERVER['SERVER_NAME'])){
-		$uri = $uri->withHost($_SERVER['SERVER_NAME']);
-	}
-	elseif(isset($_SERVER['SERVER_ADDR'])){
-		$uri = $uri->withHost($_SERVER['SERVER_ADDR']);
-	}
-
-	if(!$hasPort && isset($_SERVER['SERVER_PORT'])){
-		$uri = $uri->withPort($_SERVER['SERVER_PORT']);
-	}
-
-	if(isset($_SERVER['REQUEST_URI'])){
-		$requestUriParts = explode('?', $_SERVER['REQUEST_URI']);
-		$uri = $uri->withPath($requestUriParts[0]);
-
-		if(isset($requestUriParts[1])){
-			$hasQuery       = true;
-			$uri = $uri->withQuery($requestUriParts[1]);
-		}
-	}
-
-	if(!$hasQuery && isset($_SERVER['QUERY_STRING'])){
-		$uri = $uri->withQuery($_SERVER['QUERY_STRING']);
-	}
-
-	return $uri;
-}
 
 /**
  * Create a new writable stream from a string.

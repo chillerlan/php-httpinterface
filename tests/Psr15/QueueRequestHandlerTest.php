@@ -10,21 +10,22 @@
 
 namespace chillerlan\HTTPTest\Psr15;
 
-use chillerlan\HTTP\Psr17\{ServerRequestFactory, UriFactory};
-use chillerlan\HTTP\Psr7\Response;
 use chillerlan\HTTP\Psr15\{MiddlewareException, QueueDispatcher};
+use chillerlan\HTTP\Psr7\Response;
+use chillerlan\HTTPTest\TestAbstract;
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};
+use Psr\Http\Message\{ResponseFactoryInterface, ResponseInterface, ServerRequestInterface};
 use Psr\Http\Server\{MiddlewareInterface, RequestHandlerInterface};
 
 use function array_keys;
-use function chillerlan\HTTP\Psr17\create_server_request_from_globals;
 
-class QueueRequestHandlerTest extends TestCase{
+class QueueRequestHandlerTest extends TestAbstract{
 
 	protected RequestHandlerInterface $dispatcher;
 
 	protected function setUp():void{
+		parent::setUp();
+
 		$this->dispatcher = $this->getDispatcher();
  	}
 
@@ -41,7 +42,7 @@ class QueueRequestHandlerTest extends TestCase{
 	public function testDispatcher():void{
 
 		// execute it:
-		$response = $this->dispatcher->handle(create_server_request_from_globals(new ServerRequestFactory, new UriFactory));
+		$response = $this->dispatcher->handle($this->server->createServerRequestFromGlobals());
 
 		$this::assertSame(
 			['X-Out-First', 'X-Out-Second', 'X-Out-Third'],
@@ -85,10 +86,16 @@ class QueueRequestHandlerTest extends TestCase{
 	}
 
 	protected function getTestFallbackHandler():RequestHandlerInterface{
-		return new class() implements RequestHandlerInterface{
+		return new class($this->responseFactory) implements RequestHandlerInterface{
+			private ResponseFactoryInterface $responseFactory;
+
+			public function __construct(ResponseFactoryInterface $responseFactory){
+				$this->responseFactory = $responseFactory;
+			}
+
 			public function handle(ServerRequestInterface $request):ResponseInterface{
 				TestCase::assertSame(['foo3' => 'bar3', 'foo2' => 'bar2', 'foo1' => 'bar1'], $request->getAttributes());
-				return new Response(200);
+				return $this->responseFactory->createResponse();
 			}
 		};
 	}

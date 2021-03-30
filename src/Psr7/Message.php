@@ -13,6 +13,7 @@
 namespace chillerlan\HTTP\Psr7;
 
 use chillerlan\HTTP\Psr17\StreamFactory;
+use chillerlan\HTTP\Utils\Header;
 use Psr\Http\Message\{MessageInterface, StreamInterface};
 
 use function chillerlan\HTTP\Psr17\create_stream_from_input;

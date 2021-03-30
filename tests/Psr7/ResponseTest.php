@@ -12,18 +12,11 @@
 
 namespace chillerlan\HTTPTest\Psr7;
 
-use chillerlan\HTTP\Psr17\StreamFactory;
 use chillerlan\HTTP\Psr7\Response;
-use Psr\Http\Message\{StreamFactoryInterface, StreamInterface};
-use PHPUnit\Framework\TestCase;
+use chillerlan\HTTPTest\TestAbstract;
+use Psr\Http\Message\StreamInterface;
 
-class ResponseTest extends TestCase{
-
-	protected StreamFactoryInterface $streamFactory;
-
-	protected function setUp():void{
-		$this->streamFactory = new StreamFactory;
-	}
+class ResponseTest extends TestAbstract{
 
 	public function testDefaultConstructor():void{
 		$r = new Response;

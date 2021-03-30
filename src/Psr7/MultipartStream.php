@@ -12,12 +12,12 @@
 
 namespace chillerlan\HTTP\Psr7;
 
+use chillerlan\HTTP\Utils\Header;
 use InvalidArgumentException, RuntimeException;
 
+use function chillerlan\HTTP\Utils\getMimetypeFromFilename;
 use function chillerlan\HTTP\Psr17\{create_stream, create_stream_from_input};
-use function array_merge, basename, is_string, pathinfo, random_bytes, sha1, strlen, strtolower, substr;
-
-use const PATHINFO_EXTENSION;
+use function array_merge, basename, is_string, random_bytes, sha1, strlen, strtolower, substr;
 
 /**
  * @property \chillerlan\HTTP\Psr7\Stream|null $stream
@@ -139,7 +139,7 @@ final class MultipartStream extends StreamAbstract{
 
 		// Set a default Content-Type if none was supplied
 		if(!$this->hasHeader($e['headers'], 'content-type') && $hasFilename){
-			$type = File::MIMETYPES[pathinfo($e['filename'], PATHINFO_EXTENSION)] ?? null;
+			$type = getMimetypeFromFilename($e['filename']);
 
 			if($type){
 				$e['headers']['Content-Type'] = $type;

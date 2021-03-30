@@ -17,7 +17,7 @@ use Exception;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\{ClientExceptionInterface, ClientInterface};
 
-use function chillerlan\HTTP\Psr7\get_json;
+use function chillerlan\HTTP\Utils\get_json;
 
 abstract class HTTPClientTestAbstract extends TestCase{
 

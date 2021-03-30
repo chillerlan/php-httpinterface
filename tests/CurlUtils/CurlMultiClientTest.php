@@ -10,9 +10,10 @@
 
 namespace chillerlan\HTTPTest\CurlUtils;
 
+use chillerlan\HTTP\Utils\Query;
 use chillerlan\HTTP\CurlUtils\{CurlMultiClient, MultiResponseHandlerInterface};
 use chillerlan\HTTP\HTTPOptions;
-use chillerlan\HTTP\Psr7\{Request, Query};
+use chillerlan\HTTP\Psr7\Request;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Message\{RequestInterface, ResponseInterface};

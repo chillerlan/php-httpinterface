@@ -17,7 +17,7 @@ use Psr\Http\Message\{RequestInterface, ResponseInterface};
 use Psr\Log\{LoggerAwareInterface, LoggerAwareTrait, LoggerInterface, NullLogger};
 use Throwable;
 
-use function chillerlan\HTTP\Psr7\message_to_string;
+use function chillerlan\HTTP\Utils\message_to_string;
 use function get_class;
 
 /**

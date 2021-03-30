@@ -11,34 +11,30 @@
 namespace chillerlan\HTTPTest\CurlUtils;
 
 use chillerlan\HTTP\HTTPOptions;
-use chillerlan\HTTP\Psr17\{RequestFactory, StreamFactory};
 use chillerlan\HTTP\Psr18\CurlClient;
 use chillerlan\HTTP\Psr7\Request;
+use chillerlan\HTTPTest\TestAbstract;
 use Exception;
-use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
-use Psr\Http\Message\{RequestFactoryInterface, StreamFactoryInterface};
 
-use function chillerlan\HTTP\Psr7\get_json;
+use function chillerlan\HTTP\Utils\get_json;
 use function str_repeat, strlen, strtolower;
 
 /**
  * @group slow
  */
-class CurlHandleTest extends TestCase{
+class CurlHandleTest extends TestAbstract{
 
 	protected ClientInterface $http;
-	protected RequestFactoryInterface $requestFactory;
-	protected StreamFactoryInterface $streamFactory;
 
 	protected function setUp():void{
+		parent::setUp();
+
 		$options = new HTTPOptions([
 			'ca_info' => __DIR__.'/../cacert.pem',
 		]);
 
-		$this->http           = new CurlClient($options);
-		$this->requestFactory = new RequestFactory;
-		$this->streamFactory  = new StreamFactory;
+		$this->http = new CurlClient($options);
 	}
 
 	public function requestMethodProvider():array{
