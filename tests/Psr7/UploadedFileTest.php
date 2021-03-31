@@ -12,7 +12,6 @@
 
 namespace chillerlan\HTTPTest\Psr7;
 
-use chillerlan\HTTP\Psr17\StreamFactory;
 use chillerlan\HTTPTest\TestAbstract;
 use chillerlan\HTTP\Psr7\UploadedFile;
 use InvalidArgumentException;
