@@ -244,17 +244,15 @@ class CurlHandle{
 
 		}
 
-		$options[CURLOPT_HTTPHEADER] = $headers;
-
-		// If the Expect header is not present, prevent curl from adding it
-		if(!$this->request->hasHeader('Expect')){
-			$options[CURLOPT_HTTPHEADER][] = 'Expect:';
-		}
+		// If the Expect header is not present (it isn't), prevent curl from adding it
+		$headers[] = 'Expect:';
 
 		// cURL sometimes adds a content-type by default. Prevent this.
 		if(!$this->request->hasHeader('Content-Type')){
-			$options[CURLOPT_HTTPHEADER][] = 'Content-Type:';
+			$headers[] = 'Content-Type:';
 		}
+
+		$options[CURLOPT_HTTPHEADER] = $headers;
 
 		return $options;
 	}
