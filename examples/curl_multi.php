@@ -10,16 +10,17 @@
  * @license      MIT
  */
 
+use chillerlan\HTTP\Utils\Query;
 use chillerlan\HTTP\CurlUtils\{CurlMultiClient, MultiResponseHandlerInterface};
 use chillerlan\HTTP\HTTPOptions;
 use chillerlan\HTTP\Psr18\CurlClient;
-use chillerlan\HTTP\Psr7\{Request, Query};
+use chillerlan\HTTP\Psr7\Request;
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
-use function chillerlan\HTTP\Psr7\get_json;
+use function chillerlan\HTTP\Utils\get_json;
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-// invoke the http clients
+// options for both clients
 $options = new HTTPOptions([
 	'ca_info'    => __DIR__.'/cacert.pem',
 	'sleep'      => 60 / 300 * 1000000, // GW2 API limit: 300 requests/minute
@@ -28,25 +29,14 @@ $options = new HTTPOptions([
 
 $client = new CurlClient($options);
 
-// request the list of item ids
 $endpoint     = 'https://api.guildwars2.com/v2/items';
+$languages    = ['de', 'en', 'es'];//, 'fr', 'zh'
+// request the list of item ids
 $itemResponse = $client->sendRequest(new Request('GET', $endpoint));
 
 if($itemResponse->getStatusCode() !== 200){
 	exit('/v2/items fetch error');
 }
-
-
-// chunk the response into arrays of 200 ids each (API limit) and create Request objects for each desired language
-$languages = ['de', 'en', 'es'];//, 'fr', 'zh'
-$requests  = [];
-
-foreach(array_chunk(get_json($itemResponse), 200) as $chunk){
-	foreach($languages as $lang){
-		$requests[] = new Request('GET', $endpoint.'?'.Query::build(['lang' => $lang, 'ids' => implode(',', $chunk)]));
-	}
-}
-
 
 // create directories for each language to dump the item responses into
 foreach($languages as $lang){
@@ -56,7 +46,6 @@ foreach($languages as $lang){
 		mkdir($dir);
 	}
 }
-
 
 // the multi request handler
 $handler = new class() implements MultiResponseHandlerInterface{
@@ -86,10 +75,14 @@ $handler = new class() implements MultiResponseHandlerInterface{
 
 };
 
+$multiClient = new CurlMultiClient($handler, $options);
+
+// chunk the item response into arrays of 200 ids each (API limit) and create Request objects for each desired language
+foreach(array_chunk(get_json($itemResponse), 200) as $chunk){
+	foreach($languages as $lang){
+		$multiClient->addRequest(new Request('GET', $endpoint.'?'.Query::build(['lang' => $lang, 'ids' => implode(',', $chunk)])));
+	}
+}
 
 // run the whole thing
-(new CurlMultiClient($handler, $options))
-	->addRequests($requests)
-	->process()
-;
-
+$multiClient->process();
