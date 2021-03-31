@@ -17,10 +17,10 @@ use function array_key_exists, count, curl_close, curl_init, curl_setopt_array,
 	explode, in_array, is_resource, strlen, strtolower, strtoupper, substr, trim;
 
 use const CURLOPT_CAINFO, CURLOPT_CONNECTTIMEOUT, CURLOPT_CUSTOMREQUEST, CURLOPT_FOLLOWLOCATION, CURLOPT_HEADER,
-	CURLOPT_HEADERFUNCTION, CURLOPT_HTTP_VERSION, CURLOPT_HTTPHEADER, CURLOPT_INFILESIZE, CURLOPT_NOBODY,
-	CURLOPT_POSTFIELDS, CURLOPT_PROTOCOLS, CURLOPT_READFUNCTION, CURLOPT_RETURNTRANSFER,
-	CURLOPT_SSL_VERIFYHOST, CURLOPT_SSL_VERIFYPEER, CURLOPT_TIMEOUT, CURLOPT_UPLOAD, CURLOPT_URL, CURLOPT_USERAGENT,
-	CURLOPT_USERPWD, CURLOPT_WRITEFUNCTION, CURLPROTO_HTTP, CURLPROTO_HTTPS, CURL_HTTP_VERSION_2TLS,
+	CURLOPT_HEADERFUNCTION, CURLOPT_HTTP_VERSION, CURLOPT_HTTPHEADER, CURLOPT_INFILESIZE, CURLOPT_MAXREDIRS,
+	CURLOPT_NOBODY, CURLOPT_POSTFIELDS, CURLOPT_PROTOCOLS, CURLOPT_READFUNCTION, CURLOPT_RETURNTRANSFER,
+	CURLOPT_SSL_VERIFYHOST, CURLOPT_SSL_VERIFYPEER, CURLOPT_SSL_VERIFYSTATUS, CURLOPT_TIMEOUT, CURLOPT_UPLOAD, CURLOPT_URL,
+	CURLOPT_USERAGENT, CURLOPT_USERPWD, CURLOPT_WRITEFUNCTION, CURLPROTO_HTTP, CURLPROTO_HTTPS, CURL_HTTP_VERSION_2TLS,
 	CURLE_COULDNT_CONNECT, CURLE_COULDNT_RESOLVE_HOST, CURLE_COULDNT_RESOLVE_PROXY,
 	CURLE_GOT_NOTHING, CURLE_OPERATION_TIMEOUTED, CURLE_SSL_CONNECT_ERROR;
 
@@ -77,7 +77,7 @@ class CurlHandle{
 	/**
 	 * The cURL handle
 	 *
-	 * @var resource|null
+	 * @var resource|\CurlHandle|null
 	 */
 	protected $curl;
 
@@ -120,7 +120,7 @@ class CurlHandle{
 	}
 
 	/**
-	 * @return resource|null
+	 * @return resource|\CurlHandle|null
 	 * @codeCoverageIgnore
 	 */
 	public function getCurlResource(){
@@ -142,24 +142,29 @@ class CurlHandle{
 	}
 
 	/**
+	 * @link https://php.watch/articles/php-curl-security-hardening
+	 *
 	 * @return array
 	 */
 	protected function initCurlOptions():array{
 		return [
-			CURLOPT_HEADER         => false,
-			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_FOLLOWLOCATION => false,
-			CURLOPT_URL            => (string)$this->request->getUri()->withFragment(''),
-			CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_2TLS,
-			CURLOPT_USERAGENT      => $this->options->user_agent,
-			CURLOPT_PROTOCOLS      => CURLPROTO_HTTP | CURLPROTO_HTTPS,
-			CURLOPT_SSL_VERIFYPEER => true,
-			CURLOPT_SSL_VERIFYHOST => 2,
-			CURLOPT_CAINFO         => $this->options->ca_info,
-			CURLOPT_TIMEOUT        => $this->options->timeout,
-			CURLOPT_CONNECTTIMEOUT => 30,
-			CURLOPT_WRITEFUNCTION  => [$this, 'writefunction'],
-			CURLOPT_HEADERFUNCTION => [$this, 'headerfunction'],
+			CURLOPT_HEADER           => false,
+			CURLOPT_RETURNTRANSFER   => true,
+			CURLOPT_FOLLOWLOCATION   => false,
+			CURLOPT_MAXREDIRS        => 5,
+			CURLOPT_URL              => (string)$this->request->getUri()->withFragment(''),
+			CURLOPT_HTTP_VERSION     => CURL_HTTP_VERSION_2TLS,
+			CURLOPT_USERAGENT        => $this->options->user_agent,
+			CURLOPT_PROTOCOLS        => CURLPROTO_HTTP | CURLPROTO_HTTPS,
+			CURLOPT_REDIR_PROTOCOLS  => CURLPROTO_HTTPS,
+			CURLOPT_SSL_VERIFYPEER   => true,
+			CURLOPT_SSL_VERIFYHOST   => 2,
+			CURLOPT_SSL_VERIFYSTATUS => $this->options->curl_check_OCSP,
+			CURLOPT_CAINFO           => $this->options->ca_info,
+			CURLOPT_TIMEOUT          => $this->options->timeout,
+			CURLOPT_CONNECTTIMEOUT   => 30,
+			CURLOPT_WRITEFUNCTION    => [$this, 'writefunction'],
+			CURLOPT_HEADERFUNCTION   => [$this, 'headerfunction'],
 		];
 	}
 

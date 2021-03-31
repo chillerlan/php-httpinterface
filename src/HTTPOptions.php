@@ -22,6 +22,7 @@ use chillerlan\Settings\SettingsContainerAbstract;
  * @property int       $timeout
  * @property int       $retries
  * @property array     $curl_multi_options
+ * @property bool      $curl_check_OCSP
  */
 class HTTPOptions extends SettingsContainerAbstract{
 	use HTTPOptionsTrait;

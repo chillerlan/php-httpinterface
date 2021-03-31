@@ -48,7 +48,7 @@ final class CurlMultiClient implements LoggerAwareInterface{
 	/**
 	 * the stack of running handles
 	 *
-	 * @var \chillerlan\HTTP\CurlUtils\CurlHandle[]
+	 * @var \chillerlan\HTTP\CurlUtils\CurlMultiHandle[]
 	 */
 	private array $handles = [];
 

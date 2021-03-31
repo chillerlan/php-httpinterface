@@ -80,6 +80,18 @@ trait HTTPOptionsTrait{
 	protected int $retries = 3;
 
 	/**
+	 * cURL extra hardening
+	 *
+	 * When set to true, cURL validates that the server staples an OCSP response during the TLS handshake.
+	 *
+	 * Use with caution as cURL will refuse a connection if it doesn't receive a valid OCSP response -
+	 * this does not necessarily mean that the TLS connection is insecure.
+	 *
+	 * @see \CURLOPT_SSL_VERIFYSTATUS
+	 */
+	protected bool $curl_check_OCSP = false;
+
+	/**
 	 * HTTPOptionsTrait constructor
 	 *
 	 * @throws \Psr\Http\Client\ClientExceptionInterface
