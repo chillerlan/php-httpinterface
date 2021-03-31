@@ -55,3 +55,11 @@ An API documentation created with [phpDocumentor](https://www.phpdoc.org/) can b
 
 Profit!
 
+## License information
+
+This library contains portions of code (especially tests) from the following libraries:
+- [Guzzle PSR-7](https://github.com/guzzle/psr7) (MIT)
+- [bakame-php psr7-uri-interface-tests](https://github.com/bakame-php/psr7-uri-interface-tests) (MIT)
+- [Slim](https://github.com/slimphp/Slim) (MIT) 
+- [nyholm PSR-7](https://github.com/Nyholm/psr7) (MIT)  
+- [caridea-dispatch ](https://github.com/libreworks/caridea-dispatch) (Apache)
