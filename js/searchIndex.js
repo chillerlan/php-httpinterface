@@ -286,6 +286,11 @@ Search.appendIndex(
             "summary": "Number\u0020of\u0020retries\u0020\u0028multi\u0020fetch\u0029",
             "url": "classes/chillerlan-HTTP-HTTPOptionsTrait.html#property_retries"
         },                {
+            "fqsen": "\\chillerlan\\HTTP\\HTTPOptionsTrait\u003A\u003A\u0024curl_check_OCSP",
+            "name": "curl_check_OCSP",
+            "summary": "cURL\u0020extra\u0020hardening",
+            "url": "classes/chillerlan-HTTP-HTTPOptionsTrait.html#property_curl_check_OCSP"
+        },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr15\\EmptyResponseHandler",
             "name": "EmptyResponseHandler",
             "summary": "",

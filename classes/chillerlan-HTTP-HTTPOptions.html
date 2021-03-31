@@ -96,7 +96,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/HTTPOptions.php"><a href="files/src-httpoptions.html"><abbr title="src/HTTPOptions.php">HTTPOptions.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">26</span>
+    <span class="phpdocumentor-element-found-in__line">27</span>
 </aside>
 
         
@@ -119,6 +119,13 @@
     <a href="classes/chillerlan-HTTP-HTTPOptions.html#property_ca_info">$ca_info</a>
     <span>
                 &nbsp;: string            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/chillerlan-HTTP-HTTPOptions.html#property_curl_check_OCSP">$curl_check_OCSP</a>
+    <span>
+                &nbsp;: bool            </span>
 </dt>
 <dd></dd>
 
@@ -184,6 +191,13 @@
                 &nbsp;: string|null            </span>
 </dt>
 <dd>CA Root Certificates for use with CURL/SSL (if not configured in php.ini or available in a default path)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/chillerlan-HTTP-HTTPOptionsTrait.html#property_curl_check_OCSP">$curl_check_OCSP</a>
+    <span>
+                &nbsp;: bool            </span>
+</dt>
+<dd>cURL extra hardening</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/chillerlan-HTTP-HTTPOptionsTrait.html#property_curl_multi_options">$curl_multi_options</a>
@@ -292,6 +306,37 @@ requires either HTTPOptions::$ca_info or a properly working system CA file</dd>
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">$ca_info</span>
+    </code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_curl_check_OCSP">
+        $curl_check_OCSP
+        <a href="classes/chillerlan-HTTP-HTTPOptions.html#property_curl_check_OCSP" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/HTTPOptions.php"><a href="files/src-httpoptions.html"><abbr title="src/HTTPOptions.php">HTTPOptions.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">bool</span>
+    <span class="phpdocumentor-signature__name">$curl_check_OCSP</span>
     </code>
 
         <section class="phpdocumentor-description"></section>
@@ -602,6 +647,56 @@ requires either HTTPOptions::$ca_info or a properly working system CA file</dd>
                 <dd class="phpdocumentor-tag-list__definition">
                                                                                                         <a class="phpdocumentor-tag-link" href="https://raw.githubusercontent.com/bagder/ca-bundle/master/ca-bundle.crt"> https://raw.githubusercontent.com/bagder/ca-bundle/master/ca-bundle.crt </a>
                     
+                                    </dd>
+                        </dl>
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_curl_check_OCSP">
+        $curl_check_OCSP
+        <a href="classes/chillerlan-HTTP-HTTPOptionsTrait.html#property_curl_check_OCSP" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/HTTPOptionsTrait.php"><a href="files/src-httpoptionstrait.html"><abbr title="src/HTTPOptionsTrait.php">HTTPOptionsTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">92</span>
+</aside>
+
+        <p class="phpdocumentor-summary">cURL extra hardening</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">bool</span>
+    <span class="phpdocumentor-signature__name">$curl_check_OCSP</span>
+     = <span class="phpdocumentor-signature__default-value">false</span></code>
+
+        <section class="phpdocumentor-description"><p>When set to true, cURL validates that the server staples an OCSP response during the TLS handshake.</p>
+<p>Use with caution as cURL will refuse a connection if it doesn't receive a valid OCSP response -
+this does not necessarily mean that the TLS connection is insecure.</p>
+</section>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><abbr title="\CURLOPT_SSL_VERIFYSTATUS">CURLOPT_SSL_VERIFYSTATUS</abbr></span>
+                                        
+                                                 <section class="phpdocumentor-description"></section>
+
                                     </dd>
                         </dl>
 
@@ -926,7 +1021,7 @@ requires either HTTPOptions::$ca_info or a properly working system CA file</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/HTTPOptionsTrait.php"><a href="files/src-httpoptionstrait.html"><abbr title="src/HTTPOptionsTrait.php">HTTPOptionsTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">87</span>
+    <span class="phpdocumentor-element-found-in__line">99</span>
 </aside>
 
         <p class="phpdocumentor-summary">HTTPOptionsTrait constructor</p>
@@ -975,7 +1070,7 @@ requires either HTTPOptions::$ca_info or a properly working system CA file</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/HTTPOptionsTrait.php"><a href="files/src-httpoptionstrait.html"><abbr title="src/HTTPOptionsTrait.php">HTTPOptionsTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">103</span>
+    <span class="phpdocumentor-element-found-in__line">115</span>
 </aside>
 
     
