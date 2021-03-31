@@ -23,13 +23,11 @@
 			<directory>./vendor/http-interop/http-factory-tests/test</directory>
 		</testsuite>
 	</testsuites>
-<!--
 	<groups>
 		<exclude>
 			<group>slow</group>
 		</exclude>
 	</groups>
--->
 	<logging>
 		<junit outputFile=".build/logs/junit.xml"/>
 	</logging>
