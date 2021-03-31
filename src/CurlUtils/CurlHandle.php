@@ -76,7 +76,7 @@ class CurlHandle{
 
 	/**
 	 * The cURL handle
-	 *
+	 * @phan-suppress PhanUndeclaredTypeProperty
 	 * @var resource|\CurlHandle|null
 	 */
 	protected $curl;
@@ -120,6 +120,7 @@ class CurlHandle{
 	}
 
 	/**
+	 * @phan-suppress PhanUndeclaredTypeReturnType
 	 * @return resource|\CurlHandle|null
 	 * @codeCoverageIgnore
 	 */
