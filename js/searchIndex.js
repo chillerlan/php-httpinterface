@@ -2026,21 +2026,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr7-MultipartStreamTest.html#method_testSerializesNonStringFields"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MultipartStreamTest\u003A\u003AtestSerializesFiles\u0028\u0029",
-            "name": "testSerializesFiles",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-MultipartStreamTest.html#method_testSerializesFiles"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MultipartStreamTest\u003A\u003AtestSerializesFilesWithCustomHeaders\u0028\u0029",
-            "name": "testSerializesFilesWithCustomHeaders",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-MultipartStreamTest.html#method_testSerializesFilesWithCustomHeaders"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MultipartStreamTest\u003A\u003AtestSerializesFilesWithCustomHeadersAndMultipleValues\u0028\u0029",
-            "name": "testSerializesFilesWithCustomHeadersAndMultipleValues",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-MultipartStreamTest.html#method_testSerializesFilesWithCustomHeadersAndMultipleValues"
-        },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\RequestTest",
             "name": "RequestTest",
             "summary": "",
