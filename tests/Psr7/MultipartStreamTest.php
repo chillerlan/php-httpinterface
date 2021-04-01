@@ -11,14 +11,12 @@
 namespace chillerlan\HTTPTest\Psr7;
 
 use chillerlan\HTTP\Psr7\MultipartStream;
-use GuzzleHttp\Psr7\FnStream;
+use chillerlan\HTTPTest\TestAbstract;
 use InvalidArgumentException;
-use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
-use function chillerlan\HTTP\Psr17\create_stream_from_input;
 
-class MultipartStreamTest extends TestCase{
+class MultipartStreamTest extends TestAbstract{
 
 	public function testCreatesDefaultBoundary():void{
 		$this::assertMatchesRegularExpression('/^[a-f\d]{40}$/', (new MultipartStream)->getBoundary());
@@ -101,7 +99,7 @@ class MultipartStreamTest extends TestCase{
 			(string)$stream
 		);
 	}
-
+/*
 	public function testSerializesFiles():void{
 
 		$stream = new MultipartStream([
@@ -188,5 +186,5 @@ class MultipartStreamTest extends TestCase{
 			(string)$stream
 		);
 	}
-
+*/
 }
