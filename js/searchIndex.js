@@ -266,10 +266,10 @@ Search.appendIndex(
             "summary": "options\u0020for\u0020the\u0020curl\u0020multi\u0020instance",
             "url": "classes/chillerlan-HTTP-HTTPOptionsTrait.html#property_curl_multi_options"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\HTTPOptionsTrait\u003A\u003A\u0024windowSize",
-            "name": "windowSize",
+            "fqsen": "\\chillerlan\\HTTP\\HTTPOptionsTrait\u003A\u003A\u0024window_size",
+            "name": "window_size",
             "summary": "maximum\u0020of\u0020concurrent\u0020requests\u0020for\u0020curl_multi",
-            "url": "classes/chillerlan-HTTP-HTTPOptionsTrait.html#property_windowSize"
+            "url": "classes/chillerlan-HTTP-HTTPOptionsTrait.html#property_window_size"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\HTTPOptionsTrait\u003A\u003A\u0024sleep",
             "name": "sleep",
