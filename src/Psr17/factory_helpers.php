@@ -12,38 +12,13 @@ use Psr\Http\Message\StreamInterface;
 use chillerlan\HTTP\Psr7\Stream;
 use InvalidArgumentException;
 
-use function is_scalar, method_exists;
+use function in_array, is_scalar, method_exists;
 
 const CHILLERLAN_PSR17_INCLUDES = true;
 
-const STREAM_MODES_READ_WRITE = [
-	'a+'  => true,
-	'c+'  => true,
-	'c+b' => true,
-	'c+t' => true,
-	'r+'  => true,
-	'r+b' => true,
-	'r+t' => true,
-	'w+'  => true,
-	'w+b' => true,
-	'w+t' => true,
-	'x+'  => true,
-	'x+b' => true,
-	'x+t' => true,
-];
-
-const STREAM_MODES_READ = STREAM_MODES_READ_WRITE + [
-	'r'   => true,
-	'rb'  => true,
-	'rt'  => true,
-];
-
-const STREAM_MODES_WRITE = STREAM_MODES_READ_WRITE + [
-	'a'   => true,
-	'rw'  => true,
-	'w'   => true,
-	'wb'  => true,
-];
+const STREAM_MODES_READ_WRITE = ['a+', 'c+', 'c+b', 'c+t', 'r+' , 'r+b', 'r+t', 'w+' , 'w+b', 'w+t', 'x+' , 'x+b', 'x+t'];
+const STREAM_MODES_READ = [...STREAM_MODES_READ_WRITE, 'r', 'rb', 'rt'];
+const STREAM_MODES_WRITE = [...STREAM_MODES_READ_WRITE, 'a', 'rw', 'w', 'wb'];
 
 /**
  * Create a new writable stream from a string.
@@ -58,7 +33,7 @@ const STREAM_MODES_WRITE = STREAM_MODES_READ_WRITE + [
  */
 function create_stream(string $content = '', string $mode = 'r+', bool $rewind = true):StreamInterface{
 
-	if(!isset(STREAM_MODES_WRITE[$mode])){
+	if(!in_array($mode, STREAM_MODES_WRITE)){
 		throw new InvalidArgumentException('invalid mode');
 	}
 

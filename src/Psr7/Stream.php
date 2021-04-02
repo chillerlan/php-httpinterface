@@ -12,7 +12,8 @@ namespace chillerlan\HTTP\Psr7;
 
 use Exception, InvalidArgumentException, RuntimeException;
 
-use function clearstatcache, fclose, feof, fread, fstat, ftell, fwrite, is_resource, stream_get_contents, stream_get_meta_data;
+use function clearstatcache, fclose, feof, fread, fstat, ftell, fwrite, in_array,
+	is_resource, stream_get_contents, stream_get_meta_data;
 
 use const SEEK_SET;
 use const chillerlan\HTTP\Psr17\{STREAM_MODES_READ, STREAM_MODES_WRITE};
@@ -48,8 +49,8 @@ final class Stream extends StreamAbstract{
 		$meta = stream_get_meta_data($this->stream);
 
 		$this->seekable = $meta['seekable'];
-		$this->readable = isset(STREAM_MODES_READ[$meta['mode']]);
-		$this->writable = isset(STREAM_MODES_WRITE[$meta['mode']]);
+		$this->readable = in_array($meta['mode'], STREAM_MODES_READ);
+		$this->writable = in_array($meta['mode'], STREAM_MODES_WRITE);
 		$this->uri      = $meta['uri'] ?? null;
 	}
 
