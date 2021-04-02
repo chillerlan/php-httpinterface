@@ -23,7 +23,7 @@ trait HTTPOptionsTrait{
 	/**
 	 * A custom user agent string
 	 */
-	protected string $user_agent = 'chillerlanHttpInterface/2.0 +https://github.com/chillerlan/php-httpinterface';
+	protected string $user_agent = 'chillerlanHttpInterface/5.0 +https://github.com/chillerlan/php-httpinterface';
 
 	/**
 	 * options for each curl instance
@@ -60,7 +60,7 @@ trait HTTPOptionsTrait{
 	/**
 	 * maximum of concurrent requests for curl_multi
 	 */
-	protected int $windowSize = 5;
+	protected int $window_size = 5;
 
 	/**
 	 * sleep timer (milliseconds) between each fired multi request on startup

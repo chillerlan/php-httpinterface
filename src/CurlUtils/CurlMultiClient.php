@@ -74,7 +74,7 @@ final class CurlMultiClient implements LoggerAwareInterface{
 
 		$curl_multi_options = [
 			CURLMOPT_PIPELINING  => CURLPIPE_MULTIPLEX,
-			CURLMOPT_MAXCONNECTS => $this->options->windowSize,
+			CURLMOPT_MAXCONNECTS => $this->options->window_size,
 		] + $this->options->curl_multi_options;
 
 		foreach($curl_multi_options as $k => $v){
@@ -141,7 +141,7 @@ final class CurlMultiClient implements LoggerAwareInterface{
 		}
 
 		// shoot out the first batch of requests
-		for($i = 0; $i < $this->options->windowSize; $i++){
+		for($i = 0; $i < $this->options->window_size; $i++){
 			$this->createHandle();
 		}
 

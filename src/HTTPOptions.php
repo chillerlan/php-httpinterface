@@ -17,7 +17,7 @@ use chillerlan\Settings\SettingsContainerAbstract;
  * @property array     $curl_options
  * @property string    $ca_info
  * @property bool      $ssl_verifypeer
- * @property int       $windowSize
+ * @property int       $window_size
  * @property int|float $sleep
  * @property int       $timeout
  * @property int       $retries
