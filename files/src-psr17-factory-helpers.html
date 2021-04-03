@@ -99,21 +99,21 @@
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a href="namespaces/chillerlan-http-psr17.html#constant_STREAM_MODES_READ">STREAM_MODES_READ</a>
     <span>
-        &nbsp;= STREAM_MODES_READ_WRITE + [&#039;r&#039; =&gt; true, &#039;rb&#039; =&gt; true, &#039;rt&#039; =&gt; true]                    </span>
+        &nbsp;= [...STREAM_MODES_READ_WRITE, &#039;r&#039;, &#039;rb&#039;, &#039;rt&#039;]                    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a href="namespaces/chillerlan-http-psr17.html#constant_STREAM_MODES_READ_WRITE">STREAM_MODES_READ_WRITE</a>
     <span>
-        &nbsp;= [&#039;a+&#039; =&gt; true, &#039;c+&#039; =&gt; true, &#039;c+b&#039; =&gt; true, &#039;c+t&#039; =&gt; true, &#039;r+&#039; =&gt; true, &#039;r+b&#039; =&gt; true, &#039;r+t&#039; =&gt; true, &#039;w+&#039; =&gt; true, &#039;w+b&#039; =&gt; true, &#039;w+t&#039; =&gt; true, &#039;x+&#039; =&gt; true, &#039;x+b&#039; =&gt; true, &#039;x+t&#039; =&gt; true]                    </span>
+        &nbsp;= [&#039;a+&#039;, &#039;c+&#039;, &#039;c+b&#039;, &#039;c+t&#039;, &#039;r+&#039;, &#039;r+b&#039;, &#039;r+t&#039;, &#039;w+&#039;, &#039;w+b&#039;, &#039;w+t&#039;, &#039;x+&#039;, &#039;x+b&#039;, &#039;x+t&#039;]                    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a href="namespaces/chillerlan-http-psr17.html#constant_STREAM_MODES_WRITE">STREAM_MODES_WRITE</a>
     <span>
-        &nbsp;= STREAM_MODES_READ_WRITE + [&#039;a&#039; =&gt; true, &#039;rw&#039; =&gt; true, &#039;w&#039; =&gt; true, &#039;wb&#039; =&gt; true]                    </span>
+        &nbsp;= [...STREAM_MODES_READ_WRITE, &#039;a&#039;, &#039;rw&#039;, &#039;w&#039;, &#039;wb&#039;]                    </span>
 </dt>
 <dd></dd>
 
@@ -174,7 +174,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr17/factory_helpers.php"><a href="files/src-psr17-factory-helpers.html"><abbr title="src/Psr17/factory_helpers.php">factory_helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">35</span>
+    <span class="phpdocumentor-element-found-in__line">20</span>
 </aside>
 
     
@@ -182,7 +182,7 @@
     <span class="phpdocumentor-signature__visibility">public</span>
     <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">STREAM_MODES_READ</span>
-    = <span class="phpdocumentor-signature__default-value">STREAM_MODES_READ_WRITE + [&#039;r&#039; =&gt; true, &#039;rb&#039; =&gt; true, &#039;rt&#039; =&gt; true]</span>
+    = <span class="phpdocumentor-signature__default-value">[...STREAM_MODES_READ_WRITE, &#039;r&#039;, &#039;rb&#039;, &#039;rt&#039;]</span>
 </code>
 
 
@@ -207,7 +207,7 @@
     <span class="phpdocumentor-signature__visibility">public</span>
     <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">STREAM_MODES_READ_WRITE</span>
-    = <span class="phpdocumentor-signature__default-value">[&#039;a+&#039; =&gt; true, &#039;c+&#039; =&gt; true, &#039;c+b&#039; =&gt; true, &#039;c+t&#039; =&gt; true, &#039;r+&#039; =&gt; true, &#039;r+b&#039; =&gt; true, &#039;r+t&#039; =&gt; true, &#039;w+&#039; =&gt; true, &#039;w+b&#039; =&gt; true, &#039;w+t&#039; =&gt; true, &#039;x+&#039; =&gt; true, &#039;x+b&#039; =&gt; true, &#039;x+t&#039; =&gt; true]</span>
+    = <span class="phpdocumentor-signature__default-value">[&#039;a+&#039;, &#039;c+&#039;, &#039;c+b&#039;, &#039;c+t&#039;, &#039;r+&#039;, &#039;r+b&#039;, &#039;r+t&#039;, &#039;w+&#039;, &#039;w+b&#039;, &#039;w+t&#039;, &#039;x+&#039;, &#039;x+b&#039;, &#039;x+t&#039;]</span>
 </code>
 
 
@@ -224,7 +224,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr17/factory_helpers.php"><a href="files/src-psr17-factory-helpers.html"><abbr title="src/Psr17/factory_helpers.php">factory_helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">41</span>
+    <span class="phpdocumentor-element-found-in__line">21</span>
 </aside>
 
     
@@ -232,7 +232,7 @@
     <span class="phpdocumentor-signature__visibility">public</span>
     <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">STREAM_MODES_WRITE</span>
-    = <span class="phpdocumentor-signature__default-value">STREAM_MODES_READ_WRITE + [&#039;a&#039; =&gt; true, &#039;rw&#039; =&gt; true, &#039;w&#039; =&gt; true, &#039;wb&#039; =&gt; true]</span>
+    = <span class="phpdocumentor-signature__default-value">[...STREAM_MODES_READ_WRITE, &#039;a&#039;, &#039;rw&#039;, &#039;w&#039;, &#039;wb&#039;]</span>
 </code>
 
 
@@ -255,7 +255,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr17/factory_helpers.php"><a href="files/src-psr17-factory-helpers.html"><abbr title="src/Psr17/factory_helpers.php">factory_helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">59</span>
+    <span class="phpdocumentor-element-found-in__line">34</span>
 </aside>
 
         <p class="phpdocumentor-summary">Create a new writable stream from a string.</p>
@@ -310,7 +310,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr17/factory_helpers.php"><a href="files/src-psr17-factory-helpers.html"><abbr title="src/Psr17/factory_helpers.php">factory_helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">83</span>
+    <span class="phpdocumentor-element-found-in__line">58</span>
 </aside>
 
     
