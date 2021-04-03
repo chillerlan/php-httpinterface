@@ -14,7 +14,7 @@ use chillerlan\HTTP\Psr7\Stream;
 use Psr\Http\Message\{StreamFactoryInterface, StreamInterface};
 use InvalidArgumentException, RuntimeException;
 
-use function fopen, in_array, is_file;
+use function fopen, in_array, is_file, is_readable;
 
 final class StreamFactory implements StreamFactoryInterface{
 
@@ -36,7 +36,7 @@ final class StreamFactory implements StreamFactoryInterface{
 	 */
 	public function createStreamFromFile(string $filename, string $mode = 'r'):StreamInterface{
 
-		if(empty($filename) || !is_file($filename)){
+		if(empty($filename) || !is_file($filename) || !is_readable($filename)){
 			throw new RuntimeException('invalid file');
 		}
 

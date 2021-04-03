@@ -293,7 +293,7 @@ class CurlHandle{
 		}
 
 		// overwrite the default values with $curl_options
-		foreach($this->options->curl_options as $k => $v){
+		foreach($this->options->curl_options ?? [] as $k => $v){
 			// skip some options that are only set automatically
 			if(in_array($k, [CURLOPT_HTTPHEADER, CURLOPT_CUSTOMREQUEST, CURLOPT_NOBODY], true)){
 				continue;
@@ -317,6 +317,7 @@ class CurlHandle{
 	 * @param int      $length
 	 *
 	 * @return string
+	 * @noinspection PhpUnusedParameterInspection
 	 */
 	public function readfunction($curl, $stream, int $length):string{
 		return $this->request->getBody()->read($length);
@@ -329,6 +330,7 @@ class CurlHandle{
 	 * @param string   $data
 	 *
 	 * @return int
+	 * @noinspection PhpUnusedParameterInspection
 	 */
 	public function writefunction($curl, string $data):int{
 		return $this->response->getBody()->write($data);
@@ -341,6 +343,7 @@ class CurlHandle{
 	 * @param string   $line
 	 *
 	 * @return int
+	 * @noinspection PhpUnusedParameterInspection
 	 */
 	public function headerfunction($curl, string $line):int{
 		$str    = trim($line);

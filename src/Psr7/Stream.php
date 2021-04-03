@@ -63,20 +63,17 @@ final class Stream extends StreamAbstract{
 			return '';
 		}
 
-		try{
-
-			if($this->isSeekable()){
-				$this->seek(0);
-			}
-
-			return (string)stream_get_contents($this->stream);
+		if($this->isSeekable()){
+			$this->seek(0);
 		}
-		// @codeCoverageIgnoreStart
-		catch(Exception $e){
-			throw new RuntimeException('Stream::__toString exception: '.$e->getMessage());
-		}
-		// @codeCoverageIgnoreEnd
 
+		$contents = stream_get_contents($this->stream);
+
+		if($contents !== false){
+			return $contents;
+		}
+
+		throw new RuntimeException('stream_get_contents() error'); // @codeCoverageIgnore
 	}
 
 	/**
