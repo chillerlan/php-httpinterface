@@ -10,7 +10,7 @@
 
 namespace chillerlan\HTTP\Psr7;
 
-use Exception, InvalidArgumentException, RuntimeException;
+use InvalidArgumentException, RuntimeException;
 
 use function clearstatcache, fclose, feof, fread, fstat, ftell, fwrite, in_array,
 	is_resource, stream_get_contents, stream_get_meta_data;
