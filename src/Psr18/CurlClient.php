@@ -13,6 +13,7 @@ namespace chillerlan\HTTP\Psr18;
 use chillerlan\HTTP\CurlUtils\CurlHandle;
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
 
+use function chillerlan\HTTP\Utils\message_to_string;
 use function curl_errno, curl_error, curl_exec, in_array;
 
 use const CURLE_OK;
@@ -25,6 +26,8 @@ class CurlClient extends HTTPClientAbstract{
 	 * @inheritDoc
 	 */
 	public function sendRequest(RequestInterface $request):ResponseInterface{
+		$this->logger->debug("\n----HTTP-REQUEST----\n".message_to_string($request));
+
 		$this->handle = $this->createHandle($request);
 		$this->handle->init();
 
@@ -47,10 +50,11 @@ class CurlClient extends HTTPClientAbstract{
 		}
 
 		$this->handle->close();
-		$r = $this->handle->getResponse();
-		$r->getBody()->rewind();
+		$response = $this->handle->getResponse();
+		$this->logger->debug("\n----HTTP-RESPONSE---\n".message_to_string($response));
+		$response->getBody()->rewind();
 
-		return $r;
+		return $response;
 	}
 
 	/**
