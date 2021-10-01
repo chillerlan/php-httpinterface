@@ -46,7 +46,7 @@ class URLExtractorTest extends HTTPClientTestAbstract{
 			'https://bit.ly/1oesmr8',
 			'http://tinyurl.com/jvc5y98',
 			// interesting, this is a new one
-			'https://redirect.viglink.com?key=a7e37b5f6ff1de9cb410158b1013e54a&u=https%3A%2F%2Fapi.guildwars2.com%2Fv2%2Fbuild&prodOvrd=RAC',
+			'https://redirect.viglink.com?u=https%3A%2F%2Fapi.guildwars2.com%2Fv2%2Fbuild&key=a7e37b5f6ff1de9cb410158b1013e54a&prodOvrd=RAC&opt=false',
 			'https://api.guildwars2.com/v2/build',
 			'',
 		];
