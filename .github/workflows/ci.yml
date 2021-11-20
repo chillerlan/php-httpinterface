@@ -2,8 +2,12 @@
 # https://github.com/sebastianbergmann/phpunit/blob/master/.github/workflows/ci.yml
 
 on:
-  - pull_request
-  - push
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 name: "Continuous Integration"
 
