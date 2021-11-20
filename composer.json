@@ -43,7 +43,7 @@
 	},
 	"require-dev": {
 		"http-interop/http-factory-tests": "^0.9",
-		"phan/phan": "^4.0",
+		"phan/phan": "^5.3",
 		"phpunit/phpunit": "^9.5"
 	},
 	"autoload": {
@@ -59,5 +59,14 @@
 			"chillerlan\\HTTPTest\\": "tests/",
 			"chillerlan\\HTTPExamples\\": "examples/"
 		}
+	},
+	"scripts": {
+		"phpunit": "@php vendor/bin/phpunit",
+		"phan": "@php vendor/bin/phan"
+	},
+	"config": {
+		"lock": false,
+		"sort-packages": true,
+		"platform-check": true
 	}
 }
