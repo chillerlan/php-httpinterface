@@ -8,12 +8,16 @@
     <link rel="icon" href="images/favicon.ico"/>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/base.css">
-            <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+            <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/template.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism-okaidia.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
                 <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
         <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/js/all.min.js" integrity="sha256-0vuk8LXoyrmCjp1f0O300qo1M75ZQyhH9X3J6d+scmk=" crossorigin="anonymous"></script>
         <script src="js/search.js"></script>
         <script defer src="js/searchIndex.js"></script>
     </head>
@@ -48,17 +52,27 @@
     Menu
 </label>
 <aside class="phpdocumentor-column -four phpdocumentor-sidebar">
-    
-    <section class="phpdocumentor-sidebar__category">
-        <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
-                                                <h4 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/chillerlan.html"><abbr title="\chillerlan">chillerlan</abbr></a></h4>
-                <ul class="phpdocumentor-list">
-                                            <li><a href="namespaces/chillerlan-http.html"><abbr title="\chillerlan\HTTP">HTTP</abbr></a></li>
-                                            <li><a href="namespaces/chillerlan-httptest.html"><abbr title="\chillerlan\HTTPTest">HTTPTest</abbr></a></li>
-                                    </ul>
-                        </section>
+                    <section class="phpdocumentor-sidebar__category">
+            <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/chillerlan.html">chillerlan</a></h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/chillerlan-http.html">HTTP</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/chillerlan-httptest.html">HTTPTest</a>
+                
+            </li>
+            </ul>
 
-    
+                        </section>
+                <section class="phpdocumentor-sidebar__category">
+            <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace"><a href="packages/Application.html">Application</a></h4>
+
+                        </section>
+            
     <section class="phpdocumentor-sidebar__category">
         <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
                 <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
@@ -87,9 +101,11 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/HTTPOptionsTrait.php"><a href="files/src-httpoptionstrait.html"><abbr title="src/HTTPOptionsTrait.php">HTTPOptionsTrait.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">21</span>
-</aside>
+
+    </aside>
 
         
+    <section class="phpdocumentor-description"></section>
 
 
 
@@ -216,7 +232,8 @@ requires either HTTPOptions::$ca_info or a properly working system CA file</dd>
     <abbr class="phpdocumentor-element-found-in__file" title="src/HTTPOptionsTrait.php"><a href="files/src-httpoptionstrait.html"><abbr title="src/HTTPOptionsTrait.php">HTTPOptionsTrait.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">43</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">CA Root Certificates for use with CURL/SSL (if not configured in php.ini or available in a default path)</p>
 
@@ -226,6 +243,7 @@ requires either HTTPOptions::$ca_info or a properly working system CA file</dd>
     <span class="phpdocumentor-signature__name">$ca_info</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
+    
         <section class="phpdocumentor-description"></section>
 
     
@@ -275,7 +293,8 @@ requires either HTTPOptions::$ca_info or a properly working system CA file</dd>
     <abbr class="phpdocumentor-element-found-in__file" title="src/HTTPOptionsTrait.php"><a href="files/src-httpoptionstrait.html"><abbr title="src/HTTPOptionsTrait.php">HTTPOptionsTrait.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">92</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">cURL extra hardening</p>
 
@@ -290,6 +309,8 @@ requires either HTTPOptions::$ca_info or a properly working system CA file</dd>
 this does not necessarily mean that the TLS connection is insecure.</p>
 </section>
 
+        <section class="phpdocumentor-description"></section>
+
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
@@ -302,8 +323,7 @@ this does not necessarily mean that the TLS connection is insecure.</p>
                 <dd class="phpdocumentor-tag-list__definition">
                                                                                     <span class="phpdocumentor-tag-link"><abbr title="\CURLOPT_SSL_VERIFYSTATUS">CURLOPT_SSL_VERIFYSTATUS</abbr></span>
                                         
-                                                 <section class="phpdocumentor-description"></section>
-
+                                             
                                     </dd>
                         </dl>
 
@@ -325,7 +345,8 @@ this does not necessarily mean that the TLS connection is insecure.</p>
     <abbr class="phpdocumentor-element-found-in__file" title="src/HTTPOptionsTrait.php"><a href="files/src-httpoptionstrait.html"><abbr title="src/HTTPOptionsTrait.php">HTTPOptionsTrait.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">58</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">options for the curl multi instance</p>
 
@@ -335,6 +356,7 @@ this does not necessarily mean that the TLS connection is insecure.</p>
     <span class="phpdocumentor-signature__name">$curl_multi_options</span>
      = <span class="phpdocumentor-signature__default-value">[]</span></code>
 
+    
         <section class="phpdocumentor-description"></section>
 
     
@@ -370,7 +392,8 @@ this does not necessarily mean that the TLS connection is insecure.</p>
     <abbr class="phpdocumentor-element-found-in__file" title="src/HTTPOptionsTrait.php"><a href="files/src-httpoptionstrait.html"><abbr title="src/HTTPOptionsTrait.php">HTTPOptionsTrait.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">34</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">options for each curl instance</p>
 
@@ -383,6 +406,8 @@ this does not necessarily mean that the TLS connection is insecure.</p>
         <section class="phpdocumentor-description"><p>this array is being merged into the default options as the last thing before curl_exec().
 none of the values (except existence of the CA file) will be checked - that's up to the implementation.</p>
 </section>
+
+        <section class="phpdocumentor-description"></section>
 
     
 
@@ -404,7 +429,8 @@ none of the values (except existence of the CA file) will be checked - that's up
     <abbr class="phpdocumentor-element-found-in__file" title="src/HTTPOptionsTrait.php"><a href="files/src-httpoptionstrait.html"><abbr title="src/HTTPOptionsTrait.php">HTTPOptionsTrait.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">80</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Number of retries (multi fetch)</p>
 
@@ -414,6 +440,7 @@ none of the values (except existence of the CA file) will be checked - that's up
     <span class="phpdocumentor-signature__name">$retries</span>
      = <span class="phpdocumentor-signature__default-value">3</span></code>
 
+    
         <section class="phpdocumentor-description"></section>
 
     
@@ -436,7 +463,8 @@ none of the values (except existence of the CA file) will be checked - that's up
     <abbr class="phpdocumentor-element-found-in__file" title="src/HTTPOptionsTrait.php"><a href="files/src-httpoptionstrait.html"><abbr title="src/HTTPOptionsTrait.php">HTTPOptionsTrait.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">68</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">sleep timer (milliseconds) between each fired multi request on startup</p>
 
@@ -446,6 +474,7 @@ none of the values (except existence of the CA file) will be checked - that's up
     <span class="phpdocumentor-signature__name">$sleep</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
+    
         <section class="phpdocumentor-description"></section>
 
     
@@ -468,7 +497,8 @@ none of the values (except existence of the CA file) will be checked - that's up
     <abbr class="phpdocumentor-element-found-in__file" title="src/HTTPOptionsTrait.php"><a href="files/src-httpoptionstrait.html"><abbr title="src/HTTPOptionsTrait.php">HTTPOptionsTrait.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">51</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">see CURLOPT_SSL_VERIFYPEER
 requires either HTTPOptions::$ca_info or a properly working system CA file</p>
@@ -479,6 +509,7 @@ requires either HTTPOptions::$ca_info or a properly working system CA file</p>
     <span class="phpdocumentor-signature__name">$ssl_verifypeer</span>
      = <span class="phpdocumentor-signature__default-value">true</span></code>
 
+    
         <section class="phpdocumentor-description"></section>
 
     
@@ -514,7 +545,8 @@ requires either HTTPOptions::$ca_info or a properly working system CA file</p>
     <abbr class="phpdocumentor-element-found-in__file" title="src/HTTPOptionsTrait.php"><a href="files/src-httpoptionstrait.html"><abbr title="src/HTTPOptionsTrait.php">HTTPOptionsTrait.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">75</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Timeout value</p>
 
@@ -524,6 +556,7 @@ requires either HTTPOptions::$ca_info or a properly working system CA file</p>
     <span class="phpdocumentor-signature__name">$timeout</span>
      = <span class="phpdocumentor-signature__default-value">10</span></code>
 
+    
         <section class="phpdocumentor-description"></section>
 
     
@@ -538,8 +571,7 @@ requires either HTTPOptions::$ca_info or a properly working system CA file</p>
                 <dd class="phpdocumentor-tag-list__definition">
                                                                                     <span class="phpdocumentor-tag-link"><abbr title="\CURLOPT_TIMEOUT">CURLOPT_TIMEOUT</abbr></span>
                                         
-                                                 <section class="phpdocumentor-description"></section>
-
+                                             
                                     </dd>
                         </dl>
 
@@ -561,7 +593,8 @@ requires either HTTPOptions::$ca_info or a properly working system CA file</p>
     <abbr class="phpdocumentor-element-found-in__file" title="src/HTTPOptionsTrait.php"><a href="files/src-httpoptionstrait.html"><abbr title="src/HTTPOptionsTrait.php">HTTPOptionsTrait.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">26</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">A custom user agent string</p>
 
@@ -571,6 +604,7 @@ requires either HTTPOptions::$ca_info or a properly working system CA file</p>
     <span class="phpdocumentor-signature__name">$user_agent</span>
      = <span class="phpdocumentor-signature__default-value">&#039;chillerlanHttpInterface/5.0 +https://github.com/chillerlan/php-httpinterface&#039;</span></code>
 
+    
         <section class="phpdocumentor-description"></section>
 
     
@@ -593,7 +627,8 @@ requires either HTTPOptions::$ca_info or a properly working system CA file</p>
     <abbr class="phpdocumentor-element-found-in__file" title="src/HTTPOptionsTrait.php"><a href="files/src-httpoptionstrait.html"><abbr title="src/HTTPOptionsTrait.php">HTTPOptionsTrait.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">63</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">maximum of concurrent requests for curl_multi</p>
 
@@ -603,6 +638,7 @@ requires either HTTPOptions::$ca_info or a properly working system CA file</p>
     <span class="phpdocumentor-signature__name">$window_size</span>
      = <span class="phpdocumentor-signature__default-value">5</span></code>
 
+    
         <section class="phpdocumentor-description"></section>
 
     
@@ -629,7 +665,8 @@ requires either HTTPOptions::$ca_info or a properly working system CA file</p>
     <abbr class="phpdocumentor-element-found-in__file" title="src/HTTPOptionsTrait.php"><a href="files/src-httpoptionstrait.html"><abbr title="src/HTTPOptionsTrait.php">HTTPOptionsTrait.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">99</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">HTTPOptionsTrait constructor</p>
 
@@ -637,8 +674,7 @@ requires either HTTPOptions::$ca_info or a properly working system CA file</p>
     <span class="phpdocumentor-signature__visibility">protected</span>
                 <span class="phpdocumentor-signature__name">HTTPOptionsTrait</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
@@ -652,16 +688,14 @@ requires either HTTPOptions::$ca_info or a properly working system CA file</p>
                 <dd class="phpdocumentor-tag-list__definition">
                                                                 <span class="phpdocumentor-tag-link"><abbr title="\Psr\Http\Client\ClientExceptionInterface">ClientExceptionInterface</abbr></span>
                                                             
-                                                 <section class="phpdocumentor-description"></section>
-
+                                             
                                     </dd>
                         </dl>
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">void</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -678,15 +712,15 @@ requires either HTTPOptions::$ca_info or a properly working system CA file</p>
     <abbr class="phpdocumentor-element-found-in__file" title="src/HTTPOptionsTrait.php"><a href="files/src-httpoptionstrait.html"><abbr title="src/HTTPOptionsTrait.php">HTTPOptionsTrait.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">115</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
                 <span class="phpdocumentor-signature__name">setCA</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
@@ -700,19 +734,79 @@ requires either HTTPOptions::$ca_info or a properly working system CA file</p>
                 <dd class="phpdocumentor-tag-list__definition">
                                                                 <span class="phpdocumentor-tag-link"><abbr title="\Psr\Http\Client\ClientExceptionInterface">ClientExceptionInterface</abbr></span>
                                                             
-                                                 <section class="phpdocumentor-description"></section>
-
+                                             
                                     </dd>
                         </dl>
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">void</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
             </section>
+
+        
+    <script type="text/javascript">
+        function loadExternalCodeSnippets(line) {
+            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                var src = pre.getAttribute('data-src').replace( /\\/g, '/');
+                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+                var language = 'php';
+
+                var code = document.createElement('code');
+                code.className = 'language-' + language;
+
+                pre.textContent = '';
+
+                pre.setAttribute('data-line', line)
+                code.textContent = 'Loading…';
+
+                pre.appendChild(code);
+
+                var xhr = new XMLHttpRequest();
+
+                xhr.open('GET', src, true);
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) {
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+
+                            Prism.highlightElement(code);
+                        }
+                        else if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                        }
+                        else {
+                            code.textContent = '✖ Error: File does not exist, is empty or trying to view from localhost';
+                        }
+                    }
+                };
+
+                xhr.send(null);
+            });
+        }
+
+        var modals = document.querySelectorAll("[data-modal]");
+
+        modals.forEach(function (trigger) {
+            trigger.addEventListener("click", function (event) {
+                //event.preventDefault();
+                const modal = document.getElementById(trigger.dataset.modal);
+                modal.classList.add("phpdocumentor-modal__open");
+                loadExternalCodeSnippets(trigger.dataset.line)
+                const exits = modal.querySelectorAll("[data-exit-button]");
+                exits.forEach(function (exit) {
+                    exit.addEventListener("click", function (event) {
+                        event.preventDefault();
+                        modal.classList.remove("phpdocumentor-modal__open");
+                    });
+                });
+            });
+        });
+    </script>
 
     </article>
                 <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
@@ -735,5 +829,9 @@ requires either HTTPOptions::$ca_info or a properly working system CA file</p>
     <script>
         cssVars({});
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
 </body>
 </html>
