@@ -12,7 +12,6 @@
 
 namespace chillerlan\HTTP\Psr18;
 
-use ErrorException, Exception;
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
 
 use function chillerlan\HTTP\Utils\message_to_string;
@@ -57,23 +56,17 @@ class StreamClient extends HTTPClientAbstract{
 			],
 		]);
 
-		$requestUri = (string)$uri->withFragment('');
+		$errorHandler = function(int $errno, string $errstr):bool{
+			$this->logger->error('StreamClient error #'.$errno.': '.$errstr);
 
-		/** @phan-suppress-next-line PhanTypeMismatchArgumentInternal */
-		set_error_handler(function(int $severity, string $msg, string $file, int $line):void{
-			throw new ErrorException($msg, 0, $severity, $file, $line);
-		});
+			throw new ClientException($errstr, $errno);
+		};
 
-		try{
-			$responseBody    = file_get_contents($requestUri, false, $context);
-			/** @phan-suppress-next-line PhanTypeMismatchArgumentInternal https://github.com/phan/phan/issues/3273 */
-			$responseHeaders = $this->parseResponseHeaders(get_headers($requestUri, 1, $context));
-		}
-		catch(Exception $e){
-			$this->logger->error('StreamClient error #'.$e->getCode().': '.$e->getMessage());
+		set_error_handler($errorHandler);
 
-			throw new ClientException($e->getMessage(), $e->getCode());
-		}
+		$requestUri      = (string)$uri->withFragment('');
+		$responseBody    = file_get_contents($requestUri, false, $context);
+		$responseHeaders = $this->parseResponseHeaders(get_headers($requestUri, true, $context));
 
 		restore_error_handler();
 
