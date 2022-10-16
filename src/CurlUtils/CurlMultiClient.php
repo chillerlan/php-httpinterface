@@ -96,6 +96,7 @@ final class CurlMultiClient implements LoggerAwareInterface{
 	public function close():void{
 
 		if(is_resource($this->curl_multi)){
+			/** @phan-suppress-next-line PhanTypeMismatchArgumentInternalReal */
 			curl_multi_close($this->curl_multi);
 		}
 

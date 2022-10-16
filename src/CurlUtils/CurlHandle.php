@@ -113,6 +113,7 @@ class CurlHandle{
 	public function close():CurlHandle{
 
 		if(is_resource($this->curl)){
+			/** @phan-suppress-next-line PhanTypeMismatchArgumentInternalReal */
 			curl_close($this->curl);
 		}
 
