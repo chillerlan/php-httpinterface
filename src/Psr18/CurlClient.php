@@ -14,7 +14,7 @@ use chillerlan\HTTP\CurlUtils\CurlHandle;
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
 
 use function chillerlan\HTTP\Utils\message_to_string;
-use function curl_errno, curl_error, curl_exec, in_array, sprintf;
+use function in_array, sprintf;
 
 use const CURLE_OK;
 
