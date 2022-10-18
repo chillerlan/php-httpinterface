@@ -197,11 +197,32 @@ requires either HTTPOptions::$ca_info or a properly working system CA file</dd>
 <dd>maximum of concurrent requests for curl_multi</dd>
 
                 <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a href="classes/chillerlan-HTTP-HTTPOptionsTrait.html#method_checkCA">checkCA()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Check whether the given CA info exists and if it is file or dir</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
     <a href="classes/chillerlan-HTTP-HTTPOptionsTrait.html#method_HTTPOptionsTrait">HTTPOptionsTrait()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
 <dd>HTTPOptionsTrait constructor</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a href="classes/chillerlan-HTTP-HTTPOptionsTrait.html#method_set_ca_info">set_ca_info()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a href="classes/chillerlan-HTTP-HTTPOptionsTrait.html#method_set_curl_options">set_curl_options()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
     <a href="classes/chillerlan-HTTP-HTTPOptionsTrait.html#method_setCA">setCA()</a>
@@ -297,7 +318,7 @@ requires either HTTPOptions::$ca_info or a properly working system CA file</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/HTTPOptionsTrait.php"><a href="files/src-httpoptionstrait.html"><abbr title="src/HTTPOptionsTrait.php">HTTPOptionsTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">92</span>
+    <span class="phpdocumentor-element-found-in__line">97</span>
 
     </aside>
 
@@ -349,7 +370,7 @@ this does not necessarily mean that the TLS connection is insecure.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/HTTPOptionsTrait.php"><a href="files/src-httpoptionstrait.html"><abbr title="src/HTTPOptionsTrait.php">HTTPOptionsTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">58</span>
+    <span class="phpdocumentor-element-found-in__line">63</span>
 
     </aside>
 
@@ -433,7 +454,7 @@ none of the values (except existence of the CA file) will be checked - that's up
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/HTTPOptionsTrait.php"><a href="files/src-httpoptionstrait.html"><abbr title="src/HTTPOptionsTrait.php">HTTPOptionsTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">80</span>
+    <span class="phpdocumentor-element-found-in__line">85</span>
 
     </aside>
 
@@ -467,7 +488,7 @@ none of the values (except existence of the CA file) will be checked - that's up
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/HTTPOptionsTrait.php"><a href="files/src-httpoptionstrait.html"><abbr title="src/HTTPOptionsTrait.php">HTTPOptionsTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">68</span>
+    <span class="phpdocumentor-element-found-in__line">73</span>
 
     </aside>
 
@@ -501,7 +522,7 @@ none of the values (except existence of the CA file) will be checked - that's up
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/HTTPOptionsTrait.php"><a href="files/src-httpoptionstrait.html"><abbr title="src/HTTPOptionsTrait.php">HTTPOptionsTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">51</span>
+    <span class="phpdocumentor-element-found-in__line">56</span>
 
     </aside>
 
@@ -549,7 +570,7 @@ requires either HTTPOptions::$ca_info or a properly working system CA file</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/HTTPOptionsTrait.php"><a href="files/src-httpoptionstrait.html"><abbr title="src/HTTPOptionsTrait.php">HTTPOptionsTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">75</span>
+    <span class="phpdocumentor-element-found-in__line">80</span>
 
     </aside>
 
@@ -631,7 +652,7 @@ requires either HTTPOptions::$ca_info or a properly working system CA file</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/HTTPOptionsTrait.php"><a href="files/src-httpoptionstrait.html"><abbr title="src/HTTPOptionsTrait.php">HTTPOptionsTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">63</span>
+    <span class="phpdocumentor-element-found-in__line">68</span>
 
     </aside>
 
@@ -662,6 +683,65 @@ requires either HTTPOptions::$ca_info or a properly working system CA file</p>
             -protected
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_checkCA">
+        checkCA()
+        <a href="classes/chillerlan-HTTP-HTTPOptionsTrait.html#method_checkCA" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/HTTPOptionsTrait.php"><a href="files/src-httpoptionstrait.html"><abbr title="src/HTTPOptionsTrait.php">HTTPOptionsTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">235</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Check whether the given CA info exists and if it is file or dir</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                    <span class="phpdocumentor-signature__name">checkCA</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$ca</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$ca</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">phan-suppress</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>PhanTypeMismatchArgumentNullableInternal</p>
+</section>
+
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">bool</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_HTTPOptionsTrait">
         HTTPOptionsTrait()
         <a href="classes/chillerlan-HTTP-HTTPOptionsTrait.html#method_HTTPOptionsTrait" class="headerlink"><i class="fas fa-link"></i></a>
@@ -669,7 +749,7 @@ requires either HTTPOptions::$ca_info or a properly working system CA file</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/HTTPOptionsTrait.php"><a href="files/src-httpoptionstrait.html"><abbr title="src/HTTPOptionsTrait.php">HTTPOptionsTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">99</span>
+    <span class="phpdocumentor-element-found-in__line">104</span>
 
     </aside>
 
@@ -709,9 +789,9 @@ requires either HTTPOptions::$ca_info or a properly working system CA file</p>
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_setCA">
-        setCA()
-        <a href="classes/chillerlan-HTTP-HTTPOptionsTrait.html#method_setCA" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_set_ca_info">
+        set_ca_info()
+        <a href="classes/chillerlan-HTTP-HTTPOptionsTrait.html#method_set_ca_info" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/HTTPOptionsTrait.php"><a href="files/src-httpoptionstrait.html"><abbr title="src/HTTPOptionsTrait.php">HTTPOptionsTrait.php</abbr></a></abbr>
@@ -723,10 +803,107 @@ requires either HTTPOptions::$ca_info or a properly working system CA file</p>
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-                    <span class="phpdocumentor-signature__name">setCA</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">set_ca_info</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$ca_info</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$ca_info</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
     
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">void</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_set_curl_options">
+        set_curl_options()
+        <a href="classes/chillerlan-HTTP-HTTPOptionsTrait.html#method_set_curl_options" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/HTTPOptionsTrait.php"><a href="files/src-httpoptionstrait.html"><abbr title="src/HTTPOptionsTrait.php">HTTPOptionsTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">122</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                    <span class="phpdocumentor-signature__name">set_curl_options</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$curl_options</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$curl_options</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">void</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setCA">
+        setCA()
+        <a href="classes/chillerlan-HTTP-HTTPOptionsTrait.html#method_setCA" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/HTTPOptionsTrait.php"><a href="files/src-httpoptionstrait.html"><abbr title="src/HTTPOptionsTrait.php">HTTPOptionsTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">146</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                    <span class="phpdocumentor-signature__name">setCA</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$ca_info</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$ca_info</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
