@@ -94,7 +94,7 @@ class HTTPOptionsTest extends TestCase{
 
 		new HTTPOptions(['curl_options' => [CURLOPT_CAINFO => 'foo']]);
 	}
-
+/*
 	public function testCaInfoFallback():void{
 
 		if(file_exists(ini_get('curl.cainfo'))){
@@ -108,7 +108,7 @@ class HTTPOptionsTest extends TestCase{
 		$this::assertSame(2, $curl_options[CURLOPT_SSL_VERIFYHOST]);
 		$this::assertSame(true, $curl_options[CURLOPT_SSL_VERIFYPEER]);
 	}
-
+*/
 	public function testSetVerifyPeer():void{
 		// no ca given -> false
 		$options      = new HTTPOptions(['ssl_verifypeer' => true]);
