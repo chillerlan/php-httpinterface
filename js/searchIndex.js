@@ -1701,11 +1701,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testCurloptCaInfoInvalidException"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\HTTPOptionsTest\u003A\u003AtestCaInfoFallback\u0028\u0029",
-            "name": "testCaInfoFallback",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testCaInfoFallback"
-        },                {
             "fqsen": "\\chillerlan\\HTTPTest\\HTTPOptionsTest\u003A\u003AtestSetVerifyPeer\u0028\u0029",
             "name": "testSetVerifyPeer",
             "summary": "",
