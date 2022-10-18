@@ -13,7 +13,7 @@ namespace chillerlan\HTTP\CurlUtils;
 use chillerlan\Settings\SettingsContainerInterface;
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
 
-use function array_key_exists, count, curl_close, curl_init, curl_setopt_array,
+use function array_key_exists, count, curl_close, curl_errno, curl_error, curl_exec, curl_init, curl_setopt_array,
 	explode, in_array, is_resource, strlen, strtolower, strtoupper, substr, trim;
 
 use const CURL_HTTP_VERSION_2TLS, CURLE_COULDNT_CONNECT, CURLE_COULDNT_RESOLVE_HOST, CURLE_COULDNT_RESOLVE_PROXY,
@@ -26,7 +26,7 @@ use const CURL_HTTP_VERSION_2TLS, CURLE_COULDNT_CONNECT, CURLE_COULDNT_RESOLVE_H
 
 class CurlHandle{
 
-	const CURL_NETWORK_ERRORS = [
+	public const CURL_NETWORK_ERRORS = [
 		CURLE_COULDNT_RESOLVE_PROXY,
 		CURLE_COULDNT_RESOLVE_HOST,
 		CURLE_COULDNT_CONNECT,
@@ -38,7 +38,7 @@ class CurlHandle{
 	// https://www.php.net/manual/function.curl-getinfo.php#111678
 	// https://www.openssl.org/docs/manmaster/man1/verify.html#VERIFY_OPERATION
 	// https://github.com/openssl/openssl/blob/91cb81d40a8102c3d8667629661be8d6937db82b/include/openssl/x509_vfy.h#L99-L189
-	const CURLINFO_SSL_VERIFYRESULT = [
+	public const CURLINFO_SSL_VERIFYRESULT = [
 		0  => 'ok the operation was successful.',
 		2  => 'unable to get issuer certificate',
 		3  => 'unable to get certificate CRL',
@@ -82,6 +82,8 @@ class CurlHandle{
 	protected $curl;
 
 	protected array $curlOptions = [];
+
+	protected bool $initialized = false;
 
 	/**
 	 * @var \chillerlan\Settings\SettingsContainerInterface|\chillerlan\HTTP\HTTPOptions
@@ -326,9 +328,10 @@ class CurlHandle{
 	}
 
 	/**
-	 *
+	 * @phan-suppress PhanUndeclaredTypeReturnType
+	 * @return resource|\CurlHandle|null
 	 */
-	public function init():CurlHandle{
+	public function init(){
 		$options = $this->initCurlOptions();
 
 		if(!isset($options[CURLOPT_HEADERFUNCTION])){
@@ -341,7 +344,30 @@ class CurlHandle{
 
 		curl_setopt_array($this->curl, $options);
 
-		return $this;
+		$this->initialized = true;
+
+		return $this->curl;
+	}
+
+	/**
+	 *
+	 */
+	public function exec():int{
+
+		if(!$this->initialized){
+			$this->init();
+		}
+
+		curl_exec($this->curl);
+
+		return curl_errno($this->curl);
+	}
+
+	/**
+	 *
+	 */
+	public function getError():string{
+		return curl_error($this->curl);
 	}
 
 	/**

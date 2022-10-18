@@ -23,9 +23,10 @@ use const CURLOPT_CAINFO, CURLOPT_CAPATH, CURLOPT_SSL_VERIFYHOST, CURLOPT_SSL_VE
 class HTTPOptionsTest extends TestCase{
 
 	protected function createTestHandleOptions(HTTPOptions $options):array{
-		return (new CurlHandle(new Request('GET', 'http://example.com'), new Response, $options))
-			->init()
-			->getCurlOptions();
+		$ch = new CurlHandle(new Request('GET', 'http://example.com'), new Response, $options);
+		$ch->init();
+
+		return $ch->getCurlOptions();
 	}
 
 	public function testInvalidUserAgentException():void{
