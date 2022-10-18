@@ -10,7 +10,9 @@
 
 namespace chillerlan\HTTPTest;
 
+use chillerlan\HTTP\CurlUtils\CurlHandle;
 use chillerlan\HTTP\HTTPOptions;
+use chillerlan\HTTP\Psr7\{Request, Response};
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientExceptionInterface;
 
@@ -20,6 +22,12 @@ use const CURLOPT_CAINFO, CURLOPT_CAPATH, CURLOPT_SSL_VERIFYHOST, CURLOPT_SSL_VE
 
 class HTTPOptionsTest extends TestCase{
 
+	protected function createTestHandleOptions(HTTPOptions $options):array{
+		return (new CurlHandle(new Request('GET', 'http://example.com'), new Response, $options))
+			->init()
+			->getCurlOptions();
+	}
+
 	public function testInvalidUserAgentException():void{
 		$this->expectException(ClientExceptionInterface::class);
 		$this->expectExceptionMessage('invalid user agent');
@@ -27,71 +35,61 @@ class HTTPOptionsTest extends TestCase{
 		new HTTPOptions(['user_agent' => false]);
 	}
 
-	public function testCaDisable():void{
-		$o = new HTTPOptions([
-			'ssl_verifypeer' => false,
-			'curl_options'   => [
-				CURLOPT_CAINFO => 'foo',
-				CURLOPT_CAPATH => 'bar',
-			],
-		]);
-
-		$this::assertSame(0, $o->curl_options[CURLOPT_SSL_VERIFYHOST]);
-		$this::assertSame(false, $o->curl_options[CURLOPT_SSL_VERIFYPEER]);
-		$this::assertArrayNotHasKey(CURLOPT_CAINFO, $o->curl_options);
-		$this::assertArrayNotHasKey(CURLOPT_CAPATH, $o->curl_options);
-	}
-
-	public function testCaInfoFile():void{
-		$file = __DIR__.'/cacert.pem';
-		$o    = new HTTPOptions(['ca_info' => $file]);
-
-		$this::assertSame($file, $o->curl_options[CURLOPT_CAINFO]);
-		$this::assertSame(2, $o->curl_options[CURLOPT_SSL_VERIFYHOST]);
-		$this::assertSame(true, $o->curl_options[CURLOPT_SSL_VERIFYPEER]);
-		$this::assertArrayNotHasKey(CURLOPT_CAPATH, $o->curl_options);
-	}
-
-	public function testCaInfoDir():void{
-		$dir = __DIR__;
-		$o   = new HTTPOptions(['ca_info' => $dir]);
-
-		$this::assertSame($dir, $o->curl_options[CURLOPT_CAPATH]);
-		$this::assertSame(2, $o->curl_options[CURLOPT_SSL_VERIFYHOST]);
-		$this::assertSame(true, $o->curl_options[CURLOPT_SSL_VERIFYPEER]);
-		$this::assertArrayNotHasKey(CURLOPT_CAINFO, $o->curl_options);
-	}
-
-	public function testCaInfoInvalidException():void{
+	public function testInvalidCAException():void{
 		$this->expectException(ClientExceptionInterface::class);
-		$this->expectExceptionMessage('invalid path to SSL CA bundle (HTTPOptions::$ca_info): foo');
+		$this->expectExceptionMessage('invalid path to SSL CA bundle');
 
 		new HTTPOptions(['ca_info' => 'foo']);
 	}
 
-	public function testCurloptCaInfoFile():void{
-		$file = __DIR__.'/cacert.pem';
-		$o    = new HTTPOptions(['curl_options' => [CURLOPT_CAINFO => $file]]);
+	public function testCaInfoFile():void{
+		$file         = __DIR__.'/cacert.pem';
+		// via the ca_info option
+		$options      = new HTTPOptions(['ca_info' => $file]);
+		$curl_options = $this->createTestHandleOptions($options);
+		$this::assertSame($file, $curl_options[CURLOPT_CAINFO]);
+		$this::assertSame(2, $curl_options[CURLOPT_SSL_VERIFYHOST]);
+		$this::assertSame(true, $curl_options[CURLOPT_SSL_VERIFYPEER]);
+		$this::assertArrayNotHasKey(CURLOPT_CAPATH, $curl_options);
 
-		$this::assertSame($file, $o->curl_options[CURLOPT_CAINFO]);
-		$this::assertSame(2, $o->curl_options[CURLOPT_SSL_VERIFYHOST]);
-		$this::assertSame(true, $o->curl_options[CURLOPT_SSL_VERIFYPEER]);
-		$this::assertArrayNotHasKey(CURLOPT_CAPATH, $o->curl_options);
+		// via curl_options
+		$options      = new HTTPOptions(['curl_options' => [CURLOPT_CAINFO => $file]]);
+		$curl_options = $this->createTestHandleOptions($options);
+		$this::assertSame($file, $curl_options[CURLOPT_CAINFO]);
+		$this::assertSame(2, $curl_options[CURLOPT_SSL_VERIFYHOST]);
+		$this::assertSame(true, $curl_options[CURLOPT_SSL_VERIFYPEER]);
+		$this::assertArrayNotHasKey(CURLOPT_CAPATH, $curl_options);
 	}
 
-	public function testCurloptCaInfoDir():void{
-		$dir = __DIR__;
-		$o   = new HTTPOptions(['curl_options' => [CURLOPT_CAPATH => $dir]]);
+	public function testCaInfoDir():void{
+		$dir          = __DIR__;
+		// via the ca_info option
+		$options      = new HTTPOptions(['ca_info' => $dir]);
+		$curl_options = $this->createTestHandleOptions($options);
+		$this::assertSame($dir, $curl_options[CURLOPT_CAPATH]);
+		$this::assertSame(2, $curl_options[CURLOPT_SSL_VERIFYHOST]);
+		$this::assertSame(true, $curl_options[CURLOPT_SSL_VERIFYPEER]);
+		$this::assertArrayNotHasKey(CURLOPT_CAINFO, $curl_options);
 
-		$this::assertSame($dir, $o->curl_options[CURLOPT_CAPATH]);
-		$this::assertSame(2, $o->curl_options[CURLOPT_SSL_VERIFYHOST]);
-		$this::assertSame(true, $o->curl_options[CURLOPT_SSL_VERIFYPEER]);
-		$this::assertArrayNotHasKey(CURLOPT_CAINFO, $o->curl_options);
+		// via curl_options
+		$options      = new HTTPOptions(['curl_options' => [CURLOPT_CAPATH => $dir]]);
+		$curl_options = $this->createTestHandleOptions($options);
+		$this::assertSame($dir, $curl_options[CURLOPT_CAPATH]);
+		$this::assertSame(2, $curl_options[CURLOPT_SSL_VERIFYHOST]);
+		$this::assertSame(true, $curl_options[CURLOPT_SSL_VERIFYPEER]);
+		$this::assertArrayNotHasKey(CURLOPT_CAINFO, $curl_options);
+	}
+
+	public function testCaInfoInvalidException():void{
+		$this->expectException(ClientExceptionInterface::class);
+		$this->expectExceptionMessage('invalid path to SSL CA bundle');
+
+		new HTTPOptions(['ca_info' => 'foo']);
 	}
 
 	public function testCurloptCaInfoInvalidException():void{
 		$this->expectException(ClientExceptionInterface::class);
-		$this->expectExceptionMessage('invalid path to SSL CA bundle (CURLOPT_CAPATH/CURLOPT_CAINFO): foo');
+		$this->expectExceptionMessage('invalid path to SSL CA bundle');
 
 		new HTTPOptions(['curl_options' => [CURLOPT_CAINFO => 'foo']]);
 	}
@@ -102,11 +100,29 @@ class HTTPOptionsTest extends TestCase{
 			$this->markTestSkipped('curl.cainfo set');
 		}
 
-		$o = new HTTPOptions;
+		$options      = new HTTPOptions;
+		$curl_options = $this->createTestHandleOptions($options);
 
-		$this::assertFileExists($o->curl_options[CURLOPT_CAINFO]);
-		$this::assertSame(2, $o->curl_options[CURLOPT_SSL_VERIFYHOST]);
-		$this::assertSame(true, $o->curl_options[CURLOPT_SSL_VERIFYPEER]);
+		$this::assertFileExists($curl_options[CURLOPT_CAINFO]);
+		$this::assertSame(2, $curl_options[CURLOPT_SSL_VERIFYHOST]);
+		$this::assertSame(true, $curl_options[CURLOPT_SSL_VERIFYPEER]);
+	}
+
+	public function testSetVerifyPeer():void{
+		// no ca given -> false
+		$options      = new HTTPOptions(['ssl_verifypeer' => true]);
+		$curl_options = $this->createTestHandleOptions($options);
+		$this::assertFalse($curl_options[CURLOPT_SSL_VERIFYPEER]);
+
+		// with CA
+		$options      = new HTTPOptions(['ssl_verifypeer' => true, 'ca_info' => __DIR__.'/cacert.pem']);
+		$curl_options = $this->createTestHandleOptions($options);
+		$this::assertTrue($curl_options[CURLOPT_SSL_VERIFYPEER]);
+
+		// set to false, obv
+		$options      = new HTTPOptions(['ssl_verifypeer' => false]);
+		$curl_options = $this->createTestHandleOptions($options);
+		$this::assertFalse($curl_options[CURLOPT_SSL_VERIFYPEER]);
 	}
 
 }

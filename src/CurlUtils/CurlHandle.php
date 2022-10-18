@@ -16,13 +16,13 @@ use Psr\Http\Message\{RequestInterface, ResponseInterface};
 use function array_key_exists, count, curl_close, curl_init, curl_setopt_array,
 	explode, in_array, is_resource, strlen, strtolower, strtoupper, substr, trim;
 
-use const CURLOPT_CAINFO, CURLOPT_CONNECTTIMEOUT, CURLOPT_CUSTOMREQUEST, CURLOPT_FOLLOWLOCATION, CURLOPT_HEADER,
-	CURLOPT_HEADERFUNCTION, CURLOPT_HTTP_VERSION, CURLOPT_HTTPHEADER, CURLOPT_INFILESIZE, CURLOPT_MAXREDIRS,
-	CURLOPT_NOBODY, CURLOPT_POSTFIELDS, CURLOPT_PROTOCOLS, CURLOPT_READFUNCTION, CURLOPT_RETURNTRANSFER,
-	CURLOPT_SSL_VERIFYHOST, CURLOPT_SSL_VERIFYPEER, CURLOPT_SSL_VERIFYSTATUS, CURLOPT_TIMEOUT, CURLOPT_UPLOAD, CURLOPT_URL,
-	CURLOPT_USERAGENT, CURLOPT_USERPWD, CURLOPT_WRITEFUNCTION, CURLPROTO_HTTP, CURLPROTO_HTTPS, CURL_HTTP_VERSION_2TLS,
-	CURLE_COULDNT_CONNECT, CURLE_COULDNT_RESOLVE_HOST, CURLE_COULDNT_RESOLVE_PROXY,
-	CURLE_GOT_NOTHING, CURLE_OPERATION_TIMEOUTED, CURLE_SSL_CONNECT_ERROR;
+use const CURL_HTTP_VERSION_2TLS, CURLE_COULDNT_CONNECT, CURLE_COULDNT_RESOLVE_HOST, CURLE_COULDNT_RESOLVE_PROXY,
+	CURLE_GOT_NOTHING, CURLE_OPERATION_TIMEOUTED, CURLE_SSL_CONNECT_ERROR, CURLOPT_CAINFO, CURLOPT_CAPATH,
+	CURLOPT_CONNECTTIMEOUT, CURLOPT_CUSTOMREQUEST, CURLOPT_FOLLOWLOCATION, CURLOPT_HEADER, CURLOPT_HEADERFUNCTION,
+	CURLOPT_HTTP_VERSION, CURLOPT_HTTPHEADER, CURLOPT_INFILESIZE, CURLOPT_MAXREDIRS, CURLOPT_NOBODY, CURLOPT_POSTFIELDS,
+	CURLOPT_PROTOCOLS, CURLOPT_READFUNCTION, CURLOPT_REDIR_PROTOCOLS, CURLOPT_RETURNTRANSFER, CURLOPT_SSL_VERIFYHOST,
+	CURLOPT_SSL_VERIFYPEER, CURLOPT_SSL_VERIFYSTATUS, CURLOPT_TIMEOUT, CURLOPT_UPLOAD, CURLOPT_URL, CURLOPT_USERAGENT,
+	CURLOPT_USERPWD, CURLOPT_WRITEFUNCTION, CURLPROTO_HTTP, CURLPROTO_HTTPS;
 
 class CurlHandle{
 
@@ -81,6 +81,8 @@ class CurlHandle{
 	 */
 	protected $curl;
 
+	protected array $curlOptions = [];
+
 	/**
 	 * @var \chillerlan\Settings\SettingsContainerInterface|\chillerlan\HTTP\HTTPOptions
 	 */
@@ -108,7 +110,7 @@ class CurlHandle{
 	}
 
 	/**
-	 * @return \chillerlan\HTTP\CurlUtils\CurlHandle
+	 *
 	 */
 	public function close():CurlHandle{
 
@@ -144,12 +146,17 @@ class CurlHandle{
 	}
 
 	/**
+	 * @codeCoverageIgnore
+	 */
+	public function getCurlOptions():array{
+		return $this->curlOptions;
+	}
+
+	/**
 	 * @link https://php.watch/articles/php-curl-security-hardening
-	 *
-	 * @return array
 	 */
 	protected function initCurlOptions():array{
-		return [
+		$this->curlOptions = [
 			CURLOPT_HEADER           => false,
 			CURLOPT_RETURNTRANSFER   => true,
 			CURLOPT_FOLLOWLOCATION   => false,
@@ -159,28 +166,26 @@ class CurlHandle{
 			CURLOPT_USERAGENT        => $this->options->user_agent,
 			CURLOPT_PROTOCOLS        => CURLPROTO_HTTP | CURLPROTO_HTTPS,
 			CURLOPT_REDIR_PROTOCOLS  => CURLPROTO_HTTPS,
-			CURLOPT_SSL_VERIFYPEER   => true,
-			CURLOPT_SSL_VERIFYHOST   => 2,
-			CURLOPT_SSL_VERIFYSTATUS => $this->options->curl_check_OCSP,
-			CURLOPT_CAINFO           => $this->options->ca_info,
 			CURLOPT_TIMEOUT          => $this->options->timeout,
 			CURLOPT_CONNECTTIMEOUT   => 30,
-			CURLOPT_WRITEFUNCTION    => [$this, 'writefunction'],
-			CURLOPT_HEADERFUNCTION   => [$this, 'headerfunction'],
 		];
+
+		$this->setSSLOptions();
+		$this->setRequestOptions();
+		$this->setHeaderOptions();
+
+		return $this->curlOptions;
 	}
 
 	/**
-	 * @param array $options
 	 *
-	 * @return array
 	 */
-	protected function setBodyOptions(array $options):array{
+	protected function setBodyOptions():void{
 		$body     = $this->request->getBody();
 		$bodySize = $body->getSize();
 
 		if($bodySize === 0){
-			return $options;
+			return;
 		}
 
 		if($body->isSeekable()){
@@ -188,30 +193,48 @@ class CurlHandle{
 		}
 
 		// Message has non empty body.
-		if($bodySize === null || $bodySize > 1 << 20){
+		if($bodySize === null || $bodySize > (1 << 20)){
 			// Avoid full loading large or unknown size body into memory
-			$options[CURLOPT_UPLOAD] = true;
+			$this->curlOptions[CURLOPT_UPLOAD] = true;
 
 			if($bodySize !== null){
-				$options[CURLOPT_INFILESIZE] = $bodySize;
+				$this->curlOptions[CURLOPT_INFILESIZE] = $bodySize;
 			}
 
-			$options[CURLOPT_READFUNCTION] = [$this, 'readfunction'];
+			$this->curlOptions[CURLOPT_READFUNCTION] = [$this, 'readfunction'];
 		}
 		// Small body can be loaded into memory
 		else{
-			$options[CURLOPT_POSTFIELDS] = (string)$body;
+			$this->curlOptions[CURLOPT_POSTFIELDS] = (string)$body;
 		}
-
-		return $options;
 	}
 
 	/**
-	 * @param array $options
 	 *
-	 * @return array
 	 */
-	protected function setHeaderOptions(array $options):array{
+	protected function setSSLOptions():void{
+		$this->curlOptions[CURLOPT_SSL_VERIFYHOST] = 2;
+		$this->curlOptions[CURLOPT_SSL_VERIFYPEER] = false;
+
+		if($this->options->ca_info !== null){
+			$opt                     = $this->options->ca_info_is_path ? CURLOPT_CAPATH : CURLOPT_CAINFO;
+			$this->curlOptions[$opt] = $this->options->ca_info;
+
+			if($this->options->ssl_verifypeer){
+				$this->curlOptions[CURLOPT_SSL_VERIFYPEER] = true;
+			}
+
+			if($this->options->curl_check_OCSP){
+				$this->curlOptions[CURLOPT_SSL_VERIFYSTATUS] = true;
+			}
+		}
+
+	}
+
+	/**
+	 *
+	 */
+	protected function setHeaderOptions():void{
 		$headers = [];
 
 		foreach($this->request->getHeaders() as $name => $values){
@@ -225,11 +248,11 @@ class CurlHandle{
 			if($header === 'content-length'){
 
 				// Small body content length can be calculated here.
-				if(array_key_exists(CURLOPT_POSTFIELDS, $options)){
-					$values = [strlen($options[CURLOPT_POSTFIELDS])];
+				if(array_key_exists(CURLOPT_POSTFIELDS, $this->curlOptions)){
+					$values = [strlen($this->curlOptions[CURLOPT_POSTFIELDS])];
 				}
 				// Else if there is no body, forcing "Content-length" to 0
-				elseif(!array_key_exists(CURLOPT_READFUNCTION, $options)){
+				elseif(!array_key_exists(CURLOPT_READFUNCTION, $this->curlOptions)){
 					$values = ['0'];
 				}
 
@@ -253,21 +276,18 @@ class CurlHandle{
 			$headers[] = 'Content-Type:';
 		}
 
-		$options[CURLOPT_HTTPHEADER] = $headers;
-
-		return $options;
+		$this->curlOptions[CURLOPT_HTTPHEADER] = $headers;
 	}
 
 	/**
-	 * @return \chillerlan\HTTP\CurlUtils\CurlHandle
+	 *
 	 */
-	public function init():CurlHandle{
-		$options  = $this->initCurlOptions();
+	public function setRequestOptions():void{
 		$userinfo = $this->request->getUri()->getUserInfo();
 		$method   = $this->request->getMethod();
 
 		if(!empty($userinfo)){
-			$options[CURLOPT_USERPWD] = $userinfo;
+			$this->curlOptions[CURLOPT_USERPWD] = $userinfo;
 		}
 
 		/*
@@ -280,30 +300,44 @@ class CurlHandle{
 		 */
 
 		if(in_array($method, ['DELETE', 'PATCH', 'POST', 'PUT'], true)){
-			$options = $this->setBodyOptions($options);
+			$this->setBodyOptions();
 		}
 
 		// This will set HTTP method to "HEAD".
 		if($method === 'HEAD'){
-			$options[CURLOPT_NOBODY] = true;
+			$this->curlOptions[CURLOPT_NOBODY] = true;
 		}
 
 		// GET is a default method. Other methods should be specified explicitly.
 		if($method !== 'GET'){
-			$options[CURLOPT_CUSTOMREQUEST] = $method;
+			$this->curlOptions[CURLOPT_CUSTOMREQUEST] = $method;
 		}
 
 		// overwrite the default values with $curl_options
-		foreach($this->options->curl_options ?? [] as $k => $v){
+		foreach($this->options->curl_options as $k => $v){
 			// skip some options that are only set automatically
 			if(in_array($k, [CURLOPT_HTTPHEADER, CURLOPT_CUSTOMREQUEST, CURLOPT_NOBODY], true)){
 				continue;
 			}
 
-			$options[$k] = $v;
+			$this->curlOptions[$k] = $v;
 		}
 
-		$options = $this->setHeaderOptions($options);
+	}
+
+	/**
+	 *
+	 */
+	public function init():CurlHandle{
+		$options = $this->initCurlOptions();
+
+		if(!isset($options[CURLOPT_HEADERFUNCTION])){
+			$options[CURLOPT_HEADERFUNCTION] = [$this, 'headerfunction'];
+		}
+
+		if(!isset($options[CURLOPT_WRITEFUNCTION])){
+			$options[CURLOPT_WRITEFUNCTION] = [$this, 'writefunction'];
+		}
 
 		curl_setopt_array($this->curl, $options);
 
