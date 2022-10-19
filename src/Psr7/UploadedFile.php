@@ -20,7 +20,7 @@ use function in_array, is_file, is_string, is_writable, move_uploaded_file, php_
 use const UPLOAD_ERR_CANT_WRITE, UPLOAD_ERR_EXTENSION, UPLOAD_ERR_FORM_SIZE, UPLOAD_ERR_INI_SIZE,
 	UPLOAD_ERR_NO_FILE, UPLOAD_ERR_NO_TMP_DIR, UPLOAD_ERR_OK, UPLOAD_ERR_PARTIAL;
 
-final class UploadedFile implements UploadedFileInterface{
+class UploadedFile implements UploadedFileInterface{
 
 	/** @var int[] */
 	public const UPLOAD_ERRORS = [

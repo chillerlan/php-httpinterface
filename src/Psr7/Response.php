@@ -13,7 +13,7 @@ namespace chillerlan\HTTP\Psr7;
 use Fig\Http\Message\StatusCodeInterface;
 use Psr\Http\Message\ResponseInterface;
 
-final class Response extends Message implements ResponseInterface, StatusCodeInterface{
+class Response extends Message implements ResponseInterface, StatusCodeInterface{
 
 	/**
 	 * Status codes and reason phrases

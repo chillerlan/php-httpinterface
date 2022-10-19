@@ -13,7 +13,7 @@ namespace chillerlan\HTTP\Psr17;
 use chillerlan\HTTP\Psr7\Uri;
 use Psr\Http\Message\{UriFactoryInterface, UriInterface};
 
-final class UriFactory implements UriFactoryInterface{
+class UriFactory implements UriFactoryInterface{
 
 	/**
 	 * @inheritDoc

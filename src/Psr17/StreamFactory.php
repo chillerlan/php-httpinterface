@@ -16,7 +16,7 @@ use InvalidArgumentException, RuntimeException;
 
 use function fopen, in_array, is_file, is_readable;
 
-final class StreamFactory implements StreamFactoryInterface{
+class StreamFactory implements StreamFactoryInterface{
 
 	/**
 	 * @inheritDoc

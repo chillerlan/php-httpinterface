@@ -15,7 +15,7 @@ use Psr\Http\Message\ServerRequestInterface;
 
 use function array_key_exists, is_array, is_object;
 
-final class ServerRequest extends Request implements ServerRequestInterface{
+class ServerRequest extends Request implements ServerRequestInterface{
 
 	private array $serverParams;
 

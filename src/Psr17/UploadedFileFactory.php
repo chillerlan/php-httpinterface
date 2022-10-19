@@ -15,7 +15,7 @@ use Psr\Http\Message\{StreamInterface, UploadedFileFactoryInterface, UploadedFil
 
 use const UPLOAD_ERR_OK;
 
-final class UploadedFileFactory implements UploadedFileFactoryInterface{
+class UploadedFileFactory implements UploadedFileFactoryInterface{
 
 	/**
 	 * @inheritDoc

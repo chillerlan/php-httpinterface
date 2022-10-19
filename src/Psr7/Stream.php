@@ -21,7 +21,7 @@ use const chillerlan\HTTP\Psr17\{STREAM_MODES_READ, STREAM_MODES_WRITE};
 /**
  * @property resource|null $stream
  */
-final class Stream extends StreamAbstract{
+class Stream extends StreamAbstract{
 
 	private bool $seekable;
 

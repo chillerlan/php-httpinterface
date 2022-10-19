@@ -14,7 +14,7 @@ use chillerlan\HTTP\Psr7\ServerRequest;
 use Fig\Http\Message\RequestMethodInterface;
 use Psr\Http\Message\{ServerRequestFactoryInterface, ServerRequestInterface};
 
-final class ServerRequestFactory implements ServerRequestFactoryInterface, RequestMethodInterface{
+class ServerRequestFactory implements ServerRequestFactoryInterface, RequestMethodInterface{
 
 	/**
 	 * @inheritDoc

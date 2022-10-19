@@ -21,7 +21,7 @@ use function array_shift, curl_close, curl_multi_add_handle, curl_multi_close, c
 
 use const CURLM_OK, CURLMOPT_MAXCONNECTS, CURLMOPT_PIPELINING, CURLPIPE_MULTIPLEX;
 
-final class CurlMultiClient implements LoggerAwareInterface{
+class CurlMultiClient implements LoggerAwareInterface{
 	use LoggerAwareTrait;
 
 	/** @var \chillerlan\Settings\SettingsContainerInterface|\chillerlan\HTTP\HTTPOptions */
