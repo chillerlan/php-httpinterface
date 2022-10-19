@@ -10,13 +10,13 @@
 
 namespace chillerlan\HTTP\Psr7;
 
+use chillerlan\HTTP\Psr17\FactoryHelpers;
 use InvalidArgumentException, RuntimeException;
 
 use function clearstatcache, fclose, feof, fread, fstat, ftell, fwrite, in_array,
 	is_resource, stream_get_contents, stream_get_meta_data;
 
 use const SEEK_SET;
-use const chillerlan\HTTP\Psr17\{STREAM_MODES_READ, STREAM_MODES_WRITE};
 
 /**
  * @property resource|null $stream
@@ -49,8 +49,8 @@ class Stream extends StreamAbstract{
 		$meta = stream_get_meta_data($this->stream);
 
 		$this->seekable = $meta['seekable'];
-		$this->readable = in_array($meta['mode'], STREAM_MODES_READ);
-		$this->writable = in_array($meta['mode'], STREAM_MODES_WRITE);
+		$this->readable = in_array($meta['mode'], FactoryHelpers::STREAM_MODES_READ);
+		$this->writable = in_array($meta['mode'], FactoryHelpers::STREAM_MODES_WRITE);
 		$this->uri      = $meta['uri'] ?? null;
 	}
 

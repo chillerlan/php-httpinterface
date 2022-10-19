@@ -10,17 +10,17 @@
 
 namespace chillerlan\HTTPTest\Psr17;
 
+use chillerlan\HTTP\Psr17\FactoryHelpers;
 use chillerlan\HTTPTest\TestAbstract;
 use Psr\Http\Message\StreamInterface;
 use InvalidArgumentException, stdClass;
 
-use function chillerlan\HTTP\Psr17\{create_stream, create_stream_from_input};
 use function fopen, fseek, fwrite, simplexml_load_string;
 
 class FactoryHelpersTest extends TestAbstract{
 
 	public function testCreateStream():void{
-		$stream = create_stream('test');
+		$stream = FactoryHelpers::create_stream('test');
 
 		$this::assertInstanceOf(Streaminterface::class, $stream);
 		$this::assertSame('test', $stream->getContents());
@@ -30,7 +30,7 @@ class FactoryHelpersTest extends TestAbstract{
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('invalid mode');
 
-		create_stream('test', 'foo');
+		FactoryHelpers::create_stream('test', 'foo');
 	}
 
 	public function streamInputProvider():array{
@@ -45,7 +45,7 @@ class FactoryHelpersTest extends TestAbstract{
 			'string'          => ['stringtest', 'stringtest'],
 #			'file'            => [__DIR__.'/streaminput.txt', 'filetest'.PHP_EOL],
 			'resource'        => [$fh, 'resourcetest'],
-			'streaminterface' => [create_stream('streaminterfacetest'), 'streaminterfacetest'],
+			'streaminterface' => [FactoryHelpers::create_stream('streaminterfacetest'), 'streaminterfacetest'],
 			'tostring'        => [$xml->foo, 'bar'],
 		];
 	}
@@ -57,14 +57,14 @@ class FactoryHelpersTest extends TestAbstract{
 	 * @param string $content
 	 */
 	public function testCreateStreamFromInput($input, string $content):void{
-		$this::assertSame($content, create_stream_from_input($input)->getContents());
+		$this::assertSame($content, FactoryHelpers::create_stream_from_input($input)->getContents());
 	}
 
 	public function testCreateStreamFromInputException():void{
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('Invalid resource type: object');
 
-		create_stream_from_input(new stdClass);
+		FactoryHelpers::create_stream_from_input(new stdClass);
 	}
 
 }

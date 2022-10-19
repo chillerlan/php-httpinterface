@@ -12,11 +12,10 @@
 
 namespace chillerlan\HTTP\Psr7;
 
+use chillerlan\HTTP\Psr17\FactoryHelpers;
 use chillerlan\HTTP\Psr17\StreamFactory;
 use chillerlan\HTTP\Utils\Header;
 use Psr\Http\Message\{MessageInterface, StreamInterface};
-
-use function chillerlan\HTTP\Psr17\create_stream_from_input;
 
 use function array_map, array_merge, implode, is_array, strtolower, trim;
 
@@ -45,9 +44,16 @@ abstract class Message implements MessageInterface{
 		$this->version       = $version ?? '1.1';
 		$this->streamFactory = new StreamFactory;
 
-		$this->body = $body !== null && $body !== ''
-			? create_stream_from_input($body)
-			: $this->streamFactory->createStream();
+		if($body instanceof StreamInterface){
+			$this->body = $body;
+		}
+		elseif($body !== null && $body !== ''){
+			$this->body = FactoryHelpers::create_stream_from_input($body);
+		}
+		else{
+			$this->body = $this->streamFactory->createStream();
+		}
+
 	}
 
 	/**

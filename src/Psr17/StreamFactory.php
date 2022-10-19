@@ -40,7 +40,7 @@ class StreamFactory implements StreamFactoryInterface{
 			throw new RuntimeException('invalid file');
 		}
 
-		if(!in_array($mode, STREAM_MODES_WRITE) && !in_array($mode, STREAM_MODES_READ)){
+		if(!in_array($mode, FactoryHelpers::STREAM_MODES_WRITE) && !in_array($mode, FactoryHelpers::STREAM_MODES_READ)){
 			throw new InvalidArgumentException('invalid mode');
 		}
 

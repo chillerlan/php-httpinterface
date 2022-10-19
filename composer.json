@@ -47,9 +47,6 @@
 		"phpunit/phpunit": "^9.5"
 	},
 	"autoload": {
-		"files": [
-			"src/includes.php"
-		],
 		"psr-4": {
 			"chillerlan\\HTTP\\": "src/"
 		}
