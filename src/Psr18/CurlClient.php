@@ -28,7 +28,7 @@ class CurlClient extends HTTPClientAbstract{
 	public function sendRequest(RequestInterface $request):ResponseInterface{
 		$this->logger->debug(sprintf("\n----HTTP-REQUEST----\n%s", message_to_string($request)));
 
-		$this->handle = $this->createHandle($request);
+		$this->handle = new CurlHandle($request, $this->responseFactory->createResponse(), $this->options);
 		$errno        = $this->handle->exec();
 
 		if($errno !== CURLE_OK){
@@ -48,13 +48,6 @@ class CurlClient extends HTTPClientAbstract{
 		$this->logger->debug(sprintf("\n----HTTP-RESPONSE---\n%s", message_to_string($response)));
 
 		return $response;
-	}
-
-	/**
-	 *
-	 */
-	protected function createHandle(RequestInterface $request):CurlHandle{
-		return new CurlHandle($request, $this->responseFactory->createResponse(), $this->options);
 	}
 
 }
