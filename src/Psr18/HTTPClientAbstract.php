@@ -34,9 +34,19 @@ abstract class HTTPClientAbstract implements ClientInterface, LoggerAwareInterfa
 		ResponseFactoryInterface $responseFactory = null,
 		LoggerInterface $logger = null
 	){
-		$this->options         = $options ?? new HTTPOptions;
-		$this->responseFactory = $responseFactory ?? new ResponseFactory;
-		$this->logger          = $logger ?? new NullLogger;
+		$this->options = $options ?? new HTTPOptions;
+
+		$this->setResponseFactory($responseFactory ?? new ResponseFactory);
+		$this->setLogger($logger ?? new NullLogger);
+	}
+
+	/**
+	 * @codeCoverageIgnore
+	 */
+	public function setResponseFactory(ResponseFactory $responseFactory):self{
+		$this->responseFactory = $responseFactory;
+
+		return $this;
 	}
 
 }
