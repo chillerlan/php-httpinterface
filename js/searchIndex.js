@@ -656,11 +656,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTP-Psr18-CurlClient.html#method_sendRequest"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr18\\CurlClient\u003A\u003AcreateHandle\u0028\u0029",
-            "name": "createHandle",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr18-CurlClient.html#method_createHandle"
-        },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr18\\CurlClient\u003A\u003A\u0024handle",
             "name": "handle",
             "summary": "",

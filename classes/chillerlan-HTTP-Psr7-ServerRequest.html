@@ -155,9 +155,23 @@
 
 <dl class="phpdocumentor-table-of-contents">
                     <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/chillerlan-HTTP-Psr7-ServerRequest.html#property_attributes">$attributes</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/chillerlan-HTTP-Psr7-Message.html#property_body">$body</a>
     <span>
                         &nbsp;: <abbr title="\Psr\Http\Message\StreamInterface">StreamInterface</abbr>            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/chillerlan-HTTP-Psr7-ServerRequest.html#property_cookieParams">$cookieParams</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;            </span>
 </dt>
 <dd></dd>
 
@@ -183,6 +197,20 @@
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/chillerlan-HTTP-Psr7-ServerRequest.html#property_parsedBody">$parsedBody</a>
+    <span>
+                        &nbsp;: null|array&lt;string|int, mixed&gt;|object            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/chillerlan-HTTP-Psr7-ServerRequest.html#property_queryParams">$queryParams</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/chillerlan-HTTP-Psr7-Request.html#property_requestTarget">$requestTarget</a>
     <span>
                         &nbsp;: string|null            </span>
@@ -190,9 +218,23 @@
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/chillerlan-HTTP-Psr7-ServerRequest.html#property_serverParams">$serverParams</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/chillerlan-HTTP-Psr7-Message.html#property_streamFactory">$streamFactory</a>
     <span>
                         &nbsp;: <a href="classes/chillerlan-HTTP-Psr17-StreamFactory.html"><abbr title="\chillerlan\HTTP\Psr17\StreamFactory">StreamFactory</abbr></a>            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/chillerlan-HTTP-Psr7-ServerRequest.html#property_uploadedFiles">$uploadedFiles</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;            </span>
 </dt>
 <dd></dd>
 
@@ -207,48 +249,6 @@
     <a href="classes/chillerlan-HTTP-Psr7-Message.html#property_version">$version</a>
     <span>
                         &nbsp;: string            </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/chillerlan-HTTP-Psr7-ServerRequest.html#property_attributes">$attributes</a>
-    <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;            </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/chillerlan-HTTP-Psr7-ServerRequest.html#property_cookieParams">$cookieParams</a>
-    <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;            </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/chillerlan-HTTP-Psr7-ServerRequest.html#property_parsedBody">$parsedBody</a>
-    <span>
-                        &nbsp;: null|array&lt;string|int, mixed&gt;|object            </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/chillerlan-HTTP-Psr7-ServerRequest.html#property_queryParams">$queryParams</a>
-    <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;            </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/chillerlan-HTTP-Psr7-ServerRequest.html#property_serverParams">$serverParams</a>
-    <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;            </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/chillerlan-HTTP-Psr7-ServerRequest.html#property_uploadedFiles">$uploadedFiles</a>
-    <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;            </span>
 </dt>
 <dd></dd>
 
@@ -509,6 +509,40 @@
             -protected
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="property_attributes">
+        $attributes
+        <a href="classes/chillerlan-HTTP-Psr7-ServerRequest.html#property_attributes" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/ServerRequest.php"><a href="files/src-psr7-serverrequest.html"><abbr title="src/Psr7/ServerRequest.php">ServerRequest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">28</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__name">$attributes</span>
+     = <span class="phpdocumentor-signature__default-value">[]</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="property_body">
         $body
         <a href="classes/chillerlan-HTTP-Psr7-Message.html#property_body" class="headerlink"><i class="fas fa-link"></i></a>
@@ -528,6 +562,40 @@
         <span class="phpdocumentor-signature__type"><abbr title="\Psr\Http\Message\StreamInterface">StreamInterface</abbr></span>
     <span class="phpdocumentor-signature__name">$body</span>
     </code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_cookieParams">
+        $cookieParams
+        <a href="classes/chillerlan-HTTP-Psr7-ServerRequest.html#property_cookieParams" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/ServerRequest.php"><a href="files/src-psr7-serverrequest.html"><abbr title="src/Psr7/ServerRequest.php">ServerRequest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">22</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__name">$cookieParams</span>
+     = <span class="phpdocumentor-signature__default-value">[]</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -643,6 +711,72 @@
             -protected
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="property_parsedBody">
+        $parsedBody
+        <a href="classes/chillerlan-HTTP-Psr7-ServerRequest.html#property_parsedBody" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/ServerRequest.php"><a href="files/src-psr7-serverrequest.html"><abbr title="src/Psr7/ServerRequest.php">ServerRequest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">26</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">null|array&lt;string|int, mixed&gt;|object</span>
+    <span class="phpdocumentor-signature__name">$parsedBody</span>
+    </code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_queryParams">
+        $queryParams
+        <a href="classes/chillerlan-HTTP-Psr7-ServerRequest.html#property_queryParams" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/ServerRequest.php"><a href="files/src-psr7-serverrequest.html"><abbr title="src/Psr7/ServerRequest.php">ServerRequest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">24</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__name">$queryParams</span>
+     = <span class="phpdocumentor-signature__default-value">[]</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="property_requestTarget">
         $requestTarget
         <a href="classes/chillerlan-HTTP-Psr7-Request.html#property_requestTarget" class="headerlink"><i class="fas fa-link"></i></a>
@@ -677,6 +811,40 @@
             -protected
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="property_serverParams">
+        $serverParams
+        <a href="classes/chillerlan-HTTP-Psr7-ServerRequest.html#property_serverParams" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/ServerRequest.php"><a href="files/src-psr7-serverrequest.html"><abbr title="src/Psr7/ServerRequest.php">ServerRequest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">20</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__name">$serverParams</span>
+    </code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="property_streamFactory">
         $streamFactory
         <a href="classes/chillerlan-HTTP-Psr7-Message.html#property_streamFactory" class="headerlink"><i class="fas fa-link"></i></a>
@@ -696,6 +864,40 @@
         <span class="phpdocumentor-signature__type"><a href="classes/chillerlan-HTTP-Psr17-StreamFactory.html"><abbr title="\chillerlan\HTTP\Psr17\StreamFactory">StreamFactory</abbr></a></span>
     <span class="phpdocumentor-signature__name">$streamFactory</span>
     </code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_uploadedFiles">
+        $uploadedFiles
+        <a href="classes/chillerlan-HTTP-Psr7-ServerRequest.html#property_uploadedFiles" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/ServerRequest.php"><a href="files/src-psr7-serverrequest.html"><abbr title="src/Psr7/ServerRequest.php">ServerRequest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">30</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__name">$uploadedFiles</span>
+     = <span class="phpdocumentor-signature__default-value">[]</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -764,208 +966,6 @@
         <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">$version</span>
     </code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_attributes">
-        $attributes
-        <a href="classes/chillerlan-HTTP-Psr7-ServerRequest.html#property_attributes" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/ServerRequest.php"><a href="files/src-psr7-serverrequest.html"><abbr title="src/Psr7/ServerRequest.php">ServerRequest.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">28</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
-    <span class="phpdocumentor-signature__name">$attributes</span>
-     = <span class="phpdocumentor-signature__default-value">[]</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_cookieParams">
-        $cookieParams
-        <a href="classes/chillerlan-HTTP-Psr7-ServerRequest.html#property_cookieParams" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/ServerRequest.php"><a href="files/src-psr7-serverrequest.html"><abbr title="src/Psr7/ServerRequest.php">ServerRequest.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">22</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
-    <span class="phpdocumentor-signature__name">$cookieParams</span>
-     = <span class="phpdocumentor-signature__default-value">[]</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_parsedBody">
-        $parsedBody
-        <a href="classes/chillerlan-HTTP-Psr7-ServerRequest.html#property_parsedBody" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/ServerRequest.php"><a href="files/src-psr7-serverrequest.html"><abbr title="src/Psr7/ServerRequest.php">ServerRequest.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">26</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">null|array&lt;string|int, mixed&gt;|object</span>
-    <span class="phpdocumentor-signature__name">$parsedBody</span>
-    </code>
-
-    
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_queryParams">
-        $queryParams
-        <a href="classes/chillerlan-HTTP-Psr7-ServerRequest.html#property_queryParams" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/ServerRequest.php"><a href="files/src-psr7-serverrequest.html"><abbr title="src/Psr7/ServerRequest.php">ServerRequest.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">24</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
-    <span class="phpdocumentor-signature__name">$queryParams</span>
-     = <span class="phpdocumentor-signature__default-value">[]</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_serverParams">
-        $serverParams
-        <a href="classes/chillerlan-HTTP-Psr7-ServerRequest.html#property_serverParams" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/ServerRequest.php"><a href="files/src-psr7-serverrequest.html"><abbr title="src/Psr7/ServerRequest.php">ServerRequest.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">20</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
-    <span class="phpdocumentor-signature__name">$serverParams</span>
-    </code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_uploadedFiles">
-        $uploadedFiles
-        <a href="classes/chillerlan-HTTP-Psr7-ServerRequest.html#property_uploadedFiles" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/ServerRequest.php"><a href="files/src-psr7-serverrequest.html"><abbr title="src/Psr7/ServerRequest.php">ServerRequest.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">30</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
-    <span class="phpdocumentor-signature__name">$uploadedFiles</span>
-     = <span class="phpdocumentor-signature__default-value">[]</span></code>
 
         <section class="phpdocumentor-description"></section>
 
