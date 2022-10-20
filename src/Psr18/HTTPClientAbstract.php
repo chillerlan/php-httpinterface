@@ -43,7 +43,7 @@ abstract class HTTPClientAbstract implements ClientInterface, LoggerAwareInterfa
 	/**
 	 * @codeCoverageIgnore
 	 */
-	public function setResponseFactory(ResponseFactory $responseFactory):self{
+	public function setResponseFactory(ResponseFactoryInterface $responseFactory):self{
 		$this->responseFactory = $responseFactory;
 
 		return $this;
