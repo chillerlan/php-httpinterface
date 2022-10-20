@@ -15,7 +15,7 @@ use Psr\Http\Message\{RequestInterface, ResponseInterface};
 
 class CurlMultiHandle extends CurlHandle{
 
-	private MultiResponseHandlerInterface $multiResponseHandler;
+	protected MultiResponseHandlerInterface $multiResponseHandler;
 
 	public function __construct(
 		MultiResponseHandlerInterface $multiResponseHandler,
@@ -31,12 +31,12 @@ class CurlMultiHandle extends CurlHandle{
 	/**
 	 * a handle ID (counter), used in CurlMultiClient
 	 */
-	private ?int $id = null;
+	protected ?int $id = null;
 
 	/**
 	 * a retry counter, used in CurlMultiClient
 	 */
-	private int $retries = 0;
+	protected int $retries = 0;
 
 	/**
 	 *

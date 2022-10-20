@@ -33,21 +33,21 @@ class UploadedFile implements UploadedFileInterface{
 		UPLOAD_ERR_EXTENSION,
 	];
 
-	private int $error;
+	protected int $error;
 
-	private int $size;
+	protected int $size;
 
-	private ?string $clientFilename;
+	protected ?string $clientFilename;
 
-	private ?string $clientMediaType;
+	protected ?string $clientMediaType;
 
-	private ?string $file = null;
+	protected ?string $file = null;
 
-	private ?StreamInterface $stream;
+	protected ?StreamInterface $stream;
 
-	private bool $moved = false;
+	protected bool $moved = false;
 
-	private StreamFactory $streamFactory;
+	protected StreamFactory $streamFactory;
 
 	/**
 	 * @param \Psr\Http\Message\StreamInterface|string|resource $file
@@ -160,7 +160,7 @@ class UploadedFile implements UploadedFileInterface{
 	/**
 	 * @throws RuntimeException if is moved or not ok
 	 */
-	private function validateActive():void{
+	protected function validateActive():void{
 
 		if($this->error !== UPLOAD_ERR_OK){
 			throw new RuntimeException('Cannot retrieve stream due to upload error');
@@ -182,7 +182,7 @@ class UploadedFile implements UploadedFileInterface{
 	 *
 	 * @throws \RuntimeException on error
 	 */
-	private function copyToStream(StreamInterface $dest){
+	protected function copyToStream(StreamInterface $dest){
 		$source = $this->getStream();
 
 		if($source->isSeekable()){

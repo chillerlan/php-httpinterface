@@ -25,37 +25,37 @@ class CurlMultiClient implements LoggerAwareInterface{
 	use LoggerAwareTrait;
 
 	/** @var \chillerlan\Settings\SettingsContainerInterface|\chillerlan\HTTP\HTTPOptions */
-	private SettingsContainerInterface $options;
+	protected SettingsContainerInterface $options;
 
-	private ResponseFactoryInterface $responseFactory;
+	protected ResponseFactoryInterface $responseFactory;
 
-	private MultiResponseHandlerInterface $multiResponseHandler;
+	protected MultiResponseHandlerInterface $multiResponseHandler;
 
 	/**
 	 * the curl_multi master handle
 	 *
 	 * @var resource
 	 */
-	private $curl_multi;
+	protected $curl_multi;
 
 	/**
 	 * An array of RequestInterface to run
 	 *
 	 * @var \Psr\Http\Message\RequestInterface[]
 	 */
-	private array $requests = [];
+	protected array $requests = [];
 
 	/**
 	 * the stack of running handles
 	 *
 	 * @var \chillerlan\HTTP\CurlUtils\CurlMultiHandle[]
 	 */
-	private array $handles = [];
+	protected array $handles = [];
 
 	/**
 	 *
 	 */
-	private int $handleCounter = 0;
+	protected int $handleCounter = 0;
 
 	/**
 	 * CurlMultiClient constructor.
@@ -181,7 +181,7 @@ class CurlMultiClient implements LoggerAwareInterface{
 	/**
 	 *
 	 */
-	private function createHandle(RequestInterface $request = null, int $id = null, int $retries = null):void{
+	protected function createHandle(RequestInterface $request = null, int $id = null, int $retries = null):void{
 
 		if($request === null){
 

@@ -21,21 +21,21 @@ use const FILTER_FLAG_IPV6, FILTER_VALIDATE_IP;
 
 class Uri implements UriInterface{
 
-	private string $scheme = '';
+	protected string $scheme = '';
 
-	private string $user = '';
+	protected string $user = '';
 
-	private ?string $pass = null;
+	protected ?string $pass = null;
 
-	private string $host = '';
+	protected string $host = '';
 
-	private ?int $port = null;
+	protected ?int $port = null;
 
-	private string $path = '';
+	protected string $path = '';
 
-	private string $query = '';
+	protected string $query = '';
 
-	private string $fragment = '';
+	protected string $fragment = '';
 
 	/**
 	 * Uri constructor.
@@ -102,7 +102,7 @@ class Uri implements UriInterface{
 	 * @return string
 	 * @throws \InvalidArgumentException
 	 */
-	private function filterScheme($scheme):string{
+	protected function filterScheme($scheme):string{
 
 		if(!is_string($scheme)){
 			throw new InvalidArgumentException('scheme must be a string');
@@ -147,7 +147,7 @@ class Uri implements UriInterface{
 	 * @return string
 	 * @throws \InvalidArgumentException
 	 */
-	private function filterUser($user):string{
+	protected function filterUser($user):string{
 
 		if(!is_string($user)){
 			throw new InvalidArgumentException('user must be a string');
@@ -162,7 +162,7 @@ class Uri implements UriInterface{
 	 * @return string
 	 * @throws \InvalidArgumentException
 	 */
-	private function filterPass($pass):string{
+	protected function filterPass($pass):string{
 
 		if(!is_string($pass)){
 			throw new InvalidArgumentException('pass must be a string');
@@ -229,7 +229,7 @@ class Uri implements UriInterface{
 	 * @return string
 	 * @throws \InvalidArgumentException
 	 */
-	private function filterHost($host):string{
+	protected function filterHost($host):string{
 
 		if(!is_string($host)){
 			throw new InvalidArgumentException('host must be a string');
@@ -277,7 +277,7 @@ class Uri implements UriInterface{
 	 * @return int|null
 	 * @throws \InvalidArgumentException
 	 */
-	private function filterPort($port):?int{
+	protected function filterPort($port):?int{
 
 		if($port === null){
 			return null;
@@ -328,7 +328,7 @@ class Uri implements UriInterface{
 	 * @return string
 	 * @throws \InvalidArgumentException
 	 */
-	private function filterPath($path):string{
+	protected function filterPath($path):string{
 
 		if(!is_string($path)){
 			throw new InvalidArgumentException('path must be a string');
@@ -372,7 +372,7 @@ class Uri implements UriInterface{
 	 * @return string
 	 * @throws \InvalidArgumentException
 	 */
-	private function filterQuery($query):string{
+	protected function filterQuery($query):string{
 
 		if(!is_string($query)){
 			throw new InvalidArgumentException('query and fragment must be a string');
@@ -415,7 +415,7 @@ class Uri implements UriInterface{
 	 *
 	 * @return string
 	 */
-	private function filterFragment($fragment):string{
+	protected function filterFragment($fragment):string{
 		return $this->filterQuery($fragment);
 	}
 
@@ -449,7 +449,7 @@ class Uri implements UriInterface{
 	 *
 	 * @return void
 	 */
-	private function parseUriParts(array $parts):void{
+	protected function parseUriParts(array $parts):void{
 
 		foreach(['scheme', 'user', 'pass', 'host', 'port', 'path', 'query', 'fragment'] as $part){
 
@@ -469,7 +469,7 @@ class Uri implements UriInterface{
 	 *
 	 * @return string
 	 */
-	private function replaceChars(string $str, bool $query = null):string{
+	protected function replaceChars(string $str, bool $query = null):string{
 		/** @noinspection RegExpRedundantEscape, RegExpUnnecessaryNonCapturingGroup */
 		return preg_replace_callback(
 			'/(?:[^a-z\d_\-\.~!\$&\'\(\)\*\+,;=%:@\/'.($query ? '\?' : '').']++|%(?![a-f\d]{2}))/i',
@@ -482,7 +482,7 @@ class Uri implements UriInterface{
 	/**
 	 * @return void
 	 */
-	private function removeDefaultPort():void{
+	protected function removeDefaultPort():void{
 
 		if(uriIsDefaultPort($this)){
 			$this->port = null;
@@ -493,7 +493,7 @@ class Uri implements UriInterface{
 	/**
 	 * @return void
 	 */
-	private function validateState():void{
+	protected function validateState():void{
 
 		if(empty($this->host) && ($this->scheme === 'http' || $this->scheme === 'https')){
 			$this->host = 'localhost';

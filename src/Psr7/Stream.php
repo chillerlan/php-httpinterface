@@ -23,15 +23,15 @@ use const SEEK_SET;
  */
 class Stream extends StreamAbstract{
 
-	private bool $seekable;
+	protected bool $seekable;
 
-	private bool $readable;
+	protected bool $readable;
 
-	private bool $writable;
+	protected bool $writable;
 
-	private ?string $uri = null;
+	protected ?string $uri = null;
 
-	private ?int $size = null;
+	protected ?int $size = null;
 
 	/**
 	 * Stream constructor.

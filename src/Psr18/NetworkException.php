@@ -22,7 +22,7 @@ class NetworkException extends ClientException implements NetworkExceptionInterf
 	/**
 	 * @var \Psr\Http\Message\RequestInterface
 	 */
-	private RequestInterface $request;
+	protected RequestInterface $request;
 
 	/**
 	 * @param string                             $message
