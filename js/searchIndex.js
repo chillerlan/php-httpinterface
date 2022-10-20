@@ -541,35 +541,35 @@ Search.appendIndex(
             "summary": "Tip\u0020of\u0020the\u0020middleware\u0020call\u0020stack",
             "url": "classes/chillerlan-HTTP-Psr15-RecursiveDispatcher.html#property_tip"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr17\\CHILLERLAN_PSR17_INCLUDES",
-            "name": "CHILLERLAN_PSR17_INCLUDES",
+            "fqsen": "\\chillerlan\\HTTP\\Psr17\\FactoryHelpers",
+            "name": "FactoryHelpers",
             "summary": "",
-            "url": "namespaces/chillerlan-http-psr17.html#constant_CHILLERLAN_PSR17_INCLUDES"
+            "url": "classes/chillerlan-HTTP-Psr17-FactoryHelpers.html"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr17\\STREAM_MODES_READ_WRITE",
-            "name": "STREAM_MODES_READ_WRITE",
-            "summary": "",
-            "url": "namespaces/chillerlan-http-psr17.html#constant_STREAM_MODES_READ_WRITE"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr17\\STREAM_MODES_READ",
-            "name": "STREAM_MODES_READ",
-            "summary": "",
-            "url": "namespaces/chillerlan-http-psr17.html#constant_STREAM_MODES_READ"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr17\\STREAM_MODES_WRITE",
-            "name": "STREAM_MODES_WRITE",
-            "summary": "",
-            "url": "namespaces/chillerlan-http-psr17.html#constant_STREAM_MODES_WRITE"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr17\\create_stream\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTP\\Psr17\\FactoryHelpers\u003A\u003Acreate_stream\u0028\u0029",
             "name": "create_stream",
             "summary": "Create\u0020a\u0020new\u0020writable\u0020stream\u0020from\u0020a\u0020string.",
-            "url": "namespaces/chillerlan-http-psr17.html#function_create_stream"
+            "url": "classes/chillerlan-HTTP-Psr17-FactoryHelpers.html#method_create_stream"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr17\\create_stream_from_input\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTP\\Psr17\\FactoryHelpers\u003A\u003Acreate_stream_from_input\u0028\u0029",
             "name": "create_stream_from_input",
             "summary": "",
-            "url": "namespaces/chillerlan-http-psr17.html#function_create_stream_from_input"
+            "url": "classes/chillerlan-HTTP-Psr17-FactoryHelpers.html#method_create_stream_from_input"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr17\\FactoryHelpers\u003A\u003ASTREAM_MODES_READ_WRITE",
+            "name": "STREAM_MODES_READ_WRITE",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr17-FactoryHelpers.html#constant_STREAM_MODES_READ_WRITE"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr17\\FactoryHelpers\u003A\u003ASTREAM_MODES_READ",
+            "name": "STREAM_MODES_READ",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr17-FactoryHelpers.html#constant_STREAM_MODES_READ"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr17\\FactoryHelpers\u003A\u003ASTREAM_MODES_WRITE",
+            "name": "STREAM_MODES_WRITE",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr17-FactoryHelpers.html#constant_STREAM_MODES_WRITE"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr17\\RequestFactory",
             "name": "RequestFactory",
@@ -675,6 +675,11 @@ Search.appendIndex(
             "name": "__construct",
             "summary": "HTTPClientAbstract\u0020constructor.",
             "url": "classes/chillerlan-HTTP-Psr18-HTTPClientAbstract.html#method___construct"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr18\\HTTPClientAbstract\u003A\u003AsetResponseFactory\u0028\u0029",
+            "name": "setResponseFactory",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr18-HTTPClientAbstract.html#method_setResponseFactory"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr18\\HTTPClientAbstract\u003A\u003A\u0024options",
             "name": "options",
