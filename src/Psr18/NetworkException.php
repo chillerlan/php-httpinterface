@@ -10,7 +10,7 @@
 
 namespace chillerlan\HTTP\Psr18;
 
-use Exception;
+use Throwable;
 use Psr\Http\Client\NetworkExceptionInterface;
 use Psr\Http\Message\RequestInterface;
 
@@ -29,7 +29,7 @@ class NetworkException extends ClientException implements NetworkExceptionInterf
 	 * @param \Psr\Http\Message\RequestInterface $request
 	 * @param \Exception|null                    $previous
 	 */
-	public function __construct(string $message, RequestInterface $request, Exception $previous = null){
+	public function __construct(string $message, RequestInterface $request, Throwable $previous = null){
 		$this->request = $request;
 
 		parent::__construct($message, 0, $previous);
