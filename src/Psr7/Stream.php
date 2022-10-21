@@ -67,6 +67,12 @@ class Stream extends StreamAbstract{
 			$this->seek(0);
 		}
 
+		$meta = stream_get_meta_data($this->stream);
+
+		if(isset($meta['wrapper_type']) && $meta['wrapper_type'] === 'plainfile'){
+			return $meta['uri'];
+		}
+
 		$contents = stream_get_contents($this->stream);
 
 		if($contents !== false){
