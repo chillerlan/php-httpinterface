@@ -11,6 +11,7 @@
 namespace chillerlan\HTTP\Psr18;
 
 use chillerlan\HTTP\HTTPOptions;
+use Psr\Http\Message\StreamFactoryInterface;
 use chillerlan\HTTP\Psr17\{ResponseFactory};
 use chillerlan\Settings\SettingsContainerInterface;
 use Fig\Http\Message\RequestMethodInterface;
@@ -25,6 +26,7 @@ abstract class HTTPClientAbstract implements ClientInterface, LoggerAwareInterfa
 	protected SettingsContainerInterface $options;
 
 	protected ResponseFactoryInterface $responseFactory;
+	protected ?StreamFactoryInterface $streamFactory = null;
 
 	/**
 	 * HTTPClientAbstract constructor.
@@ -45,6 +47,15 @@ abstract class HTTPClientAbstract implements ClientInterface, LoggerAwareInterfa
 	 */
 	public function setResponseFactory(ResponseFactoryInterface $responseFactory):self{
 		$this->responseFactory = $responseFactory;
+
+		return $this;
+	}
+
+	/**
+	 * @codeCoverageIgnore
+	 */
+	public function setStreamFactory(StreamFactoryInterface $streamFactory):self{
+		$this->streamFactory = $streamFactory;
 
 		return $this;
 	}

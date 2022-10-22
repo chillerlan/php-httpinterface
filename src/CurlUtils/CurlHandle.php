@@ -11,7 +11,7 @@
 namespace chillerlan\HTTP\CurlUtils;
 
 use chillerlan\Settings\SettingsContainerInterface;
-use Psr\Http\Message\{RequestInterface, ResponseInterface};
+use Psr\Http\Message\{RequestInterface, ResponseInterface, StreamInterface};
 
 use function array_key_exists, count, curl_close, curl_errno, curl_error, curl_exec, curl_init, curl_setopt_array,
 	explode, in_array, is_resource, strlen, strtolower, strtoupper, substr, trim;
@@ -94,14 +94,25 @@ class CurlHandle{
 
 	protected ResponseInterface $response;
 
+	protected StreamInterface $requestBody;
+	protected StreamInterface $responseBody;
+
 	/**
 	 * CurlHandle constructor.
 	 */
-	public function __construct(RequestInterface $request, ResponseInterface $response, SettingsContainerInterface $options){
+	public function __construct(
+		RequestInterface $request,
+		ResponseInterface $response,
+		SettingsContainerInterface $options,
+		StreamInterface $stream = null
+	){
 		$this->request  = $request;
 		$this->response = $response;
 		$this->options  = $options;
 		$this->curl     = curl_init();
+
+		$this->requestBody  = $this->request->getBody();
+		$this->responseBody = $stream ?? $this->response->getBody();
 	}
 
 	/**
@@ -144,7 +155,7 @@ class CurlHandle{
 	 * @codeCoverageIgnore
 	 */
 	public function getResponse():ResponseInterface{
-		return $this->response;
+		return $this->response->withBody($this->responseBody);
 	}
 
 	/**
@@ -183,15 +194,14 @@ class CurlHandle{
 	 *
 	 */
 	protected function setBodyOptions():void{
-		$body     = $this->request->getBody();
-		$bodySize = $body->getSize();
+		$bodySize = $this->requestBody->getSize();
 
 		if($bodySize === 0){
 			return;
 		}
 
-		if($body->isSeekable()){
-			$body->rewind();
+		if($this->requestBody->isSeekable()){
+			$this->requestBody->rewind();
 		}
 
 		// Message has non empty body.
@@ -207,7 +217,7 @@ class CurlHandle{
 		}
 		// Small body can be loaded into memory
 		else{
-			$this->curlOptions[CURLOPT_POSTFIELDS] = (string)$body;
+			$this->curlOptions[CURLOPT_POSTFIELDS] = (string)$this->requestBody;
 		}
 	}
 
@@ -381,7 +391,7 @@ class CurlHandle{
 	 * @noinspection PhpUnusedParameterInspection
 	 */
 	public function readfunction($curl, $stream, int $length):string{
-		return $this->request->getBody()->read($length);
+		return $this->requestBody->read($length);
 	}
 
 	/**
@@ -394,7 +404,7 @@ class CurlHandle{
 	 * @noinspection PhpUnusedParameterInspection
 	 */
 	public function writefunction($curl, string $data):int{
-		return $this->response->getBody()->write($data);
+		return $this->responseBody->write($data);
 	}
 
 	/**
