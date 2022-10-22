@@ -12,7 +12,7 @@ namespace chillerlan\HTTP\Psr7;
 
 use chillerlan\HTTP\Psr17\FactoryHelpers;
 use InvalidArgumentException, RuntimeException;
-
+use Psr\Http\Message\StreamInterface;
 use function clearstatcache, fclose, feof, fread, fstat, ftell, fwrite, in_array,
 	is_resource, stream_get_contents, stream_get_meta_data;
 
@@ -21,7 +21,10 @@ use const SEEK_SET;
 /**
  * @property resource|null $stream
  */
-class Stream extends StreamAbstract{
+class Stream implements StreamInterface{
+
+	/** @var resource|null */
+	protected $stream = null;
 
 	protected bool $seekable;
 
@@ -52,6 +55,15 @@ class Stream extends StreamAbstract{
 		$this->readable = in_array($meta['mode'], FactoryHelpers::STREAM_MODES_READ);
 		$this->writable = in_array($meta['mode'], FactoryHelpers::STREAM_MODES_WRITE);
 		$this->uri      = $meta['uri'] ?? null;
+	}
+
+	/**
+	 * Closes the stream when the destructed
+	 *
+	 * @return void
+	 */
+	public function __destruct(){
+		$this->close();
 	}
 
 	/**
@@ -297,7 +309,7 @@ class Stream extends StreamAbstract{
 
 		$meta = stream_get_meta_data($this->stream);
 
-		return isset($meta[$key]) ? $meta[$key] : null;
+		return $meta[$key] ?? null;
 	}
 
 }
