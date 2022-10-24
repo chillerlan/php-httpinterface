@@ -10,17 +10,37 @@
 
 namespace chillerlan\HTTP\Psr18;
 
+use chillerlan\HTTP\Psr17\RequestFactory;
 use chillerlan\HTTP\Psr7\Request;
-use Psr\Http\Message\{RequestInterface, ResponseInterface};
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\{RequestFactoryInterface, RequestInterface, ResponseInterface};
 
 use function in_array;
 
-class URLExtractor extends CurlClient{
+/**
+ * A client that follows redirects until it reaches a non-30x response, e.g. to extract shortened URLs
+ *
+ * The given HTTP client needs to be set up accordingly:
+ *
+ *   - CURLOPT_FOLLOWLOCATION  must be set to false so that we can intercept the 30x responses
+ *   - CURLOPT_MAXREDIRS       should be set to a value > 1
+ */
+class URLExtractor implements ClientInterface{
+
+	/** @var \Psr\Http\Message\ResponseInterface[] */
+	protected array $responses = [];
+
+	protected ClientInterface $http;
+
+	protected RequestFactoryInterface $requestFactory;
 
 	/**
-	 * @var \Psr\Http\Message\ResponseInterface[]
+	 * URLExtractor constructor.
 	 */
-	protected array $responses = [];
+	public function __construct(ClientInterface $http, RequestFactoryInterface $requestFactory = null){
+		$this->http           = $http;
+		$this->requestFactory = $requestFactory ?? new RequestFactory;
+	}
 
 	/**
 	 * @inheritDoc
@@ -28,9 +48,11 @@ class URLExtractor extends CurlClient{
 	public function sendRequest(RequestInterface $request):ResponseInterface{
 
 		do{
-			$response = parent::sendRequest($request);
-			$request  = new Request($request->getMethod(), $response->getHeaderLine('location'));
+			// fetch the response for the current request
+			$response          = $this->http->sendRequest($request);
 			$this->responses[] = $response;
+			// set up a new request to the location header of the last response
+			$request           = $this->requestFactory->createRequest($request->getMethod(), $response->getHeaderLine('location'));
 		}
 		while(in_array($response->getStatusCode(), [301, 302, 303, 307, 308], true));
 
