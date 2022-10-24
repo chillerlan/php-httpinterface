@@ -12,9 +12,8 @@
 
 namespace chillerlan\HTTP\Psr18;
 
+use chillerlan\HTTP\Utils\MessageUtil;
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
-
-use function chillerlan\HTTP\Utils\message_to_string;
 use function explode, file_get_contents, get_headers, in_array, intval, restore_error_handler,
 	set_error_handler, stream_context_create, strtolower, substr, trim;
 
@@ -26,7 +25,7 @@ class StreamClient extends HTTPClientAbstract{
 	 *
 	 */
 	public function sendRequest(RequestInterface $request):ResponseInterface{
-		$this->logger->debug("\n----HTTP-REQUEST----\n".message_to_string($request));
+		$this->logger->debug("\n----HTTP-REQUEST----\n".MessageUtil::toString($request));
 
 		$uri     = $request->getUri();
 		$method  = $request->getMethod();
@@ -41,7 +40,7 @@ class StreamClient extends HTTPClientAbstract{
 				'method'           => $method,
 				'header'           => $headers,
 				'content'          => $body,
-				'protocol_version' => '1.1',
+#				'protocol_version' => '1.1',
 				'user_agent'       => $this->options->user_agent,
 				'max_redirects'    => 0,
 				'timeout'          => 5,
@@ -76,7 +75,7 @@ class StreamClient extends HTTPClientAbstract{
 		;
 
 		$response->getBody()->write($responseBody);
-		$this->logger->debug("\n----HTTP-RESPONSE---\n".message_to_string($response));
+		$this->logger->debug("\n----HTTP-RESPONSE---\n".MessageUtil::toString($response, false));
 		$response->getBody()->rewind();
 
 		return $response;

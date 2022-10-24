@@ -10,7 +10,7 @@
 
 namespace chillerlan\HTTPTest\CurlUtils;
 
-use chillerlan\HTTP\Utils\Query;
+use chillerlan\HTTP\Utils\QueryUtil;
 use chillerlan\HTTP\CurlUtils\{CurlMultiClient, MultiResponseHandlerInterface};
 use chillerlan\HTTP\HTTPOptions;
 use chillerlan\HTTP\Psr7\Request;
@@ -53,7 +53,7 @@ class CurlMultiClientTest extends TestCase{
 			foreach(['de', 'en', 'es', 'fr', 'zh'] as $lang){
 				$requests[] = new Request(
 					Request::METHOD_GET,
-					'https://api.guildwars2.com/v2/items?'.Query::build(['lang' => $lang, 'ids' => implode(',', $chunk)])
+					'https://api.guildwars2.com/v2/items?'.QueryUtil::build(['lang' => $lang, 'ids' => implode(',', $chunk)])
 				);
 			}
 		}

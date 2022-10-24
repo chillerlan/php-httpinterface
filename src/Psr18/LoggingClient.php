@@ -12,13 +12,12 @@
 
 namespace chillerlan\HTTP\Psr18;
 
+use chillerlan\HTTP\Utils\MessageUtil;
 use Psr\Http\Client\{ClientExceptionInterface, ClientInterface};
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
 use Psr\Log\{LoggerAwareInterface, LoggerAwareTrait, LoggerInterface, NullLogger};
 use Throwable;
-
-use function chillerlan\HTTP\Utils\message_to_string;
-use function get_class;
+use function get_class, sprintf;
 
 /**
  * @codeCoverageIgnore
@@ -40,24 +39,23 @@ class LoggingClient implements ClientInterface, LoggerAwareInterface{
 	 * @inheritDoc
 	 */
 	public function sendRequest(RequestInterface $request):ResponseInterface{
-		$this->logger->debug("\n----HTTP-REQUEST----\n".message_to_string($request));
+		$this->logger->debug(sprintf("\n----HTTP-REQUEST----\n%s", MessageUtil::toString($request)));
 
 		try{
 			$response = $this->http->sendRequest($request);
+
+			$this->logger->debug(sprintf("\n----HTTP-RESPONSE---\n%s", MessageUtil::toString($response)));
 		}
 		catch(Throwable $e){
-			$this->logger->debug("\n----HTTP-ERROR------\n".message_to_string($request));
 			$this->logger->error($e->getMessage());
 			$this->logger->error($e->getTraceAsString());
 
 			if(!$e instanceof ClientExceptionInterface){
-				throw new ClientException('unexpected exception, does not implement "ClientExceptionInterface": '.get_class($e));
+				throw new ClientException(sprintf('unexpected exception, does not implement "ClientExceptionInterface": %s', get_class($e)));
 			}
 
 			throw $e;
 		}
-
-		$this->logger->debug("\n----HTTP-RESPONSE---\n".message_to_string($response));
 
 		return $response;
 	}

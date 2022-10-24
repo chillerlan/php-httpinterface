@@ -10,13 +10,12 @@
  * @license      MIT
  */
 
-use chillerlan\HTTP\Utils\Query;
+use chillerlan\HTTP\Utils\{MessageUtil, QueryUtil};
 use chillerlan\HTTP\CurlUtils\{CurlMultiClient, MultiResponseHandlerInterface};
 use chillerlan\HTTP\HTTPOptions;
 use chillerlan\HTTP\Psr18\CurlClient;
 use chillerlan\HTTP\Psr7\Request;
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
-use function chillerlan\HTTP\Utils\get_json;
 
 require_once __DIR__.'/../vendor/autoload.php';
 
@@ -58,7 +57,7 @@ $handler = new class() implements MultiResponseHandlerInterface{
 			$lang = $response->getHeaderLine('content-language');
 
 			// create a file for each item in the response (ofc you'd rather put this in a DB)
-			foreach(get_json($response) as $item){
+			foreach(MessageUtil::decodeJSON($response) as $item){
 				$file = $lang.'/'.$item->id;
 				file_put_contents(__DIR__.'/'.$file.'.json', json_encode($item, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES));
 
@@ -78,9 +77,9 @@ $handler = new class() implements MultiResponseHandlerInterface{
 $multiClient = new CurlMultiClient($handler, $options);
 
 // chunk the item response into arrays of 200 ids each (API limit) and create Request objects for each desired language
-foreach(array_chunk(get_json($itemResponse), 200) as $chunk){
+foreach(array_chunk(MessageUtil::decodeJSON($itemResponse), 200) as $chunk){
 	foreach($languages as $lang){
-		$multiClient->addRequest(new Request('GET', $endpoint.'?'.Query::build(['lang' => $lang, 'ids' => implode(',', $chunk)])));
+		$multiClient->addRequest(new Request('GET', $endpoint.'?'.QueryUtil::build(['lang' => $lang, 'ids' => implode(',', $chunk)])));
 	}
 }
 

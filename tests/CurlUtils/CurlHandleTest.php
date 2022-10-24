@@ -13,11 +13,10 @@ namespace chillerlan\HTTPTest\CurlUtils;
 use chillerlan\HTTP\HTTPOptions;
 use chillerlan\HTTP\Psr18\CurlClient;
 use chillerlan\HTTP\Psr7\Request;
+use chillerlan\HTTP\Utils\MessageUtil;
 use chillerlan\HTTPTest\TestAbstract;
 use Exception;
 use Psr\Http\Client\ClientInterface;
-
-use function chillerlan\HTTP\Utils\get_json;
 use function str_repeat, strlen, strtolower;
 
 /**
@@ -66,7 +65,7 @@ class CurlHandleTest extends TestAbstract{
 				throw new Exception('HTTP/'.$status.' ('.$url.')');
 			}
 
-			$data = get_json($response);
+			$data = MessageUtil::decodeJSON($response);
 
 			$this::assertSame($url, $data->url);
 			$this::assertSame('bar', $data->args->foo);
@@ -109,7 +108,7 @@ class CurlHandleTest extends TestAbstract{
 				throw new Exception('HTTP/'.$status);
 			}
 
-			$data = get_json($response);
+			$data = MessageUtil::decodeJSON($response);
 
 			$this::assertSame($url, $data->url);
 			$this::assertSame('x-www-form-urlencoded', $data->headers->{'Content-Type'});
@@ -144,7 +143,7 @@ class CurlHandleTest extends TestAbstract{
 				throw new Exception('HTTP/'.$status);
 			}
 
-			$data = get_json($response);
+			$data = MessageUtil::decodeJSON($response);
 
 			$this::assertSame($url, $data->url);
 			$this::assertSame('application/json', $data->headers->{'Content-Type'});
@@ -175,7 +174,7 @@ class CurlHandleTest extends TestAbstract{
 				throw new Exception('HTTP/'.$status);
 			}
 
-			$data = get_json($response);
+			$data = MessageUtil::decodeJSON($response);
 
 			$this::assertSame(strlen($body), (int)$data->headers->{'Content-Length'});
 		}

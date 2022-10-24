@@ -10,13 +10,13 @@
 
 namespace chillerlan\HTTP\Psr7;
 
+use chillerlan\HTTP\Utils\{QueryUtil, UriUtil};
 use InvalidArgumentException;
 use Psr\Http\Message\UriInterface;
 
 use function call_user_func_array, explode, filter_var, is_array, is_string, ltrim, mb_strtolower,
 	preg_replace_callback, rawurlencode, strpos, strtolower, ucfirst, var_export;
 
-use function chillerlan\HTTP\Utils\{parseUrl, uriIsDefaultPort};
 use const FILTER_FLAG_IPV6, FILTER_VALIDATE_IP;
 
 class Uri implements UriInterface{
@@ -49,7 +49,7 @@ class Uri implements UriInterface{
 		if($uri !== null){
 
 			if(is_string($uri)){
-				$uri = parseUrl($uri);
+				$uri = QueryUtil::parseUrl($uri);
 			}
 
 			if(!is_array($uri)){
@@ -484,7 +484,7 @@ class Uri implements UriInterface{
 	 */
 	protected function removeDefaultPort():void{
 
-		if(uriIsDefaultPort($this)){
+		if(UriUtil::isDefaultPort($this)){
 			$this->port = null;
 		}
 

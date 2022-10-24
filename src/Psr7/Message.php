@@ -14,7 +14,7 @@ namespace chillerlan\HTTP\Psr7;
 
 use chillerlan\HTTP\Psr17\FactoryHelpers;
 use chillerlan\HTTP\Psr17\StreamFactory;
-use chillerlan\HTTP\Utils\Header;
+use chillerlan\HTTP\Utils\HeaderUtil;
 use Psr\Http\Message\{MessageInterface, StreamInterface};
 
 use function array_map, array_merge, implode, is_array, strtolower, trim;
@@ -39,7 +39,7 @@ abstract class Message implements MessageInterface{
 	 * @param string|null                                            $version
 	 */
 	public function __construct(array $headers = null, $body = null, string $version = null){
-		$this->setHeaders(Header::normalize($headers ?? []));
+		$this->setHeaders(HeaderUtil::normalize($headers ?? []));
 
 		$this->version       = $version ?? '1.1';
 		$this->streamFactory = new StreamFactory;
@@ -238,7 +238,7 @@ abstract class Message implements MessageInterface{
 	 * header-field = field-name ":" OWS field-value OWS
 	 * OWS          = *( SP / HTAB )
 	 *
-	 * @param string[] $values Header values
+	 * @param string[] $values header values
 	 *
 	 * @return string[] Trimmed header values
 	 *
