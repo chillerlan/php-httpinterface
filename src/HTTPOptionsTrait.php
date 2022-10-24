@@ -103,7 +103,7 @@ trait HTTPOptionsTrait{
 	 */
 	protected function HTTPOptionsTrait():void{
 
-		if(!is_string($this->user_agent) || empty(trim($this->user_agent))){
+		if(empty(trim($this->user_agent))){
 			throw new ClientException('invalid user agent');
 		}
 
