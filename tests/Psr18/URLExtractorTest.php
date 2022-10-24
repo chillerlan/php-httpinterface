@@ -10,7 +10,7 @@
 
 namespace chillerlan\HTTPTest\Psr18;
 
-use chillerlan\HTTP\Psr18\URLExtractor;
+use chillerlan\HTTP\Psr18\{CurlClient, URLExtractor};
 use chillerlan\HTTP\Psr7\Request;
 use function defined;
 use const CURLOPT_FOLLOWLOCATION, CURLOPT_MAXREDIRS;
@@ -30,7 +30,7 @@ class URLExtractorTest extends HTTPClientTestAbstract{
 			CURLOPT_MAXREDIRS      => 25,
 		];
 
-		$this->http = new URLExtractor($this->options);
+		$this->http = new URLExtractor(new CurlClient($this->options));
 	}
 
 	public function testSendRequest():void{

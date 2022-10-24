@@ -12,12 +12,12 @@ namespace chillerlan\HTTPTest\Psr18;
 
 use chillerlan\HTTP\HTTPOptions;
 use chillerlan\HTTP\Psr7\Request;
+use chillerlan\HTTP\Utils\MessageUtil;
 use chillerlan\Settings\SettingsContainerInterface;
 use Exception;
+use Fig\Http\Message\RequestMethodInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\{ClientExceptionInterface, ClientInterface};
-
-use function chillerlan\HTTP\Utils\get_json;
 
 abstract class HTTPClientTestAbstract extends TestCase{
 
@@ -41,8 +41,8 @@ abstract class HTTPClientTestAbstract extends TestCase{
 
 		try{
 			$url      = 'https://httpbin.org/get';
-			$response = $this->http->sendRequest(new Request(Request::METHOD_GET, $url));
-			$json     = get_json($response);
+			$response = $this->http->sendRequest(new Request(RequestMethodInterface::METHOD_GET, $url));
+			$json     = MessageUtil::decodeJSON($response);
 
 			$this::assertSame($url, $json->url);
 			$this::assertSame($this::USER_AGENT, $json->headers->{'User-Agent'});
@@ -57,7 +57,7 @@ abstract class HTTPClientTestAbstract extends TestCase{
 	public function testNetworkError():void{
 		$this->expectException(ClientExceptionInterface::class);
 
-		$this->http->sendRequest(new Request(Request::METHOD_GET, 'http://foo'));
+		$this->http->sendRequest(new Request(RequestMethodInterface::METHOD_GET, 'http://foo'));
 	}
 
 }

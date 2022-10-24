@@ -10,7 +10,7 @@
 
 namespace chillerlan\HTTPTest;
 
-use chillerlan\HTTP\Utils\Server;
+use chillerlan\HTTP\Utils\ServerUtil;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\{
@@ -36,7 +36,7 @@ abstract class TestAbstract extends TestCase{
 	protected StreamFactoryInterface $streamFactory;
 	protected UploadedFileFactoryInterface $uploadedFileFactory;
 	protected UriFactoryInterface $uriFactory;
-	protected Server $server;
+	protected ServerUtil $server;
 
 	/**
 	 * @throws \Exception
@@ -53,7 +53,12 @@ abstract class TestAbstract extends TestCase{
 			$this->{$property} = new $class;
 		}
 
-		$this->server = new Server($this->serverRequestFactory, $this->uriFactory, $this->uploadedFileFactory, $this->streamFactory);
+		$this->server = new ServerUtil(
+			$this->serverRequestFactory,
+			$this->uriFactory,
+			$this->uploadedFileFactory,
+			$this->streamFactory
+		);
 	}
 
 
