@@ -49,9 +49,10 @@ class Stream implements StreamInterface{
 
 		$this->stream   = $stream;
 		$meta           = $this->getMetadata();
+		$mode           = $meta['mode'] ?? null;
 		$this->seekable = $meta['seekable'] ?? false;
-		$this->readable = in_array($meta['mode'], FactoryHelpers::STREAM_MODES_READ);
-		$this->writable = in_array($meta['mode'], FactoryHelpers::STREAM_MODES_WRITE);
+		$this->readable = in_array($mode, FactoryHelpers::STREAM_MODES_READ);
+		$this->writable = in_array($mode, FactoryHelpers::STREAM_MODES_WRITE);
 		$this->uri      = $meta['uri'] ?? null;
 	}
 

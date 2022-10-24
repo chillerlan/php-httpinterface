@@ -11,7 +11,6 @@
 namespace chillerlan\HTTP\Psr18;
 
 use chillerlan\HTTP\Psr17\RequestFactory;
-use chillerlan\HTTP\Psr7\Request;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\{RequestFactoryInterface, RequestInterface, ResponseInterface};
 
