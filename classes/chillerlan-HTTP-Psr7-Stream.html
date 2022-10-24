@@ -102,9 +102,6 @@
         <h2 class="phpdocumentor-content__title">
     Stream
 
-        <span class="phpdocumentor-element__extends">
-        extends <a href="classes/chillerlan-HTTP-Psr7-StreamAbstract.html"><abbr title="\chillerlan\HTTP\Psr7\StreamAbstract">StreamAbstract</abbr></a>
-    </span>
     
             <div class="phpdocumentor-element__package">
             in package
@@ -113,6 +110,9 @@
                             </ul>
         </div>
     
+            <span class="phpdocumentor-element__implements">
+            implements
+                            <abbr title="\Psr\Http\Message\StreamInterface">StreamInterface</abbr>                    </span>
     
     </h2>
 
@@ -130,6 +130,18 @@
 
 
 
+<h3 id="interfaces_class_traits">
+    Interfaces, Classes, Traits and Enums
+    <a href="#interfaces_class_traits" class="headerlink"><i class="fas fa-link"></i></a>
+</h3>
+
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\Psr\Http\Message\StreamInterface">StreamInterface</abbr></dt>
+        <dd></dd>
+    
+    
+    
+    </dl>
 
 
 <h3 id="toc">
@@ -167,9 +179,9 @@
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/chillerlan-HTTP-Psr7-StreamAbstract.html#property_stream">$stream</a>
+    <a href="classes/chillerlan-HTTP-Psr7-Stream.html#property_stream">$stream</a>
     <span>
-                        &nbsp;: <abbr title="\Psr\Http\Message\StreamInterface">StreamInterface</abbr>|resource|null            </span>
+                        &nbsp;: resource|null            </span>
 </dt>
 <dd></dd>
 
@@ -195,7 +207,7 @@
 <dd>Stream constructor.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/chillerlan-HTTP-Psr7-StreamAbstract.html#method___destruct">__destruct()</a>
+    <a href="classes/chillerlan-HTTP-Psr7-Stream.html#method___destruct">__destruct()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
@@ -346,7 +358,8 @@
     </code>
 
     
-    
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -366,7 +379,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/Stream.php"><a href="files/src-psr7-stream.html"><abbr title="src/Psr7/Stream.php">Stream.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">28</span>
+    <span class="phpdocumentor-element-found-in__line">31</span>
 
     </aside>
 
@@ -400,7 +413,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/Stream.php"><a href="files/src-psr7-stream.html"><abbr title="src/Psr7/Stream.php">Stream.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">26</span>
+    <span class="phpdocumentor-element-found-in__line">29</span>
 
     </aside>
 
@@ -434,7 +447,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/Stream.php"><a href="files/src-psr7-stream.html"><abbr title="src/Psr7/Stream.php">Stream.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">34</span>
+    <span class="phpdocumentor-element-found-in__line">37</span>
 
     </aside>
 
@@ -461,21 +474,21 @@
 >
     <h4 class="phpdocumentor-element__name" id="property_stream">
         $stream
-        <a href="classes/chillerlan-HTTP-Psr7-StreamAbstract.html#property_stream" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/chillerlan-HTTP-Psr7-Stream.html#property_stream" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/StreamAbstract.php"><a href="files/src-psr7-streamabstract.html"><abbr title="src/Psr7/StreamAbstract.php">StreamAbstract.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/Stream.php"><a href="files/src-psr7-stream.html"><abbr title="src/Psr7/Stream.php">Stream.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">22</span>
+    <span class="phpdocumentor-element-found-in__line">27</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type"><abbr title="\Psr\Http\Message\StreamInterface">StreamInterface</abbr>|resource|null</span>
+        <span class="phpdocumentor-signature__type">resource|null</span>
     <span class="phpdocumentor-signature__name">$stream</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
@@ -500,7 +513,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/Stream.php"><a href="files/src-psr7-stream.html"><abbr title="src/Psr7/Stream.php">Stream.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">32</span>
+    <span class="phpdocumentor-element-found-in__line">35</span>
 
     </aside>
 
@@ -534,7 +547,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/Stream.php"><a href="files/src-psr7-stream.html"><abbr title="src/Psr7/Stream.php">Stream.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">30</span>
+    <span class="phpdocumentor-element-found-in__line">33</span>
 
     </aside>
 
@@ -572,7 +585,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/Stream.php"><a href="files/src-psr7-stream.html"><abbr title="src/Psr7/Stream.php">Stream.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">41</span>
+    <span class="phpdocumentor-element-found-in__line">44</span>
 
     </aside>
 
@@ -610,12 +623,12 @@
 >
     <h4 class="phpdocumentor-element__name" id="method___destruct">
         __destruct()
-        <a href="classes/chillerlan-HTTP-Psr7-StreamAbstract.html#method___destruct" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/chillerlan-HTTP-Psr7-Stream.html#method___destruct" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/StreamAbstract.php"><a href="files/src-psr7-streamabstract.html"><abbr title="src/Psr7/StreamAbstract.php">StreamAbstract.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/Stream.php"><a href="files/src-psr7-stream.html"><abbr title="src/Psr7/Stream.php">Stream.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">29</span>
+    <span class="phpdocumentor-element-found-in__line">63</span>
 
     </aside>
 
@@ -648,7 +661,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/Stream.php"><a href="files/src-psr7-stream.html"><abbr title="src/Psr7/Stream.php">Stream.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">60</span>
+    <span class="phpdocumentor-element-found-in__line">70</span>
 
     </aside>
 
@@ -693,7 +706,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/Stream.php"><a href="files/src-psr7-stream.html"><abbr title="src/Psr7/Stream.php">Stream.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">88</span>
+    <span class="phpdocumentor-element-found-in__line">92</span>
 
     </aside>
 
@@ -738,7 +751,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/Stream.php"><a href="files/src-psr7-stream.html"><abbr title="src/Psr7/Stream.php">Stream.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">100</span>
+    <span class="phpdocumentor-element-found-in__line">104</span>
 
     </aside>
 
@@ -783,7 +796,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/Stream.php"><a href="files/src-psr7-stream.html"><abbr title="src/Psr7/Stream.php">Stream.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">163</span>
+    <span class="phpdocumentor-element-found-in__line">167</span>
 
     </aside>
 
@@ -828,7 +841,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/Stream.php"><a href="files/src-psr7-stream.html"><abbr title="src/Psr7/Stream.php">Stream.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">270</span>
+    <span class="phpdocumentor-element-found-in__line">274</span>
 
     </aside>
 
@@ -873,7 +886,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/Stream.php"><a href="files/src-psr7-stream.html"><abbr title="src/Psr7/Stream.php">Stream.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">288</span>
+    <span class="phpdocumentor-element-found-in__line">292</span>
 
     </aside>
 
@@ -929,7 +942,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/Stream.php"><a href="files/src-psr7-stream.html"><abbr title="src/Psr7/Stream.php">Stream.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">116</span>
+    <span class="phpdocumentor-element-found-in__line">120</span>
 
     </aside>
 
@@ -974,7 +987,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/Stream.php"><a href="files/src-psr7-stream.html"><abbr title="src/Psr7/Stream.php">Stream.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">233</span>
+    <span class="phpdocumentor-element-found-in__line">237</span>
 
     </aside>
 
@@ -1019,7 +1032,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/Stream.php"><a href="files/src-psr7-stream.html"><abbr title="src/Psr7/Stream.php">Stream.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">170</span>
+    <span class="phpdocumentor-element-found-in__line">174</span>
 
     </aside>
 
@@ -1064,7 +1077,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/Stream.php"><a href="files/src-psr7-stream.html"><abbr title="src/Psr7/Stream.php">Stream.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">202</span>
+    <span class="phpdocumentor-element-found-in__line">206</span>
 
     </aside>
 
@@ -1109,7 +1122,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/Stream.php"><a href="files/src-psr7-stream.html"><abbr title="src/Psr7/Stream.php">Stream.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">240</span>
+    <span class="phpdocumentor-element-found-in__line">244</span>
 
     </aside>
 
@@ -1165,7 +1178,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/Stream.php"><a href="files/src-psr7-stream.html"><abbr title="src/Psr7/Stream.php">Stream.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">195</span>
+    <span class="phpdocumentor-element-found-in__line">199</span>
 
     </aside>
 
@@ -1210,7 +1223,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/Stream.php"><a href="files/src-psr7-stream.html"><abbr title="src/Psr7/Stream.php">Stream.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">177</span>
+    <span class="phpdocumentor-element-found-in__line">181</span>
 
     </aside>
 
@@ -1274,7 +1287,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/Stream.php"><a href="files/src-psr7-stream.html"><abbr title="src/Psr7/Stream.php">Stream.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">145</span>
+    <span class="phpdocumentor-element-found-in__line">149</span>
 
     </aside>
 
@@ -1319,7 +1332,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr7/Stream.php"><a href="files/src-psr7-stream.html"><abbr title="src/Psr7/Stream.php">Stream.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">209</span>
+    <span class="phpdocumentor-element-found-in__line">213</span>
 
     </aside>
 

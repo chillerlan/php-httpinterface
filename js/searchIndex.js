@@ -121,6 +121,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTP-CurlUtils-CurlHandle.html#property_response"
         },                {
+            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlHandle\u003A\u003A\u0024requestBody",
+            "name": "requestBody",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-CurlUtils-CurlHandle.html#property_requestBody"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlHandle\u003A\u003A\u0024responseBody",
+            "name": "responseBody",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-CurlUtils-CurlHandle.html#property_responseBody"
+        },                {
             "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlMultiClient",
             "name": "CurlMultiClient",
             "summary": "",
@@ -676,6 +686,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTP-Psr18-HTTPClientAbstract.html#method_setResponseFactory"
         },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr18\\HTTPClientAbstract\u003A\u003AsetStreamFactory\u0028\u0029",
+            "name": "setStreamFactory",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr18-HTTPClientAbstract.html#method_setStreamFactory"
+        },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr18\\HTTPClientAbstract\u003A\u003A\u0024options",
             "name": "options",
             "summary": "",
@@ -685,6 +700,11 @@ Search.appendIndex(
             "name": "responseFactory",
             "summary": "",
             "url": "classes/chillerlan-HTTP-Psr18-HTTPClientAbstract.html#property_responseFactory"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr18\\HTTPClientAbstract\u003A\u003A\u0024streamFactory",
+            "name": "streamFactory",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr18-HTTPClientAbstract.html#property_streamFactory"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr18\\LoggingClient",
             "name": "LoggingClient",
@@ -768,8 +788,13 @@ Search.appendIndex(
         },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr18\\URLExtractor",
             "name": "URLExtractor",
-            "summary": "",
+            "summary": "A\u0020client\u0020that\u0020follows\u0020redirects\u0020until\u0020it\u0020reaches\u0020a\u0020non\u002D30x\u0020response,\u0020e.g.\u0020to\u0020extract\u0020shortened\u0020URLs",
             "url": "classes/chillerlan-HTTP-Psr18-URLExtractor.html"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr18\\URLExtractor\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "URLExtractor\u0020constructor.",
+            "url": "classes/chillerlan-HTTP-Psr18-URLExtractor.html#method___construct"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr18\\URLExtractor\u003A\u003AsendRequest\u0028\u0029",
             "name": "sendRequest",
@@ -785,6 +810,16 @@ Search.appendIndex(
             "name": "responses",
             "summary": "",
             "url": "classes/chillerlan-HTTP-Psr18-URLExtractor.html#property_responses"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr18\\URLExtractor\u003A\u003A\u0024http",
+            "name": "http",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr18-URLExtractor.html#property_http"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr18\\URLExtractor\u003A\u003A\u0024requestFactory",
+            "name": "requestFactory",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr18-URLExtractor.html#property_requestFactory"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr7\\Message",
             "name": "Message",
@@ -1101,6 +1136,11 @@ Search.appendIndex(
             "summary": "Stream\u0020constructor.",
             "url": "classes/chillerlan-HTTP-Psr7-Stream.html#method___construct"
         },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\Stream\u003A\u003A__destruct\u0028\u0029",
+            "name": "__destruct",
+            "summary": "Closes\u0020the\u0020stream\u0020when\u0020the\u0020destructed",
+            "url": "classes/chillerlan-HTTP-Psr7-Stream.html#method___destruct"
+        },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr7\\Stream\u003A\u003A__toString\u0028\u0029",
             "name": "__toString",
             "summary": "",
@@ -1176,6 +1216,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTP-Psr7-Stream.html#method_getMetadata"
         },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\Stream\u003A\u003A\u0024stream",
+            "name": "stream",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr7-Stream.html#property_stream"
+        },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr7\\Stream\u003A\u003A\u0024seekable",
             "name": "seekable",
             "summary": "",
@@ -1200,96 +1245,6 @@ Search.appendIndex(
             "name": "size",
             "summary": "",
             "url": "classes/chillerlan-HTTP-Psr7-Stream.html#property_size"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\StreamAbstract",
-            "name": "StreamAbstract",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr7-StreamAbstract.html"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\StreamAbstract\u003A\u003A__destruct\u0028\u0029",
-            "name": "__destruct",
-            "summary": "Closes\u0020the\u0020stream\u0020when\u0020the\u0020destructed",
-            "url": "classes/chillerlan-HTTP-Psr7-StreamAbstract.html#method___destruct"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\StreamAbstract\u003A\u003A__toString\u0028\u0029",
-            "name": "__toString",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr7-StreamAbstract.html#method___toString"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\StreamAbstract\u003A\u003Aclose\u0028\u0029",
-            "name": "close",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr7-StreamAbstract.html#method_close"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\StreamAbstract\u003A\u003Adetach\u0028\u0029",
-            "name": "detach",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr7-StreamAbstract.html#method_detach"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\StreamAbstract\u003A\u003AgetSize\u0028\u0029",
-            "name": "getSize",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr7-StreamAbstract.html#method_getSize"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\StreamAbstract\u003A\u003Atell\u0028\u0029",
-            "name": "tell",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr7-StreamAbstract.html#method_tell"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\StreamAbstract\u003A\u003Aeof\u0028\u0029",
-            "name": "eof",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr7-StreamAbstract.html#method_eof"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\StreamAbstract\u003A\u003AisSeekable\u0028\u0029",
-            "name": "isSeekable",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr7-StreamAbstract.html#method_isSeekable"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\StreamAbstract\u003A\u003Aseek\u0028\u0029",
-            "name": "seek",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr7-StreamAbstract.html#method_seek"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\StreamAbstract\u003A\u003Arewind\u0028\u0029",
-            "name": "rewind",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr7-StreamAbstract.html#method_rewind"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\StreamAbstract\u003A\u003AisWritable\u0028\u0029",
-            "name": "isWritable",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr7-StreamAbstract.html#method_isWritable"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\StreamAbstract\u003A\u003Awrite\u0028\u0029",
-            "name": "write",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr7-StreamAbstract.html#method_write"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\StreamAbstract\u003A\u003AisReadable\u0028\u0029",
-            "name": "isReadable",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr7-StreamAbstract.html#method_isReadable"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\StreamAbstract\u003A\u003Aread\u0028\u0029",
-            "name": "read",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr7-StreamAbstract.html#method_read"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\StreamAbstract\u003A\u003AgetContents\u0028\u0029",
-            "name": "getContents",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr7-StreamAbstract.html#method_getContents"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\StreamAbstract\u003A\u003AgetMetadata\u0028\u0029",
-            "name": "getMetadata",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr7-StreamAbstract.html#method_getMetadata"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\StreamAbstract\u003A\u003A\u0024stream",
-            "name": "stream",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr7-StreamAbstract.html#property_stream"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr7\\UploadedFile",
             "name": "UploadedFile",

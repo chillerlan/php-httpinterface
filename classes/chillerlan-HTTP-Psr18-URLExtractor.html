@@ -102,9 +102,6 @@
         <h2 class="phpdocumentor-content__title">
     URLExtractor
 
-        <span class="phpdocumentor-element__extends">
-        extends <a href="classes/chillerlan-HTTP-Psr18-CurlClient.html"><abbr title="\chillerlan\HTTP\Psr18\CurlClient">CurlClient</abbr></a>
-    </span>
     
             <div class="phpdocumentor-element__package">
             in package
@@ -113,24 +110,45 @@
                             </ul>
         </div>
     
+            <span class="phpdocumentor-element__implements">
+            implements
+                            <abbr title="\Psr\Http\Client\ClientInterface">ClientInterface</abbr>                    </span>
     
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr18/URLExtractor.php"><a href="files/src-psr18-urlextractor.html"><abbr title="src/Psr18/URLExtractor.php">URLExtractor.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 
     </aside>
 
-        
-    <section class="phpdocumentor-description"></section>
+            <p class="phpdocumentor-summary">A client that follows redirects until it reaches a non-30x response, e.g. to extract shortened URLs</p>
+
+    <section class="phpdocumentor-description"><p>The given HTTP client needs to be set up accordingly:</p>
+<ul>
+<li>CURLOPT_FOLLOWLOCATION  must be set to false so that we can intercept the 30x responses</li>
+<li>CURLOPT_MAXREDIRS       should be set to a value &gt; 1</li>
+</ul>
+</section>
 
 
 
 
 
 
+<h3 id="interfaces_class_traits">
+    Interfaces, Classes, Traits and Enums
+    <a href="#interfaces_class_traits" class="headerlink"><i class="fas fa-link"></i></a>
+</h3>
+
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\Psr\Http\Client\ClientInterface">ClientInterface</abbr></dt>
+        <dd></dd>
+    
+    
+    
+    </dl>
 
 
 <h3 id="toc">
@@ -140,23 +158,16 @@
 
 <dl class="phpdocumentor-table-of-contents">
                     <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/chillerlan-HTTP-Psr18-CurlClient.html#property_handle">$handle</a>
+    <a href="classes/chillerlan-HTTP-Psr18-URLExtractor.html#property_http">$http</a>
     <span>
-                        &nbsp;: <a href="classes/chillerlan-HTTP-CurlUtils-CurlHandle.html"><abbr title="\chillerlan\HTTP\CurlUtils\CurlHandle">CurlHandle</abbr></a>            </span>
+                        &nbsp;: <abbr title="\Psr\Http\Client\ClientInterface">ClientInterface</abbr>            </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/chillerlan-HTTP-Psr18-HTTPClientAbstract.html#property_options">$options</a>
+    <a href="classes/chillerlan-HTTP-Psr18-URLExtractor.html#property_requestFactory">$requestFactory</a>
     <span>
-                        &nbsp;: <abbr title="\chillerlan\Settings\SettingsContainerInterface">SettingsContainerInterface</abbr>            </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/chillerlan-HTTP-Psr18-HTTPClientAbstract.html#property_responseFactory">$responseFactory</a>
-    <span>
-                        &nbsp;: <abbr title="\Psr\Http\Message\ResponseFactoryInterface">ResponseFactoryInterface</abbr>            </span>
+                        &nbsp;: <abbr title="\Psr\Http\Message\RequestFactoryInterface">RequestFactoryInterface</abbr>            </span>
 </dt>
 <dd></dd>
 
@@ -168,11 +179,11 @@
 <dd></dd>
 
                 <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/chillerlan-HTTP-Psr18-HTTPClientAbstract.html#method___construct">__construct()</a>
+    <a href="classes/chillerlan-HTTP-Psr18-URLExtractor.html#method___construct">__construct()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
-<dd>HTTPClientAbstract constructor.</dd>
+<dd>URLExtractor constructor.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/chillerlan-HTTP-Psr18-URLExtractor.html#method_getResponses">getResponses()</a>
@@ -185,13 +196,6 @@
     <a href="classes/chillerlan-HTTP-Psr18-URLExtractor.html#method_sendRequest">sendRequest()</a>
     <span>
                                 &nbsp;: <abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>    </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/chillerlan-HTTP-Psr18-HTTPClientAbstract.html#method_setResponseFactory">setResponseFactory()</a>
-    <span>
-                                &nbsp;: self    </span>
 </dt>
 <dd></dd>
 
@@ -214,24 +218,24 @@
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_handle">
-        $handle
-        <a href="classes/chillerlan-HTTP-Psr18-CurlClient.html#property_handle" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_http">
+        $http
+        <a href="classes/chillerlan-HTTP-Psr18-URLExtractor.html#property_http" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr18/CurlClient.php"><a href="files/src-psr18-curlclient.html"><abbr title="src/Psr18/CurlClient.php">CurlClient.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr18/URLExtractor.php"><a href="files/src-psr18-urlextractor.html"><abbr title="src/Psr18/URLExtractor.php">URLExtractor.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">23</span>
+    <span class="phpdocumentor-element-found-in__line">33</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type"><a href="classes/chillerlan-HTTP-CurlUtils-CurlHandle.html"><abbr title="\chillerlan\HTTP\CurlUtils\CurlHandle">CurlHandle</abbr></a></span>
-    <span class="phpdocumentor-signature__name">$handle</span>
+        <span class="phpdocumentor-signature__type"><abbr title="\Psr\Http\Client\ClientInterface">ClientInterface</abbr></span>
+    <span class="phpdocumentor-signature__name">$http</span>
     </code>
 
         <section class="phpdocumentor-description"></section>
@@ -248,56 +252,24 @@
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_options">
-        $options
-        <a href="classes/chillerlan-HTTP-Psr18-HTTPClientAbstract.html#property_options" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_requestFactory">
+        $requestFactory
+        <a href="classes/chillerlan-HTTP-Psr18-URLExtractor.html#property_requestFactory" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr18/HTTPClientAbstract.php"><a href="files/src-psr18-httpclientabstract.html"><abbr title="src/Psr18/HTTPClientAbstract.php">HTTPClientAbstract.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr18/URLExtractor.php"><a href="files/src-psr18-urlextractor.html"><abbr title="src/Psr18/URLExtractor.php">URLExtractor.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">25</span>
+    <span class="phpdocumentor-element-found-in__line">35</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type"><abbr title="\chillerlan\Settings\SettingsContainerInterface">SettingsContainerInterface</abbr></span>
-    <span class="phpdocumentor-signature__name">$options</span>
-    </code>
-
-    
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_responseFactory">
-        $responseFactory
-        <a href="classes/chillerlan-HTTP-Psr18-HTTPClientAbstract.html#property_responseFactory" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr18/HTTPClientAbstract.php"><a href="files/src-psr18-httpclientabstract.html"><abbr title="src/Psr18/HTTPClientAbstract.php">HTTPClientAbstract.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">27</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type"><abbr title="\Psr\Http\Message\ResponseFactoryInterface">ResponseFactoryInterface</abbr></span>
-    <span class="phpdocumentor-signature__name">$responseFactory</span>
+        <span class="phpdocumentor-signature__type"><abbr title="\Psr\Http\Message\RequestFactoryInterface">RequestFactoryInterface</abbr></span>
+    <span class="phpdocumentor-signature__name">$requestFactory</span>
     </code>
 
         <section class="phpdocumentor-description"></section>
@@ -323,7 +295,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr18/URLExtractor.php"><a href="files/src-psr18-urlextractor.html"><abbr title="src/Psr18/URLExtractor.php">URLExtractor.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">23</span>
+    <span class="phpdocumentor-element-found-in__line">31</span>
 
     </aside>
 
@@ -354,43 +326,35 @@
 >
     <h4 class="phpdocumentor-element__name" id="method___construct">
         __construct()
-        <a href="classes/chillerlan-HTTP-Psr18-HTTPClientAbstract.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/chillerlan-HTTP-Psr18-URLExtractor.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr18/HTTPClientAbstract.php"><a href="files/src-psr18-httpclientabstract.html"><abbr title="src/Psr18/HTTPClientAbstract.php">HTTPClientAbstract.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr18/URLExtractor.php"><a href="files/src-psr18-urlextractor.html"><abbr title="src/Psr18/URLExtractor.php">URLExtractor.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">32</span>
+    <span class="phpdocumentor-element-found-in__line">40</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">HTTPClientAbstract constructor.</p>
+        <p class="phpdocumentor-summary">URLExtractor constructor.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\chillerlan\Settings\SettingsContainerInterface">SettingsContainerInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$options</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ResponseFactoryInterface">ResponseFactoryInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$responseFactory</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Log\LoggerInterface">LoggerInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$logger</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Client\ClientInterface">ClientInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$http</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\RequestFactoryInterface">RequestFactoryInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$requestFactory</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$options</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\chillerlan\Settings\SettingsContainerInterface">SettingsContainerInterface</abbr></span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+                <span class="phpdocumentor-signature__argument__name">$http</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Client\ClientInterface">ClientInterface</abbr></span>
+                            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
 
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$responseFactory</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ResponseFactoryInterface">ResponseFactoryInterface</abbr></span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$logger</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Log\LoggerInterface">LoggerInterface</abbr></span>
+                <span class="phpdocumentor-signature__argument__name">$requestFactory</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\RequestFactoryInterface">RequestFactoryInterface</abbr></span>
                  = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -419,7 +383,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr18/URLExtractor.php"><a href="files/src-psr18-urlextractor.html"><abbr title="src/Psr18/URLExtractor.php">URLExtractor.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">43</span>
+    <span class="phpdocumentor-element-found-in__line">65</span>
 
     </aside>
 
@@ -451,7 +415,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr18/URLExtractor.php"><a href="files/src-psr18-urlextractor.html"><abbr title="src/Psr18/URLExtractor.php">URLExtractor.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">28</span>
+    <span class="phpdocumentor-element-found-in__line">48</span>
 
     </aside>
 
@@ -490,62 +454,6 @@
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_setResponseFactory">
-        setResponseFactory()
-        <a href="classes/chillerlan-HTTP-Psr18-HTTPClientAbstract.html#method_setResponseFactory" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr18/HTTPClientAbstract.php"><a href="files/src-psr18-httpclientabstract.html"><abbr title="src/Psr18/HTTPClientAbstract.php">HTTPClientAbstract.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">46</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setResponseFactory</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ResponseFactoryInterface">ResponseFactoryInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$responseFactory</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
-
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$responseFactory</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ResponseFactoryInterface">ResponseFactoryInterface</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">codeCoverageIgnore</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                
-                                             
-                                    </dd>
-                        </dl>
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">self</span>
             &mdash;
         
     
