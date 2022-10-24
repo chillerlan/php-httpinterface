@@ -47,11 +47,9 @@ class Stream implements StreamInterface{
 			throw new InvalidArgumentException('Stream must be a resource');
 		}
 
-		$this->stream = $stream;
-
-		$meta = stream_get_meta_data($this->stream);
-
-		$this->seekable = $meta['seekable'];
+		$this->stream   = $stream;
+		$meta           = $this->getMetadata();
+		$this->seekable = $meta['seekable'] ?? false;
 		$this->readable = in_array($meta['mode'], FactoryHelpers::STREAM_MODES_READ);
 		$this->writable = in_array($meta['mode'], FactoryHelpers::STREAM_MODES_WRITE);
 		$this->uri      = $meta['uri'] ?? null;
@@ -80,19 +78,12 @@ class Stream implements StreamInterface{
 		}
 
 		// this would be nice but some iplementations don't like nice things :(
-#		$meta = stream_get_meta_data($this->stream);
-#
-#		if(isset($meta['wrapper_type']) && $meta['wrapper_type'] === 'plainfile'){
-#			return $meta['uri'];
+#		$wrapper_type = $this->getMetadata('wrapper_type');
+#		if($wrapper_type === 'plainfile'){
+#			return $this->getMetadata('uri');
 #		}
 
-		$contents = stream_get_contents($this->stream);
-
-		if($contents !== false){
-			return $contents;
-		}
-
-		throw new RuntimeException('stream_get_contents() error'); // @codeCoverageIgnore
+		return $this->getContents();
 	}
 
 	/**
@@ -128,10 +119,6 @@ class Stream implements StreamInterface{
 	 */
 	public function getSize():?int{
 
-		if($this->size !== null){
-			return $this->size;
-		}
-
 		if(!is_resource($this->stream)){
 			return null;
 		}
@@ -146,6 +133,10 @@ class Stream implements StreamInterface{
 		if(isset($stats['size'])){
 			$this->size = $stats['size'];
 
+			return $this->size;
+		}
+
+		if($this->size !== null){
 			return $this->size;
 		}
 
