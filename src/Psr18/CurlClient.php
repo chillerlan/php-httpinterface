@@ -45,6 +45,7 @@ class CurlClient extends HTTPClientAbstract{
 		$this->handle->close();
 		$response = $this->handle->getResponse();
 		$this->logger->debug(sprintf("\n----HTTP-RESPONSE---\n%s", MessageUtil::toString($response, false)));
+		$response->getBody()->rewind();
 
 		return $response;
 	}
