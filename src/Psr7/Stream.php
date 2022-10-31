@@ -278,6 +278,10 @@ class Stream implements StreamInterface{
 			throw new RuntimeException('Invalid stream'); // @codeCoverageIgnore
 		}
 
+		if(!$this->readable){
+			throw new RuntimeException('Cannot read from non-readable stream');
+		}
+
 		$contents = stream_get_contents($this->stream);
 
 		if($contents === false){
