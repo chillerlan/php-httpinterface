@@ -35,32 +35,11 @@ class RequestTest extends TestCase{
 		new Request('GET', '///');
 	}
 
-	public function testCanConstructWithBody():void{
-		$r = new Request('GET', '/', [], 'baz');
-
-		$this::assertInstanceOf(StreamInterface::class, $r->getBody());
-		$this::assertSame('baz', (string)$r->getBody());
-	}
-
 	public function testNullBody():void{
 		$r = new Request('GET', '/', [], null);
 
 		$this::assertInstanceOf(StreamInterface::class, $r->getBody());
 		$this::assertSame('', (string)$r->getBody());
-	}
-
-	public function testFalseyBody():void{
-		$r = new Request('GET', '/', [], '0');
-
-		$this::assertInstanceOf(StreamInterface::class, $r->getBody());
-		$this::assertSame('0', (string)$r->getBody());
-	}
-
-	public function testConstructorDoesNotReadStreamBody():void{
-		$body = $this->getMockBuilder(StreamInterface::class)->getMock();
-		$body->expects($this->never())->method('__toString');
-
-		$this::assertSame($body, (new Request('GET', '/', [], $body))->getBody());
 	}
 
 	public function testCapitalizesMethod():void{

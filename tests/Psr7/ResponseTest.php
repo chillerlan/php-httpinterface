@@ -36,13 +36,6 @@ class ResponseTest extends TestAbstract{
 		$this::assertSame('Not Found', $r->getReasonPhrase());
 	}
 
-	public function testConstructorDoesNotReadStreamBody():void{
-		$body = $this->getMockBuilder(StreamInterface::class)->getMock();
-		$body->expects($this->never())->method('__toString');
-
-		$this::assertSame($body, (new Response(200, [], $body))->getBody());
-	}
-
 	public function testStatusCanBeNumericString():void{
 		$r  = new Response('404');
 		$r2 = $r->withStatus('201');
@@ -69,13 +62,6 @@ class ResponseTest extends TestAbstract{
 		$this::assertSame(['baz, bar'], $r->getHeader('Foo'));
 	}
 
-	public function testCanConstructWithBody():void{
-		$r = new Response(200, [], 'baz');
-
-		$this::assertInstanceOf(StreamInterface::class, $r->getBody());
-		$this::assertSame('baz', (string)$r->getBody());
-	}
-
 	public function testNullBody():void{
 		$r = new Response(200, [], null);
 
@@ -83,18 +69,11 @@ class ResponseTest extends TestAbstract{
 		$this::assertSame('', (string)$r->getBody());
 	}
 
-	public function testFalseyBody():void{
-		$r = new Response(200, [], '0');
-
-		$this::assertInstanceOf(StreamInterface::class, $r->getBody());
-		$this::assertSame('0', (string)$r->getBody());
-	}
-
 	public function testCanConstructWithReason():void{
-		$r = new Response(200, [], null, 'bar');
+		$r = new Response(200, [], 'bar');
 		$this::assertSame('bar', $r->getReasonPhrase());
 
-		$r = new Response(200, [], null, '0');
+		$r = new Response(200, [], '0');
 		$this::assertSame('0', $r->getReasonPhrase(), 'Falsey reason works');
 	}
 

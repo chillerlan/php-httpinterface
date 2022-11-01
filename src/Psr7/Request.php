@@ -32,10 +32,9 @@ class Request extends Message implements RequestInterface, RequestMethodInterfac
 	 * @param string                                                 $method
 	 * @param string|\Psr\Http\Message\UriInterface                  $uri
 	 * @param array|null                                             $headers
-	 * @param null|string|resource|\Psr\Http\Message\StreamInterface $body
 	 */
-	public function __construct(string $method, $uri, array $headers = null, $body = null){
-		parent::__construct($headers, $body);
+	public function __construct(string $method, $uri, array $headers = null){
+		parent::__construct($headers);
 
 		$this->method = strtoupper($method);
 		$this->uri    = $uri instanceof UriInterface ? $uri : new Uri($uri);

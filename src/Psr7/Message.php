@@ -12,12 +12,10 @@
 
 namespace chillerlan\HTTP\Psr7;
 
-use chillerlan\HTTP\Psr17\FactoryHelpers;
-use chillerlan\HTTP\Psr17\StreamFactory;
 use chillerlan\HTTP\Utils\HeaderUtil;
 use Psr\Http\Message\{MessageInterface, StreamInterface};
 
-use function array_merge, implode, is_array, strtolower, trim;
+use function array_merge, fopen, implode, is_array, strtolower, trim;
 
 abstract class Message implements MessageInterface{
 
@@ -29,29 +27,15 @@ abstract class Message implements MessageInterface{
 
 	protected StreamInterface $body;
 
-	protected StreamFactory $streamFactory;
-
 	/**
 	 * Message constructor.
 	 *
 	 * @param array|null                                             $headers
-	 * @param null|string|resource|\Psr\Http\Message\StreamInterface $body
 	 */
-	public function __construct(array $headers = null, $body = null){
+	public function __construct(array $headers = null){
 		$this->setHeaders(HeaderUtil::normalize($headers ?? []));
 
-		$this->streamFactory = new StreamFactory;
-
-		if($body instanceof StreamInterface){
-			$this->body = $body;
-		}
-		elseif($body !== null && $body !== ''){
-			$this->body = FactoryHelpers::create_stream_from_input($body);
-		}
-		else{
-			$this->body = $this->streamFactory->createStream();
-		}
-
+		$this->body = new Stream(fopen('php://temp', 'r+'));
 	}
 
 	/**

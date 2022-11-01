@@ -20,7 +20,7 @@ class ServerRequestFactory implements ServerRequestFactoryInterface, RequestMeth
 	 * @inheritDoc
 	 */
 	public function createServerRequest(string $method, $uri, array $serverParams = []):ServerRequestInterface{
-		return new ServerRequest($method, $uri, null, null, $serverParams);
+		return new ServerRequest($method, $uri, null, $serverParams);
 	}
 
 }
