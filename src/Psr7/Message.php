@@ -15,7 +15,7 @@ namespace chillerlan\HTTP\Psr7;
 use chillerlan\HTTP\Utils\HeaderUtil;
 use Psr\Http\Message\{MessageInterface, StreamInterface};
 
-use function array_merge, fopen, implode, is_array, strtolower, trim;
+use function array_merge, fopen, implode, is_array, strtolower;
 
 abstract class Message implements MessageInterface{
 
@@ -29,12 +29,8 @@ abstract class Message implements MessageInterface{
 
 	/**
 	 * Message constructor.
-	 *
-	 * @param array|null                                             $headers
 	 */
-	public function __construct(array $headers = null){
-		$this->setHeaders(HeaderUtil::normalize($headers ?? []));
-
+	public function __construct(){
 		$this->body = new Stream(fopen('php://temp', 'r+'));
 	}
 
@@ -180,36 +176,6 @@ abstract class Message implements MessageInterface{
 		$clone->body = $body;
 
 		return $clone;
-	}
-
-	/**
-	 * @param array $headers
-	 */
-	protected function setHeaders(array $headers):void{
-		$this->headers     = [];
-		$this->headerNames = [];
-
-		foreach($headers as $name => $value){
-
-			if(!is_array($value)){
-				$value = [$value];
-			}
-
-			$value      = HeaderUtil::trimValues($value);
-			$normalized = strtolower($name);
-
-			/** @noinspection DuplicatedCode */
-			if(isset($this->headerNames[$normalized])){
-				$name                 = $this->headerNames[$normalized];
-				/** @phan-suppress-next-line PhanTypeInvalidDimOffset */
-				$this->headers[$name] = array_merge($this->headers[$name], $value);
-			}
-			else{
-				$this->headerNames[$normalized] = $name;
-				$this->headers[$name]           = $value;
-			}
-
-		}
 	}
 
 }

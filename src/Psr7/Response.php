@@ -109,11 +109,10 @@ class Response extends Message implements ResponseInterface, StatusCodeInterface
 	 * Response constructor.
 	 *
 	 * @param int|null                                               $status
-	 * @param array|null                                             $headers
 	 * @param string|null                                            $reason
 	 */
-	public function __construct(int $status = null, array $headers = null, string $reason = null){
-		parent::__construct($headers);
+	public function __construct(int $status = null, string $reason = null){
+		parent::__construct();
 
 		$reason = $reason ?? '';
 

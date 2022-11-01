@@ -36,7 +36,7 @@ class RequestTest extends TestCase{
 	}
 
 	public function testNullBody():void{
-		$r = new Request('GET', '/', [], null);
+		$r = new Request('GET', '/');
 
 		$this::assertInstanceOf(StreamInterface::class, $r->getBody());
 		$this::assertSame('', (string)$r->getBody());
@@ -102,25 +102,11 @@ class RequestTest extends TestCase{
 		$this::assertSame('/baz?0', (new Request('GET', 'http://foo.com/baz?0'))->getRequestTarget());
 	}
 
-	public function testHostIsAddedFirst():void{
-		$r = new Request('GET', 'http://foo.com/baz?bar=bam', ['Foo' => 'Bar']);
-
-		$this::assertSame(['Host' => ['foo.com'], 'Foo'  => ['Bar']], $r->getHeaders());
-	}
-
 	public function testCanGetHeaderAsCsv():void{
-		$r = new Request('GET', 'http://foo.com/baz?bar=bam', ['Foo' => ['a', 'b', 'c']]);
+		$r = (new Request('GET', 'http://foo.com/baz?bar=bam'))->withHeader('Foo', ['a', 'b', 'c']);
 
 		$this::assertSame('a, b, c', $r->getHeaderLine('Foo'));
 		$this::assertSame('', $r->getHeaderLine('Bar'));
-	}
-
-	public function testHostIsNotOverwrittenWhenPreservingHost():void{
-		$r1 = new Request('GET', 'http://foo.com/baz?bar=bam', ['Host' => 'a.com']);
-		$this::assertSame(['Host' => ['a.com']], $r1->getHeaders());
-
-		$r2 = $r1->withUri(new Uri('http://www.foo.com/bar'), true);
-		$this::assertSame('a.com', $r2->getHeaderLine('Host'));
 	}
 
 	public function testOverridesHostWithUri():void{
@@ -131,15 +117,8 @@ class RequestTest extends TestCase{
 		$this::assertSame('www.baz.com', $r2->getHeaderLine('Host'));
 	}
 
-	public function testAggregatesHeaders():void{
-		$r = new Request('GET', '', ['ZOO' => 'zoobar', 'zoo' => ['foobar', 'zoobar']]);
-
-		$this::assertSame(['Zoo' => ['zoobar, foobar, zoobar']], $r->getHeaders());
-		$this::assertSame('zoobar, foobar, zoobar', $r->getHeaderLine('zoo'));
-	}
-
 	public function testSupportNumericHeaders():void{
-		$r = new Request('GET', '', ['Content-Length' => 200]);
+		$r = (new Request('GET', ''))->withHeader('Content-Length', 200);
 
 		$this::assertSame(['Content-Length' => ['200']], $r->getHeaders());
 		$this::assertSame('200', $r->getHeaderLine('Content-Length'));

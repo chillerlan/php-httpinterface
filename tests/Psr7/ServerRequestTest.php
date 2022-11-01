@@ -23,7 +23,7 @@ class ServerRequestTest extends TestCase{
 	public function testServerParams():void{
 		$params = ['name' => 'value'];
 
-		$r = new ServerRequest(ServerRequest::METHOD_GET, '/', [], $params);
+		$r = new ServerRequest(ServerRequest::METHOD_GET, '/', $params);
 		$this::assertSame($params, $r->getServerParams());
 	}
 
