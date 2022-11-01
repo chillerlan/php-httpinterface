@@ -12,7 +12,6 @@
 
 namespace chillerlan\HTTP\Psr18;
 
-use chillerlan\HTTP\Utils\MessageUtil;
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
 use function explode, file_get_contents, get_headers, in_array, intval, restore_error_handler,
 	set_error_handler, stream_context_create, strtolower, substr, trim;
@@ -25,8 +24,6 @@ class StreamClient extends HTTPClientAbstract{
 	 *
 	 */
 	public function sendRequest(RequestInterface $request):ResponseInterface{
-		$this->logger->debug("\n----HTTP-REQUEST----\n".MessageUtil::toString($request));
-
 		$uri     = $request->getUri();
 		$method  = $request->getMethod();
 		$headers = $this->getRequestHeaders($request);
@@ -74,11 +71,15 @@ class StreamClient extends HTTPClientAbstract{
 			->withProtocolVersion($responseHeaders['httpversion'])
 		;
 
-		$response->getBody()->write($responseBody);
-		$this->logger->debug("\n----HTTP-RESPONSE---\n".MessageUtil::toString($response, false));
-		$response->getBody()->rewind();
+		$body = $this->streamFactory !== null
+			? $this->streamFactory->createStream()
+			: $response->getBody()
+		;
 
-		return $response;
+		$body->write($responseBody);
+		$body->rewind();
+
+		return $response->withBody($body);
 	}
 
 	/**

@@ -155,6 +155,8 @@ class CurlHandle{
 	 * @codeCoverageIgnore
 	 */
 	public function getResponse():ResponseInterface{
+		$this->responseBody->rewind();
+
 		return $this->response->withBody($this->responseBody);
 	}
 
