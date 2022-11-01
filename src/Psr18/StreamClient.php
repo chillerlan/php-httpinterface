@@ -32,25 +32,27 @@ class StreamClient extends HTTPClientAbstract{
 			? $request->getBody()->getContents()
 			: null;
 
-		$context = stream_context_create([
+		$context_options = [
 			'http' => [
 				'method'           => $method,
 				'header'           => $headers,
 				'content'          => $body,
-#				'protocol_version' => '1.1',
+				'protocol_version' => '1.1', // 1.1 is default from PHP 8.0
 				'user_agent'       => $this->options->user_agent,
 				'max_redirects'    => 0,
 				'timeout'          => 5,
 			],
 			'ssl'  => [
-				'cafile'              => $this->options->ca_info,
 				'verify_peer'         => $this->options->ssl_verifypeer,
 				'verify_depth'        => 3,
 				'peer_name'           => $uri->getHost(),
 				'ciphers'             => 'HIGH:!SSLv2:!SSLv3',
 				'disable_compression' => true,
 			],
-		]);
+		];
+
+		$ca                          = $this->options->ca_info_is_path ? 'capath' : 'cafile';
+		$context_options['ssl'][$ca] = $this->options->ca_info;
 
 		$errorHandler = function(int $errno, string $errstr):bool{
 			$this->logger->error('StreamClient error #'.$errno.': '.$errstr);
@@ -60,6 +62,7 @@ class StreamClient extends HTTPClientAbstract{
 
 		set_error_handler($errorHandler);
 
+		$context         = stream_context_create($context_options);
 		$requestUri      = (string)$uri->withFragment('');
 		$responseBody    = file_get_contents($requestUri, false, $context);
 		$responseHeaders = $this->parseResponseHeaders(get_headers($requestUri, true, $context));
