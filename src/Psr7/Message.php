@@ -25,7 +25,7 @@ abstract class Message implements MessageInterface{
 	/** @var string[] */
 	protected array $headerNames = [];
 
-	protected string $version;
+	protected string $version = '1.1';
 
 	protected StreamInterface $body;
 
@@ -36,12 +36,10 @@ abstract class Message implements MessageInterface{
 	 *
 	 * @param array|null                                             $headers
 	 * @param null|string|resource|\Psr\Http\Message\StreamInterface $body
-	 * @param string|null                                            $version
 	 */
-	public function __construct(array $headers = null, $body = null, string $version = null){
+	public function __construct(array $headers = null, $body = null){
 		$this->setHeaders(HeaderUtil::normalize($headers ?? []));
 
-		$this->version       = $version ?? '1.1';
 		$this->streamFactory = new StreamFactory;
 
 		if($body instanceof StreamInterface){

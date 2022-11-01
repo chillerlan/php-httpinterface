@@ -111,11 +111,10 @@ class Response extends Message implements ResponseInterface, StatusCodeInterface
 	 * @param int|null                                               $status
 	 * @param array|null                                             $headers
 	 * @param string|null|resource|\Psr\Http\Message\StreamInterface $body
-	 * @param string|null                                            $version
 	 * @param string|null                                            $reason
 	 */
-	public function __construct(int $status = null, array $headers = null, $body = null, string $version = null, string $reason = null){
-		parent::__construct($headers, $body, $version);
+	public function __construct(int $status = null, array $headers = null, $body = null, string $reason = null){
+		parent::__construct($headers, $body);
 
 		$reason = $reason ?? '';
 

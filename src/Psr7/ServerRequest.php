@@ -36,11 +36,10 @@ class ServerRequest extends Request implements ServerRequestInterface{
 	 * @param string|\Psr\Http\Message\UriInterface                  $uri
 	 * @param array|null                                             $headers
 	 * @param null|string|resource|\Psr\Http\Message\StreamInterface $body
-	 * @param string|null                                            $version
 	 * @param array|null                                             $serverParams
 	 */
-	public function __construct(string $method, $uri, array $headers = null, $body = null, string $version = null, array $serverParams = null){
-		parent::__construct($method, $uri, $headers, $body, $version);
+	public function __construct(string $method, $uri, array $headers = null, $body = null, array $serverParams = null){
+		parent::__construct($method, $uri, $headers, $body);
 
 		$this->serverParams = $serverParams ?? [];
 	}

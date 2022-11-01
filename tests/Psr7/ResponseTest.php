@@ -91,16 +91,11 @@ class ResponseTest extends TestAbstract{
 	}
 
 	public function testCanConstructWithReason():void{
-		$r = new Response(200, [], null, '1.1', 'bar');
+		$r = new Response(200, [], null, 'bar');
 		$this::assertSame('bar', $r->getReasonPhrase());
 
-		$r = new Response(200, [], null, '1.1', '0');
+		$r = new Response(200, [], null, '0');
 		$this::assertSame('0', $r->getReasonPhrase(), 'Falsey reason works');
-	}
-
-	public function testCanConstructWithProtocolVersion():void{
-		$r = new Response(200, [], null, '1000');
-		$this::assertSame('1000', $r->getProtocolVersion());
 	}
 
 	public function testWithStatusCodeAndNoReason():void{
