@@ -17,7 +17,7 @@ use chillerlan\HTTP\Psr17\StreamFactory;
 use chillerlan\HTTP\Utils\HeaderUtil;
 use Psr\Http\Message\{MessageInterface, StreamInterface};
 
-use function array_map, array_merge, implode, is_array, strtolower, trim;
+use function array_merge, implode, is_array, strtolower, trim;
 
 abstract class Message implements MessageInterface{
 
@@ -120,7 +120,7 @@ abstract class Message implements MessageInterface{
 			$value = [$value];
 		}
 
-		$value      = $this->trimHeaderValues($value);
+		$value      = HeaderUtil::trimValues($value);
 		$normalized = strtolower($name);
 		$clone      = clone $this;
 
@@ -143,7 +143,7 @@ abstract class Message implements MessageInterface{
 			$value = [$value];
 		}
 
-		$value      = $this->trimHeaderValues($value);
+		$value      = HeaderUtil::trimValues($value);
 		$normalized = strtolower($name);
 		$clone      = clone $this;
 
@@ -213,7 +213,7 @@ abstract class Message implements MessageInterface{
 				$value = [$value];
 			}
 
-			$value      = $this->trimHeaderValues($value);
+			$value      = HeaderUtil::trimValues($value);
 			$normalized = strtolower($name);
 
 			/** @noinspection DuplicatedCode */
@@ -228,24 +228,6 @@ abstract class Message implements MessageInterface{
 			}
 
 		}
-	}
-
-	/**
-	 * Trims whitespace from the header values.
-	 *
-	 * Spaces and tabs ought to be excluded by parsers when extracting the field value from a header field.
-	 *
-	 * header-field = field-name ":" OWS field-value OWS
-	 * OWS          = *( SP / HTAB )
-	 *
-	 * @param string[] $values header values
-	 *
-	 * @return string[] Trimmed header values
-	 *
-	 * @see https://tools.ietf.org/html/rfc7230#section-3.2.4
-	 */
-	protected function trimHeaderValues(array $values):array{
-		return array_map(fn(string $value):string => trim($value, " \t"), $values);
 	}
 
 }
