@@ -22,19 +22,19 @@ class ServerRequest extends Request implements ServerRequestInterface{
 	protected array $cookieParams = [];
 
 	protected array $queryParams = [];
-	/** @var null|array|object */
-	protected $parsedBody;
 
 	protected array $attributes = [];
 
 	protected array $uploadedFiles = [];
+	/** @var null|array|object */
+	protected $parsedBody;
 
 	/**
 	 * ServerRequest constructor.
 	 *
-	 * @param string                                                 $method
-	 * @param string|\Psr\Http\Message\UriInterface                  $uri
-	 * @param array|null                                             $serverParams
+	 * @param string                                $method
+	 * @param string|\Psr\Http\Message\UriInterface $uri
+	 * @param array|null                            $serverParams
 	 */
 	public function __construct(string $method, $uri, array $serverParams = null){
 		parent::__construct($method, $uri);
@@ -134,11 +134,11 @@ class ServerRequest extends Request implements ServerRequestInterface{
 	 */
 	public function getAttribute($name, $default = null){
 
-		if(array_key_exists($name, $this->attributes)){
-			return $this->attributes[$name];
+		if(!array_key_exists($name, $this->attributes)){
+			return $default;
 		}
 
-		return $default;
+		return $this->attributes[$name];
 	}
 
 	/**
@@ -156,14 +156,14 @@ class ServerRequest extends Request implements ServerRequestInterface{
 	 */
 	public function withoutAttribute($name):ServerRequestInterface{
 
-		if(array_key_exists($name, $this->attributes)){
-			$clone = clone $this;
-			unset($clone->attributes[$name]);
-
-			return $clone;
+		if(!array_key_exists($name, $this->attributes)){
+			return $this;
 		}
 
-		return $this;
+		$clone = clone $this;
+		unset($clone->attributes[$name]);
+
+		return $clone;
 	}
 
 }

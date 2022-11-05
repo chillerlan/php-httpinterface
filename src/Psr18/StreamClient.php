@@ -107,9 +107,9 @@ class StreamClient extends HTTPClientAbstract{
 	protected function createResponse(array $headers):ResponseInterface{
 		$h = [];
 
-		$httpversion = null;
-		$statuscode  = null;
-		$statustext  = null;
+		$httpversion = '';
+		$statuscode  = 0;
+		$statustext  = '';
 
 		foreach($headers as $k => $v){
 
