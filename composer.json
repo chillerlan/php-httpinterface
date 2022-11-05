@@ -31,7 +31,7 @@
 		"ext-json":"*",
 		"ext-simplexml":"*",
 		"ext-zlib":"*",
-		"chillerlan/php-http-message-utils": "dev-main#4d1b1ff2f32b01d6e710a41a5117a02babef5a62",
+		"chillerlan/php-http-message-utils": "dev-main#64b7082702e436fed23e29f5abbdddb974e429e5",
 		"chillerlan/php-settings-container":"^2.1",
 		"fig/http-message-util":"^1.1.5",
 		"psr/http-client":"^1.0",
