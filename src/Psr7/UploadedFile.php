@@ -176,7 +176,7 @@ class UploadedFile implements UploadedFileInterface{
 	 *
 	 * @throws \RuntimeException on error
 	 */
-	protected function copyToStream(StreamInterface $dest){
+	protected function copyToStream(StreamInterface $dest):void{
 		$source = $this->getStream();
 
 		if($source->isSeekable()){

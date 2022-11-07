@@ -68,7 +68,7 @@ class Stream implements StreamInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function __toString(){
+	public function __toString():string{
 
 		if(!is_resource($this->stream)){
 			return '';
