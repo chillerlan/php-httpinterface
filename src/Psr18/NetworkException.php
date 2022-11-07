@@ -19,15 +19,10 @@ use Psr\Http\Message\RequestInterface;
  */
 class NetworkException extends ClientException implements NetworkExceptionInterface{
 
-	/**
-	 * @var \Psr\Http\Message\RequestInterface
-	 */
 	protected RequestInterface $request;
 
 	/**
-	 * @param string                             $message
-	 * @param \Psr\Http\Message\RequestInterface $request
-	 * @param \Exception|null                    $previous
+	 *
 	 */
 	public function __construct(string $message, RequestInterface $request, Throwable $previous = null){
 		$this->request = $request;
@@ -36,11 +31,7 @@ class NetworkException extends ClientException implements NetworkExceptionInterf
 	}
 
 	/**
-	 * Returns the request.
-	 *
-	 * The request object MAY be a different object from the one passed to ClientInterface::sendRequest()
-	 *
-	 * @return \Psr\Http\Message\RequestInterface
+	 * @inheritDoc
 	 */
 	public function getRequest():RequestInterface{
 		return $this->request;

@@ -20,20 +20,15 @@ use function array_pop;
 
 class QueueRunner implements RequestHandlerInterface{
 
-	/**
-	 * @var \Psr\Http\Server\MiddlewareInterface[]
-	 */
+	/** @var \Psr\Http\Server\MiddlewareInterface[] */
 	protected array $middlewareStack;
 
-	/**
-	 * @var \Psr\Http\Server\RequestHandlerInterface
-	 */
 	protected RequestHandlerInterface $fallbackHandler;
 
 	/**
 	 *  constructor.
 	 *
-	 * @param array                                    $middlewareStack
+	 * @param \Psr\Http\Server\MiddlewareInterface[]   $middlewareStack
 	 * @param \Psr\Http\Server\RequestHandlerInterface $fallbackHandler
 	 */
 	public function __construct(array $middlewareStack, RequestHandlerInterface $fallbackHandler){
@@ -54,7 +49,7 @@ class QueueRunner implements RequestHandlerInterface{
 	}
 
 	/**
-	 * @return \Psr\Http\Server\MiddlewareInterface
+	 *
 	 */
 	protected function getMiddleware():MiddlewareInterface{
 		return array_pop($this->middlewareStack);

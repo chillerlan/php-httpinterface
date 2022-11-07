@@ -30,6 +30,11 @@ interface MultiResponseHandlerInterface{
 	 * @return \Psr\Http\Message\RequestInterface|null      an optional replacement request if the previous request failed
 	 * @internal
 	 */
-	public function handleResponse(ResponseInterface $response, RequestInterface $request, int $id, array $curl_info):?RequestInterface;
+	public function handleResponse(
+		ResponseInterface $response,
+		RequestInterface $request,
+		int $id,
+		array $curl_info
+	):?RequestInterface;
 
 }
