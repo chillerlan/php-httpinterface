@@ -738,7 +738,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr18\\NetworkException\u003A\u003AgetRequest\u0028\u0029",
             "name": "getRequest",
-            "summary": "Returns\u0020the\u0020request.",
+            "summary": "",
             "url": "classes/chillerlan-HTTP-Psr18-NetworkException.html#method_getRequest"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr18\\NetworkException\u003A\u003A\u0024request",
@@ -758,7 +758,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr18\\RequestException\u003A\u003AgetRequest\u0028\u0029",
             "name": "getRequest",
-            "summary": "Returns\u0020the\u0020request.",
+            "summary": "",
             "url": "classes/chillerlan-HTTP-Psr18-RequestException.html#method_getRequest"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr18\\RequestException\u003A\u003A\u0024request",
