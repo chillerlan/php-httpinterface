@@ -24,7 +24,7 @@ class LoggingClientTest extends CurlClientTest{
 		parent::setUp();
 
 		$logger = new class() extends AbstractLogger{
-			public function log($level, $message, array $context = []){
+			public function log($level, string|\Stringable $message, array $context = []):void{
 				echo sprintf('[%s][%s] %s', date('Y-m-d H:i:s'), $level, 'LoggingClientTest')."\n";
 			}
 		};

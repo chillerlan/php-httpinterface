@@ -50,15 +50,9 @@ class UploadedFile implements UploadedFileInterface{
 	protected StreamFactory $streamFactory;
 
 	/**
-	 * @param \Psr\Http\Message\StreamInterface|string|resource $file
-	 * @param int                                               $size
-	 * @param int                                               $error
-	 * @param string|null                                       $filename
-	 * @param string|null                                       $mediaType
-	 *
 	 * @throws \InvalidArgumentException
 	 */
-	public function __construct($file, int $size, int $error = UPLOAD_ERR_OK, string $filename = null, string $mediaType = null){
+	public function __construct(mixed $file, int $size, int $error = UPLOAD_ERR_OK, string $filename = null, string $mediaType = null){
 
 		if(!in_array($error, $this::UPLOAD_ERRORS, true)){
 			throw new InvalidArgumentException('Invalid error status for UploadedFile');

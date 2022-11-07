@@ -15,7 +15,7 @@ use InvalidArgumentException;
 use Psr\Http\Message\UriInterface;
 
 use function call_user_func_array, explode, filter_var, is_array, is_string, ltrim, mb_strtolower,
-	preg_replace_callback, rawurlencode, strpos, strtolower, ucfirst, var_export;
+	preg_replace_callback, rawurlencode, strtolower, str_contains, str_starts_with, ucfirst, var_export;
 
 use const FILTER_FLAG_IPV6, FILTER_VALIDATE_IP;
 
@@ -40,11 +40,9 @@ class Uri implements UriInterface{
 	/**
 	 * Uri constructor.
 	 *
-	 * @param string|array $uri
-	 *
 	 * @throws \InvalidArgumentException
 	 */
-	public function __construct($uri = null){
+	public function __construct(string|array $uri = null){
 
 		if($uri !== null){
 
@@ -97,12 +95,9 @@ class Uri implements UriInterface{
 	 */
 
 	/**
-	 * @param mixed $scheme
-	 *
-	 * @return string
 	 * @throws \InvalidArgumentException
 	 */
-	protected function filterScheme($scheme):string{
+	protected function filterScheme(mixed $scheme):string{
 
 		if(!is_string($scheme)){
 			throw new InvalidArgumentException('scheme must be a string');
@@ -142,12 +137,9 @@ class Uri implements UriInterface{
 	 */
 
 	/**
-	 * @param mixed $user
-	 *
-	 * @return string
 	 * @throws \InvalidArgumentException
 	 */
-	protected function filterUser($user):string{
+	protected function filterUser(mixed $user):string{
 
 		if(!is_string($user)){
 			throw new InvalidArgumentException('user must be a string');
@@ -157,12 +149,9 @@ class Uri implements UriInterface{
 	}
 
 	/**
-	 * @param mixed $pass
-	 *
-	 * @return string
 	 * @throws \InvalidArgumentException
 	 */
-	protected function filterPass($pass):string{
+	protected function filterPass(mixed $pass):string{
 
 		if(!is_string($pass)){
 			throw new InvalidArgumentException('pass must be a string');
@@ -224,12 +213,9 @@ class Uri implements UriInterface{
 	 */
 
 	/**
-	 * @param mixed $host
-	 *
-	 * @return string
 	 * @throws \InvalidArgumentException
 	 */
-	protected function filterHost($host):string{
+	protected function filterHost(mixed $host):string{
 
 		if(!is_string($host)){
 			throw new InvalidArgumentException('host must be a string');
@@ -272,12 +258,9 @@ class Uri implements UriInterface{
 	 */
 
 	/**
-	 * @param mixed $port
-	 *
-	 * @return int|null
 	 * @throws \InvalidArgumentException
 	 */
-	protected function filterPort($port):?int{
+	protected function filterPort(mixed $port):?int{
 
 		if($port === null){
 			return null;
@@ -323,12 +306,9 @@ class Uri implements UriInterface{
 	 */
 
 	/**
-	 * @param mixed $path
-	 *
-	 * @return string
 	 * @throws \InvalidArgumentException
 	 */
-	protected function filterPath($path):string{
+	protected function filterPath(mixed $path):string{
 
 		if(!is_string($path)){
 			throw new InvalidArgumentException('path must be a string');
@@ -367,12 +347,9 @@ class Uri implements UriInterface{
 	 */
 
 	/**
-	 * @param mixed $query
-	 *
-	 * @return string
 	 * @throws \InvalidArgumentException
 	 */
-	protected function filterQuery($query):string{
+	protected function filterQuery(mixed $query):string{
 
 		if(!is_string($query)){
 			throw new InvalidArgumentException('query and fragment must be a string');
@@ -411,11 +388,9 @@ class Uri implements UriInterface{
 	 */
 
 	/**
-	 * @param mixed $fragment
 	 *
-	 * @return string
 	 */
-	protected function filterFragment($fragment):string{
+	protected function filterFragment(mixed $fragment):string{
 		return $this->filterQuery($fragment);
 	}
 
@@ -508,11 +483,11 @@ class Uri implements UriInterface{
 		}
 		else{
 
-			if(strpos($this->path, '//') === 0){
+			if(str_starts_with($this->path, '//')){
 				$this->path = '/'.ltrim($this->path, '/'); // automagically fix the path, unlike Guzzle
 			}
 
-			if(empty($this->scheme) && strpos(explode('/', $this->path, 2)[0], ':') !== false){
+			if(empty($this->scheme) && str_contains(explode('/', $this->path, 2)[0], ':')){
 				throw new InvalidArgumentException('A relative URI must not have a path beginning with a segment containing a colon');
 			}
 

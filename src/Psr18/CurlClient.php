@@ -23,7 +23,7 @@ class CurlClient extends HTTPClientAbstract{
 	 * @inheritDoc
 	 */
 	public function sendRequest(RequestInterface $request):ResponseInterface{
-		$stream       = $this->streamFactory !== null ? $this->streamFactory->createStream() : null;
+		$stream       = $this->streamFactory?->createStream();
 		$this->handle = new CurlHandle($request, $this->responseFactory->createResponse(), $this->options, $stream);
 		$errno        = $this->handle->exec();
 

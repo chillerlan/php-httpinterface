@@ -13,7 +13,7 @@ namespace chillerlan\HTTP\Psr18;
 use chillerlan\HTTP\Utils\HeaderUtil;
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
 use function explode, file_get_contents, get_headers, in_array, intval, restore_error_handler,
-	set_error_handler, stream_context_create, strtolower, substr, trim;
+	set_error_handler, stream_context_create, strtolower, str_starts_with, trim;
 
 class StreamClient extends HTTPClientAbstract{
 
@@ -62,7 +62,7 @@ class StreamClient extends HTTPClientAbstract{
 				'method'           => $method,
 				'header'           => $this->getRequestHeaders($request),
 				'content'          => $body,
-				'protocol_version' => '1.1', // 1.1 is default from PHP 8.0
+#				'protocol_version' => '1.1', // 1.1 is default from PHP 8.0
 				'user_agent'       => $this->options->user_agent,
 				'max_redirects'    => 0,
 				'timeout'          => 5,
@@ -113,7 +113,7 @@ class StreamClient extends HTTPClientAbstract{
 
 		foreach($headers as $k => $v){
 
-			if($k === 0 && substr($v, 0, 4) === 'HTTP'){
+			if($k === 0 && str_starts_with($v, 'HTTP')){
 				$status = explode(' ', $v, 3);
 
 				$httpversion = explode('/', $status[0], 2)[1];

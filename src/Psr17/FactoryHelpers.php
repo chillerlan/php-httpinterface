@@ -57,11 +57,9 @@ class FactoryHelpers{
 	}
 
 	/**
-	 * @param mixed $in
 	 *
-	 * @return \Psr\Http\Message\StreamInterface
 	 */
-	public static function create_stream_from_input($in = null):StreamInterface{
+	public static function create_stream_from_input(mixed $in = null):StreamInterface{
 		$in ??= '';
 
 		// not sure about this one, it might cause:

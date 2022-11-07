@@ -12,9 +12,10 @@ namespace chillerlan\HTTP\CurlUtils;
 
 use chillerlan\Settings\SettingsContainerInterface;
 use Psr\Http\Message\{RequestInterface, ResponseInterface, StreamInterface};
+use CurlHandle as CH;
 
 use function array_key_exists, count, curl_close, curl_errno, curl_error, curl_exec, curl_init, curl_setopt_array,
-	explode, in_array, is_resource, strlen, strtolower, strtoupper, substr, trim;
+	explode, in_array, strlen, strtolower, strtoupper, substr, trim;
 
 use const CURL_HTTP_VERSION_2TLS, CURLE_COULDNT_CONNECT, CURLE_COULDNT_RESOLVE_HOST, CURLE_COULDNT_RESOLVE_PROXY,
 	CURLE_GOT_NOTHING, CURLE_OPERATION_TIMEOUTED, CURLE_SSL_CONNECT_ERROR, CURLOPT_CAINFO, CURLOPT_CAPATH,
@@ -76,10 +77,8 @@ class CurlHandle{
 
 	/**
 	 * The cURL handle
-	 * @phan-suppress PhanUndeclaredTypeProperty
-	 * @var resource|\CurlHandle|null
 	 */
-	protected $curl;
+	protected ?CH $curl = null;
 
 	protected array $curlOptions = [];
 
@@ -127,7 +126,7 @@ class CurlHandle{
 	 */
 	public function close():CurlHandle{
 
-		if(is_resource($this->curl)){
+		if($this->curl instanceof CH){
 			/** @phan-suppress-next-line PhanTypeMismatchArgumentInternalReal */
 			curl_close($this->curl);
 		}
@@ -136,11 +135,9 @@ class CurlHandle{
 	}
 
 	/**
-	 * @phan-suppress PhanUndeclaredTypeReturnType
-	 * @return resource|\CurlHandle|null
 	 * @codeCoverageIgnore
 	 */
-	public function getCurlResource(){
+	public function getCurlResource():?CH{
 		return $this->curl;
 	}
 
@@ -340,10 +337,9 @@ class CurlHandle{
 	}
 
 	/**
-	 * @phan-suppress PhanUndeclaredTypeReturnType
-	 * @return resource|\CurlHandle|null
+	 *
 	 */
-	public function init(){
+	public function init():?CH{
 		$options = $this->initCurlOptions();
 
 		if(!isset($options[CURLOPT_HEADERFUNCTION])){
@@ -385,40 +381,40 @@ class CurlHandle{
 	/**
 	 * @internal
 	 *
-	 * @param resource $curl
-	 * @param resource $stream
-	 * @param int      $length
+	 * @param \CurlHandle $curl
+	 * @param resource    $stream
+	 * @param int         $length
 	 *
 	 * @return string
 	 * @noinspection PhpUnusedParameterInspection
 	 */
-	public function readfunction($curl, $stream, int $length):string{
+	public function readfunction(CH $curl, $stream, int $length):string{
 		return $this->requestBody->read($length);
 	}
 
 	/**
 	 * @internal
 	 *
-	 * @param resource $curl
-	 * @param string   $data
+	 * @param \CurlHandle $curl
+	 * @param string      $data
 	 *
 	 * @return int
 	 * @noinspection PhpUnusedParameterInspection
 	 */
-	public function writefunction($curl, string $data):int{
+	public function writefunction(CH $curl, string $data):int{
 		return $this->responseBody->write($data);
 	}
 
 	/**
 	 * @internal
 	 *
-	 * @param resource $curl
-	 * @param string   $line
+	 * @param \CurlHandle $curl
+	 * @param string      $line
 	 *
 	 * @return int
 	 * @noinspection PhpUnusedParameterInspection
 	 */
-	public function headerfunction($curl, string $line):int{
+	public function headerfunction(CH $curl, string $line):int{
 		$str    = trim($line);
 		$header = explode(':', $str, 2);
 

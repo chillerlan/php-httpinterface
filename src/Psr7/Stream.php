@@ -294,7 +294,7 @@ class Stream implements StreamInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function getMetadata($key = null){
+	public function getMetadata($key = null):mixed{
 
 		if(!is_resource($this->stream)){
 			return $key ? null : [];

@@ -11,7 +11,7 @@
 namespace chillerlan\HTTP\Psr7;
 
 use InvalidArgumentException;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\{ServerRequestInterface, UriInterface};
 
 use function array_key_exists, is_array, is_object;
 
@@ -26,17 +26,13 @@ class ServerRequest extends Request implements ServerRequestInterface{
 	protected array $attributes = [];
 
 	protected array $uploadedFiles = [];
-	/** @var null|array|object */
-	protected $parsedBody;
+
+	protected array|object|null $parsedBody = null;
 
 	/**
 	 * ServerRequest constructor.
-	 *
-	 * @param string                                $method
-	 * @param string|\Psr\Http\Message\UriInterface $uri
-	 * @param array|null                            $serverParams
 	 */
-	public function __construct(string $method, $uri, array $serverParams = null){
+	public function __construct(string $method, UriInterface|string $uri, array $serverParams = null){
 		parent::__construct($method, $uri);
 
 		$this->serverParams = $serverParams ?? [];
@@ -103,7 +99,7 @@ class ServerRequest extends Request implements ServerRequestInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function getParsedBody(){
+	public function getParsedBody():array|object|null{
 		return $this->parsedBody;
 	}
 
@@ -132,7 +128,7 @@ class ServerRequest extends Request implements ServerRequestInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function getAttribute($name, $default = null){
+	public function getAttribute($name, $default = null):mixed{
 
 		if(!array_key_exists($name, $this->attributes)){
 			return $default;

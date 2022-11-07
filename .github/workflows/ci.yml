@@ -29,13 +29,13 @@ jobs:
       - name: "Install PHP"
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "7.4"
+          php-version: "8.1"
           tools: pecl
           coverage: none
-          extensions: ast, curl, json, simplexml, zlib
+          extensions: ast, curl, json, simplexml, sodium, zlib
 
       - name: "Update dependencies with composer"
-        run: composer update --no-interaction --no-ansi --no-progress
+        uses: ramsey/composer-install@v2
 
       - name: "Run phan"
         run: php vendor/bin/phan
@@ -52,7 +52,7 @@ jobs:
       - name: "Install PHP"
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "7.4"
+          php-version: "8.1"
           tools: phpDocumentor
           coverage: none
           extensions: curl, json, simplexml, zlib
@@ -79,8 +79,6 @@ jobs:
           - ubuntu-latest
           - windows-latest
         php-version:
-          - "7.4"
-          - "8.0"
           - "8.1"
           - "8.2"
 
@@ -96,10 +94,10 @@ jobs:
         with:
           php-version: ${{ matrix.php-version }}
           coverage: pcov
-          extensions: curl, json, simplexml, zlib
+          extensions: curl, json, simplexml, sodium, zlib
 
       - name: "Install dependencies with composer"
-        run: composer update --no-ansi --no-interaction --no-progress
+        uses: ramsey/composer-install@v2
 
       - name: "Run tests with phpunit"
         run: php vendor/phpunit/phpunit/phpunit --configuration=phpunit.xml.dist

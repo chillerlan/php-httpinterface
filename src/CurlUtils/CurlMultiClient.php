@@ -14,10 +14,10 @@ use chillerlan\HTTP\{HTTPOptions, Psr17\ResponseFactory, Psr18\ClientException};
 use chillerlan\Settings\SettingsContainerInterface;
 use Psr\Http\Message\{RequestInterface, ResponseFactoryInterface};
 use Psr\Log\{LoggerAwareInterface, LoggerAwareTrait, LoggerInterface, NullLogger};
+use CurlMultiHandle as CMH;
 
 use function array_shift, curl_close, curl_multi_add_handle, curl_multi_close, curl_multi_exec,
-	curl_multi_info_read, curl_multi_init, curl_multi_remove_handle, curl_multi_select, curl_multi_setopt,
-	is_resource, usleep;
+	curl_multi_info_read, curl_multi_init, curl_multi_remove_handle, curl_multi_select, curl_multi_setopt, usleep;
 
 use const CURLM_OK, CURLMOPT_MAXCONNECTS, CURLMOPT_PIPELINING, CURLPIPE_MULTIPLEX;
 
@@ -33,10 +33,8 @@ class CurlMultiClient implements LoggerAwareInterface{
 
 	/**
 	 * the curl_multi master handle
-	 *
-	 * @var resource
 	 */
-	protected $curl_multi;
+	protected ?CMH $curl_multi = null;
 
 	/**
 	 * An array of RequestInterface to run
@@ -95,8 +93,7 @@ class CurlMultiClient implements LoggerAwareInterface{
 	 */
 	public function close():void{
 
-		if(is_resource($this->curl_multi)){
-			/** @phan-suppress-next-line PhanTypeMismatchArgumentInternalReal */
+		if($this->curl_multi instanceof CMH){
 			curl_multi_close($this->curl_multi);
 		}
 
@@ -205,6 +202,7 @@ class CurlMultiClient implements LoggerAwareInterface{
 			->init()
 		;
 
+		/** @phan-suppress-next-line PhanTypeMismatchArgumentNullableInternal */
 		curl_multi_add_handle($this->curl_multi, $curl);
 
 		$this->handles[(int)$curl] = $handle;

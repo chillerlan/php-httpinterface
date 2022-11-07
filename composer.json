@@ -1,6 +1,6 @@
 {
 	"name": "chillerlan/php-httpinterface",
-	"description": "A http PSR-7/17/18 client/interface for PHP7.4+",
+	"description": "A PSR-7/17/18 http client/interface implementation",
 	"license": "MIT",
 	"type": "library",
 	"keywords": [
@@ -26,20 +26,20 @@
 		"psr/http-server-middleware-implementation": "1.0"
 	},
 	"require": {
-		"php": "^7.4 || ^8.0",
+		"php": "^8.1",
 		"ext-curl":"*",
 		"ext-json":"*",
 		"ext-simplexml":"*",
 		"ext-zlib":"*",
-		"chillerlan/php-http-message-utils": "dev-main#64b7082702e436fed23e29f5abbdddb974e429e5",
-		"chillerlan/php-settings-container":"^2.1",
+		"chillerlan/php-http-message-utils": "dev-main#988479572c0a754fb16a7803e96905c6e0d7e50c",
+		"chillerlan/php-settings-container":"^3.0",
 		"fig/http-message-util":"^1.1.5",
 		"psr/http-client":"^1.0",
 		"psr/http-message": "^1.0",
 		"psr/http-factory":"^1.0",
 		"psr/http-server-handler": "^1.0",
 		"psr/http-server-middleware": "^1.0",
-		"psr/log": "^1.1"
+		"psr/log": "^1.1 || ^2.0 || ^3.0"
 	},
 	"require-dev": {
 		"http-interop/http-factory-tests": "^0.9",
