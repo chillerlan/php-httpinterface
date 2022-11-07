@@ -1,18 +1,18 @@
 # chillerlan/php-httpinterface
 
-A [PSR-7](https://www.php-fig.org/psr/psr-7/)/[PSR-17](https://www.php-fig.org/psr/psr-17/)/[PSR-18](https://www.php-fig.org/psr/psr-18/) implementation for PHP 7.4+.
+A [PSR-7](https://www.php-fig.org/psr/psr-7/)/[PSR-17](https://www.php-fig.org/psr/psr-17/)/[PSR-18](https://www.php-fig.org/psr/psr-18/) implementation.
 
 [![PHP Version Support][php-badge]][php]
 [![version][packagist-badge]][packagist]
 [![license][license-badge]][license]
+[![Continuous Integration][gh-action-badge]][gh-action]
 [![Coverage][coverage-badge]][coverage]
 [![Scrunitizer][scrutinizer-badge]][scrutinizer]
-[![Packagist downloads][downloads-badge]][downloads]<br/>
-[![Continuous Integration][gh-action-badge]][gh-action]
+[![Packagist downloads][downloads-badge]][downloads]
 
 [php-badge]: https://img.shields.io/packagist/php-v/chillerlan/php-httpinterface?logo=php&color=8892BF
 [php]: https://www.php.net/supported-versions.php
-[packagist-badge]: https://img.shields.io/packagist/v/chillerlan/php-httpinterface.svg
+[packagist-badge]: https://img.shields.io/packagist/v/chillerlan/php-httpinterface.svg?logo=packagist
 [packagist]: https://packagist.org/packages/chillerlan/php-httpinterface
 [license-badge]: https://img.shields.io/github/license/chillerlan/php-httpinterface.svg
 [license]: https://github.com/chillerlan/php-httpinterface/blob/main/LICENSE
@@ -20,9 +20,9 @@ A [PSR-7](https://www.php-fig.org/psr/psr-7/)/[PSR-17](https://www.php-fig.org/p
 [coverage]: https://codecov.io/github/chillerlan/php-httpinterface
 [scrutinizer-badge]: https://img.shields.io/scrutinizer/g/chillerlan/php-httpinterface.svg?logo=scrutinizer
 [scrutinizer]: https://scrutinizer-ci.com/g/chillerlan/php-httpinterface
-[downloads-badge]: https://img.shields.io/packagist/dt/chillerlan/php-httpinterface.svg
+[downloads-badge]: https://img.shields.io/packagist/dt/chillerlan/php-httpinterface.svg?logo=packagist
 [downloads]: https://packagist.org/packages/chillerlan/php-httpinterface/stats
-[gh-action-badge]: https://github.com/chillerlan/php-httpinterface/workflows/Continuous%20Integration/badge.svg
+[gh-action-badge]: https://img.shields.io/github/workflow/status/chillerlan/php-httpinterface/Continuous%20Integration?logo=github
 [gh-action]: https://github.com/chillerlan/php-httpinterface/actions
 
 # Documentation
@@ -31,7 +31,7 @@ See [the wiki](https://github.com/chillerlan/php-httpinterface/wiki) for advance
 An API documentation created with [phpDocumentor](https://www.phpdoc.org/) can be found at https://chillerlan.github.io/php-httpinterface/ (WIP).
 
 ## Requirements
-- PHP 7.4+
+- PHP 8.1+
   - the [`cURL`](https://www.php.net/manual/book.curl.php), [`json`](https://www.php.net/manual/book.json.php), [`simplexml`](https://www.php.net/manual/book.simplexml.php) and [`zlib`](https://www.php.net/manual/book.zlib.php) extensions
 
 ## Installation
@@ -41,7 +41,7 @@ An API documentation created with [phpDocumentor](https://www.phpdoc.org/) can b
 ```json
 {
 	"require": {
-		"php": "^7.4 || ^8.0",
+		"php": "^8.1",
 		"chillerlan/php-httpinterface": "dev-main"
 	}
 }
