@@ -806,6 +806,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTP-Psr18-URLExtractor.html#method_sendRequest"
         },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr18\\URLExtractor\u003A\u003Aextract\u0028\u0029",
+            "name": "extract",
+            "summary": "extract\u0020the\u0020given\u0020URL\u0020and\u0020return\u0020the\u0020last\u0020valid\u0020location\u0020header",
+            "url": "classes/chillerlan-HTTP-Psr18-URLExtractor.html#method_extract"
+        },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr18\\URLExtractor\u003A\u003AgetResponses\u0028\u0029",
             "name": "getResponses",
             "summary": "",
@@ -1885,6 +1890,11 @@ Search.appendIndex(
             "name": "testSendRequest",
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr18-URLExtractorTest.html#method_testSendRequest"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr18\\URLExtractorTest\u003A\u003AtestExtract\u0028\u0029",
+            "name": "testExtract",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr18-URLExtractorTest.html#method_testExtract"
         },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\RequestTest",
             "name": "RequestTest",
