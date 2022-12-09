@@ -12,8 +12,11 @@ namespace chillerlan\HTTP\Psr18;
 
 use chillerlan\HTTP\Psr17\RequestFactory;
 use Psr\Http\Client\ClientInterface;
-use Psr\Http\Message\{RequestFactoryInterface, RequestInterface, ResponseInterface};
+use Psr\Http\Message\{RequestFactoryInterface, RequestInterface, ResponseInterface, UriInterface};
 
+use function array_key_last;
+use function array_pop;
+use function count;
 use function in_array;
 
 /**
@@ -56,6 +59,33 @@ class URLExtractor implements ClientInterface{
 		while(in_array($response->getStatusCode(), [301, 302, 303, 307, 308], true));
 
 		return $response;
+	}
+
+	/**
+	 * extract the given URL and return the last valid location header
+	 */
+	public function extract(UriInterface|string $shortURL):?string{
+		$request  = $this->requestFactory->createRequest('GET', $shortURL);
+		$response = $this->sendRequest($request);
+
+		if($response->getStatusCode() !== 200 || empty($this->responses)){
+			return null;
+		}
+
+		$count = count($this->responses) - 2;
+
+		while($count >= 0){
+
+			$url = $this->responses[$count]?->getHeaderLine('location');
+
+			if(!empty($url)){
+				return $url;
+			}
+
+			$count--;
+		}
+
+		return null;
 	}
 
 	/**

@@ -62,4 +62,10 @@ class URLExtractorTest extends HTTPClientTestAbstract{
 
 	}
 
+	public function testExtract():void{
+		$url = $this->http->extract('https://t.co/ZSS6nVOcVp');
+
+		$this::assertSame('https://api.guildwars2.com/v2/build', $url);
+	}
+
 }
