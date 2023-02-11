@@ -1996,6 +1996,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr7-RequestTest.html#method_testWithMethodInvalidMethod"
         },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\RequestTest\u003A\u003AtestWithMethodEmptyMethod\u0028\u0029",
+            "name": "testWithMethodEmptyMethod",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-RequestTest.html#method_testWithMethodEmptyMethod"
+        },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\ResponseTest",
             "name": "ResponseTest",
             "summary": "",
