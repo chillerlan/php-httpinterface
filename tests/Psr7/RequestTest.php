@@ -142,4 +142,11 @@ class RequestTest extends TestCase{
 		(new Request('GET', '/foo'))->withMethod([]);
 	}
 
+	public function testWithMethodEmptyMethod():void{
+		$this->expectException(InvalidArgumentException::class);
+		$this->expectExceptionMessage('HTTP method must not be empty');
+
+		(new Request('GET', '/foo'))->withMethod('');
+	}
+
 }

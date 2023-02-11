@@ -16,7 +16,7 @@ use Fig\Http\Message\RequestMethodInterface;
 use InvalidArgumentException;
 use Psr\Http\Message\{RequestInterface, UriInterface};
 
-use function is_string, preg_match, strtoupper;
+use function is_string, preg_match, strtoupper, trim;
 
 class Request extends Message implements RequestInterface, RequestMethodInterface{
 
@@ -32,8 +32,13 @@ class Request extends Message implements RequestInterface, RequestMethodInterfac
 	public function __construct(string $method, UriInterface|string $uri){
 		parent::__construct();
 
-		$this->method = strtoupper($method);
-		$this->uri    = $uri instanceof UriInterface ? $uri : new Uri($uri);
+		$this->method = strtoupper(trim($method));
+
+		if($method === ''){
+			throw new InvalidArgumentException('HTTP method must not be empty');
+		}
+
+		$this->uri = $uri instanceof UriInterface ? $uri : new Uri($uri);
 
 		$this->updateHostFromUri();
 	}
@@ -89,6 +94,12 @@ class Request extends Message implements RequestInterface, RequestMethodInterfac
 
 		if(!is_string($method)){
 			throw new InvalidArgumentException('Method must be a string');
+		}
+
+		$method = trim($method);
+
+		if($method === ''){
+			throw new InvalidArgumentException('HTTP method must not be empty');
 		}
 
 		$clone         = clone $this;

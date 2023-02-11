@@ -10,6 +10,7 @@
 
 namespace chillerlan\HTTP\CurlUtils;
 
+use chillerlan\HTTP\Psr18\ClientException;
 use chillerlan\Settings\SettingsContainerInterface;
 use Psr\Http\Message\{RequestInterface, ResponseInterface, StreamInterface};
 use CurlHandle as CH;
@@ -291,11 +292,15 @@ class CurlHandle{
 	}
 
 	/**
-	 *
+	 * @throws \chillerlan\HTTP\Psr18\ClientException
 	 */
 	public function setRequestOptions():void{
-		$userinfo = $this->request->getUri()->getUserInfo();
 		$method   = $this->request->getMethod();
+		$userinfo = $this->request->getUri()->getUserInfo();
+
+		if($method === ''){
+			throw new ClientException('invalid HTTP method');
+		}
 
 		if(!empty($userinfo)){
 			$this->curlOptions[CURLOPT_USERPWD] = $userinfo;
