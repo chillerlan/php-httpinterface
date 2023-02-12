@@ -56,7 +56,7 @@ class UriTest extends TestCase{
 		$this::assertSame('https://user:pass@example.com:8080/path/123?q=abc#test', (string)$uri);
 	}
 
-	public function getValidUris():array{
+	public static function getValidUris():array{
 		return [
 			['urn:path-rootless'],
 			['urn:path:with:colon'],
@@ -276,7 +276,7 @@ class UriTest extends TestCase{
 		$this::assertSame('http://example.com', (string)$uri);
 	}
 
-	public function uriComponentsEncodingProvider():array{
+	public static function uriComponentsEncodingProvider():array{
 		$unreserved = 'a-zA-Z0-9.-_~!$&\'()*+,;=:@';
 
 		return [
@@ -506,7 +506,7 @@ class UriTest extends TestCase{
 		$this::assertSame('/foo', (string)$uri);
 	}
 
-	public function hostProvider():array{
+	public static function hostProvider():array{
 		return [
 			'normalized host' => ['MaStEr.eXaMpLe.CoM', 'master.example.com',],
 			'simple host'     => ['www.example.com', 'www.example.com',],
@@ -530,7 +530,7 @@ class UriTest extends TestCase{
 		$this::assertSame($expected, $uri->getHost(), 'Host must be normalized according to RFC3986');
 	}
 
-	public function authorityProvider():array{
+	public static function authorityProvider():array{
 		return [
 			'authority'                           => [
 				'scheme'    => 'http',

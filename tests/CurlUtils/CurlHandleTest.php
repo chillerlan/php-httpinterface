@@ -36,7 +36,7 @@ class CurlHandleTest extends TestAbstract{
 		$this->http = new CurlClient($options);
 	}
 
-	public function requestMethodProvider():array{
+	public static function requestMethodProvider():array{
 		return [
 			'delete'  => [Request::METHOD_DELETE],
 			'get'     => [Request::METHOD_GET],
@@ -76,7 +76,7 @@ class CurlHandleTest extends TestAbstract{
 
 	}
 
-	public function requestMethodWithBodyProvider():array{
+	public static function requestMethodWithBodyProvider():array{
 		return [
 			'delete'  => [Request::METHOD_DELETE],
 			'patch'   => [Request::METHOD_PATCH],

@@ -31,7 +31,7 @@
 		"ext-json":"*",
 		"ext-simplexml":"*",
 		"ext-zlib":"*",
-		"chillerlan/php-http-message-utils": "dev-main#5752d3cab23a11a7ebd4d369f8f676bef816c8dc",
+		"chillerlan/php-http-message-utils": "dev-main#8203aadaaf0d6fa26789c9aba09c512807dfa2b0",
 		"chillerlan/php-settings-container":"^3.0",
 		"fig/http-message-util":"^1.1.5",
 		"psr/http-client":"^1.0",
@@ -44,7 +44,7 @@
 	"require-dev": {
 		"http-interop/http-factory-tests": "^0.9",
 		"phan/phan": "^5.4",
-		"phpunit/phpunit": "^9.5"
+		"phpunit/phpunit": "^10.0"
 	},
 	"autoload": {
 		"psr-4": {

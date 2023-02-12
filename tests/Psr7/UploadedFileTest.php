@@ -42,7 +42,7 @@ class UploadedFileTest extends TestAbstract{
 		}
 	}
 
-	public function invalidStreams():array{
+	public static function invalidStreams():array{
 		return [
 #			'null'   => [null],
 #			'true'   => [true],
@@ -65,7 +65,7 @@ class UploadedFileTest extends TestAbstract{
 		new UploadedFile($streamOrFile, 0);
 	}
 
-	public function invalidErrorStatuses():array{
+	public static function invalidErrorStatuses():array{
 		return [
 			'negative' => [-1],
 			'too-big'  => [9],
@@ -162,7 +162,7 @@ class UploadedFileTest extends TestAbstract{
 		$upload->moveTo('/boot');
 	}
 
-	public function nonOkErrorStatus():array{
+	public static function nonOkErrorStatus():array{
 		return [
 			'UPLOAD_ERR_INI_SIZE'   => [UPLOAD_ERR_INI_SIZE],
 			'UPLOAD_ERR_FORM_SIZE'  => [UPLOAD_ERR_FORM_SIZE],

@@ -33,7 +33,7 @@ class FactoryHelpersTest extends TestAbstract{
 		FactoryHelpers::create_stream('test', 'foo');
 	}
 
-	public function streamInputProvider():array{
+	public static function streamInputProvider():array{
 
 		$fh = fopen('php://temp', 'r+');
 		fwrite($fh, 'resourcetest');
