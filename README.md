@@ -22,8 +22,8 @@ A [PSR-7](https://www.php-fig.org/psr/psr-7/)/[PSR-17](https://www.php-fig.org/p
 [scrutinizer]: https://scrutinizer-ci.com/g/chillerlan/php-httpinterface
 [downloads-badge]: https://img.shields.io/packagist/dt/chillerlan/php-httpinterface.svg?logo=packagist
 [downloads]: https://packagist.org/packages/chillerlan/php-httpinterface/stats
-[gh-action-badge]: https://img.shields.io/github/workflow/status/chillerlan/php-httpinterface/Continuous%20Integration?logo=github
-[gh-action]: https://github.com/chillerlan/php-httpinterface/actions
+[gh-action-badge]: https://img.shields.io/github/actions/workflow/status/chillerlan/php-httpinterface/ci.yml?branch=main&logo=github
+[gh-action]: https://github.com/chillerlan/php-httpinterface/actions/workflows/ci.yml?query=branch%3Amain
 
 # Documentation
 
