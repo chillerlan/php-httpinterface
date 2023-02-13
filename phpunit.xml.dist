@@ -5,23 +5,23 @@
 		 cacheResultFile=".build/phpunit.result.cache"
 		 colors="true"
 >
+	<testsuites>
+		<testsuite name="php-httpinterface test suite">
+			<directory>tests</directory>
+		</testsuite>
+		<!--<testsuite name="http-interop integration tests">
+			<directory>./vendor/http-interop/http-factory-tests/test</directory>
+		</testsuite>-->
+	</testsuites>
 	<coverage>
 		<include>
-			<directory suffix=".php">./src</directory>
+			<directory suffix=".php">src</directory>
 		</include>
 		<report>
 			<clover outputFile=".build/coverage/clover.xml"/>
 			<xml outputDirectory=".build/coverage/coverage-xml"/>
 		</report>
 	</coverage>
-	<testsuites>
-		<testsuite name="php-httpinterface test suite">
-			<directory>./tests</directory>
-		</testsuite>
-		<testsuite name="http-interop integration tests">
-			<directory>./vendor/http-interop/http-factory-tests/test</directory>
-		</testsuite>
-	</testsuites>
 	<groups>
 		<exclude>
 			<group>slow</group>
