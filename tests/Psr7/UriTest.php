@@ -102,7 +102,7 @@ class UriTest extends TestCase{
 		$this::assertSame($input, (string)(new Uri(parse_url($input))));
 	}
 
-	public function getInvalidUris():array{
+	public static function getInvalidUris():array{
 		return [
 			// parse_url() requires the host component which makes sense for http(s)
 			// but not when the scheme is not known or different. So '//' or '///' is
