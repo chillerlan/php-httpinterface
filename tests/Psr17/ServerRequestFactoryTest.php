@@ -9,6 +9,7 @@
 
 namespace chillerlan\HTTPTest\Psr17;
 
+use PHPUnit\Framework\Attributes\BackupGlobals;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestFactoryInterface;
@@ -16,7 +17,6 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\UriFactoryInterface;
 use function class_exists;
 use function defined;
-use function microtime;
 use function sprintf;
 use const UPLOAD_ERR_OK;
 
@@ -34,9 +34,6 @@ class ServerRequestFactoryTest extends TestCase{
 		if(!defined('URI_FACTORY') || !class_exists(URI_FACTORY)){
 			$this::markTestSkipped('URI_FACTORY class name not provided');
 		}
-
-		// phpunit 10 "fix"
-		$_SERVER['REQUEST_TIME_FLOAT'] = microtime(true);
 
 		$this->serverRequestFactory = new (SERVER_REQUEST_FACTORY);
 		$this->uriFactory           = new (URI_FACTORY);
@@ -91,9 +88,7 @@ class ServerRequestFactoryTest extends TestCase{
 		$this::assertSame($uri, (string)$request->getUri());
 	}
 
-	/**
-	 * @backupGlobals enabled
-	 */
+	#[BackupGlobals(true)]
 	public function testCreateServerRequestDoesNotReadServerSuperglobal():void{
 		$_SERVER = ['HTTP_X_FOO' => 'bar'];
 
