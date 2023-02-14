@@ -93,7 +93,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
-          coverage: xdebug
+          coverage: pcov
           extensions: curl, json, simplexml, sodium, zlib
 
       - name: "Install dependencies with composer"
