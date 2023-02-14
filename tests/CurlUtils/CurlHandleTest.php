@@ -17,14 +17,13 @@ use chillerlan\HTTPTest\TestAbstract;
 use Exception;
 use Fig\Http\Message\RequestMethodInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use Psr\Http\Client\ClientInterface;
 use function str_repeat;
 use function strlen;
 use function strtolower;
 
-/**
- * @group slow
- */
+#[Group('slow')]
 class CurlHandleTest extends TestAbstract{
 
 	protected ClientInterface $http;

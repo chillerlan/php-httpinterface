@@ -12,16 +12,16 @@ namespace chillerlan\HTTPTest\Psr18;
 
 use chillerlan\HTTP\Psr18\{CurlClient, URLExtractor};
 use chillerlan\HTTP\Psr7\Request;
+use PHPUnit\Framework\Attributes\Group;
 use Psr\Http\Client\ClientInterface;
 use function defined;
 use const CURLOPT_FOLLOWLOCATION;
 use const CURLOPT_MAXREDIRS;
 
 /**
- * @group slow
- *
  * @property \chillerlan\HTTP\Psr18\URLExtractor $http
  */
+#[Group('slow')]
 class URLExtractorTest extends HTTPClientTestAbstract{
 
 	protected function initClient():ClientInterface{

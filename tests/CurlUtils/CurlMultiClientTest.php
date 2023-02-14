@@ -15,6 +15,7 @@ use chillerlan\HTTP\HTTPOptions;
 use chillerlan\HTTP\Psr7\Request;
 use chillerlan\HTTP\Utils\QueryUtil;
 use Fig\Http\Message\RequestMethodInterface;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
@@ -24,9 +25,7 @@ use function implode;
 use function in_array;
 use function ksort;
 
-/**
- * @group slow
- */
+#[Group('slow')]
 class CurlMultiClientTest extends TestCase{
 
 	protected CurlMultiClient $http;

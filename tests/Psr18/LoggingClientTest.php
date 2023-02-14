@@ -11,13 +11,12 @@
 namespace chillerlan\HTTPTest\Psr18;
 
 use chillerlan\HTTP\Psr18\LoggingClient;
+use PHPUnit\Framework\Attributes\Group;
 use Psr\Log\AbstractLogger;
 use function date;
 use function sprintf;
 
-/**
- * @group slow
- */
+#[Group('slow')]
 class LoggingClientTest extends CurlClientTest{
 
 	protected function setUp():void{

@@ -13,11 +13,10 @@ namespace chillerlan\HTTPTest\Psr18;
 use chillerlan\HTTP\Psr18\{CurlClient, RequestException};
 use chillerlan\HTTP\Psr7\Request;
 use Fig\Http\Message\RequestMethodInterface;
+use PHPUnit\Framework\Attributes\Group;
 use Psr\Http\Client\ClientInterface;
 
-/**
- * @group slow
- */
+#[Group('slow')]
 class CurlClientTest extends HTTPClientTestAbstract{
 
 	protected function initClient():ClientInterface{
