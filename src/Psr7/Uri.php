@@ -21,21 +21,14 @@ use const FILTER_FLAG_IPV6, FILTER_VALIDATE_IP;
 
 class Uri implements UriInterface{
 
-	protected string $scheme = '';
-
-	protected string $user = '';
-
-	protected ?string $pass = null;
-
-	protected string $host = '';
-
-	protected ?int $port = null;
-
-	protected string $path = '';
-
-	protected string $query = '';
-
-	protected string $fragment = '';
+	protected string  $scheme   = '';
+	protected string  $user     = '';
+	protected ?string $pass     = null;
+	protected string  $host     = '';
+	protected ?int    $port     = null;
+	protected string  $path     = '';
+	protected string  $query    = '';
+	protected string  $fragment = '';
 
 	/**
 	 * Uri constructor.
@@ -90,7 +83,7 @@ class Uri implements UriInterface{
 		return $uri;
 	}
 
-	/**
+	/*
 	 * Scheme
 	 */
 
@@ -132,7 +125,7 @@ class Uri implements UriInterface{
 		return $clone;
 	}
 
-	/**
+	/*
 	 * Authority
 	 */
 
@@ -208,7 +201,7 @@ class Uri implements UriInterface{
 		return $clone;
 	}
 
-	/**
+	/*
 	 * Host
 	 */
 
@@ -253,7 +246,7 @@ class Uri implements UriInterface{
 		return $clone;
 	}
 
-	/**
+	/*
 	 * Port
 	 */
 
@@ -301,7 +294,7 @@ class Uri implements UriInterface{
 		return $clone;
 	}
 
-	/**
+	/*
 	 * Path
 	 */
 
@@ -342,7 +335,7 @@ class Uri implements UriInterface{
 		return $clone;
 	}
 
-	/**
+	/*
 	 * Query
 	 */
 
@@ -383,7 +376,7 @@ class Uri implements UriInterface{
 		return $clone;
 	}
 
-	/**
+	/*
 	 * Fragment
 	 */
 
@@ -420,9 +413,7 @@ class Uri implements UriInterface{
 	}
 
 	/**
-	 * @param array $parts
 	 *
-	 * @return void
 	 */
 	protected function parseUriParts(array $parts):void{
 
@@ -439,10 +430,7 @@ class Uri implements UriInterface{
 	}
 
 	/**
-	 * @param string    $str
-	 * @param bool|null $query
 	 *
-	 * @return string
 	 */
 	protected function replaceChars(string $str, bool $query = null):string{
 		/** @noinspection RegExpRedundantEscape, RegExpUnnecessaryNonCapturingGroup */
@@ -455,7 +443,7 @@ class Uri implements UriInterface{
 	}
 
 	/**
-	 * @return void
+	 *
 	 */
 	protected function removeDefaultPort():void{
 
@@ -466,7 +454,7 @@ class Uri implements UriInterface{
 	}
 
 	/**
-	 * @return void
+	 *
 	 */
 	protected function validateState():void{
 

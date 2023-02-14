@@ -10,11 +10,10 @@
 
 namespace chillerlan\HTTPTest\Psr15;
 
-use chillerlan\HTTPTest\TestAbstract;
 use chillerlan\HTTP\Psr15\{MiddlewareException, PriorityMiddleware, PriorityMiddlewareInterface, PriorityQueueDispatcher};
+use chillerlan\HTTPTest\TestAbstract;
 use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};
 use Psr\Http\Server\{MiddlewareInterface, RequestHandlerInterface};
-
 use function array_keys;
 
 class PriorityQueueRequestHandlerTest extends TestAbstract{

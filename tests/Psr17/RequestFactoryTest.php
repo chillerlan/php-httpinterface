@@ -9,6 +9,7 @@
 
 namespace chillerlan\HTTPTest\Psr17;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
@@ -46,11 +47,9 @@ class RequestFactoryTest extends TestCase{
 		];
 	}
 
-	/**
-	 * @dataProvider dataMethods
-	 */
+	#[DataProvider('dataMethods')]
 	public function testCreateRequest(string $method):void{
-		$uri     = 'http://example.com/';
+		$uri     = 'https://example.com/';
 		$request = $this->requestFactory->createRequest($method, $uri);
 
 		$this::assertInstanceOf(RequestInterface::class, $request);
@@ -60,7 +59,7 @@ class RequestFactoryTest extends TestCase{
 
 	public function testCreateRequestWithUri():void{
 		$method  = 'GET';
-		$uri     = 'http://example.com/';
+		$uri     = 'https://example.com/';
 		$request = $this->requestFactory->createRequest($method, $this->uriFactory->createUri($uri));
 
 		$this::assertSame($method, $request->getMethod());

@@ -12,10 +12,14 @@ namespace chillerlan\HTTPTest\Psr17;
 
 use chillerlan\HTTP\Psr17\FactoryHelpers;
 use chillerlan\HTTPTest\TestAbstract;
+use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Psr\Http\Message\StreamInterface;
-use InvalidArgumentException, stdClass;
-
-use function fopen, fseek, fwrite, simplexml_load_string;
+use stdClass;
+use function fopen;
+use function fseek;
+use function fwrite;
+use function simplexml_load_string;
 
 class FactoryHelpersTest extends TestAbstract{
 
@@ -34,8 +38,8 @@ class FactoryHelpersTest extends TestAbstract{
 	}
 
 	public static function streamInputProvider():array{
-
 		$fh = fopen('php://temp', 'r+');
+
 		fwrite($fh, 'resourcetest');
 		fseek($fh, 0);
 
@@ -43,20 +47,14 @@ class FactoryHelpersTest extends TestAbstract{
 
 		return [
 			'string'          => ['stringtest', 'stringtest'],
-#			'file'            => [__DIR__.'/streaminput.txt', 'filetest'.PHP_EOL],
 			'resource'        => [$fh, 'resourcetest'],
 			'streaminterface' => [FactoryHelpers::create_stream('streaminterfacetest'), 'streaminterfacetest'],
 			'tostring'        => [$xml->foo, 'bar'],
 		];
 	}
 
-	/**
-	 * @dataProvider streamInputProvider
-	 *
-	 * @param        $input
-	 * @param string $content
-	 */
-	public function testCreateStreamFromInput($input, string $content):void{
+	#[DataProvider('streamInputProvider')]
+	public function testCreateStreamFromInput(mixed $input, string $content):void{
 		$this::assertSame($content, FactoryHelpers::create_stream_from_input($input)->getContents());
 	}
 

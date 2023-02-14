@@ -16,8 +16,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 class EmptyResponseHandler implements RequestHandlerInterface{
 
 	protected ResponseFactoryInterface $responseFactory;
-
-	protected int $status;
+	protected int                      $status;
 
 	/**
 	 * EmptyResponseHandler constructor.

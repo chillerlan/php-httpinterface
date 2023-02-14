@@ -20,11 +20,9 @@ use function is_string, preg_match, strtoupper, trim;
 
 class Request extends Message implements RequestInterface, RequestMethodInterface{
 
-	protected string $method;
-
+	protected string       $method;
 	protected UriInterface $uri;
-
-	protected ?string $requestTarget = null;
+	protected ?string      $requestTarget = null;
 
 	/**
 	 * Request constructor.

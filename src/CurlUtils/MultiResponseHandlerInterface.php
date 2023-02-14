@@ -27,7 +27,7 @@ interface MultiResponseHandlerInterface{
 	 * @param array                               $curl_info   curl_info() result for the current request,
 	 *                                                         empty array on curl_info() failure
 	 *
-	 * @return \Psr\Http\Message\RequestInterface|null      an optional replacement request if the previous request failed
+	 * @return \Psr\Http\Message\RequestInterface|null         an optional replacement request if the previous request failed
 	 * @internal
 	 */
 	public function handleResponse(

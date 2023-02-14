@@ -14,10 +14,13 @@ namespace chillerlan\HTTPTest\Psr7;
 
 use chillerlan\HTTP\Psr7\Stream;
 use chillerlan\HTTPTest\TestAbstract;
+use Exception;
+use InvalidArgumentException;
 use Psr\Http\Message\StreamInterface;
-use Exception, InvalidArgumentException, RuntimeException;
-
-use function filesize, fopen, fwrite;
+use RuntimeException;
+use function filesize;
+use function fopen;
+use function fwrite;
 
 class StreamTest extends TestAbstract{
 

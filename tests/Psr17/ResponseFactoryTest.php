@@ -9,6 +9,7 @@
 
 namespace chillerlan\HTTPTest\Psr17;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -37,9 +38,7 @@ class ResponseFactoryTest extends TestCase{
 		];
 	}
 
-	/**
-	 * @dataProvider dataCodes
-	 */
+	#[DataProvider('dataCodes')]
 	public function testCreateResponse($code){
 		$response = $this->responseFactory->createResponse($code);
 

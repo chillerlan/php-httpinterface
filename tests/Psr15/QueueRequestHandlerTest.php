@@ -11,12 +11,10 @@
 namespace chillerlan\HTTPTest\Psr15;
 
 use chillerlan\HTTP\Psr15\{MiddlewareException, QueueDispatcher};
-use chillerlan\HTTP\Psr7\Response;
 use chillerlan\HTTPTest\TestAbstract;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\{ResponseFactoryInterface, ResponseInterface, ServerRequestInterface};
 use Psr\Http\Server\{MiddlewareInterface, RequestHandlerInterface};
-
 use function array_keys;
 
 class QueueRequestHandlerTest extends TestAbstract{

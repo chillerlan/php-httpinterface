@@ -2,7 +2,7 @@
 /**
  * Class QueueDispatcher
  *
- * @link https://github.com/libreworks/caridea-dispatch
+ * @link         https://github.com/libreworks/caridea-dispatch
  *
  * @created      08.03.2019
  * @author       smiley <smiley@chillerlan.net>
@@ -19,8 +19,7 @@ use Psr\Http\Server\{MiddlewareInterface, RequestHandlerInterface};
 class QueueDispatcher implements MiddlewareInterface, RequestHandlerInterface{
 
 	/** @var \Psr\Http\Server\MiddlewareInterface[] */
-	protected array $middlewareStack = [];
-
+	protected array                   $middlewareStack = [];
 	protected RequestHandlerInterface $fallbackHandler;
 
 	/**

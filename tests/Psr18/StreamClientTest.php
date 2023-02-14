@@ -11,16 +11,15 @@
 namespace chillerlan\HTTPTest\Psr18;
 
 use chillerlan\HTTP\Psr18\StreamClient;
+use Psr\Http\Client\ClientInterface;
 
 /**
  * @group slow
  */
 class StreamClientTest extends HTTPClientTestAbstract{
 
-	protected function setUp():void{
-		parent::setUp();
-
-		$this->http = new StreamClient($this->options);
+	protected function initClient():ClientInterface{
+		return new StreamClient($this->options);
 	}
 
 }

@@ -24,22 +24,14 @@ use const CURLM_OK, CURLMOPT_MAXCONNECTS, CURLMOPT_PIPELINING, CURLPIPE_MULTIPLE
 class CurlMultiClient implements LoggerAwareInterface{
 	use LoggerAwareTrait;
 
-	/** @var \chillerlan\Settings\SettingsContainerInterface|\chillerlan\HTTP\HTTPOptions */
-	protected SettingsContainerInterface $options;
-
-	protected ResponseFactoryInterface $responseFactory;
-
-	protected MultiResponseHandlerInterface $multiResponseHandler;
-
-	/**
-	 * the curl_multi master handle
-	 */
-	protected ?CMH $curl_multi = null;
+	protected HTTPOptions|SettingsContainerInterface $options;
+	protected ResponseFactoryInterface               $responseFactory;
+	protected MultiResponseHandlerInterface          $multiResponseHandler;
+	protected ?CMH                                   $curl_multi           = null;
+	protected int                                    $handleCounter        = 0;
 
 	/**
 	 * An array of RequestInterface to run
-	 *
-	 * @var \Psr\Http\Message\RequestInterface[]
 	 */
 	protected array $requests = [];
 
@@ -51,16 +43,11 @@ class CurlMultiClient implements LoggerAwareInterface{
 	protected array $handles = [];
 
 	/**
-	 *
-	 */
-	protected int $handleCounter = 0;
-
-	/**
 	 * CurlMultiClient constructor.
 	 */
 	public function __construct(
 		MultiResponseHandlerInterface $multiResponseHandler,
-		SettingsContainerInterface $options = null,
+		HTTPOptions|SettingsContainerInterface $options = null,
 		ResponseFactoryInterface $responseFactory = null,
 		LoggerInterface $logger = null
 	){
@@ -89,7 +76,7 @@ class CurlMultiClient implements LoggerAwareInterface{
 	}
 
 	/**
-	 * @return void
+	 *
 	 */
 	public function close():void{
 
@@ -100,9 +87,7 @@ class CurlMultiClient implements LoggerAwareInterface{
 	}
 
 	/**
-	 * @param \Psr\Http\Message\RequestInterface $request
 	 *
-	 * @return \chillerlan\HTTP\CurlUtils\CurlMultiClient
 	 */
 	public function addRequest(RequestInterface $request):CurlMultiClient{
 		$this->requests[] = $request;
@@ -112,8 +97,6 @@ class CurlMultiClient implements LoggerAwareInterface{
 
 	/**
 	 * @param \Psr\Http\Message\RequestInterface[] $stack
-	 *
-	 * @return \chillerlan\HTTP\CurlUtils\CurlMultiClient
 	 */
 	public function addRequests(iterable $stack):CurlMultiClient{
 

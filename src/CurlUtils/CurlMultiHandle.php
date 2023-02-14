@@ -90,4 +90,5 @@ class CurlMultiHandle extends CurlHandle{
 			(is_array($info) ? $info : [])
 		);
 	}
+
 }

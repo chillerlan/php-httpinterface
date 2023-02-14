@@ -23,9 +23,7 @@ abstract class HTTPClientTestAbstract extends TestCase{
 
 	protected const USER_AGENT = 'chillerlanHttpTest/2.0';
 
-	/** @var \chillerlan\Settings\SettingsContainerInterface|\chillerlan\HTTP\HTTPOptions */
-	protected SettingsContainerInterface $options;
-
+	protected HTTPOptions|SettingsContainerInterface $options;
 	protected ClientInterface $http;
 
 	protected function setUp():void{
@@ -35,7 +33,10 @@ abstract class HTTPClientTestAbstract extends TestCase{
 			'user_agent' => $this::USER_AGENT,
 		]);
 
+		$this->http = $this->initClient();
 	}
+
+	abstract protected function initClient():ClientInterface;
 
 	public function testSendRequest():void{
 
@@ -57,7 +58,7 @@ abstract class HTTPClientTestAbstract extends TestCase{
 	public function testNetworkError():void{
 		$this->expectException(ClientExceptionInterface::class);
 
-		$this->http->sendRequest(new Request(RequestMethodInterface::METHOD_GET, 'http://foo'));
+		$this->http->sendRequest(new Request(RequestMethodInterface::METHOD_GET, 'https://foo'));
 	}
 
 }

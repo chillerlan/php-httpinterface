@@ -12,12 +12,15 @@ namespace chillerlan\HTTPTest\CurlUtils;
 
 use chillerlan\HTTP\HTTPOptions;
 use chillerlan\HTTP\Psr18\CurlClient;
-use chillerlan\HTTP\Psr7\Request;
 use chillerlan\HTTP\Utils\MessageUtil;
 use chillerlan\HTTPTest\TestAbstract;
 use Exception;
+use Fig\Http\Message\RequestMethodInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Psr\Http\Client\ClientInterface;
-use function str_repeat, strlen, strtolower;
+use function str_repeat;
+use function strlen;
+use function strtolower;
 
 /**
  * @group slow
@@ -38,21 +41,17 @@ class CurlHandleTest extends TestAbstract{
 
 	public static function requestMethodProvider():array{
 		return [
-			'delete'  => [Request::METHOD_DELETE],
-			'get'     => [Request::METHOD_GET],
+			'delete'  => [RequestMethodInterface::METHOD_DELETE],
+			'get'     => [RequestMethodInterface::METHOD_GET],
 #			'head'    => [Request::METHOD_HEAD],
 #			'options' => [Request::METHOD_OPTIONS],
-			'patch'   => [Request::METHOD_PATCH],
-			'post'    => [Request::METHOD_POST],
-			'put'     => [Request::METHOD_PUT],
+			'patch'   => [RequestMethodInterface::METHOD_PATCH],
+			'post'    => [RequestMethodInterface::METHOD_POST],
+			'put'     => [RequestMethodInterface::METHOD_PUT],
 		];
 	}
 
-	/**
-	 * @dataProvider requestMethodProvider
-	 *
-	 * @param string $method
-	 */
+	#[DataProvider('requestMethodProvider')]
 	public function testRequestMethods(string $method):void{
 
 		try{
@@ -78,18 +77,14 @@ class CurlHandleTest extends TestAbstract{
 
 	public static function requestMethodWithBodyProvider():array{
 		return [
-			'delete'  => [Request::METHOD_DELETE],
-			'patch'   => [Request::METHOD_PATCH],
-			'post'    => [Request::METHOD_POST],
-			'put'     => [Request::METHOD_PUT],
+			'delete'  => [RequestMethodInterface::METHOD_DELETE],
+			'patch'   => [RequestMethodInterface::METHOD_PATCH],
+			'post'    => [RequestMethodInterface::METHOD_POST],
+			'put'     => [RequestMethodInterface::METHOD_PUT],
 		];
 	}
 
-	/**
-	 * @dataProvider requestMethodWithBodyProvider
-	 *
-	 * @param string $method
-	 */
+	#[DataProvider('requestMethodWithBodyProvider')]
 	public function testRequestMethodsWithFormBody(string $method):void{
 
 		try{
@@ -121,11 +116,7 @@ class CurlHandleTest extends TestAbstract{
 
 	}
 
-	/**
-	 * @dataProvider requestMethodWithBodyProvider
-	 *
-	 * @param string $method
-	 */
+	#[DataProvider('requestMethodWithBodyProvider')]
 	public function testRequestMethodsWithJsonBody(string $method):void{
 
 		try{

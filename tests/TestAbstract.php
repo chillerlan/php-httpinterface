@@ -17,7 +17,10 @@ use Psr\Http\Message\{
 	RequestFactoryInterface, ResponseFactoryInterface, ServerRequestFactoryInterface,
 	StreamFactoryInterface, UploadedFileFactoryInterface, UriFactoryInterface
 };
-use function constant, defined;
+use function class_exists;
+use function constant;
+use function defined;
+use function sprintf;
 
 abstract class TestAbstract extends TestCase{
 
@@ -46,10 +49,15 @@ abstract class TestAbstract extends TestCase{
 		foreach($this::FACTORIES as $property => $const){
 
 			if(!defined($const)){
-				throw new Exception('constant "'.$const.'" not defined -> see phpunit.xml');
+				throw new Exception(sprintf('constant "%s" not defined -> see phpunit.xml', $const));
 			}
 
-			$class             = constant($const);
+			$class = constant($const);
+
+			if(!class_exists($class)){
+				throw new Exception(sprintf('invalid class: "%s"', $class));
+			}
+
 			$this->{$property} = new $class;
 		}
 

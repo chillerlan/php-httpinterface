@@ -33,21 +33,14 @@ class UploadedFile implements UploadedFileInterface{
 		UPLOAD_ERR_EXTENSION,
 	];
 
-	protected int $error;
-
-	protected int $size;
-
-	protected ?string $clientFilename;
-
-	protected ?string $clientMediaType;
-
-	protected ?string $file = null;
-
+	protected int              $error;
+	protected int              $size;
+	protected ?string          $clientFilename;
+	protected ?string          $clientMediaType;
+	protected ?string          $file            = null;
 	protected ?StreamInterface $stream;
-
-	protected bool $moved = false;
-
-	protected StreamFactory $streamFactory;
+	protected bool             $moved           = false;
+	protected StreamFactory    $streamFactory;
 
 	/**
 	 * @throws \InvalidArgumentException
@@ -66,9 +59,12 @@ class UploadedFile implements UploadedFileInterface{
 
 		if($this->error === UPLOAD_ERR_OK){
 
-			is_string($file)
-				? $this->file = $file
-				: $this->stream = FactoryHelpers::create_stream_from_input($file);
+			if(is_string($file)){
+				$this->file = $file;
+			}
+			else{
+				$this->stream = FactoryHelpers::create_stream_from_input($file);
+			}
 
 		}
 
@@ -171,8 +167,6 @@ class UploadedFile implements UploadedFileInterface{
 	 * of bytes have been read.
 	 *
 	 * @author Michael Dowling and contributors to guzzlehttp/psr7
-	 *
-	 * @param StreamInterface $dest   Stream to write to
 	 *
 	 * @throws \RuntimeException on error
 	 */

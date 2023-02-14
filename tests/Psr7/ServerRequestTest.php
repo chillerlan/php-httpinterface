@@ -13,9 +13,9 @@
 namespace chillerlan\HTTPTest\Psr7;
 
 use chillerlan\HTTP\Psr7\{ServerRequest, UploadedFile};
+use Fig\Http\Message\RequestMethodInterface;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-
 use const UPLOAD_ERR_OK;
 
 class ServerRequestTest extends TestCase{
@@ -23,7 +23,7 @@ class ServerRequestTest extends TestCase{
 	public function testServerParams():void{
 		$params = ['name' => 'value'];
 
-		$r = new ServerRequest(ServerRequest::METHOD_GET, '/', $params);
+		$r = new ServerRequest(RequestMethodInterface::METHOD_GET, '/', $params);
 		$this::assertSame($params, $r->getServerParams());
 	}
 
@@ -67,6 +67,7 @@ class ServerRequestTest extends TestCase{
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('parsed body value must be an array, object or null');
 
+		/** @noinspection PhpParamsInspection */
 		(new ServerRequest('GET', '/'))->withParsedBody('');
 	}
 

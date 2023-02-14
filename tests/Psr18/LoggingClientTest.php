@@ -12,8 +12,8 @@ namespace chillerlan\HTTPTest\Psr18;
 
 use chillerlan\HTTP\Psr18\LoggingClient;
 use Psr\Log\AbstractLogger;
-
-use function date, sprintf;
+use function date;
+use function sprintf;
 
 /**
  * @group slow
@@ -28,7 +28,7 @@ class LoggingClientTest extends CurlClientTest{
 				echo sprintf('[%s][%s] %s', date('Y-m-d H:i:s'), $level, 'LoggingClientTest')."\n";
 			}
 		};
-
+		// we'll just wrap the parent's client
 		$this->http = new LoggingClient($this->http, $logger);
 	}
 

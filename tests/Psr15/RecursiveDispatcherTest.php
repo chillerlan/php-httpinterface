@@ -11,7 +11,6 @@
 namespace chillerlan\HTTPTest\Psr15;
 
 use chillerlan\HTTP\Psr15\{MiddlewareException, RecursiveDispatcher};
-use chillerlan\HTTP\Psr7\Response;
 use Psr\Http\Message\{ResponseFactoryInterface, ResponseInterface, ServerRequestInterface};
 use Psr\Http\Server\RequestHandlerInterface;
 

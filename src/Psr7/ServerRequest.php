@@ -17,17 +17,12 @@ use function array_key_exists, is_array, is_object;
 
 class ServerRequest extends Request implements ServerRequestInterface{
 
-	protected array $serverParams;
-
-	protected array $cookieParams = [];
-
-	protected array $queryParams = [];
-
-	protected array $attributes = [];
-
-	protected array $uploadedFiles = [];
-
-	protected array|object|null $parsedBody = null;
+	protected array             $serverParams;
+	protected array             $cookieParams  = [];
+	protected array             $queryParams   = [];
+	protected array             $attributes    = [];
+	protected array             $uploadedFiles = [];
+	protected array|object|null $parsedBody    = null;
 
 	/**
 	 * ServerRequest constructor.

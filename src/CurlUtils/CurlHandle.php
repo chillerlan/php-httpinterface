@@ -10,6 +10,7 @@
 
 namespace chillerlan\HTTP\CurlUtils;
 
+use chillerlan\HTTP\HTTPOptions;
 use chillerlan\HTTP\Psr18\ClientException;
 use chillerlan\Settings\SettingsContainerInterface;
 use Psr\Http\Message\{RequestInterface, ResponseInterface, StreamInterface};
@@ -76,26 +77,14 @@ class CurlHandle{
 		50 => 'application verification failure',
 	];
 
-	/**
-	 * The cURL handle
-	 */
-	protected ?CH $curl = null;
-
-	protected array $curlOptions = [];
-
-	protected bool $initialized = false;
-
-	/**
-	 * @var \chillerlan\Settings\SettingsContainerInterface|\chillerlan\HTTP\HTTPOptions
-	 */
-	protected SettingsContainerInterface $options;
-
-	protected RequestInterface $request;
-
-	protected ResponseInterface $response;
-
-	protected StreamInterface $requestBody;
-	protected StreamInterface $responseBody;
+	protected ?CH                                    $curl        = null;
+	protected array                                  $curlOptions = [];
+	protected bool                                   $initialized = false;
+	protected HTTPOptions|SettingsContainerInterface $options;
+	protected RequestInterface                       $request;
+	protected ResponseInterface                      $response;
+	protected StreamInterface                        $requestBody;
+	protected StreamInterface                        $responseBody;
 
 	/**
 	 * CurlHandle constructor.
@@ -103,7 +92,7 @@ class CurlHandle{
 	public function __construct(
 		RequestInterface $request,
 		ResponseInterface $response,
-		SettingsContainerInterface $options,
+		HTTPOptions|SettingsContainerInterface $options,
 		StreamInterface $stream = null
 	){
 		$this->request  = $request;
@@ -204,7 +193,7 @@ class CurlHandle{
 			$this->requestBody->rewind();
 		}
 
-		// Message has non empty body.
+		// Message has non-empty body.
 		if($bodySize === null || $bodySize > (1 << 20)){
 			// Avoid full loading large or unknown size body into memory
 			$this->curlOptions[CURLOPT_UPLOAD] = true;
@@ -385,12 +374,6 @@ class CurlHandle{
 
 	/**
 	 * @internal
-	 *
-	 * @param \CurlHandle $curl
-	 * @param resource    $stream
-	 * @param int         $length
-	 *
-	 * @return string
 	 * @noinspection PhpUnusedParameterInspection
 	 */
 	public function readfunction(CH $curl, $stream, int $length):string{
@@ -399,11 +382,6 @@ class CurlHandle{
 
 	/**
 	 * @internal
-	 *
-	 * @param \CurlHandle $curl
-	 * @param string      $data
-	 *
-	 * @return int
 	 * @noinspection PhpUnusedParameterInspection
 	 */
 	public function writefunction(CH $curl, string $data):int{
@@ -412,11 +390,6 @@ class CurlHandle{
 
 	/**
 	 * @internal
-	 *
-	 * @param \CurlHandle $curl
-	 * @param string      $line
-	 *
-	 * @return int
 	 * @noinspection PhpUnusedParameterInspection
 	 */
 	public function headerfunction(CH $curl, string $line):int{
@@ -427,7 +400,7 @@ class CurlHandle{
 			$this->response = $this->response
 				->withAddedHeader(trim($header[0]), trim($header[1]));
 		}
-		elseif(substr(strtoupper($str), 0, 5) === 'HTTP/'){
+		elseif(str_starts_with(strtoupper($str), 'HTTP/')){
 			$status = explode(' ', $str, 3);
 			$reason = count($status) > 2 ? trim($status[2]) : '';
 

@@ -23,7 +23,7 @@ trait HTTPOptionsTrait{
 	/**
 	 * A custom user agent string
 	 */
-	protected string $user_agent = 'chillerlanHttpInterface/5.0 +https://github.com/chillerlan/php-httpinterface';
+	protected string $user_agent = 'chillerlanHttpInterface/6.0 +https://github.com/chillerlan/php-httpinterface';
 
 	/**
 	 * options for each curl instance
@@ -36,8 +36,8 @@ trait HTTPOptionsTrait{
 	/**
 	 * CA Root Certificates for use with CURL/SSL (if not configured in php.ini or available in a default path)
 	 *
-	 * @link https://curl.haxx.se/docs/caextract.html
-	 * @link https://curl.haxx.se/ca/cacert.pem
+	 * @link https://curl.se/docs/caextract.html
+	 * @link https://curl.se/ca/cacert.pem
 	 * @link https://raw.githubusercontent.com/bagder/ca-bundle/master/ca-bundle.crt
 	 */
 	protected ?string $ca_info = null;
@@ -175,7 +175,7 @@ trait HTTPOptionsTrait{
 		       .'then you can download a CA bundle over here: https://curl.haxx.se/docs/caextract.html. '
 		       .'Once you have a CA bundle available on disk, you can set the "curl.cainfo" php.ini setting to point '
 		       .'to the path of the file, allowing you to omit the $ca_info setting. '
-		       .'See http://curl.haxx.se/docs/sslcerts.html for more information.';
+		       .'See https://curl.se/docs/sslcerts.html for more information.';
 
 		throw new ClientException($msg);
 		// @codeCoverageIgnoreEnd

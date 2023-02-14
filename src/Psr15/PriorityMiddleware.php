@@ -18,8 +18,7 @@ use const PHP_INT_MIN;
 class PriorityMiddleware implements PriorityMiddlewareInterface{
 
 	protected MiddlewareInterface $middleware;
-
-	protected int $priority;
+	protected int                 $priority;
 
 	/**
 	 * PriorityMiddleware constructor.

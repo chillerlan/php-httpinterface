@@ -13,14 +13,15 @@
 namespace chillerlan\HTTPTest\Psr7;
 
 use chillerlan\HTTP\Psr7\{Request, Uri};
+use Fig\Http\Message\RequestMethodInterface;
 use InvalidArgumentException;
-use Psr\Http\Message\StreamInterface;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\StreamInterface;
 
 class RequestTest extends TestCase{
 
 	public function testRequestUriMayBeString():void{
-		$this::assertSame('/', (string)(new Request(Request::METHOD_GET, '/'))->getUri());
+		$this::assertSame('/', (string)(new Request(RequestMethodInterface::METHOD_GET, '/'))->getUri());
 	}
 
 	public function testRequestUriMayBeUri():void{
@@ -54,7 +55,7 @@ class RequestTest extends TestCase{
 		$r1 = new Request('GET', '/');
 		$u1 = $r1->getUri();
 
-		$u2 = new Uri('http://www.example.com');
+		$u2 = new Uri('https://www.example.com');
 		$r2 = $r1->withUri($u2);
 
 		$this::assertNotSame($r1, $r2);
@@ -63,7 +64,7 @@ class RequestTest extends TestCase{
 	}
 
 	public function testSameInstanceWhenSameUri():void{
-		$r1 = new Request('GET', 'http://foo.com');
+		$r1 = new Request('GET', 'https://foo.com');
 		$r2 = $r1->withUri($r1->getUri());
 
 		$this::assertSame($r1, $r2);
@@ -90,30 +91,30 @@ class RequestTest extends TestCase{
 		$r2 = new Request('GET', '*');
 		$this::assertSame('*', $r2->getRequestTarget());
 
-		$r3 = new Request('GET', 'http://foo.com/bar baz/');
+		$r3 = new Request('GET', 'https://foo.com/bar baz/');
 		$this::assertSame('/bar%20baz/', $r3->getRequestTarget());
 	}
 
 	public function testBuildsRequestTarget():void{
-		$this::assertSame('/baz?bar=bam', (new Request('GET', 'http://foo.com/baz?bar=bam'))->getRequestTarget());
+		$this::assertSame('/baz?bar=bam', (new Request('GET', 'https://foo.com/baz?bar=bam'))->getRequestTarget());
 	}
 
 	public function testBuildsRequestTargetWithFalseyQuery():void{
-		$this::assertSame('/baz?0', (new Request('GET', 'http://foo.com/baz?0'))->getRequestTarget());
+		$this::assertSame('/baz?0', (new Request('GET', 'https://foo.com/baz?0'))->getRequestTarget());
 	}
 
 	public function testCanGetHeaderAsCsv():void{
-		$r = (new Request('GET', 'http://foo.com/baz?bar=bam'))->withHeader('Foo', ['a', 'b', 'c']);
+		$r = (new Request('GET', 'https://foo.com/baz?bar=bam'))->withHeader('Foo', ['a', 'b', 'c']);
 
 		$this::assertSame('a, b, c', $r->getHeaderLine('Foo'));
 		$this::assertSame('', $r->getHeaderLine('Bar'));
 	}
 
 	public function testOverridesHostWithUri():void{
-		$r1 = new Request('GET', 'http://foo.com/baz?bar=bam');
+		$r1 = new Request('GET', 'https://foo.com/baz?bar=bam');
 		$this::assertSame(['Host' => ['foo.com']], $r1->getHeaders());
 
-		$r2 = $r1->withUri(new Uri('http://www.baz.com/bar'));
+		$r2 = $r1->withUri(new Uri('https://www.baz.com/bar'));
 		$this::assertSame('www.baz.com', $r2->getHeaderLine('Host'));
 	}
 
@@ -125,12 +126,12 @@ class RequestTest extends TestCase{
 	}
 
 	public function testAddsPortToHeader():void{
-		$this::assertSame('foo.com:8124', (new Request('GET', 'http://foo.com:8124/bar'))->getHeaderLine('host'));
+		$this::assertSame('foo.com:8124', (new Request('GET', 'https://foo.com:8124/bar'))->getHeaderLine('host'));
 	}
 
 	public function testAddsPortToHeaderAndReplacePreviousPort():void{
-		$r = (new Request('GET', 'http://foo.com:8124/bar'))
-			->withUri(new Uri('http://foo.com:8125/bar'));
+		$r = (new Request('GET', 'https://foo.com:8124/bar'))
+			->withUri(new Uri('https://foo.com:8125/bar'));
 
 		$this::assertSame('foo.com:8125', $r->getHeaderLine('host'));
 	}
@@ -139,6 +140,7 @@ class RequestTest extends TestCase{
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('Method must be a string');
 
+		/** @noinspection PhpParamsInspection */
 		(new Request('GET', '/foo'))->withMethod([]);
 	}
 

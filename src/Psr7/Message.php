@@ -125,7 +125,6 @@ abstract class Message implements MessageInterface{
 		$normalized = strtolower($name);
 		$clone      = clone $this;
 
-		/** @noinspection DuplicatedCode */
 		if(isset($clone->headerNames[$normalized])){
 			$name                  = $this->headerNames[$normalized];
 			$clone->headers[$name] = array_merge($this->headers[$name], $value);

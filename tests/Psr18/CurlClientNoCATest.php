@@ -11,19 +11,18 @@
 namespace chillerlan\HTTPTest\Psr18;
 
 use chillerlan\HTTP\Psr18\CurlClient;
+use Psr\Http\Client\ClientInterface;
 
 /**
  * @group slow
  */
 class CurlClientNoCATest extends HTTPClientTestAbstract{
 
-	protected function setUp():void{
-		parent::setUp();
-
-		$this->options->ca_info = null;
+	protected function initClient():ClientInterface{
+		$this->options->ca_info        = null;
 		$this->options->ssl_verifypeer = false;
 
-		$this->http = new CurlClient($this->options);
+		return new CurlClient($this->options);
 	}
 
 }

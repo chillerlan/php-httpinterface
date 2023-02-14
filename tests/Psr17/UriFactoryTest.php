@@ -30,7 +30,7 @@ class UriFactoryTest extends TestCase{
 	}
 
 	public function testCreateUri():void{
-		$uriString = 'http://example.com/';
+		$uriString = 'https://example.com/';
 
 		$uri = $this->uriFactory->createUri($uriString);
 

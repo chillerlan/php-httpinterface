@@ -12,8 +12,10 @@ namespace chillerlan\HTTPTest\Psr18;
 
 use chillerlan\HTTP\Psr18\{CurlClient, URLExtractor};
 use chillerlan\HTTP\Psr7\Request;
+use Psr\Http\Client\ClientInterface;
 use function defined;
-use const CURLOPT_FOLLOWLOCATION, CURLOPT_MAXREDIRS;
+use const CURLOPT_FOLLOWLOCATION;
+use const CURLOPT_MAXREDIRS;
 
 /**
  * @group slow
@@ -22,19 +24,18 @@ use const CURLOPT_FOLLOWLOCATION, CURLOPT_MAXREDIRS;
  */
 class URLExtractorTest extends HTTPClientTestAbstract{
 
-	protected function setUp():void{
-		parent::setUp();
-
+	protected function initClient():ClientInterface{
 		$this->options->curl_options = [
 			CURLOPT_FOLLOWLOCATION => false,
 			CURLOPT_MAXREDIRS      => 25,
 		];
 
-		$this->http = new URLExtractor(new CurlClient($this->options));
+		return new URLExtractor(new CurlClient($this->options));
 	}
 
 	public function testSendRequest():void{
 
+		/** @noinspection PhpUndefinedConstantInspection */
 		if(defined('TEST_IS_CI') && TEST_IS_CI === true){
 			$this->markTestSkipped('i have no idea why the headers are empty on travis');
 		}

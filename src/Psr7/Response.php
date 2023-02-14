@@ -98,8 +98,7 @@ class Response extends Message implements ResponseInterface, StatusCodeInterface
 	];
 
 	protected string $reasonPhrase;
-
-	protected int $statusCode;
+	protected int    $statusCode;
 
 	/**
 	 * Response constructor.

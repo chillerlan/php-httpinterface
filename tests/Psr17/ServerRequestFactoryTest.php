@@ -4,11 +4,12 @@
  * @license      MIT
  * @link         https://github.com/http-interop/http-factory-tests
  *
- * @noinspection PhpUndefinedConstantInspection
+ * @noinspection PhpUndefinedConstantInspection, PhpArrayWriteIsNotUsedInspection
  */
 
 namespace chillerlan\HTTPTest\Psr17;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -59,12 +60,10 @@ class ServerRequestFactoryTest extends TestCase{
 		return $data;
 	}
 
-	/**
-	 * @dataProvider dataServer
-	 */
+	#[DataProvider('dataServer')]
 	public function testCreateServerRequest(array $server):void{
 		$method  = $server['REQUEST_METHOD'];
-		$uri     = "http://{$server['HTTP_HOST']}{$server['REQUEST_URI']}?{$server['QUERY_STRING']}";
+		$uri     = sprintf('https://%s%s?%s', $server['HTTP_HOST'], $server['REQUEST_URI'], $server['QUERY_STRING']);
 		$request = $this->serverRequestFactory->createServerRequest($method, $uri);
 
 		$this::assertInstanceOf(ServerRequestInterface::class, $request);
@@ -72,24 +71,20 @@ class ServerRequestFactoryTest extends TestCase{
 		$this::assertSame($uri, (string)$request->getUri());
 	}
 
-	/**
-	 * @dataProvider dataServer
-	 */
+	#[DataProvider('dataServer')]
 	public function testCreateServerRequestFromArray(array $server):void{
 		$method  = $server['REQUEST_METHOD'];
-		$uri     = sprintf('http://%s%s?%s', $server['HTTP_HOST'], $server['REQUEST_URI'], $server['QUERY_STRING']);
+		$uri     = sprintf('https://%s%s?%s', $server['HTTP_HOST'], $server['REQUEST_URI'], $server['QUERY_STRING']);
 		$request = $this->serverRequestFactory->createServerRequest($method, $uri, $server);
 
 		$this::assertSame($method, $request->getMethod());
 		$this::assertSame($uri, (string)$request->getUri());
 	}
 
-	/**
-	 * @dataProvider dataServer
-	 */
+	#[DataProvider('dataServer')]
 	public function testCreateServerRequestWithUriObject(array $server):void{
 		$method  = $server['REQUEST_METHOD'];
-		$uri     = sprintf('http://%s%s?%s', $server['HTTP_HOST'], $server['REQUEST_URI'], $server['QUERY_STRING']);
+		$uri     = sprintf('https://%s%s?%s', $server['HTTP_HOST'], $server['REQUEST_URI'], $server['QUERY_STRING']);
 		$request = $this->serverRequestFactory->createServerRequest($method, $this->uriFactory->createUri($uri));
 
 		$this::assertSame($method, $request->getMethod());
@@ -119,7 +114,7 @@ class ServerRequestFactoryTest extends TestCase{
 	public function testCreateServerRequestDoesNotReadCookieSuperglobal():void{
 		$_COOKIE = ['foo' => 'bar'];
 
-		$request = $this->serverRequestFactory->createServerRequest('POST', 'http://example.org/test');
+		$request = $this->serverRequestFactory->createServerRequest('POST', 'https://example.org/test');
 
 		$this::assertEmpty($request->getCookieParams());
 	}
@@ -127,7 +122,7 @@ class ServerRequestFactoryTest extends TestCase{
 	public function testCreateServerRequestDoesNotReadGetSuperglobal():void{
 		$_GET = ['foo' => 'bar'];
 
-		$request = $this->serverRequestFactory->createServerRequest('POST', 'http://example.org/test');
+		$request = $this->serverRequestFactory->createServerRequest('POST', 'https://example.org/test');
 
 		$this::assertEmpty($request->getQueryParams());
 	}
@@ -143,7 +138,7 @@ class ServerRequestFactoryTest extends TestCase{
 			],
 		];
 
-		$request = $this->serverRequestFactory->createServerRequest('POST', 'http://example.org/test');
+		$request = $this->serverRequestFactory->createServerRequest('POST', 'https://example.org/test');
 
 		$this::assertEmpty($request->getUploadedFiles());
 	}
@@ -151,7 +146,7 @@ class ServerRequestFactoryTest extends TestCase{
 	public function testCreateServerRequestDoesNotReadPostSuperglobal():void{
 		$_POST = ['foo' => 'bar'];
 
-		$request = $this->serverRequestFactory->createServerRequest('POST', 'http://example.org/test');
+		$request = $this->serverRequestFactory->createServerRequest('POST', 'https://example.org/test');
 
 		$this::assertEmpty($request->getParsedBody());
 	}

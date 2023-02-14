@@ -15,15 +15,15 @@ use chillerlan\HTTP\HTTPOptions;
 use chillerlan\HTTP\Psr7\{Request, Response};
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientExceptionInterface;
-
-use function file_exists, ini_get;
-
-use const CURLOPT_CAINFO, CURLOPT_CAPATH, CURLOPT_SSL_VERIFYHOST, CURLOPT_SSL_VERIFYPEER;
+use const CURLOPT_CAINFO;
+use const CURLOPT_CAPATH;
+use const CURLOPT_SSL_VERIFYHOST;
+use const CURLOPT_SSL_VERIFYPEER;
 
 class HTTPOptionsTest extends TestCase{
 
 	protected function createTestHandleOptions(HTTPOptions $options):array{
-		$ch = new CurlHandle(new Request('GET', 'http://example.com'), new Response, $options);
+		$ch = new CurlHandle(new Request('GET', 'https://example.com'), new Response, $options);
 		$ch->init();
 
 		return $ch->getCurlOptions();

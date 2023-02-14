@@ -186,7 +186,7 @@ class ResponseTest extends TestAbstract{
 
 	public function testHeaderValuesAreTrimmed():void{
 		$r2 = (new Response)->withHeader('Bar', " \t \tFoo\t \t ");
-		$r3 = (new Response)->withAddedHeader('Bar', " \t \tFoo\t \t ");;
+		$r3 = (new Response)->withAddedHeader('Bar', " \t \tFoo\t \t ");
 
 		foreach([$r2, $r3] as $r){
 			$this::assertSame(['Bar' => ['Foo']], $r->getHeaders());

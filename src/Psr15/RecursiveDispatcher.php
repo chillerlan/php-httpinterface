@@ -4,7 +4,7 @@
  *
  * A simple middleware dispatcher based on Slim
  *
- * @see https://github.com/slimphp/Slim/blob/de07f779d229ec06080259a816b0740de830438c/Slim/MiddlewareDispatcher.php
+ * @see          https://github.com/slimphp/Slim/blob/de07f779d229ec06080259a816b0740de830438c/Slim/MiddlewareDispatcher.php
  *
  * @created      15.04.2020
  * @author       smiley <smiley@chillerlan.net>
@@ -42,7 +42,7 @@ class RecursiveDispatcher implements RequestHandlerInterface{
 
 		$this->tip = new class ($middleware, $this->tip) implements RequestHandlerInterface{
 
-			private MiddlewareInterface $middleware;
+			private MiddlewareInterface     $middleware;
 			private RequestHandlerInterface $next;
 
 			public function __construct(MiddlewareInterface $middleware, RequestHandlerInterface $next){
@@ -53,6 +53,7 @@ class RecursiveDispatcher implements RequestHandlerInterface{
 			public function handle(ServerRequestInterface $request):ResponseInterface{
 				return $this->middleware->process($request, $this->next);
 			}
+
 		};
 
 		return $this;
@@ -61,7 +62,6 @@ class RecursiveDispatcher implements RequestHandlerInterface{
 	/**
 	 * @param \Psr\Http\Server\MiddlewareInterface[] $middlewareStack
 	 *
-	 * @return \chillerlan\HTTP\Psr15\RecursiveDispatcher
 	 * @throws \chillerlan\HTTP\Psr15\MiddlewareException
 	 */
 	public function addStack(iterable $middlewareStack):RecursiveDispatcher{

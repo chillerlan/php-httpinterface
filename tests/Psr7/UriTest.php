@@ -15,8 +15,9 @@ namespace chillerlan\HTTPTest\Psr7;
 
 use chillerlan\HTTP\Psr7\Uri;
 use InvalidArgumentException;
-use Psr\Http\Message\UriInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\UriInterface;
 
 class UriTest extends TestCase{
 
@@ -84,21 +85,13 @@ class UriTest extends TestCase{
 		];
 	}
 
-	/**
-	 * @dataProvider getValidUris
-	 *
-	 * @param string $input
-	 */
+	#[DataProvider('getValidUris')]
 	public function testValidUrisStayValid(string $input):void{
 		$this::assertSame($input, (string)(new Uri($input)));
 	}
 
-	/**
-	 * @dataProvider getValidUris
-	 *
-	 * @param string $input
-	 */
-	public function testFromParts(string $input){
+	#[DataProvider('getValidUris')]
+	public function testFromParts(string $input):void{
 		$this::assertSame($input, (string)(new Uri(parse_url($input))));
 	}
 
@@ -107,17 +100,13 @@ class UriTest extends TestCase{
 			// parse_url() requires the host component which makes sense for http(s)
 			// but not when the scheme is not known or different. So '//' or '///' is
 			// currently invalid as well but should not according to RFC 3986.
-			'only scheme'     => ['http://'],
+			'only scheme'     => ['https://'],
 			// host cannot contain ":"
 			'host with colon' => ['urn://host:with:colon'],
 		];
 	}
 
-	/**
-	 * @dataProvider getInvalidUris
-	 *
-	 * @param $invalidUri
-	 */
+	#[DataProvider('getInvalidUris')]
 	public function testInvalidUrisThrowException(string $invalidUri):void{
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('invalid URI');
@@ -203,15 +192,15 @@ class UriTest extends TestCase{
 	}
 
 	public function testSchemeIsNormalizedToLowercase():void{
-		$uri = new Uri('HTTP://example.com');
+		$uri = new Uri('HTTPS://example.com');
 
-		$this::assertSame('http', $uri->getScheme());
-		$this::assertSame('http://example.com', (string)$uri);
+		$this::assertSame('https', $uri->getScheme());
+		$this::assertSame('https://example.com', (string)$uri);
 
-		$uri = (new Uri('//example.com'))->withScheme('HTTP');
+		$uri = (new Uri('//example.com'))->withScheme('HTTPS');
 
-		$this::assertSame('http', $uri->getScheme());
-		$this::assertSame('http://example.com', (string)$uri);
+		$this::assertSame('https', $uri->getScheme());
+		$this::assertSame('https://example.com', (string)$uri);
 	}
 
 	public function testHostIsNormalizedToLowercase():void{
@@ -237,7 +226,7 @@ class UriTest extends TestCase{
 		$this::assertSame('example.com', $uri->getAuthority());
 
 		// HTTP standard port
-		$uri = new Uri('http://example.com:80');
+		$uri = new Uri('https://example.com:443');
 		$this::assertNull($uri->getPort());
 		$this::assertSame('example.com', $uri->getAuthority());
 
@@ -270,10 +259,10 @@ class UriTest extends TestCase{
 	}
 
 	public function testPortCanBeRemoved():void{
-		$uri = (new Uri('http://example.com:8080'))->withPort(null);
+		$uri = (new Uri('https://example.com:8080'))->withPort(null);
 
 		$this::assertNull($uri->getPort());
-		$this::assertSame('http://example.com', (string)$uri);
+		$this::assertSame('https://example.com', (string)$uri);
 	}
 
 	public static function uriComponentsEncodingProvider():array{
@@ -332,9 +321,7 @@ class UriTest extends TestCase{
 		];
 	}
 
-	/**
-	 * @dataProvider uriComponentsEncodingProvider
-	 */
+	#[DataProvider('uriComponentsEncodingProvider')]
 	public function testUriComponentsGetEncodedProperly(
 		string $input,
 		string $path,
@@ -370,11 +357,11 @@ class UriTest extends TestCase{
 	}
 
 	public function testHostInHttpUriDefaultsToLocalhost():void{
-		$uri = (new Uri)->withScheme('http');
+		$uri = (new Uri)->withScheme('https');
 
 		$this::assertSame('localhost', $uri->getHost());
 		$this::assertSame('localhost', $uri->getAuthority());
-		$this::assertSame('http://localhost', (string)$uri);
+		$this::assertSame('https://localhost', (string)$uri);
 	}
 
 	public function testHostInHttpsUriDefaultsToLocalhost():void{
@@ -402,16 +389,16 @@ class UriTest extends TestCase{
 
 	public function testWithQueryEncodesProperly():void{
 		$uri = (new Uri)->withQuery('?=#&€=/&b%61r');
-		// A query starting with a "?" is valid and must not be magically removed. Otherwise it would be impossible to
-		// construct such an URI. Also the "?" and "/" does not need to be encoded in the query.
+		// A query starting with a "?" is valid and must not be magically removed. Otherwise, it would be impossible to
+		// construct such a URI. Also, the "?" and "/" does not need to be encoded in the query.
 		$this::assertSame('?=%23&%E2%82%AC=/&b%61r', $uri->getQuery());
 		$this::assertSame('??=%23&%E2%82%AC=/&b%61r', (string)$uri);
 	}
 
 	public function testWithFragmentEncodesProperly():void{
 		$uri = (new Uri)->withFragment('#€?/b%61r');
-		// A fragment starting with a "#" is valid and must not be magically removed. Otherwise it would be impossible to
-		// construct such an URI. Also the "?" and "/" does not need to be encoded in the fragment.
+		// A fragment starting with a "#" is valid and must not be magically removed. Otherwise, it would be impossible to
+		// construct such a URI. Also, the "?" and "/" does not need to be encoded in the fragment.
 		$this::assertSame('%23%E2%82%AC?/b%61r', $uri->getFragment());
 		$this::assertSame('#%23%E2%82%AC?/b%61r', (string)$uri);
 	}
@@ -423,7 +410,7 @@ class UriTest extends TestCase{
 		$this::assertSame('foo', (string)$uri);
 	}
 
-	public function testRelativePathAndAuhorityIsAutomagicallyFixed():void{
+	public function testRelativePathAndAuthorityIsAutomagicallyFixed():void{
 		// concatenating a relative path with a host doesn't work: "//example.comfoo" would be wrong
 		$uri = (new Uri)->withPath('foo')->withHost('example.com');
 
@@ -437,7 +424,7 @@ class UriTest extends TestCase{
 	}
 
 	public function testPathStartingWithTwoSlashes():void{
-		$uri = new Uri('http://example.org//path-not-host.com');
+		$uri = new Uri('https://example.org//path-not-host.com');
 		$this::assertSame('//path-not-host.com', $uri->getPath());
 
 		$uri = $uri->withScheme('');
@@ -447,7 +434,7 @@ class UriTest extends TestCase{
 		$this::assertSame('/path-not-host.com', $uri->getPath());
 	}
 
-	public function testRelativeUriWithPathBeginngWithColonSegmentIsInvalid():void{
+	public function testRelativeUriWithPathBeginningWithColonSegmentIsInvalid():void{
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('A relative URI must not have a path beginning with a segment containing a colon');
 
@@ -496,7 +483,7 @@ class UriTest extends TestCase{
 		$this::assertSame('//example.com/foo', (string)$uri);
 	}
 
-	public function testRemoveExtraSlashesWihoutHost():void{
+	public function testRemoveExtraSlashesWithoutHost():void{
 		// If the path is starting with more than one "/" and no authority is
 		// present, the starting slashes MUST be reduced to one.
 		$uri = (new Uri)->withPath('//foo');
@@ -515,14 +502,9 @@ class UriTest extends TestCase{
 	}
 
 	/**
-	 * The value returned MUST be normalized to lowercase, per RFC 3986
-	 * Section 3.2.2.
-	 *
-	 * @dataProvider hostProvider
-	 *
-	 * @param $host
-	 * @param $expected
+	 * The value returned MUST be normalized to lowercase, per RFC 3986 Section 3.2.2.
 	 */
+	#[DataProvider('hostProvider')]
 	public function testGetHost(string $host, string $expected):void{
 		$uri = (new Uri)->withHost($host);
 
@@ -576,19 +558,10 @@ class UriTest extends TestCase{
 	}
 
 	/**
-	 * If the port component is not set or is the standard port for the current
-	 * scheme, it SHOULD NOT be included.
-	 *
-	 * @dataProvider authorityProvider
-	 *
-	 * @param string   $scheme
-	 * @param string   $user
-	 * @param string   $pass
-	 * @param string   $host
-	 * @param int|null $port
-	 * @param string   $authority
+	 * If the port component is not set or is the standard port for the current scheme, it SHOULD NOT be included.
 	 */
-	public function testGetAuthority(string $scheme, string $user, string $pass, string $host, ?int $port, string $authority){
+	#[DataProvider('authorityProvider')]
+	public function testGetAuthority(string $scheme, string $user, string $pass, string $host, ?int $port, string $authority):void{
 		$uri = (new Uri)
 			->withHost($host)
 			->withScheme($scheme)
@@ -653,7 +626,7 @@ class UriTest extends TestCase{
 		$uri = new Uri('https://[2a00:f48:1008::212:183:10]');
 		self::assertSame('[2a00:f48:1008::212:183:10]', $uri->getHost());
 
-		$uri = new Uri('http://[2a00:f48:1008::212:183:10]:56?foo=bar');
+		$uri = new Uri('https://[2a00:f48:1008::212:183:10]:56?foo=bar');
 		self::assertSame('[2a00:f48:1008::212:183:10]', $uri->getHost());
 		self::assertSame(56, $uri->getPort());
 		self::assertSame('foo=bar', $uri->getQuery());

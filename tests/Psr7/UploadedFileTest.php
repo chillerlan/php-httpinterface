@@ -12,16 +12,29 @@
 
 namespace chillerlan\HTTPTest\Psr7;
 
-use chillerlan\HTTPTest\TestAbstract;
 use chillerlan\HTTP\Psr7\UploadedFile;
+use chillerlan\HTTPTest\TestAbstract;
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Psr\Http\Message\StreamFactoryInterface;
 use RuntimeException;
-
-use function basename, file_exists, fopen, is_scalar, sys_get_temp_dir, tempnam, uniqid, unlink;
-
-use const UPLOAD_ERR_CANT_WRITE, UPLOAD_ERR_EXTENSION, UPLOAD_ERR_FORM_SIZE, UPLOAD_ERR_INI_SIZE,
-	UPLOAD_ERR_NO_FILE, UPLOAD_ERR_NO_TMP_DIR, UPLOAD_ERR_OK, UPLOAD_ERR_PARTIAL, PHP_OS_FAMILY;
+use function basename;
+use function file_exists;
+use function fopen;
+use function is_scalar;
+use function sys_get_temp_dir;
+use function tempnam;
+use function uniqid;
+use function unlink;
+use const PHP_OS_FAMILY;
+use const UPLOAD_ERR_CANT_WRITE;
+use const UPLOAD_ERR_EXTENSION;
+use const UPLOAD_ERR_FORM_SIZE;
+use const UPLOAD_ERR_INI_SIZE;
+use const UPLOAD_ERR_NO_FILE;
+use const UPLOAD_ERR_NO_TMP_DIR;
+use const UPLOAD_ERR_OK;
+use const UPLOAD_ERR_PARTIAL;
 
 class UploadedFileTest extends TestAbstract{
 
@@ -54,12 +67,8 @@ class UploadedFileTest extends TestAbstract{
 		];
 	}
 
-	/**
-	 * @dataProvider invalidStreams
-	 *
-	 * @param $streamOrFile
-	 */
-	public function testRaisesExceptionOnInvalidStreamOrFile($streamOrFile){
+	#[DataProvider('invalidStreams')]
+	public function testRaisesExceptionOnInvalidStreamOrFile(mixed $streamOrFile){
 		$this->expectException(InvalidArgumentException::class);
 
 		new UploadedFile($streamOrFile, 0);
@@ -72,11 +81,7 @@ class UploadedFileTest extends TestAbstract{
 		];
 	}
 
-	/**
-	 * @dataProvider invalidErrorStatuses
-	 *
-	 * @param int $status
-	 */
+	#[DataProvider('invalidErrorStatuses')]
 	public function testRaisesExceptionOnInvalidErrorStatus(int $status):void{
 		$this->expectException(InvalidArgumentException::class);
 
@@ -174,33 +179,21 @@ class UploadedFileTest extends TestAbstract{
 		];
 	}
 
-	/**
-	 * @dataProvider nonOkErrorStatus
-	 *
-	 * @param int $status
-	 */
-	public function testConstructorDoesNotRaiseExceptionForInvalidStreamWhenErrorStatusPresent(int $status){
+	#[DataProvider('nonOkErrorStatus')]
+	public function testConstructorDoesNotRaiseExceptionForInvalidStreamWhenErrorStatusPresent(int $status):void{
 		$uploadedFile = new UploadedFile('not ok', 0, $status);
 		$this::assertSame($status, $uploadedFile->getError());
 	}
 
-	/**
-	 * @dataProvider nonOkErrorStatus
-	 *
-	 * @param int $status
-	 */
-	public function testMoveToRaisesExceptionWhenErrorStatusPresent(int $status){
+	#[DataProvider('nonOkErrorStatus')]
+	public function testMoveToRaisesExceptionWhenErrorStatusPresent(int $status):void{
 		$uploadedFile = new UploadedFile('not ok', 0, $status);
 		$this->expectException(RuntimeException::class);
 		$this->expectExceptionMessage('Cannot retrieve stream due to upload error');
 		$uploadedFile->moveTo(__DIR__.'/'.uniqid());
 	}
 
-	/**
-	 * @dataProvider nonOkErrorStatus
-	 *
-	 * @param int $status
-	 */
+	#[DataProvider('nonOkErrorStatus')]
 	public function testGetStreamRaisesExceptionWhenErrorStatusPresent(int $status):void{
 		$uploadedFile = new UploadedFile('not ok', 0, $status);
 		$this->expectException(RuntimeException::class);
