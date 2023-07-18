@@ -40,7 +40,7 @@ class StreamFactoryTest extends TestCase{
 	}
 
 	public static function tearDownAfterClass():void{
-		foreach(self::$tempFiles as $tempFile){
+		foreach(static::$tempFiles as $tempFile){
 			if(file_exists($tempFile)){
 				unlink($tempFile);
 			}
@@ -54,7 +54,7 @@ class StreamFactoryTest extends TestCase{
 			throw new RuntimeException('could not create temp file');
 		}
 
-		self::$tempFiles[] = $file;
+		static::$tempFiles[] = $file;
 
 		return $file;
 	}
