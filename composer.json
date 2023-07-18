@@ -32,7 +32,7 @@
 		"ext-simplexml":"*",
 		"ext-zlib":"*",
 		"chillerlan/php-http-message-utils": "dev-main#8203aadaaf0d6fa26789c9aba09c512807dfa2b0",
-		"chillerlan/php-settings-container":"^3.0",
+		"chillerlan/php-settings-container":"^2.1.4 || ^3.0",
 		"fig/http-message-util":"^1.1.5",
 		"psr/http-client":"^1.0",
 		"psr/http-message": "^1.0",
@@ -52,8 +52,7 @@
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"chillerlan\\HTTPTest\\": "tests/",
-			"chillerlan\\HTTPExamples\\": "examples/"
+			"chillerlan\\HTTPTest\\": "tests/"
 		}
 	},
 	"scripts": {
