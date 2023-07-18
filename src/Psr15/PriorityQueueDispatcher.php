@@ -21,7 +21,7 @@ class PriorityQueueDispatcher extends QueueDispatcher{
 	/**
 	 * @inheritDoc
 	 */
-	public function addStack(iterable $middlewareStack):QueueDispatcher{
+	public function addStack(iterable $middlewareStack):static{
 
 		foreach($middlewareStack as $middleware){
 
@@ -44,7 +44,7 @@ class PriorityQueueDispatcher extends QueueDispatcher{
 	/**
 	 * @inheritDoc
 	 */
-	public function add(MiddlewareInterface $middleware):QueueDispatcher{
+	public function add(MiddlewareInterface $middleware):static{
 
 		if(!$middleware instanceof PriorityMiddlewareInterface){
 			$middleware = new PriorityMiddleware($middleware);

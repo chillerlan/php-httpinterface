@@ -35,7 +35,7 @@ class QueueDispatcher implements MiddlewareInterface, RequestHandlerInterface{
 	/**
 	 *
 	 */
-	public function setFallbackHandler(RequestHandlerInterface $fallbackHandler):QueueDispatcher{
+	public function setFallbackHandler(RequestHandlerInterface $fallbackHandler):static{
 		$this->fallbackHandler = $fallbackHandler;
 
 		return $this;
@@ -44,7 +44,7 @@ class QueueDispatcher implements MiddlewareInterface, RequestHandlerInterface{
 	/**
 	 * @throws \chillerlan\HTTP\Psr15\MiddlewareException
 	 */
-	public function addStack(iterable $middlewareStack):QueueDispatcher{
+	public function addStack(iterable $middlewareStack):static{
 
 		foreach($middlewareStack as $middleware){
 
@@ -61,7 +61,7 @@ class QueueDispatcher implements MiddlewareInterface, RequestHandlerInterface{
 	/**
 	 *
 	 */
-	public function add(MiddlewareInterface $middleware):QueueDispatcher{
+	public function add(MiddlewareInterface $middleware):static{
 		$this->middlewareStack[] = $middleware;
 
 		return $this;

@@ -44,7 +44,7 @@ abstract class HTTPClientAbstract implements HTTPClientInterface{
 	 * @inheritDoc
 	 * @codeCoverageIgnore
 	 */
-	public function setLogger(LoggerInterface $logger):HTTPClientInterface{
+	public function setLogger(LoggerInterface $logger):static{
 		$this->logger = $logger;
 
 		return $this;
@@ -54,7 +54,7 @@ abstract class HTTPClientAbstract implements HTTPClientInterface{
 	 * @inheritDoc
 	 * @codeCoverageIgnore
 	 */
-	public function setResponseFactory(ResponseFactoryInterface $responseFactory):HTTPClientInterface{
+	public function setResponseFactory(ResponseFactoryInterface $responseFactory):static{
 		$this->responseFactory = $responseFactory;
 
 		return $this;
@@ -64,7 +64,7 @@ abstract class HTTPClientAbstract implements HTTPClientInterface{
 	 * @inheritDoc
 	 * @codeCoverageIgnore
 	 */
-	public function setStreamFactory(StreamFactoryInterface $streamFactory):HTTPClientInterface{
+	public function setStreamFactory(StreamFactoryInterface $streamFactory):static{
 		$this->streamFactory = $streamFactory;
 
 		return $this;

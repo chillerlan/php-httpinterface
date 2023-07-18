@@ -44,7 +44,7 @@ abstract class Message implements MessageInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function withProtocolVersion($version):MessageInterface{
+	public function withProtocolVersion($version):static{
 
 		if($this->version === $version){
 			return $this;
@@ -92,7 +92,7 @@ abstract class Message implements MessageInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function withHeader($name, $value):MessageInterface{
+	public function withHeader($name, $value):static{
 
 		if(!is_array($value)){
 			$value = [$value];
@@ -115,7 +115,7 @@ abstract class Message implements MessageInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function withAddedHeader($name, $value):MessageInterface{
+	public function withAddedHeader($name, $value):static{
 
 		if(!is_array($value)){
 			$value = [$value];
@@ -140,7 +140,7 @@ abstract class Message implements MessageInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function withoutHeader($name):MessageInterface{
+	public function withoutHeader($name):static{
 		$normalized = strtolower($name);
 
 		if(!isset($this->headerNames[$normalized])){
@@ -165,7 +165,7 @@ abstract class Message implements MessageInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function withBody(StreamInterface $body):MessageInterface{
+	public function withBody(StreamInterface $body):static{
 
 		if($body === $this->body){
 			return $this;

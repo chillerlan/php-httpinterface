@@ -89,7 +89,7 @@ class CurlMultiClient implements LoggerAwareInterface{
 	/**
 	 *
 	 */
-	public function addRequest(RequestInterface $request):CurlMultiClient{
+	public function addRequest(RequestInterface $request):static{
 		$this->requests[] = $request;
 
 		return $this;
@@ -98,7 +98,7 @@ class CurlMultiClient implements LoggerAwareInterface{
 	/**
 	 * @param \Psr\Http\Message\RequestInterface[] $stack
 	 */
-	public function addRequests(iterable $stack):CurlMultiClient{
+	public function addRequests(iterable $stack):static{
 
 		foreach($stack as $request){
 
@@ -115,7 +115,7 @@ class CurlMultiClient implements LoggerAwareInterface{
 	 * @phan-suppress PhanTypeInvalidThrowsIsInterface
 	 * @throws \Psr\Http\Client\ClientExceptionInterface
 	 */
-	public function process():CurlMultiClient{
+	public function process():static{
 
 		if(empty($this->requests)){
 			throw new ClientException('request stack is empty');

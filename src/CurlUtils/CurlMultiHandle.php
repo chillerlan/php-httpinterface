@@ -48,7 +48,7 @@ class CurlMultiHandle extends CurlHandle{
 	/**
 	 *
 	 */
-	public function setID(int $id):CurlMultiHandle{
+	public function setID(int $id):static{
 		$this->id = $id;
 
 		return $this;
@@ -64,7 +64,7 @@ class CurlMultiHandle extends CurlHandle{
 	/**
 	 *
 	 */
-	public function setRetries(int $retries):CurlMultiHandle{
+	public function setRetries(int $retries):static{
 		$this->retries = $retries;
 
 		return $this;

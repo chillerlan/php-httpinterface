@@ -50,7 +50,7 @@ class ServerRequest extends Request implements ServerRequestInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function withCookieParams(array $cookies):ServerRequestInterface{
+	public function withCookieParams(array $cookies):static{
 		$clone               = clone $this;
 		$clone->cookieParams = $cookies;
 
@@ -67,7 +67,7 @@ class ServerRequest extends Request implements ServerRequestInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function withQueryParams(array $query):ServerRequestInterface{
+	public function withQueryParams(array $query):static{
 		$clone              = clone $this;
 		$clone->queryParams = $query;
 
@@ -84,7 +84,7 @@ class ServerRequest extends Request implements ServerRequestInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function withUploadedFiles(array $uploadedFiles):ServerRequestInterface{
+	public function withUploadedFiles(array $uploadedFiles):static{
 		$clone                = clone $this;
 		$clone->uploadedFiles = $uploadedFiles;
 
@@ -101,7 +101,7 @@ class ServerRequest extends Request implements ServerRequestInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function withParsedBody($data):ServerRequestInterface{
+	public function withParsedBody($data):static{
 
 		if($data !== null && !is_object($data) && !is_array($data)){
 			throw new InvalidArgumentException('parsed body value must be an array, object or null');
@@ -135,7 +135,7 @@ class ServerRequest extends Request implements ServerRequestInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function withAttribute($name, $value):ServerRequestInterface{
+	public function withAttribute($name, $value):static{
 		$clone                    = clone $this;
 		$clone->attributes[$name] = $value;
 
@@ -145,7 +145,7 @@ class ServerRequest extends Request implements ServerRequestInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function withoutAttribute($name):ServerRequestInterface{
+	public function withoutAttribute($name):static{
 
 		if(!array_key_exists($name, $this->attributes)){
 			return $this;

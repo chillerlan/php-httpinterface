@@ -114,7 +114,7 @@ class CurlHandle{
 	/**
 	 *
 	 */
-	public function close():CurlHandle{
+	public function close():static{
 
 		if($this->curl instanceof CH){
 			/** @phan-suppress-next-line PhanTypeMismatchArgumentInternalReal */

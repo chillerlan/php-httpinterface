@@ -109,7 +109,7 @@ class Uri implements UriInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function withScheme($scheme):UriInterface{
+	public function withScheme($scheme):static{
 		$scheme = $this->filterScheme($scheme);
 
 		if($this->scheme === $scheme){
@@ -181,7 +181,7 @@ class Uri implements UriInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function withUserInfo($user, $password = null):UriInterface{
+	public function withUserInfo($user, $password = null):static{
 		$info = $user;
 
 		if($password !== null && $password !== ''){
@@ -231,7 +231,7 @@ class Uri implements UriInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function withHost($host):UriInterface{
+	public function withHost($host):static{
 		$host = $this->filterHost($host);
 
 		if($this->host === $host){
@@ -278,7 +278,7 @@ class Uri implements UriInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function withPort($port):UriInterface{
+	public function withPort($port):static{
 		$port = $this->filterPort($port);
 
 		if($this->port === $port){
@@ -320,7 +320,7 @@ class Uri implements UriInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function withPath($path):UriInterface{
+	public function withPath($path):static{
 		$path = $this->filterPath($path);
 
 		if($this->path === $path){
@@ -361,7 +361,7 @@ class Uri implements UriInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function withQuery($query):UriInterface{
+	public function withQuery($query):static{
 		$query = $this->filterQuery($query);
 
 		if($this->query === $query){
@@ -397,7 +397,7 @@ class Uri implements UriInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function withFragment($fragment):UriInterface{
+	public function withFragment($fragment):static{
 		$fragment = $this->filterFragment($fragment);
 
 		if($this->fragment === $fragment){

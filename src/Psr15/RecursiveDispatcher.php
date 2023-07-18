@@ -38,7 +38,7 @@ class RecursiveDispatcher implements RequestHandlerInterface{
 	 * that have been added before will be executed after the newly
 	 * added one (last in, first out).
 	 */
-	public function add(MiddlewareInterface $middleware):RecursiveDispatcher{
+	public function add(MiddlewareInterface $middleware):static{
 
 		$this->tip = new class ($middleware, $this->tip) implements RequestHandlerInterface{
 
@@ -64,7 +64,7 @@ class RecursiveDispatcher implements RequestHandlerInterface{
 	 *
 	 * @throws \chillerlan\HTTP\Psr15\MiddlewareException
 	 */
-	public function addStack(iterable $middlewareStack):RecursiveDispatcher{
+	public function addStack(iterable $middlewareStack):static{
 
 		foreach($middlewareStack as $middleware){
 

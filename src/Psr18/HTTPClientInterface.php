@@ -24,16 +24,16 @@ interface HTTPClientInterface extends ClientInterface, RequestMethodInterface{
 	/**
 	 * Sets a PSR-3 Logger
 	 */
-	public function setLogger(LoggerInterface $logger):HTTPClientInterface;
+	public function setLogger(LoggerInterface $logger):static;
 
 	/**
 	 * Sets a PSR-17 response factory
 	 */
-	public function setResponseFactory(ResponseFactoryInterface $responseFactory):HTTPClientInterface;
+	public function setResponseFactory(ResponseFactoryInterface $responseFactory):static;
 
 	/**
 	 * Sets a PSR-17 stream factory
 	 */
-	public function setStreamFactory(StreamFactoryInterface $streamFactory):HTTPClientInterface;
+	public function setStreamFactory(StreamFactoryInterface $streamFactory):static;
 
 }

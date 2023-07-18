@@ -66,7 +66,7 @@ class Request extends Message implements RequestInterface, RequestMethodInterfac
 	/**
 	 * @inheritDoc
 	 */
-	public function withRequestTarget($requestTarget):RequestInterface{
+	public function withRequestTarget($requestTarget):static{
 
 		if(preg_match('#\s#', $requestTarget)){
 			throw new InvalidArgumentException('Invalid request target provided; cannot contain whitespace');
@@ -88,7 +88,7 @@ class Request extends Message implements RequestInterface, RequestMethodInterfac
 	/**
 	 * @inheritDoc
 	 */
-	public function withMethod($method):RequestInterface{
+	public function withMethod($method):static{
 
 		if(!is_string($method)){
 			throw new InvalidArgumentException('Method must be a string');
@@ -116,7 +116,7 @@ class Request extends Message implements RequestInterface, RequestMethodInterfac
 	/**
 	 * @inheritDoc
 	 */
-	public function withUri(UriInterface $uri, $preserveHost = false):RequestInterface{
+	public function withUri(UriInterface $uri, $preserveHost = false):static{
 
 		if($uri === $this->uri){
 			return $this;
