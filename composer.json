@@ -43,7 +43,7 @@
 	},
 	"require-dev": {
 		"phan/phan": "^5.4",
-		"phpunit/phpunit": "^10.0"
+		"phpunit/phpunit": "^10.2"
 	},
 	"autoload": {
 		"psr-4": {

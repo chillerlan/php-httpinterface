@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd"
+		 xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.2/phpunit.xsd"
 		 bootstrap="vendor/autoload.php"
 		 cacheResultFile=".build/phpunit.result.cache"
 		 colors="true"
@@ -9,14 +9,18 @@
 		<testsuite name="php-httpinterface test suite">
 			<directory>tests</directory>
 		</testsuite>
-		<!--<testsuite name="http-interop integration tests">
+		<!--
+		<testsuite name="http-interop integration tests">
 			<directory>./vendor/http-interop/http-factory-tests/test</directory>
-		</testsuite>-->
+		</testsuite>
+		-->
 	</testsuites>
-	<coverage>
+	<source>
 		<include>
-			<directory suffix=".php">src</directory>
+			<directory>src</directory>
 		</include>
+	</source>
+	<coverage>
 		<report>
 			<clover outputFile=".build/coverage/clover.xml"/>
 			<xml outputDirectory=".build/coverage/coverage-xml"/>
@@ -27,9 +31,6 @@
 			<group>slow</group>
 		</exclude>
 	</groups>
-	<logging>
-		<junit outputFile=".build/logs/junit.xml"/>
-	</logging>
 	<php>
 		<const name="TEST_IS_CI" value="true"/>
 		<const name="REQUEST_FACTORY" value="chillerlan\HTTP\Psr17\RequestFactory"/>
