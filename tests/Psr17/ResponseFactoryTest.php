@@ -9,25 +9,13 @@
 
 namespace chillerlan\HTTPTest\Psr17;
 
+use chillerlan\HTTPTest\FactoryTrait;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
-use function class_exists;
-use function defined;
 
 class ResponseFactoryTest extends TestCase{
-
-	protected ResponseFactoryInterface $responseFactory;
-
-	public function setUp():void{
-
-		if(!defined('RESPONSE_FACTORY') || !class_exists(RESPONSE_FACTORY)){
-			$this::markTestSkipped('RESPONSE_FACTORY class name not provided');
-		}
-
-		$this->responseFactory = new (RESPONSE_FACTORY);
-	}
+	use FactoryTrait;
 
 	public static function dataCodes():array{
 		return [

@@ -9,13 +9,11 @@
 
 namespace chillerlan\HTTPTest\Psr17;
 
+use chillerlan\HTTPTest\FactoryTrait;
 use Exception;
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
 use RuntimeException;
-use function class_exists;
-use function defined;
 use function file_exists;
 use function file_put_contents;
 use function fopen;
@@ -26,18 +24,9 @@ use function tempnam;
 use function unlink;
 
 class StreamFactoryTest extends TestCase{
+	use FactoryTrait;
 
-	protected StreamFactoryInterface $streamFactory;
-	protected static array           $tempFiles = [];
-
-	public function setUp():void{
-
-		if(!defined('STREAM_FACTORY') || !class_exists(STREAM_FACTORY)){
-			$this::markTestSkipped('STREAM_FACTORY class name not provided');
-		}
-
-		$this->streamFactory = new (STREAM_FACTORY);
-	}
+	protected static array $tempFiles = [];
 
 	public static function tearDownAfterClass():void{
 		foreach(static::$tempFiles as $tempFile){

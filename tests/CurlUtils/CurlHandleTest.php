@@ -13,23 +13,25 @@ namespace chillerlan\HTTPTest\CurlUtils;
 use chillerlan\HTTP\HTTPOptions;
 use chillerlan\HTTP\Psr18\CurlClient;
 use chillerlan\HTTP\Utils\MessageUtil;
-use chillerlan\HTTPTest\TestAbstract;
+use chillerlan\HTTPTest\FactoryTrait;
 use Exception;
 use Fig\Http\Message\RequestMethodInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
 use function str_repeat;
 use function strlen;
 use function strtolower;
 
 #[Group('slow')]
-class CurlHandleTest extends TestAbstract{
+class CurlHandleTest extends TestCase{
+	use FactoryTrait;
 
 	protected ClientInterface $http;
 
-	protected function setUp():void{
-		parent::setUp();
+	// called from FactoryTrait
+	protected function __setUp():void{
 
 		$options = new HTTPOptions([
 			'ca_info' => __DIR__.'/../cacert.pem',

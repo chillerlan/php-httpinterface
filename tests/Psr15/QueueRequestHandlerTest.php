@@ -11,21 +11,14 @@
 namespace chillerlan\HTTPTest\Psr15;
 
 use chillerlan\HTTP\Psr15\{MiddlewareException, QueueDispatcher};
-use chillerlan\HTTPTest\TestAbstract;
+use chillerlan\HTTPTest\FactoryTrait;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\{ResponseFactoryInterface, ResponseInterface, ServerRequestInterface};
 use Psr\Http\Server\{MiddlewareInterface, RequestHandlerInterface};
 use function array_keys;
 
-class QueueRequestHandlerTest extends TestAbstract{
-
-	protected RequestHandlerInterface $dispatcher;
-
-	protected function setUp():void{
-		parent::setUp();
-
-		$this->dispatcher = $this->getDispatcher();
- 	}
+class QueueRequestHandlerTest extends TestCase{
+	use FactoryTrait;
 
  	protected function getDispatcher():RequestHandlerInterface{
 	    // Create request handler instance:
@@ -40,7 +33,7 @@ class QueueRequestHandlerTest extends TestAbstract{
 	public function testDispatcher():void{
 
 		// execute it:
-		$response = $this->dispatcher->handle($this->server->createServerRequestFromGlobals());
+		$response = $this->getDispatcher()->handle($this->server->createServerRequestFromGlobals());
 
 		$this::assertSame(
 			['X-Out-First', 'X-Out-Second', 'X-Out-Third'],

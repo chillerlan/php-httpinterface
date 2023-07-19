@@ -11,9 +11,10 @@
 namespace chillerlan\HTTPTest\Psr17;
 
 use chillerlan\HTTP\Psr17\FactoryHelpers;
-use chillerlan\HTTPTest\TestAbstract;
+use chillerlan\HTTPTest\FactoryTrait;
 use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\StreamInterface;
 use stdClass;
 use function fopen;
@@ -21,7 +22,8 @@ use function fseek;
 use function fwrite;
 use function simplexml_load_string;
 
-class FactoryHelpersTest extends TestAbstract{
+class FactoryHelpersTest extends TestCase{
+	use FactoryTrait;
 
 	public function testCreateStream():void{
 		$stream = FactoryHelpers::create_stream('test');

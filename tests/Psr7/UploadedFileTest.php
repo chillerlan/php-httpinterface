@@ -13,10 +13,10 @@
 namespace chillerlan\HTTPTest\Psr7;
 
 use chillerlan\HTTP\Psr7\UploadedFile;
-use chillerlan\HTTPTest\TestAbstract;
+use chillerlan\HTTPTest\FactoryTrait;
 use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\DataProvider;
-use Psr\Http\Message\StreamFactoryInterface;
+use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use function basename;
 use function file_exists;
@@ -36,14 +36,13 @@ use const UPLOAD_ERR_NO_TMP_DIR;
 use const UPLOAD_ERR_OK;
 use const UPLOAD_ERR_PARTIAL;
 
-class UploadedFileTest extends TestAbstract{
+class UploadedFileTest extends TestCase{
+	use FactoryTrait;
 
-	protected StreamFactoryInterface $streamFactory;
 	protected array $cleanup;
 
-	protected function setUp():void{
-		parent::setUp();
-
+	// called from FactoryTrait
+	protected function __setUp():void{
 		$this->cleanup = [];
 	}
 

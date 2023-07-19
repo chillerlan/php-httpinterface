@@ -9,32 +9,13 @@
 
 namespace chillerlan\HTTPTest\Psr17;
 
+use chillerlan\HTTPTest\FactoryTrait;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\UriFactoryInterface;
-use function class_exists;
-use function defined;
 
 class RequestFactoryTest extends TestCase{
-
-	protected RequestFactoryInterface $requestFactory;
-	protected UriFactoryInterface     $uriFactory;
-
-	public function setUp():void{
-
-		if(!defined('REQUEST_FACTORY') || !class_exists(REQUEST_FACTORY)){
-			$this::markTestSkipped('REQUEST_FACTORY class name not provided');
-		}
-
-		if(!defined('URI_FACTORY') || !class_exists(URI_FACTORY)){
-			$this::markTestSkipped('URI_FACTORY class name not provided');
-		}
-
-		$this->requestFactory = new (REQUEST_FACTORY);
-		$this->uriFactory     = new (URI_FACTORY);
-	}
+	use FactoryTrait;
 
 	public static function dataMethods():array{
 		return [

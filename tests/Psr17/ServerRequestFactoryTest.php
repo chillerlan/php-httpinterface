@@ -9,35 +9,16 @@
 
 namespace chillerlan\HTTPTest\Psr17;
 
+use chillerlan\HTTPTest\FactoryTrait;
 use PHPUnit\Framework\Attributes\BackupGlobals;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\ServerRequestFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\UriFactoryInterface;
-use function class_exists;
-use function defined;
 use function sprintf;
 use const UPLOAD_ERR_OK;
 
 class ServerRequestFactoryTest extends TestCase{
-
-	protected ServerRequestFactoryInterface $serverRequestFactory;
-	protected UriFactoryInterface           $uriFactory;
-
-	public function setUp():void{
-
-		if(!defined('SERVER_REQUEST_FACTORY') || !class_exists(SERVER_REQUEST_FACTORY)){
-			$this::markTestSkipped('SERVER_REQUEST_FACTORY class name not provided');
-		}
-
-		if(!defined('URI_FACTORY') || !class_exists(URI_FACTORY)){
-			$this::markTestSkipped('URI_FACTORY class name not provided');
-		}
-
-		$this->serverRequestFactory = new (SERVER_REQUEST_FACTORY);
-		$this->uriFactory           = new (URI_FACTORY);
-	}
+	use FactoryTrait;
 
 	public static function dataServer():array{
 		$methods = ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'HEAD'];

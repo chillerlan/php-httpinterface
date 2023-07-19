@@ -9,25 +9,13 @@
 
 namespace chillerlan\HTTPTest\Psr17;
 
+use chillerlan\HTTPTest\FactoryTrait;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\UriInterface;
-use function class_exists;
-use function defined;
 
 class UriFactoryTest extends TestCase{
-
-	protected UriFactoryInterface $uriFactory;
-
-	public function setUp():void{
-
-		if(!defined('URI_FACTORY') || !class_exists(URI_FACTORY)){
-			$this::markTestSkipped('URI_FACTORY class name not provided');
-		}
-
-		$this->uriFactory = new (URI_FACTORY);
-	}
+	use FactoryTrait;
 
 	public function testCreateUri():void{
 		$uriString = 'https://example.com/';

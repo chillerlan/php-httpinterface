@@ -12,7 +12,6 @@ namespace chillerlan\HTTPTest;
 
 use chillerlan\HTTP\Utils\ServerUtil;
 use Exception;
-use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\{
 	RequestFactoryInterface, ResponseFactoryInterface, ServerRequestFactoryInterface,
 	StreamFactoryInterface, UploadedFileFactoryInterface, UriFactoryInterface
@@ -20,11 +19,12 @@ use Psr\Http\Message\{
 use function class_exists;
 use function constant;
 use function defined;
+use function method_exists;
 use function sprintf;
 
-abstract class TestAbstract extends TestCase{
+trait FactoryTrait{
 
-	protected const FACTORIES = [
+	private array $FACTORIES = [
 		'requestFactory'       => 'REQUEST_FACTORY',
 		'responseFactory'      => 'RESPONSE_FACTORY',
 		'serverRequestFactory' => 'SERVER_REQUEST_FACTORY',
@@ -46,7 +46,7 @@ abstract class TestAbstract extends TestCase{
 	 */
 	protected function setUp():void{
 
-		foreach($this::FACTORIES as $property => $const){
+		foreach($this->FACTORIES as $property => $const){
 
 			if(!defined($const)){
 				throw new Exception(sprintf('constant "%s" not defined -> see phpunit.xml', $const));
@@ -67,7 +67,11 @@ abstract class TestAbstract extends TestCase{
 			$this->uploadedFileFactory,
 			$this->streamFactory
 		);
-	}
 
+		if(method_exists($this, '__setUp')){
+			$this->__setUp();
+		}
+
+	}
 
 }

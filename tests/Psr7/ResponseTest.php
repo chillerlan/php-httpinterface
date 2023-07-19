@@ -13,10 +13,12 @@
 namespace chillerlan\HTTPTest\Psr7;
 
 use chillerlan\HTTP\Psr7\Response;
-use chillerlan\HTTPTest\TestAbstract;
+use chillerlan\HTTPTest\FactoryTrait;
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\StreamInterface;
 
-class ResponseTest extends TestAbstract{
+class ResponseTest extends TestCase{
+	use FactoryTrait;
 
 	public function testDefaultConstructor():void{
 		$r = new Response;

@@ -9,34 +9,15 @@
 
 namespace chillerlan\HTTPTest\Psr17;
 
+use chillerlan\HTTPTest\FactoryTrait;
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\StreamFactoryInterface;
-use Psr\Http\Message\UploadedFileFactoryInterface;
 use Psr\Http\Message\UploadedFileInterface;
-use function class_exists;
-use function defined;
 use function strlen;
 use const UPLOAD_ERR_NO_FILE;
 use const UPLOAD_ERR_OK;
 
 class UploadedFileFactoryTest extends TestCase{
-
-	protected UploadedFileFactoryInterface $uploadedFileFactory;
-	protected StreamFactoryInterface       $streamFactory;
-
-	public function setUp():void{
-
-		if(!defined('UPLOADED_FILE_FACTORY') || !class_exists(UPLOADED_FILE_FACTORY)){
-			$this::markTestSkipped('UPLOADED_FILE_FACTORY class name not provided');
-		}
-
-		if(!defined('STREAM_FACTORY') || !class_exists(STREAM_FACTORY)){
-			$this::markTestSkipped('STREAM_FACTORY class name not provided');
-		}
-
-		$this->uploadedFileFactory = new (UPLOADED_FILE_FACTORY);
-		$this->streamFactory       = new (STREAM_FACTORY);
-	}
+	use FactoryTrait;
 
 	protected function assertUploadedFile(
 		UploadedFileInterface $file,
