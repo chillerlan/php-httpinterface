@@ -861,6 +861,126 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTP-Psr18-URLExtractor.html#property_requestFactory"
         },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\DummyStream",
+            "name": "DummyStream",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr7-DummyStream.html"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\DummyStream\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr7-DummyStream.html#method___construct"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\DummyStream\u003A\u003AdummySetStream\u0028\u0029",
+            "name": "dummySetStream",
+            "summary": "Sets\u0020a\u0020StreamInterface\u0020to\u0020override",
+            "url": "classes/chillerlan-HTTP-Psr7-DummyStream.html#method_dummySetStream"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\DummyStream\u003A\u003AdummyOverrideAll\u0028\u0029",
+            "name": "dummyOverrideAll",
+            "summary": "Sets\u0020the\u0020override\u0020methods",
+            "url": "classes/chillerlan-HTTP-Psr7-DummyStream.html#method_dummyOverrideAll"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\DummyStream\u003A\u003AdummyOverrideMethod\u0028\u0029",
+            "name": "dummyOverrideMethod",
+            "summary": "Sets\u0020a\u0020single\u0020override\u0020method",
+            "url": "classes/chillerlan-HTTP-Psr7-DummyStream.html#method_dummyOverrideMethod"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\DummyStream\u003A\u003A__destruct\u0028\u0029",
+            "name": "__destruct",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr7-DummyStream.html#method___destruct"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\DummyStream\u003A\u003A__toString\u0028\u0029",
+            "name": "__toString",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr7-DummyStream.html#method___toString"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\DummyStream\u003A\u003Aclose\u0028\u0029",
+            "name": "close",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr7-DummyStream.html#method_close"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\DummyStream\u003A\u003Adetach\u0028\u0029",
+            "name": "detach",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr7-DummyStream.html#method_detach"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\DummyStream\u003A\u003AgetSize\u0028\u0029",
+            "name": "getSize",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr7-DummyStream.html#method_getSize"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\DummyStream\u003A\u003Atell\u0028\u0029",
+            "name": "tell",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr7-DummyStream.html#method_tell"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\DummyStream\u003A\u003Aeof\u0028\u0029",
+            "name": "eof",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr7-DummyStream.html#method_eof"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\DummyStream\u003A\u003AisSeekable\u0028\u0029",
+            "name": "isSeekable",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr7-DummyStream.html#method_isSeekable"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\DummyStream\u003A\u003Aseek\u0028\u0029",
+            "name": "seek",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr7-DummyStream.html#method_seek"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\DummyStream\u003A\u003Arewind\u0028\u0029",
+            "name": "rewind",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr7-DummyStream.html#method_rewind"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\DummyStream\u003A\u003AisWritable\u0028\u0029",
+            "name": "isWritable",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr7-DummyStream.html#method_isWritable"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\DummyStream\u003A\u003Awrite\u0028\u0029",
+            "name": "write",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr7-DummyStream.html#method_write"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\DummyStream\u003A\u003AisReadable\u0028\u0029",
+            "name": "isReadable",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr7-DummyStream.html#method_isReadable"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\DummyStream\u003A\u003Aread\u0028\u0029",
+            "name": "read",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr7-DummyStream.html#method_read"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\DummyStream\u003A\u003AgetContents\u0028\u0029",
+            "name": "getContents",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr7-DummyStream.html#method_getContents"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\DummyStream\u003A\u003AgetMetadata\u0028\u0029",
+            "name": "getMetadata",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr7-DummyStream.html#method_getMetadata"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\DummyStream\u003A\u003ASTREAMINTERFACE_METHODS",
+            "name": "STREAMINTERFACE_METHODS",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr7-DummyStream.html#constant_STREAMINTERFACE_METHODS"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\DummyStream\u003A\u003A\u0024stream",
+            "name": "stream",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr7-DummyStream.html#property_stream"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\DummyStream\u003A\u003A\u0024override",
+            "name": "override",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr7-DummyStream.html#property_override"
+        },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr7\\Message",
             "name": "Message",
             "summary": "",
@@ -1561,10 +1681,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-CurlUtils-CurlHandleTest.html"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\CurlUtils\\CurlHandleTest\u003A\u003AsetUp\u0028\u0029",
-            "name": "setUp",
+            "fqsen": "\\chillerlan\\HTTPTest\\CurlUtils\\CurlHandleTest\u003A\u003A__setUp\u0028\u0029",
+            "name": "__setUp",
             "summary": "",
-            "url": "classes/chillerlan-HTTPTest-CurlUtils-CurlHandleTest.html#method_setUp"
+            "url": "classes/chillerlan-HTTPTest-CurlUtils-CurlHandleTest.html#method___setUp"
         },                {
             "fqsen": "\\chillerlan\\HTTPTest\\CurlUtils\\CurlHandleTest\u003A\u003ArequestMethodProvider\u0028\u0029",
             "name": "requestMethodProvider",
@@ -1640,6 +1760,56 @@ Search.appendIndex(
             "name": "multiResponseHandler",
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-CurlUtils-CurlMultiClientTest.html#property_multiResponseHandler"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\FactoryTrait",
+            "name": "FactoryTrait",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-FactoryTrait.html"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\FactoryTrait\u003A\u003AsetUp\u0028\u0029",
+            "name": "setUp",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-FactoryTrait.html#method_setUp"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\FactoryTrait\u003A\u003A\u0024FACTORIES",
+            "name": "FACTORIES",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-FactoryTrait.html#property_FACTORIES"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\FactoryTrait\u003A\u003A\u0024requestFactory",
+            "name": "requestFactory",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-FactoryTrait.html#property_requestFactory"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\FactoryTrait\u003A\u003A\u0024responseFactory",
+            "name": "responseFactory",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-FactoryTrait.html#property_responseFactory"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\FactoryTrait\u003A\u003A\u0024serverRequestFactory",
+            "name": "serverRequestFactory",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-FactoryTrait.html#property_serverRequestFactory"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\FactoryTrait\u003A\u003A\u0024streamFactory",
+            "name": "streamFactory",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-FactoryTrait.html#property_streamFactory"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\FactoryTrait\u003A\u003A\u0024uploadedFileFactory",
+            "name": "uploadedFileFactory",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-FactoryTrait.html#property_uploadedFileFactory"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\FactoryTrait\u003A\u003A\u0024uriFactory",
+            "name": "uriFactory",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-FactoryTrait.html#property_uriFactory"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\FactoryTrait\u003A\u003A\u0024server",
+            "name": "server",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-FactoryTrait.html#property_server"
         },                {
             "fqsen": "\\chillerlan\\HTTPTest\\HTTPOptionsTest",
             "name": "HTTPOptionsTest",
@@ -1721,11 +1891,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr15-QueueRequestHandlerTest.html"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr15\\QueueRequestHandlerTest\u003A\u003AsetUp\u0028\u0029",
-            "name": "setUp",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr15-QueueRequestHandlerTest.html#method_setUp"
-        },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr15\\QueueRequestHandlerTest\u003A\u003AgetDispatcher\u0028\u0029",
             "name": "getDispatcher",
             "summary": "",
@@ -1755,11 +1920,6 @@ Search.appendIndex(
             "name": "testInvalidMiddlewareException",
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr15-QueueRequestHandlerTest.html#method_testInvalidMiddlewareException"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr15\\QueueRequestHandlerTest\u003A\u003A\u0024dispatcher",
-            "name": "dispatcher",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr15-QueueRequestHandlerTest.html#property_dispatcher"
         },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr15\\RecursiveDispatcherTest",
             "name": "RecursiveDispatcherTest",
@@ -1811,11 +1971,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr17-RequestFactoryTest.html"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\RequestFactoryTest\u003A\u003AsetUp\u0028\u0029",
-            "name": "setUp",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr17-RequestFactoryTest.html#method_setUp"
-        },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\RequestFactoryTest\u003A\u003AdataMethods\u0028\u0029",
             "name": "dataMethods",
             "summary": "",
@@ -1831,25 +1986,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr17-RequestFactoryTest.html#method_testCreateRequestWithUri"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\RequestFactoryTest\u003A\u003A\u0024requestFactory",
-            "name": "requestFactory",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr17-RequestFactoryTest.html#property_requestFactory"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\RequestFactoryTest\u003A\u003A\u0024uriFactory",
-            "name": "uriFactory",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr17-RequestFactoryTest.html#property_uriFactory"
-        },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\ResponseFactoryTest",
             "name": "ResponseFactoryTest",
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr17-ResponseFactoryTest.html"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\ResponseFactoryTest\u003A\u003AsetUp\u0028\u0029",
-            "name": "setUp",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr17-ResponseFactoryTest.html#method_setUp"
         },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\ResponseFactoryTest\u003A\u003AdataCodes\u0028\u0029",
             "name": "dataCodes",
@@ -1861,20 +2001,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr17-ResponseFactoryTest.html#method_testCreateResponse"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\ResponseFactoryTest\u003A\u003A\u0024responseFactory",
-            "name": "responseFactory",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr17-ResponseFactoryTest.html#property_responseFactory"
-        },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\ServerRequestFactoryTest",
             "name": "ServerRequestFactoryTest",
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr17-ServerRequestFactoryTest.html"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\ServerRequestFactoryTest\u003A\u003AsetUp\u0028\u0029",
-            "name": "setUp",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr17-ServerRequestFactoryTest.html#method_setUp"
         },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\ServerRequestFactoryTest\u003A\u003AdataServer\u0028\u0029",
             "name": "dataServer",
@@ -1921,25 +2051,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr17-ServerRequestFactoryTest.html#method_testCreateServerRequestDoesNotReadPostSuperglobal"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\ServerRequestFactoryTest\u003A\u003A\u0024serverRequestFactory",
-            "name": "serverRequestFactory",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr17-ServerRequestFactoryTest.html#property_serverRequestFactory"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\ServerRequestFactoryTest\u003A\u003A\u0024uriFactory",
-            "name": "uriFactory",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr17-ServerRequestFactoryTest.html#property_uriFactory"
-        },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\StreamFactoryTest",
             "name": "StreamFactoryTest",
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr17-StreamFactoryTest.html"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\StreamFactoryTest\u003A\u003AsetUp\u0028\u0029",
-            "name": "setUp",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr17-StreamFactoryTest.html#method_setUp"
         },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\StreamFactoryTest\u003A\u003AtearDownAfterClass\u0028\u0029",
             "name": "tearDownAfterClass",
@@ -2016,11 +2131,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr17-StreamFactoryTest.html#method_testCreateStreamFromFileWithInvalidMode"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\StreamFactoryTest\u003A\u003A\u0024streamFactory",
-            "name": "streamFactory",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr17-StreamFactoryTest.html#property_streamFactory"
-        },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\StreamFactoryTest\u003A\u003A\u0024tempFiles",
             "name": "tempFiles",
             "summary": "",
@@ -2030,11 +2140,6 @@ Search.appendIndex(
             "name": "UploadedFileFactoryTest",
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr17-UploadedFileFactoryTest.html"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\UploadedFileFactoryTest\u003A\u003AsetUp\u0028\u0029",
-            "name": "setUp",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr17-UploadedFileFactoryTest.html#method_setUp"
         },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\UploadedFileFactoryTest\u003A\u003AassertUploadedFile\u0028\u0029",
             "name": "assertUploadedFile",
@@ -2051,25 +2156,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr17-UploadedFileFactoryTest.html#method_testCreateUploadedFileWithError"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\UploadedFileFactoryTest\u003A\u003A\u0024uploadedFileFactory",
-            "name": "uploadedFileFactory",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr17-UploadedFileFactoryTest.html#property_uploadedFileFactory"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\UploadedFileFactoryTest\u003A\u003A\u0024streamFactory",
-            "name": "streamFactory",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr17-UploadedFileFactoryTest.html#property_streamFactory"
-        },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\UriFactoryTest",
             "name": "UriFactoryTest",
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr17-UriFactoryTest.html"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\UriFactoryTest\u003A\u003AsetUp\u0028\u0029",
-            "name": "setUp",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr17-UriFactoryTest.html#method_setUp"
         },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\UriFactoryTest\u003A\u003AtestCreateUri\u0028\u0029",
             "name": "testCreateUri",
@@ -2080,11 +2170,6 @@ Search.appendIndex(
             "name": "testExceptionWhenUriIsInvalid",
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr17-UriFactoryTest.html#method_testExceptionWhenUriIsInvalid"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\UriFactoryTest\u003A\u003A\u0024uriFactory",
-            "name": "uriFactory",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr17-UriFactoryTest.html#property_uriFactory"
         },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr18\\CurlClientNoCATest",
             "name": "CurlClientNoCATest",
@@ -2210,6 +2295,31 @@ Search.appendIndex(
             "name": "testExtract",
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr18-URLExtractorTest.html#method_testExtract"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\DummyStreamTest",
+            "name": "DummyStreamTest",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-DummyStreamTest.html"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\DummyStreamTest\u003A\u003AtestDefaultStream\u0028\u0029",
+            "name": "testDefaultStream",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-DummyStreamTest.html#method_testDefaultStream"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\DummyStreamTest\u003A\u003AtestProxiesToFunction\u0028\u0029",
+            "name": "testProxiesToFunction",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-DummyStreamTest.html#method_testProxiesToFunction"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\DummyStreamTest\u003A\u003AtestCanCloseOnDestruct\u0028\u0029",
+            "name": "testCanCloseOnDestruct",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-DummyStreamTest.html#method_testCanCloseOnDestruct"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\DummyStreamTest\u003A\u003AtestDecoratesWithCustomizations\u0028\u0029",
+            "name": "testDecoratesWithCustomizations",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-DummyStreamTest.html#method_testDecoratesWithCustomizations"
         },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\RequestTest",
             "name": "RequestTest",
@@ -2551,10 +2661,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\UploadedFileTest\u003A\u003AsetUp\u0028\u0029",
-            "name": "setUp",
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\UploadedFileTest\u003A\u003A__setUp\u0028\u0029",
+            "name": "__setUp",
             "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_setUp"
+            "url": "classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method___setUp"
         },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\UploadedFileTest\u003A\u003AtearDown\u0028\u0029",
             "name": "tearDown",
@@ -2645,11 +2755,6 @@ Search.appendIndex(
             "name": "testNormalizeFilesRaisesException",
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testNormalizeFilesRaisesException"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\UploadedFileTest\u003A\u003A\u0024streamFactory",
-            "name": "streamFactory",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#property_streamFactory"
         },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\UploadedFileTest\u003A\u003A\u0024cleanup",
             "name": "cleanup",
@@ -2920,56 +3025,6 @@ Search.appendIndex(
             "name": "testIPv6Host",
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr7-UriTest.html#method_testIPv6Host"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\TestAbstract",
-            "name": "TestAbstract",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-TestAbstract.html"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\TestAbstract\u003A\u003AsetUp\u0028\u0029",
-            "name": "setUp",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-TestAbstract.html#method_setUp"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\TestAbstract\u003A\u003AFACTORIES",
-            "name": "FACTORIES",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-TestAbstract.html#constant_FACTORIES"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\TestAbstract\u003A\u003A\u0024requestFactory",
-            "name": "requestFactory",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-TestAbstract.html#property_requestFactory"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\TestAbstract\u003A\u003A\u0024responseFactory",
-            "name": "responseFactory",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-TestAbstract.html#property_responseFactory"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\TestAbstract\u003A\u003A\u0024serverRequestFactory",
-            "name": "serverRequestFactory",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-TestAbstract.html#property_serverRequestFactory"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\TestAbstract\u003A\u003A\u0024streamFactory",
-            "name": "streamFactory",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-TestAbstract.html#property_streamFactory"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\TestAbstract\u003A\u003A\u0024uploadedFileFactory",
-            "name": "uploadedFileFactory",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-TestAbstract.html#property_uploadedFileFactory"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\TestAbstract\u003A\u003A\u0024uriFactory",
-            "name": "uriFactory",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-TestAbstract.html#property_uriFactory"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\TestAbstract\u003A\u003A\u0024server",
-            "name": "server",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-TestAbstract.html#property_server"
         },                {
             "fqsen": "\\",
             "name": "\\",

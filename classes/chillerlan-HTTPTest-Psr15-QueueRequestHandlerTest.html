@@ -103,7 +103,7 @@
     QueueRequestHandlerTest
 
         <span class="phpdocumentor-element__extends">
-        extends <a href="classes/chillerlan-HTTPTest-TestAbstract.html"><abbr title="\chillerlan\HTTPTest\TestAbstract">TestAbstract</abbr></a>
+        extends <abbr title="\PHPUnit\Framework\TestCase">TestCase</abbr>
     </span>
     
             <div class="phpdocumentor-element__package">
@@ -114,6 +114,9 @@
         </div>
     
     
+            <span class="phpdocumentor-element__extends">
+            Uses
+                            <a href="classes/chillerlan-HTTPTest-FactoryTrait.html"><abbr title="\chillerlan\HTTPTest\FactoryTrait">FactoryTrait</abbr></a>                    </span>
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
@@ -139,66 +142,59 @@
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -constant -protected">
-    <a href="classes/chillerlan-HTTPTest-TestAbstract.html#constant_FACTORIES">FACTORIES</a>
-    <span>
-        &nbsp;= [&#039;requestFactory&#039; =&gt; &#039;REQUEST_FACTORY&#039;, &#039;responseFactory&#039; =&gt; &#039;RESPONSE_FACTORY&#039;, &#039;serverRequestFactory&#039; =&gt; &#039;SERVER_REQUEST_FACTORY&#039;, &#039;streamFactory&#039; =&gt; &#039;STREAM_FACTORY&#039;, &#039;uploadedFileFactory&#039; =&gt; &#039;UPLOADED_FILE_FACTORY&#039;, &#039;uriFactory&#039; =&gt; &#039;URI_FACTORY&#039;]                            </span>
-</dt>
-<dd></dd>
-
                     <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/chillerlan-HTTPTest-Psr15-QueueRequestHandlerTest.html#property_dispatcher">$dispatcher</a>
-    <span>
-                        &nbsp;: <abbr title="\Psr\Http\Server\RequestHandlerInterface">RequestHandlerInterface</abbr>            </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/chillerlan-HTTPTest-TestAbstract.html#property_requestFactory">$requestFactory</a>
+    <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_requestFactory">$requestFactory</a>
     <span>
                         &nbsp;: <abbr title="\Psr\Http\Message\RequestFactoryInterface">RequestFactoryInterface</abbr>            </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/chillerlan-HTTPTest-TestAbstract.html#property_responseFactory">$responseFactory</a>
+    <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_responseFactory">$responseFactory</a>
     <span>
                         &nbsp;: <abbr title="\Psr\Http\Message\ResponseFactoryInterface">ResponseFactoryInterface</abbr>            </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/chillerlan-HTTPTest-TestAbstract.html#property_server">$server</a>
+    <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_server">$server</a>
     <span>
                         &nbsp;: <abbr title="\chillerlan\HTTP\Utils\ServerUtil">ServerUtil</abbr>            </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/chillerlan-HTTPTest-TestAbstract.html#property_serverRequestFactory">$serverRequestFactory</a>
+    <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_serverRequestFactory">$serverRequestFactory</a>
     <span>
                         &nbsp;: <abbr title="\Psr\Http\Message\ServerRequestFactoryInterface">ServerRequestFactoryInterface</abbr>            </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/chillerlan-HTTPTest-TestAbstract.html#property_streamFactory">$streamFactory</a>
+    <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_streamFactory">$streamFactory</a>
     <span>
                         &nbsp;: <abbr title="\Psr\Http\Message\StreamFactoryInterface">StreamFactoryInterface</abbr>            </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/chillerlan-HTTPTest-TestAbstract.html#property_uploadedFileFactory">$uploadedFileFactory</a>
+    <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_uploadedFileFactory">$uploadedFileFactory</a>
     <span>
                         &nbsp;: <abbr title="\Psr\Http\Message\UploadedFileFactoryInterface">UploadedFileFactoryInterface</abbr>            </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/chillerlan-HTTPTest-TestAbstract.html#property_uriFactory">$uriFactory</a>
+    <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_uriFactory">$uriFactory</a>
     <span>
                         &nbsp;: <abbr title="\Psr\Http\Message\UriFactoryInterface">UriFactoryInterface</abbr>            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_FACTORIES">$FACTORIES</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;            </span>
 </dt>
 <dd></dd>
 
@@ -245,7 +241,7 @@
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
-    <a href="classes/chillerlan-HTTPTest-Psr15-QueueRequestHandlerTest.html#method_setUp">setUp()</a>
+    <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#method_setUp">setUp()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
@@ -256,41 +252,6 @@
 
 
         
-    <section class="phpdocumentor-constants">
-        <h3 class="phpdocumentor-elements__header" id="constants">
-            Constants
-            <a href="classes/chillerlan-HTTPTest-Psr15-QueueRequestHandlerTest.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
-        </h3>
-                    <article class="phpdocumentor-element -constant -protected ">
-    <h4 class="phpdocumentor-element__name" id="constant_FACTORIES">
-        FACTORIES
-        <a href="classes/chillerlan-HTTPTest-TestAbstract.html#constant_FACTORIES" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="tests/TestAbstract.php"><a href="files/tests-testabstract.html"><abbr title="tests/TestAbstract.php">TestAbstract.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">27</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">FACTORIES</span>
-    = <span class="phpdocumentor-signature__default-value">[&#039;requestFactory&#039; =&gt; &#039;REQUEST_FACTORY&#039;, &#039;responseFactory&#039; =&gt; &#039;RESPONSE_FACTORY&#039;, &#039;serverRequestFactory&#039; =&gt; &#039;SERVER_REQUEST_FACTORY&#039;, &#039;streamFactory&#039; =&gt; &#039;STREAM_FACTORY&#039;, &#039;uploadedFileFactory&#039; =&gt; &#039;UPLOADED_FILE_FACTORY&#039;, &#039;uriFactory&#039; =&gt; &#039;URI_FACTORY&#039;]</span>
-</code>
-
-
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-
-</article>
-            </section>
 
         
     <section class="phpdocumentor-properties">
@@ -305,48 +266,14 @@
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_dispatcher">
-        $dispatcher
-        <a href="classes/chillerlan-HTTPTest-Psr15-QueueRequestHandlerTest.html#property_dispatcher" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="tests/Psr15/QueueRequestHandlerTest.php"><a href="files/tests-psr15-queuerequesthandlertest.html"><abbr title="tests/Psr15/QueueRequestHandlerTest.php">QueueRequestHandlerTest.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">22</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type"><abbr title="\Psr\Http\Server\RequestHandlerInterface">RequestHandlerInterface</abbr></span>
-    <span class="phpdocumentor-signature__name">$dispatcher</span>
-    </code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="property_requestFactory">
         $requestFactory
-        <a href="classes/chillerlan-HTTPTest-TestAbstract.html#property_requestFactory" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_requestFactory" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="tests/TestAbstract.php"><a href="files/tests-testabstract.html"><abbr title="tests/TestAbstract.php">TestAbstract.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="tests/FactoryTrait.php"><a href="files/tests-factorytrait.html"><abbr title="tests/FactoryTrait.php">FactoryTrait.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">36</span>
 
@@ -375,12 +302,12 @@
 >
     <h4 class="phpdocumentor-element__name" id="property_responseFactory">
         $responseFactory
-        <a href="classes/chillerlan-HTTPTest-TestAbstract.html#property_responseFactory" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_responseFactory" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="tests/TestAbstract.php"><a href="files/tests-testabstract.html"><abbr title="tests/TestAbstract.php">TestAbstract.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="tests/FactoryTrait.php"><a href="files/tests-factorytrait.html"><abbr title="tests/FactoryTrait.php">FactoryTrait.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">37</span>
 
@@ -409,12 +336,12 @@
 >
     <h4 class="phpdocumentor-element__name" id="property_server">
         $server
-        <a href="classes/chillerlan-HTTPTest-TestAbstract.html#property_server" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_server" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="tests/TestAbstract.php"><a href="files/tests-testabstract.html"><abbr title="tests/TestAbstract.php">TestAbstract.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="tests/FactoryTrait.php"><a href="files/tests-factorytrait.html"><abbr title="tests/FactoryTrait.php">FactoryTrait.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">42</span>
 
@@ -443,12 +370,12 @@
 >
     <h4 class="phpdocumentor-element__name" id="property_serverRequestFactory">
         $serverRequestFactory
-        <a href="classes/chillerlan-HTTPTest-TestAbstract.html#property_serverRequestFactory" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_serverRequestFactory" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="tests/TestAbstract.php"><a href="files/tests-testabstract.html"><abbr title="tests/TestAbstract.php">TestAbstract.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="tests/FactoryTrait.php"><a href="files/tests-factorytrait.html"><abbr title="tests/FactoryTrait.php">FactoryTrait.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">38</span>
 
@@ -477,12 +404,12 @@
 >
     <h4 class="phpdocumentor-element__name" id="property_streamFactory">
         $streamFactory
-        <a href="classes/chillerlan-HTTPTest-TestAbstract.html#property_streamFactory" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_streamFactory" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="tests/TestAbstract.php"><a href="files/tests-testabstract.html"><abbr title="tests/TestAbstract.php">TestAbstract.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="tests/FactoryTrait.php"><a href="files/tests-factorytrait.html"><abbr title="tests/FactoryTrait.php">FactoryTrait.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">39</span>
 
@@ -511,12 +438,12 @@
 >
     <h4 class="phpdocumentor-element__name" id="property_uploadedFileFactory">
         $uploadedFileFactory
-        <a href="classes/chillerlan-HTTPTest-TestAbstract.html#property_uploadedFileFactory" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_uploadedFileFactory" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="tests/TestAbstract.php"><a href="files/tests-testabstract.html"><abbr title="tests/TestAbstract.php">TestAbstract.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="tests/FactoryTrait.php"><a href="files/tests-factorytrait.html"><abbr title="tests/FactoryTrait.php">FactoryTrait.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">40</span>
 
@@ -545,12 +472,12 @@
 >
     <h4 class="phpdocumentor-element__name" id="property_uriFactory">
         $uriFactory
-        <a href="classes/chillerlan-HTTPTest-TestAbstract.html#property_uriFactory" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_uriFactory" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="tests/TestAbstract.php"><a href="files/tests-testabstract.html"><abbr title="tests/TestAbstract.php">TestAbstract.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="tests/FactoryTrait.php"><a href="files/tests-factorytrait.html"><abbr title="tests/FactoryTrait.php">FactoryTrait.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">41</span>
 
@@ -562,6 +489,40 @@
         <span class="phpdocumentor-signature__type"><abbr title="\Psr\Http\Message\UriFactoryInterface">UriFactoryInterface</abbr></span>
     <span class="phpdocumentor-signature__name">$uriFactory</span>
     </code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_FACTORIES">
+        $FACTORIES
+        <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_FACTORIES" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="tests/FactoryTrait.php"><a href="files/tests-factorytrait.html"><abbr title="tests/FactoryTrait.php">FactoryTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">27</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__name">$FACTORIES</span>
+     = <span class="phpdocumentor-signature__default-value">[&#039;requestFactory&#039; =&gt; &#039;REQUEST_FACTORY&#039;, &#039;responseFactory&#039; =&gt; &#039;RESPONSE_FACTORY&#039;, &#039;serverRequestFactory&#039; =&gt; &#039;SERVER_REQUEST_FACTORY&#039;, &#039;streamFactory&#039; =&gt; &#039;STREAM_FACTORY&#039;, &#039;uploadedFileFactory&#039; =&gt; &#039;UPLOADED_FILE_FACTORY&#039;, &#039;uriFactory&#039; =&gt; &#039;URI_FACTORY&#039;]</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -590,7 +551,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="tests/Psr15/QueueRequestHandlerTest.php"><a href="files/tests-psr15-queuerequesthandlertest.html"><abbr title="tests/Psr15/QueueRequestHandlerTest.php">QueueRequestHandlerTest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">40</span>
+    <span class="phpdocumentor-element-found-in__line">33</span>
 
     </aside>
 
@@ -623,7 +584,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="tests/Psr15/QueueRequestHandlerTest.php"><a href="files/tests-psr15-queuerequesthandlertest.html"><abbr title="tests/Psr15/QueueRequestHandlerTest.php">QueueRequestHandlerTest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">101</span>
+    <span class="phpdocumentor-element-found-in__line">94</span>
 
     </aside>
 
@@ -656,7 +617,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="tests/Psr15/QueueRequestHandlerTest.php"><a href="files/tests-psr15-queuerequesthandlertest.html"><abbr title="tests/Psr15/QueueRequestHandlerTest.php">QueueRequestHandlerTest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">30</span>
+    <span class="phpdocumentor-element-found-in__line">23</span>
 
     </aside>
 
@@ -689,7 +650,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="tests/Psr15/QueueRequestHandlerTest.php"><a href="files/tests-psr15-queuerequesthandlertest.html"><abbr title="tests/Psr15/QueueRequestHandlerTest.php">QueueRequestHandlerTest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">86</span>
+    <span class="phpdocumentor-element-found-in__line">79</span>
 
     </aside>
 
@@ -722,7 +683,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="tests/Psr15/QueueRequestHandlerTest.php"><a href="files/tests-psr15-queuerequesthandlertest.html"><abbr title="tests/Psr15/QueueRequestHandlerTest.php">QueueRequestHandlerTest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">74</span>
+    <span class="phpdocumentor-element-found-in__line">67</span>
 
     </aside>
 
@@ -755,7 +716,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="tests/Psr15/QueueRequestHandlerTest.php"><a href="files/tests-psr15-queuerequesthandlertest.html"><abbr title="tests/Psr15/QueueRequestHandlerTest.php">QueueRequestHandlerTest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">51</span>
+    <span class="phpdocumentor-element-found-in__line">44</span>
 
     </aside>
 
@@ -783,12 +744,12 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_setUp">
         setUp()
-        <a href="classes/chillerlan-HTTPTest-Psr15-QueueRequestHandlerTest.html#method_setUp" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#method_setUp" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="tests/Psr15/QueueRequestHandlerTest.php"><a href="files/tests-psr15-queuerequesthandlertest.html"><abbr title="tests/Psr15/QueueRequestHandlerTest.php">QueueRequestHandlerTest.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="tests/FactoryTrait.php"><a href="files/tests-factorytrait.html"><abbr title="tests/FactoryTrait.php">FactoryTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">47</span>
 
     </aside>
 
@@ -800,6 +761,20 @@
     
     
     
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
+                                                            
+                                             
+                                    </dd>
+                        </dl>
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">void</span>
