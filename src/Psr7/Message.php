@@ -6,8 +6,6 @@
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2018 smiley
  * @license      MIT
- *
- * @phan-file-suppress PhanParamSignatureMismatch
  */
 
 namespace chillerlan\HTTP\Psr7;
@@ -17,7 +15,7 @@ use Psr\Http\Message\{MessageInterface, StreamInterface};
 
 use function array_merge, fopen, implode, is_array, strtolower;
 
-abstract class Message implements MessageInterface{
+class Message implements MessageInterface{
 
 	protected array $headers = [];
 	/** @var string[] */
@@ -44,7 +42,7 @@ abstract class Message implements MessageInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function withProtocolVersion($version):static{
+	public function withProtocolVersion(string $version):static{
 
 		if($this->version === $version){
 			return $this;
@@ -66,14 +64,14 @@ abstract class Message implements MessageInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function hasHeader($name):bool{
+	public function hasHeader(string $name):bool{
 		return isset($this->headerNames[strtolower($name)]);
 	}
 
 	/**
 	 * @inheritDoc
 	 */
-	public function getHeader($name):array{
+	public function getHeader(string $name):array{
 
 		if(!$this->hasHeader($name)){
 			return [];
@@ -85,14 +83,14 @@ abstract class Message implements MessageInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function getHeaderLine($name):string{
+	public function getHeaderLine(string $name):string{
 		return implode(', ', $this->getHeader($name));
 	}
 
 	/**
 	 * @inheritDoc
 	 */
-	public function withHeader($name, $value):static{
+	public function withHeader(string $name, $value):static{
 
 		if(!is_array($value)){
 			$value = [$value];
@@ -115,7 +113,7 @@ abstract class Message implements MessageInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function withAddedHeader($name, $value):static{
+	public function withAddedHeader(string $name, $value):static{
 
 		if(!is_array($value)){
 			$value = [$value];
@@ -140,7 +138,7 @@ abstract class Message implements MessageInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function withoutHeader($name):static{
+	public function withoutHeader(string $name):static{
 		$normalized = strtolower($name);
 
 		if(!isset($this->headerNames[$normalized])){

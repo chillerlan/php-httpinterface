@@ -6,8 +6,6 @@
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2018 smiley
  * @license      MIT
- *
- * @phan-file-suppress PhanParamSignatureMismatch
  */
 
 namespace chillerlan\HTTP\Psr7;
@@ -16,7 +14,7 @@ use Fig\Http\Message\RequestMethodInterface;
 use InvalidArgumentException;
 use Psr\Http\Message\{RequestInterface, UriInterface};
 
-use function is_string, preg_match, strtoupper, trim;
+use function preg_match, strtoupper, trim;
 
 class Request extends Message implements RequestInterface, RequestMethodInterface{
 
@@ -66,7 +64,7 @@ class Request extends Message implements RequestInterface, RequestMethodInterfac
 	/**
 	 * @inheritDoc
 	 */
-	public function withRequestTarget($requestTarget):static{
+	public function withRequestTarget(string $requestTarget):static{
 
 		if(preg_match('#\s#', $requestTarget)){
 			throw new InvalidArgumentException('Invalid request target provided; cannot contain whitespace');
@@ -88,12 +86,7 @@ class Request extends Message implements RequestInterface, RequestMethodInterfac
 	/**
 	 * @inheritDoc
 	 */
-	public function withMethod($method):static{
-
-		if(!is_string($method)){
-			throw new InvalidArgumentException('Method must be a string');
-		}
-
+	public function withMethod(string $method):static{
 		$method = trim($method);
 
 		if($method === ''){
@@ -116,7 +109,7 @@ class Request extends Message implements RequestInterface, RequestMethodInterfac
 	/**
 	 * @inheritDoc
 	 */
-	public function withUri(UriInterface $uri, $preserveHost = false):static{
+	public function withUri(UriInterface $uri, bool $preserveHost = false):static{
 
 		if($uri === $this->uri){
 			return $this;

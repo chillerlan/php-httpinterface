@@ -123,7 +123,7 @@ class ServerRequest extends Request implements ServerRequestInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function getAttribute($name, $default = null):mixed{
+	public function getAttribute(string $name, $default = null):mixed{
 
 		if(!array_key_exists($name, $this->attributes)){
 			return $default;
@@ -135,7 +135,7 @@ class ServerRequest extends Request implements ServerRequestInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function withAttribute($name, $value):static{
+	public function withAttribute(string $name, $value):static{
 		$clone                    = clone $this;
 		$clone->attributes[$name] = $value;
 
@@ -145,7 +145,7 @@ class ServerRequest extends Request implements ServerRequestInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function withoutAttribute($name):static{
+	public function withoutAttribute(string $name):static{
 
 		if(!array_key_exists($name, $this->attributes)){
 			return $this;

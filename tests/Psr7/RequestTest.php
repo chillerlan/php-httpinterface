@@ -136,14 +136,6 @@ class RequestTest extends TestCase{
 		$this::assertSame('foo.com:8125', $r->getHeaderLine('host'));
 	}
 
-	public function testWithMethodInvalidMethod():void{
-		$this->expectException(InvalidArgumentException::class);
-		$this->expectExceptionMessage('Method must be a string');
-
-		/** @noinspection PhpParamsInspection */
-		(new Request('GET', '/foo'))->withMethod([]);
-	}
-
 	public function testWithMethodEmptyMethod():void{
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('HTTP method must not be empty');

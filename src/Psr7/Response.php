@@ -11,9 +11,8 @@
 namespace chillerlan\HTTP\Psr7;
 
 use Fig\Http\Message\StatusCodeInterface;
-use InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
-use function is_string, trim;
+use function trim;
 
 class Response extends Message implements ResponseInterface, StatusCodeInterface{
 
@@ -120,13 +119,7 @@ class Response extends Message implements ResponseInterface, StatusCodeInterface
 	/**
 	 * @inheritDoc
 	 */
-	public function withStatus($code, $reasonPhrase = ''):static{
-
-		if(!is_string($reasonPhrase)){
-			throw new InvalidArgumentException('invalid reason phrase');
-		}
-
-		$code         = (int)$code;
+	public function withStatus(int $code, string $reasonPhrase = ''):static{
 		$reasonPhrase = trim($reasonPhrase);
 
 		$clone               = clone $this;

@@ -35,7 +35,7 @@
 		"chillerlan/php-settings-container":"^2.1.4 || ^3.0",
 		"fig/http-message-util":"^1.1.5",
 		"psr/http-client":"^1.0",
-		"psr/http-message": "^1.0",
+		"psr/http-message": "^1.1",
 		"psr/http-factory":"^1.0",
 		"psr/http-server-handler": "^1.0",
 		"psr/http-server-middleware": "^1.0",
