@@ -2416,11 +2416,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr7-RequestTest.html#method_testAddsPortToHeaderAndReplacePreviousPort"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\RequestTest\u003A\u003AtestWithMethodInvalidMethod\u0028\u0029",
-            "name": "testWithMethodInvalidMethod",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-RequestTest.html#method_testWithMethodInvalidMethod"
-        },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\RequestTest\u003A\u003AtestWithMethodEmptyMethod\u0028\u0029",
             "name": "testWithMethodEmptyMethod",
             "summary": "",
