@@ -15,7 +15,7 @@ use chillerlan\HTTP\Psr7\Message;
 use chillerlan\HTTP\Utils\{HeaderUtil, MessageUtil};
 use InvalidArgumentException;
 use Psr\Http\Message\{MessageInterface, StreamFactoryInterface, StreamInterface};
-use function basename, count, fopen, implode, ksort, preg_match, random_bytes, sha1, sprintf, str_starts_with, trim;
+use function basename, count, implode, ksort, preg_match, random_bytes, sha1, sprintf, str_starts_with, trim;
 
 /**
  * Use PSR-7 MessageInterface to build multipart messages
@@ -152,7 +152,7 @@ class MultipartStreamBuilder{
 	 * and the MessageInterface is returned; returns the StreamInterface with the content otherwise.
 	 */
 	public function build(MessageInterface $message = null):StreamInterface|MessageInterface{
-		$this->stream = $this->streamFactory->createStreamFromResource(fopen('php://temp', 'r+'));
+		$this->stream = $this->streamFactory->createStream();
 
 		foreach($this->messages as $part){
 			// write boundary before each part

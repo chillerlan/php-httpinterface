@@ -10,10 +10,11 @@
 
 namespace chillerlan\HTTP\Psr7;
 
+use chillerlan\HTTP\Common\FactoryHelpers;
 use chillerlan\HTTP\Utils\HeaderUtil;
 use Psr\Http\Message\{MessageInterface, StreamInterface};
 
-use function array_merge, fopen, implode, is_array, strtolower;
+use function array_merge, implode, is_array, strtolower;
 
 class Message implements MessageInterface{
 
@@ -29,7 +30,7 @@ class Message implements MessageInterface{
 	 * Message constructor.
 	 */
 	public function __construct(){
-		$this->body = new Stream(fopen('php://temp', 'r+'));
+		$this->body = FactoryHelpers::createStream();
 	}
 
 	/**
