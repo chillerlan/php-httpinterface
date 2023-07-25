@@ -10,11 +10,10 @@
 
 namespace chillerlan\HTTP\Psr7;
 
-use chillerlan\HTTP\Psr17\FactoryHelpers;
+use chillerlan\HTTP\Utils\StreamUtil;
 use InvalidArgumentException, RuntimeException;
 use Psr\Http\Message\StreamInterface;
-use function clearstatcache, fclose, feof, fread, fstat, ftell, fwrite, in_array,
-	is_resource, stream_get_contents, stream_get_meta_data;
+use function clearstatcache, fclose, feof, fread, fstat, ftell, fwrite, is_resource, stream_get_meta_data;
 
 use const SEEK_SET;
 
@@ -45,10 +44,10 @@ class Stream implements StreamInterface{
 
 		$this->stream   = $stream;
 		$meta           = $this->getMetadata();
-		$mode           = $meta['mode'] ?? null;
+		$mode           = ($meta['mode'] ?? '');
 		$this->seekable = $meta['seekable'] ?? false;
-		$this->readable = in_array($mode, FactoryHelpers::STREAM_MODES_READ);
-		$this->writable = in_array($mode, FactoryHelpers::STREAM_MODES_WRITE);
+		$this->readable = StreamUtil::modeAllowsRead($mode);
+		$this->writable = StreamUtil::modeAllowsWrite($mode);
 		$this->uri      = $meta['uri'] ?? null;
 	}
 
@@ -73,12 +72,6 @@ class Stream implements StreamInterface{
 		if($this->isSeekable()){
 			$this->seek(0);
 		}
-
-		// this would be nice but some iplementations don't like nice things :(
-#		$wrapper_type = $this->getMetadata('wrapper_type');
-#		if($wrapper_type === 'plainfile'){
-#			return $this->getMetadata('uri');
-#		}
 
 		return $this->getContents();
 	}
@@ -184,7 +177,8 @@ class Stream implements StreamInterface{
 		if(!$this->seekable){
 			throw new RuntimeException('Stream is not seekable');
 		}
-		elseif(fseek($this->stream, $offset, $whence) === -1){
+
+		if(fseek($this->stream, $offset, $whence) === -1){
 			throw new RuntimeException('Unable to seek to stream position '.$offset.' with whence '.$whence);
 		}
 
@@ -278,13 +272,7 @@ class Stream implements StreamInterface{
 			throw new RuntimeException('Cannot read from non-readable stream');
 		}
 
-		$contents = stream_get_contents($this->stream);
-
-		if($contents === false){
-			throw new RuntimeException('Unable to read stream contents'); // @codeCoverageIgnore
-		}
-
-		return $contents;
+		return StreamUtil::tryGetContents($this->stream);
 	}
 
 	/**

@@ -10,7 +10,7 @@
 
 namespace chillerlan\HTTP\Psr7;
 
-use chillerlan\HTTP\Psr17\FactoryHelpers;
+use chillerlan\HTTP\Common\FactoryHelpers;
 use Closure;
 use Psr\Http\Message\StreamInterface;
 use function array_diff;
@@ -47,7 +47,7 @@ class DummyStream implements StreamInterface{
 	public function __construct(StreamInterface $stream = null, array $methods = null){
 
 		$this
-			->dummySetStream($stream ?? FactoryHelpers::create_stream())
+			->dummySetStream($stream ?? FactoryHelpers::createStream())
 			->dummyOverrideAll($methods ?? [])
 		;
 	}

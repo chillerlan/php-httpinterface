@@ -10,11 +10,13 @@
 
 namespace chillerlan\HTTP\Psr17;
 
+use chillerlan\HTTP\Common\FactoryHelpers;
 use chillerlan\HTTP\Psr7\Stream;
+use chillerlan\HTTP\Utils\StreamUtil;
 use Psr\Http\Message\{StreamFactoryInterface, StreamInterface};
 use InvalidArgumentException, RuntimeException;
 
-use function fopen, in_array, is_file, is_readable;
+use function is_file, is_readable;
 
 class StreamFactory implements StreamFactoryInterface{
 
@@ -22,13 +24,7 @@ class StreamFactory implements StreamFactoryInterface{
 	 * @inheritDoc
 	 */
 	public function createStream(string $content = ''):StreamInterface{
-		$stream = new Stream(fopen('php://temp', 'r+'));
-
-		if($content !== ''){
-			$stream->write($content);
-		}
-
-		return $stream;
+		return FactoryHelpers::createStream(content: $content, rewind: false);
 	}
 
 	/**
@@ -40,11 +36,11 @@ class StreamFactory implements StreamFactoryInterface{
 			throw new RuntimeException('invalid file');
 		}
 
-		if(!in_array($mode, FactoryHelpers::STREAM_MODES_WRITE) && !in_array($mode, FactoryHelpers::STREAM_MODES_READ)){
+		if(!StreamUtil::modeAllowsRead($mode) && !StreamUtil::modeAllowsWrite($mode)){
 			throw new InvalidArgumentException('invalid mode');
 		}
 
-		return new Stream(fopen($filename, $mode));
+		return new Stream(StreamUtil::tryFopen($filename, $mode));
 	}
 
 	/**

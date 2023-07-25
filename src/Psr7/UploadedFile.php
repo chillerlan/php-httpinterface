@@ -10,11 +10,11 @@
 
 namespace chillerlan\HTTP\Psr7;
 
-use chillerlan\HTTP\Psr17\{FactoryHelpers, StreamFactory};
+use chillerlan\HTTP\Common\FactoryHelpers;
+use chillerlan\HTTP\Psr17\StreamFactory;
 use Psr\Http\Message\{StreamInterface, UploadedFileInterface};
 use InvalidArgumentException, RuntimeException;
-
-use function in_array, is_file, is_string, is_writable, move_uploaded_file, php_sapi_name,rename;
+use function in_array, is_file, is_string, is_writable, move_uploaded_file, php_sapi_name, rename;
 
 use const UPLOAD_ERR_CANT_WRITE, UPLOAD_ERR_EXTENSION, UPLOAD_ERR_FORM_SIZE, UPLOAD_ERR_INI_SIZE,
 	UPLOAD_ERR_NO_FILE, UPLOAD_ERR_NO_TMP_DIR, UPLOAD_ERR_OK, UPLOAD_ERR_PARTIAL;
@@ -63,7 +63,7 @@ class UploadedFile implements UploadedFileInterface{
 				$this->file = $file;
 			}
 			else{
-				$this->stream = FactoryHelpers::create_stream_from_input($file);
+				$this->stream = FactoryHelpers::createStreamFromSource($file);
 			}
 
 		}
