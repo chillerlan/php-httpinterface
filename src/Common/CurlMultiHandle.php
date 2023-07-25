@@ -8,7 +8,7 @@
  * @license      MIT
  */
 
-namespace chillerlan\HTTP\CurlUtils;
+namespace chillerlan\HTTP\Common;
 
 use chillerlan\Settings\SettingsContainerInterface;
 use Psr\Http\Message\{RequestInterface, ResponseInterface};

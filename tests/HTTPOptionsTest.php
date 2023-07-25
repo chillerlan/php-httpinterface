@@ -10,7 +10,7 @@
 
 namespace chillerlan\HTTPTest;
 
-use chillerlan\HTTP\CurlUtils\CurlHandle;
+use chillerlan\HTTP\Common\CurlHandle;
 use chillerlan\HTTP\HTTPOptions;
 use chillerlan\HTTP\Psr7\{Request, Response};
 use PHPUnit\Framework\TestCase;

@@ -8,9 +8,9 @@
  * @license      MIT
  */
 
-namespace chillerlan\HTTPTest\CurlUtils;
+namespace chillerlan\HTTPTest\Common;
 
-use chillerlan\HTTP\CurlUtils\{CurlMultiClient, MultiResponseHandlerInterface};
+use chillerlan\HTTP\Common\{CurlMultiClient, MultiResponseHandlerInterface};
 use chillerlan\HTTP\HTTPOptions;
 use chillerlan\HTTP\Psr7\Request;
 use chillerlan\HTTP\Utils\QueryUtil;

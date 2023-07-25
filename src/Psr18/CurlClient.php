@@ -10,7 +10,7 @@
 
 namespace chillerlan\HTTP\Psr18;
 
-use chillerlan\HTTP\CurlUtils\CurlHandle;
+use chillerlan\HTTP\Common\CurlHandle;
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
 use function in_array, sprintf;
 use const CURLE_OK;

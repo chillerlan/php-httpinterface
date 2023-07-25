@@ -8,7 +8,7 @@
  * @license      MIT
  */
 
-namespace chillerlan\HTTPTest\CurlUtils;
+namespace chillerlan\HTTPTest\Common;
 
 use chillerlan\HTTP\HTTPOptions;
 use chillerlan\HTTP\Psr18\CurlClient;

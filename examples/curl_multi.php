@@ -11,7 +11,7 @@
  */
 
 use chillerlan\HTTP\Utils\{MessageUtil, QueryUtil};
-use chillerlan\HTTP\CurlUtils\{CurlMultiClient, MultiResponseHandlerInterface};
+use chillerlan\HTTP\Common\{CurlMultiClient, MultiResponseHandlerInterface};
 use chillerlan\HTTP\HTTPOptions;
 use chillerlan\HTTP\Psr18\CurlClient;
 use chillerlan\HTTP\Psr7\Request;

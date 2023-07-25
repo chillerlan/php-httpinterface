@@ -8,7 +8,7 @@
  * @license      MIT
  */
 
-namespace chillerlan\HTTP\CurlUtils;
+namespace chillerlan\HTTP\Common;
 
 use chillerlan\HTTP\{HTTPOptions, Psr17\ResponseFactory, Psr18\ClientException};
 use chillerlan\Settings\SettingsContainerInterface;
@@ -38,7 +38,7 @@ class CurlMultiClient implements LoggerAwareInterface{
 	/**
 	 * the stack of running handles
 	 *
-	 * @var \chillerlan\HTTP\CurlUtils\CurlMultiHandle[]
+	 * @var \chillerlan\HTTP\Common\CurlMultiHandle[]
 	 */
 	protected array $handles = [];
 

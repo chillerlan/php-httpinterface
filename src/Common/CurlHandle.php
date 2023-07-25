@@ -8,7 +8,7 @@
  * @license      MIT
  */
 
-namespace chillerlan\HTTP\CurlUtils;
+namespace chillerlan\HTTP\Common;
 
 use chillerlan\HTTP\HTTPOptions;
 use chillerlan\HTTP\Psr18\ClientException;

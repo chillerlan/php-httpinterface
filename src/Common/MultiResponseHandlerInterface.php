@@ -8,14 +8,14 @@
  * @license      MIT
  */
 
-namespace chillerlan\HTTP\CurlUtils;
+namespace chillerlan\HTTP\Common;
 
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
 
 interface MultiResponseHandlerInterface{
 
 	/**
-	 * The multi response handler. (Schrödingers cat state handler)
+	 * The multi response handler. (Schrödinger's cat state handler)
 	 *
 	 * This method will be called within a loop in MultiRequest::processStack().
 	 * It may return a RequestInterface object (e.g. as a replacement for a failed request),
@@ -28,7 +28,6 @@ interface MultiResponseHandlerInterface{
 	 *                                                         empty array on curl_info() failure
 	 *
 	 * @return \Psr\Http\Message\RequestInterface|null         an optional replacement request if the previous request failed
-	 * @internal
 	 */
 	public function handleResponse(
 		ResponseInterface $response,
