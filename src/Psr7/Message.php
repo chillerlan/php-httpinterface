@@ -14,16 +14,12 @@ use chillerlan\HTTP\Common\FactoryHelpers;
 use chillerlan\HTTP\Utils\HeaderUtil;
 use Psr\Http\Message\{MessageInterface, StreamInterface};
 
-use function array_merge, implode, is_array, strtolower;
+use function array_column, array_combine, array_merge, implode, is_array, strtolower;
 
 class Message implements MessageInterface{
 
-	protected array $headers = [];
-	/** @var string[] */
-	protected array $headerNames = [];
-
-	protected string $version = '1.1';
-
+	protected array           $headers = [];
+	protected string          $version = '1.1';
 	protected StreamInterface $body;
 
 	/**
@@ -59,14 +55,14 @@ class Message implements MessageInterface{
 	 * @inheritDoc
 	 */
 	public function getHeaders():array{
-		return $this->headers;
+		return array_combine(array_column($this->headers, 'name'), array_column($this->headers, 'value'));
 	}
 
 	/**
 	 * @inheritDoc
 	 */
 	public function hasHeader(string $name):bool{
-		return isset($this->headerNames[strtolower($name)]);
+		return isset($this->headers[strtolower($name)]);
 	}
 
 	/**
@@ -78,7 +74,7 @@ class Message implements MessageInterface{
 			return [];
 		}
 
-		return $this->headers[$this->headerNames[strtolower($name)]];
+		return $this->headers[strtolower($name)]['value'];
 	}
 
 	/**
@@ -97,16 +93,9 @@ class Message implements MessageInterface{
 			$value = [$value];
 		}
 
-		$value      = HeaderUtil::trimValues($value);
-		$normalized = strtolower($name);
-		$clone      = clone $this;
+		$clone = clone $this;
 
-		if(isset($clone->headerNames[$normalized])){
-			unset($clone->headers[$clone->headerNames[$normalized]]);
-		}
-
-		$clone->headerNames[$normalized] = $name;
-		$clone->headers[$name]           = $value;
+		$clone->headers[strtolower($name)] = ['name' => $name, 'value' => HeaderUtil::trimValues($value)];
 
 		return $clone;
 	}
@@ -120,18 +109,16 @@ class Message implements MessageInterface{
 			$value = [$value];
 		}
 
-		$value      = HeaderUtil::trimValues($value);
-		$normalized = strtolower($name);
-		$clone      = clone $this;
+		$value  = HeaderUtil::trimValues($value);
+		$lcName = strtolower($name);
 
-		if(isset($clone->headerNames[$normalized])){
-			$name                  = $this->headerNames[$normalized];
-			$clone->headers[$name] = array_merge($this->headers[$name], $value);
+		if(isset($this->headers[$lcName])){
+			$name = $this->headers[$lcName]['name'];
 		}
-		else{
-			$clone->headerNames[$normalized] = $name;
-			$clone->headers[$name]           = $value;
-		}
+
+		$clone = clone $this;
+
+		$clone->headers[$lcName] = ['name' => $name, 'value' => array_merge(($this->headers[$lcName]['value'] ?? []), $value)];
 
 		return $clone;
 	}
@@ -140,16 +127,15 @@ class Message implements MessageInterface{
 	 * @inheritDoc
 	 */
 	public function withoutHeader(string $name):static{
-		$normalized = strtolower($name);
+		$lcName = strtolower($name);
 
-		if(!isset($this->headerNames[$normalized])){
+		if(!isset($this->headers[$lcName])){
 			return $this;
 		}
 
-		$name  = $this->headerNames[$normalized];
 		$clone = clone $this;
 
-		unset($clone->headers[$name], $clone->headerNames[$normalized]);
+		unset($clone->headers[$lcName]);
 
 		return $clone;
 	}

@@ -139,16 +139,9 @@ class Request extends Message implements RequestInterface, RequestMethodInterfac
 			$host .= ':'.$port;
 		}
 
-		if(isset($this->headerNames['host'])){
-			$header = $this->headerNames['host'];
-		}
-		else{
-			$header                    = 'Host';
-			$this->headerNames['host'] = 'Host';
-		}
 		// Ensure Host is the first header.
 		// See: http://tools.ietf.org/html/rfc7230#section-5.4
-		$this->headers = [$header => [$host]] + $this->headers;
+		$this->headers = ['host' => ['name' => 'Host', 'value' => [$host]]] + $this->headers;
 	}
 
 }
