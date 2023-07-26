@@ -48,13 +48,6 @@ class ResponseTest extends TestCase{
 		$this::assertSame('Created', $r2->getReasonPhrase());
 	}
 
-	public function testNullBody():void{
-		$r = new Response(200, null);
-
-		$this::assertInstanceOf(StreamInterface::class, $r->getBody());
-		$this::assertSame('', (string)$r->getBody());
-	}
-
 	public function testCanConstructWithReason():void{
 		$r = new Response(200, 'bar');
 		$this::assertSame('bar', $r->getReasonPhrase());
@@ -93,108 +86,6 @@ class ResponseTest extends TestCase{
 		$r = (new Response)->withBody($this->streamFactory->createStream('0'));
 		$this::assertInstanceOf(StreamInterface::class, $r->getBody());
 		$this::assertSame('0', (string) $r->getBody());
-	}
-
-	public function testSameInstanceWhenSameBody():void{
-		$r = new Response();
-
-		$b = $r->getBody();
-		$this::assertSame($r, $r->withBody($b));
-	}
-
-	public function testWithHeader():void{
-		$r  = (new Response(200))->withHeader('Foo', 'Bar');
-		$r2 = $r->withHeader('baZ', 'Bam');
-
-		$this::assertSame(['Foo' => ['Bar']], $r->getHeaders());
-		$this::assertSame(['Foo' => ['Bar'], 'baZ' => ['Bam']], $r2->getHeaders());
-		$this::assertSame('Bam', $r2->getHeaderLine('baz'));
-		$this::assertSame(['Bam'], $r2->getHeader('baz'));
-	}
-
-	public function testWithHeaderAsArray():void{
-		$r  = (new Response(200))->withHeader('Foo', 'Bar');
-		$r2 = $r->withHeader('baZ', ['Bam', 'Bar']);
-
-		$this::assertSame(['Foo' => ['Bar']], $r->getHeaders());
-		$this::assertSame(['Foo' => ['Bar'], 'baZ' => ['Bam', 'Bar']], $r2->getHeaders());
-		$this::assertSame('Bam, Bar', $r2->getHeaderLine('baz'));
-		$this::assertSame(['Bam', 'Bar'], $r2->getHeader('baz'));
-	}
-
-	public function testWithHeaderReplacesDifferentCase():void{
-		$r  = (new Response(200))->withHeader('Foo', 'Bar');
-		$r2 = $r->withHeader('foO', 'Bam');
-
-		$this::assertSame(['Foo' => ['Bar']], $r->getHeaders());
-		$this::assertSame(['foO' => ['Bam']], $r2->getHeaders());
-		$this::assertSame('Bam', $r2->getHeaderLine('foo'));
-		$this::assertSame(['Bam'], $r2->getHeader('foo'));
-	}
-
-	public function testWithAddedHeader():void{
-		$r  = (new Response(200))->withHeader('Foo', 'Bar');
-		$r2 = $r->withAddedHeader('foO', 'Baz');
-
-		$this::assertSame(['Foo' => ['Bar']], $r->getHeaders());
-		$this::assertSame(['Foo' => ['Bar', 'Baz']], $r2->getHeaders());
-		$this::assertSame('Bar, Baz', $r2->getHeaderLine('foo'));
-		$this::assertSame(['Bar', 'Baz'], $r2->getHeader('foo'));
-	}
-
-	public function testWithAddedHeaderAsArray():void{
-		$r  = (new Response(200))->withHeader('Foo', 'Bar');
-		$r2 = $r->withAddedHeader('foO', ['Baz', 'Bam',]);
-
-		$this::assertSame(['Foo' => ['Bar']], $r->getHeaders());
-		$this::assertSame(['Foo' => ['Bar', 'Baz', 'Bam']], $r2->getHeaders());
-		$this::assertSame('Bar, Baz, Bam', $r2->getHeaderLine('foo'));
-		$this::assertSame(['Bar', 'Baz', 'Bam'], $r2->getHeader('foo'));
-	}
-
-	public function testWithAddedHeaderThatDoesNotExist():void{
-		$r  = (new Response(200))->withHeader('Foo', 'Bar');
-		$r2 = $r->withAddedHeader('nEw', 'Baz');
-
-		$this::assertSame(['Foo' => ['Bar']], $r->getHeaders());
-		$this::assertSame(['Foo' => ['Bar'], 'nEw' => ['Baz']], $r2->getHeaders());
-		$this::assertSame('Baz', $r2->getHeaderLine('new'));
-		$this::assertSame(['Baz'], $r2->getHeader('new'));
-	}
-
-	public function testWithoutHeaderThatExists():void{
-		$r  = (new Response(200))->withHeader('Foo', 'Bar')->withHeader('Baz', 'Bam');
-		$r2 = $r->withoutHeader('foO');
-
-		$this::assertTrue($r->hasHeader('foo'));
-		$this::assertSame(['Foo' => ['Bar'], 'Baz' => ['Bam']], $r->getHeaders());
-		$this::assertFalse($r2->hasHeader('foo'));
-		$this::assertSame(['Baz' => ['Bam']], $r2->getHeaders());
-	}
-
-	public function testWithoutHeaderThatDoesNotExist():void{
-		$r  = (new Response(200))->withHeader('Baz', 'Bam');
-		$r2 = $r->withoutHeader('foO');
-
-		$this::assertSame($r, $r2);
-		$this::assertFalse($r2->hasHeader('foo'));
-		$this::assertSame(['Baz' => ['Bam']], $r2->getHeaders());
-	}
-
-	public function testSameInstanceWhenRemovingMissingHeader():void{
-		$r = new Response();
-		$this::assertSame($r, $r->withoutHeader('foo'));
-	}
-
-	public function testHeaderValuesAreTrimmed():void{
-		$r2 = (new Response)->withHeader('Bar', " \t \tFoo\t \t ");
-		$r3 = (new Response)->withAddedHeader('Bar', " \t \tFoo\t \t ");
-
-		foreach([$r2, $r3] as $r){
-			$this::assertSame(['Bar' => ['Foo']], $r->getHeaders());
-			$this::assertSame('Foo', $r->getHeaderLine('Bar'));
-			$this::assertSame(['Foo'], $r->getHeader('Bar'));
-		}
 	}
 
 }

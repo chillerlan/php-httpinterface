@@ -16,7 +16,6 @@ use chillerlan\HTTP\Psr7\{Request, Uri};
 use Fig\Http\Message\RequestMethodInterface;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\StreamInterface;
 
 class RequestTest extends TestCase{
 
@@ -34,13 +33,6 @@ class RequestTest extends TestCase{
 		$this->expectException(InvalidArgumentException::class);
 
 		new Request('GET', '///');
-	}
-
-	public function testNullBody():void{
-		$r = new Request('GET', '/');
-
-		$this::assertInstanceOf(StreamInterface::class, $r->getBody());
-		$this::assertSame('', (string)$r->getBody());
 	}
 
 	public function testCapitalizesMethod():void{
@@ -116,13 +108,6 @@ class RequestTest extends TestCase{
 
 		$r2 = $r1->withUri(new Uri('https://www.baz.com/bar'));
 		$this::assertSame('www.baz.com', $r2->getHeaderLine('Host'));
-	}
-
-	public function testSupportNumericHeaders():void{
-		$r = (new Request('GET', ''))->withHeader('Content-Length', 200);
-
-		$this::assertSame(['Content-Length' => ['200']], $r->getHeaders());
-		$this::assertSame('200', $r->getHeaderLine('Content-Length'));
 	}
 
 	public function testAddsPortToHeader():void{
