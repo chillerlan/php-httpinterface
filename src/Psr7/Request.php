@@ -18,8 +18,8 @@ use function preg_match, strtoupper, trim;
 
 class Request extends Message implements RequestInterface, RequestMethodInterface{
 
-	protected string       $method;
 	protected UriInterface $uri;
+	protected string       $method;
 	protected ?string      $requestTarget = null;
 
 	/**
@@ -49,13 +49,14 @@ class Request extends Message implements RequestInterface, RequestMethodInterfac
 		}
 
 		$target = $this->uri->getPath();
+		$query  = $this->uri->getQuery();
 
 		if($target === ''){
 			$target = '/';
 		}
 
-		if($this->uri->getQuery() !== ''){
-			$target .= '?'.$this->uri->getQuery();
+		if($query !== ''){
+			$target .= '?'.$query;
 		}
 
 		return $target;
@@ -87,14 +88,14 @@ class Request extends Message implements RequestInterface, RequestMethodInterfac
 	 * @inheritDoc
 	 */
 	public function withMethod(string $method):static{
-		$method = trim($method);
+		$method = strtoupper(trim($method));
 
 		if($method === ''){
 			throw new InvalidArgumentException('HTTP method must not be empty');
 		}
 
 		$clone         = clone $this;
-		$clone->method = strtoupper($method);
+		$clone->method = $method;
 
 		return $clone;
 	}
@@ -115,14 +116,14 @@ class Request extends Message implements RequestInterface, RequestMethodInterfac
 			return $this;
 		}
 
-		$new      = clone $this;
-		$new->uri = $uri;
+		$clone      = clone $this;
+		$clone->uri = $uri;
 
 		if(!$preserveHost){
-			$new->updateHostFromUri();
+			$clone->updateHostFromUri();
 		}
 
-		return $new;
+		return $clone;
 	}
 
 	/**

@@ -13,7 +13,7 @@ namespace chillerlan\HTTP\Psr18;
 use chillerlan\HTTP\Psr17\RequestFactory;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\{RequestFactoryInterface, RequestInterface, ResponseInterface, UriInterface};
-use function count;
+use function array_reverse;
 use function in_array;
 
 /**
@@ -26,12 +26,10 @@ use function in_array;
  */
 class URLExtractor implements ClientInterface{
 
-	/** @var \Psr\Http\Message\ResponseInterface[] */
-	protected array $responses = [];
-
-	protected ClientInterface $http;
-
+	protected ClientInterface         $http;
 	protected RequestFactoryInterface $requestFactory;
+	/** @var \Psr\Http\Message\ResponseInterface[] */
+	protected array                   $responses = [];
 
 	/**
 	 * URLExtractor constructor.
@@ -49,9 +47,15 @@ class URLExtractor implements ClientInterface{
 		do{
 			// fetch the response for the current request
 			$response          = $this->http->sendRequest($request);
+			$location          = $response->getHeaderLine('location');
 			$this->responses[] = $response;
+
+			if($location === ''){
+				break;
+			}
+
 			// set up a new request to the location header of the last response
-			$request           = $this->requestFactory->createRequest($request->getMethod(), $response->getHeaderLine('location'));
+			$request = $this->requestFactory->createRequest($request->getMethod(), $location);
 		}
 		while(in_array($response->getStatusCode(), [301, 302, 303, 307, 308], true));
 
@@ -69,17 +73,12 @@ class URLExtractor implements ClientInterface{
 			return null;
 		}
 
-		$count = count($this->responses) - 2;
-
-		while($count >= 0){
-
-			$url = $this->responses[$count]?->getHeaderLine('location');
+		foreach(array_reverse($this->responses) as $r){
+			$url = $r->getHeaderLine('location');
 
 			if(!empty($url)){
 				return $url;
 			}
-
-			$count--;
 		}
 
 		return null;

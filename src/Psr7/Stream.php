@@ -283,11 +283,12 @@ class Stream implements StreamInterface{
 		if(!is_resource($this->stream)){
 			return $key ? null : [];
 		}
-		elseif($key === null){
-			return stream_get_meta_data($this->stream);
-		}
 
 		$meta = stream_get_meta_data($this->stream);
+
+		if($key === null){
+			return $meta;
+		}
 
 		return $meta[$key] ?? null;
 	}

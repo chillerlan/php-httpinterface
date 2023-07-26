@@ -12,13 +12,12 @@
 
 namespace chillerlan\HTTPTest\Psr7;
 
+use chillerlan\HTTP\Common\FactoryHelpers;
 use chillerlan\HTTP\Psr7\Response;
-use chillerlan\HTTPTest\FactoryTrait;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\StreamInterface;
 
 class ResponseTest extends TestCase{
-	use FactoryTrait;
 
 	public function testDefaultConstructor():void{
 		$r = new Response;
@@ -78,12 +77,12 @@ class ResponseTest extends TestCase{
 	}
 
 	public function testSameInstanceWhenSameProtocol():void{
-		$r = new Response();
+		$r = new Response;
 		$this::assertSame($r, $r->withProtocolVersion('1.1'));
 	}
 
 	public function testWithBody():void{
-		$r = (new Response)->withBody($this->streamFactory->createStream('0'));
+		$r = (new Response)->withBody(FactoryHelpers::createStream('0'));
 		$this::assertInstanceOf(StreamInterface::class, $r->getBody());
 		$this::assertSame('0', (string) $r->getBody());
 	}

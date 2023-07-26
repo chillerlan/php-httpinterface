@@ -42,8 +42,11 @@ class DummyStream implements StreamInterface{
 	];
 
 	protected StreamInterface $stream;
-	protected array $override = [];
+	protected array           $override = [];
 
+	/**
+	 * DummyStream constructor
+	 */
 	public function __construct(StreamInterface $stream = null, array $methods = null){
 
 		$this

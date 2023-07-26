@@ -12,15 +12,16 @@ namespace chillerlan\HTTP\Psr7;
 
 use chillerlan\HTTP\Common\FactoryHelpers;
 use chillerlan\HTTP\Utils\HeaderUtil;
+use InvalidArgumentException;
 use Psr\Http\Message\{MessageInterface, StreamInterface};
 
-use function array_column, array_combine, array_merge, implode, is_array, strtolower;
+use function array_column, array_combine, array_merge, implode, is_array, is_scalar, strtolower;
 
 class Message implements MessageInterface{
 
+	protected StreamInterface $body;
 	protected array           $headers = [];
 	protected string          $version = '1.1';
-	protected StreamInterface $body;
 
 	/**
 	 * Message constructor.
@@ -88,14 +89,9 @@ class Message implements MessageInterface{
 	 * @inheritDoc
 	 */
 	public function withHeader(string $name, $value):static{
-
-		if(!is_array($value)){
-			$value = [$value];
-		}
-
 		$clone = clone $this;
 
-		$clone->headers[strtolower($name)] = ['name' => $name, 'value' => HeaderUtil::trimValues($value)];
+		$clone->headers[strtolower($name)] = ['name' => $name, 'value' => HeaderUtil::trimValues($this->checkValue($value))];
 
 		return $clone;
 	}
@@ -104,12 +100,7 @@ class Message implements MessageInterface{
 	 * @inheritDoc
 	 */
 	public function withAddedHeader(string $name, $value):static{
-
-		if(!is_array($value)){
-			$value = [$value];
-		}
-
-		$value  = HeaderUtil::trimValues($value);
+		$value  = HeaderUtil::trimValues($this->checkValue($value));
 		$lcName = strtolower($name);
 
 		if(isset($this->headers[$lcName])){
@@ -160,6 +151,25 @@ class Message implements MessageInterface{
 		$clone->body = $body;
 
 		return $clone;
+	}
+
+	/**
+	 * @param mixed $value
+	 *
+	 * @return string[]
+	 */
+	protected function checkValue(mixed $value):array{
+
+		if(!is_array($value)){
+
+			if(!is_scalar($value)){
+				throw new InvalidArgumentException('$value is expected to be scalar');
+			}
+
+			$value = [$value];
+		}
+
+		return $value;
 	}
 
 }
