@@ -14,7 +14,7 @@ use chillerlan\HTTP\Common\FactoryHelpers;
 use chillerlan\HTTP\Psr7\Stream;
 use chillerlan\HTTP\Utils\StreamUtil;
 use Psr\Http\Message\{StreamFactoryInterface, StreamInterface};
-use InvalidArgumentException, RuntimeException;
+use RuntimeException;
 
 use function is_file, is_readable;
 
@@ -34,10 +34,6 @@ class StreamFactory implements StreamFactoryInterface{
 
 		if(empty($filename) || !is_file($filename) || !is_readable($filename)){
 			throw new RuntimeException('invalid file');
-		}
-
-		if(!StreamUtil::modeAllowsRead($mode) && !StreamUtil::modeAllowsWrite($mode)){
-			throw new InvalidArgumentException('invalid mode');
 		}
 
 		return new Stream(StreamUtil::tryFopen($filename, $mode));
