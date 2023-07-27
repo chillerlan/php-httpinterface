@@ -8,7 +8,7 @@
  * @license      MIT
  */
 
-namespace chillerlan\HTTPTest\Psr17;
+namespace chillerlan\HTTPTest\Common;
 
 use chillerlan\HTTP\Common\FactoryHelpers;
 use chillerlan\HTTPTest\FactoryTrait;
