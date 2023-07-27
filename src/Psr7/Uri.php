@@ -112,17 +112,14 @@ class Uri implements UriInterface{
 	public function withScheme($scheme):static{
 		$scheme = $this->filterScheme($scheme);
 
-		if($this->scheme === $scheme){
-			return $this;
+		if($scheme !== $this->scheme){
+			$this->scheme = $scheme;
+
+			$this->removeDefaultPort();
+			$this->validateState();
 		}
 
-		$clone         = clone $this;
-		$clone->scheme = $scheme;
-
-		$clone->removeDefaultPort();
-		$clone->validateState();
-
-		return $clone;
+		return $this;
 	}
 
 	/*
@@ -188,17 +185,14 @@ class Uri implements UriInterface{
 			$info .= ':'.$password;
 		}
 
-		if($this->getUserInfo() === $info){
-			return $this;
+		if($info !== $this->getUserInfo()){
+			$this->user = $user;
+			$this->pass = $password;
+
+			$this->validateState();
 		}
 
-		$clone       = clone $this;
-		$clone->user = $user;
-		$clone->pass = $password;
-
-		$clone->validateState();
-
-		return $clone;
+		return $this;
 	}
 
 	/*
@@ -234,16 +228,13 @@ class Uri implements UriInterface{
 	public function withHost($host):static{
 		$host = $this->filterHost($host);
 
-		if($this->host === $host){
-			return $this;
+		if($host !== $this->host){
+			$this->host = $host;
+
+			$this->validateState();
 		}
 
-		$clone       = clone $this;
-		$clone->host = $host;
-
-		$clone->validateState();
-
-		return $clone;
+		return $this;
 	}
 
 	/*
@@ -281,17 +272,14 @@ class Uri implements UriInterface{
 	public function withPort($port):static{
 		$port = $this->filterPort($port);
 
-		if($this->port === $port){
-			return $this;
+		if($port !== $this->port){
+			$this->port = $port;
+
+			$this->removeDefaultPort();
+			$this->validateState();
 		}
 
-		$clone       = clone $this;
-		$clone->port = $port;
-
-		$clone->removeDefaultPort();
-		$clone->validateState();
-
-		return $clone;
+		return $this;
 	}
 
 	/*
@@ -323,16 +311,13 @@ class Uri implements UriInterface{
 	public function withPath($path):static{
 		$path = $this->filterPath($path);
 
-		if($this->path === $path){
-			return $this;
+		if($path !== $this->path){
+			$this->path = $path;
+
+			$this->validateState();
 		}
 
-		$clone       = clone $this;
-		$clone->path = $path;
-
-		$clone->validateState();
-
-		return $clone;
+		return $this;
 	}
 
 	/*
@@ -364,16 +349,13 @@ class Uri implements UriInterface{
 	public function withQuery($query):static{
 		$query = $this->filterQuery($query);
 
-		if($this->query === $query){
-			return $this;
+		if($query !== $this->query){
+			$this->query = $query;
+
+			$this->validateState();
 		}
 
-		$clone        = clone $this;
-		$clone->query = $query;
-
-		$clone->validateState();
-
-		return $clone;
+		return $this;
 	}
 
 	/*
@@ -400,16 +382,13 @@ class Uri implements UriInterface{
 	public function withFragment($fragment):static{
 		$fragment = $this->filterFragment($fragment);
 
-		if($this->fragment === $fragment){
-			return $this;
+		if($fragment !== $this->fragment){
+			$this->fragment = $fragment;
+
+			$this->validateState();
 		}
 
-		$clone           = clone $this;
-		$clone->fragment = $fragment;
-
-		$clone->validateState();
-
-		return $clone;
+		return $this;
 	}
 
 	/**

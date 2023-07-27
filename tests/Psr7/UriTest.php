@@ -461,18 +461,6 @@ class UriTest extends TestCase{
 		$this::assertSame('', $uri->getFragment());
 	}
 
-	public function testImmutability():void{
-		$uri = new Uri;
-
-		$this::assertNotSame($uri, $uri->withScheme('https'));
-		$this::assertNotSame($uri, $uri->withUserInfo('user', 'pass'));
-		$this::assertNotSame($uri, $uri->withHost('example.com'));
-		$this::assertNotSame($uri, $uri->withPort(8080));
-		$this::assertNotSame($uri, $uri->withPath('/path/123'));
-		$this::assertNotSame($uri, $uri->withQuery('q=abc'));
-		$this::assertNotSame($uri, $uri->withFragment('test'));
-	}
-
 	public function testAddsSlashForRelativeUriStringWithHost():void{
 		// If the path is rootless and an authority is present, the path MUST
 		// be prefixed by "/".

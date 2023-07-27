@@ -71,10 +71,9 @@ class Request extends Message implements RequestInterface, RequestMethodInterfac
 			throw new InvalidArgumentException('Invalid request target provided; cannot contain whitespace');
 		}
 
-		$clone                = clone $this;
-		$clone->requestTarget = $requestTarget;
+		$this->requestTarget = $requestTarget;
 
-		return $clone;
+		return $this;
 	}
 
 	/**
@@ -94,10 +93,9 @@ class Request extends Message implements RequestInterface, RequestMethodInterfac
 			throw new InvalidArgumentException('HTTP method must not be empty');
 		}
 
-		$clone         = clone $this;
-		$clone->method = $method;
+		$this->method = $method;
 
-		return $clone;
+		return $this;
 	}
 
 	/**
@@ -112,18 +110,15 @@ class Request extends Message implements RequestInterface, RequestMethodInterfac
 	 */
 	public function withUri(UriInterface $uri, bool $preserveHost = false):static{
 
-		if($uri === $this->uri){
-			return $this;
+		if($uri !== $this->uri){
+			$this->uri = $uri;
+
+			if(!$preserveHost){
+				$this->updateHostFromUri();
+			}
 		}
 
-		$clone      = clone $this;
-		$clone->uri = $uri;
-
-		if(!$preserveHost){
-			$clone->updateHostFromUri();
-		}
-
-		return $clone;
+		return $this;
 	}
 
 	/**
@@ -132,17 +127,17 @@ class Request extends Message implements RequestInterface, RequestMethodInterfac
 	protected function updateHostFromUri():void{
 		$host = $this->uri->getHost();
 
-		if($host === ''){
-			return;
+		if($host !== ''){
+
+			if(($port = $this->uri->getPort()) !== null){
+				$host .= ':'.$port;
+			}
+
+			// Ensure Host is the first header.
+			// See: http://tools.ietf.org/html/rfc7230#section-5.4
+			$this->headers = ['host' => ['name' => 'Host', 'value' => [$host]]] + $this->headers;
 		}
 
-		if(($port = $this->uri->getPort()) !== null){
-			$host .= ':'.$port;
-		}
-
-		// Ensure Host is the first header.
-		// See: http://tools.ietf.org/html/rfc7230#section-5.4
-		$this->headers = ['host' => ['name' => 'Host', 'value' => [$host]]] + $this->headers;
 	}
 
 }

@@ -44,30 +44,32 @@ class RequestTest extends TestCase{
 	}
 
 	public function testWithUri():void{
-		$r1 = new Request('GET', '/');
-		$u1 = $r1->getUri();
+		$request = new Request('GET', '/');
+		$uri1    = $request->getUri();
+		$uri2    = new Uri('https://www.example.com');
 
-		$u2 = new Uri('https://www.example.com');
-		$r2 = $r1->withUri($u2);
+		$this::assertSame($uri1, $request->getUri());
 
-		$this::assertNotSame($r1, $r2);
-		$this::assertSame($u2, $r2->getUri());
-		$this::assertSame($u1, $r1->getUri());
+		$request->withUri($uri2);
+
+		$this::assertSame($uri2, $request->getUri());
 	}
 
 	public function testSameInstanceWhenSameUri():void{
-		$r1 = new Request('GET', 'https://foo.com');
-		$r2 = $r1->withUri($r1->getUri());
+		$request = new Request('GET', 'https://foo.com');
+		$request->withUri($request->getUri());
 
-		$this::assertSame($r1, $r2);
+		$this::assertSame($request, $request);
 	}
 
 	public function testWithRequestTarget():void{
-		$r1 = new Request('GET', '/');
-		$r2 = $r1->withRequestTarget('*');
+		$request = new Request('GET', '/');
 
-		$this::assertSame('*', $r2->getRequestTarget());
-		$this::assertSame('/', $r1->getRequestTarget());
+		$this::assertSame('/', $request->getRequestTarget());
+
+		$request->withRequestTarget('*');
+
+		$this::assertSame('*', $request->getRequestTarget());
 	}
 
 	public function testRequestTargetDoesNotAllowSpaces():void{
@@ -77,14 +79,14 @@ class RequestTest extends TestCase{
 	}
 
 	public function testRequestTargetDefaultsToSlash():void{
-		$r1 = new Request('GET', '');
-		$this::assertSame('/', $r1->getRequestTarget());
+		$request = new Request('GET', '');
+		$this::assertSame('/', $request->getRequestTarget());
 
-		$r2 = new Request('GET', '*');
-		$this::assertSame('*', $r2->getRequestTarget());
+		$request = new Request('GET', '*');
+		$this::assertSame('*', $request->getRequestTarget());
 
-		$r3 = new Request('GET', 'https://foo.com/bar baz/');
-		$this::assertSame('/bar%20baz/', $r3->getRequestTarget());
+		$request = new Request('GET', 'https://foo.com/bar baz/');
+		$this::assertSame('/bar%20baz/', $request->getRequestTarget());
 	}
 
 	public function testBuildsRequestTarget():void{
@@ -96,18 +98,18 @@ class RequestTest extends TestCase{
 	}
 
 	public function testCanGetHeaderAsCsv():void{
-		$r = (new Request('GET', 'https://foo.com/baz?bar=bam'))->withHeader('Foo', ['a', 'b', 'c']);
+		$request = (new Request('GET', 'https://foo.com/baz?bar=bam'))->withHeader('Foo', ['a', 'b', 'c']);
 
-		$this::assertSame('a, b, c', $r->getHeaderLine('Foo'));
-		$this::assertSame('', $r->getHeaderLine('Bar'));
+		$this::assertSame('a, b, c', $request->getHeaderLine('Foo'));
+		$this::assertSame('', $request->getHeaderLine('Bar'));
 	}
 
 	public function testOverridesHostWithUri():void{
-		$r1 = new Request('GET', 'https://foo.com/baz?bar=bam');
-		$this::assertSame(['Host' => ['foo.com']], $r1->getHeaders());
+		$request = new Request('GET', 'https://foo.com/baz?bar=bam');
+		$this::assertSame(['Host' => ['foo.com']], $request->getHeaders());
 
-		$r2 = $r1->withUri(new Uri('https://www.baz.com/bar'));
-		$this::assertSame('www.baz.com', $r2->getHeaderLine('Host'));
+		$request->withUri(new Uri('https://www.baz.com/bar'));
+		$this::assertSame('www.baz.com', $request->getHeaderLine('Host'));
 	}
 
 	public function testAddsPortToHeader():void{
@@ -115,10 +117,10 @@ class RequestTest extends TestCase{
 	}
 
 	public function testAddsPortToHeaderAndReplacePreviousPort():void{
-		$r = (new Request('GET', 'https://foo.com:8124/bar'))
+		$request = (new Request('GET', 'https://foo.com:8124/bar'))
 			->withUri(new Uri('https://foo.com:8125/bar'));
 
-		$this::assertSame('foo.com:8125', $r->getHeaderLine('host'));
+		$this::assertSame('foo.com:8125', $request->getHeaderLine('host'));
 	}
 
 	public function testWithMethodEmptyMethod():void{

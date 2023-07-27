@@ -2,6 +2,11 @@
 
 A [PSR-7](https://www.php-fig.org/psr/psr-7/)/[PSR-17](https://www.php-fig.org/psr/psr-17/)/[PSR-18](https://www.php-fig.org/psr/psr-18/) implementation.
 
+**NOTE: This library has abandoned the silly "immuatbility" that is dictated by PSR-7 for it is horseshit.
+Fluent interfaces just don't work like that, the pseudo-immutability gets in the way more often (always) than it is useful (never).
+If you want your fluent objects to be immutable for whatever reason, just fucking clone them 
+and don't force countless libraries to do that for you instead. If you don't like it, just use Guzzle instead.**
+
 [![PHP Version Support][php-badge]][php]
 [![version][packagist-badge]][packagist]
 [![license][license-badge]][license]

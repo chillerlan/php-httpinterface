@@ -20,71 +20,73 @@ use Psr\Http\Message\StreamInterface;
 class ResponseTest extends TestCase{
 
 	public function testDefaultConstructor():void{
-		$r = new Response;
+		$response = new Response;
 
-		$this::assertSame(200, $r->getStatusCode());
-		$this::assertSame('1.1', $r->getProtocolVersion());
-		$this::assertSame('OK', $r->getReasonPhrase());
-		$this::assertSame([], $r->getHeaders());
-		$this::assertInstanceOf(StreamInterface::class, $r->getBody());
-		$this::assertSame('', (string)$r->getBody());
+		$this::assertSame(200, $response->getStatusCode());
+		$this::assertSame('1.1', $response->getProtocolVersion());
+		$this::assertSame('OK', $response->getReasonPhrase());
+		$this::assertSame([], $response->getHeaders());
+		$this::assertInstanceOf(StreamInterface::class, $response->getBody());
+		$this::assertSame('', (string)$response->getBody());
 	}
 
 	public function testCanConstructWithStatusCode():void{
-		$r = new Response(404);
+		$response = new Response(404);
 
-		$this::assertSame(404, $r->getStatusCode());
-		$this::assertSame('Not Found', $r->getReasonPhrase());
+		$this::assertSame(404, $response->getStatusCode());
+		$this::assertSame('Not Found', $response->getReasonPhrase());
 	}
 
 	public function testStatusCanBeNumericString():void{
-		$r  = new Response('404');
-		$r2 = $r->withStatus('201');
+		$response  = new Response('404');
 
-		$this::assertSame(404, $r->getStatusCode());
-		$this::assertSame('Not Found', $r->getReasonPhrase());
-		$this::assertSame(201, $r2->getStatusCode());
-		$this::assertSame('Created', $r2->getReasonPhrase());
+		$this::assertSame(404, $response->getStatusCode());
+		$this::assertSame('Not Found', $response->getReasonPhrase());
+
+		$response->withStatus('201');
+
+		$this::assertSame(201, $response->getStatusCode());
+		$this::assertSame('Created', $response->getReasonPhrase());
 	}
 
 	public function testCanConstructWithReason():void{
-		$r = new Response(200, 'bar');
-		$this::assertSame('bar', $r->getReasonPhrase());
+		$response = new Response(200, 'bar');
+		$this::assertSame('bar', $response->getReasonPhrase());
 
-		$r = new Response(200, '0');
-		$this::assertSame('0', $r->getReasonPhrase(), 'Falsey reason works');
+		$response = new Response(200, '0');
+		$this::assertSame('0', $response->getReasonPhrase(), 'Falsey reason works');
 	}
 
 	public function testWithStatusCodeAndNoReason():void{
-		$r = (new Response)->withStatus(201);
-		$this::assertSame(201, $r->getStatusCode());
-		$this::assertSame('Created', $r->getReasonPhrase());
+		$response = (new Response)->withStatus(201);
+		$this::assertSame(201, $response->getStatusCode());
+		$this::assertSame('Created', $response->getReasonPhrase());
 	}
 
 	public function testWithStatusCodeAndReason():void{
-		$r = (new Response)->withStatus(201, 'Foo');
-		$this::assertSame(201, $r->getStatusCode());
-		$this::assertSame('Foo', $r->getReasonPhrase());
+		$response = (new Response)->withStatus(201, 'Foo');
+		$this::assertSame(201, $response->getStatusCode());
+		$this::assertSame('Foo', $response->getReasonPhrase());
 
-		$r = (new Response)->withStatus(201, '0');
-		$this::assertSame(201, $r->getStatusCode());
-		$this::assertSame('0', $r->getReasonPhrase(), 'Falsey reason works');
+		$response = (new Response)->withStatus(201, '0');
+		$this::assertSame(201, $response->getStatusCode());
+		$this::assertSame('0', $response->getReasonPhrase(), 'Falsey reason works');
 	}
 
 	public function testWithProtocolVersion():void{
-		$r = (new Response)->withProtocolVersion('1000');
-		$this::assertSame('1000', $r->getProtocolVersion());
+		$response = (new Response)->withProtocolVersion('1000');
+		$this::assertSame('1000', $response->getProtocolVersion());
 	}
 
 	public function testSameInstanceWhenSameProtocol():void{
-		$r = new Response;
-		$this::assertSame($r, $r->withProtocolVersion('1.1'));
+		$response = new Response;
+		$this::assertSame($response, $response->withProtocolVersion('1.1'));
 	}
 
 	public function testWithBody():void{
-		$r = (new Response)->withBody(FactoryHelpers::createStream('0'));
-		$this::assertInstanceOf(StreamInterface::class, $r->getBody());
-		$this::assertSame('0', (string) $r->getBody());
+		$response = (new Response)->withBody(FactoryHelpers::createStream('0'));
+		$this::assertInstanceOf(StreamInterface::class, $response->getBody());
+		$this::assertSame('0', (string) $response->getBody());
 	}
 
 }

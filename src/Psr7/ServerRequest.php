@@ -51,10 +51,9 @@ class ServerRequest extends Request implements ServerRequestInterface{
 	 * @inheritDoc
 	 */
 	public function withCookieParams(array $cookies):static{
-		$clone               = clone $this;
-		$clone->cookieParams = $cookies;
+		$this->cookieParams = $cookies;
 
-		return $clone;
+		return $this;
 	}
 
 	/**
@@ -68,10 +67,9 @@ class ServerRequest extends Request implements ServerRequestInterface{
 	 * @inheritDoc
 	 */
 	public function withQueryParams(array $query):static{
-		$clone              = clone $this;
-		$clone->queryParams = $query;
+		$this->queryParams = $query;
 
-		return $clone;
+		return $this;
 	}
 
 	/**
@@ -85,10 +83,9 @@ class ServerRequest extends Request implements ServerRequestInterface{
 	 * @inheritDoc
 	 */
 	public function withUploadedFiles(array $uploadedFiles):static{
-		$clone                = clone $this;
-		$clone->uploadedFiles = $uploadedFiles;
+		$this->uploadedFiles = $uploadedFiles;
 
-		return $clone;
+		return $this;
 	}
 
 	/**
@@ -107,10 +104,9 @@ class ServerRequest extends Request implements ServerRequestInterface{
 			throw new InvalidArgumentException('parsed body value must be an array, object or null');
 		}
 
-		$clone             = clone $this;
-		$clone->parsedBody = $data;
+		$this->parsedBody = $data;
 
-		return $clone;
+		return $this;
 	}
 
 	/**
@@ -136,10 +132,9 @@ class ServerRequest extends Request implements ServerRequestInterface{
 	 * @inheritDoc
 	 */
 	public function withAttribute(string $name, $value):static{
-		$clone                    = clone $this;
-		$clone->attributes[$name] = $value;
+		$this->attributes[$name] = $value;
 
-		return $clone;
+		return $this;
 	}
 
 	/**
@@ -147,14 +142,11 @@ class ServerRequest extends Request implements ServerRequestInterface{
 	 */
 	public function withoutAttribute(string $name):static{
 
-		if(!array_key_exists($name, $this->attributes)){
-			return $this;
+		if(array_key_exists($name, $this->attributes)){
+			unset($this->attributes[$name]);
 		}
 
-		$clone = clone $this;
-		unset($clone->attributes[$name]);
-
-		return $clone;
+		return $this;
 	}
 
 }

@@ -41,82 +41,95 @@ class MessageTest extends TestCase{
 
 	public function testWithHeader():void{
 		$message  = (new Message)->withHeader('Foo', 'Bar');
-		// this is horseshit btw., the whole "immutability" of PSR-7 is horseshit and y'all know it
-		$message2 = $message->withHeader('baZ', 'Bam');
 
 		$this::assertSame(['Foo' => ['Bar']], $message->getHeaders());
-		$this::assertSame(['Foo' => ['Bar'], 'baZ' => ['Bam']], $message2->getHeaders());
-		$this::assertSame('Bam', $message2->getHeaderLine('baz'));
-		$this::assertSame(['Bam'], $message2->getHeader('baz'));
+
+		$message->withHeader('baZ', 'Bam');
+
+		$this::assertSame(['Foo' => ['Bar'], 'baZ' => ['Bam']], $message->getHeaders());
+		$this::assertSame('Bam', $message->getHeaderLine('baz'));
+		$this::assertSame(['Bam'], $message->getHeader('baz'));
 	}
 
 	public function testWithHeaderAsArray():void{
 		$message  = (new Message)->withHeader('Foo', 'Bar');
-		$message2 = $message->withHeader('baZ', ['Bam', 'Bar']);
 
 		$this::assertSame(['Foo' => ['Bar']], $message->getHeaders());
-		$this::assertSame(['Foo' => ['Bar'], 'baZ' => ['Bam', 'Bar']], $message2->getHeaders());
-		$this::assertSame('Bam, Bar', $message2->getHeaderLine('baz'));
-		$this::assertSame(['Bam', 'Bar'], $message2->getHeader('baz'));
+
+		$message->withHeader('baZ', ['Bam', 'Bar']);
+
+		$this::assertSame(['Foo' => ['Bar'], 'baZ' => ['Bam', 'Bar']], $message->getHeaders());
+		$this::assertSame('Bam, Bar', $message->getHeaderLine('baz'));
+		$this::assertSame(['Bam', 'Bar'], $message->getHeader('baz'));
 	}
 
 	public function testWithHeaderReplacesDifferentCase():void{
 		$message  = (new Message)->withHeader('Foo', 'Bar');
-		$message2 = $message->withHeader('foO', 'Bam');
 
 		$this::assertSame(['Foo' => ['Bar']], $message->getHeaders());
-		$this::assertSame(['foO' => ['Bam']], $message2->getHeaders());
-		$this::assertSame('Bam', $message2->getHeaderLine('foo'));
-		$this::assertSame(['Bam'], $message2->getHeader('foo'));
+
+		$message->withHeader('foO', 'Bam');
+
+		$this::assertSame(['foO' => ['Bam']], $message->getHeaders());
+		$this::assertSame('Bam', $message->getHeaderLine('foo'));
+		$this::assertSame(['Bam'], $message->getHeader('foo'));
 	}
 
 	public function testWithAddedHeader():void{
 		$message  = (new Message)->withHeader('Foo', 'Bar');
-		$message2 = $message->withAddedHeader('foO', 'Baz');
 
 		$this::assertSame(['Foo' => ['Bar']], $message->getHeaders());
-		$this::assertSame(['Foo' => ['Bar', 'Baz']], $message2->getHeaders());
-		$this::assertSame('Bar, Baz', $message2->getHeaderLine('foo'));
-		$this::assertSame(['Bar', 'Baz'], $message2->getHeader('foo'));
+
+		$message->withAddedHeader('foO', 'Baz');
+
+		$this::assertSame(['Foo' => ['Bar', 'Baz']], $message->getHeaders());
+		$this::assertSame('Bar, Baz', $message->getHeaderLine('foo'));
+		$this::assertSame(['Bar', 'Baz'], $message->getHeader('foo'));
 	}
 
 	public function testWithAddedHeaderAsArray():void{
 		$message  = (new Message)->withHeader('Foo', 'Bar');
-		$message2 = $message->withAddedHeader('foO', ['Baz', 'Bam',]);
 
 		$this::assertSame(['Foo' => ['Bar']], $message->getHeaders());
-		$this::assertSame(['Foo' => ['Bar', 'Baz', 'Bam']], $message2->getHeaders());
-		$this::assertSame('Bar, Baz, Bam', $message2->getHeaderLine('foo'));
-		$this::assertSame(['Bar', 'Baz', 'Bam'], $message2->getHeader('foo'));
+
+		$message->withAddedHeader('foO', ['Baz', 'Bam',]);
+
+		$this::assertSame(['Foo' => ['Bar', 'Baz', 'Bam']], $message->getHeaders());
+		$this::assertSame('Bar, Baz, Bam', $message->getHeaderLine('foo'));
+		$this::assertSame(['Bar', 'Baz', 'Bam'], $message->getHeader('foo'));
 	}
 
 	public function testWithAddedHeaderThatDoesNotExist():void{
 		$message  = (new Message)->withHeader('Foo', 'Bar');
-		$message2 = $message->withAddedHeader('nEw', 'Baz');
 
 		$this::assertSame(['Foo' => ['Bar']], $message->getHeaders());
-		$this::assertSame(['Foo' => ['Bar'], 'nEw' => ['Baz']], $message2->getHeaders());
-		$this::assertSame('Baz', $message2->getHeaderLine('new'));
-		$this::assertSame(['Baz'], $message2->getHeader('new'));
+
+		$message->withAddedHeader('nEw', 'Baz');
+
+		$this::assertSame(['Foo' => ['Bar'], 'nEw' => ['Baz']], $message->getHeaders());
+		$this::assertSame('Baz', $message->getHeaderLine('new'));
+		$this::assertSame(['Baz'], $message->getHeader('new'));
 	}
 
 	public function testWithoutHeaderThatExists():void{
 		$message  = (new Message)->withHeader('Foo', 'Bar')->withHeader('Baz', 'Bam');
-		$message2 = $message->withoutHeader('foO');
 
 		$this::assertTrue($message->hasHeader('foo'));
 		$this::assertSame(['Foo' => ['Bar'], 'Baz' => ['Bam']], $message->getHeaders());
-		$this::assertFalse($message2->hasHeader('foo'));
-		$this::assertSame(['Baz' => ['Bam']], $message2->getHeaders());
+
+		$message->withoutHeader('foO');
+
+		$this::assertFalse($message->hasHeader('foo'));
+		$this::assertSame(['Baz' => ['Bam']], $message->getHeaders());
 	}
 
 	public function testWithoutHeaderThatDoesNotExist():void{
 		$message  = (new Message)->withHeader('Baz', 'Bam');
-		$message2 = $message->withoutHeader('foO');
+		$message->withoutHeader('foO');
 
-		$this::assertSame($message, $message2);
-		$this::assertFalse($message2->hasHeader('foo'));
-		$this::assertSame(['Baz' => ['Bam']], $message2->getHeaders());
+		$this::assertSame($message, $message);
+		$this::assertFalse($message->hasHeader('foo'));
+		$this::assertSame(['Baz' => ['Bam']], $message->getHeaders());
 	}
 
 	public function testSameInstanceWhenRemovingMissingHeader():void{
@@ -125,10 +138,10 @@ class MessageTest extends TestCase{
 	}
 
 	public function testHeaderValuesAreTrimmed():void{
-		$message2 = (new Message)->withHeader('Bar', " \t \tFoo\t \t ");
-		$message3 = (new Message)->withAddedHeader('Bar', " \t \tFoo\t \t ");
+		$message1 = (new Message)->withHeader('Bar', " \t \tFoo\t \t ");
+		$message2 = (new Message)->withAddedHeader('Bar', " \t \tFoo\t \t ");
 
-		foreach([$message2, $message3] as $message){
+		foreach([$message1, $message2] as $message){
 			$this::assertSame(['Bar' => ['Foo']], $message->getHeaders());
 			$this::assertSame('Foo', $message->getHeaderLine('Bar'));
 			$this::assertSame(['Foo'], $message->getHeader('Bar'));
@@ -136,10 +149,10 @@ class MessageTest extends TestCase{
 	}
 
 	public function testSupportNumericHeaderValues():void{
-		$r = (new Message)->withHeader('Content-Length', 69);
+		$message = (new Message)->withHeader('Content-Length', 69);
 
-		$this::assertSame(['Content-Length' => ['69']], $r->getHeaders());
-		$this::assertSame('69', $r->getHeaderLine('Content-Length'));
+		$this::assertSame(['Content-Length' => ['69']], $message->getHeaders());
+		$this::assertSame('69', $message->getHeaderLine('Content-Length'));
 	}
 
 }

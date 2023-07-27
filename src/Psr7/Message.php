@@ -42,14 +42,11 @@ class Message implements MessageInterface{
 	 */
 	public function withProtocolVersion(string $version):static{
 
-		if($this->version === $version){
-			return $this;
+		if($this->version !== $version){
+			$this->version = $version;
 		}
 
-		$clone          = clone $this;
-		$clone->version = $version;
-
-		return $clone;
+		return $this;
 	}
 
 	/**
@@ -89,11 +86,9 @@ class Message implements MessageInterface{
 	 * @inheritDoc
 	 */
 	public function withHeader(string $name, $value):static{
-		$clone = clone $this;
+		$this->headers[strtolower($name)] = ['name' => $name, 'value' => HeaderUtil::trimValues($this->checkValue($value))];
 
-		$clone->headers[strtolower($name)] = ['name' => $name, 'value' => HeaderUtil::trimValues($this->checkValue($value))];
-
-		return $clone;
+		return $this;
 	}
 
 	/**
@@ -107,11 +102,9 @@ class Message implements MessageInterface{
 			$name = $this->headers[$lcName]['name'];
 		}
 
-		$clone = clone $this;
+		$this->headers[$lcName] = ['name' => $name, 'value' => array_merge(($this->headers[$lcName]['value'] ?? []), $value)];
 
-		$clone->headers[$lcName] = ['name' => $name, 'value' => array_merge(($this->headers[$lcName]['value'] ?? []), $value)];
-
-		return $clone;
+		return $this;
 	}
 
 	/**
@@ -124,11 +117,9 @@ class Message implements MessageInterface{
 			return $this;
 		}
 
-		$clone = clone $this;
+		unset($this->headers[$lcName]);
 
-		unset($clone->headers[$lcName]);
-
-		return $clone;
+		return $this;
 	}
 
 	/**
@@ -143,14 +134,11 @@ class Message implements MessageInterface{
 	 */
 	public function withBody(StreamInterface $body):static{
 
-		if($body === $this->body){
-			return $this;
+		if($body !== $this->body){
+			$this->body = $body;
 		}
 
-		$clone       = clone $this;
-		$clone->body = $body;
-
-		return $clone;
+		return $this;
 	}
 
 	/**

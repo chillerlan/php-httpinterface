@@ -122,11 +122,10 @@ class Response extends Message implements ResponseInterface, StatusCodeInterface
 	public function withStatus(int $code, string $reasonPhrase = ''):static{
 		$reasonPhrase = trim($reasonPhrase);
 
-		$clone               = clone $this;
-		$clone->statusCode   = $code;
-		$clone->reasonPhrase = $reasonPhrase !== '' ? $reasonPhrase : $this->getReasonPhraseFromStatusCode($code);
+		$this->statusCode   = $code;
+		$this->reasonPhrase = $reasonPhrase !== '' ? $reasonPhrase : $this->getReasonPhraseFromStatusCode($code);
 
-		return $clone;
+		return $this;
 	}
 
 	/**

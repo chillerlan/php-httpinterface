@@ -23,44 +23,44 @@ class ServerRequestTest extends TestCase{
 	public function testServerParams():void{
 		$params = ['name' => 'value'];
 
-		$r = new ServerRequest(RequestMethodInterface::METHOD_GET, '/', $params);
-		$this::assertSame($params, $r->getServerParams());
+		$request = new ServerRequest(RequestMethodInterface::METHOD_GET, '/', $params);
+		$this::assertSame($params, $request->getServerParams());
 	}
 
 	public function testCookieParams():void{
-		$r1 = new ServerRequest('GET', '/');
+		$request = new ServerRequest('GET', '/');
+
+		$this::assertEmpty($request->getCookieParams());
 
 		$params = ['name' => 'value'];
 
-		$r2 = $r1->withCookieParams($params);
+		$request->withCookieParams($params);
 
-		$this::assertNotSame($r2, $r1);
-		$this::assertEmpty($r1->getCookieParams());
-		$this::assertSame($params, $r2->getCookieParams());
+		$this::assertSame($params, $request->getCookieParams());
 	}
 
 	public function testQueryParams():void{
-		$r1 = new ServerRequest('GET', '/');
+		$request = new ServerRequest('GET', '/');
+
+		$this::assertEmpty($request->getQueryParams());
 
 		$params = ['name' => 'value'];
 
-		$r2 = $r1->withQueryParams($params);
+		$request->withQueryParams($params);
 
-		$this::assertNotSame($r2, $r1);
-		$this::assertEmpty($r1->getQueryParams());
-		$this::assertSame($params, $r2->getQueryParams());
+		$this::assertSame($params, $request->getQueryParams());
 	}
 
 	public function testParsedBody():void{
-		$r1 = new ServerRequest('GET', '/');
+		$request = new ServerRequest('GET', '/');
+
+		$this::assertEmpty($request->getParsedBody());
 
 		$params = ['name' => 'value'];
 
-		$r2 = $r1->withParsedBody($params);
+		$request->withParsedBody($params);
 
-		$this::assertNotSame($r2, $r1);
-		$this::assertEmpty($r1->getParsedBody());
-		$this::assertSame($params, $r2->getParsedBody());
+		$this::assertSame($params, $request->getParsedBody());
 	}
 
 	public function testParsedBodyInvalidArg():void{
@@ -72,52 +72,48 @@ class ServerRequestTest extends TestCase{
 	}
 
 	public function testAttributes():void{
-		$r1 = new ServerRequest('GET', '/');
+		$request = new ServerRequest('GET', '/');
 
-		$r2 = $r1->withAttribute('name', 'value');
-		$r3 = $r2->withAttribute('other', 'otherValue');
-		$r4 = $r3->withoutAttribute('other');
-		$r5 = $r3->withoutAttribute('unknown');
+		$this::assertSame([], $request->getAttributes());
+		$this::assertNull($request->getAttribute('name'));
+		$this::assertSame('something', $request->getAttribute('name', 'something'), 'Should return the default value');
 
-		$this::assertNotSame($r2, $r1);
-		$this::assertNotSame($r3, $r2);
-		$this::assertNotSame($r4, $r3);
-		$this::assertSame($r5, $r3);
+		$request->withAttribute('name', 'value');
 
-		$this::assertSame([], $r1->getAttributes());
-		$this::assertNull($r1->getAttribute('name'));
-		$this::assertSame('something', $r1->getAttribute('name', 'something'), 'Should return the default value');
+		$this::assertSame('value', $request->getAttribute('name'));
+		$this::assertSame(['name' => 'value'], $request->getAttributes());
 
-		$this::assertSame('value', $r2->getAttribute('name'));
-		$this::assertSame(['name' => 'value'], $r2->getAttributes());
-		$this::assertSame(['name' => 'value', 'other' => 'otherValue'], $r3->getAttributes());
-		$this::assertSame(['name' => 'value'], $r4->getAttributes());
+		$request->withAttribute('other', 'otherValue');
+
+		$this::assertSame(['name' => 'value', 'other' => 'otherValue'], $request->getAttributes());
+
+		$request->withoutAttribute('other');
+
+		$this::assertSame(['name' => 'value'], $request->getAttributes());
 	}
 
 	public function testNullAttribute():void{
-		$r = (new ServerRequest('GET', '/'))->withAttribute('name', null);
+		$request = (new ServerRequest('GET', '/'))->withAttribute('name', null);
 
-		$this::assertSame(['name' => null], $r->getAttributes());
-		$this::assertNull($r->getAttribute('name', 'different-default'));
+		$this::assertSame(['name' => null], $request->getAttributes());
+		$this::assertNull($request->getAttribute('name', 'different-default'));
 
-		$requestWithoutAttribute = $r->withoutAttribute('name');
+		$request->withoutAttribute('name');
 
-		$this::assertSame([], $requestWithoutAttribute->getAttributes());
-		$this::assertSame('different-default', $requestWithoutAttribute->getAttribute('name', 'different-default'));
+		$this::assertSame([], $request->getAttributes());
+		$this::assertSame('different-default', $request->getAttribute('name', 'different-default'));
 	}
 
 	public function testUploadedFiles():void{
-		$r1 = new ServerRequest('GET', '/');
+		$request = new ServerRequest('GET', '/');
 
-		$files = [
-			'file' => new UploadedFile('test', 123, UPLOAD_ERR_OK)
-		];
+		$this::assertSame([], $request->getUploadedFiles());
 
-		$r2 = $r1->withUploadedFiles($files);
+		$files = ['file' => new UploadedFile('test', 123, UPLOAD_ERR_OK)];
 
-		$this::assertNotSame($r2, $r1);
-		$this::assertSame([], $r1->getUploadedFiles());
-		$this::assertSame($files, $r2->getUploadedFiles());
+		$request->withUploadedFiles($files);
+
+		$this::assertSame($files, $request->getUploadedFiles());
 	}
 
 }
