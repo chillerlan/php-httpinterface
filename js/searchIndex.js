@@ -1,270 +1,380 @@
 Search.appendIndex(
     [
                 {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlHandle",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlHandle",
             "name": "CurlHandle",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlHandle.html"
+            "url": "classes/chillerlan-HTTP-Common-CurlHandle.html"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlHandle\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlHandle\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "CurlHandle\u0020constructor.",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlHandle.html#method___construct"
+            "url": "classes/chillerlan-HTTP-Common-CurlHandle.html#method___construct"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlHandle\u003A\u003A__destruct\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlHandle\u003A\u003A__destruct\u0028\u0029",
             "name": "__destruct",
             "summary": "close\u0020an\u0020existing\u0020cURL\u0020handle\u0020on\u0020exit",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlHandle.html#method___destruct"
+            "url": "classes/chillerlan-HTTP-Common-CurlHandle.html#method___destruct"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlHandle\u003A\u003Aclose\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlHandle\u003A\u003Aclose\u0028\u0029",
             "name": "close",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlHandle.html#method_close"
+            "url": "classes/chillerlan-HTTP-Common-CurlHandle.html#method_close"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlHandle\u003A\u003AgetCurlResource\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlHandle\u003A\u003AgetCurlResource\u0028\u0029",
             "name": "getCurlResource",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlHandle.html#method_getCurlResource"
+            "url": "classes/chillerlan-HTTP-Common-CurlHandle.html#method_getCurlResource"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlHandle\u003A\u003AgetRequest\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlHandle\u003A\u003AgetRequest\u0028\u0029",
             "name": "getRequest",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlHandle.html#method_getRequest"
+            "url": "classes/chillerlan-HTTP-Common-CurlHandle.html#method_getRequest"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlHandle\u003A\u003AgetResponse\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlHandle\u003A\u003AgetResponse\u0028\u0029",
             "name": "getResponse",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlHandle.html#method_getResponse"
+            "url": "classes/chillerlan-HTTP-Common-CurlHandle.html#method_getResponse"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlHandle\u003A\u003AgetCurlOptions\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlHandle\u003A\u003AgetCurlOptions\u0028\u0029",
             "name": "getCurlOptions",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlHandle.html#method_getCurlOptions"
+            "url": "classes/chillerlan-HTTP-Common-CurlHandle.html#method_getCurlOptions"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlHandle\u003A\u003AinitCurlOptions\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlHandle\u003A\u003AinitCurlOptions\u0028\u0029",
             "name": "initCurlOptions",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlHandle.html#method_initCurlOptions"
+            "url": "classes/chillerlan-HTTP-Common-CurlHandle.html#method_initCurlOptions"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlHandle\u003A\u003AsetBodyOptions\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlHandle\u003A\u003AsetBodyOptions\u0028\u0029",
             "name": "setBodyOptions",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlHandle.html#method_setBodyOptions"
+            "url": "classes/chillerlan-HTTP-Common-CurlHandle.html#method_setBodyOptions"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlHandle\u003A\u003AsetSSLOptions\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlHandle\u003A\u003AsetSSLOptions\u0028\u0029",
             "name": "setSSLOptions",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlHandle.html#method_setSSLOptions"
+            "url": "classes/chillerlan-HTTP-Common-CurlHandle.html#method_setSSLOptions"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlHandle\u003A\u003AsetHeaderOptions\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlHandle\u003A\u003AsetHeaderOptions\u0028\u0029",
             "name": "setHeaderOptions",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlHandle.html#method_setHeaderOptions"
+            "url": "classes/chillerlan-HTTP-Common-CurlHandle.html#method_setHeaderOptions"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlHandle\u003A\u003AsetRequestOptions\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlHandle\u003A\u003AsetRequestOptions\u0028\u0029",
             "name": "setRequestOptions",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlHandle.html#method_setRequestOptions"
+            "url": "classes/chillerlan-HTTP-Common-CurlHandle.html#method_setRequestOptions"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlHandle\u003A\u003Ainit\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlHandle\u003A\u003Ainit\u0028\u0029",
             "name": "init",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlHandle.html#method_init"
+            "url": "classes/chillerlan-HTTP-Common-CurlHandle.html#method_init"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlHandle\u003A\u003Aexec\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlHandle\u003A\u003Aexec\u0028\u0029",
             "name": "exec",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlHandle.html#method_exec"
+            "url": "classes/chillerlan-HTTP-Common-CurlHandle.html#method_exec"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlHandle\u003A\u003AgetError\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlHandle\u003A\u003AgetError\u0028\u0029",
             "name": "getError",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlHandle.html#method_getError"
+            "url": "classes/chillerlan-HTTP-Common-CurlHandle.html#method_getError"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlHandle\u003A\u003ACURL_NETWORK_ERRORS",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlHandle\u003A\u003ACURL_NETWORK_ERRORS",
             "name": "CURL_NETWORK_ERRORS",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlHandle.html#constant_CURL_NETWORK_ERRORS"
+            "url": "classes/chillerlan-HTTP-Common-CurlHandle.html#constant_CURL_NETWORK_ERRORS"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlHandle\u003A\u003ACURLINFO_SSL_VERIFYRESULT",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlHandle\u003A\u003ACURLINFO_SSL_VERIFYRESULT",
             "name": "CURLINFO_SSL_VERIFYRESULT",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlHandle.html#constant_CURLINFO_SSL_VERIFYRESULT"
+            "url": "classes/chillerlan-HTTP-Common-CurlHandle.html#constant_CURLINFO_SSL_VERIFYRESULT"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlHandle\u003A\u003A\u0024curl",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlHandle\u003A\u003A\u0024curl",
             "name": "curl",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlHandle.html#property_curl"
+            "url": "classes/chillerlan-HTTP-Common-CurlHandle.html#property_curl"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlHandle\u003A\u003A\u0024curlOptions",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlHandle\u003A\u003A\u0024curlOptions",
             "name": "curlOptions",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlHandle.html#property_curlOptions"
+            "url": "classes/chillerlan-HTTP-Common-CurlHandle.html#property_curlOptions"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlHandle\u003A\u003A\u0024initialized",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlHandle\u003A\u003A\u0024initialized",
             "name": "initialized",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlHandle.html#property_initialized"
+            "url": "classes/chillerlan-HTTP-Common-CurlHandle.html#property_initialized"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlHandle\u003A\u003A\u0024options",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlHandle\u003A\u003A\u0024options",
             "name": "options",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlHandle.html#property_options"
+            "url": "classes/chillerlan-HTTP-Common-CurlHandle.html#property_options"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlHandle\u003A\u003A\u0024request",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlHandle\u003A\u003A\u0024request",
             "name": "request",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlHandle.html#property_request"
+            "url": "classes/chillerlan-HTTP-Common-CurlHandle.html#property_request"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlHandle\u003A\u003A\u0024response",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlHandle\u003A\u003A\u0024response",
             "name": "response",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlHandle.html#property_response"
+            "url": "classes/chillerlan-HTTP-Common-CurlHandle.html#property_response"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlHandle\u003A\u003A\u0024requestBody",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlHandle\u003A\u003A\u0024requestBody",
             "name": "requestBody",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlHandle.html#property_requestBody"
+            "url": "classes/chillerlan-HTTP-Common-CurlHandle.html#property_requestBody"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlHandle\u003A\u003A\u0024responseBody",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlHandle\u003A\u003A\u0024responseBody",
             "name": "responseBody",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlHandle.html#property_responseBody"
+            "url": "classes/chillerlan-HTTP-Common-CurlHandle.html#property_responseBody"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlMultiClient",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlMultiClient",
             "name": "CurlMultiClient",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlMultiClient.html"
+            "url": "classes/chillerlan-HTTP-Common-CurlMultiClient.html"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlMultiClient\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlMultiClient\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "CurlMultiClient\u0020constructor.",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlMultiClient.html#method___construct"
+            "url": "classes/chillerlan-HTTP-Common-CurlMultiClient.html#method___construct"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlMultiClient\u003A\u003A__destruct\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlMultiClient\u003A\u003A__destruct\u0028\u0029",
             "name": "__destruct",
             "summary": "close\u0020an\u0020existing\u0020cURL\u0020multi\u0020handle\u0020on\u0020exit",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlMultiClient.html#method___destruct"
+            "url": "classes/chillerlan-HTTP-Common-CurlMultiClient.html#method___destruct"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlMultiClient\u003A\u003Aclose\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlMultiClient\u003A\u003Aclose\u0028\u0029",
             "name": "close",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlMultiClient.html#method_close"
+            "url": "classes/chillerlan-HTTP-Common-CurlMultiClient.html#method_close"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlMultiClient\u003A\u003AaddRequest\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlMultiClient\u003A\u003AaddRequest\u0028\u0029",
             "name": "addRequest",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlMultiClient.html#method_addRequest"
+            "url": "classes/chillerlan-HTTP-Common-CurlMultiClient.html#method_addRequest"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlMultiClient\u003A\u003AaddRequests\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlMultiClient\u003A\u003AaddRequests\u0028\u0029",
             "name": "addRequests",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlMultiClient.html#method_addRequests"
+            "url": "classes/chillerlan-HTTP-Common-CurlMultiClient.html#method_addRequests"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlMultiClient\u003A\u003Aprocess\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlMultiClient\u003A\u003Aprocess\u0028\u0029",
             "name": "process",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlMultiClient.html#method_process"
+            "url": "classes/chillerlan-HTTP-Common-CurlMultiClient.html#method_process"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlMultiClient\u003A\u003AcreateHandle\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlMultiClient\u003A\u003AcreateHandle\u0028\u0029",
             "name": "createHandle",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlMultiClient.html#method_createHandle"
+            "url": "classes/chillerlan-HTTP-Common-CurlMultiClient.html#method_createHandle"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlMultiClient\u003A\u003A\u0024options",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlMultiClient\u003A\u003A\u0024options",
             "name": "options",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlMultiClient.html#property_options"
+            "url": "classes/chillerlan-HTTP-Common-CurlMultiClient.html#property_options"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlMultiClient\u003A\u003A\u0024responseFactory",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlMultiClient\u003A\u003A\u0024responseFactory",
             "name": "responseFactory",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlMultiClient.html#property_responseFactory"
+            "url": "classes/chillerlan-HTTP-Common-CurlMultiClient.html#property_responseFactory"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlMultiClient\u003A\u003A\u0024multiResponseHandler",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlMultiClient\u003A\u003A\u0024multiResponseHandler",
             "name": "multiResponseHandler",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlMultiClient.html#property_multiResponseHandler"
+            "url": "classes/chillerlan-HTTP-Common-CurlMultiClient.html#property_multiResponseHandler"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlMultiClient\u003A\u003A\u0024curl_multi",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlMultiClient\u003A\u003A\u0024curl_multi",
             "name": "curl_multi",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlMultiClient.html#property_curl_multi"
+            "url": "classes/chillerlan-HTTP-Common-CurlMultiClient.html#property_curl_multi"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlMultiClient\u003A\u003A\u0024handleCounter",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlMultiClient\u003A\u003A\u0024handleCounter",
             "name": "handleCounter",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlMultiClient.html#property_handleCounter"
+            "url": "classes/chillerlan-HTTP-Common-CurlMultiClient.html#property_handleCounter"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlMultiClient\u003A\u003A\u0024requests",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlMultiClient\u003A\u003A\u0024requests",
             "name": "requests",
             "summary": "An\u0020array\u0020of\u0020RequestInterface\u0020to\u0020run",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlMultiClient.html#property_requests"
+            "url": "classes/chillerlan-HTTP-Common-CurlMultiClient.html#property_requests"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlMultiClient\u003A\u003A\u0024handles",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlMultiClient\u003A\u003A\u0024handles",
             "name": "handles",
             "summary": "the\u0020stack\u0020of\u0020running\u0020handles",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlMultiClient.html#property_handles"
+            "url": "classes/chillerlan-HTTP-Common-CurlMultiClient.html#property_handles"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlMultiHandle",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlMultiHandle",
             "name": "CurlMultiHandle",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlMultiHandle.html"
+            "url": "classes/chillerlan-HTTP-Common-CurlMultiHandle.html"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlMultiHandle\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlMultiHandle\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "CurlHandle\u0020constructor.",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlMultiHandle.html#method___construct"
+            "url": "classes/chillerlan-HTTP-Common-CurlMultiHandle.html#method___construct"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlMultiHandle\u003A\u003AgetID\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlMultiHandle\u003A\u003AgetID\u0028\u0029",
             "name": "getID",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlMultiHandle.html#method_getID"
+            "url": "classes/chillerlan-HTTP-Common-CurlMultiHandle.html#method_getID"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlMultiHandle\u003A\u003AsetID\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlMultiHandle\u003A\u003AsetID\u0028\u0029",
             "name": "setID",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlMultiHandle.html#method_setID"
+            "url": "classes/chillerlan-HTTP-Common-CurlMultiHandle.html#method_setID"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlMultiHandle\u003A\u003AgetRetries\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlMultiHandle\u003A\u003AgetRetries\u0028\u0029",
             "name": "getRetries",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlMultiHandle.html#method_getRetries"
+            "url": "classes/chillerlan-HTTP-Common-CurlMultiHandle.html#method_getRetries"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlMultiHandle\u003A\u003AsetRetries\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlMultiHandle\u003A\u003AsetRetries\u0028\u0029",
             "name": "setRetries",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlMultiHandle.html#method_setRetries"
+            "url": "classes/chillerlan-HTTP-Common-CurlMultiHandle.html#method_setRetries"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlMultiHandle\u003A\u003AaddRetry\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlMultiHandle\u003A\u003AaddRetry\u0028\u0029",
             "name": "addRetry",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlMultiHandle.html#method_addRetry"
+            "url": "classes/chillerlan-HTTP-Common-CurlMultiHandle.html#method_addRetry"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlMultiHandle\u003A\u003AhandleResponse\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlMultiHandle\u003A\u003AhandleResponse\u0028\u0029",
             "name": "handleResponse",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlMultiHandle.html#method_handleResponse"
+            "url": "classes/chillerlan-HTTP-Common-CurlMultiHandle.html#method_handleResponse"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlMultiHandle\u003A\u003A\u0024multiResponseHandler",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlMultiHandle\u003A\u003A\u0024multiResponseHandler",
             "name": "multiResponseHandler",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlMultiHandle.html#property_multiResponseHandler"
+            "url": "classes/chillerlan-HTTP-Common-CurlMultiHandle.html#property_multiResponseHandler"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlMultiHandle\u003A\u003A\u0024id",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlMultiHandle\u003A\u003A\u0024id",
             "name": "id",
             "summary": "a\u0020handle\u0020ID\u0020\u0028counter\u0029,\u0020used\u0020in\u0020CurlMultiClient",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlMultiHandle.html#property_id"
+            "url": "classes/chillerlan-HTTP-Common-CurlMultiHandle.html#property_id"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\CurlMultiHandle\u003A\u003A\u0024retries",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\CurlMultiHandle\u003A\u003A\u0024retries",
             "name": "retries",
             "summary": "a\u0020retry\u0020counter,\u0020used\u0020in\u0020CurlMultiClient",
-            "url": "classes/chillerlan-HTTP-CurlUtils-CurlMultiHandle.html#property_retries"
+            "url": "classes/chillerlan-HTTP-Common-CurlMultiHandle.html#property_retries"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils\\MultiResponseHandlerInterface",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\FactoryHelpers",
+            "name": "FactoryHelpers",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Common-FactoryHelpers.html"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Common\\FactoryHelpers\u003A\u003AcreateStream\u0028\u0029",
+            "name": "createStream",
+            "summary": "Create\u0020a\u0020new\u0020writable\u0020stream\u0020from\u0020a\u0020string.",
+            "url": "classes/chillerlan-HTTP-Common-FactoryHelpers.html#method_createStream"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Common\\FactoryHelpers\u003A\u003AcreateStreamFromSource\u0028\u0029",
+            "name": "createStreamFromSource",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Common-FactoryHelpers.html#method_createStreamFromSource"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Common\\MultipartStreamBuilder",
+            "name": "MultipartStreamBuilder",
+            "summary": "Use\u0020PSR\u002D7\u0020MessageInterface\u0020to\u0020build\u0020multipart\u0020messages",
+            "url": "classes/chillerlan-HTTP-Common-MultipartStreamBuilder.html"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Common\\MultipartStreamBuilder\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "MultipartStreamBuilder\u0020constructor",
+            "url": "classes/chillerlan-HTTP-Common-MultipartStreamBuilder.html#method___construct"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Common\\MultipartStreamBuilder\u003A\u003A__toString\u0028\u0029",
+            "name": "__toString",
+            "summary": "Returns\u0020the\u0020stream\u0020content\u0020\u0028make\u0020sure\u0020to\u0020save\u0020the\u0020boundary\u0020before\u0021\u0029",
+            "url": "classes/chillerlan-HTTP-Common-MultipartStreamBuilder.html#method___toString"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Common\\MultipartStreamBuilder\u003A\u003Areset\u0028\u0029",
+            "name": "reset",
+            "summary": "Clears\u0020the\u0020MessageInterface\u0020array",
+            "url": "classes/chillerlan-HTTP-Common-MultipartStreamBuilder.html#method_reset"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Common\\MultipartStreamBuilder\u003A\u003AsetBoundary\u0028\u0029",
+            "name": "setBoundary",
+            "summary": "Sets\u0020a\u0020boundary\u0020string",
+            "url": "classes/chillerlan-HTTP-Common-MultipartStreamBuilder.html#method_setBoundary"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Common\\MultipartStreamBuilder\u003A\u003AgetBoundary\u0028\u0029",
+            "name": "getBoundary",
+            "summary": "Returns\u0020the\u0020current\u0020boundary\u0020string",
+            "url": "classes/chillerlan-HTTP-Common-MultipartStreamBuilder.html#method_getBoundary"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Common\\MultipartStreamBuilder\u003A\u003AgetRandomBoundary\u0028\u0029",
+            "name": "getRandomBoundary",
+            "summary": "Generates\u0020a\u0020random\u0020boundary\u0020string",
+            "url": "classes/chillerlan-HTTP-Common-MultipartStreamBuilder.html#method_getRandomBoundary"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Common\\MultipartStreamBuilder\u003A\u003AaddString\u0028\u0029",
+            "name": "addString",
+            "summary": "Adds\u0020a\u0020message\u0020with\u0020the\u0020given\u0020content",
+            "url": "classes/chillerlan-HTTP-Common-MultipartStreamBuilder.html#method_addString"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Common\\MultipartStreamBuilder\u003A\u003AaddStream\u0028\u0029",
+            "name": "addStream",
+            "summary": "Adds\u0020a\u0020StreamInterface",
+            "url": "classes/chillerlan-HTTP-Common-MultipartStreamBuilder.html#method_addStream"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Common\\MultipartStreamBuilder\u003A\u003AaddMessage\u0028\u0029",
+            "name": "addMessage",
+            "summary": "Adds\u0020a\u0020MessageInterface",
+            "url": "classes/chillerlan-HTTP-Common-MultipartStreamBuilder.html#method_addMessage"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Common\\MultipartStreamBuilder\u003A\u003Abuild\u0028\u0029",
+            "name": "build",
+            "summary": "Builds\u0020the\u0020multipart\u0020content\u0020from\u0020the\u0020given\u0020messages.",
+            "url": "classes/chillerlan-HTTP-Common-MultipartStreamBuilder.html#method_build"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Common\\MultipartStreamBuilder\u003A\u003AwriteHeaders\u0028\u0029",
+            "name": "writeHeaders",
+            "summary": "Parses\u0020and\u0020writes\u0020the\u0020headers\u0020from\u0020the\u0020given\u0020message\u0020to\u0020the\u0020multipart\u0020stream",
+            "url": "classes/chillerlan-HTTP-Common-MultipartStreamBuilder.html#method_writeHeaders"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Common\\MultipartStreamBuilder\u003A\u003AwriteBody\u0028\u0029",
+            "name": "writeBody",
+            "summary": "Writes\u0020the\u0020content\u0020of\u0020the\u0020given\u0020StreamInterface\u0020to\u0020the\u0020multipart\u0020stream",
+            "url": "classes/chillerlan-HTTP-Common-MultipartStreamBuilder.html#method_writeBody"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Common\\MultipartStreamBuilder\u003A\u003AsetContentDispositionHeader\u0028\u0029",
+            "name": "setContentDispositionHeader",
+            "summary": "Sets\u0020the\u0020\u0022Content\u002DDisposition\u0022\u0020header\u0020in\u0020the\u0020given\u0020MessageInterface\u0020if\u0020a\u0020name\u0020and\/or\u0020filename\u0020are\u0020given",
+            "url": "classes/chillerlan-HTTP-Common-MultipartStreamBuilder.html#method_setContentDispositionHeader"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Common\\MultipartStreamBuilder\u003A\u003A\u0024streamFactory",
+            "name": "streamFactory",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Common-MultipartStreamBuilder.html#property_streamFactory"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Common\\MultipartStreamBuilder\u003A\u003A\u0024stream",
+            "name": "stream",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Common-MultipartStreamBuilder.html#property_stream"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Common\\MultipartStreamBuilder\u003A\u003A\u0024messages",
+            "name": "messages",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Common-MultipartStreamBuilder.html#property_messages"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Common\\MultipartStreamBuilder\u003A\u003A\u0024boundary",
+            "name": "boundary",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Common-MultipartStreamBuilder.html#property_boundary"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Common\\MultiResponseHandlerInterface",
             "name": "MultiResponseHandlerInterface",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlUtils-MultiResponseHandlerInterface.html"
+            "url": "classes/chillerlan-HTTP-Common-MultiResponseHandlerInterface.html"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Common\\MultiResponseHandlerInterface\u003A\u003AhandleResponse\u0028\u0029",
+            "name": "handleResponse",
+            "summary": "The\u0020multi\u0020response\u0020handler.\u0020\u0028Schr\u00F6dinger\u0027s\u0020cat\u0020state\u0020handler\u0029",
+            "url": "classes/chillerlan-HTTP-Common-MultiResponseHandlerInterface.html#method_handleResponse"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\HTTPOptions",
             "name": "HTTPOptions",
@@ -551,36 +661,6 @@ Search.appendIndex(
             "summary": "Tip\u0020of\u0020the\u0020middleware\u0020call\u0020stack",
             "url": "classes/chillerlan-HTTP-Psr15-RecursiveDispatcher.html#property_tip"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr17\\FactoryHelpers",
-            "name": "FactoryHelpers",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr17-FactoryHelpers.html"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr17\\FactoryHelpers\u003A\u003Acreate_stream\u0028\u0029",
-            "name": "create_stream",
-            "summary": "Create\u0020a\u0020new\u0020writable\u0020stream\u0020from\u0020a\u0020string.",
-            "url": "classes/chillerlan-HTTP-Psr17-FactoryHelpers.html#method_create_stream"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr17\\FactoryHelpers\u003A\u003Acreate_stream_from_input\u0028\u0029",
-            "name": "create_stream_from_input",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr17-FactoryHelpers.html#method_create_stream_from_input"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr17\\FactoryHelpers\u003A\u003ASTREAM_MODES_READ_WRITE",
-            "name": "STREAM_MODES_READ_WRITE",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr17-FactoryHelpers.html#constant_STREAM_MODES_READ_WRITE"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr17\\FactoryHelpers\u003A\u003ASTREAM_MODES_READ",
-            "name": "STREAM_MODES_READ",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr17-FactoryHelpers.html#constant_STREAM_MODES_READ"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr17\\FactoryHelpers\u003A\u003ASTREAM_MODES_WRITE",
-            "name": "STREAM_MODES_WRITE",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr17-FactoryHelpers.html#constant_STREAM_MODES_WRITE"
-        },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr17\\RequestFactory",
             "name": "RequestFactory",
             "summary": "",
@@ -846,11 +926,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTP-Psr18-URLExtractor.html#method_getResponses"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr18\\URLExtractor\u003A\u003A\u0024responses",
-            "name": "responses",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr18-URLExtractor.html#property_responses"
-        },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr18\\URLExtractor\u003A\u003A\u0024http",
             "name": "http",
             "summary": "",
@@ -861,6 +936,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTP-Psr18-URLExtractor.html#property_requestFactory"
         },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr18\\URLExtractor\u003A\u003A\u0024responses",
+            "name": "responses",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr18-URLExtractor.html#property_responses"
+        },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr7\\DummyStream",
             "name": "DummyStream",
             "summary": "",
@@ -868,7 +948,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr7\\DummyStream\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "DummyStream\u0020constructor",
             "url": "classes/chillerlan-HTTP-Psr7-DummyStream.html#method___construct"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr7\\DummyStream\u003A\u003AdummySetStream\u0028\u0029",
@@ -1046,25 +1126,25 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTP-Psr7-Message.html#method_withBody"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\Message\u003A\u003A\u0024headers",
-            "name": "headers",
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\Message\u003A\u003AcheckValue\u0028\u0029",
+            "name": "checkValue",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr7-Message.html#property_headers"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\Message\u003A\u003A\u0024headerNames",
-            "name": "headerNames",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr7-Message.html#property_headerNames"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\Message\u003A\u003A\u0024version",
-            "name": "version",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr7-Message.html#property_version"
+            "url": "classes/chillerlan-HTTP-Psr7-Message.html#method_checkValue"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr7\\Message\u003A\u003A\u0024body",
             "name": "body",
             "summary": "",
             "url": "classes/chillerlan-HTTP-Psr7-Message.html#property_body"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\Message\u003A\u003A\u0024headers",
+            "name": "headers",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr7-Message.html#property_headers"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\Message\u003A\u003A\u0024version",
+            "name": "version",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr7-Message.html#property_version"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr7\\Request",
             "name": "Request",
@@ -1111,15 +1191,15 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTP-Psr7-Request.html#method_updateHostFromUri"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr7\\Request\u003A\u003A\u0024method",
-            "name": "method",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr7-Request.html#property_method"
-        },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr7\\Request\u003A\u003A\u0024uri",
             "name": "uri",
             "summary": "",
             "url": "classes/chillerlan-HTTP-Psr7-Request.html#property_uri"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\Request\u003A\u003A\u0024method",
+            "name": "method",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr7-Request.html#property_method"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr7\\Request\u003A\u003A\u0024requestTarget",
             "name": "requestTarget",
@@ -1150,6 +1230,11 @@ Search.appendIndex(
             "name": "getReasonPhrase",
             "summary": "",
             "url": "classes/chillerlan-HTTP-Psr7-Response.html#method_getReasonPhrase"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr7\\Response\u003A\u003AgetReasonPhraseFromStatusCode\u0028\u0029",
+            "name": "getReasonPhraseFromStatusCode",
+            "summary": "Get\u0020the\u0020reason\u0020phrase\u0020for\u0020the\u0020given\u0020status\u0020code,\u0020returns\u0020an\u0020empty\u0020string\u0020if\u0020no\u0020matching\u0020phrase\u0020is\u0020found",
+            "url": "classes/chillerlan-HTTP-Psr7-Response.html#method_getReasonPhraseFromStatusCode"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr7\\Response\u003A\u003AREASON_PHRASES",
             "name": "REASON_PHRASES",
@@ -1676,90 +1761,220 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTP-Psr7-Uri.html#property_fragment"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\CurlUtils\\CurlHandleTest",
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\CurlHandleTest",
             "name": "CurlHandleTest",
             "summary": "",
-            "url": "classes/chillerlan-HTTPTest-CurlUtils-CurlHandleTest.html"
+            "url": "classes/chillerlan-HTTPTest-Common-CurlHandleTest.html"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\CurlUtils\\CurlHandleTest\u003A\u003A__setUp\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\CurlHandleTest\u003A\u003A__setUp\u0028\u0029",
             "name": "__setUp",
             "summary": "",
-            "url": "classes/chillerlan-HTTPTest-CurlUtils-CurlHandleTest.html#method___setUp"
+            "url": "classes/chillerlan-HTTPTest-Common-CurlHandleTest.html#method___setUp"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\CurlUtils\\CurlHandleTest\u003A\u003ArequestMethodProvider\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\CurlHandleTest\u003A\u003ArequestMethodProvider\u0028\u0029",
             "name": "requestMethodProvider",
             "summary": "",
-            "url": "classes/chillerlan-HTTPTest-CurlUtils-CurlHandleTest.html#method_requestMethodProvider"
+            "url": "classes/chillerlan-HTTPTest-Common-CurlHandleTest.html#method_requestMethodProvider"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\CurlUtils\\CurlHandleTest\u003A\u003AtestRequestMethods\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\CurlHandleTest\u003A\u003AtestRequestMethods\u0028\u0029",
             "name": "testRequestMethods",
             "summary": "",
-            "url": "classes/chillerlan-HTTPTest-CurlUtils-CurlHandleTest.html#method_testRequestMethods"
+            "url": "classes/chillerlan-HTTPTest-Common-CurlHandleTest.html#method_testRequestMethods"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\CurlUtils\\CurlHandleTest\u003A\u003ArequestMethodWithBodyProvider\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\CurlHandleTest\u003A\u003ArequestMethodWithBodyProvider\u0028\u0029",
             "name": "requestMethodWithBodyProvider",
             "summary": "",
-            "url": "classes/chillerlan-HTTPTest-CurlUtils-CurlHandleTest.html#method_requestMethodWithBodyProvider"
+            "url": "classes/chillerlan-HTTPTest-Common-CurlHandleTest.html#method_requestMethodWithBodyProvider"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\CurlUtils\\CurlHandleTest\u003A\u003AtestRequestMethodsWithFormBody\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\CurlHandleTest\u003A\u003AtestRequestMethodsWithFormBody\u0028\u0029",
             "name": "testRequestMethodsWithFormBody",
             "summary": "",
-            "url": "classes/chillerlan-HTTPTest-CurlUtils-CurlHandleTest.html#method_testRequestMethodsWithFormBody"
+            "url": "classes/chillerlan-HTTPTest-Common-CurlHandleTest.html#method_testRequestMethodsWithFormBody"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\CurlUtils\\CurlHandleTest\u003A\u003AtestRequestMethodsWithJsonBody\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\CurlHandleTest\u003A\u003AtestRequestMethodsWithJsonBody\u0028\u0029",
             "name": "testRequestMethodsWithJsonBody",
             "summary": "",
-            "url": "classes/chillerlan-HTTPTest-CurlUtils-CurlHandleTest.html#method_testRequestMethodsWithJsonBody"
+            "url": "classes/chillerlan-HTTPTest-Common-CurlHandleTest.html#method_testRequestMethodsWithJsonBody"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\CurlUtils\\CurlHandleTest\u003A\u003AtestLargeBody\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\CurlHandleTest\u003A\u003AtestLargeBody\u0028\u0029",
             "name": "testLargeBody",
             "summary": "",
-            "url": "classes/chillerlan-HTTPTest-CurlUtils-CurlHandleTest.html#method_testLargeBody"
+            "url": "classes/chillerlan-HTTPTest-Common-CurlHandleTest.html#method_testLargeBody"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\CurlUtils\\CurlHandleTest\u003A\u003A\u0024http",
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\CurlHandleTest\u003A\u003A\u0024http",
             "name": "http",
             "summary": "",
-            "url": "classes/chillerlan-HTTPTest-CurlUtils-CurlHandleTest.html#property_http"
+            "url": "classes/chillerlan-HTTPTest-Common-CurlHandleTest.html#property_http"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\CurlUtils\\CurlMultiClientTest",
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\CurlMultiClientTest",
             "name": "CurlMultiClientTest",
             "summary": "",
-            "url": "classes/chillerlan-HTTPTest-CurlUtils-CurlMultiClientTest.html"
+            "url": "classes/chillerlan-HTTPTest-Common-CurlMultiClientTest.html"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\CurlUtils\\CurlMultiClientTest\u003A\u003AsetUp\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\CurlMultiClientTest\u003A\u003AsetUp\u0028\u0029",
             "name": "setUp",
             "summary": "",
-            "url": "classes/chillerlan-HTTPTest-CurlUtils-CurlMultiClientTest.html#method_setUp"
+            "url": "classes/chillerlan-HTTPTest-Common-CurlMultiClientTest.html#method_setUp"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\CurlUtils\\CurlMultiClientTest\u003A\u003AgetRequests\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\CurlMultiClientTest\u003A\u003AgetRequests\u0028\u0029",
             "name": "getRequests",
             "summary": "",
-            "url": "classes/chillerlan-HTTPTest-CurlUtils-CurlMultiClientTest.html#method_getRequests"
+            "url": "classes/chillerlan-HTTPTest-Common-CurlMultiClientTest.html#method_getRequests"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\CurlUtils\\CurlMultiClientTest\u003A\u003AgetTestResponseHandler\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\CurlMultiClientTest\u003A\u003AgetTestResponseHandler\u0028\u0029",
             "name": "getTestResponseHandler",
             "summary": "",
-            "url": "classes/chillerlan-HTTPTest-CurlUtils-CurlMultiClientTest.html#method_getTestResponseHandler"
+            "url": "classes/chillerlan-HTTPTest-Common-CurlMultiClientTest.html#method_getTestResponseHandler"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\CurlUtils\\CurlMultiClientTest\u003A\u003AtestMultiRequest\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\CurlMultiClientTest\u003A\u003AtestMultiRequest\u0028\u0029",
             "name": "testMultiRequest",
             "summary": "",
-            "url": "classes/chillerlan-HTTPTest-CurlUtils-CurlMultiClientTest.html#method_testMultiRequest"
+            "url": "classes/chillerlan-HTTPTest-Common-CurlMultiClientTest.html#method_testMultiRequest"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\CurlUtils\\CurlMultiClientTest\u003A\u003AtestEmptyStackException\u0028\u0029",
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\CurlMultiClientTest\u003A\u003AtestEmptyStackException\u0028\u0029",
             "name": "testEmptyStackException",
             "summary": "",
-            "url": "classes/chillerlan-HTTPTest-CurlUtils-CurlMultiClientTest.html#method_testEmptyStackException"
+            "url": "classes/chillerlan-HTTPTest-Common-CurlMultiClientTest.html#method_testEmptyStackException"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\CurlUtils\\CurlMultiClientTest\u003A\u003A\u0024http",
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\CurlMultiClientTest\u003A\u003A\u0024http",
             "name": "http",
             "summary": "",
-            "url": "classes/chillerlan-HTTPTest-CurlUtils-CurlMultiClientTest.html#property_http"
+            "url": "classes/chillerlan-HTTPTest-Common-CurlMultiClientTest.html#property_http"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\CurlUtils\\CurlMultiClientTest\u003A\u003A\u0024multiResponseHandler",
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\CurlMultiClientTest\u003A\u003A\u0024multiResponseHandler",
             "name": "multiResponseHandler",
             "summary": "",
-            "url": "classes/chillerlan-HTTPTest-CurlUtils-CurlMultiClientTest.html#property_multiResponseHandler"
+            "url": "classes/chillerlan-HTTPTest-Common-CurlMultiClientTest.html#property_multiResponseHandler"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\FactoryHelpersTest",
+            "name": "FactoryHelpersTest",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Common-FactoryHelpersTest.html"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\FactoryHelpersTest\u003A\u003AtestCreateStream\u0028\u0029",
+            "name": "testCreateStream",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Common-FactoryHelpersTest.html#method_testCreateStream"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\FactoryHelpersTest\u003A\u003AtestCreateStreamInvalidModeException\u0028\u0029",
+            "name": "testCreateStreamInvalidModeException",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Common-FactoryHelpersTest.html#method_testCreateStreamInvalidModeException"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\FactoryHelpersTest\u003A\u003AstreamInputProvider\u0028\u0029",
+            "name": "streamInputProvider",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Common-FactoryHelpersTest.html#method_streamInputProvider"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\FactoryHelpersTest\u003A\u003AtestCreateStreamFromInput\u0028\u0029",
+            "name": "testCreateStreamFromInput",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Common-FactoryHelpersTest.html#method_testCreateStreamFromInput"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\FactoryHelpersTest\u003A\u003AtestCreateStreamFromInputException\u0028\u0029",
+            "name": "testCreateStreamFromInputException",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Common-FactoryHelpersTest.html#method_testCreateStreamFromInputException"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\MultipartStreamBuilderTest",
+            "name": "MultipartStreamBuilderTest",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Common-MultipartStreamBuilderTest.html"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\MultipartStreamBuilderTest\u003A\u003A__setUp\u0028\u0029",
+            "name": "__setUp",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Common-MultipartStreamBuilderTest.html#method___setUp"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\MultipartStreamBuilderTest\u003A\u003AtestCreatesDefaultBoundary\u0028\u0029",
+            "name": "testCreatesDefaultBoundary",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Common-MultipartStreamBuilderTest.html#method_testCreatesDefaultBoundary"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\MultipartStreamBuilderTest\u003A\u003AtestSetBoundary\u0028\u0029",
+            "name": "testSetBoundary",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Common-MultipartStreamBuilderTest.html#method_testSetBoundary"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\MultipartStreamBuilderTest\u003A\u003AtestSetBoundaryEmptyException\u0028\u0029",
+            "name": "testSetBoundaryEmptyException",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Common-MultipartStreamBuilderTest.html#method_testSetBoundaryEmptyException"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\MultipartStreamBuilderTest\u003A\u003AtestSetBoundaryInvalidCharException\u0028\u0029",
+            "name": "testSetBoundaryInvalidCharException",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Common-MultipartStreamBuilderTest.html#method_testSetBoundaryInvalidCharException"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\MultipartStreamBuilderTest\u003A\u003AtestReset\u0028\u0029",
+            "name": "testReset",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Common-MultipartStreamBuilderTest.html#method_testReset"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\MultipartStreamBuilderTest\u003A\u003AtestCanCreateEmptyBody\u0028\u0029",
+            "name": "testCanCreateEmptyBody",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Common-MultipartStreamBuilderTest.html#method_testCanCreateEmptyBody"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\MultipartStreamBuilderTest\u003A\u003AtestAddFields\u0028\u0029",
+            "name": "testAddFields",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Common-MultipartStreamBuilderTest.html#method_testAddFields"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\MultipartStreamBuilderTest\u003A\u003AtestAddStreams\u0028\u0029",
+            "name": "testAddStreams",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Common-MultipartStreamBuilderTest.html#method_testAddStreams"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\MultipartStreamBuilderTest\u003A\u003AtestAddFieldWithSameName\u0028\u0029",
+            "name": "testAddFieldWithSameName",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Common-MultipartStreamBuilderTest.html#method_testAddFieldWithSameName"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\MultipartStreamBuilderTest\u003A\u003AtestGivenFieldnameCannotBeEmptyException\u0028\u0029",
+            "name": "testGivenFieldnameCannotBeEmptyException",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Common-MultipartStreamBuilderTest.html#method_testGivenFieldnameCannotBeEmptyException"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\MultipartStreamBuilderTest\u003A\u003AtestCustomHeaders\u0028\u0029",
+            "name": "testCustomHeaders",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Common-MultipartStreamBuilderTest.html#method_testCustomHeaders"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\MultipartStreamBuilderTest\u003A\u003AtestCustomHeadersAndMultipleValues\u0028\u0029",
+            "name": "testCustomHeadersAndMultipleValues",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Common-MultipartStreamBuilderTest.html#method_testCustomHeadersAndMultipleValues"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\MultipartStreamBuilderTest\u003A\u003AtestSuppressContentTypeHeader\u0028\u0029",
+            "name": "testSuppressContentTypeHeader",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Common-MultipartStreamBuilderTest.html#method_testSuppressContentTypeHeader"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\MultipartStreamBuilderTest\u003A\u003AtestIgnoresNonContentNonCustomHeaders\u0028\u0029",
+            "name": "testIgnoresNonContentNonCustomHeaders",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Common-MultipartStreamBuilderTest.html#method_testIgnoresNonContentNonCustomHeaders"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\MultipartStreamBuilderTest\u003A\u003AtestNesting\u0028\u0029",
+            "name": "testNesting",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Common-MultipartStreamBuilderTest.html#method_testNesting"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\MultipartStreamBuilderTest\u003A\u003AtestBuildWithMessageInterface\u0028\u0029",
+            "name": "testBuildWithMessageInterface",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Common-MultipartStreamBuilderTest.html#method_testBuildWithMessageInterface"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\MultipartStreamBuilderTest\u003A\u003AtestOverwritesContentTypeHeaderInMessage\u0028\u0029",
+            "name": "testOverwritesContentTypeHeaderInMessage",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Common-MultipartStreamBuilderTest.html#method_testOverwritesContentTypeHeaderInMessage"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\MultipartStreamBuilderTest\u003A\u003A\u0024multipartStreamBuilder",
+            "name": "multipartStreamBuilder",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Common-MultipartStreamBuilderTest.html#property_multipartStreamBuilder"
         },                {
             "fqsen": "\\chillerlan\\HTTPTest\\FactoryTrait",
             "name": "FactoryTrait",
@@ -1935,36 +2150,6 @@ Search.appendIndex(
             "name": "testInvalidMiddlewareException",
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr15-RecursiveDispatcherTest.html#method_testInvalidMiddlewareException"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\FactoryHelpersTest",
-            "name": "FactoryHelpersTest",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr17-FactoryHelpersTest.html"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\FactoryHelpersTest\u003A\u003AtestCreateStream\u0028\u0029",
-            "name": "testCreateStream",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr17-FactoryHelpersTest.html#method_testCreateStream"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\FactoryHelpersTest\u003A\u003AtestCreateStreamInvalidModeException\u0028\u0029",
-            "name": "testCreateStreamInvalidModeException",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr17-FactoryHelpersTest.html#method_testCreateStreamInvalidModeException"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\FactoryHelpersTest\u003A\u003AstreamInputProvider\u0028\u0029",
-            "name": "streamInputProvider",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr17-FactoryHelpersTest.html#method_streamInputProvider"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\FactoryHelpersTest\u003A\u003AtestCreateStreamFromInput\u0028\u0029",
-            "name": "testCreateStreamFromInput",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr17-FactoryHelpersTest.html#method_testCreateStreamFromInput"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\FactoryHelpersTest\u003A\u003AtestCreateStreamFromInputException\u0028\u0029",
-            "name": "testCreateStreamFromInputException",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr17-FactoryHelpersTest.html#method_testCreateStreamFromInputException"
         },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr17\\RequestFactoryTest",
             "name": "RequestFactoryTest",
@@ -2321,6 +2506,81 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr7-DummyStreamTest.html#method_testDecoratesWithCustomizations"
         },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageTest",
+            "name": "MessageTest",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-MessageTest.html"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageTest\u003A\u003AtestNullBody\u0028\u0029",
+            "name": "testNullBody",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-MessageTest.html#method_testNullBody"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageTest\u003A\u003AtestSameInstanceWhenSameBody\u0028\u0029",
+            "name": "testSameInstanceWhenSameBody",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-MessageTest.html#method_testSameInstanceWhenSameBody"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageTest\u003A\u003AtestReturnsEmptyHeadersArray\u0028\u0029",
+            "name": "testReturnsEmptyHeadersArray",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-MessageTest.html#method_testReturnsEmptyHeadersArray"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageTest\u003A\u003AtestWithHeader\u0028\u0029",
+            "name": "testWithHeader",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-MessageTest.html#method_testWithHeader"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageTest\u003A\u003AtestWithHeaderAsArray\u0028\u0029",
+            "name": "testWithHeaderAsArray",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-MessageTest.html#method_testWithHeaderAsArray"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageTest\u003A\u003AtestWithHeaderReplacesDifferentCase\u0028\u0029",
+            "name": "testWithHeaderReplacesDifferentCase",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-MessageTest.html#method_testWithHeaderReplacesDifferentCase"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageTest\u003A\u003AtestWithAddedHeader\u0028\u0029",
+            "name": "testWithAddedHeader",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-MessageTest.html#method_testWithAddedHeader"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageTest\u003A\u003AtestWithAddedHeaderAsArray\u0028\u0029",
+            "name": "testWithAddedHeaderAsArray",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-MessageTest.html#method_testWithAddedHeaderAsArray"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageTest\u003A\u003AtestWithAddedHeaderThatDoesNotExist\u0028\u0029",
+            "name": "testWithAddedHeaderThatDoesNotExist",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-MessageTest.html#method_testWithAddedHeaderThatDoesNotExist"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageTest\u003A\u003AtestWithoutHeaderThatExists\u0028\u0029",
+            "name": "testWithoutHeaderThatExists",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-MessageTest.html#method_testWithoutHeaderThatExists"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageTest\u003A\u003AtestWithoutHeaderThatDoesNotExist\u0028\u0029",
+            "name": "testWithoutHeaderThatDoesNotExist",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-MessageTest.html#method_testWithoutHeaderThatDoesNotExist"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageTest\u003A\u003AtestSameInstanceWhenRemovingMissingHeader\u0028\u0029",
+            "name": "testSameInstanceWhenRemovingMissingHeader",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-MessageTest.html#method_testSameInstanceWhenRemovingMissingHeader"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageTest\u003A\u003AtestHeaderValuesAreTrimmed\u0028\u0029",
+            "name": "testHeaderValuesAreTrimmed",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-MessageTest.html#method_testHeaderValuesAreTrimmed"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\MessageTest\u003A\u003AtestSupportNumericHeaderValues\u0028\u0029",
+            "name": "testSupportNumericHeaderValues",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-Psr7-MessageTest.html#method_testSupportNumericHeaderValues"
+        },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\RequestTest",
             "name": "RequestTest",
             "summary": "",
@@ -2340,11 +2600,6 @@ Search.appendIndex(
             "name": "testValidateRequestUri",
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr7-RequestTest.html#method_testValidateRequestUri"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\RequestTest\u003A\u003AtestNullBody\u0028\u0029",
-            "name": "testNullBody",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-RequestTest.html#method_testNullBody"
         },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\RequestTest\u003A\u003AtestCapitalizesMethod\u0028\u0029",
             "name": "testCapitalizesMethod",
@@ -2401,11 +2656,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr7-RequestTest.html#method_testOverridesHostWithUri"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\RequestTest\u003A\u003AtestSupportNumericHeaders\u0028\u0029",
-            "name": "testSupportNumericHeaders",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-RequestTest.html#method_testSupportNumericHeaders"
-        },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\RequestTest\u003A\u003AtestAddsPortToHeader\u0028\u0029",
             "name": "testAddsPortToHeader",
             "summary": "",
@@ -2441,11 +2691,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr7-ResponseTest.html#method_testStatusCanBeNumericString"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\ResponseTest\u003A\u003AtestNullBody\u0028\u0029",
-            "name": "testNullBody",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-ResponseTest.html#method_testNullBody"
-        },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\ResponseTest\u003A\u003AtestCanConstructWithReason\u0028\u0029",
             "name": "testCanConstructWithReason",
             "summary": "",
@@ -2475,61 +2720,6 @@ Search.appendIndex(
             "name": "testWithBody",
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr7-ResponseTest.html#method_testWithBody"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\ResponseTest\u003A\u003AtestSameInstanceWhenSameBody\u0028\u0029",
-            "name": "testSameInstanceWhenSameBody",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-ResponseTest.html#method_testSameInstanceWhenSameBody"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\ResponseTest\u003A\u003AtestWithHeader\u0028\u0029",
-            "name": "testWithHeader",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-ResponseTest.html#method_testWithHeader"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\ResponseTest\u003A\u003AtestWithHeaderAsArray\u0028\u0029",
-            "name": "testWithHeaderAsArray",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-ResponseTest.html#method_testWithHeaderAsArray"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\ResponseTest\u003A\u003AtestWithHeaderReplacesDifferentCase\u0028\u0029",
-            "name": "testWithHeaderReplacesDifferentCase",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-ResponseTest.html#method_testWithHeaderReplacesDifferentCase"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\ResponseTest\u003A\u003AtestWithAddedHeader\u0028\u0029",
-            "name": "testWithAddedHeader",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-ResponseTest.html#method_testWithAddedHeader"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\ResponseTest\u003A\u003AtestWithAddedHeaderAsArray\u0028\u0029",
-            "name": "testWithAddedHeaderAsArray",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-ResponseTest.html#method_testWithAddedHeaderAsArray"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\ResponseTest\u003A\u003AtestWithAddedHeaderThatDoesNotExist\u0028\u0029",
-            "name": "testWithAddedHeaderThatDoesNotExist",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-ResponseTest.html#method_testWithAddedHeaderThatDoesNotExist"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\ResponseTest\u003A\u003AtestWithoutHeaderThatExists\u0028\u0029",
-            "name": "testWithoutHeaderThatExists",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-ResponseTest.html#method_testWithoutHeaderThatExists"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\ResponseTest\u003A\u003AtestWithoutHeaderThatDoesNotExist\u0028\u0029",
-            "name": "testWithoutHeaderThatDoesNotExist",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-ResponseTest.html#method_testWithoutHeaderThatDoesNotExist"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\ResponseTest\u003A\u003AtestSameInstanceWhenRemovingMissingHeader\u0028\u0029",
-            "name": "testSameInstanceWhenRemovingMissingHeader",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-ResponseTest.html#method_testSameInstanceWhenRemovingMissingHeader"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\ResponseTest\u003A\u003AtestHeaderValuesAreTrimmed\u0028\u0029",
-            "name": "testHeaderValuesAreTrimmed",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-ResponseTest.html#method_testHeaderValuesAreTrimmed"
         },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\ServerRequestTest",
             "name": "ServerRequestTest",
@@ -2956,11 +3146,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr7-UriTest.html#method_testDefaultReturnValuesOfGetters"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\UriTest\u003A\u003AtestImmutability\u0028\u0029",
-            "name": "testImmutability",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-UriTest.html#method_testImmutability"
-        },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\UriTest\u003A\u003AtestAddsSlashForRelativeUriStringWithHost\u0028\u0029",
             "name": "testAddsSlashForRelativeUriStringWithHost",
             "summary": "",
@@ -3026,10 +3211,10 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/default.html"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlUtils",
-            "name": "CurlUtils",
+            "fqsen": "\\chillerlan\\HTTP\\Common",
+            "name": "Common",
             "summary": "",
-            "url": "namespaces/chillerlan-http-curlutils.html"
+            "url": "namespaces/chillerlan-http-common.html"
         },                {
             "fqsen": "\\chillerlan\\HTTP",
             "name": "HTTP",
@@ -3061,10 +3246,10 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/chillerlan-http-psr7.html"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\CurlUtils",
-            "name": "CurlUtils",
+            "fqsen": "\\chillerlan\\HTTPTest\\Common",
+            "name": "Common",
             "summary": "",
-            "url": "namespaces/chillerlan-httptest-curlutils.html"
+            "url": "namespaces/chillerlan-httptest-common.html"
         },                {
             "fqsen": "\\chillerlan\\HTTPTest",
             "name": "HTTPTest",
