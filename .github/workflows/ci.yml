@@ -9,7 +9,7 @@ on:
     branches:
       - main
 
-name: "Continuous Integration"
+name: "CI"
 
 jobs:
 
@@ -17,6 +17,14 @@ jobs:
     name: "Static Code Analysis"
 
     runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: true
+      matrix:
+        php-version:
+          - "8.1"
+          - "8.2"
+          - "8.3"
 
     env:
       PHAN_ALLOW_XDEBUG: 0
@@ -29,16 +37,17 @@ jobs:
       - name: "Install PHP"
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.1"
+          php-version: ${{ matrix.php-version }}
           tools: pecl
           coverage: none
-          extensions: ast, curl, json, simplexml, sodium, zlib
+          extensions: ast, curl, fileinfo, json, simplexml, sodium, zlib
 
       - name: "Update dependencies with composer"
         uses: ramsey/composer-install@v2
 
       - name: "Run phan"
-        run: php vendor/bin/phan
+        run: php vendor/bin/phan --target-php-version=${{ matrix.php-version }}
+
 
   build-docs:
     name: "Build and publish Docs"
@@ -55,7 +64,7 @@ jobs:
           php-version: "8.1"
           tools: phpDocumentor
           coverage: none
-          extensions: curl, json, simplexml, zlib
+          extensions: curl, fileinfo, json, simplexml, sodium, zlib
 
       - name: "Build Docs"
         run: phpdoc --config=phpdoc.xml
@@ -66,6 +75,7 @@ jobs:
           BRANCH: gh-pages
           FOLDER: docs
           CLEAN: true
+
 
   tests:
     name: "Unit Tests"
@@ -81,6 +91,7 @@ jobs:
         php-version:
           - "8.1"
           - "8.2"
+          - "8.3"
 
     steps:
       - name: "Checkout"
@@ -94,7 +105,7 @@ jobs:
         with:
           php-version: ${{ matrix.php-version }}
           coverage: pcov
-          extensions: curl, json, simplexml, sodium, zlib
+          extensions: curl, fileinfo, json, simplexml, sodium, zlib
 
       - name: "Install dependencies with composer"
         uses: ramsey/composer-install@v2
