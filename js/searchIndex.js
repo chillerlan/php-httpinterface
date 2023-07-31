@@ -351,10 +351,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTP-Common-MultipartStreamBuilder.html#property_streamFactory"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\Common\\MultipartStreamBuilder\u003A\u003A\u0024stream",
-            "name": "stream",
+            "fqsen": "\\chillerlan\\HTTP\\Common\\MultipartStreamBuilder\u003A\u003A\u0024multipartStream",
+            "name": "multipartStream",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-Common-MultipartStreamBuilder.html#property_stream"
+            "url": "classes/chillerlan-HTTP-Common-MultipartStreamBuilder.html#property_multipartStream"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\Common\\MultipartStreamBuilder\u003A\u003A\u0024messages",
             "name": "messages",
