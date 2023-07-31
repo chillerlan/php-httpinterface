@@ -29,7 +29,7 @@ abstract class HTTPClientTestAbstract extends TestCase{
 	protected function setUp():void{
 
 		$this->options = new HTTPOptions([
-			'ca_info' => __DIR__.'/../cacert.pem',
+			'ca_info'    => __DIR__.'/../cacert.pem',
 			'user_agent' => $this::USER_AGENT,
 		]);
 

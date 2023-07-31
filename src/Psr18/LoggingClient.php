@@ -32,7 +32,7 @@ class LoggingClient implements ClientInterface, LoggerAwareInterface{
 	 */
 	public function __construct(ClientInterface $http, LoggerInterface $logger = null){
 		$this->http   = $http;
-		$this->logger = $logger ?? new NullLogger;
+		$this->logger = ($logger ?? new NullLogger);
 	}
 
 	/**

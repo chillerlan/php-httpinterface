@@ -483,8 +483,8 @@ class UriTest extends TestCase{
 
 	public static function hostProvider():array{
 		return [
-			'normalized host' => ['MaStEr.eXaMpLe.CoM', 'master.example.com',],
-			'simple host'     => ['www.example.com', 'www.example.com',],
+			'normalized host' => ['MaStEr.eXaMpLe.CoM', 'master.example.com'],
+			'simple host'     => ['www.example.com', 'www.example.com'],
 			'IPv6 Host'       => ['[::1]', '[::1]'],
 		];
 	}

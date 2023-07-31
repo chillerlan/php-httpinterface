@@ -183,7 +183,7 @@ class CurlMultiClient implements LoggerAwareInterface{
 		);
 
 		$curl = $handle
-			->setID($id ?? $this->handleCounter++)
+			->setID(($id ?? $this->handleCounter++))
 			->setRetries($retries ?? 1)
 			->init()
 		;

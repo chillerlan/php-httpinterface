@@ -218,7 +218,7 @@ class CurlHandle{
 		$this->curlOptions[CURLOPT_SSL_VERIFYPEER] = false;
 
 		if($this->options->ca_info !== null){
-			$opt                     = $this->options->ca_info_is_path ? CURLOPT_CAPATH : CURLOPT_CAINFO;
+			$opt                     = ($this->options->ca_info_is_path) ? CURLOPT_CAPATH : CURLOPT_CAINFO;
 			$this->curlOptions[$opt] = $this->options->ca_info;
 
 			if($this->options->ssl_verifypeer){

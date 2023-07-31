@@ -34,7 +34,7 @@ class MultipartStreamBuilder{
 	 * MultipartStreamBuilder constructor
 	 */
 	public function __construct(StreamFactoryInterface $streamFactory = null){
-		$this->streamFactory = $streamFactory ?? new StreamFactory;
+		$this->streamFactory = ($streamFactory ?? new StreamFactory);
 
 		$this->reset();
 	}
