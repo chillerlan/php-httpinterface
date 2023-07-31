@@ -6,7 +6,6 @@
 	"keywords": [
 		"http", "message", "client", "factory", "handler", "psr-7", "psr-15", "psr-17", "psr-18"
 	],
-	"minimum-stability": "stable",
 	"authors": [
 		{
 			"name": "smiley",
@@ -25,13 +24,15 @@
 		"psr/http-server-handler-implementation": "1.0",
 		"psr/http-server-middleware-implementation": "1.0"
 	},
+	"minimum-stability": "dev",
+	"prefer-stable": true,
 	"require": {
 		"php": "^8.1",
 		"ext-curl":"*",
 		"ext-json":"*",
 		"ext-simplexml":"*",
 		"ext-zlib":"*",
-		"chillerlan/php-http-message-utils": "dev-main#f83afbfeb2fb5466ecf5b83d7be07f842f4884ba",
+		"chillerlan/php-http-message-utils": "dev-main#d1a5a12369a9075100beffe20af16976e3203be8",
 		"chillerlan/php-settings-container": "^2.1.4 || ^3.1",
 		"fig/http-message-util":"^1.1.5",
 		"psr/http-client":"^1.0",
