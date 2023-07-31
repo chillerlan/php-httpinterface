@@ -12,7 +12,7 @@ namespace chillerlan\HTTP\Common;
 
 use chillerlan\HTTP\Psr17\StreamFactory;
 use chillerlan\HTTP\Psr7\Message;
-use chillerlan\HTTP\Utils\{HeaderUtil, MessageUtil};
+use chillerlan\HTTP\Utils\{HeaderUtil, MessageUtil, StreamUtil};
 use InvalidArgumentException;
 use Psr\Http\Message\{MessageInterface, StreamFactoryInterface, StreamInterface};
 use function basename, count, implode, ksort, preg_match, random_bytes, sha1, sprintf, str_starts_with, trim;
@@ -25,10 +25,10 @@ use function basename, count, implode, ksort, preg_match, random_bytes, sha1, sp
 class MultipartStreamBuilder{
 
 	protected StreamFactoryInterface $streamFactory;
-	protected StreamInterface        $stream;
+	protected StreamInterface        $multipartStream;
 	/** @var \Psr\Http\Message\MessageInterface[]  */
-	protected array                  $messages = [];
-	protected string                 $boundary = '';
+	protected array                  $messages;
+	protected string                 $boundary;
 
 	/**
 	 * MultipartStreamBuilder constructor
@@ -152,30 +152,30 @@ class MultipartStreamBuilder{
 	 * and the MessageInterface is returned; returns the StreamInterface with the content otherwise.
 	 */
 	public function build(MessageInterface $message = null):StreamInterface|MessageInterface{
-		$this->stream = $this->streamFactory->createStream();
+		$this->multipartStream = $this->streamFactory->createStream();
 
 		foreach($this->messages as $part){
 			// write boundary before each part
-			$this->stream->write(sprintf("--%s\r\n", $this->boundary));
+			$this->multipartStream->write(sprintf("--%s\r\n", $this->boundary));
 			// write content
 			$this->writeHeaders($part->getHeaders());
 			$this->writeBody($part->getBody());
 		}
 
 		// write final boundary
-		$this->stream->write(sprintf("--%s--\r\n", $this->boundary));
+		$this->multipartStream->write(sprintf("--%s--\r\n", $this->boundary));
 		// rewind stream!!!
-		$this->stream->rewind();
+		$this->multipartStream->rewind();
 
 		// just return the stream
 		if($message === null){
-			return $this->stream;
+			return $this->multipartStream;
 		}
 
 		// write a proper multipart header to the given message and add the body
 		return $message
 			->withHeader('Content-Type', sprintf('multipart/form-data; boundary="%s"', $this->boundary))
-			->withBody($this->stream)
+			->withBody($this->multipartStream)
 		;
 	}
 
@@ -199,10 +199,10 @@ class MultipartStreamBuilder{
 			}
 
 			// write "Key: Value" followed by a newline
-			$this->stream->write(sprintf("%s: %s\r\n", $name, $value));
+			$this->multipartStream->write(sprintf("%s: %s\r\n", $name, $value));
 		}
 		// end with newline
-		$this->stream->write("\r\n");
+		$this->multipartStream->write("\r\n");
 	}
 
 	/**
@@ -215,18 +215,10 @@ class MultipartStreamBuilder{
 			$body->rewind();
 		}
 
-		// stream is readable? fine!
-		if($body->isReadable()){
-			while(!$body->eof()){
-				$this->stream->write($body->read(1048576));
-			}
-		}
-		// else attempt casting the stream to string (might throw)
-		else{
-			$this->stream->write((string)$body); // @codeCoverageIgnore
-		}
+		StreamUtil::copyToStream($body, $this->multipartStream);
+
 		// end with newline
-		$this->stream->write("\r\n");
+		$this->multipartStream->write("\r\n");
 	}
 
 	/**
