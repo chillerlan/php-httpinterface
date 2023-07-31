@@ -10,7 +10,7 @@
 
 namespace chillerlan\HTTP\Psr7;
 
-use chillerlan\HTTP\Utils\{QueryUtil, UriUtil};
+use chillerlan\HTTP\Utils\UriUtil;
 use InvalidArgumentException;
 use Psr\Http\Message\UriInterface;
 
@@ -40,7 +40,7 @@ class Uri implements UriInterface{
 		if($uri !== null){
 
 			if(is_string($uri)){
-				$uri = QueryUtil::parseUrl($uri);
+				$uri = UriUtil::parseUrl($uri);
 			}
 
 			if(!is_array($uri)){
