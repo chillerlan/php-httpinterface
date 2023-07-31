@@ -12,7 +12,7 @@ and don't force countless libraries to do that for you instead. If you don't lik
 [![license][license-badge]][license]
 [![Continuous Integration][gh-action-badge]][gh-action]
 [![Coverage][coverage-badge]][coverage]
-[![Scrunitizer][scrutinizer-badge]][scrutinizer]
+[![Codacy][codacy-badge]][codacy]
 [![Packagist downloads][downloads-badge]][downloads]
 
 [php-badge]: https://img.shields.io/packagist/php-v/chillerlan/php-httpinterface?logo=php&color=8892BF
@@ -23,8 +23,8 @@ and don't force countless libraries to do that for you instead. If you don't lik
 [license]: https://github.com/chillerlan/php-httpinterface/blob/main/LICENSE
 [coverage-badge]: https://img.shields.io/codecov/c/github/chillerlan/php-httpinterface.svg?logo=codecov
 [coverage]: https://codecov.io/github/chillerlan/php-httpinterface
-[scrutinizer-badge]: https://img.shields.io/scrutinizer/g/chillerlan/php-httpinterface.svg?logo=scrutinizer
-[scrutinizer]: https://scrutinizer-ci.com/g/chillerlan/php-httpinterface
+[codacy-badge]: https://img.shields.io/codacy/grade/0ad3a5f9abe547cca5d5b3dff0ba3383?logo=codacy
+[codacy]: https://app.codacy.com/gh/chillerlan/php-httpinterface/dashboard
 [downloads-badge]: https://img.shields.io/packagist/dt/chillerlan/php-httpinterface.svg?logo=packagist
 [downloads]: https://packagist.org/packages/chillerlan/php-httpinterface/stats
 [gh-action-badge]: https://img.shields.io/github/actions/workflow/status/chillerlan/php-httpinterface/ci.yml?branch=main&logo=github
