@@ -4,4 +4,7 @@
 vendor/*
 composer.lock
 *cacert.pem
+phpcs.xml
+phpdoc.xml
+phpmd.xml
 phpunit.xml

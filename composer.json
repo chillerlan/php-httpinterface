@@ -28,23 +28,25 @@
 	"prefer-stable": true,
 	"require": {
 		"php": "^8.1",
-		"ext-curl":"*",
-		"ext-json":"*",
-		"ext-simplexml":"*",
-		"ext-zlib":"*",
+		"ext-curl": "*",
+		"ext-json": "*",
+		"ext-simplexml": "*",
+		"ext-zlib": "*",
 		"chillerlan/php-http-message-utils": "dev-main#d1a5a12369a9075100beffe20af16976e3203be8",
 		"chillerlan/php-settings-container": "^2.1.4 || ^3.1",
-		"fig/http-message-util":"^1.1.5",
-		"psr/http-client":"^1.0",
+		"fig/http-message-util": "^1.1.5",
+		"psr/http-client": "^1.0",
 		"psr/http-message": "^1.1",
-		"psr/http-factory":"^1.0",
+		"psr/http-factory": "^1.0",
 		"psr/http-server-handler": "^1.0",
 		"psr/http-server-middleware": "^1.0",
 		"psr/log": "^1.1 || ^2.0 || ^3.0"
 	},
 	"require-dev": {
 		"phan/phan": "^5.4",
-		"phpunit/phpunit": "^10.2"
+		"phpmd/phpmd": "^2.13",
+		"phpunit/phpunit": "^10.2",
+		"squizlabs/php_codesniffer": "^3.7"
 	},
 	"autoload": {
 		"psr-4": {
