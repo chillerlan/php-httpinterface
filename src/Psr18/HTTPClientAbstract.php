@@ -32,11 +32,11 @@ abstract class HTTPClientAbstract implements HTTPClientInterface{
 		ResponseFactoryInterface $responseFactory = null,
 		LoggerInterface $logger = null
 	){
-		$this->options = $options ?? new HTTPOptions;
+		$this->options = ($options ?? new HTTPOptions);
 
 		$this
-			->setResponseFactory($responseFactory ?? new ResponseFactory)
-			->setLogger($logger ?? new NullLogger)
+			->setResponseFactory(($responseFactory ?? new ResponseFactory))
+			->setLogger(($logger ?? new NullLogger))
 		;
 	}
 

@@ -45,10 +45,10 @@ class Stream implements StreamInterface{
 		$this->stream   = $stream;
 		$meta           = $this->getMetadata();
 		$mode           = ($meta['mode'] ?? '');
-		$this->seekable = $meta['seekable'] ?? false;
+		$this->seekable = ($meta['seekable'] ?? false);
 		$this->readable = StreamUtil::modeAllowsRead($mode);
 		$this->writable = StreamUtil::modeAllowsWrite($mode);
-		$this->uri      = $meta['uri'] ?? null;
+		$this->uri      = ($meta['uri'] ?? null);
 	}
 
 	/**
@@ -281,7 +281,7 @@ class Stream implements StreamInterface{
 	public function getMetadata($key = null):mixed{
 
 		if(!is_resource($this->stream)){
-			return $key ? null : [];
+			return ($key) ? null : [];
 		}
 
 		$meta = stream_get_meta_data($this->stream);
@@ -290,7 +290,7 @@ class Stream implements StreamInterface{
 			return $meta;
 		}
 
-		return $meta[$key] ?? null;
+		return ($meta[$key] ?? null);
 	}
 
 }

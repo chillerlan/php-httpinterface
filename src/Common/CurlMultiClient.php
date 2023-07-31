@@ -10,7 +10,9 @@
 
 namespace chillerlan\HTTP\Common;
 
-use chillerlan\HTTP\{HTTPOptions, Psr17\ResponseFactory, Psr18\ClientException};
+use chillerlan\HTTP\Psr17\ResponseFactory;
+use chillerlan\HTTP\Psr18\ClientException;
+use chillerlan\HTTP\HTTPOptions;
 use chillerlan\Settings\SettingsContainerInterface;
 use Psr\Http\Message\{RequestInterface, ResponseFactoryInterface};
 use Psr\Log\{LoggerAwareInterface, LoggerAwareTrait, LoggerInterface, NullLogger};
@@ -52,15 +54,15 @@ class CurlMultiClient implements LoggerAwareInterface{
 		LoggerInterface $logger = null
 	){
 		$this->multiResponseHandler = $multiResponseHandler;
-		$this->options              = $options ?? new HTTPOptions;
-		$this->responseFactory      = $responseFactory ?? new ResponseFactory;
-		$this->logger               = $logger ?? new NullLogger;
+		$this->options              = ($options ?? new HTTPOptions);
+		$this->responseFactory      = ($responseFactory ?? new ResponseFactory);
+		$this->logger               = ($logger ?? new NullLogger);
 		$this->curl_multi           = curl_multi_init();
 
-		$curl_multi_options = [
+		$curl_multi_options = ([
 			CURLMOPT_PIPELINING  => CURLPIPE_MULTIPLEX,
 			CURLMOPT_MAXCONNECTS => $this->options->window_size,
-		] + $this->options->curl_multi_options;
+		] + $this->options->curl_multi_options);
 
 		foreach($curl_multi_options as $k => $v){
 			curl_multi_setopt($this->curl_multi, $k, $v);
@@ -128,9 +130,10 @@ class CurlMultiClient implements LoggerAwareInterface{
 
 		// ...and process the stack
 		do{
+			// $still_running is not a "flag" as the documentation states, but the number of currently active handles
 			$status = curl_multi_exec($this->curl_multi, $active);
 
-			if($active){
+			if($active > 0){
 				curl_multi_select($this->curl_multi, $this->options->timeout);
 			}
 
@@ -153,7 +156,7 @@ class CurlMultiClient implements LoggerAwareInterface{
 			}
 
 		}
-		while($active && $status === CURLM_OK);
+		while($active > 0 && $status === CURLM_OK);
 
 		return $this;
 	}

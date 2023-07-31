@@ -63,7 +63,7 @@ class PriorityQueueDispatcher extends QueueDispatcher{
 	protected function sortMiddleware():void{
 		usort(
 			$this->middlewareStack,
-			fn(PriorityMiddlewareInterface $a, PriorityMiddlewareInterface $b) => $b->getPriority() <=> $a->getPriority()
+			fn(PriorityMiddlewareInterface $a, PriorityMiddlewareInterface $b):int => ($b->getPriority() <=> $a->getPriority())
 		);
 	}
 

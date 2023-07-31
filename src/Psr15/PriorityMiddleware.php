@@ -25,7 +25,7 @@ class PriorityMiddleware implements PriorityMiddlewareInterface{
 	 */
 	public function __construct(MiddlewareInterface $middleware, int $priority = null){
 		$this->middleware = $middleware;
-		$this->priority   = $priority ?? PHP_INT_MIN;
+		$this->priority   = ($priority ?? PHP_INT_MIN);
 	}
 
 	/**

@@ -269,35 +269,35 @@ class UriTest extends TestCase{
 		$unreserved = 'a-zA-Z0-9.-_~!$&\'()*+,;=:@';
 
 		return [
-			'Percent encode spaces' => [
+			'Percent encode spaces'                            => [
 				'/pa th?q=va lue#frag ment',
 				'/pa%20th',
 				'q=va%20lue',
 				'frag%20ment',
 				'/pa%20th?q=va%20lue#frag%20ment',
 			],
-			'Percent encode multibyte' => [
+			'Percent encode multibyte'                         => [
 				'/€?€#€',
 				'/%E2%82%AC',
 				'%E2%82%AC',
 				'%E2%82%AC',
 				'/%E2%82%AC?%E2%82%AC#%E2%82%AC',
 			],
-			'Don\'t encode already encoded' => [
+			'Don\'t encode already encoded'                    => [
 				'/pa%20th?q=va%20lue#frag%20ment',
 				'/pa%20th',
 				'q=va%20lue',
 				'frag%20ment',
 				'/pa%20th?q=va%20lue#frag%20ment',
 			],
-			'Percent encode invalid percent encodings' => [
+			'Percent encode invalid percent encodings'         => [
 				'/pa%2-th?q=va%2-lue#frag%2-ment',
 				'/pa%252-th',
 				'q=va%252-lue',
 				'frag%252-ment',
 				'/pa%252-th?q=va%252-lue#frag%252-ment',
 			],
-			'Don\'t encode path segments' => [
+			'Don\'t encode path segments'                      => [
 				'/pa/th//two?q=va/lue#frag/ment',
 				'/pa/th//two',
 				'q=va/lue',
@@ -311,7 +311,7 @@ class UriTest extends TestCase{
 				$unreserved,
 				"/$unreserved?$unreserved#$unreserved",
 			],
-			'Encoded unreserved chars are not decoded' => [
+			'Encoded unreserved chars are not decoded'         => [
 				'/p%61th?q=v%61lue#fr%61gment',
 				'/p%61th',
 				'q=v%61lue',

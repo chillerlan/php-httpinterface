@@ -51,7 +51,7 @@ class DummyStream implements StreamInterface{
 
 		$this
 			->dummySetStream($stream ?? FactoryHelpers::createStream())
-			->dummyOverrideAll($methods ?? [])
+			->dummyOverrideAll(($methods ?? []))
 		;
 	}
 

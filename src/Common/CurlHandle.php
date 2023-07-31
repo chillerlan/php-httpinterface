@@ -101,7 +101,7 @@ class CurlHandle{
 		$this->curl     = curl_init();
 
 		$this->requestBody  = $this->request->getBody();
-		$this->responseBody = $stream ?? $this->response->getBody();
+		$this->responseBody = ($stream ?? $this->response->getBody());
 	}
 
 	/**
@@ -159,17 +159,17 @@ class CurlHandle{
 	 */
 	protected function initCurlOptions():array{
 		$this->curlOptions = [
-			CURLOPT_HEADER           => false,
-			CURLOPT_RETURNTRANSFER   => true,
-			CURLOPT_FOLLOWLOCATION   => false,
-			CURLOPT_MAXREDIRS        => 5,
-			CURLOPT_URL              => (string)$this->request->getUri()->withFragment(''),
-			CURLOPT_HTTP_VERSION     => CURL_HTTP_VERSION_2TLS,
-			CURLOPT_USERAGENT        => $this->options->user_agent,
-			CURLOPT_PROTOCOLS        => CURLPROTO_HTTP | CURLPROTO_HTTPS,
-			CURLOPT_REDIR_PROTOCOLS  => CURLPROTO_HTTPS,
-			CURLOPT_TIMEOUT          => $this->options->timeout,
-			CURLOPT_CONNECTTIMEOUT   => 30,
+			CURLOPT_HEADER          => false,
+			CURLOPT_RETURNTRANSFER  => true,
+			CURLOPT_FOLLOWLOCATION  => false,
+			CURLOPT_MAXREDIRS       => 5,
+			CURLOPT_URL             => (string)$this->request->getUri()->withFragment(''),
+			CURLOPT_HTTP_VERSION    => CURL_HTTP_VERSION_2TLS,
+			CURLOPT_USERAGENT       => $this->options->user_agent,
+			CURLOPT_PROTOCOLS       => (CURLPROTO_HTTP | CURLPROTO_HTTPS),
+			CURLOPT_REDIR_PROTOCOLS => CURLPROTO_HTTPS,
+			CURLOPT_TIMEOUT         => $this->options->timeout,
+			CURLOPT_CONNECTTIMEOUT  => 30,
 		];
 
 		$this->setSSLOptions();
@@ -264,7 +264,7 @@ class CurlHandle{
 
 				// cURL requires a special format for empty headers.
 				// See https://github.com/guzzle/guzzle/issues/1882 for more details.
-				$headers[] = $value === '' ? $name.';' : $name.': '.$value;
+				$headers[] = ($value === '') ? $name.';' : $name.': '.$value;
 			}
 
 		}
@@ -402,7 +402,7 @@ class CurlHandle{
 		}
 		elseif(str_starts_with(strtoupper($str), 'HTTP/')){
 			$status = explode(' ', $str, 3);
-			$reason = count($status) > 2 ? trim($status[2]) : '';
+			$reason = (count($status) > 2) ? trim($status[2]) : '';
 
 			$this->response = $this->response
 				->withStatus((int)$status[1], $reason)

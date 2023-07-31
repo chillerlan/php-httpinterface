@@ -28,7 +28,7 @@ class RecursiveDispatcherTest extends QueueRequestHandlerTest{
 		$this->expectException(MiddlewareException::class);
 		$this->expectExceptionMessage('invalid middleware');
 
-		$handler = new class($this->responseFactory) implements RequestHandlerInterface{
+		$handler = new class ($this->responseFactory) implements RequestHandlerInterface{
 			private ResponseFactoryInterface $responseFactory;
 
 			public function __construct(ResponseFactoryInterface $responseFactory){

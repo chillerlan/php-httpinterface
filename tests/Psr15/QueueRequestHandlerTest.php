@@ -43,7 +43,7 @@ class QueueRequestHandlerTest extends TestCase{
 
 	protected function getTestMiddlewareStack():array{
 		return [
-			new class() implements MiddlewareInterface{
+			new class () implements MiddlewareInterface{
 				public function process(ServerRequestInterface $request, RequestHandlerInterface $handler):ResponseInterface{
 					TestCase::assertSame(['foo3' => 'bar3', 'foo2' => 'bar2'], $request->getAttributes());
 					$r = $handler->handle($request->withAttribute('foo1', 'bar1'));
@@ -52,7 +52,7 @@ class QueueRequestHandlerTest extends TestCase{
 					return $r->withHeader('X-Out-First', '1');
 				}
 			},
-			new class() implements MiddlewareInterface{
+			new class () implements MiddlewareInterface{
 				public function process(ServerRequestInterface $request, RequestHandlerInterface $handler):ResponseInterface{
 					TestCase::assertSame(['foo3' => 'bar3'], $request->getAttributes());
 					$r = $handler->handle($request->withAttribute('foo2', 'bar2'));
@@ -65,7 +65,7 @@ class QueueRequestHandlerTest extends TestCase{
 	}
 
 	protected function getTestMiddleware():MiddlewareInterface{
-		return new class() implements MiddlewareInterface{
+		return new class () implements MiddlewareInterface{
 			public function process(ServerRequestInterface $request, RequestHandlerInterface $handler):ResponseInterface{
 				TestCase::assertSame([], $request->getAttributes());
 				$r = $handler->handle($request->withAttribute('foo3', 'bar3'));
@@ -77,7 +77,7 @@ class QueueRequestHandlerTest extends TestCase{
 	}
 
 	protected function getTestFallbackHandler():RequestHandlerInterface{
-		return new class($this->responseFactory) implements RequestHandlerInterface{
+		return new class ($this->responseFactory) implements RequestHandlerInterface{
 			private ResponseFactoryInterface $responseFactory;
 
 			public function __construct(ResponseFactoryInterface $responseFactory){

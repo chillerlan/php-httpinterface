@@ -13,6 +13,7 @@ namespace chillerlan\HTTPTest\Psr18;
 use chillerlan\HTTP\Psr18\LoggingClient;
 use PHPUnit\Framework\Attributes\Group;
 use Psr\Log\AbstractLogger;
+use Stringable;
 use function date;
 use function sprintf;
 
@@ -22,8 +23,8 @@ class LoggingClientTest extends CurlClientTest{
 	protected function setUp():void{
 		parent::setUp();
 
-		$logger = new class() extends AbstractLogger{
-			public function log($level, string|\Stringable $message, array $context = []):void{
+		$logger = new class () extends AbstractLogger{
+			public function log($level, string|Stringable $message, array $context = []):void{
 				echo sprintf('[%s][%s] %s', date('Y-m-d H:i:s'), $level, 'LoggingClientTest')."\n";
 			}
 		};

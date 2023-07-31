@@ -20,10 +20,11 @@ $artists = ['4wLIbcoqmqI4WZHDiBxeCB', '7mefbdlQXxJVKgEbfAeKjL', '4G3PykZuN4ts87L
 // https://github.com/ThirumalaiK/youtube-dl/commit/120339ec1413bca0a398cdcb7b4d12c5897ce7b7
 $sha256Hash = 'd66221ea13998b2f81883c5187d174c8646e4041d67f5b1e103bc262d447e3a0'; // Apollo/GraphQL thing?? may change
 
-$http = new CurlClient(new HTTPOptions([
-	'ca_info'    => __DIR__.'/cacert.pem',
-	'user_agent' => 'Mozilla/5.0 (Windows NT 6.6.6; Win64; x64; rv:91.0) Gecko/20100101 Firefox/91.0',
-]));
+$options = new HTTPOptions;
+$options->ca_info    = __DIR__.'/cacert.pem';
+$options->user_agent = 'Mozilla/5.0 (Windows NT 6.6.6; Win64; x64; rv:91.0) Gecko/20100101 Firefox/91.0';
+
+$http = new CurlClient($options);
 
 $tokenRequest  = new Request('GET', new Uri('https://open.spotify.com/get_access_token'));
 $tokenResponse = $http->sendRequest($tokenRequest);
@@ -52,4 +53,3 @@ foreach($artists as $artistID){
 	}
 
 }
-

@@ -45,7 +45,7 @@ class PriorityQueueRequestHandlerTest extends TestCase{
 				'X-Priority-2',
 				'X-Priority-1',
 				'X-Priority-None-0',
-				'X-Priority-None-1'
+				'X-Priority-None-1',
 			],
 			array_keys($response->getHeaders())
 		);
@@ -81,14 +81,14 @@ class PriorityQueueRequestHandlerTest extends TestCase{
 				'X-Priority-11',
 				'X-Priority-None-0',
 				'X-Priority-1',
-				'X-Priority-None-1'
+				'X-Priority-None-1',
 			],
 			array_keys($response->getHeaders())
 		);
 	}
 
 	protected function getNonPriorityMiddleware(int $id):MiddlewareInterface{
-		return new class($id) implements MiddlewareInterface{
+		return new class ($id) implements MiddlewareInterface{
 
 			protected int $id;
 
@@ -104,7 +104,7 @@ class PriorityQueueRequestHandlerTest extends TestCase{
 
 	protected function getPriorityMiddleware(int $priority):PriorityMiddlewareInterface{
 
-		$middleware = new class($priority) implements MiddlewareInterface{
+		$middleware = new class ($priority) implements MiddlewareInterface{
 
 			protected int $priority;
 

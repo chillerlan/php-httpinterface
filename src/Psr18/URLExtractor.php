@@ -36,7 +36,7 @@ class URLExtractor implements ClientInterface{
 	 */
 	public function __construct(ClientInterface $http, RequestFactoryInterface $requestFactory = null){
 		$this->http           = $http;
-		$this->requestFactory = $requestFactory ?? new RequestFactory;
+		$this->requestFactory = ($requestFactory ?? new RequestFactory);
 	}
 
 	/**

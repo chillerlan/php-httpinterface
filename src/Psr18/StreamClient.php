@@ -62,7 +62,7 @@ class StreamClient extends HTTPClientAbstract{
 				'method'           => $method,
 				'header'           => $this->getRequestHeaders($request),
 				'content'          => $body,
-#				'protocol_version' => '1.1', // 1.1 is default from PHP 8.0
+				'protocol_version' => $request->getProtocolVersion(),
 				'user_agent'       => $this->options->user_agent,
 				'max_redirects'    => 0,
 				'timeout'          => 5,
@@ -76,7 +76,7 @@ class StreamClient extends HTTPClientAbstract{
 			],
 		];
 
-		$ca                  = $this->options->ca_info_is_path ? 'capath' : 'cafile';
+		$ca                  = ($this->options->ca_info_is_path) ? 'capath' : 'cafile';
 		$options['ssl'][$ca] = $this->options->ca_info;
 
 		return $options;
@@ -94,7 +94,7 @@ class StreamClient extends HTTPClientAbstract{
 			foreach($values as $value){
 				// cURL requires a special format for empty headers.
 				// See https://github.com/guzzle/guzzle/issues/1882 for more details.
-				$headers[] = $value === '' ? $name.';' : $name.': '.$value;
+				$headers[] = ($value === '') ? $name.';' : $name.': '.$value;
 			}
 		}
 

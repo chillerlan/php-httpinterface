@@ -27,8 +27,8 @@ class QueueDispatcher implements MiddlewareInterface, RequestHandlerInterface{
 	 */
 	public function __construct(iterable $middlewareStack = null, RequestHandlerInterface $fallbackHandler = null){
 		$this
-			->addStack($middlewareStack ?? [])
-			->setFallbackHandler($fallbackHandler ?? new EmptyResponseHandler(new ResponseFactory, 500))
+			->addStack(($middlewareStack ?? []))
+			->setFallbackHandler(($fallbackHandler ?? new EmptyResponseHandler(new ResponseFactory, 500)))
 		;
 	}
 

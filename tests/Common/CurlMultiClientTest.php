@@ -35,7 +35,7 @@ class CurlMultiClientTest extends TestCase{
 
 		$options = new HTTPOptions([
 			'ca_info' => __DIR__.'/../cacert.pem',
-			'sleep'   => 60 / 300 * 1000000,
+			'sleep'   => (60 / 300 * 1000000),
 		]);
 
 		$this->multiResponseHandler = $this->getTestResponseHandler();
@@ -66,7 +66,7 @@ class CurlMultiClientTest extends TestCase{
 
 	protected function getTestResponseHandler():MultiResponseHandlerInterface{
 
-		return new class() implements MultiResponseHandlerInterface{
+		return new class () implements MultiResponseHandlerInterface{
 
 			protected array $responses = [];
 
@@ -111,7 +111,6 @@ class CurlMultiClientTest extends TestCase{
 			->process()
 		;
 
-		/** @noinspection PhpPossiblePolymorphicInvocationInspection */
 		$responses = $this->multiResponseHandler->getResponses();
 
 		$this::assertCount(10, $requests);

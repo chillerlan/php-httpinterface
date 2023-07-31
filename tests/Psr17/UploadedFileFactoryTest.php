@@ -26,11 +26,11 @@ class UploadedFileFactoryTest extends TestCase{
 		int $error = null,
 		string $clientFilename = null,
 		string $clientMediaType = null
-	){
+	):void{
 		$this::assertInstanceOf(UploadedFileInterface::class, $file);
 		$this::assertSame($content, (string)$file->getStream());
-		$this::assertSame($size ?? strlen($content), $file->getSize());
-		$this::assertSame($error ?? UPLOAD_ERR_OK, $file->getError());
+		$this::assertSame(($size ?? strlen($content)), $file->getSize());
+		$this::assertSame(($error ?? UPLOAD_ERR_OK), $file->getError());
 		$this::assertSame($clientFilename, $file->getClientFilename());
 		$this::assertSame($clientMediaType, $file->getClientMediaType());
 	}

@@ -126,7 +126,7 @@ class StreamTest extends TestCase{
 		$throws = function(callable $fn) use ($stream){
 			try{
 				$fn($stream);
-				$this->fail();
+				$this::fail();
 			}
 			catch(Exception $e){}
 		};

@@ -172,7 +172,7 @@ class Uri implements UriInterface{
 	 * @inheritDoc
 	 */
 	public function getUserInfo():string{
-		return $this->user.($this->pass != '' ? ':'.$this->pass : '');
+		return $this->user.(($this->pass != '') ? ':'.$this->pass : '');
 	}
 
 	/**
@@ -414,7 +414,7 @@ class Uri implements UriInterface{
 	protected function replaceChars(string $str, bool $query = null):string{
 		/** @noinspection RegExpRedundantEscape, RegExpUnnecessaryNonCapturingGroup */
 		return preg_replace_callback(
-			'/(?:[^a-z\d_\-\.~!\$&\'\(\)\*\+,;=%:@\/'.($query ? '\?' : '').']++|%(?![a-f\d]{2}))/i',
+			'/(?:[^a-z\d_\-\.~!\$&\'\(\)\*\+,;=%:@\/'.(($query) ? '\?' : '').']++|%(?![a-f\d]{2}))/i',
 			fn(array $match):string => rawurlencode($match[0]),
 			$str
 		);

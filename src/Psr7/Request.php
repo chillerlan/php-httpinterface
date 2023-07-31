@@ -34,7 +34,7 @@ class Request extends Message implements RequestInterface, RequestMethodInterfac
 			throw new InvalidArgumentException('HTTP method must not be empty');
 		}
 
-		$this->uri = $uri instanceof UriInterface ? $uri : new Uri($uri);
+		$this->uri = ($uri instanceof UriInterface) ? $uri : new Uri($uri);
 
 		$this->updateHostFromUri();
 	}
@@ -128,14 +128,15 @@ class Request extends Message implements RequestInterface, RequestMethodInterfac
 		$host = $this->uri->getHost();
 
 		if($host !== ''){
+			$port = $this->uri->getPort();
 
-			if(($port = $this->uri->getPort()) !== null){
+			if($port !== null){
 				$host .= ':'.$port;
 			}
 
 			// Ensure Host is the first header.
 			// See: http://tools.ietf.org/html/rfc7230#section-5.4
-			$this->headers = ['host' => ['name' => 'Host', 'value' => [$host]]] + $this->headers;
+			$this->headers = (['host' => ['name' => 'Host', 'value' => [$host]]] + $this->headers);
 		}
 
 	}

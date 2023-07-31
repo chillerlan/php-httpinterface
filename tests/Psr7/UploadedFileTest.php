@@ -121,7 +121,8 @@ class UploadedFileTest extends TestCase{
 		$stream = $this->streamFactory->createStream('Foo bar!');
 		$upload = new UploadedFile($stream, 0);
 
-		$this->cleanup[] = $to = tempnam(sys_get_temp_dir(), 'diac');
+		$to              = tempnam(sys_get_temp_dir(), 'diac');
+		$this->cleanup[] = $to;
 		$upload->moveTo($to);
 		$this::assertTrue(file_exists($to));
 
@@ -134,7 +135,8 @@ class UploadedFileTest extends TestCase{
 		$stream = $this->streamFactory->createStream('Foo bar!');
 		$upload = new UploadedFile($stream, 0);
 
-		$this->cleanup[] = $to = tempnam(sys_get_temp_dir(), 'diac');
+		$to              = tempnam(sys_get_temp_dir(), 'diac');
+		$this->cleanup[] = $to;
 		$upload->moveTo($to);
 		$this::assertFileExists($to);
 
@@ -201,8 +203,11 @@ class UploadedFileTest extends TestCase{
 	}
 
 	public function testMoveToCreatesStreamIfOnlyAFilenameWasProvided():void{
-		$this->cleanup[] = $from = tempnam(sys_get_temp_dir(), 'copy_from');
-		$this->cleanup[] = $to = tempnam(sys_get_temp_dir(), 'copy_to');
+		$from = tempnam(sys_get_temp_dir(), 'copy_from');
+		$to   = tempnam(sys_get_temp_dir(), 'copy_to');
+
+		$this->cleanup[] = $from;
+		$this->cleanup[] = $to;
 
 		copy(__FILE__, $from);
 

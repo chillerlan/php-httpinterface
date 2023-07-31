@@ -105,8 +105,8 @@ class Response extends Message implements ResponseInterface, StatusCodeInterface
 	public function __construct(int $status = null, string $reason = null){
 		parent::__construct();
 
-		$this->statusCode   = $status ?? $this::STATUS_OK;
-		$this->reasonPhrase = $reason ?? $this->getReasonPhraseFromStatusCode($this->statusCode);
+		$this->statusCode   = ($status ?? $this::STATUS_OK);
+		$this->reasonPhrase = ($reason ?? $this->getReasonPhraseFromStatusCode($this->statusCode));
 	}
 
 	/**
@@ -123,7 +123,7 @@ class Response extends Message implements ResponseInterface, StatusCodeInterface
 		$reasonPhrase = trim($reasonPhrase);
 
 		$this->statusCode   = $code;
-		$this->reasonPhrase = $reasonPhrase !== '' ? $reasonPhrase : $this->getReasonPhraseFromStatusCode($code);
+		$this->reasonPhrase = ($reasonPhrase !== '') ? $reasonPhrase : $this->getReasonPhraseFromStatusCode($code);
 
 		return $this;
 	}
@@ -139,7 +139,7 @@ class Response extends Message implements ResponseInterface, StatusCodeInterface
 	 * Get the reason phrase for the given status code, returns an empty string if no matching phrase is found
 	 */
 	protected function getReasonPhraseFromStatusCode(int $status):string{
-		return $this::REASON_PHRASES[$status] ?? '';
+		return ($this::REASON_PHRASES[$status] ?? '');
 	}
 
 }

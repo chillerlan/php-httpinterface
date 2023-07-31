@@ -78,10 +78,10 @@ class CurlHandleTest extends TestCase{
 
 	public static function requestMethodWithBodyProvider():array{
 		return [
-			'delete'  => [RequestMethodInterface::METHOD_DELETE],
-			'patch'   => [RequestMethodInterface::METHOD_PATCH],
-			'post'    => [RequestMethodInterface::METHOD_POST],
-			'put'     => [RequestMethodInterface::METHOD_PUT],
+			'delete' => [RequestMethodInterface::METHOD_DELETE],
+			'patch'  => [RequestMethodInterface::METHOD_PATCH],
+			'post'   => [RequestMethodInterface::METHOD_POST],
+			'put'    => [RequestMethodInterface::METHOD_PUT],
 		];
 	}
 
@@ -152,7 +152,7 @@ class CurlHandleTest extends TestCase{
 	public function testLargeBody():void{
 
 		try{
-			$body    = str_repeat('*', (1 << 20) + 1);
+			$body    = str_repeat('*', ((1 << 20) + 1));
 			$request = $this->requestFactory->createRequest('POST', 'https://httpbin.org/post')
 				->withHeader('Content-type', 'text/plain')
 				->withHeader('Content-Length', strlen($body))

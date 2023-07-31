@@ -92,7 +92,7 @@ class MessageTest extends TestCase{
 
 		$this::assertSame(['Foo' => ['Bar']], $message->getHeaders());
 
-		$message->withAddedHeader('foO', ['Baz', 'Bam',]);
+		$message->withAddedHeader('foO', ['Baz', 'Bam']);
 
 		$this::assertSame(['Foo' => ['Bar', 'Baz', 'Bam']], $message->getHeaders());
 		$this::assertSame('Bar, Baz, Bam', $message->getHeaderLine('foo'));
