@@ -95,6 +95,7 @@ class Message implements MessageInterface{
 	 * @inheritDoc
 	 */
 	public function withAddedHeader(string $name, $value):static{
+		/** @var array $value */
 		$value  = HeaderUtil::trimValues($this->checkValue($value));
 		$lcName = strtolower($name);
 
@@ -102,6 +103,7 @@ class Message implements MessageInterface{
 			$name = $this->headers[$lcName]['name'];
 		}
 
+		/** @phan-suppress-next-line PhanTypeMismatchArgumentInternal */
 		$this->headers[$lcName] = ['name' => $name, 'value' => array_merge(($this->headers[$lcName]['value'] ?? []), $value)];
 
 		return $this;
