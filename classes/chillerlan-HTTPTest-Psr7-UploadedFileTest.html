@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/base.css">
             <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/template.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
                 <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
         <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="js/template.js"></script>
         <script src="js/search.js"></script>
         <script defer src="js/searchIndex.js"></script>
     </head>
@@ -52,7 +53,7 @@
 <label class="phpdocumentor-sidebar__menu-icon" for="sidebar-button">
     Menu
 </label>
-<aside class="phpdocumentor-column -four phpdocumentor-sidebar">
+<aside class="phpdocumentor-column -three phpdocumentor-sidebar">
                     <section class="phpdocumentor-sidebar__category">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
@@ -91,8 +92,9 @@
     </section>
 </aside>
 
-            <div class="phpdocumentor-column -eight phpdocumentor-content">
-                    <ul class="phpdocumentor-breadcrumbs">
+            <div class="phpdocumentor-column -nine phpdocumentor-content">
+                                <section>
+                                        <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/chillerlan.html">chillerlan</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/chillerlan-httptest.html">HTTPTest</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/chillerlan-httptest-psr7.html">Psr7</a></li>
@@ -119,6 +121,11 @@
                             <a href="classes/chillerlan-HTTPTest-FactoryTrait.html"><abbr title="\chillerlan\HTTPTest\FactoryTrait">FactoryTrait</abbr></a>                    </span>
     </h2>
 
+<div class="phpdocumentor-label-line">
+
+
+</div>
+
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="tests/Psr7/UploadedFileTest.php"><a href="files/tests-psr7-uploadedfiletest.html"><abbr title="tests/Psr7/UploadedFileTest.php">UploadedFileTest.php</abbr></a></abbr>
     :
@@ -127,10 +134,6 @@
     </aside>
 
         
-    <section class="phpdocumentor-description"></section>
-
-
-
 
 
 
@@ -138,214 +141,208 @@
 
 <h3 id="toc">
     Table of Contents
-    <a href="#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+
 </h3>
 
+
+
+
+
+
+
+
+
+<h4 id="toc-properties">
+    Properties
+    <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
 <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#property_cleanup">$cleanup</a>
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_requestFactory">$requestFactory</a>
     <span>
                         &nbsp;: <abbr title="\Psr\Http\Message\RequestFactoryInterface">RequestFactoryInterface</abbr>            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_responseFactory">$responseFactory</a>
     <span>
                         &nbsp;: <abbr title="\Psr\Http\Message\ResponseFactoryInterface">ResponseFactoryInterface</abbr>            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_server">$server</a>
     <span>
                         &nbsp;: <abbr title="\chillerlan\HTTP\Utils\ServerUtil">ServerUtil</abbr>            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_serverRequestFactory">$serverRequestFactory</a>
     <span>
                         &nbsp;: <abbr title="\Psr\Http\Message\ServerRequestFactoryInterface">ServerRequestFactoryInterface</abbr>            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_streamFactory">$streamFactory</a>
     <span>
                         &nbsp;: <abbr title="\Psr\Http\Message\StreamFactoryInterface">StreamFactoryInterface</abbr>            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_uploadedFileFactory">$uploadedFileFactory</a>
     <span>
                         &nbsp;: <abbr title="\Psr\Http\Message\UploadedFileFactoryInterface">UploadedFileFactoryInterface</abbr>            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_uriFactory">$uriFactory</a>
     <span>
                         &nbsp;: <abbr title="\Psr\Http\Message\UriFactoryInterface">UriFactoryInterface</abbr>            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_FACTORIES">$FACTORIES</a>
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;            </span>
 </dt>
-<dd></dd>
 
-                <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    </dl>
+
+<h4 id="toc-methods">
+    Methods
+    <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_invalidErrorStatuses">invalidErrorStatuses()</a>
     <span>
                                 &nbsp;: array&lt;string|int, mixed&gt;    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_invalidStreams">invalidStreams()</a>
     <span>
                                 &nbsp;: array&lt;string|int, mixed&gt;    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_nonOkErrorStatus">nonOkErrorStatus()</a>
     <span>
                                 &nbsp;: array&lt;string|int, mixed&gt;    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testCannotMoveToEmptyTarget">testCannotMoveToEmptyTarget()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testCannotMoveToUnwritableDirectory">testCannotMoveToUnwritableDirectory()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testCannotRetrieveStreamAfterMove">testCannotRetrieveStreamAfterMove()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testConstructorDoesNotRaiseExceptionForInvalidStreamWhenErrorStatusPresent">testConstructorDoesNotRaiseExceptionForInvalidStreamWhenErrorStatusPresent()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testGetStreamRaisesExceptionWhenErrorStatusPresent">testGetStreamRaisesExceptionWhenErrorStatusPresent()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testGetStreamReturnsOriginalStreamObject">testGetStreamReturnsOriginalStreamObject()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testGetStreamReturnsWrappedPhpStream">testGetStreamReturnsWrappedPhpStream()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testMoveCannotBeCalledMoreThanOnce">testMoveCannotBeCalledMoreThanOnce()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testMoveToCreatesStreamIfOnlyAFilenameWasProvided">testMoveToCreatesStreamIfOnlyAFilenameWasProvided()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testMoveToRaisesExceptionWhenErrorStatusPresent">testMoveToRaisesExceptionWhenErrorStatusPresent()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testNormalizeFilesRaisesException">testNormalizeFilesRaisesException()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testRaisesExceptionOnInvalidErrorStatus">testRaisesExceptionOnInvalidErrorStatus()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testRaisesExceptionOnInvalidStreamOrFile">testRaisesExceptionOnInvalidStreamOrFile()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testSuccessful">testSuccessful()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
     <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method___setUp">__setUp()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
     <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#method_setUp">setUp()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
     <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_tearDown">tearDown()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
-        </dl>
+    </dl>
+
 
 
 
@@ -356,6 +353,7 @@
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
             <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+
         </h3>
                     <article
         class="
@@ -367,6 +365,7 @@
     <h4 class="phpdocumentor-element__name" id="property_cleanup">
         $cleanup
         <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#property_cleanup" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -384,10 +383,8 @@
     <span class="phpdocumentor-signature__name">$cleanup</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -401,6 +398,7 @@
     <h4 class="phpdocumentor-element__name" id="property_requestFactory">
         $requestFactory
         <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_requestFactory" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -418,10 +416,8 @@
     <span class="phpdocumentor-signature__name">$requestFactory</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -435,6 +431,7 @@
     <h4 class="phpdocumentor-element__name" id="property_responseFactory">
         $responseFactory
         <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_responseFactory" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -452,10 +449,8 @@
     <span class="phpdocumentor-signature__name">$responseFactory</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -469,6 +464,7 @@
     <h4 class="phpdocumentor-element__name" id="property_server">
         $server
         <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_server" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -486,10 +482,8 @@
     <span class="phpdocumentor-signature__name">$server</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -503,6 +497,7 @@
     <h4 class="phpdocumentor-element__name" id="property_serverRequestFactory">
         $serverRequestFactory
         <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_serverRequestFactory" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -520,10 +515,8 @@
     <span class="phpdocumentor-signature__name">$serverRequestFactory</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -537,6 +530,7 @@
     <h4 class="phpdocumentor-element__name" id="property_streamFactory">
         $streamFactory
         <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_streamFactory" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -554,10 +548,8 @@
     <span class="phpdocumentor-signature__name">$streamFactory</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -571,6 +563,7 @@
     <h4 class="phpdocumentor-element__name" id="property_uploadedFileFactory">
         $uploadedFileFactory
         <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_uploadedFileFactory" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -588,10 +581,8 @@
     <span class="phpdocumentor-signature__name">$uploadedFileFactory</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -605,6 +596,7 @@
     <h4 class="phpdocumentor-element__name" id="property_uriFactory">
         $uriFactory
         <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_uriFactory" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -622,10 +614,8 @@
     <span class="phpdocumentor-signature__name">$uriFactory</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -639,6 +629,7 @@
     <h4 class="phpdocumentor-element__name" id="property_FACTORIES">
         $FACTORIES
         <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_FACTORIES" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -656,10 +647,8 @@
     <span class="phpdocumentor-signature__name">$FACTORIES</span>
      = <span class="phpdocumentor-signature__default-value">[&#039;requestFactory&#039; =&gt; &#039;REQUEST_FACTORY&#039;, &#039;responseFactory&#039; =&gt; &#039;RESPONSE_FACTORY&#039;, &#039;serverRequestFactory&#039; =&gt; &#039;SERVER_REQUEST_FACTORY&#039;, &#039;streamFactory&#039; =&gt; &#039;STREAM_FACTORY&#039;, &#039;uploadedFileFactory&#039; =&gt; &#039;UPLOADED_FILE_FACTORY&#039;, &#039;uriFactory&#039; =&gt; &#039;URI_FACTORY&#039;]</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -669,6 +658,7 @@
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
             <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+
         </h3>
                     <article
         class="phpdocumentor-element
@@ -679,6 +669,7 @@
     <h4 class="phpdocumentor-element__name" id="method_invalidErrorStatuses">
         invalidErrorStatuses()
         <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_invalidErrorStatuses" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="tests/Psr7/UploadedFileTest.php"><a href="files/tests-psr7-uploadedfiletest.html"><abbr title="tests/Psr7/UploadedFileTest.php">UploadedFileTest.php</abbr></a></abbr>
@@ -692,16 +683,17 @@
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">invalidErrorStatuses</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -712,6 +704,7 @@
     <h4 class="phpdocumentor-element__name" id="method_invalidStreams">
         invalidStreams()
         <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_invalidStreams" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="tests/Psr7/UploadedFileTest.php"><a href="files/tests-psr7-uploadedfiletest.html"><abbr title="tests/Psr7/UploadedFileTest.php">UploadedFileTest.php</abbr></a></abbr>
@@ -725,16 +718,17 @@
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">invalidStreams</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -745,6 +739,7 @@
     <h4 class="phpdocumentor-element__name" id="method_nonOkErrorStatus">
         nonOkErrorStatus()
         <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_nonOkErrorStatus" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="tests/Psr7/UploadedFileTest.php"><a href="files/tests-psr7-uploadedfiletest.html"><abbr title="tests/Psr7/UploadedFileTest.php">UploadedFileTest.php</abbr></a></abbr>
@@ -758,16 +753,17 @@
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">nonOkErrorStatus</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -778,6 +774,7 @@
     <h4 class="phpdocumentor-element__name" id="method_testCannotMoveToEmptyTarget">
         testCannotMoveToEmptyTarget()
         <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testCannotMoveToEmptyTarget" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="tests/Psr7/UploadedFileTest.php"><a href="files/tests-psr7-uploadedfiletest.html"><abbr title="tests/Psr7/UploadedFileTest.php">UploadedFileTest.php</abbr></a></abbr>
@@ -791,15 +788,12 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">testCannotMoveToEmptyTarget</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -811,6 +805,7 @@
     <h4 class="phpdocumentor-element__name" id="method_testCannotMoveToUnwritableDirectory">
         testCannotMoveToUnwritableDirectory()
         <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testCannotMoveToUnwritableDirectory" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="tests/Psr7/UploadedFileTest.php"><a href="files/tests-psr7-uploadedfiletest.html"><abbr title="tests/Psr7/UploadedFileTest.php">UploadedFileTest.php</abbr></a></abbr>
@@ -824,15 +819,12 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">testCannotMoveToUnwritableDirectory</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -844,6 +836,7 @@
     <h4 class="phpdocumentor-element__name" id="method_testCannotRetrieveStreamAfterMove">
         testCannotRetrieveStreamAfterMove()
         <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testCannotRetrieveStreamAfterMove" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="tests/Psr7/UploadedFileTest.php"><a href="files/tests-psr7-uploadedfiletest.html"><abbr title="tests/Psr7/UploadedFileTest.php">UploadedFileTest.php</abbr></a></abbr>
@@ -857,15 +850,12 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">testCannotRetrieveStreamAfterMove</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -877,6 +867,7 @@
     <h4 class="phpdocumentor-element__name" id="method_testConstructorDoesNotRaiseExceptionForInvalidStreamWhenErrorStatusPresent">
         testConstructorDoesNotRaiseExceptionForInvalidStreamWhenErrorStatusPresent()
         <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testConstructorDoesNotRaiseExceptionForInvalidStreamWhenErrorStatusPresent" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="tests/Psr7/UploadedFileTest.php"><a href="files/tests-psr7-uploadedfiletest.html"><abbr title="tests/Psr7/UploadedFileTest.php">UploadedFileTest.php</abbr></a></abbr>
@@ -890,8 +881,9 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">testConstructorDoesNotRaiseExceptionForInvalidStreamWhenErrorStatusPresent</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$status</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -899,17 +891,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -921,6 +908,7 @@
     <h4 class="phpdocumentor-element__name" id="method_testGetStreamRaisesExceptionWhenErrorStatusPresent">
         testGetStreamRaisesExceptionWhenErrorStatusPresent()
         <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testGetStreamRaisesExceptionWhenErrorStatusPresent" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="tests/Psr7/UploadedFileTest.php"><a href="files/tests-psr7-uploadedfiletest.html"><abbr title="tests/Psr7/UploadedFileTest.php">UploadedFileTest.php</abbr></a></abbr>
@@ -934,8 +922,9 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">testGetStreamRaisesExceptionWhenErrorStatusPresent</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$status</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -943,17 +932,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -965,6 +949,7 @@
     <h4 class="phpdocumentor-element__name" id="method_testGetStreamReturnsOriginalStreamObject">
         testGetStreamReturnsOriginalStreamObject()
         <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testGetStreamReturnsOriginalStreamObject" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="tests/Psr7/UploadedFileTest.php"><a href="files/tests-psr7-uploadedfiletest.html"><abbr title="tests/Psr7/UploadedFileTest.php">UploadedFileTest.php</abbr></a></abbr>
@@ -978,15 +963,12 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">testGetStreamReturnsOriginalStreamObject</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -998,6 +980,7 @@
     <h4 class="phpdocumentor-element__name" id="method_testGetStreamReturnsWrappedPhpStream">
         testGetStreamReturnsWrappedPhpStream()
         <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testGetStreamReturnsWrappedPhpStream" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="tests/Psr7/UploadedFileTest.php"><a href="files/tests-psr7-uploadedfiletest.html"><abbr title="tests/Psr7/UploadedFileTest.php">UploadedFileTest.php</abbr></a></abbr>
@@ -1011,15 +994,12 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">testGetStreamReturnsWrappedPhpStream</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1031,6 +1011,7 @@
     <h4 class="phpdocumentor-element__name" id="method_testMoveCannotBeCalledMoreThanOnce">
         testMoveCannotBeCalledMoreThanOnce()
         <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testMoveCannotBeCalledMoreThanOnce" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="tests/Psr7/UploadedFileTest.php"><a href="files/tests-psr7-uploadedfiletest.html"><abbr title="tests/Psr7/UploadedFileTest.php">UploadedFileTest.php</abbr></a></abbr>
@@ -1044,15 +1025,12 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">testMoveCannotBeCalledMoreThanOnce</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1064,6 +1042,7 @@
     <h4 class="phpdocumentor-element__name" id="method_testMoveToCreatesStreamIfOnlyAFilenameWasProvided">
         testMoveToCreatesStreamIfOnlyAFilenameWasProvided()
         <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testMoveToCreatesStreamIfOnlyAFilenameWasProvided" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="tests/Psr7/UploadedFileTest.php"><a href="files/tests-psr7-uploadedfiletest.html"><abbr title="tests/Psr7/UploadedFileTest.php">UploadedFileTest.php</abbr></a></abbr>
@@ -1077,15 +1056,12 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">testMoveToCreatesStreamIfOnlyAFilenameWasProvided</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1097,6 +1073,7 @@
     <h4 class="phpdocumentor-element__name" id="method_testMoveToRaisesExceptionWhenErrorStatusPresent">
         testMoveToRaisesExceptionWhenErrorStatusPresent()
         <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testMoveToRaisesExceptionWhenErrorStatusPresent" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="tests/Psr7/UploadedFileTest.php"><a href="files/tests-psr7-uploadedfiletest.html"><abbr title="tests/Psr7/UploadedFileTest.php">UploadedFileTest.php</abbr></a></abbr>
@@ -1110,8 +1087,9 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">testMoveToRaisesExceptionWhenErrorStatusPresent</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$status</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1119,17 +1097,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1141,6 +1114,7 @@
     <h4 class="phpdocumentor-element__name" id="method_testNormalizeFilesRaisesException">
         testNormalizeFilesRaisesException()
         <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testNormalizeFilesRaisesException" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="tests/Psr7/UploadedFileTest.php"><a href="files/tests-psr7-uploadedfiletest.html"><abbr title="tests/Psr7/UploadedFileTest.php">UploadedFileTest.php</abbr></a></abbr>
@@ -1154,15 +1128,12 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">testNormalizeFilesRaisesException</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1174,6 +1145,7 @@
     <h4 class="phpdocumentor-element__name" id="method_testRaisesExceptionOnInvalidErrorStatus">
         testRaisesExceptionOnInvalidErrorStatus()
         <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testRaisesExceptionOnInvalidErrorStatus" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="tests/Psr7/UploadedFileTest.php"><a href="files/tests-psr7-uploadedfiletest.html"><abbr title="tests/Psr7/UploadedFileTest.php">UploadedFileTest.php</abbr></a></abbr>
@@ -1187,8 +1159,9 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">testRaisesExceptionOnInvalidErrorStatus</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$status</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1196,17 +1169,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1218,6 +1186,7 @@
     <h4 class="phpdocumentor-element__name" id="method_testRaisesExceptionOnInvalidStreamOrFile">
         testRaisesExceptionOnInvalidStreamOrFile()
         <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testRaisesExceptionOnInvalidStreamOrFile" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="tests/Psr7/UploadedFileTest.php"><a href="files/tests-psr7-uploadedfiletest.html"><abbr title="tests/Psr7/UploadedFileTest.php">UploadedFileTest.php</abbr></a></abbr>
@@ -1231,8 +1200,9 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">testRaisesExceptionOnInvalidStreamOrFile</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$streamOrFile</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1240,17 +1210,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1262,6 +1227,7 @@
     <h4 class="phpdocumentor-element__name" id="method_testSuccessful">
         testSuccessful()
         <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testSuccessful" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="tests/Psr7/UploadedFileTest.php"><a href="files/tests-psr7-uploadedfiletest.html"><abbr title="tests/Psr7/UploadedFileTest.php">UploadedFileTest.php</abbr></a></abbr>
@@ -1275,15 +1241,12 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">testSuccessful</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1295,6 +1258,7 @@
     <h4 class="phpdocumentor-element__name" id="method___setUp">
         __setUp()
         <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method___setUp" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="tests/Psr7/UploadedFileTest.php"><a href="files/tests-psr7-uploadedfiletest.html"><abbr title="tests/Psr7/UploadedFileTest.php">UploadedFileTest.php</abbr></a></abbr>
@@ -1308,15 +1272,12 @@
     <span class="phpdocumentor-signature__visibility">protected</span>
                     <span class="phpdocumentor-signature__name">__setUp</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1328,6 +1289,7 @@
     <h4 class="phpdocumentor-element__name" id="method_setUp">
         setUp()
         <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#method_setUp" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="tests/FactoryTrait.php"><a href="files/tests-factorytrait.html"><abbr title="tests/FactoryTrait.php">FactoryTrait.php</abbr></a></abbr>
@@ -1341,12 +1303,15 @@
     <span class="phpdocumentor-signature__visibility">protected</span>
                     <span class="phpdocumentor-signature__name">setUp</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#method_setUp#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h5>
     <dl class="phpdocumentor-tag-list">
                                     <dt class="phpdocumentor-tag-list__entry">
@@ -1357,12 +1322,8 @@
                                                             
                                              
                                     </dd>
-                        </dl>
+                                            </dl>
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1374,6 +1335,7 @@
     <h4 class="phpdocumentor-element__name" id="method_tearDown">
         tearDown()
         <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_tearDown" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="tests/Psr7/UploadedFileTest.php"><a href="files/tests-psr7-uploadedfiletest.html"><abbr title="tests/Psr7/UploadedFileTest.php">UploadedFileTest.php</abbr></a></abbr>
@@ -1387,83 +1349,170 @@
     <span class="phpdocumentor-signature__visibility">protected</span>
                     <span class="phpdocumentor-signature__name">tearDown</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
             </section>
 
-        
+        <div class="phpdocumentor-modal" id="source-view">
+    <div class="phpdocumentor-modal-bg" data-exit-button></div>
+    <div class="phpdocumentor-modal-container">
+        <div class="phpdocumentor-modal-content">
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/tests/Psr7/UploadedFileTest.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+        </div>
+        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
+    </div>
+</div>
+
     <script type="text/javascript">
-        function loadExternalCodeSnippets(line) {
-            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach((pre) => {
-                var src = pre.getAttribute('data-src').replace( /\\/g, '/');
-                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
-                var language = 'php';
+        (function () {
+            function loadExternalCodeSnippet(el, url, line) {
+                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
+                    const language = 'php';
 
-                var code = document.createElement('code');
-                code.className = 'language-' + language;
+                    const code = document.createElement('code');
+                    code.className = 'language-' + language;
+                    pre.textContent = '';
+                    pre.setAttribute('data-line', line)
+                    code.textContent = 'Loading…';
+                    pre.appendChild(code);
 
-                pre.textContent = '';
+                    var xhr = new XMLHttpRequest();
 
-                pre.setAttribute('data-line', line)
-                code.textContent = 'Loading…';
+                    xhr.open('GET', src, true);
 
-                pre.appendChild(code);
-
-                var xhr = new XMLHttpRequest();
-
-                xhr.open('GET', src, true);
-
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4) {
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState !== 4) {
+                            return;
+                        }
 
                         if (xhr.status < 400 && xhr.responseText) {
                             code.textContent = xhr.responseText;
-
                             Prism.highlightElement(code);
+                            return;
                         }
-                        else if (xhr.status >= 400) {
+
+                        if (xhr.status === 404) {
+                            code.textContent = '✖ Error: File could not be found';
+                            return;
+                        }
+
+                        if (xhr.status >= 400) {
                             code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                            return;
                         }
-                        else {
-                            code.textContent = '✖ Error: File does not exist, is empty or trying to view from localhost';
-                        }
+
+                        code.textContent = '✖ Error: An unknown error occurred';
+                    };
+
+                    xhr.send(null);
+                });
+            }
+
+            const modalButtons = document.querySelectorAll("[data-modal]");
+            const openedAsLocalFile = window.location.protocol === 'file:';
+            if (modalButtons.length > 0 && openedAsLocalFile) {
+                console.warn(
+                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
+                    'browsers block XHR requests when a page is opened this way'
+                );
+            }
+
+            modalButtons.forEach(function (trigger) {
+                if (openedAsLocalFile) {
+                    trigger.setAttribute("hidden", "hidden");
+                }
+
+                trigger.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    const modal = document.getElementById(trigger.dataset.modal);
+                    if (!modal) {
+                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
+                        return;
                     }
-                };
+                    modal.classList.add("phpdocumentor-modal__open");
 
-                xhr.send(null);
-            });
-        }
-
-        var modals = document.querySelectorAll("[data-modal]");
-
-        modals.forEach(function (trigger) {
-            trigger.addEventListener("click", function (event) {
-                //event.preventDefault();
-                const modal = document.getElementById(trigger.dataset.modal);
-                modal.classList.add("phpdocumentor-modal__open");
-                loadExternalCodeSnippets(trigger.dataset.line)
-                const exits = modal.querySelectorAll("[data-exit-button]");
-                exits.forEach(function (exit) {
-                    exit.addEventListener("click", function (event) {
-                        event.preventDefault();
-                        modal.classList.remove("phpdocumentor-modal__open");
+                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
+                    const exits = modal.querySelectorAll("[data-exit-button]");
+                    exits.forEach(function (exit) {
+                        exit.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            modal.classList.remove("phpdocumentor-modal__open");
+                        });
                     });
                 });
             });
-        });
+        })();
     </script>
 
     </article>
-                <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+                                </section>
+                <section class="phpdocumentor-on-this-page__sidebar">
+                                
+    <section class="phpdocumentor-on-this-page__content">
+        <strong class="phpdocumentor-on-this-page__title">On this page</strong>
+
+        <ul class="phpdocumentor-list -clean">
+            <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                                            <li><a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#toc-methods">Methods</a></li>
+                                    </ul>
+            </li>
+            
+                            <li class="phpdocumentor-on-this-page-section__title">Properties</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li><a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#property_cleanup">$cleanup<a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html"></li>
+                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_requestFactory">$requestFactory<a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html"></li>
+                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_responseFactory">$responseFactory<a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html"></li>
+                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_server">$server<a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html"></li>
+                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_serverRequestFactory">$serverRequestFactory<a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html"></li>
+                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_streamFactory">$streamFactory<a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html"></li>
+                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_uploadedFileFactory">$uploadedFileFactory<a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html"></li>
+                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_uriFactory">$uriFactory<a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html"></li>
+                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_FACTORIES">$FACTORIES<a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html"></li>
+                                            </ul>
+                </li>
+            
+                        <li class="phpdocumentor-on-this-page-section__title">Methods</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                            <li><a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_invalidErrorStatuses">invalidErrorStatuses()</a></li>
+                                            <li><a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_invalidStreams">invalidStreams()</a></li>
+                                            <li><a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_nonOkErrorStatus">nonOkErrorStatus()</a></li>
+                                            <li><a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testCannotMoveToEmptyTarget">testCannotMoveToEmptyTarget()</a></li>
+                                            <li><a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testCannotMoveToUnwritableDirectory">testCannotMoveToUnwritableDirectory()</a></li>
+                                            <li><a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testCannotRetrieveStreamAfterMove">testCannotRetrieveStreamAfterMove()</a></li>
+                                            <li><a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testConstructorDoesNotRaiseExceptionForInvalidStreamWhenErrorStatusPresent">testConstructorDoesNotRaiseExceptionForInvalidStreamWhenErrorStatusPresent()</a></li>
+                                            <li><a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testGetStreamRaisesExceptionWhenErrorStatusPresent">testGetStreamRaisesExceptionWhenErrorStatusPresent()</a></li>
+                                            <li><a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testGetStreamReturnsOriginalStreamObject">testGetStreamReturnsOriginalStreamObject()</a></li>
+                                            <li><a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testGetStreamReturnsWrappedPhpStream">testGetStreamReturnsWrappedPhpStream()</a></li>
+                                            <li><a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testMoveCannotBeCalledMoreThanOnce">testMoveCannotBeCalledMoreThanOnce()</a></li>
+                                            <li><a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testMoveToCreatesStreamIfOnlyAFilenameWasProvided">testMoveToCreatesStreamIfOnlyAFilenameWasProvided()</a></li>
+                                            <li><a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testMoveToRaisesExceptionWhenErrorStatusPresent">testMoveToRaisesExceptionWhenErrorStatusPresent()</a></li>
+                                            <li><a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testNormalizeFilesRaisesException">testNormalizeFilesRaisesException()</a></li>
+                                            <li><a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testRaisesExceptionOnInvalidErrorStatus">testRaisesExceptionOnInvalidErrorStatus()</a></li>
+                                            <li><a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testRaisesExceptionOnInvalidStreamOrFile">testRaisesExceptionOnInvalidStreamOrFile()</a></li>
+                                            <li><a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_testSuccessful">testSuccessful()</a></li>
+                                            <li><a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method___setUp">__setUp()</a></li>
+                                            <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#method_setUp">setUp()</a></li>
+                                            <li><a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method_tearDown">tearDown()</a></li>
+                                    </ul>
+            </li>
+                    </ul>
+    </section>
+
+                </section>
+                            </div>
+            <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
     <section class="phpdocumentor-search-results__dialog">
         <header class="phpdocumentor-search-results__header">
             <h2 class="phpdocumentor-search-results__title">Search results</h2>
@@ -1474,7 +1523,6 @@
         </section>
     </section>
 </section>
-            </div>
         </div>
         <a href="classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
