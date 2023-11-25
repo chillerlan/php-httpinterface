@@ -24,7 +24,7 @@
 		"psr/http-server-handler-implementation": "1.0",
 		"psr/http-server-middleware-implementation": "1.0"
 	},
-	"minimum-stability": "dev",
+	"minimum-stability": "stable",
 	"prefer-stable": true,
 	"require": {
 		"php": "^8.1",
@@ -32,7 +32,7 @@
 		"ext-json": "*",
 		"ext-simplexml": "*",
 		"ext-zlib": "*",
-		"chillerlan/php-http-message-utils": "dev-main#d1a5a12369a9075100beffe20af16976e3203be8",
+		"chillerlan/php-http-message-utils": "^2.0",
 		"chillerlan/php-settings-container": "^2.1.4 || ^3.1",
 		"fig/http-message-util": "^1.1.5",
 		"psr/http-client": "^1.0",
@@ -43,9 +43,10 @@
 		"psr/log": "^1.1 || ^2.0 || ^3.0"
 	},
 	"require-dev": {
+		"http-interop/http-factory-tests": "2.1.0",
 		"phan/phan": "^5.4",
 		"phpmd/phpmd": "^2.13",
-		"phpunit/phpunit": "^10.2",
+		"phpunit/phpunit": "^10.4",
 		"squizlabs/php_codesniffer": "^3.7"
 	},
 	"autoload": {
