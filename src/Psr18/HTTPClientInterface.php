@@ -12,8 +12,7 @@ namespace chillerlan\HTTP\Psr18;
 
 use Fig\Http\Message\RequestMethodInterface;
 use Psr\Http\Client\ClientInterface;
-use Psr\Http\Message\ResponseFactoryInterface;
-use Psr\Http\Message\StreamFactoryInterface;
+use Psr\Http\Message\{ResponseFactoryInterface, StreamFactoryInterface};
 use Psr\Log\LoggerInterface;
 
 /**

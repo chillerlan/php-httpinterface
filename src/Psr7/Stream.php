@@ -11,10 +11,9 @@
 namespace chillerlan\HTTP\Psr7;
 
 use chillerlan\HTTP\Utils\StreamUtil;
-use InvalidArgumentException, RuntimeException;
 use Psr\Http\Message\StreamInterface;
+use InvalidArgumentException, RuntimeException;
 use function clearstatcache, fclose, feof, fread, fstat, ftell, fwrite, is_resource, stream_get_meta_data;
-
 use const SEEK_SET;
 
 /**
@@ -23,13 +22,12 @@ use const SEEK_SET;
 class Stream implements StreamInterface{
 
 	/** @var resource|null */
-	protected $stream = null;
-
-	protected bool    $seekable;
-	protected bool    $readable;
-	protected bool    $writable;
-	protected ?string $uri  = null;
-	protected ?int    $size = null;
+	protected             $stream = null;
+	protected bool        $seekable;
+	protected bool        $readable;
+	protected bool        $writable;
+	protected string|null $uri    = null;
+	protected int|null    $size   = null;
 
 	/**
 	 * Stream constructor.
@@ -107,7 +105,7 @@ class Stream implements StreamInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function getSize():?int{
+	public function getSize():int|null{
 
 		if(!is_resource($this->stream)){
 			return null;
@@ -168,7 +166,7 @@ class Stream implements StreamInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function seek($offset, $whence = SEEK_SET):void{
+	public function seek(int $offset, int $whence = SEEK_SET):void{
 
 		if(!is_resource($this->stream)){
 			throw new RuntimeException('Invalid stream'); // @codeCoverageIgnore
@@ -201,7 +199,7 @@ class Stream implements StreamInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function write($string):int{
+	public function write(string $string):int{
 
 		if(!is_resource($this->stream)){
 			throw new RuntimeException('Invalid stream'); // @codeCoverageIgnore
@@ -232,7 +230,7 @@ class Stream implements StreamInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function read($length):string{
+	public function read(int $length):string{
 
 		if(!is_resource($this->stream)){
 			throw new RuntimeException('Invalid stream'); // @codeCoverageIgnore
@@ -278,7 +276,7 @@ class Stream implements StreamInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function getMetadata($key = null):mixed{
+	public function getMetadata(string|null $key = null):mixed{
 
 		if(!is_resource($this->stream)){
 			return ($key) ? null : [];

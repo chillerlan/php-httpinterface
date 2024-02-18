@@ -19,11 +19,7 @@ use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
-use function array_column;
-use function defined;
-use function implode;
-use function in_array;
-use function ksort;
+use function array_column, defined, implode, in_array, ksort;
 
 #[Group('slow')]
 class CurlMultiClientTest extends TestCase{

@@ -1,6 +1,6 @@
 <?php
 /**
- * Class FactoryHelpers
+ * Class FactoryUtils
  *
  * @created      20.10.2022
  * @author       smiley <smiley@chillerlan.net>
@@ -12,19 +12,14 @@ namespace chillerlan\HTTP\Common;
 
 use chillerlan\HTTP\Psr7\Stream;
 use chillerlan\HTTP\Utils\StreamUtil;
-use InvalidArgumentException;
 use Psr\Http\Message\StreamInterface;
-use Stringable;
-use function fseek;
-use function gettype;
-use function is_scalar;
-use function stream_copy_to_stream;
-use function stream_get_meta_data;
+use InvalidArgumentException, Stringable;
+use function fseek, gettype, is_scalar, stream_copy_to_stream, stream_get_meta_data;
 
 /**
  *
  */
-class FactoryHelpers{
+class FactoryUtils{
 
 	/**
 	 * Create a new writable stream from a string.
@@ -41,7 +36,7 @@ class FactoryHelpers{
 			$stream->write($content);
 		}
 
-		if($rewind){
+		if($rewind === true){
 			$stream->rewind();
 		}
 

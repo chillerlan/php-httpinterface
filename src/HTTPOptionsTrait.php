@@ -13,9 +13,7 @@
 namespace chillerlan\HTTP;
 
 use chillerlan\HTTP\Psr18\ClientException;
-
 use function file_exists, ini_get, is_dir, is_file, is_link, readlink, trim;
-
 use const CURLOPT_CAINFO, CURLOPT_CAPATH;
 
 trait HTTPOptionsTrait{
@@ -40,7 +38,7 @@ trait HTTPOptionsTrait{
 	 * @link https://curl.se/ca/cacert.pem
 	 * @link https://raw.githubusercontent.com/bagder/ca-bundle/master/ca-bundle.crt
 	 */
-	protected ?string $ca_info = null;
+	protected string|null $ca_info = null;
 
 	/**
 	 * @internal
@@ -70,7 +68,7 @@ trait HTTPOptionsTrait{
 	/**
 	 * sleep timer (milliseconds) between each fired multi request on startup
 	 */
-	protected ?int $sleep = null;
+	protected int|null $sleep = null;
 
 	/**
 	 * Timeout value
@@ -112,7 +110,7 @@ trait HTTPOptionsTrait{
 	/**
 	 *
 	 */
-	protected function set_ca_info(string $ca_info = null):void{
+	protected function set_ca_info(string|null $ca_info = null):void{
 		$this->setCA($ca_info);
 	}
 
@@ -143,7 +141,7 @@ trait HTTPOptionsTrait{
 	/**
 	 * @throws \Psr\Http\Client\ClientExceptionInterface
 	 */
-	protected function setCA(string $ca_info = null):void{
+	protected function setCA(string|null $ca_info = null):void{
 		$this->ca_info = null;
 
 		// a path/dir/link to a CA bundle is given, let's check that
@@ -232,7 +230,7 @@ trait HTTPOptionsTrait{
 	 *
 	 * @phan-suppress PhanTypeMismatchArgumentNullableInternal
 	 */
-	protected function checkCA(string $ca = null):bool{
+	protected function checkCA(string|null $ca = null):bool{
 		// if you - for whatever obscure reason - need to check Windows .lnk links,
 		// see http://php.net/manual/en/function.is-link.php#91249
 		switch(true){

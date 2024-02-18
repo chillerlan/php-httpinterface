@@ -12,9 +12,9 @@ namespace chillerlan\HTTPTest\Common;
 
 use chillerlan\HTTP\Common\MultipartStreamBuilder;
 use chillerlan\HTTPTest\FactoryTrait;
-use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\MessageInterface;
+use InvalidArgumentException;
 
 /**
  *

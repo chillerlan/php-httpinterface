@@ -13,7 +13,6 @@
 namespace chillerlan\HTTP\Psr15;
 
 use Psr\Http\Server\MiddlewareInterface;
-
 use function usort;
 
 class PriorityQueueDispatcher extends QueueDispatcher{

@@ -19,25 +19,17 @@ use Psr\Log\{LoggerInterface, NullLogger};
 
 abstract class HTTPClientAbstract implements HTTPClientInterface{
 
-	protected HTTPOptions|SettingsContainerInterface $options;
-	protected LoggerInterface                        $logger;
-	protected ResponseFactoryInterface               $responseFactory;
-	protected ?StreamFactoryInterface                $streamFactory   = null;
+	protected StreamFactoryInterface|null $streamFactory = null;
 
 	/**
 	 * HTTPClientAbstract constructor.
 	 */
 	public function __construct(
-		HTTPOptions|SettingsContainerInterface $options = null,
-		ResponseFactoryInterface $responseFactory = null,
-		LoggerInterface $logger = null
+		protected HTTPOptions|SettingsContainerInterface $options = new HTTPOptions,
+		protected ResponseFactoryInterface               $responseFactory = new ResponseFactory,
+		protected LoggerInterface                        $logger = new NullLogger,
 	){
-		$this->options = ($options ?? new HTTPOptions);
 
-		$this
-			->setResponseFactory(($responseFactory ?? new ResponseFactory))
-			->setLogger(($logger ?? new NullLogger))
-		;
 	}
 
 	/**

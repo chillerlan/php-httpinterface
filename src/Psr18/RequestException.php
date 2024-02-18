@@ -10,23 +10,23 @@
 
 namespace chillerlan\HTTP\Psr18;
 
-use Throwable;
 use Psr\Http\Client\RequestExceptionInterface;
 use Psr\Http\Message\RequestInterface;
+use Throwable;
 
 /**
  * @codeCoverageIgnore
  */
 class RequestException extends ClientException implements RequestExceptionInterface{
 
-	protected RequestInterface $request;
-
 	/**
 	 *
 	 */
-	public function __construct(string $message, RequestInterface $request, Throwable $previous = null){
-		$this->request = $request;
-
+	public function __construct(
+		string $message,
+		protected RequestInterface $request,
+		Throwable|null $previous = null
+	){
 		parent::__construct($message, 0, $previous);
 	}
 

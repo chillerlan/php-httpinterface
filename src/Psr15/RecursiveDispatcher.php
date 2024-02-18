@@ -20,15 +20,12 @@ use Psr\Http\Server\{MiddlewareInterface, RequestHandlerInterface};
 class RecursiveDispatcher implements RequestHandlerInterface{
 
 	/**
-	 * Tip of the middleware call stack
-	 */
-	protected RequestHandlerInterface $tip;
-
-	/**
 	 * RecursiveDispatcher constructor.
 	 */
-	public function __construct(RequestHandlerInterface $kernel){
-		$this->tip = $kernel;
+	public function __construct(
+		protected RequestHandlerInterface $kernel,
+	){
+
 	}
 
 	/**
@@ -40,14 +37,13 @@ class RecursiveDispatcher implements RequestHandlerInterface{
 	 */
 	public function add(MiddlewareInterface $middleware):static{
 
-		$this->tip = new class ($middleware, $this->tip) implements RequestHandlerInterface{
+		$this->kernel = new class ($middleware, $this->kernel) implements RequestHandlerInterface{
 
-			private MiddlewareInterface     $middleware;
-			private RequestHandlerInterface $next;
+			public function __construct(
+				private MiddlewareInterface     $middleware,
+				private RequestHandlerInterface $next,
+			){
 
-			public function __construct(MiddlewareInterface $middleware, RequestHandlerInterface $next){
-				$this->middleware = $middleware;
-				$this->next       = $next;
 			}
 
 			public function handle(ServerRequestInterface $request):ResponseInterface{
@@ -82,7 +78,7 @@ class RecursiveDispatcher implements RequestHandlerInterface{
 	 * @inheritDoc
 	 */
 	public function handle(ServerRequestInterface $request):ResponseInterface{
-		return $this->tip->handle($request);
+		return $this->kernel->handle($request);
 	}
 
 }

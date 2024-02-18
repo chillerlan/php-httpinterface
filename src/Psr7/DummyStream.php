@@ -10,12 +10,10 @@
 
 namespace chillerlan\HTTP\Psr7;
 
-use chillerlan\HTTP\Common\FactoryHelpers;
-use Closure;
+use chillerlan\HTTP\Common\FactoryUtils;
 use Psr\Http\Message\StreamInterface;
-use function array_diff;
-use function array_keys;
-use function in_array;
+use Closure;
+use function array_diff, array_keys, in_array;
 use const SEEK_SET;
 
 /**
@@ -47,10 +45,10 @@ class DummyStream implements StreamInterface{
 	/**
 	 * DummyStream constructor
 	 */
-	public function __construct(StreamInterface $stream = null, array $methods = null){
+	public function __construct(StreamInterface|null $stream = null, array|null $methods = null){
 
 		$this
-			->dummySetStream($stream ?? FactoryHelpers::createStream())
+			->dummySetStream($stream ?? FactoryUtils::createStream())
 			->dummyOverrideAll(($methods ?? []))
 		;
 	}
@@ -114,7 +112,7 @@ class DummyStream implements StreamInterface{
 	}
 
 	/** @inheritDoc */
-	public function getSize():?int{
+	public function getSize():int|null{
 		return $this->override['getSize']();
 	}
 
@@ -169,7 +167,7 @@ class DummyStream implements StreamInterface{
 	}
 
 	/** @inheritDoc */
-	public function getMetadata(?string $key = null):mixed{
+	public function getMetadata(string|null $key = null):mixed{
 		return $this->override['getMetadata']($key);
 	}
 

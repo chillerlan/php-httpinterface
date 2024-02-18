@@ -14,10 +14,10 @@ use chillerlan\HTTP\HTTPOptions;
 use chillerlan\HTTP\Psr7\Request;
 use chillerlan\HTTP\Utils\MessageUtil;
 use chillerlan\Settings\SettingsContainerInterface;
-use Exception;
 use Fig\Http\Message\RequestMethodInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\{ClientExceptionInterface, ClientInterface};
+use Exception;
 
 abstract class HTTPClientTestAbstract extends TestCase{
 

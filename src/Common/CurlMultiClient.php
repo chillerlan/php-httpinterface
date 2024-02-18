@@ -15,22 +15,16 @@ use chillerlan\HTTP\Psr18\ClientException;
 use chillerlan\HTTP\HTTPOptions;
 use chillerlan\Settings\SettingsContainerInterface;
 use Psr\Http\Message\{RequestInterface, ResponseFactoryInterface};
-use Psr\Log\{LoggerAwareInterface, LoggerAwareTrait, LoggerInterface, NullLogger};
+use Psr\Log\{LoggerAwareInterface, LoggerInterface, NullLogger};
 use CurlMultiHandle as CMH;
-
 use function array_shift, curl_close, curl_multi_add_handle, curl_multi_close, curl_multi_exec,
 	curl_multi_info_read, curl_multi_init, curl_multi_remove_handle, curl_multi_select, curl_multi_setopt, usleep;
-
 use const CURLM_OK, CURLMOPT_MAXCONNECTS, CURLMOPT_PIPELINING, CURLPIPE_MULTIPLEX;
 
 class CurlMultiClient implements LoggerAwareInterface{
-	use LoggerAwareTrait;
 
-	protected HTTPOptions|SettingsContainerInterface $options;
-	protected ResponseFactoryInterface               $responseFactory;
-	protected MultiResponseHandlerInterface          $multiResponseHandler;
-	protected ?CMH                                   $curl_multi           = null;
-	protected int                                    $handleCounter        = 0;
+	protected CMH|null $curl_multi    = null;
+	protected int      $handleCounter = 0;
 
 	/**
 	 * An array of RequestInterface to run
@@ -48,16 +42,12 @@ class CurlMultiClient implements LoggerAwareInterface{
 	 * CurlMultiClient constructor.
 	 */
 	public function __construct(
-		MultiResponseHandlerInterface $multiResponseHandler,
-		HTTPOptions|SettingsContainerInterface $options = null,
-		ResponseFactoryInterface $responseFactory = null,
-		LoggerInterface $logger = null
+		protected MultiResponseHandlerInterface          $multiResponseHandler,
+		protected HTTPOptions|SettingsContainerInterface $options = new HTTPOptions,
+		protected ResponseFactoryInterface               $responseFactory = new ResponseFactory,
+		protected LoggerInterface                        $logger = new NullLogger,
 	){
-		$this->multiResponseHandler = $multiResponseHandler;
-		$this->options              = ($options ?? new HTTPOptions);
-		$this->responseFactory      = ($responseFactory ?? new ResponseFactory);
-		$this->logger               = ($logger ?? new NullLogger);
-		$this->curl_multi           = curl_multi_init();
+		$this->curl_multi = curl_multi_init();
 
 		$curl_multi_options = ([
 			CURLMOPT_PIPELINING  => CURLPIPE_MULTIPLEX,
@@ -75,6 +65,14 @@ class CurlMultiClient implements LoggerAwareInterface{
 	 */
 	public function __destruct(){
 		$this->close();
+	}
+
+	/**
+	 * @inheritDoc
+	 * @codeCoverageIgnore
+	 */
+	public function setLogger(LoggerInterface $logger):void{
+		$this->logger = $logger;
 	}
 
 	/**
@@ -164,7 +162,7 @@ class CurlMultiClient implements LoggerAwareInterface{
 	/**
 	 *
 	 */
-	protected function createHandle(RequestInterface $request = null, int $id = null, int $retries = null):void{
+	protected function createHandle(RequestInterface|null $request = null, int|null $id = null, int|null $retries = null):void{
 
 		if($request === null){
 
@@ -179,7 +177,7 @@ class CurlMultiClient implements LoggerAwareInterface{
 			$this->multiResponseHandler,
 			$request,
 			$this->responseFactory->createResponse(),
-			$this->options
+			$this->options,
 		);
 
 		$curl = $handle

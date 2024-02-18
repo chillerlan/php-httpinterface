@@ -102,7 +102,7 @@ class Response extends Message implements ResponseInterface, StatusCodeInterface
 	/**
 	 * Response constructor.
 	 */
-	public function __construct(int $status = null, string $reason = null){
+	public function __construct(int|null $status = null, string|null $reason = null){
 		parent::__construct();
 
 		$this->statusCode   = ($status ?? $this::STATUS_OK);
@@ -120,10 +120,12 @@ class Response extends Message implements ResponseInterface, StatusCodeInterface
 	 * @inheritDoc
 	 */
 	public function withStatus(int $code, string $reasonPhrase = ''):static{
-		$reasonPhrase = trim($reasonPhrase);
-
+		$this->reasonPhrase = trim($reasonPhrase);
 		$this->statusCode   = $code;
-		$this->reasonPhrase = ($reasonPhrase !== '') ? $reasonPhrase : $this->getReasonPhraseFromStatusCode($code);
+
+		if($this->reasonPhrase === ''){
+			$this->reasonPhrase = $this->getReasonPhraseFromStatusCode($this->statusCode);
+		}
 
 		return $this;
 	}

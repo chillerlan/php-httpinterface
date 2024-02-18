@@ -12,7 +12,6 @@ namespace chillerlan\HTTP\Psr17;
 
 use chillerlan\HTTP\Psr7\UploadedFile;
 use Psr\Http\Message\{StreamInterface, UploadedFileFactoryInterface, UploadedFileInterface};
-
 use const UPLOAD_ERR_OK;
 
 class UploadedFileFactory implements UploadedFileFactoryInterface{
@@ -22,10 +21,10 @@ class UploadedFileFactory implements UploadedFileFactoryInterface{
 	 */
 	public function createUploadedFile(
 		StreamInterface $stream,
-		int             $size = null,
+		int|null        $size = null,
 		int             $error = UPLOAD_ERR_OK,
-		string          $clientFilename = null,
-		string          $clientMediaType = null
+		string|null     $clientFilename = null,
+		string|null     $clientMediaType = null,
 	):UploadedFileInterface{
 		return new UploadedFile($stream, ($size ?? (int)$stream->getSize()), $error, $clientFilename, $clientMediaType);
 	}

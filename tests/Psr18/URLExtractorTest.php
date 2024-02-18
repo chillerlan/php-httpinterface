@@ -15,8 +15,7 @@ use chillerlan\HTTP\Psr7\Request;
 use PHPUnit\Framework\Attributes\Group;
 use Psr\Http\Client\ClientInterface;
 use function defined;
-use const CURLOPT_FOLLOWLOCATION;
-use const CURLOPT_MAXREDIRS;
+use const CURLOPT_FOLLOWLOCATION, CURLOPT_MAXREDIRS;
 
 /**
  * @property \chillerlan\HTTP\Psr18\URLExtractor $http

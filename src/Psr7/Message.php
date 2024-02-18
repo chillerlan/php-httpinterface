@@ -10,11 +10,10 @@
 
 namespace chillerlan\HTTP\Psr7;
 
-use chillerlan\HTTP\Common\FactoryHelpers;
+use chillerlan\HTTP\Common\FactoryUtils;
 use chillerlan\HTTP\Utils\HeaderUtil;
-use InvalidArgumentException;
 use Psr\Http\Message\{MessageInterface, StreamInterface};
-
+use InvalidArgumentException;
 use function array_column, array_combine, array_merge, implode, is_array, is_scalar, strtolower;
 
 class Message implements MessageInterface{
@@ -27,7 +26,7 @@ class Message implements MessageInterface{
 	 * Message constructor.
 	 */
 	public function __construct(){
-		$this->body = FactoryHelpers::createStream();
+		$this->body = FactoryUtils::createStream();
 	}
 
 	/**
@@ -41,10 +40,7 @@ class Message implements MessageInterface{
 	 * @inheritDoc
 	 */
 	public function withProtocolVersion(string $version):static{
-
-		if($this->version !== $version){
-			$this->version = $version;
-		}
+		$this->version = $version;
 
 		return $this;
 	}
@@ -135,10 +131,7 @@ class Message implements MessageInterface{
 	 * @inheritDoc
 	 */
 	public function withBody(StreamInterface $body):static{
-
-		if($body !== $this->body){
-			$this->body = $body;
-		}
+		$this->body = $body;
 
 		return $this;
 	}

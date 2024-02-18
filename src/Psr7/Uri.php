@@ -6,36 +6,64 @@
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2018 smiley
  * @license      MIT
+ *
+ * @noinspection RegExpUnnecessaryNonCapturingGroup, RegExpRedundantEscape
  */
 
 namespace chillerlan\HTTP\Psr7;
 
 use chillerlan\HTTP\Utils\UriUtil;
-use InvalidArgumentException;
 use Psr\Http\Message\UriInterface;
-
-use function call_user_func_array, explode, filter_var, is_array, is_string, ltrim, mb_strtolower,
-	preg_replace_callback, rawurlencode, strtolower, str_contains, str_starts_with, ucfirst, var_export;
-
+use InvalidArgumentException;
+use function explode, filter_var, is_array, is_string, ltrim, mb_strtolower, preg_match,
+	preg_replace_callback, property_exists, rawurlencode, str_contains, str_starts_with, trim;
 use const FILTER_FLAG_IPV6, FILTER_VALIDATE_IP;
 
 class Uri implements UriInterface{
 
-	protected string  $scheme   = '';
-	protected string  $user     = '';
-	protected ?string $pass     = null;
-	protected string  $host     = '';
-	protected ?int    $port     = null;
-	protected string  $path     = '';
-	protected string  $query    = '';
-	protected string  $fragment = '';
+	/**
+	 * Percent encoded
+	 *
+	 * @see https://datatracker.ietf.org/doc/html/rfc3986#section-2.1
+	 */
+	protected const CHAR_PERCENT_HEX = '%(?![a-fA-F0-9]{2})';
+
+	/**
+	 * Generic delimiters for use in a regex.
+	 *
+	 * @see https://datatracker.ietf.org/doc/html/rfc3986#section-2.2
+	 */
+	protected const CHAR_GEN_DELIMS = ':\/\?#\[\]@';
+
+	/**
+	 * Sub delimiters for use in a regex.
+	 *
+	 * @see https://datatracker.ietf.org/doc/html/rfc3986#section-2.2
+	 */
+	protected const CHAR_SUB_DELIMS = '!\$&\'\(\)\*\+,;=';
+
+	/**
+	 * Unreserved characters for use in a regex.
+	 *
+	 * @see https://datatracker.ietf.org/doc/html/rfc3986#section-2.3
+	 */
+	protected const CHAR_UNRESERVED = 'a-zA-Z0-9_\-\.~';
+
+	protected string   $scheme   = '';
+	protected string   $user     = '';
+	protected string   $pass     = '';
+	protected string   $host     = '';
+	protected int|null $port     = null;
+	protected string   $path     = '';
+	protected string   $query    = '';
+	protected string   $fragment = '';
 
 	/**
 	 * Uri constructor.
 	 *
 	 * @throws \InvalidArgumentException
 	 */
-	public function __construct(string|array $uri = null){
+	public function __construct(string|array|null $uri = null){
 
 		if($uri !== null){
 
@@ -44,33 +72,47 @@ class Uri implements UriInterface{
 			}
 
 			if(!is_array($uri)){
-				throw new InvalidArgumentException('invalid URI: '.var_export($uri, true));
+				throw new InvalidArgumentException('Unable to parse URI');
 			}
 
 			$this->parseUriParts($uri);
-			$this->validateState();
 		}
 
 	}
 
 	/**
 	 * @inheritDoc
+	 * @throws \InvalidArgumentException
 	 */
 	public function __toString():string{
-		$this->validateState();
+
+		if(empty($this->scheme) && str_contains(explode('/', $this->path, 2)[0], ':')){
+			throw new InvalidArgumentException('A relative URI must not have a path beginning with a segment containing a colon');
+		}
 
 		$uri       = '';
 		$authority = $this->getAuthority();
+		$path      = $this->path;
 
 		if($this->scheme !== ''){
 			$uri .= $this->scheme.':';
 		}
 
+		// fix "file" scheme (see Guzzle)
 		if($authority !== '' || $this->scheme === 'file'){
 			$uri .= '//'.$authority;
 		}
 
-		$uri .= $this->path;
+		// If the path is rootless and an authority is present, the path MUST be prefixed by "/"
+		if($authority !== '' && $path !== '' && !str_starts_with($path, '/')){
+			$path = '/'.$path;
+		}
+		// If the path is starting with more than one "/", the starting slashes MUST be reduced to one.
+		elseif($authority === '' && str_starts_with($path, '//')){
+			$path = '/'.ltrim($path, '/');
+		}
+
+		$uri .= $path;
 
 		if($this->query !== ''){
 			$uri .= '?'.$this->query;
@@ -84,20 +126,8 @@ class Uri implements UriInterface{
 	}
 
 	/*
-	 * Scheme
+	 * Getters
 	 */
-
-	/**
-	 * @throws \InvalidArgumentException
-	 */
-	protected function filterScheme(mixed $scheme):string{
-
-		if(!is_string($scheme)){
-			throw new InvalidArgumentException('scheme must be a string');
-		}
-
-		return strtolower($scheme);
-	}
 
 	/**
 	 * @inheritDoc
@@ -109,45 +139,28 @@ class Uri implements UriInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function withScheme($scheme):static{
-		$scheme = $this->filterScheme($scheme);
+	public function getUserInfo():string{
+		$userinfo = $this->user;
 
-		if($scheme !== $this->scheme){
-			$this->scheme = $scheme;
-
-			$this->removeDefaultPort();
-			$this->validateState();
+		if($this->pass !== ''){
+			$userinfo .= ':'.$this->pass;
 		}
 
-		return $this;
-	}
-
-	/*
-	 * Authority
-	 */
-
-	/**
-	 * @throws \InvalidArgumentException
-	 */
-	protected function filterUser(mixed $user):string{
-
-		if(!is_string($user)){
-			throw new InvalidArgumentException('user must be a string');
-		}
-
-		return $user;
+		return $userinfo;
 	}
 
 	/**
-	 * @throws \InvalidArgumentException
+	 * @inheritDoc
 	 */
-	protected function filterPass(mixed $pass):string{
+	public function getHost():string{
+		return $this->host;
+	}
 
-		if(!is_string($pass)){
-			throw new InvalidArgumentException('pass must be a string');
-		}
-
-		return $pass;
+	/**
+	 * @inheritDoc
+	 */
+	public function getPort():int|null{
+		return $this->port;
 	}
 
 	/**
@@ -156,6 +169,10 @@ class Uri implements UriInterface{
 	public function getAuthority():string{
 		$authority = $this->host;
 		$userInfo  = $this->getUserInfo();
+
+		if($this->host === '' && ($this->scheme === 'http' || $this->scheme === 'https')){
+			$authority = 'localhost';
+		}
 
 		if($userInfo !== ''){
 			$authority = $userInfo.'@'.$authority;
@@ -171,169 +188,8 @@ class Uri implements UriInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function getUserInfo():string{
-		return $this->user.(($this->pass != '') ? ':'.$this->pass : '');
-	}
-
-	/**
-	 * @inheritDoc
-	 */
-	public function withUserInfo($user, $password = null):static{
-		$info = $user;
-
-		if($password !== null && $password !== ''){
-			$info .= ':'.$password;
-		}
-
-		if($info !== $this->getUserInfo()){
-			$this->user = $user;
-			$this->pass = $password;
-
-			$this->validateState();
-		}
-
-		return $this;
-	}
-
-	/*
-	 * Host
-	 */
-
-	/**
-	 * @throws \InvalidArgumentException
-	 */
-	protected function filterHost(mixed $host):string{
-
-		if(!is_string($host)){
-			throw new InvalidArgumentException('host must be a string');
-		}
-
-		if(filter_var($host, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)){
-			$host = '['.$host.']';
-		}
-
-		return mb_strtolower($host);
-	}
-
-	/**
-	 * @inheritDoc
-	 */
-	public function getHost():string{
-		return $this->host;
-	}
-
-	/**
-	 * @inheritDoc
-	 */
-	public function withHost($host):static{
-		$host = $this->filterHost($host);
-
-		if($host !== $this->host){
-			$this->host = $host;
-
-			$this->validateState();
-		}
-
-		return $this;
-	}
-
-	/*
-	 * Port
-	 */
-
-	/**
-	 * @throws \InvalidArgumentException
-	 */
-	protected function filterPort(mixed $port):?int{
-
-		if($port === null){
-			return null;
-		}
-
-		$port = (int)$port;
-
-		if($port >= 1 && $port <= 0xffff){
-			return $port;
-		}
-
-		throw new InvalidArgumentException('invalid port: '.$port);
-	}
-
-	/**
-	 * @inheritDoc
-	 */
-	public function getPort():?int{
-		return $this->port;
-	}
-
-	/**
-	 * @inheritDoc
-	 */
-	public function withPort($port):static{
-		$port = $this->filterPort($port);
-
-		if($port !== $this->port){
-			$this->port = $port;
-
-			$this->removeDefaultPort();
-			$this->validateState();
-		}
-
-		return $this;
-	}
-
-	/*
-	 * Path
-	 */
-
-	/**
-	 * @throws \InvalidArgumentException
-	 */
-	protected function filterPath(mixed $path):string{
-
-		if(!is_string($path)){
-			throw new InvalidArgumentException('path must be a string');
-		}
-
-		return $this->replaceChars($path);
-	}
-
-	/**
-	 * @inheritDoc
-	 */
 	public function getPath():string{
 		return $this->path;
-	}
-
-	/**
-	 * @inheritDoc
-	 */
-	public function withPath($path):static{
-		$path = $this->filterPath($path);
-
-		if($path !== $this->path){
-			$this->path = $path;
-
-			$this->validateState();
-		}
-
-		return $this;
-	}
-
-	/*
-	 * Query
-	 */
-
-	/**
-	 * @throws \InvalidArgumentException
-	 */
-	protected function filterQuery(mixed $query):string{
-
-		if(!is_string($query)){
-			throw new InvalidArgumentException('query and fragment must be a string');
-		}
-
-		return $this->replaceChars($query, true);
 	}
 
 	/**
@@ -346,120 +202,173 @@ class Uri implements UriInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function withQuery($query):static{
-		$query = $this->filterQuery($query);
-
-		if($query !== $this->query){
-			$this->query = $query;
-
-			$this->validateState();
-		}
-
-		return $this;
-	}
-
-	/*
-	 * Fragment
-	 */
-
-	/**
-	 *
-	 */
-	protected function filterFragment(mixed $fragment):string{
-		return $this->filterQuery($fragment);
-	}
-
-	/**
-	 * @inheritDoc
-	 */
 	public function getFragment():string{
 		return $this->fragment;
 	}
 
+	/*
+	 * Setters
+	 */
+
 	/**
 	 * @inheritDoc
 	 */
-	public function withFragment($fragment):static{
-		$fragment = $this->filterFragment($fragment);
+	public function withScheme(string $scheme):static{
+		return $this->parseUriParts(['scheme' => $scheme]);
+	}
 
-		if($fragment !== $this->fragment){
-			$this->fragment = $fragment;
+	/**
+	 * @inheritDoc
+	 */
+	public function withUserInfo(string $user, string|null $password = null):static{
+		return $this->parseUriParts(['user' => $user, 'pass' => ($password ?? '')]);
+	}
 
-			$this->validateState();
+	/**
+	 * @inheritDoc
+	 */
+	public function withHost(string $host):static{
+		return $this->parseUriParts(['host' => $host]);
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function withPort(int|null $port):static{
+		return $this->parseUriParts(['port' => $port]);
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function withPath(string $path):static{
+		return $this->parseUriParts(['path' => $path]);
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function withQuery(string $query):static{
+		return $this->parseUriParts(['query' => $query]);
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function withFragment(string $fragment):static{
+		return $this->parseUriParts(['fragment' => $fragment]);
+	}
+
+	/*
+	 * Filters
+	 */
+
+	/**
+	 * @throws \InvalidArgumentException
+	 */
+	protected function filterScheme(string $scheme):string{
+		$scheme = mb_strtolower(trim($scheme));
+
+		if(!preg_match('/^[a-z0-9\+\-\.]*$/', $scheme)){
+			throw new InvalidArgumentException('scheme contains illegal characters');
 		}
 
-		return $this;
+		return $scheme;
+	}
+
+	/**
+	 * @throws \InvalidArgumentException
+	 */
+	protected function filterUserInfo(string $userOrPass):string{
+		return $this->replaceChars(
+			$userOrPass,
+			'/(?:['.self::CHAR_GEN_DELIMS.self::CHAR_SUB_DELIMS.']+|'.self::CHAR_PERCENT_HEX.')/',
+		);
+	}
+
+	/**
+	 * @throws \InvalidArgumentException
+	 */
+	protected function filterHost(string $host):string{
+		$filteredIPv6 = filter_var(trim($host, '[]'), FILTER_VALIDATE_IP, FILTER_FLAG_IPV6);
+
+		if($filteredIPv6 !== false){
+			$host = '['.$filteredIPv6.']';
+		}
+
+		return mb_strtolower($host);
+	}
+
+	/**
+	 * @throws \InvalidArgumentException
+	 */
+	protected function filterPort(int|null $port):int|null{
+
+		if($port === null){
+			return null;
+		}
+
+		if($port >= 0 && $port <= 0xffff){
+			return $port;
+		}
+
+		throw new InvalidArgumentException('invalid port: '.$port);
+	}
+
+	/**
+	 * @throws \InvalidArgumentException
+	 */
+	protected function filterPath(string $path):string{
+		return $this->replaceChars(
+			$path,
+			'/(?:[^'.self::CHAR_UNRESERVED.self::CHAR_SUB_DELIMS.'%:@\/]++|'.self::CHAR_PERCENT_HEX.')/',
+		);
+	}
+
+	/**
+	 * @throws \InvalidArgumentException
+	 */
+	protected function filterQueryOrFragment(string $queryOrFragment):string{
+		return $this->replaceChars(
+			$queryOrFragment,
+			'/(?:[^'.self::CHAR_UNRESERVED.self::CHAR_SUB_DELIMS.'%:@\/\?]++|'.self::CHAR_PERCENT_HEX.')/',
+		);
 	}
 
 	/**
 	 *
 	 */
-	protected function parseUriParts(array $parts):void{
+	protected function replaceChars(string $str, string $regex):string{
+		return preg_replace_callback($regex, fn(array $match):string => rawurlencode($match[0]), $str);
+	}
 
-		foreach(['scheme', 'user', 'pass', 'host', 'port', 'path', 'query', 'fragment'] as $part){
+	/**
+	 *
+	 */
+	protected function parseUriParts(array $parts):static{
 
-			if(!isset($parts[$part])){
+		foreach($parts as $part => $value){
+
+			if(!property_exists($this, $part)){
 				continue;
 			}
 
-			$this->{$part} = call_user_func_array([$this, 'filter'.ucfirst($part)], [$parts[$part]]);
+			$this->{$part} = match($part){
+				'user', 'pass'      => $this->filterUserInfo($value),
+				'scheme'            => $this->filterScheme($value),
+				'host'              => $this->filterHost($value),
+				'port'              => $this->filterPort($value),
+				'path'              => $this->filterPath($value),
+				'query', 'fragment' => $this->filterQueryOrFragment($value),
+			};
+
 		}
-
-		$this->removeDefaultPort();
-	}
-
-	/**
-	 *
-	 */
-	protected function replaceChars(string $str, bool $query = null):string{
-		/** @noinspection RegExpRedundantEscape, RegExpUnnecessaryNonCapturingGroup */
-		return preg_replace_callback(
-			'/(?:[^a-z\d_\-\.~!\$&\'\(\)\*\+,;=%:@\/'.(($query) ? '\?' : '').']++|%(?![a-f\d]{2}))/i',
-			fn(array $match):string => rawurlencode($match[0]),
-			$str
-		);
-
-	}
-
-	/**
-	 *
-	 */
-	protected function removeDefaultPort():void{
 
 		if(UriUtil::isDefaultPort($this)){
 			$this->port = null;
 		}
 
-	}
-
-	/**
-	 *
-	 */
-	protected function validateState():void{
-
-		if(empty($this->host) && ($this->scheme === 'http' || $this->scheme === 'https')){
-			$this->host = 'localhost';
-		}
-
-		if($this->getAuthority() !== ''){
-
-			if(isset($this->path[0]) && $this->path[0] !== '/'){
-				$this->path = '/'.$this->path; // automagically fix the path, unlike Guzzle
-			}
-
-		}
-		else{
-
-			if(str_starts_with($this->path, '//')){
-				$this->path = '/'.ltrim($this->path, '/'); // automagically fix the path, unlike Guzzle
-			}
-
-			if(empty($this->scheme) && str_contains(explode('/', $this->path, 2)[0], ':')){
-				throw new InvalidArgumentException('A relative URI must not have a path beginning with a segment containing a colon');
-			}
-
-		}
-
+		return $this;
 	}
 
 }

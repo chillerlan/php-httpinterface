@@ -10,12 +10,11 @@
 
 namespace chillerlan\HTTP\Psr17;
 
-use chillerlan\HTTP\Common\FactoryHelpers;
+use chillerlan\HTTP\Common\FactoryUtils;
 use chillerlan\HTTP\Psr7\Stream;
 use chillerlan\HTTP\Utils\StreamUtil;
 use Psr\Http\Message\{StreamFactoryInterface, StreamInterface};
 use RuntimeException;
-
 use function is_file, is_readable;
 
 class StreamFactory implements StreamFactoryInterface{
@@ -24,7 +23,7 @@ class StreamFactory implements StreamFactoryInterface{
 	 * @inheritDoc
 	 */
 	public function createStream(string $content = ''):StreamInterface{
-		return FactoryHelpers::createStream(content: $content, rewind: false);
+		return FactoryUtils::createStream(content: $content, rewind: false);
 	}
 
 	/**

@@ -10,12 +10,11 @@
 
 namespace chillerlan\HTTP\Psr7;
 
-use chillerlan\HTTP\Common\FactoryHelpers;
+use chillerlan\HTTP\Common\FactoryUtils;
 use chillerlan\HTTP\Psr17\StreamFactory;
 use Psr\Http\Message\{StreamInterface, UploadedFileInterface};
 use InvalidArgumentException, RuntimeException;
 use function in_array, is_file, is_string, is_writable, move_uploaded_file, php_sapi_name, rename;
-
 use const UPLOAD_ERR_CANT_WRITE, UPLOAD_ERR_EXTENSION, UPLOAD_ERR_FORM_SIZE, UPLOAD_ERR_INI_SIZE,
 	UPLOAD_ERR_NO_FILE, UPLOAD_ERR_NO_TMP_DIR, UPLOAD_ERR_OK, UPLOAD_ERR_PARTIAL;
 
@@ -33,29 +32,25 @@ class UploadedFile implements UploadedFileInterface{
 		UPLOAD_ERR_EXTENSION,
 	];
 
-	protected int              $error;
-	protected int              $size;
-	protected ?string          $clientFilename;
-	protected ?string          $clientMediaType;
-	protected ?string          $file            = null;
-	protected ?StreamInterface $stream;
-	protected bool             $moved           = false;
-	protected StreamFactory    $streamFactory;
+	protected string|null          $file  = null;
+	protected StreamInterface|null $stream;
+	protected bool                 $moved = false;
 
 	/**
 	 * @throws \InvalidArgumentException
 	 */
-	public function __construct(mixed $file, int $size, int $error = UPLOAD_ERR_OK, string $filename = null, string $mediaType = null){
+	public function __construct(
+		mixed                   $file,
+		protected int           $size,
+		protected int           $error = UPLOAD_ERR_OK,
+		protected string|null   $filename = null,
+		protected string|null   $mediaType = null,
+		protected StreamFactory $streamFactory = new StreamFactory,
+	){
 
 		if(!in_array($error, $this::UPLOAD_ERRORS, true)){
 			throw new InvalidArgumentException('Invalid error status for UploadedFile');
 		}
-
-		$this->size            = (int)$size; // int type hint also accepts float...
-		$this->error           = $error;
-		$this->clientFilename  = $filename;
-		$this->clientMediaType = $mediaType;
-		$this->streamFactory   = new StreamFactory;
 
 		if($this->error === UPLOAD_ERR_OK){
 
@@ -63,7 +58,7 @@ class UploadedFile implements UploadedFileInterface{
 				$this->file = $file;
 			}
 			else{
-				$this->stream = FactoryHelpers::createStreamFromSource($file);
+				$this->stream = FactoryUtils::createStreamFromSource($file);
 			}
 
 		}
@@ -91,11 +86,11 @@ class UploadedFile implements UploadedFileInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function moveTo($targetPath):void{
+	public function moveTo(string $targetPath):void{
 
 		$this->validateActive();
 
-		if(is_string($targetPath) && empty($targetPath)){
+		if(empty($targetPath)){
 			throw new InvalidArgumentException('Invalid path provided for move operation; must be a non-empty string');
 		}
 
@@ -122,7 +117,7 @@ class UploadedFile implements UploadedFileInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function getSize():?int{
+	public function getSize():int|null{
 		return $this->size;
 	}
 
@@ -136,15 +131,15 @@ class UploadedFile implements UploadedFileInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function getClientFilename():?string{
-		return $this->clientFilename;
+	public function getClientFilename():string|null{
+		return $this->filename;
 	}
 
 	/**
 	 * @inheritDoc
 	 */
-	public function getClientMediaType():?string{
-		return $this->clientMediaType;
+	public function getClientMediaType():string|null{
+		return $this->mediaType;
 	}
 
 	/**

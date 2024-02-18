@@ -15,23 +15,19 @@ use Psr\Http\Message\{RequestInterface, ResponseInterface};
 
 class CurlMultiHandle extends CurlHandle{
 
-	protected MultiResponseHandlerInterface $multiResponseHandler;
-
 	public function __construct(
-		MultiResponseHandlerInterface $multiResponseHandler,
-		RequestInterface $request,
-		ResponseInterface $response,
-		SettingsContainerInterface $options
+		protected MultiResponseHandlerInterface $multiResponseHandler,
+		RequestInterface                        $request,
+		ResponseInterface                       $response,
+		SettingsContainerInterface              $options,
 	){
 		parent::__construct($request, $response, $options);
-
-		$this->multiResponseHandler = $multiResponseHandler;
 	}
 
 	/**
 	 * a handle ID (counter), used in CurlMultiClient
 	 */
-	protected ?int $id = null;
+	protected int|null $id = null;
 
 	/**
 	 * a retry counter, used in CurlMultiClient
@@ -41,7 +37,7 @@ class CurlMultiHandle extends CurlHandle{
 	/**
 	 *
 	 */
-	public function getID():?int{
+	public function getID():int|null{
 		return $this->id;
 	}
 
@@ -80,14 +76,14 @@ class CurlMultiHandle extends CurlHandle{
 	/**
 	 *
 	 */
-	public function handleResponse():?RequestInterface{
+	public function handleResponse():RequestInterface|null{
 		$info = curl_getinfo($this->curl);
 
 		return $this->multiResponseHandler->handleResponse(
 			$this->response,
 			$this->request,
 			$this->id,
-			(is_array($info) ? $info : [])
+			(is_array($info) ? $info : []),
 		);
 	}
 

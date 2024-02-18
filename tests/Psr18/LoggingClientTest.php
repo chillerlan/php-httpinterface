@@ -14,8 +14,7 @@ use chillerlan\HTTP\Psr18\LoggingClient;
 use PHPUnit\Framework\Attributes\Group;
 use Psr\Log\AbstractLogger;
 use Stringable;
-use function date;
-use function sprintf;
+use function date, sprintf;
 
 #[Group('slow')]
 class LoggingClientTest extends CurlClientTest{

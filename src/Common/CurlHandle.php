@@ -15,10 +15,8 @@ use chillerlan\HTTP\Psr18\ClientException;
 use chillerlan\Settings\SettingsContainerInterface;
 use Psr\Http\Message\{RequestInterface, ResponseInterface, StreamInterface};
 use CurlHandle as CH;
-
 use function array_key_exists, count, curl_close, curl_errno, curl_error, curl_exec, curl_init, curl_setopt_array,
 	explode, in_array, strlen, strtolower, strtoupper, substr, trim;
-
 use const CURL_HTTP_VERSION_2TLS, CURLE_COULDNT_CONNECT, CURLE_COULDNT_RESOLVE_HOST, CURLE_COULDNT_RESOLVE_PROXY,
 	CURLE_GOT_NOTHING, CURLE_OPERATION_TIMEOUTED, CURLE_SSL_CONNECT_ERROR, CURLOPT_CAINFO, CURLOPT_CAPATH,
 	CURLOPT_CONNECTTIMEOUT, CURLOPT_CUSTOMREQUEST, CURLOPT_FOLLOWLOCATION, CURLOPT_HEADER, CURLOPT_HEADERFUNCTION,
@@ -77,29 +75,22 @@ class CurlHandle{
 		50 => 'application verification failure',
 	];
 
-	protected ?CH                                    $curl        = null;
-	protected array                                  $curlOptions = [];
-	protected bool                                   $initialized = false;
-	protected HTTPOptions|SettingsContainerInterface $options;
-	protected RequestInterface                       $request;
-	protected ResponseInterface                      $response;
-	protected StreamInterface                        $requestBody;
-	protected StreamInterface                        $responseBody;
+	protected CH|null         $curl        = null;
+	protected array           $curlOptions = [];
+	protected bool            $initialized = false;
+	protected StreamInterface $requestBody;
+	protected StreamInterface $responseBody;
 
 	/**
 	 * CurlHandle constructor.
 	 */
 	public function __construct(
-		RequestInterface $request,
-		ResponseInterface $response,
-		HTTPOptions|SettingsContainerInterface $options,
-		StreamInterface $stream = null
+		protected RequestInterface                       $request,
+		protected ResponseInterface                      $response,
+		protected HTTPOptions|SettingsContainerInterface $options,
+		StreamInterface|null                             $stream = null,
 	){
-		$this->request  = $request;
-		$this->response = $response;
-		$this->options  = $options;
-		$this->curl     = curl_init();
-
+		$this->curl         = curl_init();
 		$this->requestBody  = $this->request->getBody();
 		$this->responseBody = ($stream ?? $this->response->getBody());
 	}
@@ -127,7 +118,7 @@ class CurlHandle{
 	/**
 	 * @codeCoverageIgnore
 	 */
-	public function getCurlResource():?CH{
+	public function getCurlResource():CH|null{
 		return $this->curl;
 	}
 
@@ -158,6 +149,7 @@ class CurlHandle{
 	 * @link https://php.watch/articles/php-curl-security-hardening
 	 */
 	protected function initCurlOptions():array{
+
 		$this->curlOptions = [
 			CURLOPT_HEADER          => false,
 			CURLOPT_RETURNTRANSFER  => true,
@@ -333,7 +325,7 @@ class CurlHandle{
 	/**
 	 *
 	 */
-	public function init():?CH{
+	public function init():CH|null{
 		$options = $this->initCurlOptions();
 
 		if(!isset($options[CURLOPT_HEADERFUNCTION])){

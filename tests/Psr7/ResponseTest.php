@@ -12,7 +12,7 @@
 
 namespace chillerlan\HTTPTest\Psr7;
 
-use chillerlan\HTTP\Common\FactoryHelpers;
+use chillerlan\HTTP\Common\FactoryUtils;
 use chillerlan\HTTP\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\StreamInterface;
@@ -35,18 +35,6 @@ class ResponseTest extends TestCase{
 
 		$this::assertSame(404, $response->getStatusCode());
 		$this::assertSame('Not Found', $response->getReasonPhrase());
-	}
-
-	public function testStatusCanBeNumericString():void{
-		$response  = new Response('404');
-
-		$this::assertSame(404, $response->getStatusCode());
-		$this::assertSame('Not Found', $response->getReasonPhrase());
-
-		$response->withStatus('201');
-
-		$this::assertSame(201, $response->getStatusCode());
-		$this::assertSame('Created', $response->getReasonPhrase());
 	}
 
 	public function testCanConstructWithReason():void{
@@ -84,7 +72,7 @@ class ResponseTest extends TestCase{
 	}
 
 	public function testWithBody():void{
-		$response = (new Response)->withBody(FactoryHelpers::createStream('0'));
+		$response = (new Response)->withBody(FactoryUtils::createStream('0'));
 		$this::assertInstanceOf(StreamInterface::class, $response->getBody());
 		$this::assertSame('0', (string) $response->getBody());
 	}

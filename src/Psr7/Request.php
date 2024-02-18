@@ -11,16 +11,15 @@
 namespace chillerlan\HTTP\Psr7;
 
 use Fig\Http\Message\RequestMethodInterface;
-use InvalidArgumentException;
 use Psr\Http\Message\{RequestInterface, UriInterface};
-
+use InvalidArgumentException;
 use function preg_match, strtoupper, trim;
 
 class Request extends Message implements RequestInterface, RequestMethodInterface{
 
 	protected UriInterface $uri;
 	protected string       $method;
-	protected ?string      $requestTarget = null;
+	protected string|null  $requestTarget = null;
 
 	/**
 	 * Request constructor.

@@ -13,8 +13,7 @@ namespace chillerlan\HTTP\Psr18;
 use chillerlan\HTTP\Psr17\RequestFactory;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\{RequestFactoryInterface, RequestInterface, ResponseInterface, UriInterface};
-use function array_reverse;
-use function in_array;
+use function array_reverse, in_array;
 
 /**
  * A client that follows redirects until it reaches a non-30x response, e.g. to extract shortened URLs
@@ -26,17 +25,17 @@ use function in_array;
  */
 class URLExtractor implements ClientInterface{
 
-	protected ClientInterface         $http;
-	protected RequestFactoryInterface $requestFactory;
 	/** @var \Psr\Http\Message\ResponseInterface[] */
-	protected array                   $responses = [];
+	protected array $responses = [];
 
 	/**
 	 * URLExtractor constructor.
 	 */
-	public function __construct(ClientInterface $http, RequestFactoryInterface $requestFactory = null){
-		$this->http           = $http;
-		$this->requestFactory = ($requestFactory ?? new RequestFactory);
+	public function __construct(
+		protected ClientInterface         $http,
+		protected RequestFactoryInterface $requestFactory = new RequestFactory,
+	){
+
 	}
 
 	/**
@@ -65,7 +64,7 @@ class URLExtractor implements ClientInterface{
 	/**
 	 * extract the given URL and return the last valid location header
 	 */
-	public function extract(UriInterface|string $shortURL):?string{
+	public function extract(UriInterface|string $shortURL):string|null{
 		$request  = $this->requestFactory->createRequest('GET', $shortURL);
 		$response = $this->sendRequest($request);
 

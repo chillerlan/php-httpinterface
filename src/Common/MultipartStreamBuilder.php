@@ -13,8 +13,8 @@ namespace chillerlan\HTTP\Common;
 use chillerlan\HTTP\Psr17\StreamFactory;
 use chillerlan\HTTP\Psr7\Message;
 use chillerlan\HTTP\Utils\{HeaderUtil, MessageUtil, StreamUtil};
-use InvalidArgumentException;
 use Psr\Http\Message\{MessageInterface, StreamFactoryInterface, StreamInterface};
+use InvalidArgumentException;
 use function basename, count, implode, ksort, preg_match, random_bytes, sha1, sprintf, str_starts_with, trim;
 
 /**
@@ -24,18 +24,17 @@ use function basename, count, implode, ksort, preg_match, random_bytes, sha1, sp
  */
 class MultipartStreamBuilder{
 
-	protected StreamFactoryInterface $streamFactory;
-	protected StreamInterface        $multipartStream;
-	/** @var \Psr\Http\Message\MessageInterface[]  */
-	protected array                  $messages;
-	protected string                 $boundary;
+	/** @var \Psr\Http\Message\MessageInterface[] */
+	protected array           $messages;
+	protected string          $boundary;
+	protected StreamInterface $multipartStream;
 
 	/**
 	 * MultipartStreamBuilder constructor
 	 */
-	public function __construct(StreamFactoryInterface $streamFactory = null){
-		$this->streamFactory = ($streamFactory ?? new StreamFactory);
-
+	public function __construct(
+		protected StreamFactoryInterface $streamFactory = new StreamFactory,
+	){
 		$this->reset();
 	}
 
@@ -97,12 +96,13 @@ class MultipartStreamBuilder{
 	 * Adds a message with the given content
 	 */
 	public function addString(
-		string   $content,
-		string   $fieldname = null,
-		string   $filename = null,
-		iterable $headers = null
+		string        $content,
+		string|null   $fieldname = null,
+		string|null   $filename = null,
+		iterable|null $headers = null,
+		bool|null     $setContentLength = null,
 	):static{
-		return $this->addStream($this->streamFactory->createStream($content), $fieldname, $filename, $headers);
+		return $this->addStream($this->streamFactory->createStream($content), $fieldname, $filename, $headers, $setContentLength);
 	}
 
 	/**
@@ -110,9 +110,10 @@ class MultipartStreamBuilder{
 	 */
 	public function addStream(
 		StreamInterface $stream,
-		string          $fieldname = null,
-		string          $filename = null,
-		iterable        $headers = null
+		string|null     $fieldname = null,
+		string|null     $filename = null,
+		iterable|null   $headers = null,
+		bool|null       $setContentLength = null,
 	):static{
 		$message = new Message;
 
@@ -122,13 +123,19 @@ class MultipartStreamBuilder{
 			}
 		}
 
-		return $this->addMessage($message->withBody($stream), $fieldname, $filename);
+		return $this->addMessage($message->withBody($stream), $fieldname, $filename, $setContentLength);
 	}
 
 	/**
 	 * Adds a MessageInterface
 	 */
-	public function addMessage(MessageInterface $message, string $fieldname = null, string $filename = null):static{
+	public function addMessage(
+		MessageInterface $message,
+		string|null      $fieldname = null,
+		string|null      $filename = null,
+		bool|null        $setContentLength = null,
+	):static{
+		$setContentLength ??= true;
 
 		// hmm, we don't have a content-type, let's see if we can guess one
 		if(!$message->hasHeader('content-type')){
@@ -140,7 +147,10 @@ class MultipartStreamBuilder{
 		$message = $this->setContentDispositionHeader($message, $fieldname, $filename);
 
 		// set Content-Length
-		$this->messages[] = MessageUtil::setContentLengthHeader($message);
+		// @see https://github.com/guzzle/psr7/pull/581
+		if($setContentLength === true){
+			$this->messages[] = MessageUtil::setContentLengthHeader($message);
+		}
 
 		return $this;
 	}
@@ -151,7 +161,7 @@ class MultipartStreamBuilder{
 	 * If a MessageInterface is given, the body and content type header with the boundary will be set
 	 * and the MessageInterface is returned; returns the StreamInterface with the content otherwise.
 	 */
-	public function build(MessageInterface $message = null):StreamInterface|MessageInterface{
+	public function build(MessageInterface|null $message = null):StreamInterface|MessageInterface{
 		$this->multipartStream = $this->streamFactory->createStream();
 
 		foreach($this->messages as $part){
@@ -228,8 +238,8 @@ class MultipartStreamBuilder{
 	 */
 	protected function setContentDispositionHeader(
 		MessageInterface $message,
-		?string          $fieldname,
-		?string          $filename
+		string|null      $fieldname,
+		string|null      $filename,
 	):MessageInterface{
 		// oh, you already set the header? okay - at your own risk! bye
 		if($message->hasHeader('Content-Disposition')){

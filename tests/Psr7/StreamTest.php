@@ -14,14 +14,10 @@ namespace chillerlan\HTTPTest\Psr7;
 
 use chillerlan\HTTP\Psr7\Stream;
 use chillerlan\HTTPTest\FactoryTrait;
-use Exception;
-use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\StreamInterface;
-use RuntimeException;
-use function filesize;
-use function fopen;
-use function fwrite;
+use Exception, InvalidArgumentException, RuntimeException;
+use function filesize, fopen, fwrite;
 
 class StreamTest extends TestCase{
 	use FactoryTrait;

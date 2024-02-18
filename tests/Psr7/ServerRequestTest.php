@@ -14,8 +14,8 @@ namespace chillerlan\HTTPTest\Psr7;
 
 use chillerlan\HTTP\Psr7\{ServerRequest, UploadedFile};
 use Fig\Http\Message\RequestMethodInterface;
-use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+use InvalidArgumentException;
 use const UPLOAD_ERR_OK;
 
 class ServerRequestTest extends TestCase{

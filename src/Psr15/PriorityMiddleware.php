@@ -12,20 +12,20 @@ namespace chillerlan\HTTP\Psr15;
 
 use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};
 use Psr\Http\Server\{MiddlewareInterface, RequestHandlerInterface};
-
 use const PHP_INT_MIN;
 
 class PriorityMiddleware implements PriorityMiddlewareInterface{
 
-	protected MiddlewareInterface $middleware;
-	protected int                 $priority;
+	protected int $priority;
 
 	/**
 	 * PriorityMiddleware constructor.
 	 */
-	public function __construct(MiddlewareInterface $middleware, int $priority = null){
-		$this->middleware = $middleware;
-		$this->priority   = ($priority ?? PHP_INT_MIN);
+	public function __construct(
+		protected MiddlewareInterface $middleware,
+		int                           $priority = null,
+	){
+		$this->priority = ($priority ?? PHP_INT_MIN);
 	}
 
 	/**

@@ -31,9 +31,9 @@ interface MultiResponseHandlerInterface{
 	 */
 	public function handleResponse(
 		ResponseInterface $response,
-		RequestInterface $request,
-		int $id,
-		array $curl_info
-	):?RequestInterface;
+		RequestInterface  $request,
+		int               $id,
+		array             $curl_info,
+	):RequestInterface|null;
 
 }

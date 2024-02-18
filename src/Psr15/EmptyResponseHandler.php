@@ -15,15 +15,14 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class EmptyResponseHandler implements RequestHandlerInterface{
 
-	protected ResponseFactoryInterface $responseFactory;
-	protected int                      $status;
-
 	/**
 	 * EmptyResponseHandler constructor.
 	 */
-	public function __construct(ResponseFactoryInterface $responseFactory, int $status){
-		$this->responseFactory = $responseFactory;
-		$this->status          = $status;
+	public function __construct(
+		protected ResponseFactoryInterface $responseFactory,
+		protected int                      $status,
+	){
+
 	}
 
 	/**

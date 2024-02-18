@@ -11,16 +11,12 @@
 namespace chillerlan\HTTPTest;
 
 use chillerlan\HTTP\Utils\ServerUtil;
-use Exception;
 use Psr\Http\Message\{
 	RequestFactoryInterface, ResponseFactoryInterface, ServerRequestFactoryInterface,
 	StreamFactoryInterface, UploadedFileFactoryInterface, UriFactoryInterface
 };
-use function class_exists;
-use function constant;
-use function defined;
-use function method_exists;
-use function sprintf;
+use Exception;
+use function class_exists, constant, defined, method_exists, sprintf;
 
 trait FactoryTrait{
 
@@ -33,13 +29,13 @@ trait FactoryTrait{
 		'uriFactory'           => 'URI_FACTORY',
 	];
 
-	protected RequestFactoryInterface $requestFactory;
-	protected ResponseFactoryInterface $responseFactory;
+	protected RequestFactoryInterface       $requestFactory;
+	protected ResponseFactoryInterface      $responseFactory;
 	protected ServerRequestFactoryInterface $serverRequestFactory;
-	protected StreamFactoryInterface $streamFactory;
-	protected UploadedFileFactoryInterface $uploadedFileFactory;
-	protected UriFactoryInterface $uriFactory;
-	protected ServerUtil $server;
+	protected StreamFactoryInterface        $streamFactory;
+	protected UploadedFileFactoryInterface  $uploadedFileFactory;
+	protected UriFactoryInterface           $uriFactory;
+	protected ServerUtil                    $server;
 
 	/**
 	 * @throws \Exception

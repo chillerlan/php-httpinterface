@@ -15,24 +15,31 @@ namespace chillerlan\HTTP\Psr18;
 use chillerlan\HTTP\Utils\MessageUtil;
 use Psr\Http\Client\{ClientExceptionInterface, ClientInterface};
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
-use Psr\Log\{LoggerAwareInterface, LoggerAwareTrait, LoggerInterface, NullLogger};
+use Psr\Log\{LoggerInterface, NullLogger};
 use Throwable;
 use function get_class, sprintf;
 
 /**
  * @codeCoverageIgnore
  */
-class LoggingClient implements ClientInterface, LoggerAwareInterface{
-	use LoggerAwareTrait;
-
-	protected ClientInterface $http;
+class LoggingClient implements ClientInterface{
 
 	/**
 	 * LoggingClient constructor.
 	 */
-	public function __construct(ClientInterface $http, LoggerInterface $logger = null){
-		$this->http   = $http;
-		$this->logger = ($logger ?? new NullLogger);
+	public function __construct(
+		protected ClientInterface $http,
+		protected LoggerInterface $logger = new NullLogger,
+	){
+	}
+
+	/**
+	 * @codeCoverageIgnore
+	 */
+	public function setLogger(LoggerInterface $logger):static{
+		$this->logger = $logger;
+
+		return $this;
 	}
 
 	/**

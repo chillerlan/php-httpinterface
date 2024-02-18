@@ -14,15 +14,13 @@ use chillerlan\HTTP\HTTPOptions;
 use chillerlan\HTTP\Psr18\CurlClient;
 use chillerlan\HTTP\Utils\MessageUtil;
 use chillerlan\HTTPTest\FactoryTrait;
-use Exception;
 use Fig\Http\Message\RequestMethodInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
-use function str_repeat;
-use function strlen;
-use function strtolower;
+use Exception;
+use function str_repeat, strlen, strtolower;
 
 #[Group('slow')]
 class CurlHandleTest extends TestCase{
@@ -44,8 +42,8 @@ class CurlHandleTest extends TestCase{
 		return [
 			'delete'  => [RequestMethodInterface::METHOD_DELETE],
 			'get'     => [RequestMethodInterface::METHOD_GET],
-#			'head'    => [Request::METHOD_HEAD],
-#			'options' => [Request::METHOD_OPTIONS],
+#			'head'    => [RequestMethodInterface::METHOD_HEAD],
+#			'options' => [RequestMethodInterface::METHOD_OPTIONS],
 			'patch'   => [RequestMethodInterface::METHOD_PATCH],
 			'post'    => [RequestMethodInterface::METHOD_POST],
 			'put'     => [RequestMethodInterface::METHOD_PUT],

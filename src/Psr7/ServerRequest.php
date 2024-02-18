@@ -10,9 +10,8 @@
 
 namespace chillerlan\HTTP\Psr7;
 
-use InvalidArgumentException;
 use Psr\Http\Message\{ServerRequestInterface, UriInterface};
-
+use InvalidArgumentException;
 use function array_key_exists, is_array, is_object;
 
 class ServerRequest extends Request implements ServerRequestInterface{
@@ -27,7 +26,7 @@ class ServerRequest extends Request implements ServerRequestInterface{
 	/**
 	 * ServerRequest constructor.
 	 */
-	public function __construct(string $method, UriInterface|string $uri, array $serverParams = null){
+	public function __construct(string $method, UriInterface|string $uri, array|null $serverParams = null){
 		parent::__construct($method, $uri);
 
 		$this->serverParams = ($serverParams ?? []);
@@ -98,7 +97,7 @@ class ServerRequest extends Request implements ServerRequestInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function withParsedBody($data):static{
+	public function withParsedBody(mixed $data):static{
 
 		if($data !== null && !is_object($data) && !is_array($data)){
 			throw new InvalidArgumentException('parsed body value must be an array, object or null');
@@ -119,7 +118,7 @@ class ServerRequest extends Request implements ServerRequestInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function getAttribute(string $name, $default = null):mixed{
+	public function getAttribute(string $name, mixed $default = null):mixed{
 
 		if(!array_key_exists($name, $this->attributes)){
 			return $default;
@@ -131,7 +130,7 @@ class ServerRequest extends Request implements ServerRequestInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function withAttribute(string $name, $value):static{
+	public function withAttribute(string $name, mixed $value):static{
 		$this->attributes[$name] = $value;
 
 		return $this;
