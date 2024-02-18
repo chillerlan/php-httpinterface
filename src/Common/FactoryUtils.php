@@ -8,6 +8,8 @@
  * @license      MIT
  */
 
+declare(strict_types=1);
+
 namespace chillerlan\HTTP\Common;
 
 use chillerlan\HTTP\Psr7\Stream;

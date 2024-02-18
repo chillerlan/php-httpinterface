@@ -8,6 +8,8 @@
  * @license      MIT
  */
 
+declare(strict_types=1);
+
 namespace chillerlan\HTTPTest;
 
 use chillerlan\HTTP\Common\CurlHandle;

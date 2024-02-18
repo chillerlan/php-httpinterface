@@ -8,6 +8,8 @@
  * @license      MIT
  */
 
+declare(strict_types=1);
+
 namespace chillerlan\HTTPTest\Common;
 
 use chillerlan\HTTP\Common\FactoryUtils;

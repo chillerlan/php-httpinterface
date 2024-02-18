@@ -8,6 +8,8 @@
  * @license      MIT
  */
 
+declare(strict_types=1);
+
 namespace chillerlan\HTTP\Psr18;
 
 use chillerlan\HTTP\HTTPOptions;

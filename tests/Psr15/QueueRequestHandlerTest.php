@@ -8,6 +8,8 @@
  * @license      MIT
  */
 
+declare(strict_types=1);
+
 namespace chillerlan\HTTPTest\Psr15;
 
 use chillerlan\HTTP\Psr15\{MiddlewareException, QueueDispatcher};

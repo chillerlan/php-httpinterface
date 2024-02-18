@@ -8,6 +8,8 @@
  * @license      MIT
  */
 
+declare(strict_types=1);
+
 namespace chillerlan\HTTPTest\Psr18;
 
 use chillerlan\HTTP\Psr18\{CurlClient, URLExtractor};

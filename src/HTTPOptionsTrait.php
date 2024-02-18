@@ -10,6 +10,8 @@
  * @phan-file-suppress PhanTypeInvalidThrowsIsInterface
  */
 
+declare(strict_types=1);
+
 namespace chillerlan\HTTP;
 
 use chillerlan\HTTP\Psr18\ClientException;
