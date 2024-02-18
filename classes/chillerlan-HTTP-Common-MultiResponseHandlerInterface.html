@@ -114,11 +114,12 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Common/MultiResponseHandlerInterface.php"><a href="files/src-common-multiresponsehandlerinterface.html"><abbr title="src/Common/MultiResponseHandlerInterface.php">MultiResponseHandlerInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">15</span>
+    <span class="phpdocumentor-element-found-in__line">20</span>
 
     </aside>
 
-        
+            <p class="phpdocumentor-summary">The multi response handler. (Schrödinger&#039;s cat state handler)</p>
+
 
 
 
@@ -150,7 +151,7 @@
     <span>
                                 &nbsp;: <abbr title="\Psr\Http\Message\RequestInterface">RequestInterface</abbr>|null    </span>
 </dt>
-<dd>The multi response handler. (Schrödinger&#039;s cat state handler)</dd>
+<dd>This method will be called within a loop in MultiRequest::processStack().</dd>
 
     </dl>
 
@@ -179,11 +180,11 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Common/MultiResponseHandlerInterface.php"><a href="files/src-common-multiresponsehandlerinterface.html"><abbr title="src/Common/MultiResponseHandlerInterface.php">MultiResponseHandlerInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">32</span>
+    <span class="phpdocumentor-element-found-in__line">35</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">The multi response handler. (Schrödinger&#039;s cat state handler)</p>
+        <p class="phpdocumentor-summary">This method will be called within a loop in MultiRequest::processStack().</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -191,8 +192,7 @@
 
     <div class="phpdocumentor-label-line">
         </div>
-        <section class="phpdocumentor-description"><p>This method will be called within a loop in MultiRequest::processStack().
-It may return a RequestInterface object (e.g. as a replacement for a failed request),
+        <section class="phpdocumentor-description"><p>It may return a RequestInterface object (e.g. as a replacement for a failed request),
 which then will be re-added to the running queue, otherwise NULL.</p>
 </section>
 

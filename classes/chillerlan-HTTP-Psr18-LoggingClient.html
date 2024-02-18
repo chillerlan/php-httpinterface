@@ -114,11 +114,8 @@
     
             <span class="phpdocumentor-element__implements">
             implements
-                            <abbr title="\Psr\Http\Client\ClientInterface">ClientInterface</abbr>,                             <abbr title="\Psr\Log\LoggerAwareInterface">LoggerAwareInterface</abbr>                    </span>
+                            <abbr title="\Psr\Http\Client\ClientInterface">ClientInterface</abbr>                    </span>
     
-            <span class="phpdocumentor-element__extends">
-            Uses
-                            <abbr title="\Psr\Log\LoggerAwareTrait">LoggerAwareTrait</abbr>                    </span>
     </h2>
 
 <div class="phpdocumentor-label-line">
@@ -129,11 +126,12 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr18/LoggingClient.php"><a href="files/src-psr18-loggingclient.html"><abbr title="src/Psr18/LoggingClient.php">LoggingClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">25</span>
+    <span class="phpdocumentor-element-found-in__line">27</span>
 
     </aside>
 
-        
+            <p class="phpdocumentor-summary">a silly logging wrapper (do not use in production!)</p>
+
 
 
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
@@ -167,7 +165,7 @@
 
     </h4>
     <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\Psr\Http\Client\ClientInterface">ClientInterface</abbr></dt>            <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\Psr\Log\LoggerAwareInterface">LoggerAwareInterface</abbr></dt>    </dl>
+                    <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\Psr\Http\Client\ClientInterface">ClientInterface</abbr></dt>    </dl>
 
 
 
@@ -184,6 +182,12 @@
     <a href="classes/chillerlan-HTTP-Psr18-LoggingClient.html#property_http">$http</a>
     <span>
                         &nbsp;: <abbr title="\Psr\Http\Client\ClientInterface">ClientInterface</abbr>            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/chillerlan-HTTP-Psr18-LoggingClient.html#property_logger">$logger</a>
+    <span>
+                        &nbsp;: <abbr title="\Psr\Log\LoggerInterface">LoggerInterface</abbr>            </span>
 </dt>
 
     </dl>
@@ -205,6 +209,12 @@
     <a href="classes/chillerlan-HTTP-Psr18-LoggingClient.html#method_sendRequest">sendRequest()</a>
     <span>
                                 &nbsp;: <abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/chillerlan-HTTP-Psr18-LoggingClient.html#method_setLogger">setLogger()</a>
+    <span>
+                                &nbsp;: static    </span>
 </dt>
 
     </dl>
@@ -238,7 +248,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr18/LoggingClient.php"><a href="files/src-psr18-loggingclient.html"><abbr title="src/Psr18/LoggingClient.php">LoggingClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">28</span>
+    <span class="phpdocumentor-element-found-in__line">33</span>
 
     </aside>
 
@@ -248,6 +258,39 @@
         <span class="phpdocumentor-signature__type"><abbr title="\Psr\Http\Client\ClientInterface">ClientInterface</abbr></span>
     <span class="phpdocumentor-signature__name">$http</span>
     </code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_logger">
+        $logger
+        <a href="classes/chillerlan-HTTP-Psr18-LoggingClient.html#property_logger" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr18/LoggingClient.php"><a href="files/src-psr18-loggingclient.html"><abbr title="src/Psr18/LoggingClient.php">LoggingClient.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">34</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type"><abbr title="\Psr\Log\LoggerInterface">LoggerInterface</abbr></span>
+    <span class="phpdocumentor-signature__name">$logger</span>
+     = <span class="phpdocumentor-signature__default-value">new NullLogger()</span></code>
 
     
     
@@ -276,7 +319,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr18/LoggingClient.php"><a href="files/src-psr18-loggingclient.html"><abbr title="src/Psr18/LoggingClient.php">LoggingClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">33</span>
+    <span class="phpdocumentor-element-found-in__line">32</span>
 
     </aside>
 
@@ -284,7 +327,7 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Client\ClientInterface">ClientInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$http</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Log\LoggerInterface">LoggerInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$logger</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Client\ClientInterface">ClientInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$http</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Log\LoggerInterface">LoggerInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$logger</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">new NullLogger()</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -301,7 +344,7 @@
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$logger</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Log\LoggerInterface">LoggerInterface</abbr></span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+                 = <span class="phpdocumentor-signature__argument__default-value">new NullLogger()</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
             </dd>
@@ -325,7 +368,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Psr18/LoggingClient.php"><a href="files/src-psr18-loggingclient.html"><abbr title="src/Psr18/LoggingClient.php">LoggingClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">41</span>
+    <span class="phpdocumentor-element-found-in__line">50</span>
 
     </aside>
 
@@ -367,6 +410,65 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setLogger">
+        setLogger()
+        <a href="classes/chillerlan-HTTP-Psr18-LoggingClient.html#method_setLogger" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Psr18/LoggingClient.php"><a href="files/src-psr18-loggingclient.html"><abbr title="src/Psr18/LoggingClient.php">LoggingClient.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">41</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setLogger</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Log\LoggerInterface">LoggerInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$logger</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$logger</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Log\LoggerInterface">LoggerInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/chillerlan-HTTP-Psr18-LoggingClient.html#method_setLogger#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">codeCoverageIgnore</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                             
+                                    </dd>
+                                            </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">static</span>
             </section>
 
 </article>
@@ -484,6 +586,7 @@
                 <li>
                     <ul class="phpdocumentor-list -clean">
                                                     <li><a href="classes/chillerlan-HTTP-Psr18-LoggingClient.html#property_http">$http<a href="classes/chillerlan-HTTP-Psr18-LoggingClient.html"></li>
+                                                    <li><a href="classes/chillerlan-HTTP-Psr18-LoggingClient.html#property_logger">$logger<a href="classes/chillerlan-HTTP-Psr18-LoggingClient.html"></li>
                                             </ul>
                 </li>
             
@@ -492,6 +595,7 @@
                 <ul class="phpdocumentor-list -clean">
                                             <li><a href="classes/chillerlan-HTTP-Psr18-LoggingClient.html#method___construct">__construct()</a></li>
                                             <li><a href="classes/chillerlan-HTTP-Psr18-LoggingClient.html#method_sendRequest">sendRequest()</a></li>
+                                            <li><a href="classes/chillerlan-HTTP-Psr18-LoggingClient.html#method_setLogger">setLogger()</a></li>
                                     </ul>
             </li>
                     </ul>
