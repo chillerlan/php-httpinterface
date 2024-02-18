@@ -12,6 +12,9 @@ namespace chillerlan\HTTP\Psr15;
 
 use Psr\Http\Server\MiddlewareInterface;
 
+/**
+ *
+ */
 interface PriorityMiddlewareInterface extends MiddlewareInterface{
 
 	/**

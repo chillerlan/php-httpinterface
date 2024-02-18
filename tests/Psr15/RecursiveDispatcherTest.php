@@ -14,6 +14,9 @@ use chillerlan\HTTP\Psr15\{MiddlewareException, RecursiveDispatcher};
 use Psr\Http\Message\{ResponseFactoryInterface, ResponseInterface, ServerRequestInterface};
 use Psr\Http\Server\RequestHandlerInterface;
 
+/**
+ *
+ */
 class RecursiveDispatcherTest extends QueueRequestHandlerTest{
 
 	protected function getDispatcher():RequestHandlerInterface{

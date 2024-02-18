@@ -16,6 +16,9 @@ use Psr\Log\AbstractLogger;
 use Stringable;
 use function date, sprintf;
 
+/**
+ *
+ */
 #[Group('slow')]
 class LoggingClientTest extends CurlClientTest{
 

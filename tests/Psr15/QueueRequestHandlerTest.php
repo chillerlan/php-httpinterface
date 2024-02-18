@@ -17,6 +17,9 @@ use Psr\Http\Message\{ResponseFactoryInterface, ResponseInterface, ServerRequest
 use Psr\Http\Server\{MiddlewareInterface, RequestHandlerInterface};
 use function array_keys;
 
+/**
+ *
+ */
 class QueueRequestHandlerTest extends TestCase{
 	use FactoryTrait;
 

@@ -13,6 +13,9 @@ namespace chillerlan\HTTP\Psr17;
 use chillerlan\HTTP\Psr7\Uri;
 use Psr\Http\Message\{UriFactoryInterface, UriInterface};
 
+/**
+ *
+ */
 class UriFactory implements UriFactoryInterface{
 
 	/**

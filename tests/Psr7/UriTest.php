@@ -2,9 +2,6 @@
 /**
  * Class UriTest
  *
- * @link https://github.com/guzzle/psr7/blob/c0dcda9f54d145bd4d062a6d15f54931a67732f9/tests/UriTest.php
- * @link https://github.com/bakame-php/psr7-uri-interface-tests/blob/5a556fdfe668a6c6a14772efeba6134c0b7dae34/tests/AbstractUriTestCase.php
- *
  * @created      10.08.2018
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2018 smiley
@@ -19,6 +16,10 @@ use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\UriInterface;
 use InvalidArgumentException;
 
+/**
+ * @see https://github.com/guzzle/psr7/blob/45b30f99ac27b5ca93cb4831afe16285f57b8221/tests/UriTest.php
+ * @see https://github.com/Nyholm/psr7/blob/fd12ffc87a1e4014b2a7485b88add81c96d105e8/tests/UriTest.php
+ */
 class UriTest extends TestCase{
 
 	public function testDefaultReturnValuesOfGetters():void{

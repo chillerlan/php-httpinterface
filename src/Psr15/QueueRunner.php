@@ -2,8 +2,6 @@
 /**
  * Class QueueRunner
  *
- * @link         https://www.php-fig.org/psr/psr-15/meta/
- *
  * @created      10.03.2019
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2019 smiley
@@ -17,10 +15,13 @@ use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};
 use Psr\Http\Server\RequestHandlerInterface;
 use function array_pop;
 
+/**
+ * @see https://www.php-fig.org/psr/psr-15/meta/
+ */
 class QueueRunner implements RequestHandlerInterface{
 
 	/**
-	 *  constructor.
+	 * QueueRunner constructor.
 	 *
 	 * @param \Psr\Http\Server\MiddlewareInterface[]   $middlewareStack
 	 * @param \Psr\Http\Server\RequestHandlerInterface $fallbackHandler

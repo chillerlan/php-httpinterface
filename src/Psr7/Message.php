@@ -16,6 +16,14 @@ use Psr\Http\Message\{MessageInterface, StreamInterface};
 use InvalidArgumentException;
 use function array_column, array_combine, array_merge, implode, is_array, is_scalar, strtolower;
 
+/**
+ * Implements a HTTP message
+ *
+ * @see https://datatracker.ietf.org/doc/html/rfc7230
+ * @see https://datatracker.ietf.org/doc/html/rfc7231
+ * @see https://datatracker.ietf.org/doc/html/rfc9110
+ * @see https://datatracker.ietf.org/doc/html/rfc9112
+ */
 class Message implements MessageInterface{
 
 	protected StreamInterface $body;
@@ -80,6 +88,9 @@ class Message implements MessageInterface{
 
 	/**
 	 * @inheritDoc
+	 * https://github.com/advisories/GHSA-wxmh-65f7-jcvw
+	 * https://github.com/slimphp/Slim-Psr7/security/advisories/GHSA-q2qj-628g-vhfw
+	 * https://github.com/advisories/GHSA-xv3h-4844-9h36
 	 */
 	public function withHeader(string $name, $value):static{
 		$this->headers[strtolower($name)] = ['name' => $name, 'value' => HeaderUtil::trimValues($this->checkValue($value))];

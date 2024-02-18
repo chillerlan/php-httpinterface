@@ -18,6 +18,9 @@ use Psr\Http\Message\{
 use Exception;
 use function class_exists, constant, defined, method_exists, sprintf;
 
+/**
+ *
+ */
 trait FactoryTrait{
 
 	private array $FACTORIES = [

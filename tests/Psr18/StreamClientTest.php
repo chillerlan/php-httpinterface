@@ -14,6 +14,9 @@ use chillerlan\HTTP\Psr18\StreamClient;
 use PHPUnit\Framework\Attributes\Group;
 use Psr\Http\Client\ClientInterface;
 
+/**
+ *
+ */
 #[Group('slow')]
 class StreamClientTest extends HTTPClientTestAbstract{
 

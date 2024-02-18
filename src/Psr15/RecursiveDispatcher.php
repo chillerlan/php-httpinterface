@@ -2,10 +2,6 @@
 /**
  * Class RecursiveDispatcher
  *
- * A simple middleware dispatcher based on Slim
- *
- * @see          https://github.com/slimphp/Slim/blob/de07f779d229ec06080259a816b0740de830438c/Slim/MiddlewareDispatcher.php
- *
  * @created      15.04.2020
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2020 smiley
@@ -17,6 +13,11 @@ namespace chillerlan\HTTP\Psr15;
 use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};
 use Psr\Http\Server\{MiddlewareInterface, RequestHandlerInterface};
 
+/**
+ * A simple middleware dispatcher based on Slim
+ *
+ * @see https://github.com/slimphp/Slim/blob/de07f779d229ec06080259a816b0740de830438c/Slim/MiddlewareDispatcher.php
+ */
 class RecursiveDispatcher implements RequestHandlerInterface{
 
 	/**

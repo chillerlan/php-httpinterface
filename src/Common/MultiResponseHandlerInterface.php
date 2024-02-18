@@ -12,11 +12,12 @@ namespace chillerlan\HTTP\Common;
 
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
 
+/**
+ * The multi response handler. (Schrödinger's cat state handler)
+ */
 interface MultiResponseHandlerInterface{
 
 	/**
-	 * The multi response handler. (Schrödinger's cat state handler)
-	 *
 	 * This method will be called within a loop in MultiRequest::processStack().
 	 * It may return a RequestInterface object (e.g. as a replacement for a failed request),
 	 * which then will be re-added to the running queue, otherwise NULL.

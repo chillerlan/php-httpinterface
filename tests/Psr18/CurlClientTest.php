@@ -16,6 +16,9 @@ use Fig\Http\Message\RequestMethodInterface;
 use PHPUnit\Framework\Attributes\Group;
 use Psr\Http\Client\ClientInterface;
 
+/**
+ *
+ */
 #[Group('slow')]
 class CurlClientTest extends HTTPClientTestAbstract{
 

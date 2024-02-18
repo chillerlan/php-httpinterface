@@ -15,6 +15,9 @@ use Psr\Http\Message\{RequestInterface, UriInterface};
 use InvalidArgumentException;
 use function preg_match, strtoupper, trim;
 
+/**
+ * Implements a HTTP request message
+ */
 class Request extends Message implements RequestInterface, RequestMethodInterface{
 
 	protected UriInterface $uri;

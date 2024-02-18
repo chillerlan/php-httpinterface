@@ -2,8 +2,6 @@
 /**
  * Class QueueDispatcher
  *
- * @link         https://github.com/libreworks/caridea-dispatch
- *
  * @created      08.03.2019
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2019 smiley
@@ -16,6 +14,9 @@ use chillerlan\HTTP\Psr17\ResponseFactory;
 use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};
 use Psr\Http\Server\{MiddlewareInterface, RequestHandlerInterface};
 
+/**
+ * @see https://github.com/libreworks/caridea-dispatch
+ */
 class QueueDispatcher implements MiddlewareInterface, RequestHandlerInterface{
 
 	/** @var \Psr\Http\Server\MiddlewareInterface[] */

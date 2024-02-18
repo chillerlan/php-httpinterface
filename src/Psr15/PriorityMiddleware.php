@@ -14,6 +14,9 @@ use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};
 use Psr\Http\Server\{MiddlewareInterface, RequestHandlerInterface};
 use const PHP_INT_MIN;
 
+/**
+ *
+ */
 class PriorityMiddleware implements PriorityMiddlewareInterface{
 
 	protected int $priority;

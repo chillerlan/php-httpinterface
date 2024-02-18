@@ -2,8 +2,6 @@
 /**
  * Class LoggingClient
  *
- * a silly logging wrapper (do not use in production!)
- *
  * @created      07.08.2019
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2019 smiley
@@ -20,6 +18,8 @@ use Throwable;
 use function get_class, sprintf;
 
 /**
+ * a silly logging wrapper (do not use in production!)
+ *
  * @codeCoverageIgnore
  */
 class LoggingClient implements ClientInterface{

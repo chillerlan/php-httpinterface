@@ -17,6 +17,9 @@ use Fig\Http\Message\RequestMethodInterface;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
+/**
+ *
+ */
 class RequestTest extends TestCase{
 
 	public function testRequestUriMayBeString():void{

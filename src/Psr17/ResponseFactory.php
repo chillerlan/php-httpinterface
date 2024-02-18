@@ -14,6 +14,9 @@ use chillerlan\HTTP\Psr7\Response;
 use Fig\Http\Message\StatusCodeInterface;
 use Psr\Http\Message\{ResponseFactoryInterface, ResponseInterface};
 
+/**
+ *
+ */
 class ResponseFactory implements ResponseFactoryInterface, StatusCodeInterface{
 
 	/**

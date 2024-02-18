@@ -14,6 +14,9 @@ use chillerlan\HTTP\Psr18\CurlClient;
 use PHPUnit\Framework\Attributes\Group;
 use Psr\Http\Client\ClientInterface;
 
+/**
+ *
+ */
 #[Group('slow')]
 class CurlClientNoCATest extends HTTPClientTestAbstract{
 

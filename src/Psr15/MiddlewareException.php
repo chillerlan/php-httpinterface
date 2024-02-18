@@ -12,6 +12,9 @@ namespace chillerlan\HTTP\Psr15;
 
 use Exception;
 
+/**
+ *
+ */
 class MiddlewareException extends Exception{
 
 }

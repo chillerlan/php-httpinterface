@@ -17,7 +17,7 @@ use function clearstatcache, fclose, feof, fread, fstat, ftell, fwrite, is_resou
 use const SEEK_SET;
 
 /**
- * @property resource|null $stream
+ * Implements a data stream object
  */
 class Stream implements StreamInterface{
 

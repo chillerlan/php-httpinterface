@@ -13,6 +13,9 @@ namespace chillerlan\HTTP\Psr15;
 use Psr\Http\Message\{ResponseFactoryInterface, ResponseInterface, ServerRequestInterface};
 use Psr\Http\Server\RequestHandlerInterface;
 
+/**
+ *
+ */
 class EmptyResponseHandler implements RequestHandlerInterface{
 
 	/**

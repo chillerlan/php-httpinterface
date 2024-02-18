@@ -17,6 +17,9 @@ use Psr\Http\Message\{StreamFactoryInterface, StreamInterface};
 use RuntimeException;
 use function is_file, is_readable;
 
+/**
+ *
+ */
 class StreamFactory implements StreamFactoryInterface{
 
 	/**

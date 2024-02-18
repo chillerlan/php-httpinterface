@@ -17,7 +17,7 @@ use function array_diff, array_keys, in_array;
 use const SEEK_SET;
 
 /**
- *
+ * A stream handler that allows to override select methods of the given StreamInterface
  */
 class DummyStream implements StreamInterface{
 

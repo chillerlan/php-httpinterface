@@ -15,6 +15,9 @@ use Psr\Http\Message\{RequestInterface, ResponseInterface};
 use function explode, file_get_contents, get_headers, in_array, intval, restore_error_handler,
 	set_error_handler, stream_context_create, strtolower, str_starts_with, trim;
 
+/**
+ *
+ */
 class StreamClient extends HTTPClientAbstract{
 
 	/**

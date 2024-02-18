@@ -17,6 +17,9 @@ use chillerlan\HTTP\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\StreamInterface;
 
+/**
+ *
+ */
 class ResponseTest extends TestCase{
 
 	public function testDefaultConstructor():void{

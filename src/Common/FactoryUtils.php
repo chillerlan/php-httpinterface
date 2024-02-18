@@ -17,7 +17,7 @@ use InvalidArgumentException, Stringable;
 use function fseek, gettype, is_scalar, stream_copy_to_stream, stream_get_meta_data;
 
 /**
- *
+ * Utilities for use with the PSR-17 factories
  */
 class FactoryUtils{
 
@@ -44,7 +44,7 @@ class FactoryUtils{
 	}
 
 	/**
-	 *
+	 * Creates a StreamInterface from the given source
 	 */
 	public static function createStreamFromSource(mixed $source = null):StreamInterface{
 		$source ??= '';

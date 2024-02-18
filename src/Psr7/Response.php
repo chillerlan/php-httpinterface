@@ -14,6 +14,9 @@ use Fig\Http\Message\StatusCodeInterface;
 use Psr\Http\Message\ResponseInterface;
 use function trim;
 
+/**
+ * Implements a HTTP response message
+ */
 class Response extends Message implements ResponseInterface, StatusCodeInterface{
 
 	/**

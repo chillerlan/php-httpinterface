@@ -13,6 +13,9 @@ namespace chillerlan\HTTP\Common;
 use chillerlan\Settings\SettingsContainerInterface;
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
 
+/**
+ * Implements a cURL multi connection object
+ */
 class CurlMultiHandle extends CurlHandle{
 
 	public function __construct(

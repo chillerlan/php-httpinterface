@@ -19,6 +19,9 @@ use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\{ClientExceptionInterface, ClientInterface};
 use Exception;
 
+/**
+ *
+ */
 abstract class HTTPClientTestAbstract extends TestCase{
 
 	protected const USER_AGENT = 'chillerlanHttpTest/2.0';

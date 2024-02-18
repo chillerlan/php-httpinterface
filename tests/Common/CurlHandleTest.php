@@ -22,6 +22,9 @@ use Psr\Http\Client\ClientInterface;
 use Exception;
 use function str_repeat, strlen, strtolower;
 
+/**
+ *
+ */
 #[Group('slow')]
 class CurlHandleTest extends TestCase{
 	use FactoryTrait;

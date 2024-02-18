@@ -19,6 +19,13 @@ use function explode, filter_var, is_array, is_string, ltrim, mb_strtolower, pre
 	preg_replace_callback, property_exists, rawurlencode, str_contains, str_starts_with, trim;
 use const FILTER_FLAG_IPV6, FILTER_VALIDATE_IP;
 
+/**
+ * Implements an URI object
+ *
+ * @see https://datatracker.ietf.org/doc/html/rfc3986
+ * @see https://datatracker.ietf.org/doc/html/rfc7320
+ * @see https://datatracker.ietf.org/doc/html/rfc8820
+ */
 class Uri implements UriInterface{
 
 	/**

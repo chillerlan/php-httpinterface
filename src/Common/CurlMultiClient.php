@@ -21,6 +21,9 @@ use function array_shift, curl_close, curl_multi_add_handle, curl_multi_close, c
 	curl_multi_info_read, curl_multi_init, curl_multi_remove_handle, curl_multi_select, curl_multi_setopt, usleep;
 use const CURLM_OK, CURLMOPT_MAXCONNECTS, CURLMOPT_PIPELINING, CURLPIPE_MULTIPLEX;
 
+/**
+ * Curl multi http client
+ */
 class CurlMultiClient implements LoggerAwareInterface{
 
 	protected CMH|null $curl_multi    = null;

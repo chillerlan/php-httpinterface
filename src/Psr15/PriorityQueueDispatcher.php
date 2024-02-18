@@ -2,8 +2,6 @@
 /**
  * Class PriorityQueueDispatcher
  *
- * @link https://github.com/libreworks/caridea-dispatch
- *
  * @created      10.03.2019
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2019 smiley
@@ -15,6 +13,9 @@ namespace chillerlan\HTTP\Psr15;
 use Psr\Http\Server\MiddlewareInterface;
 use function usort;
 
+/**
+ * @see https://github.com/libreworks/caridea-dispatch
+ */
 class PriorityQueueDispatcher extends QueueDispatcher{
 
 	/**

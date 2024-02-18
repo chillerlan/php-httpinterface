@@ -17,6 +17,9 @@ use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Log\{LoggerInterface, NullLogger};
 
+/**
+ *
+ */
 abstract class HTTPClientAbstract implements HTTPClientInterface{
 
 	protected StreamFactoryInterface|null $streamFactory = null;

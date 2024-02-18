@@ -21,6 +21,9 @@ use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
 use function array_column, defined, implode, in_array, ksort;
 
+/**
+ *
+ */
 #[Group('slow')]
 class CurlMultiClientTest extends TestCase{
 

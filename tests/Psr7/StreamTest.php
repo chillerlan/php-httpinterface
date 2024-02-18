@@ -19,6 +19,9 @@ use Psr\Http\Message\StreamInterface;
 use Exception, InvalidArgumentException, RuntimeException;
 use function filesize, fopen, fwrite;
 
+/**
+ *
+ */
 class StreamTest extends TestCase{
 	use FactoryTrait;
 

@@ -17,6 +17,9 @@ use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientExceptionInterface;
 use const CURLOPT_CAINFO, CURLOPT_CAPATH, CURLOPT_SSL_VERIFYHOST, CURLOPT_SSL_VERIFYPEER;
 
+/**
+ *
+ */
 class HTTPOptionsTest extends TestCase{
 
 	protected function createTestHandleOptions(HTTPOptions $options):array{

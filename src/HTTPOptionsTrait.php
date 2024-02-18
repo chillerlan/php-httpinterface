@@ -16,6 +16,9 @@ use chillerlan\HTTP\Psr18\ClientException;
 use function file_exists, ini_get, is_dir, is_file, is_link, readlink, trim;
 use const CURLOPT_CAINFO, CURLOPT_CAPATH;
 
+/**
+ *
+ */
 trait HTTPOptionsTrait{
 
 	/**

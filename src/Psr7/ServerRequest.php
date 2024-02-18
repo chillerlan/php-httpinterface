@@ -14,6 +14,9 @@ use Psr\Http\Message\{ServerRequestInterface, UriInterface};
 use InvalidArgumentException;
 use function array_key_exists, is_array, is_object;
 
+/**
+ * Implements a server-side incoming HTTP request
+ */
 class ServerRequest extends Request implements ServerRequestInterface{
 
 	protected array             $serverParams;

@@ -14,6 +14,9 @@ use chillerlan\HTTP\Psr7\UploadedFile;
 use Psr\Http\Message\{StreamInterface, UploadedFileFactoryInterface, UploadedFileInterface};
 use const UPLOAD_ERR_OK;
 
+/**
+ *
+ */
 class UploadedFileFactory implements UploadedFileFactoryInterface{
 
 	/**
