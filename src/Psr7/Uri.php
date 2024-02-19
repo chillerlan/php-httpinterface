@@ -286,7 +286,7 @@ class Uri implements UriInterface{
 	}
 
 	/**
-	 * @throws \InvalidArgumentException
+	 *
 	 */
 	protected function filterUserInfo(string $userOrPass):string{
 		return $this->replaceChars(
@@ -296,7 +296,7 @@ class Uri implements UriInterface{
 	}
 
 	/**
-	 * @throws \InvalidArgumentException
+	 *
 	 */
 	protected function filterHost(string $host):string{
 		$filteredIPv6 = filter_var(trim($host, '[]'), FILTER_VALIDATE_IP, FILTER_FLAG_IPV6);
@@ -325,7 +325,7 @@ class Uri implements UriInterface{
 	}
 
 	/**
-	 * @throws \InvalidArgumentException
+	 *
 	 */
 	protected function filterPath(string $path):string{
 		return $this->replaceChars(
@@ -335,7 +335,7 @@ class Uri implements UriInterface{
 	}
 
 	/**
-	 * @throws \InvalidArgumentException
+	 *
 	 */
 	protected function filterQueryOrFragment(string $queryOrFragment):string{
 		return $this->replaceChars(
