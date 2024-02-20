@@ -69,8 +69,8 @@ trait FactoryTrait{
 			$this->streamFactory
 		);
 
-		if(method_exists($this, '__setUp')){
-			$this->__setUp();
+		if(method_exists($this, '_setUp_')){
+			$this->_setUp_();
 		}
 
 	}

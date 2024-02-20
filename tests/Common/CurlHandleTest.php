@@ -34,7 +34,7 @@ class CurlHandleTest extends TestCase{
 	protected ClientInterface $http;
 
 	// called from FactoryTrait
-	protected function __setUp():void{
+	protected function _setUp_():void{
 
 		$options = new HTTPOptions([
 			'ca_info' => __DIR__.'/../cacert.pem',
