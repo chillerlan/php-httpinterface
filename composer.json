@@ -33,7 +33,7 @@
 		"ext-mbstring": "*",
 		"ext-simplexml": "*",
 		"ext-zlib": "*",
-		"chillerlan/php-http-message-utils": "^2.0.3",
+		"chillerlan/php-http-message-utils": "^2.1",
 		"chillerlan/php-settings-container": "^3.1.1",
 		"fig/http-message-util": "^1.1.5",
 		"psr/http-client": "^1.0",
