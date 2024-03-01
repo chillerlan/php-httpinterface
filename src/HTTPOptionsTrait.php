@@ -100,16 +100,16 @@ trait HTTPOptionsTrait{
 	protected bool $curl_check_OCSP = false;
 
 	/**
-	 * HTTPOptionsTrait constructor
-	 *
 	 * @throws \Psr\Http\Client\ClientExceptionInterface
 	 */
-	protected function HTTPOptionsTrait():void{
+	protected function set_user_agent(string $user_agent):void{
+		$user_agent = trim($user_agent);
 
-		if(empty(trim($this->user_agent))){
+		if(empty($user_agent)){
 			throw new ClientException('invalid user agent');
 		}
 
+		$this->user_agent = $user_agent;
 	}
 
 	/**
