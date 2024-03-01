@@ -40,7 +40,7 @@ jobs:
           php-version: ${{ matrix.php-version }}
           tools: pecl
           coverage: none
-          extensions: ast, curl, fileinfo, json, mbstring, simplexml, sodium, zlib
+          extensions: ast, curl, fileinfo, intl, json, mbstring, simplexml, sodium, zlib
 
       - name: "Update dependencies with composer"
         uses: ramsey/composer-install@v2
@@ -64,7 +64,7 @@ jobs:
           php-version: "8.1"
           tools: phpDocumentor
           coverage: none
-          extensions: curl, fileinfo, json, mbstring, simplexml, sodium, zlib
+          extensions: curl, fileinfo, intl, json, mbstring, simplexml, sodium, zlib
 
       - name: "Build Docs"
         run: phpdoc --config=phpdoc.xml.dist
@@ -105,7 +105,7 @@ jobs:
         with:
           php-version: ${{ matrix.php-version }}
           coverage: pcov
-          extensions: curl, fileinfo, json, mbstring, simplexml, sodium, zlib
+          extensions: curl, fileinfo, intl, json, mbstring, simplexml, sodium, zlib
 
       - name: "Install dependencies with composer"
         uses: ramsey/composer-install@v2
