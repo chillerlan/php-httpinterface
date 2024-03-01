@@ -49,7 +49,10 @@ foreach($artists as $artistID){
 	$response = $http->sendRequest($request);
 
 	if($response->getStatusCode() === 200){
-		file_put_contents(sprintf('%s/json/%s.json', __DIR__, $artistID), (string)$response->getBody());
+		$body = $response->getBody();
+
+		var_dump($artistID, $body->getSize());
+		file_put_contents(sprintf('%s/json/%s.json', __DIR__, $artistID), $body->getContents());
 	}
 
 }
