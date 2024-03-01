@@ -396,10 +396,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTP-HTTPOptionsTrait.html"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\HTTPOptionsTrait\u003A\u003AHTTPOptionsTrait\u0028\u0029",
-            "name": "HTTPOptionsTrait",
-            "summary": "HTTPOptionsTrait\u0020constructor",
-            "url": "classes/chillerlan-HTTP-HTTPOptionsTrait.html#method_HTTPOptionsTrait"
+            "fqsen": "\\chillerlan\\HTTP\\HTTPOptionsTrait\u003A\u003Aset_user_agent\u0028\u0029",
+            "name": "set_user_agent",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-HTTPOptionsTrait.html#method_set_user_agent"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\HTTPOptionsTrait\u003A\u003Aset_ca_info\u0028\u0029",
             "name": "set_ca_info",
@@ -1786,10 +1786,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Common-CurlHandleTest.html"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Common\\CurlHandleTest\u003A\u003A__setUp\u0028\u0029",
-            "name": "__setUp",
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\CurlHandleTest\u003A\u003A_setUp_\u0028\u0029",
+            "name": "_setUp_",
             "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Common-CurlHandleTest.html#method___setUp"
+            "url": "classes/chillerlan-HTTPTest-Common-CurlHandleTest.html#method__setUp_"
         },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Common\\CurlHandleTest\u003A\u003ArequestMethodProvider\u0028\u0029",
             "name": "requestMethodProvider",
@@ -1901,10 +1901,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Common-MultipartStreamBuilderTest.html"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Common\\MultipartStreamBuilderTest\u003A\u003A__setUp\u0028\u0029",
-            "name": "__setUp",
+            "fqsen": "\\chillerlan\\HTTPTest\\Common\\MultipartStreamBuilderTest\u003A\u003A_setUp_\u0028\u0029",
+            "name": "_setUp_",
             "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Common-MultipartStreamBuilderTest.html#method___setUp"
+            "url": "classes/chillerlan-HTTPTest-Common-MultipartStreamBuilderTest.html#method__setUp_"
         },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Common\\MultipartStreamBuilderTest\u003A\u003AtestCreatesDefaultBoundary\u0028\u0029",
             "name": "testCreatesDefaultBoundary",
@@ -2656,10 +2656,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\UploadedFileTest\u003A\u003A__setUp\u0028\u0029",
-            "name": "__setUp",
+            "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\UploadedFileTest\u003A\u003A_setUp_\u0028\u0029",
+            "name": "_setUp_",
             "summary": "",
-            "url": "classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method___setUp"
+            "url": "classes/chillerlan-HTTPTest-Psr7-UploadedFileTest.html#method__setUp_"
         },                {
             "fqsen": "\\chillerlan\\HTTPTest\\Psr7\\UploadedFileTest\u003A\u003AtearDown\u0028\u0029",
             "name": "tearDown",
