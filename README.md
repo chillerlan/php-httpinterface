@@ -2,11 +2,6 @@
 
 A [PSR-7](https://www.php-fig.org/psr/psr-7/)/[PSR-17](https://www.php-fig.org/psr/psr-17/)/[PSR-18](https://www.php-fig.org/psr/psr-18/) implementation.
 
-**NOTE: This library has abandoned the silly "immuatbility" that is dictated by PSR-7 for it is horseshit.
-Fluent interfaces just don't work like that, the pseudo-immutability gets in the way more often (always) than it is useful (never).
-If you want your fluent objects to be immutable for whatever reason, just fucking clone them 
-and don't force countless libraries to do that for you instead. If you don't like it, just use Guzzle instead.**
-
 [![PHP Version Support][php-badge]][php]
 [![version][packagist-badge]][packagist]
 [![license][license-badge]][license]
@@ -35,9 +30,19 @@ and don't force countless libraries to do that for you instead. If you don't lik
 See [the wiki](https://github.com/chillerlan/php-httpinterface/wiki) for advanced documentation.
 An API documentation created with [phpDocumentor](https://www.phpdoc.org/) can be found at https://chillerlan.github.io/php-httpinterface/ (WIP).
 
+**NOTE: This library has abandoned the silly "immuatbility" that is dictated by PSR-7 for it is horseshit.
+Fluent interfaces just don't work like that, the pseudo-immutability gets in the way more often (always) than it is useful (never).
+If you want your fluent objects to be immutable for whatever reason, just fucking clone them
+and don't force countless libraries to do that for you instead. If you don't like it, just use Guzzle instead.**
+
+
 ## Requirements
 - PHP 8.1+
-  - the [`cURL`](https://www.php.net/manual/book.curl.php), [`json`](https://www.php.net/manual/book.json.php), [`simplexml`](https://www.php.net/manual/book.simplexml.php) and [`zlib`](https://www.php.net/manual/book.zlib.php) extensions
+  - [`ext-curl`](https://www.php.net/manual/book.curl.php)
+  - [`ext-json`](https://www.php.net/manual/book.json.php)
+  - [`ext-mbstring`](https://www.php.net/manual/book.mbstring.php)
+  - [`ext-simplexml`](https://www.php.net/manual/book.simplexml.php)
+  - [`ext-zlib`](https://www.php.net/manual/book.zlib.php)
 
 ## Installation
 **requires [composer](https://getcomposer.org)**
@@ -60,7 +65,5 @@ Profit!
 
 This library contains portions of code (especially tests) from the following libraries:
 - [Guzzle PSR-7](https://github.com/guzzle/psr7) (MIT)
-- [bakame-php psr7-uri-interface-tests](https://github.com/bakame-php/psr7-uri-interface-tests) (MIT)
 - [Slim](https://github.com/slimphp/Slim) (MIT) 
-- [nyholm PSR-7](https://github.com/Nyholm/psr7) (MIT)  
 - [caridea-dispatch ](https://github.com/libreworks/caridea-dispatch) (Apache)
