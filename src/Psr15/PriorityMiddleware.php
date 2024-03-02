@@ -21,16 +21,14 @@ use const PHP_INT_MIN;
  */
 class PriorityMiddleware implements PriorityMiddlewareInterface{
 
-	protected int $priority;
-
 	/**
 	 * PriorityMiddleware constructor.
 	 */
 	public function __construct(
 		protected MiddlewareInterface $middleware,
-		int                           $priority = null,
+		protected int                 $priority = PHP_INT_MIN,
 	){
-		$this->priority = ($priority ?? PHP_INT_MIN);
+
 	}
 
 	/**

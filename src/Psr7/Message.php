@@ -94,7 +94,7 @@ class Message implements MessageInterface{
 	 * https://github.com/slimphp/Slim-Psr7/security/advisories/GHSA-q2qj-628g-vhfw
 	 * https://github.com/advisories/GHSA-xv3h-4844-9h36
 	 */
-	public function withHeader(string $name, $value):static{
+	public function withHeader(string $name, mixed $value):static{
 		$this->headers[strtolower($name)] = ['name' => $name, 'value' => HeaderUtil::trimValues($this->checkValue($value))];
 
 		return $this;
@@ -103,7 +103,7 @@ class Message implements MessageInterface{
 	/**
 	 * @inheritDoc
 	 */
-	public function withAddedHeader(string $name, $value):static{
+	public function withAddedHeader(string $name, mixed $value):static{
 		/** @var array $value */
 		$value  = HeaderUtil::trimValues($this->checkValue($value));
 		$lcName = strtolower($name);

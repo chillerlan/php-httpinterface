@@ -1,6 +1,6 @@
 {
 	"name": "chillerlan/php-httpinterface",
-	"description": "A PSR-7/17/18 http client/interface implementation",
+	"description": "A PSR-7/17/18 http message/client implementation",
 	"license": "MIT",
 	"type": "library",
 	"keywords": [

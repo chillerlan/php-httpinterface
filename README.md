@@ -35,6 +35,9 @@ Fluent interfaces just don't work like that, the pseudo-immutability gets in the
 If you want your fluent objects to be immutable for whatever reason, just fucking clone them
 and don't force countless libraries to do that for you instead. If you don't like it, just use Guzzle instead.**
 
+Further, it still only implements [`psr/http-message`](https://packagist.org/packages/psr/http-message) v1.1, 
+as the v2.0 release from 06/2023 has return types added [that conflict](https://github.com/php-fig/http-message/pull/107) 
+with the PHP 8 [`static` return type](https://wiki.php.net/rfc/static_return_type).
 
 ## Requirements
 - PHP 8.1+

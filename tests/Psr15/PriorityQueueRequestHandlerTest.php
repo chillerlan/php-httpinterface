@@ -28,10 +28,11 @@ class PriorityQueueRequestHandlerTest extends TestCase{
 	public function testHandler():void{
 
 		$middlewareStack = [
-			$this->getNonPriorityMiddleware(0),
 			$this->getPriorityMiddleware(2),
-			$this->getPriorityMiddleware(3),
+			$this->getPriorityMiddleware(-42),
+			$this->getNonPriorityMiddleware(0),
 			$this->getPriorityMiddleware(1),
+			$this->getPriorityMiddleware(3),
 		];
 
 		// Create request handler instance:
@@ -49,6 +50,7 @@ class PriorityQueueRequestHandlerTest extends TestCase{
 				'X-Priority-3',
 				'X-Priority-2',
 				'X-Priority-1',
+				'X-Priority--42',
 				'X-Priority-None-0',
 				'X-Priority-None-1',
 			],

@@ -249,7 +249,7 @@ class CurlHandle{
 				if(array_key_exists(CURLOPT_POSTFIELDS, $this->curlOptions)){
 					$values = [strlen($this->curlOptions[CURLOPT_POSTFIELDS])];
 				}
-				// Else if there is no body, forcing "Content-length" to 0
+				// Else if a body is not present, force "Content-length" to 0
 				elseif(!array_key_exists(CURLOPT_READFUNCTION, $this->curlOptions)){
 					$values = ['0'];
 				}

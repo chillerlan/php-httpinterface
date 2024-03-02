@@ -34,7 +34,7 @@ class Request extends Message implements RequestInterface, RequestMethodInterfac
 
 		$this->method = strtoupper(trim($method));
 
-		if($method === ''){
+		if($this->method === ''){
 			throw new InvalidArgumentException('HTTP method must not be empty');
 		}
 
