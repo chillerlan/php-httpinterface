@@ -13,8 +13,8 @@ declare(strict_types=1);
 namespace chillerlan\HTTP\Psr7;
 
 use chillerlan\HTTP\Common\FactoryUtils;
-use chillerlan\HTTP\Psr17\StreamFactory;
-use Psr\Http\Message\{StreamInterface, UploadedFileInterface};
+use chillerlan\HTTP\Common\HTTPFactory;
+use Psr\Http\Message\{StreamFactoryInterface, StreamInterface, UploadedFileInterface};
 use InvalidArgumentException, RuntimeException;
 use function in_array, is_file, is_string, is_writable, move_uploaded_file, php_sapi_name, rename;
 use const UPLOAD_ERR_CANT_WRITE, UPLOAD_ERR_EXTENSION, UPLOAD_ERR_FORM_SIZE, UPLOAD_ERR_INI_SIZE,
@@ -45,12 +45,12 @@ class UploadedFile implements UploadedFileInterface{
 	 * @throws \InvalidArgumentException
 	 */
 	public function __construct(
-		mixed                   $file,
-		protected int           $size,
-		protected int           $error = UPLOAD_ERR_OK,
-		protected string|null   $filename = null,
-		protected string|null   $mediaType = null,
-		protected StreamFactory $streamFactory = new StreamFactory,
+		mixed                            $file,
+		protected int                    $size,
+		protected int                    $error = UPLOAD_ERR_OK,
+		protected string|null            $filename = null,
+		protected string|null            $mediaType = null,
+		protected StreamFactoryInterface $streamFactory = new HTTPFactory,
 	){
 
 		if(!in_array($error, $this::UPLOAD_ERRORS, true)){

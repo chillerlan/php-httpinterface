@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace chillerlan\HTTP\Psr15;
 
-use chillerlan\HTTP\Psr17\ResponseFactory;
+use chillerlan\HTTP\Common\HTTPFactory;
 use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};
 use Psr\Http\Server\{MiddlewareInterface, RequestHandlerInterface};
 
@@ -32,7 +32,7 @@ class QueueDispatcher implements MiddlewareInterface, RequestHandlerInterface{
 		iterable|null                $middlewareStack = null,
 		RequestHandlerInterface|null $fallbackHandler = null,
 	){
-		$fallbackHandler ??= new EmptyResponseHandler(new ResponseFactory, 500);
+		$fallbackHandler ??= new EmptyResponseHandler(new HTTPFactory, 500);
 
 		$this
 			->addStack(($middlewareStack ?? []))

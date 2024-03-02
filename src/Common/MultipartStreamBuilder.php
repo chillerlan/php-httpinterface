@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace chillerlan\HTTP\Common;
 
-use chillerlan\HTTP\Psr17\StreamFactory;
 use chillerlan\HTTP\Psr7\Message;
 use chillerlan\HTTP\Utils\{HeaderUtil, MessageUtil, StreamUtil};
 use Psr\Http\Message\{MessageInterface, StreamFactoryInterface, StreamInterface};
@@ -35,7 +34,7 @@ class MultipartStreamBuilder{
 	 * MultipartStreamBuilder constructor
 	 */
 	public function __construct(
-		protected StreamFactoryInterface $streamFactory = new StreamFactory,
+		protected StreamFactoryInterface $streamFactory = new HTTPFactory,
 	){
 		$this->reset();
 	}

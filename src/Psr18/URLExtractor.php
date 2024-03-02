@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace chillerlan\HTTP\Psr18;
 
-use chillerlan\HTTP\Psr17\RequestFactory;
+use chillerlan\HTTP\Common\HTTPFactory;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\{RequestFactoryInterface, RequestInterface, ResponseInterface, UriInterface};
 use function array_reverse, in_array;
@@ -35,7 +35,7 @@ class URLExtractor implements ClientInterface{
 	 */
 	public function __construct(
 		protected ClientInterface         $http,
-		protected RequestFactoryInterface $requestFactory = new RequestFactory,
+		protected RequestFactoryInterface $requestFactory = new HTTPFactory,
 	){
 
 	}
