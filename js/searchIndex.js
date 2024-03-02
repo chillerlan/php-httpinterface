@@ -286,6 +286,51 @@ Search.appendIndex(
             "summary": "Creates\u0020a\u0020StreamInterface\u0020from\u0020the\u0020given\u0020source",
             "url": "classes/chillerlan-HTTP-Common-FactoryUtils.html#method_createStreamFromSource"
         },                {
+            "fqsen": "\\chillerlan\\HTTP\\Common\\HTTPFactory",
+            "name": "HTTPFactory",
+            "summary": "Implements\u0020the\u0020PSR\u002D17\u0020HTTP\u0020factories",
+            "url": "classes/chillerlan-HTTP-Common-HTTPFactory.html"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Common\\HTTPFactory\u003A\u003AcreateRequest\u0028\u0029",
+            "name": "createRequest",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Common-HTTPFactory.html#method_createRequest"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Common\\HTTPFactory\u003A\u003AcreateResponse\u0028\u0029",
+            "name": "createResponse",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Common-HTTPFactory.html#method_createResponse"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Common\\HTTPFactory\u003A\u003AcreateStream\u0028\u0029",
+            "name": "createStream",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Common-HTTPFactory.html#method_createStream"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Common\\HTTPFactory\u003A\u003AcreateStreamFromFile\u0028\u0029",
+            "name": "createStreamFromFile",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Common-HTTPFactory.html#method_createStreamFromFile"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Common\\HTTPFactory\u003A\u003AcreateStreamFromResource\u0028\u0029",
+            "name": "createStreamFromResource",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Common-HTTPFactory.html#method_createStreamFromResource"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Common\\HTTPFactory\u003A\u003AcreateUri\u0028\u0029",
+            "name": "createUri",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Common-HTTPFactory.html#method_createUri"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Common\\HTTPFactory\u003A\u003AcreateServerRequest\u0028\u0029",
+            "name": "createServerRequest",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Common-HTTPFactory.html#method_createServerRequest"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Common\\HTTPFactory\u003A\u003AcreateUploadedFile\u0028\u0029",
+            "name": "createUploadedFile",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Common-HTTPFactory.html#method_createUploadedFile"
+        },                {
             "fqsen": "\\chillerlan\\HTTP\\Common\\MultipartStreamBuilder",
             "name": "MultipartStreamBuilder",
             "summary": "Use\u0020PSR\u002D7\u0020MessageInterface\u0020to\u0020build\u0020multipart\u0020messages",
@@ -521,15 +566,15 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTP-Psr15-PriorityMiddleware.html#method_getPriority"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr15\\PriorityMiddleware\u003A\u003A\u0024priority",
-            "name": "priority",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr15-PriorityMiddleware.html#property_priority"
-        },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr15\\PriorityMiddleware\u003A\u003A\u0024middleware",
             "name": "middleware",
             "summary": "",
             "url": "classes/chillerlan-HTTP-Psr15-PriorityMiddleware.html#property_middleware"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\Psr15\\PriorityMiddleware\u003A\u003A\u0024priority",
+            "name": "priority",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-Psr15-PriorityMiddleware.html#property_priority"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr15\\PriorityMiddlewareInterface",
             "name": "PriorityMiddlewareInterface",
@@ -670,76 +715,6 @@ Search.appendIndex(
             "name": "kernel",
             "summary": "",
             "url": "classes/chillerlan-HTTP-Psr15-RecursiveDispatcher.html#property_kernel"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr17\\RequestFactory",
-            "name": "RequestFactory",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr17-RequestFactory.html"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr17\\RequestFactory\u003A\u003AcreateRequest\u0028\u0029",
-            "name": "createRequest",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr17-RequestFactory.html#method_createRequest"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr17\\ResponseFactory",
-            "name": "ResponseFactory",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr17-ResponseFactory.html"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr17\\ResponseFactory\u003A\u003AcreateResponse\u0028\u0029",
-            "name": "createResponse",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr17-ResponseFactory.html#method_createResponse"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr17\\ServerRequestFactory",
-            "name": "ServerRequestFactory",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr17-ServerRequestFactory.html"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr17\\ServerRequestFactory\u003A\u003AcreateServerRequest\u0028\u0029",
-            "name": "createServerRequest",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr17-ServerRequestFactory.html#method_createServerRequest"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr17\\StreamFactory",
-            "name": "StreamFactory",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr17-StreamFactory.html"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr17\\StreamFactory\u003A\u003AcreateStream\u0028\u0029",
-            "name": "createStream",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr17-StreamFactory.html#method_createStream"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr17\\StreamFactory\u003A\u003AcreateStreamFromFile\u0028\u0029",
-            "name": "createStreamFromFile",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr17-StreamFactory.html#method_createStreamFromFile"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr17\\StreamFactory\u003A\u003AcreateStreamFromResource\u0028\u0029",
-            "name": "createStreamFromResource",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr17-StreamFactory.html#method_createStreamFromResource"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr17\\UploadedFileFactory",
-            "name": "UploadedFileFactory",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr17-UploadedFileFactory.html"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr17\\UploadedFileFactory\u003A\u003AcreateUploadedFile\u0028\u0029",
-            "name": "createUploadedFile",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr17-UploadedFileFactory.html#method_createUploadedFile"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr17\\UriFactory",
-            "name": "UriFactory",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr17-UriFactory.html"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr17\\UriFactory\u003A\u003AcreateUri\u0028\u0029",
-            "name": "createUri",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-Psr17-UriFactory.html#method_createUri"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr18\\ClientException",
             "name": "ClientException",
@@ -2995,11 +2970,6 @@ Search.appendIndex(
             "name": "Psr15",
             "summary": "",
             "url": "namespaces/chillerlan-http-psr15.html"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\Psr17",
-            "name": "Psr17",
-            "summary": "",
-            "url": "namespaces/chillerlan-http-psr17.html"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\Psr18",
             "name": "Psr18",

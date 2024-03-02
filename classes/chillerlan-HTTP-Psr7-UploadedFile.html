@@ -222,7 +222,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/chillerlan-HTTP-Psr7-UploadedFile.html#property_streamFactory">$streamFactory</a>
     <span>
-                        &nbsp;: <a href="classes/chillerlan-HTTP-Psr17-StreamFactory.html"><abbr title="\chillerlan\HTTP\Psr17\StreamFactory">StreamFactory</abbr></a>            </span>
+                        &nbsp;: <abbr title="\Psr\Http\Message\StreamFactoryInterface">StreamFactoryInterface</abbr>            </span>
 </dt>
 
     </dl>
@@ -593,9 +593,9 @@ of bytes have been read.</dd>
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type"><a href="classes/chillerlan-HTTP-Psr17-StreamFactory.html"><abbr title="\chillerlan\HTTP\Psr17\StreamFactory">StreamFactory</abbr></a></span>
+        <span class="phpdocumentor-signature__type"><abbr title="\Psr\Http\Message\StreamFactoryInterface">StreamFactoryInterface</abbr></span>
     <span class="phpdocumentor-signature__name">$streamFactory</span>
-     = <span class="phpdocumentor-signature__default-value">new StreamFactory()</span></code>
+     = <span class="phpdocumentor-signature__default-value">new HTTPFactory()</span></code>
 
     
     
@@ -631,7 +631,7 @@ of bytes have been read.</dd>
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$file</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$size</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$error</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">UPLOAD_ERR_OK</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$filename</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mediaType</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/chillerlan-HTTP-Psr17-StreamFactory.html"><abbr title="\chillerlan\HTTP\Psr17\StreamFactory">StreamFactory</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$streamFactory</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">new StreamFactory()</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$file</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$size</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$error</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">UPLOAD_ERR_OK</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$filename</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mediaType</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\StreamFactoryInterface">StreamFactoryInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$streamFactory</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">new HTTPFactory()</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -675,8 +675,8 @@ of bytes have been read.</dd>
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$streamFactory</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/chillerlan-HTTP-Psr17-StreamFactory.html"><abbr title="\chillerlan\HTTP\Psr17\StreamFactory">StreamFactory</abbr></a></span>
-                 = <span class="phpdocumentor-signature__argument__default-value">new StreamFactory()</span>            </dt>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\StreamFactoryInterface">StreamFactoryInterface</abbr></span>
+                 = <span class="phpdocumentor-signature__argument__default-value">new HTTPFactory()</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
             </dd>
