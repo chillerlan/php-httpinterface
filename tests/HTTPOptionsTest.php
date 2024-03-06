@@ -35,7 +35,7 @@ class HTTPOptionsTest extends TestCase{
 		$this->expectException(ClientExceptionInterface::class);
 		$this->expectExceptionMessage('invalid user agent');
 
-		new HTTPOptions(['user_agent' => false]);
+		new HTTPOptions(['user_agent' => '']);
 	}
 
 	public function testInvalidCAException():void{
