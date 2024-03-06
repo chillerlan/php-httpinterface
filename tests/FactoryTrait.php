@@ -45,7 +45,7 @@ trait FactoryTrait{
 	/**
 	 * @throws \Exception
 	 */
-	protected function setUp():void{
+	protected function initFactories():void{
 
 		foreach($this->FACTORIES as $property => $const){
 
@@ -68,10 +68,6 @@ trait FactoryTrait{
 			$this->uploadedFileFactory,
 			$this->streamFactory
 		);
-
-		if(method_exists($this, '_setUp_')){
-			$this->_setUp_();
-		}
 
 	}
 

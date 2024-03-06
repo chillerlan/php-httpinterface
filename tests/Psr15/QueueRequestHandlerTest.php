@@ -25,7 +25,11 @@ use function array_keys;
 class QueueRequestHandlerTest extends TestCase{
 	use FactoryTrait;
 
- 	protected function getDispatcher():RequestHandlerInterface{
+	protected function setUp():void{
+		$this->initFactories();
+	}
+
+	protected function getDispatcher():RequestHandlerInterface{
 	    // Create request handler instance:
 	    $dispatcher = new QueueDispatcher($this->getTestMiddlewareStack(), $this->getTestFallbackHandler());
 

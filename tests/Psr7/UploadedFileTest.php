@@ -32,7 +32,9 @@ class UploadedFileTest extends TestCase{
 	protected array $cleanup;
 
 	// called from FactoryTrait
-	protected function _setUp_():void{
+	protected function setUp():void{
+		$this->initFactories();
+
 		$this->cleanup = [];
 	}
 

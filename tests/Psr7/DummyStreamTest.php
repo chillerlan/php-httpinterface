@@ -24,6 +24,10 @@ use PHPUnit\Framework\TestCase;
 class DummyStreamTest extends TestCase{
 	use FactoryTrait;
 
+	protected function setUp():void{
+		$this->initFactories();
+	}
+
 	public function testDefaultStream():void{
 		$dummy = new DummyStream;
 

@@ -27,6 +27,10 @@ use function filesize, fopen, fwrite;
 class StreamTest extends TestCase{
 	use FactoryTrait;
 
+	protected function setUp():void{
+		$this->initFactories();
+	}
+
 	public function testConstructorThrowsExceptionOnInvalidArgument():void{
 		$this->expectException(InvalidArgumentException::class);
 

@@ -25,6 +25,10 @@ use function array_keys;
 class PriorityQueueRequestHandlerTest extends TestCase{
 	use FactoryTrait;
 
+	protected function setUp():void{
+		$this->initFactories();
+	}
+
 	public function testHandler():void{
 
 		$middlewareStack = [

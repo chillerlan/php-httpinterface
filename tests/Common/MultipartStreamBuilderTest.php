@@ -26,7 +26,9 @@ class MultipartStreamBuilderTest extends TestCase{
 
 	protected MultipartStreamBuilder $multipartStreamBuilder;
 
-	protected function _setUp_():void{
+	protected function setUp():void{
+		$this->initFactories();
+
 		$this->multipartStreamBuilder = new MultipartStreamBuilder();
 	}
 

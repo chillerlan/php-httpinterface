@@ -26,6 +26,10 @@ use function fopen, fseek, fwrite, simplexml_load_string;
 class FactoryUtilsTest extends TestCase{
 	use FactoryTrait;
 
+	protected function setUp():void{
+		$this->initFactories();
+	}
+
 	public function testCreateStream():void{
 		$stream = FactoryUtils::createStream('test');
 
