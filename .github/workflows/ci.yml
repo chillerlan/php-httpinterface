@@ -43,7 +43,7 @@ jobs:
           extensions: ast, curl, fileinfo, intl, json, mbstring, simplexml, sodium, zlib
 
       - name: "Update dependencies with composer"
-        uses: ramsey/composer-install@v2
+        uses: ramsey/composer-install@v3
 
       - name: "Run phan"
         run: php vendor/bin/phan --target-php-version=${{ matrix.php-version }}
@@ -108,7 +108,7 @@ jobs:
           extensions: curl, fileinfo, intl, json, mbstring, simplexml, sodium, zlib
 
       - name: "Install dependencies with composer"
-        uses: ramsey/composer-install@v2
+        uses: ramsey/composer-install@v3
 
       - name: "Run tests with phpunit"
         run: php vendor/phpunit/phpunit/phpunit --configuration=phpunit.xml.dist
