@@ -18,7 +18,7 @@ use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\{ExpectationFailedException, TestCase};
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
-use function array_column, defined, implode, in_array, ksort;
+use function array_column, implode, in_array, ksort;
 
 /**
  *
@@ -102,12 +102,6 @@ class CurlMultiClientTest extends TestCase{
 	 * @todo
 	 */
 	public function testMultiRequest():void{
-
-		/** @noinspection PhpUndefinedConstantInspection */
-		if(defined('TEST_IS_CI') && TEST_IS_CI === true){
-			$this->markTestSkipped('i have no idea why the headers are empty on travis');
-		}
-
 		$requests = $this->getRequests();
 
 		$this->http
