@@ -423,7 +423,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\chillerlan\\HTTP\\HTTPOptionsTrait\u003A\u003A\u0024sleep",
             "name": "sleep",
-            "summary": "sleep\u0020timer\u0020\u0028milliseconds\u0029\u0020between\u0020each\u0020fired\u0020multi\u0020request\u0020on\u0020startup",
+            "summary": "sleep\u0020timer\u0020\u0028microseconds\u0029\u0020between\u0020each\u0020fired\u0020multi\u0020request\u0020on\u0020startup",
             "url": "classes/chillerlan-HTTP-HTTPOptionsTrait.html#property_sleep"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\HTTPOptionsTrait\u003A\u003A\u0024timeout",
