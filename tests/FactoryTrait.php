@@ -18,7 +18,7 @@ use Psr\Http\Message\{
 	StreamFactoryInterface, UploadedFileFactoryInterface, UriFactoryInterface
 };
 use Exception;
-use function class_exists, constant, defined, method_exists, sprintf;
+use function class_exists, constant, defined, sprintf;
 
 /**
  *

@@ -10,7 +10,7 @@
 
 declare(strict_types=1);
 
-namespace chillerlan\HTTP\Psr18;
+namespace chillerlan\HTTP;
 
 use chillerlan\HTTP\Utils\MessageUtil;
 use Psr\Http\Client\{ClientExceptionInterface, ClientInterface};
@@ -33,6 +33,7 @@ class LoggingClient implements ClientInterface{
 		protected ClientInterface $http,
 		protected LoggerInterface $logger = new NullLogger,
 	){
+
 	}
 
 	/**
@@ -60,7 +61,9 @@ class LoggingClient implements ClientInterface{
 			$this->logger->error($e->getTraceAsString());
 
 			if(!$e instanceof ClientExceptionInterface){
-				throw new ClientException(sprintf('unexpected exception, does not implement "ClientExceptionInterface": %s', get_class($e)));
+				throw new ClientException(
+					sprintf('unexpected exception, does not implement "ClientExceptionInterface": %s', get_class($e)),
+				);
 			}
 
 			throw $e;

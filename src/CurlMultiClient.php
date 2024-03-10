@@ -10,10 +10,8 @@
 
 declare(strict_types=1);
 
-namespace chillerlan\HTTP\Common;
+namespace chillerlan\HTTP;
 
-use chillerlan\HTTP\Psr18\ClientException;
-use chillerlan\HTTP\HTTPOptions;
 use chillerlan\Settings\SettingsContainerInterface;
 use Psr\Http\Message\{RequestInterface, ResponseFactoryInterface};
 use Psr\Log\{LoggerAwareInterface, LoggerInterface, NullLogger};
@@ -38,7 +36,7 @@ class CurlMultiClient implements LoggerAwareInterface{
 	/**
 	 * the stack of running handles
 	 *
-	 * @var \chillerlan\HTTP\Common\CurlMultiHandle[]
+	 * @var \chillerlan\HTTP\CurlMultiHandle[]
 	 */
 	protected array $handles = [];
 
@@ -47,8 +45,8 @@ class CurlMultiClient implements LoggerAwareInterface{
 	 */
 	public function __construct(
 		protected MultiResponseHandlerInterface          $multiResponseHandler,
+		protected ResponseFactoryInterface               $responseFactory,
 		protected HTTPOptions|SettingsContainerInterface $options = new HTTPOptions,
-		protected ResponseFactoryInterface               $responseFactory = new HTTPFactory,
 		protected LoggerInterface                        $logger = new NullLogger,
 	){
 		$this->curl_multi = curl_multi_init();

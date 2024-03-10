@@ -10,11 +10,9 @@
 
 declare(strict_types=1);
 
-namespace chillerlan\HTTPTest\Psr18;
+namespace chillerlan\HTTPTest;
 
-use chillerlan\HTTP\Psr18\{CurlClient, RequestException};
-use chillerlan\HTTP\Psr7\Request;
-use Fig\Http\Message\RequestMethodInterface;
+use chillerlan\HTTP\CurlClient;
 use PHPUnit\Framework\Attributes\Group;
 use Psr\Http\Client\ClientInterface;
 
@@ -25,13 +23,13 @@ use Psr\Http\Client\ClientInterface;
 class CurlClientTest extends HTTPClientTestAbstract{
 
 	protected function initClient():ClientInterface{
-		return new CurlClient($this->options);
+		return new CurlClient($this->responseFactory, $this->options);
 	}
 
 	public function testRequestError():void{
-		$this->expectException(RequestException::class);
+		$this->expectException(\chillerlan\HTTP\RequestException::class);
 
-		$this->http->sendRequest(new Request(RequestMethodInterface::METHOD_GET, ''));
+		$this->http->sendRequest($this->requestFactory->createRequest('GET', ''));
 	}
 
 }

@@ -10,13 +10,11 @@
 
 declare(strict_types=1);
 
-namespace chillerlan\HTTPTest\Psr18;
+namespace chillerlan\HTTPTest;
 
 use chillerlan\HTTP\HTTPOptions;
-use chillerlan\HTTP\Psr7\Request;
 use chillerlan\HTTP\Utils\MessageUtil;
 use chillerlan\Settings\SettingsContainerInterface;
-use Fig\Http\Message\RequestMethodInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\{ClientExceptionInterface, ClientInterface};
 use Exception;
@@ -25,6 +23,7 @@ use Exception;
  *
  */
 abstract class HTTPClientTestAbstract extends TestCase{
+	use FactoryTrait;
 
 	protected const USER_AGENT = 'chillerlanHttpTest/2.0';
 
@@ -32,9 +31,10 @@ abstract class HTTPClientTestAbstract extends TestCase{
 	protected ClientInterface $http;
 
 	protected function setUp():void{
+		$this->initFactories();
 
 		$this->options = new HTTPOptions([
-			'ca_info'    => __DIR__.'/../cacert.pem',
+			'ca_info'    => __DIR__.'/cacert.pem',
 			'user_agent' => $this::USER_AGENT,
 		]);
 
@@ -47,7 +47,7 @@ abstract class HTTPClientTestAbstract extends TestCase{
 
 		try{
 			$url      = 'https://httpbin.org/get';
-			$response = $this->http->sendRequest(new Request(RequestMethodInterface::METHOD_GET, $url));
+			$response = $this->http->sendRequest($this->requestFactory->createRequest('GET', $url));
 			$json     = MessageUtil::decodeJSON($response);
 
 			$this::assertSame($url, $json->url);
@@ -63,7 +63,7 @@ abstract class HTTPClientTestAbstract extends TestCase{
 	public function testNetworkError():void{
 		$this->expectException(ClientExceptionInterface::class);
 
-		$this->http->sendRequest(new Request(RequestMethodInterface::METHOD_GET, 'https://foo'));
+		$this->http->sendRequest($this->requestFactory->createRequest('GET', 'https://foo'));
 	}
 
 }

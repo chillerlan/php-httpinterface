@@ -10,13 +10,11 @@
 
 declare(strict_types=1);
 
-namespace chillerlan\HTTPTest\Common;
+namespace chillerlan\HTTPTest;
 
-use chillerlan\HTTP\Common\{CurlMultiClient, MultiResponseHandlerInterface};
+use chillerlan\HTTP\{CurlMultiClient, MultiResponseHandlerInterface};
 use chillerlan\HTTP\HTTPOptions;
-use chillerlan\HTTP\Psr7\Request;
 use chillerlan\HTTP\Utils\QueryUtil;
-use Fig\Http\Message\RequestMethodInterface;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
@@ -29,20 +27,22 @@ use function array_column, defined, implode, in_array, ksort;
  */
 #[Group('slow')]
 class CurlMultiClientTest extends TestCase{
+	use FactoryTrait;
 
-	protected CurlMultiClient $http;
+	protected CurlMultiClient               $http;
 	protected MultiResponseHandlerInterface $multiResponseHandler;
 
 	protected function setUp():void{
+		$this->initFactories();
 
 		$options = new HTTPOptions([
-			'ca_info' => __DIR__.'/../cacert.pem',
+			'ca_info' => __DIR__.'/cacert.pem',
 			'sleep'   => 1,
 		]);
 
 		$this->multiResponseHandler = $this->getTestResponseHandler();
 
-		$this->http = new CurlMultiClient($this->multiResponseHandler, $options);
+		$this->http = new CurlMultiClient($this->multiResponseHandler, $this->responseFactory, $options);
 	}
 
 	protected function getRequests():array{
@@ -56,8 +56,8 @@ class CurlMultiClientTest extends TestCase{
 
 		foreach($ids as $chunk){
 			foreach(['de', 'en', 'es', 'fr', 'zh'] as $lang){
-				$requests[] = new Request(
-					RequestMethodInterface::METHOD_GET,
+				$requests[] = $this->requestFactory->createRequest(
+					'GET',
 					'https://api.guildwars2.com/v2/items?'.QueryUtil::build(['lang' => $lang, 'ids' => implode(',', $chunk)])
 				);
 			}
@@ -66,9 +66,9 @@ class CurlMultiClientTest extends TestCase{
 		return $requests;
 	}
 
-	protected function getTestResponseHandler():MultiResponseHandlerInterface{
+	protected function getTestResponseHandler():\chillerlan\HTTP\MultiResponseHandlerInterface{
 
-		return new class () implements MultiResponseHandlerInterface{
+		return new class () implements \chillerlan\HTTP\MultiResponseHandlerInterface{
 
 			protected array $responses = [];
 

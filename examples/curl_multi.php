@@ -10,11 +10,9 @@
  * @license      MIT
  */
 
+use chillerlan\HTTP\{CurlClient , CurlMultiClient, HTTPOptions, MultiResponseHandlerInterface};
+use chillerlan\HTTP\Psr7\HTTPFactory;
 use chillerlan\HTTP\Utils\{MessageUtil, QueryUtil};
-use chillerlan\HTTP\Common\{CurlMultiClient, MultiResponseHandlerInterface};
-use chillerlan\HTTP\HTTPOptions;
-use chillerlan\HTTP\Psr18\CurlClient;
-use chillerlan\HTTP\Psr7\Request;
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
 
 require_once __DIR__.'/../vendor/autoload.php';
@@ -22,15 +20,16 @@ require_once __DIR__.'/../vendor/autoload.php';
 // options for both clients
 $options = new HTTPOptions;
 $options->ca_info    = __DIR__.'/cacert.pem';
-$options->sleep      = (60 / 300 * 1000000); // GW2 API limit: 300 requests/minute
+$options->sleep      = 1; // GW2 API limit: 300 requests/minute
 #$options->user_agent = 'my fancy http client';
 
-$client = new CurlClient($options);
+$factory = new HTTPFactory;
+$client  = new CurlClient($factory, $options);
 
 $endpoint     = 'https://api.guildwars2.com/v2/items';
 $languages    = ['de', 'en', 'es'];//, 'fr', 'zh'
 // request the list of item ids
-$itemResponse = $client->sendRequest(new Request('GET', $endpoint));
+$itemResponse = $client->sendRequest($factory->createRequest('GET', $endpoint));
 
 if($itemResponse->getStatusCode() !== 200){
 	exit('/v2/items fetch error');
@@ -63,7 +62,7 @@ $handler = new class () implements MultiResponseHandlerInterface{
 			try{
 				$json = MessageUtil::decodeJSON($response);
 			}
-			catch(Throwable $e){
+			catch(Throwable){
 				// maybe we didn't properly receive the data? let's try again
 				return $request;
 			}
@@ -73,7 +72,7 @@ $handler = new class () implements MultiResponseHandlerInterface{
 				$file = $lang.'/'.$item->id;
 				file_put_contents(__DIR__.'/'.$file.'.json', json_encode($item, (JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)));
 
-#				echo $file.PHP_EOL;
+				echo $file.PHP_EOL;
 			}
 
 			// response ok, nothing to return
@@ -86,12 +85,12 @@ $handler = new class () implements MultiResponseHandlerInterface{
 
 };
 
-$multiClient = new CurlMultiClient($handler, $options);
+$multiClient = new CurlMultiClient($handler, $factory, $options);
 
 // chunk the item response into arrays of 200 ids each (API limit) and create Request objects for each desired language
 foreach(array_chunk(MessageUtil::decodeJSON($itemResponse), 200) as $chunk){
 	foreach($languages as $lang){
-		$multiClient->addRequest(new Request('GET', $endpoint.'?'.QueryUtil::build(['lang' => $lang, 'ids' => implode(',', $chunk)])));
+		$multiClient->addRequest($factory->createRequest('GET', $endpoint.'?'.QueryUtil::build(['lang' => $lang, 'ids' => implode(',', $chunk)])));
 	}
 }
 

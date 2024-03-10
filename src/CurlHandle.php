@@ -10,10 +10,8 @@
 
 declare(strict_types=1);
 
-namespace chillerlan\HTTP\Common;
+namespace chillerlan\HTTP;
 
-use chillerlan\HTTP\HTTPOptions;
-use chillerlan\HTTP\Psr18\ClientException;
 use chillerlan\Settings\SettingsContainerInterface;
 use Psr\Http\Message\{RequestInterface, ResponseInterface, StreamInterface};
 use CurlHandle as CH;
@@ -278,7 +276,7 @@ class CurlHandle{
 	}
 
 	/**
-	 * @throws \chillerlan\HTTP\Psr18\ClientException
+	 * @throws \chillerlan\HTTP\ClientException
 	 */
 	public function setRequestOptions():void{
 		$method   = $this->request->getMethod();

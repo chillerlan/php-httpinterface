@@ -12,9 +12,8 @@ declare(strict_types=1);
 
 namespace chillerlan\HTTPTest;
 
-use chillerlan\HTTP\Common\CurlHandle;
+use chillerlan\HTTP\CurlHandle;
 use chillerlan\HTTP\HTTPOptions;
-use chillerlan\HTTP\Psr7\{Request, Response};
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientExceptionInterface;
 use const CURLOPT_CAINFO, CURLOPT_CAPATH, CURLOPT_SSL_VERIFYHOST, CURLOPT_SSL_VERIFYPEER;
@@ -23,9 +22,16 @@ use const CURLOPT_CAINFO, CURLOPT_CAPATH, CURLOPT_SSL_VERIFYHOST, CURLOPT_SSL_VE
  *
  */
 class HTTPOptionsTest extends TestCase{
+	use FactoryTrait;
+
+	protected function setUp():void{
+		$this->initFactories();
+	}
 
 	protected function createTestHandleOptions(HTTPOptions $options):array{
-		$ch = new CurlHandle(new Request('GET', 'https://example.com'), new Response, $options);
+		$response = $this->responseFactory->createResponse();
+
+		$ch = new CurlHandle($this->requestFactory->createRequest('GET', 'https://example.com'), $response, $options);
 		$ch->init();
 
 		return $ch->getCurlOptions();

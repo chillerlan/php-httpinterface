@@ -10,28 +10,31 @@
 
 declare(strict_types=1);
 
-namespace chillerlan\HTTPTest\Psr18;
+namespace chillerlan\HTTPTest;
 
-use chillerlan\HTTP\Psr18\{CurlClient, URLExtractor};
-use chillerlan\HTTP\Psr7\Request;
+use chillerlan\HTTP\{CurlClient, URLExtractor};
 use PHPUnit\Framework\Attributes\Group;
 use Psr\Http\Client\ClientInterface;
 use function defined;
 use const CURLOPT_FOLLOWLOCATION, CURLOPT_MAXREDIRS;
 
 /**
- * @property \chillerlan\HTTP\Psr18\URLExtractor $http
+ * @property \chillerlan\HTTP\URLExtractor $http
  */
 #[Group('slow')]
 class URLExtractorTest extends HTTPClientTestAbstract{
+	use FactoryTrait;
 
 	protected function initClient():ClientInterface{
+
 		$this->options->curl_options = [
 			CURLOPT_FOLLOWLOCATION => false,
 			CURLOPT_MAXREDIRS      => 25,
 		];
 
-		return new URLExtractor(new CurlClient($this->options));
+		$http = new CurlClient($this->responseFactory, $this->options);
+
+		return new URLExtractor($http, $this->responseFactory);
 	}
 
 	public function testSendRequest():void{
@@ -42,7 +45,7 @@ class URLExtractorTest extends HTTPClientTestAbstract{
 		}
 
 		// reminder: twitter does not delete shortened URLs of deleted tweets (this one was deleted in 2016)
-		$this->http->sendRequest(new Request('GET', 'https://t.co/ZSS6nVOcVp'));
+		$this->http->sendRequest($this->requestFactory->createRequest('GET', 'https://t.co/ZSS6nVOcVp'));
 
 		$expected = [
 			'https://bit.ly/1oesmr8',

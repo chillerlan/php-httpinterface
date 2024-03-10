@@ -10,19 +10,19 @@
 
 declare(strict_types=1);
 
-namespace chillerlan\HTTPTest\Common;
+namespace chillerlan\HTTPTest;
 
+use chillerlan\HTTP\CurlClient;
 use chillerlan\HTTP\HTTPOptions;
-use chillerlan\HTTP\Psr18\CurlClient;
 use chillerlan\HTTP\Utils\MessageUtil;
-use chillerlan\HTTPTest\FactoryTrait;
-use Fig\Http\Message\RequestMethodInterface;
+use Exception;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
-use Exception;
-use function str_repeat, strlen, strtolower;
+use function str_repeat;
+use function strlen;
+use function strtolower;
 
 /**
  *
@@ -38,21 +38,21 @@ class CurlHandleTest extends TestCase{
 		$this->initFactories();
 
 		$options = new HTTPOptions([
-			'ca_info' => __DIR__.'/../cacert.pem',
+			'ca_info' => __DIR__.'/cacert.pem',
 		]);
 
-		$this->http = new CurlClient($options);
+		$this->http = new CurlClient($this->responseFactory, $options);
 	}
 
 	public static function requestMethodProvider():array{
 		return [
-			'delete'  => [RequestMethodInterface::METHOD_DELETE],
-			'get'     => [RequestMethodInterface::METHOD_GET],
-#			'head'    => [RequestMethodInterface::METHOD_HEAD],
-#			'options' => [RequestMethodInterface::METHOD_OPTIONS],
-			'patch'   => [RequestMethodInterface::METHOD_PATCH],
-			'post'    => [RequestMethodInterface::METHOD_POST],
-			'put'     => [RequestMethodInterface::METHOD_PUT],
+			'delete'  => ['DELETE'],
+			'get'     => ['GET'],
+#			'head'    => ['HEAD'],
+#			'options' => ['OPTIONS'],
+			'patch'   => ['PATCH'],
+			'post'    => ['POST'],
+			'put'     => ['PUT'],
 		];
 	}
 
@@ -82,10 +82,10 @@ class CurlHandleTest extends TestCase{
 
 	public static function requestMethodWithBodyProvider():array{
 		return [
-			'delete' => [RequestMethodInterface::METHOD_DELETE],
-			'patch'  => [RequestMethodInterface::METHOD_PATCH],
-			'post'   => [RequestMethodInterface::METHOD_POST],
-			'put'    => [RequestMethodInterface::METHOD_PUT],
+			'delete' => ['DELETE'],
+			'patch'  => ['PATCH'],
+			'post'   => ['POST'],
+			'put'    => ['PUT'],
 		];
 	}
 

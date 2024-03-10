@@ -10,9 +10,8 @@
 
 declare(strict_types=1);
 
-namespace chillerlan\HTTP\Psr18;
+namespace chillerlan\HTTP;
 
-use Fig\Http\Message\RequestMethodInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\{ResponseFactoryInterface, StreamFactoryInterface};
 use Psr\Log\LoggerInterface;
@@ -20,7 +19,7 @@ use Psr\Log\LoggerInterface;
 /**
  *
  */
-interface HTTPClientInterface extends ClientInterface, RequestMethodInterface{
+interface HTTPClientInterface extends ClientInterface{
 
 	/**
 	 * Sets a PSR-3 Logger

@@ -10,7 +10,7 @@
 
 declare(strict_types=1);
 
-namespace chillerlan\HTTP\Common;
+namespace chillerlan\HTTP;
 
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
 

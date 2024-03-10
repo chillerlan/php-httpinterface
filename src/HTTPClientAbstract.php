@@ -10,10 +10,8 @@
 
 declare(strict_types=1);
 
-namespace chillerlan\HTTP\Psr18;
+namespace chillerlan\HTTP;
 
-use chillerlan\HTTP\Common\HTTPFactory;
-use chillerlan\HTTP\HTTPOptions;
 use chillerlan\Settings\SettingsContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
@@ -30,8 +28,8 @@ abstract class HTTPClientAbstract implements HTTPClientInterface{
 	 * HTTPClientAbstract constructor.
 	 */
 	public function __construct(
+		protected ResponseFactoryInterface               $responseFactory,
 		protected HTTPOptions|SettingsContainerInterface $options = new HTTPOptions,
-		protected ResponseFactoryInterface               $responseFactory = new HTTPFactory,
 		protected LoggerInterface                        $logger = new NullLogger,
 	){
 

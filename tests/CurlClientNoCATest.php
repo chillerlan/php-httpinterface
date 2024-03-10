@@ -1,18 +1,18 @@
 <?php
 /**
- * Class StreamClientNoCATest
+ * Class CurlClientNoCATest
  *
- * @created      23.02.2019
+ * @created      28.08.2018
  * @author       smiley <smiley@chillerlan.net>
- * @copyright    2019 smiley
+ * @copyright    2018 smiley
  * @license      MIT
  */
 
 declare(strict_types=1);
 
-namespace chillerlan\HTTPTest\Psr18;
+namespace chillerlan\HTTPTest;
 
-use chillerlan\HTTP\Psr18\StreamClient;
+use chillerlan\HTTP\CurlClient;
 use PHPUnit\Framework\Attributes\Group;
 use Psr\Http\Client\ClientInterface;
 
@@ -20,13 +20,13 @@ use Psr\Http\Client\ClientInterface;
  *
  */
 #[Group('slow')]
-class StreamClientNoCATest extends HTTPClientTestAbstract{
+class CurlClientNoCATest extends HTTPClientTestAbstract{
 
 	protected function initClient():ClientInterface{
 		$this->options->ca_info        = null;
 		$this->options->ssl_verifypeer = false;
 
-		return new StreamClient($this->options);
+		return new CurlClient($this->responseFactory, $this->options);
 	}
 
 }
