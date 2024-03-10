@@ -16,7 +16,7 @@ use chillerlan\HTTP\LoggingClient;
 use PHPUnit\Framework\Attributes\Group;
 use Psr\Log\AbstractLogger;
 use Stringable;
-use function date, sprintf;
+use function date, printf;
 
 /**
  *
@@ -29,7 +29,7 @@ class LoggingClientTest extends CurlClientTest{
 
 		$logger = new class () extends AbstractLogger{
 			public function log($level, string|Stringable $message, array $context = []):void{
-				echo sprintf('[%s][%s] %s', date('Y-m-d H:i:s'), $level, 'LoggingClientTest')."\n";
+				printf("\n[%s][%s] LoggingClientTest: %s", date('Y-m-d H:i:s'), $level, $message);
 			}
 		};
 		// we'll just wrap the parent's client
