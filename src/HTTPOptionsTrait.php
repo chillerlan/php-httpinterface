@@ -70,7 +70,7 @@ trait HTTPOptionsTrait{
 	protected int $window_size = 5;
 
 	/**
-	 * sleep timer (milliseconds) between each fired multi request on startup
+	 * sleep timer (microseconds) between each fired multi request on startup
 	 */
 	protected int|null $sleep = null;
 

@@ -12,11 +12,11 @@ declare(strict_types=1);
 
 namespace chillerlan\HTTPTest;
 
+use chillerlan\HTTP\LoggingClient;
 use PHPUnit\Framework\Attributes\Group;
 use Psr\Log\AbstractLogger;
 use Stringable;
-use function date;
-use function sprintf;
+use function date, sprintf;
 
 /**
  *
@@ -33,7 +33,7 @@ class LoggingClientTest extends CurlClientTest{
 			}
 		};
 		// we'll just wrap the parent's client
-		$this->http = new \chillerlan\HTTP\LoggingClient($this->http, $logger);
+		$this->http = new LoggingClient($this->http, $logger);
 	}
 
 	public function testNetworkError():void{

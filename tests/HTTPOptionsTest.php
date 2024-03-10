@@ -12,8 +12,7 @@ declare(strict_types=1);
 
 namespace chillerlan\HTTPTest;
 
-use chillerlan\HTTP\CurlHandle;
-use chillerlan\HTTP\HTTPOptions;
+use chillerlan\HTTP\{CurlHandle, HTTPOptions};
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientExceptionInterface;
 use const CURLOPT_CAINFO, CURLOPT_CAPATH, CURLOPT_SSL_VERIFYHOST, CURLOPT_SSL_VERIFYPEER;

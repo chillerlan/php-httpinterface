@@ -12,17 +12,14 @@ declare(strict_types=1);
 
 namespace chillerlan\HTTPTest;
 
-use chillerlan\HTTP\CurlClient;
-use chillerlan\HTTP\HTTPOptions;
+use chillerlan\HTTP\{CurlClient, HTTPOptions};
 use chillerlan\HTTP\Utils\MessageUtil;
-use Exception;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
-use function str_repeat;
-use function strlen;
-use function strtolower;
+use Exception;
+use function str_repeat, strlen, strtolower;
 
 /**
  *
@@ -174,7 +171,7 @@ class CurlHandleTest extends TestCase{
 
 			$this::assertSame(strlen($body), (int)$data->headers->{'Content-Length'});
 		}
-		catch(Exception $e){
+		catch(Exception){
 			// httpbin times out after 10 seconds and will most likely fail to transfer 1MB of data
 			// so fool the code coverage if that happens, as we're only interested in request creation
 			$this::assertTrue(true);

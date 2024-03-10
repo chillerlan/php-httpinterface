@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace chillerlan\HTTPTest;
 
-use chillerlan\HTTP\CurlClient;
+use chillerlan\HTTP\{CurlClient, RequestException};
 use PHPUnit\Framework\Attributes\Group;
 use Psr\Http\Client\ClientInterface;
 
@@ -27,7 +27,7 @@ class CurlClientTest extends HTTPClientTestAbstract{
 	}
 
 	public function testRequestError():void{
-		$this->expectException(\chillerlan\HTTP\RequestException::class);
+		$this->expectException(RequestException::class);
 
 		$this->http->sendRequest($this->requestFactory->createRequest('GET', ''));
 	}

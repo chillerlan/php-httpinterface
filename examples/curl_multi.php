@@ -19,8 +19,10 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 // options for both clients
 $options = new HTTPOptions;
-$options->ca_info    = __DIR__.'/cacert.pem';
-$options->sleep      = 1; // GW2 API limit: 300 requests/minute
+$options->ca_info     = __DIR__.'/cacert.pem';
+$options->sleep       = 750000; // GW2 API limit: 300 requests/minute
+$options->window_size = 5;
+$options->retries     = 1;
 #$options->user_agent = 'my fancy http client';
 
 $factory = new HTTPFactory;
@@ -47,40 +49,45 @@ foreach($languages as $lang){
 // the multi request handler
 $handler = new class () implements MultiResponseHandlerInterface{
 
-	public function handleResponse(ResponseInterface $response, RequestInterface $request, int $id, array $curl_info):?RequestInterface{
+	public function handleResponse(
+		ResponseInterface $response,
+		RequestInterface $request,
+		int $id,
+		array $curl_info,
+	):RequestInterface|null{
 
 		// the API returns either 200 or 206 on OK responses
 		// https://gitter.im/arenanet/api-cdi?at=5738e2c0ae26c1967f9eb4a0
-		if(in_array($response->getStatusCode(), [200, 206], true)){
-			$lang = $response->getHeaderLine('content-language');
+		if(!in_array($response->getStatusCode(), [200, 206], true)){
+			// return the failed request back to the stack
+			return $request;
+		}
 
-			// the response body is empty for some reason, we pretend that's fine and exit
-			if($response->getBody()->getSize() === 0){
-				return null;
-			}
-
-			try{
-				$json = MessageUtil::decodeJSON($response);
-			}
-			catch(Throwable){
-				// maybe we didn't properly receive the data? let's try again
-				return $request;
-			}
-
-			// create a file for each item in the response (ofc you'd rather put this in a DB)
-			foreach($json as $item){
-				$file = $lang.'/'.$item->id;
-				file_put_contents(__DIR__.'/'.$file.'.json', json_encode($item, (JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)));
-
-				echo $file.PHP_EOL;
-			}
-
-			// response ok, nothing to return
+		// the response body is empty for some reason, we pretend that's fine and exit
+		if($response->getBody()->getSize() === 0){
 			return null;
 		}
 
-		// return the failed request back to the stack
-		return $request;
+		try{
+			$json = MessageUtil::decodeJSON($response);
+		}
+		catch(Throwable){
+			// maybe we didn't properly receive the data? let's try again
+			return $request;
+		}
+
+		$lang = $response->getHeaderLine('content-language');
+
+		// create a file for each item in the response (ofc you'd rather put this in a DB)
+		foreach($json as $item){
+			$file = $lang.'/'.$item->id;
+			file_put_contents(__DIR__.'/'.$file.'.json', json_encode($item, (JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)));
+
+			echo $file.PHP_EOL;
+		}
+
+		// response ok, nothing to return
+		return null;
 	}
 
 };

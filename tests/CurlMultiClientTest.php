@@ -12,12 +12,10 @@ declare(strict_types=1);
 
 namespace chillerlan\HTTPTest;
 
-use chillerlan\HTTP\{CurlMultiClient, MultiResponseHandlerInterface};
-use chillerlan\HTTP\HTTPOptions;
+use chillerlan\HTTP\{CurlMultiClient, HTTPOptions, MultiResponseHandlerInterface};
 use chillerlan\HTTP\Utils\QueryUtil;
 use PHPUnit\Framework\Attributes\Group;
-use PHPUnit\Framework\ExpectationFailedException;
-use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\{ExpectationFailedException, TestCase};
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
 use function array_column, defined, implode, in_array, ksort;
@@ -66,13 +64,18 @@ class CurlMultiClientTest extends TestCase{
 		return $requests;
 	}
 
-	protected function getTestResponseHandler():\chillerlan\HTTP\MultiResponseHandlerInterface{
+	protected function getTestResponseHandler():MultiResponseHandlerInterface{
 
-		return new class () implements \chillerlan\HTTP\MultiResponseHandlerInterface{
+		return new class () implements MultiResponseHandlerInterface{
 
 			protected array $responses = [];
 
-			public function handleResponse(ResponseInterface $response, RequestInterface $request, int $id, array $curl_info):?RequestInterface{
+			public function handleResponse(
+				ResponseInterface $response,
+				RequestInterface  $request,
+				int               $id,
+				array             $curl_info,
+			):RequestInterface|null{
 
 				if(in_array($response->getStatusCode(), [200, 206], true)){
 					$this->responses[$id]['lang'] = $response->getHeaderLine('content-language');
