@@ -101,7 +101,7 @@
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    HTTPOptionsTest
+    CurlMultiClientTest
 
         <span class="phpdocumentor-element__extends">
         extends <abbr title="\PHPUnit\Framework\TestCase">TestCase</abbr>
@@ -126,9 +126,9 @@
 </div>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="tests/HTTPOptionsTest.php"><a href="files/tests-httpoptionstest.html"><abbr title="tests/HTTPOptionsTest.php">HTTPOptionsTest.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="tests/CurlMultiClientTest.php"><a href="files/tests-curlmulticlienttest.html"><abbr title="tests/CurlMultiClientTest.php">CurlMultiClientTest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 
     </aside>
 
@@ -140,7 +140,7 @@
 
 <h3 id="toc">
     Table of Contents
-    <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
@@ -154,10 +154,22 @@
 
 <h4 id="toc-properties">
     Properties
-    <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html#property_http">$http</a>
+    <span>
+                        &nbsp;: <a href="classes/chillerlan-HTTP-CurlMultiClient.html"><abbr title="\chillerlan\HTTP\CurlMultiClient">CurlMultiClient</abbr></a>            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html#property_multiResponseHandler">$multiResponseHandler</a>
+    <span>
+                        &nbsp;: <a href="classes/chillerlan-HTTP-MultiResponseHandlerInterface.html"><abbr title="\chillerlan\HTTP\MultiResponseHandlerInterface">MultiResponseHandlerInterface</abbr></a>            </span>
+</dt>
+
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_requestFactory">$requestFactory</a>
     <span>
@@ -210,56 +222,32 @@
 
 <h4 id="toc-methods">
     Methods
-    <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testCaInfoDir">testCaInfoDir()</a>
+    <a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html#method_testEmptyStackException">testEmptyStackException()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testCaInfoFile">testCaInfoFile()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testCaInfoInvalidException">testCaInfoInvalidException()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testCurloptCaInfoInvalidException">testCurloptCaInfoInvalidException()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testInvalidCAException">testInvalidCAException()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testInvalidUserAgentException">testInvalidUserAgentException()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testSetVerifyPeer">testSetVerifyPeer()</a>
+    <a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html#method_testMultiRequest">testMultiRequest()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
-    <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_createTestHandleOptions">createTestHandleOptions()</a>
+    <a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html#method_getRequests">getRequests()</a>
     <span>
                                 &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html#method_getTestResponseHandler">getTestResponseHandler()</a>
+    <span>
+                                &nbsp;: <a href="classes/chillerlan-HTTP-MultiResponseHandlerInterface.html"><abbr title="\chillerlan\HTTP\MultiResponseHandlerInterface">MultiResponseHandlerInterface</abbr></a>    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
@@ -269,7 +257,7 @@
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
-    <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_setUp">setUp()</a>
+    <a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html#method_setUp">setUp()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
@@ -285,9 +273,75 @@
     <section class="phpdocumentor-properties">
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
-            <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_http">
+        $http
+        <a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html#property_http" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="tests/CurlMultiClientTest.php"><a href="files/tests-curlmulticlienttest.html"><abbr title="tests/CurlMultiClientTest.php">CurlMultiClientTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">32</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type"><a href="classes/chillerlan-HTTP-CurlMultiClient.html"><abbr title="\chillerlan\HTTP\CurlMultiClient">CurlMultiClient</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$http</span>
+    </code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_multiResponseHandler">
+        $multiResponseHandler
+        <a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html#property_multiResponseHandler" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="tests/CurlMultiClientTest.php"><a href="files/tests-curlmulticlienttest.html"><abbr title="tests/CurlMultiClientTest.php">CurlMultiClientTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">33</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type"><a href="classes/chillerlan-HTTP-MultiResponseHandlerInterface.html"><abbr title="\chillerlan\HTTP\MultiResponseHandlerInterface">MultiResponseHandlerInterface</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$multiResponseHandler</span>
+    </code>
+
+    
+    
+    
+
+</article>
                     <article
         class="
             phpdocumentor-element
@@ -557,7 +611,7 @@
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
@@ -566,22 +620,22 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_testCaInfoDir">
-        testCaInfoDir()
-        <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testCaInfoDir" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_testEmptyStackException">
+        testEmptyStackException()
+        <a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html#method_testEmptyStackException" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="tests/HTTPOptionsTest.php"><a href="files/tests-httpoptionstest.html"><abbr title="tests/HTTPOptionsTest.php">HTTPOptionsTest.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="tests/CurlMultiClientTest.php"><a href="files/tests-curlmulticlienttest.html"><abbr title="tests/CurlMultiClientTest.php">CurlMultiClientTest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">73</span>
+    <span class="phpdocumentor-element-found-in__line">132</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">testCaInfoDir</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">testEmptyStackException</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -597,183 +651,42 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_testCaInfoFile">
-        testCaInfoFile()
-        <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testCaInfoFile" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_testMultiRequest">
+        testMultiRequest()
+        <a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html#method_testMultiRequest" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="tests/HTTPOptionsTest.php"><a href="files/tests-httpoptionstest.html"><abbr title="tests/HTTPOptionsTest.php">HTTPOptionsTest.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="tests/CurlMultiClientTest.php"><a href="files/tests-curlmulticlienttest.html"><abbr title="tests/CurlMultiClientTest.php">CurlMultiClientTest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">54</span>
+    <span class="phpdocumentor-element-found-in__line">101</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">testCaInfoFile</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">testMultiRequest</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
     
     
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html#method_testMultiRequest#tags" class="headerlink"><i class="fas fa-link"></i></a>
 
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_testCaInfoInvalidException">
-        testCaInfoInvalidException()
-        <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testCaInfoInvalidException" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="tests/HTTPOptionsTest.php"><a href="files/tests-httpoptionstest.html"><abbr title="tests/HTTPOptionsTest.php">HTTPOptionsTest.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">92</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">testCaInfoInvalidException</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_testCurloptCaInfoInvalidException">
-        testCurloptCaInfoInvalidException()
-        <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testCurloptCaInfoInvalidException" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="tests/HTTPOptionsTest.php"><a href="files/tests-httpoptionstest.html"><abbr title="tests/HTTPOptionsTest.php">HTTPOptionsTest.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">99</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">testCurloptCaInfoInvalidException</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_testInvalidCAException">
-        testInvalidCAException()
-        <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testInvalidCAException" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="tests/HTTPOptionsTest.php"><a href="files/tests-httpoptionstest.html"><abbr title="tests/HTTPOptionsTest.php">HTTPOptionsTest.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">47</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">testInvalidCAException</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_testInvalidUserAgentException">
-        testInvalidUserAgentException()
-        <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testInvalidUserAgentException" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="tests/HTTPOptionsTest.php"><a href="files/tests-httpoptionstest.html"><abbr title="tests/HTTPOptionsTest.php">HTTPOptionsTest.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">40</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">testInvalidUserAgentException</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_testSetVerifyPeer">
-        testSetVerifyPeer()
-        <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testSetVerifyPeer" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="tests/HTTPOptionsTest.php"><a href="files/tests-httpoptionstest.html"><abbr title="tests/HTTPOptionsTest.php">HTTPOptionsTest.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">120</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">testSetVerifyPeer</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">todo</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                             
+                                    </dd>
+                                            </dl>
 
     
 </article>
@@ -783,42 +696,67 @@
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_createTestHandleOptions">
-        createTestHandleOptions()
-        <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_createTestHandleOptions" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getRequests">
+        getRequests()
+        <a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html#method_getRequests" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="tests/HTTPOptionsTest.php"><a href="files/tests-httpoptionstest.html"><abbr title="tests/HTTPOptionsTest.php">HTTPOptionsTest.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="tests/CurlMultiClientTest.php"><a href="files/tests-curlmulticlienttest.html"><abbr title="tests/CurlMultiClientTest.php">CurlMultiClientTest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">31</span>
+    <span class="phpdocumentor-element-found-in__line">48</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-                    <span class="phpdocumentor-signature__name">createTestHandleOptions</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/chillerlan-HTTP-HTTPOptions.html"><abbr title="\chillerlan\HTTP\HTTPOptions">HTTPOptions</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$options</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">getRequests</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$options</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/chillerlan-HTTP-HTTPOptions.html"><abbr title="\chillerlan\HTTP\HTTPOptions">HTTPOptions</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
+    
     
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getTestResponseHandler">
+        getTestResponseHandler()
+        <a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html#method_getTestResponseHandler" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="tests/CurlMultiClientTest.php"><a href="files/tests-curlmulticlienttest.html"><abbr title="tests/CurlMultiClientTest.php">CurlMultiClientTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">69</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                    <span class="phpdocumentor-signature__name">getTestResponseHandler</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/chillerlan-HTTP-MultiResponseHandlerInterface.html"><abbr title="\chillerlan\HTTP\MultiResponseHandlerInterface">MultiResponseHandlerInterface</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/chillerlan-HTTP-MultiResponseHandlerInterface.html"><abbr title="\chillerlan\HTTP\MultiResponseHandlerInterface">MultiResponseHandlerInterface</abbr></a></span>
             </section>
 
 </article>
@@ -876,13 +814,13 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_setUp">
         setUp()
-        <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_setUp" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html#method_setUp" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="tests/HTTPOptionsTest.php"><a href="files/tests-httpoptionstest.html"><abbr title="tests/HTTPOptionsTest.php">HTTPOptionsTest.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="tests/CurlMultiClientTest.php"><a href="files/tests-curlmulticlienttest.html"><abbr title="tests/CurlMultiClientTest.php">CurlMultiClientTest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">27</span>
+    <span class="phpdocumentor-element-found-in__line">35</span>
 
     </aside>
 
@@ -905,7 +843,7 @@
     <div class="phpdocumentor-modal-bg" data-exit-button></div>
     <div class="phpdocumentor-modal-container">
         <div class="phpdocumentor-modal-content">
-            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/tests/HTTPOptionsTest.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/tests/CurlMultiClientTest.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
         </div>
         <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
     </div>
@@ -1004,38 +942,36 @@
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                                            <li><a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#toc-properties">Properties</a></li>
-                                                            <li><a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#toc-methods">Methods</a></li>
+                                                            <li><a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html#toc-methods">Methods</a></li>
                                     </ul>
             </li>
             
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
-                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_requestFactory">$requestFactory<a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html"></li>
-                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_responseFactory">$responseFactory<a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html"></li>
-                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_server">$server<a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html"></li>
-                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_serverRequestFactory">$serverRequestFactory<a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html"></li>
-                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_streamFactory">$streamFactory<a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html"></li>
-                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_uploadedFileFactory">$uploadedFileFactory<a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html"></li>
-                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_uriFactory">$uriFactory<a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html"></li>
-                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_FACTORIES">$FACTORIES<a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html"></li>
+                                                    <li><a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html#property_http">$http<a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html"></li>
+                                                    <li><a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html#property_multiResponseHandler">$multiResponseHandler<a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html"></li>
+                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_requestFactory">$requestFactory<a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html"></li>
+                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_responseFactory">$responseFactory<a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html"></li>
+                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_server">$server<a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html"></li>
+                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_serverRequestFactory">$serverRequestFactory<a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html"></li>
+                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_streamFactory">$streamFactory<a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html"></li>
+                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_uploadedFileFactory">$uploadedFileFactory<a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html"></li>
+                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_uriFactory">$uriFactory<a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html"></li>
+                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_FACTORIES">$FACTORIES<a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html"></li>
                                             </ul>
                 </li>
             
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                            <li><a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testCaInfoDir">testCaInfoDir()</a></li>
-                                            <li><a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testCaInfoFile">testCaInfoFile()</a></li>
-                                            <li><a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testCaInfoInvalidException">testCaInfoInvalidException()</a></li>
-                                            <li><a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testCurloptCaInfoInvalidException">testCurloptCaInfoInvalidException()</a></li>
-                                            <li><a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testInvalidCAException">testInvalidCAException()</a></li>
-                                            <li><a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testInvalidUserAgentException">testInvalidUserAgentException()</a></li>
-                                            <li><a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testSetVerifyPeer">testSetVerifyPeer()</a></li>
-                                            <li><a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_createTestHandleOptions">createTestHandleOptions()</a></li>
+                                            <li><a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html#method_testEmptyStackException">testEmptyStackException()</a></li>
+                                            <li><a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html#method_testMultiRequest">testMultiRequest()</a></li>
+                                            <li><a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html#method_getRequests">getRequests()</a></li>
+                                            <li><a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html#method_getTestResponseHandler">getTestResponseHandler()</a></li>
                                             <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#method_initFactories">initFactories()</a></li>
-                                            <li><a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_setUp">setUp()</a></li>
+                                            <li><a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html#method_setUp">setUp()</a></li>
                                     </ul>
             </li>
                     </ul>
@@ -1055,7 +991,7 @@
     </section>
 </section>
         </div>
-        <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/chillerlan-HTTPTest-CurlMultiClientTest.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

@@ -101,7 +101,7 @@
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    HTTPOptionsTest
+    CurlHandleTest
 
         <span class="phpdocumentor-element__extends">
         extends <abbr title="\PHPUnit\Framework\TestCase">TestCase</abbr>
@@ -126,9 +126,9 @@
 </div>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="tests/HTTPOptionsTest.php"><a href="files/tests-httpoptionstest.html"><abbr title="tests/HTTPOptionsTest.php">HTTPOptionsTest.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="tests/CurlHandleTest.php"><a href="files/tests-curlhandletest.html"><abbr title="tests/CurlHandleTest.php">CurlHandleTest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">30</span>
 
     </aside>
 
@@ -140,7 +140,7 @@
 
 <h3 id="toc">
     Table of Contents
-    <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/chillerlan-HTTPTest-CurlHandleTest.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
@@ -154,10 +154,16 @@
 
 <h4 id="toc-properties">
     Properties
-    <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/chillerlan-HTTPTest-CurlHandleTest.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/chillerlan-HTTPTest-CurlHandleTest.html#property_http">$http</a>
+    <span>
+                        &nbsp;: <abbr title="\Psr\Http\Client\ClientInterface">ClientInterface</abbr>            </span>
+</dt>
+
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_requestFactory">$requestFactory</a>
     <span>
@@ -210,56 +216,44 @@
 
 <h4 id="toc-methods">
     Methods
-    <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/chillerlan-HTTPTest-CurlHandleTest.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testCaInfoDir">testCaInfoDir()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testCaInfoFile">testCaInfoFile()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testCaInfoInvalidException">testCaInfoInvalidException()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testCurloptCaInfoInvalidException">testCurloptCaInfoInvalidException()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testInvalidCAException">testInvalidCAException()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testInvalidUserAgentException">testInvalidUserAgentException()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testSetVerifyPeer">testSetVerifyPeer()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
-    <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_createTestHandleOptions">createTestHandleOptions()</a>
+    <a href="classes/chillerlan-HTTPTest-CurlHandleTest.html#method_requestMethodProvider">requestMethodProvider()</a>
     <span>
                                 &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/chillerlan-HTTPTest-CurlHandleTest.html#method_requestMethodWithBodyProvider">requestMethodWithBodyProvider()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/chillerlan-HTTPTest-CurlHandleTest.html#method_testLargeBody">testLargeBody()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/chillerlan-HTTPTest-CurlHandleTest.html#method_testRequestMethods">testRequestMethods()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/chillerlan-HTTPTest-CurlHandleTest.html#method_testRequestMethodsWithFormBody">testRequestMethodsWithFormBody()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/chillerlan-HTTPTest-CurlHandleTest.html#method_testRequestMethodsWithJsonBody">testRequestMethodsWithJsonBody()</a>
+    <span>
+                                &nbsp;: void    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
@@ -269,7 +263,7 @@
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
-    <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_setUp">setUp()</a>
+    <a href="classes/chillerlan-HTTPTest-CurlHandleTest.html#method_setUp">setUp()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
@@ -285,9 +279,42 @@
     <section class="phpdocumentor-properties">
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
-            <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/chillerlan-HTTPTest-CurlHandleTest.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_http">
+        $http
+        <a href="classes/chillerlan-HTTPTest-CurlHandleTest.html#property_http" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="tests/CurlHandleTest.php"><a href="files/tests-curlhandletest.html"><abbr title="tests/CurlHandleTest.php">CurlHandleTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">34</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type"><abbr title="\Psr\Http\Client\ClientInterface">ClientInterface</abbr></span>
+    <span class="phpdocumentor-signature__name">$http</span>
+    </code>
+
+    
+    
+    
+
+</article>
                     <article
         class="
             phpdocumentor-element
@@ -557,146 +584,22 @@
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/chillerlan-HTTPTest-CurlHandleTest.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
         class="phpdocumentor-element
             -method
             -public
-                                                        "
+                                    -static                    "
 >
-    <h4 class="phpdocumentor-element__name" id="method_testCaInfoDir">
-        testCaInfoDir()
-        <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testCaInfoDir" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_requestMethodProvider">
+        requestMethodProvider()
+        <a href="classes/chillerlan-HTTPTest-CurlHandleTest.html#method_requestMethodProvider" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="tests/HTTPOptionsTest.php"><a href="files/tests-httpoptionstest.html"><abbr title="tests/HTTPOptionsTest.php">HTTPOptionsTest.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">73</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">testCaInfoDir</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_testCaInfoFile">
-        testCaInfoFile()
-        <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testCaInfoFile" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="tests/HTTPOptionsTest.php"><a href="files/tests-httpoptionstest.html"><abbr title="tests/HTTPOptionsTest.php">HTTPOptionsTest.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">54</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">testCaInfoFile</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_testCaInfoInvalidException">
-        testCaInfoInvalidException()
-        <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testCaInfoInvalidException" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="tests/HTTPOptionsTest.php"><a href="files/tests-httpoptionstest.html"><abbr title="tests/HTTPOptionsTest.php">HTTPOptionsTest.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">92</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">testCaInfoInvalidException</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_testCurloptCaInfoInvalidException">
-        testCurloptCaInfoInvalidException()
-        <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testCurloptCaInfoInvalidException" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="tests/HTTPOptionsTest.php"><a href="files/tests-httpoptionstest.html"><abbr title="tests/HTTPOptionsTest.php">HTTPOptionsTest.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">99</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">testCurloptCaInfoInvalidException</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_testInvalidCAException">
-        testInvalidCAException()
-        <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testInvalidCAException" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="tests/HTTPOptionsTest.php"><a href="files/tests-httpoptionstest.html"><abbr title="tests/HTTPOptionsTest.php">HTTPOptionsTest.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="tests/CurlHandleTest.php"><a href="files/tests-curlhandletest.html"><abbr title="tests/CurlHandleTest.php">CurlHandleTest.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">47</span>
 
@@ -705,7 +608,77 @@
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">testInvalidCAException</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">requestMethodProvider</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_requestMethodWithBodyProvider">
+        requestMethodWithBodyProvider()
+        <a href="classes/chillerlan-HTTPTest-CurlHandleTest.html#method_requestMethodWithBodyProvider" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="tests/CurlHandleTest.php"><a href="files/tests-curlhandletest.html"><abbr title="tests/CurlHandleTest.php">CurlHandleTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">83</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">requestMethodWithBodyProvider</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testLargeBody">
+        testLargeBody()
+        <a href="classes/chillerlan-HTTPTest-CurlHandleTest.html#method_testLargeBody" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="tests/CurlHandleTest.php"><a href="files/tests-curlhandletest.html"><abbr title="tests/CurlHandleTest.php">CurlHandleTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">156</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testLargeBody</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -721,84 +694,22 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_testInvalidUserAgentException">
-        testInvalidUserAgentException()
-        <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testInvalidUserAgentException" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_testRequestMethods">
+        testRequestMethods()
+        <a href="classes/chillerlan-HTTPTest-CurlHandleTest.html#method_testRequestMethods" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="tests/HTTPOptionsTest.php"><a href="files/tests-httpoptionstest.html"><abbr title="tests/HTTPOptionsTest.php">HTTPOptionsTest.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="tests/CurlHandleTest.php"><a href="files/tests-curlhandletest.html"><abbr title="tests/CurlHandleTest.php">CurlHandleTest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">40</span>
+    <span class="phpdocumentor-element-found-in__line">59</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">testInvalidUserAgentException</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_testSetVerifyPeer">
-        testSetVerifyPeer()
-        <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testSetVerifyPeer" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="tests/HTTPOptionsTest.php"><a href="files/tests-httpoptionstest.html"><abbr title="tests/HTTPOptionsTest.php">HTTPOptionsTest.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">120</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">testSetVerifyPeer</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_createTestHandleOptions">
-        createTestHandleOptions()
-        <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_createTestHandleOptions" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="tests/HTTPOptionsTest.php"><a href="files/tests-httpoptionstest.html"><abbr title="tests/HTTPOptionsTest.php">HTTPOptionsTest.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">31</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-                    <span class="phpdocumentor-signature__name">createTestHandleOptions</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/chillerlan-HTTP-HTTPOptions.html"><abbr title="\chillerlan\HTTP\HTTPOptions">HTTPOptions</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$options</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">testRequestMethods</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$method</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -806,8 +717,8 @@
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$options</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/chillerlan-HTTP-HTTPOptions.html"><abbr title="\chillerlan\HTTP\HTTPOptions">HTTPOptions</abbr></a></span>
+                <span class="phpdocumentor-signature__argument__name">$method</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -816,11 +727,89 @@
 
     
 
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            </section>
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testRequestMethodsWithFormBody">
+        testRequestMethodsWithFormBody()
+        <a href="classes/chillerlan-HTTPTest-CurlHandleTest.html#method_testRequestMethodsWithFormBody" class="headerlink"><i class="fas fa-link"></i></a>
 
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="tests/CurlHandleTest.php"><a href="files/tests-curlhandletest.html"><abbr title="tests/CurlHandleTest.php">CurlHandleTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">92</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testRequestMethodsWithFormBody</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$method</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$method</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testRequestMethodsWithJsonBody">
+        testRequestMethodsWithJsonBody()
+        <a href="classes/chillerlan-HTTPTest-CurlHandleTest.html#method_testRequestMethodsWithJsonBody" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="tests/CurlHandleTest.php"><a href="files/tests-curlhandletest.html"><abbr title="tests/CurlHandleTest.php">CurlHandleTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">124</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testRequestMethodsWithJsonBody</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$method</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$method</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -876,13 +865,13 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_setUp">
         setUp()
-        <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_setUp" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/chillerlan-HTTPTest-CurlHandleTest.html#method_setUp" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="tests/HTTPOptionsTest.php"><a href="files/tests-httpoptionstest.html"><abbr title="tests/HTTPOptionsTest.php">HTTPOptionsTest.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="tests/CurlHandleTest.php"><a href="files/tests-curlhandletest.html"><abbr title="tests/CurlHandleTest.php">CurlHandleTest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">27</span>
+    <span class="phpdocumentor-element-found-in__line">37</span>
 
     </aside>
 
@@ -905,7 +894,7 @@
     <div class="phpdocumentor-modal-bg" data-exit-button></div>
     <div class="phpdocumentor-modal-container">
         <div class="phpdocumentor-modal-content">
-            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/tests/HTTPOptionsTest.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/tests/CurlHandleTest.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
         </div>
         <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
     </div>
@@ -1004,38 +993,37 @@
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                                            <li><a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#toc-properties">Properties</a></li>
-                                                            <li><a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#toc-methods">Methods</a></li>
+                                                            <li><a href="classes/chillerlan-HTTPTest-CurlHandleTest.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/chillerlan-HTTPTest-CurlHandleTest.html#toc-methods">Methods</a></li>
                                     </ul>
             </li>
             
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
-                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_requestFactory">$requestFactory<a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html"></li>
-                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_responseFactory">$responseFactory<a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html"></li>
-                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_server">$server<a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html"></li>
-                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_serverRequestFactory">$serverRequestFactory<a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html"></li>
-                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_streamFactory">$streamFactory<a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html"></li>
-                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_uploadedFileFactory">$uploadedFileFactory<a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html"></li>
-                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_uriFactory">$uriFactory<a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html"></li>
-                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_FACTORIES">$FACTORIES<a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html"></li>
+                                                    <li><a href="classes/chillerlan-HTTPTest-CurlHandleTest.html#property_http">$http<a href="classes/chillerlan-HTTPTest-CurlHandleTest.html"></li>
+                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_requestFactory">$requestFactory<a href="classes/chillerlan-HTTPTest-CurlHandleTest.html"></li>
+                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_responseFactory">$responseFactory<a href="classes/chillerlan-HTTPTest-CurlHandleTest.html"></li>
+                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_server">$server<a href="classes/chillerlan-HTTPTest-CurlHandleTest.html"></li>
+                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_serverRequestFactory">$serverRequestFactory<a href="classes/chillerlan-HTTPTest-CurlHandleTest.html"></li>
+                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_streamFactory">$streamFactory<a href="classes/chillerlan-HTTPTest-CurlHandleTest.html"></li>
+                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_uploadedFileFactory">$uploadedFileFactory<a href="classes/chillerlan-HTTPTest-CurlHandleTest.html"></li>
+                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_uriFactory">$uriFactory<a href="classes/chillerlan-HTTPTest-CurlHandleTest.html"></li>
+                                                    <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#property_FACTORIES">$FACTORIES<a href="classes/chillerlan-HTTPTest-CurlHandleTest.html"></li>
                                             </ul>
                 </li>
             
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                            <li><a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testCaInfoDir">testCaInfoDir()</a></li>
-                                            <li><a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testCaInfoFile">testCaInfoFile()</a></li>
-                                            <li><a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testCaInfoInvalidException">testCaInfoInvalidException()</a></li>
-                                            <li><a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testCurloptCaInfoInvalidException">testCurloptCaInfoInvalidException()</a></li>
-                                            <li><a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testInvalidCAException">testInvalidCAException()</a></li>
-                                            <li><a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testInvalidUserAgentException">testInvalidUserAgentException()</a></li>
-                                            <li><a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testSetVerifyPeer">testSetVerifyPeer()</a></li>
-                                            <li><a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_createTestHandleOptions">createTestHandleOptions()</a></li>
+                                            <li><a href="classes/chillerlan-HTTPTest-CurlHandleTest.html#method_requestMethodProvider">requestMethodProvider()</a></li>
+                                            <li><a href="classes/chillerlan-HTTPTest-CurlHandleTest.html#method_requestMethodWithBodyProvider">requestMethodWithBodyProvider()</a></li>
+                                            <li><a href="classes/chillerlan-HTTPTest-CurlHandleTest.html#method_testLargeBody">testLargeBody()</a></li>
+                                            <li><a href="classes/chillerlan-HTTPTest-CurlHandleTest.html#method_testRequestMethods">testRequestMethods()</a></li>
+                                            <li><a href="classes/chillerlan-HTTPTest-CurlHandleTest.html#method_testRequestMethodsWithFormBody">testRequestMethodsWithFormBody()</a></li>
+                                            <li><a href="classes/chillerlan-HTTPTest-CurlHandleTest.html#method_testRequestMethodsWithJsonBody">testRequestMethodsWithJsonBody()</a></li>
                                             <li><a href="classes/chillerlan-HTTPTest-FactoryTrait.html#method_initFactories">initFactories()</a></li>
-                                            <li><a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_setUp">setUp()</a></li>
+                                            <li><a href="classes/chillerlan-HTTPTest-CurlHandleTest.html#method_setUp">setUp()</a></li>
                                     </ul>
             </li>
                     </ul>
@@ -1055,7 +1043,7 @@
     </section>
 </section>
         </div>
-        <a href="classes/chillerlan-HTTPTest-HTTPOptionsTest.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/chillerlan-HTTPTest-CurlHandleTest.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 
