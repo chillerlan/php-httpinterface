@@ -9,11 +9,6 @@
 		<testsuite name="php-httpinterface test suite">
 			<directory>tests</directory>
 		</testsuite>
-		<!--
-		<testsuite name="http-interop integration tests">
-			<directory>./vendor/http-interop/http-factory-tests/test</directory>
-		</testsuite>
-		-->
 	</testsuites>
 	<source>
 		<include>
@@ -33,11 +28,11 @@
 	</groups>
 	<php>
 		<const name="TEST_IS_CI" value="true"/>
-		<const name="REQUEST_FACTORY" value="chillerlan\HTTP\Common\HTTPFactory"/>
-		<const name="RESPONSE_FACTORY" value="chillerlan\HTTP\Common\HTTPFactory"/>
-		<const name="SERVER_REQUEST_FACTORY" value="chillerlan\HTTP\Common\HTTPFactory"/>
-		<const name="STREAM_FACTORY" value="chillerlan\HTTP\Common\HTTPFactory"/>
-		<const name="UPLOADED_FILE_FACTORY" value="chillerlan\HTTP\Common\HTTPFactory"/>
-		<const name="URI_FACTORY" value="chillerlan\HTTP\Common\HTTPFactory"/>
+		<const name="REQUEST_FACTORY" value="chillerlan\HTTP\Psr7\HTTPFactory"/>
+		<const name="RESPONSE_FACTORY" value="chillerlan\HTTP\Psr7\HTTPFactory"/>
+		<const name="SERVER_REQUEST_FACTORY" value="chillerlan\HTTP\Psr7\HTTPFactory"/>
+		<const name="STREAM_FACTORY" value="chillerlan\HTTP\Psr7\HTTPFactory"/>
+		<const name="UPLOADED_FILE_FACTORY" value="chillerlan\HTTP\Psr7\HTTPFactory"/>
+		<const name="URI_FACTORY" value="chillerlan\HTTP\Psr7\HTTPFactory"/>
 	</php>
 </phpunit>
