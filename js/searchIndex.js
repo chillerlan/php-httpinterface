@@ -841,10 +841,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-LoggingClientTest.html"
         },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\LoggingClientTest\u003A\u003AsetUp\u0028\u0029",
-            "name": "setUp",
+            "fqsen": "\\chillerlan\\HTTPTest\\LoggingClientTest\u003A\u003AinitClient\u0028\u0029",
+            "name": "initClient",
             "summary": "",
-            "url": "classes/chillerlan-HTTPTest-LoggingClientTest.html#method_setUp"
+            "url": "classes/chillerlan-HTTPTest-LoggingClientTest.html#method_initClient"
         },                {
             "fqsen": "\\chillerlan\\HTTPTest\\LoggingClientTest\u003A\u003AtestNetworkError\u0028\u0029",
             "name": "testNetworkError",
