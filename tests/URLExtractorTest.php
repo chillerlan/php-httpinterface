@@ -27,7 +27,8 @@ class URLExtractorTest extends HTTPClientTestAbstract{
 
 	protected function initClient():ClientInterface{
 
-		$this->options->curl_options = [
+		$this->options->ssl_verifypeer = false;
+		$this->options->curl_options   = [
 			CURLOPT_FOLLOWLOCATION => false,
 			CURLOPT_MAXREDIRS      => 25,
 		];
