@@ -130,7 +130,7 @@ You can then invoke the multi request client - the `MultiResponseHandlerInterfac
 `HTTPOptions` and `LoggerInterface` are optional:
 
 ```php
-$options = new HTTPOptions;
+$options              = new HTTPOptions;
 $options->ca_info     = '/path/to/cacert.pem';
 $options->user_agent  = 'my cool user agent 1.0';
 $options->sleep       = 750000; // microseconds, see usleep()
@@ -154,6 +154,15 @@ $multiClient->process();
 The `URLExtractor` wraps a PSR-18 `ClientInterface` to extract and follow shortened URLs to their original location.
 
 ```php
+$options                 = new HTTPOptions;
+$options->user_agent     = 'my cool user agent 1.0';
+$options->ssl_verifypeer = false;
+$options->curl_options   = [
+	CURLOPT_FOLLOWLOCATION => false,
+	CURLOPT_MAXREDIRS      => 25,
+];
+
+$httpClient   = new CurlClient($responseFactory, $options, $logger);
 $urlExtractor = new URLExtractor($httpClient, $responseFactory);
 
 $request = $factory->createRequest('GET', 'https://t.co/ZSS6nVOcVp');
