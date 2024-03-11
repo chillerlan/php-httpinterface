@@ -21,13 +21,12 @@
 			<xml outputDirectory=".build/coverage/coverage-xml"/>
 		</report>
 	</coverage>
-	<!--
 	<groups>
 		<exclude>
-			<group>slow</group>
+			<group>output</group>
+			<!--<group>slow</group>-->
 		</exclude>
 	</groups>
-	-->
 	<php>
 		<const name="REQUEST_FACTORY" value="chillerlan\HTTP\Psr7\HTTPFactory"/>
 		<const name="RESPONSE_FACTORY" value="chillerlan\HTTP\Psr7\HTTPFactory"/>

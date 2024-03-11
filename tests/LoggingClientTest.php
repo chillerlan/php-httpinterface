@@ -22,6 +22,7 @@ use function date, printf;
  *
  */
 #[Group('slow')]
+#[Group('output')]
 class LoggingClientTest extends CurlClientTest{
 
 	protected function setUp():void{
