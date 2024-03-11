@@ -15,6 +15,7 @@ namespace chillerlan\HTTPTest;
 use chillerlan\HTTP\{CurlHandle, HTTPOptions};
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientExceptionInterface;
+use function realpath;
 use const CURLOPT_CAINFO, CURLOPT_CAPATH, CURLOPT_SSL_VERIFYHOST, CURLOPT_SSL_VERIFYPEER;
 
 /**
@@ -51,7 +52,7 @@ class HTTPOptionsTest extends TestCase{
 	}
 
 	public function testCaInfoFile():void{
-		$file         = __DIR__.'/cacert.pem';
+		$file         = realpath(__DIR__.'/cacert.pem');
 		// via the ca_info option
 		$options      = new HTTPOptions(['ca_info' => $file]);
 		$curl_options = $this->createTestHandleOptions($options);

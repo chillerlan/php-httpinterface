@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace chillerlan\HTTP;
 
-use function file_exists, ini_get, is_dir, is_file, is_link, readlink, trim;
+use function file_exists, ini_get, is_dir, is_file, is_link, readlink, realpath, trim;
 use const CURLOPT_CAINFO, CURLOPT_CAPATH;
 
 /**
@@ -152,9 +152,13 @@ trait HTTPOptionsTrait{
 		if($ca_info !== null){
 
 			if($this->checkCA($ca_info)){
-				$this->ca_info = $ca_info;
+				$ca_info = realpath($ca_info);
 
-				return;
+				if($ca_info !== false){
+					$this->ca_info = $ca_info;
+
+					return;
+				}
 			}
 
 			throw new ClientException('invalid path to SSL CA bundle: '.$ca_info);

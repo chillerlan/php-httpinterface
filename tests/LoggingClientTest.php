@@ -12,8 +12,9 @@ declare(strict_types=1);
 
 namespace chillerlan\HTTPTest;
 
-use chillerlan\HTTP\LoggingClient;
+use chillerlan\HTTP\{CurlClient, LoggingClient};
 use PHPUnit\Framework\Attributes\Group;
+use Psr\Http\Client\ClientInterface;
 use Psr\Log\AbstractLogger;
 use Stringable;
 use function date, printf;
@@ -23,18 +24,19 @@ use function date, printf;
  */
 #[Group('slow')]
 #[Group('output')]
-class LoggingClientTest extends CurlClientTest{
+class LoggingClientTest extends HTTPClientTestAbstract{
 
-	protected function setUp():void{
-		parent::setUp();
+	protected function initClient():ClientInterface{
+		$this->options->ssl_verifypeer = false; // whyyy???
 
+		$http   = new CurlClient($this->responseFactory, $this->options);
 		$logger = new class () extends AbstractLogger{
 			public function log($level, string|Stringable $message, array $context = []):void{
 				printf("\n[%s][%s] LoggingClientTest: %s", date('Y-m-d H:i:s'), $level, $message);
 			}
 		};
-		// we'll just wrap the parent's client
-		$this->http = new LoggingClient($this->http, $logger);
+
+		return new LoggingClient($http, $logger);
 	}
 
 	public function testNetworkError():void{
