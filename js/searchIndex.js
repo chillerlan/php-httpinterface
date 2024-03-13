@@ -38,13 +38,23 @@ Search.appendIndex(
         },                {
             "fqsen": "\\chillerlan\\HTTP\\CurlHandle\u003A\u003Aclose\u0028\u0029",
             "name": "close",
-            "summary": "",
+            "summary": "closes\u0020the\u0020handle",
             "url": "classes/chillerlan-HTTP-CurlHandle.html#method_close"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\CurlHandle\u003A\u003AgetCurlResource\u0028\u0029",
             "name": "getCurlResource",
-            "summary": "",
+            "summary": "returns\u0020the\u0020internal\u0020cURL\u0020resource\u0020in\u0020its\u0020current\u0020state",
             "url": "classes/chillerlan-HTTP-CurlHandle.html#method_getCurlResource"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\CurlHandle\u003A\u003AgetHandleID\u0028\u0029",
+            "name": "getHandleID",
+            "summary": "returns\u0020the\u0020handle\u0020ID\u0020\u0028cURL\u0020resource\u0020id\u0029",
+            "url": "classes/chillerlan-HTTP-CurlHandle.html#method_getHandleID"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\CurlHandle\u003A\u003AgetInfo\u0028\u0029",
+            "name": "getInfo",
+            "summary": "returns\u0020the\u0020result\u0020from\u0020\u0060curl_getinfo\u0028\u0029\u0060\u0020or\u0020\u0060null\u0060\u0020in\u0020case\u0020of\u0020an\u0020error",
+            "url": "classes/chillerlan-HTTP-CurlHandle.html#method_getInfo"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\CurlHandle\u003A\u003AgetRequest\u0028\u0029",
             "name": "getRequest",
@@ -61,25 +71,15 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTP-CurlHandle.html#method_getCurlOptions"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlHandle\u003A\u003AinitCurlOptions\u0028\u0029",
-            "name": "initCurlOptions",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlHandle.html#method_initCurlOptions"
+            "fqsen": "\\chillerlan\\HTTP\\CurlHandle\u003A\u003AguessCA\u0028\u0029",
+            "name": "guessCA",
+            "summary": "Check\u0020default\u0020locations\u0020for\u0020the\u0020CA\u0020bundle",
+            "url": "classes/chillerlan-HTTP-CurlHandle.html#method_guessCA"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlHandle\u003A\u003AsetBodyOptions\u0028\u0029",
-            "name": "setBodyOptions",
+            "fqsen": "\\chillerlan\\HTTP\\CurlHandle\u003A\u003AsetCA\u0028\u0029",
+            "name": "setCA",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlHandle.html#method_setBodyOptions"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlHandle\u003A\u003AsetSSLOptions\u0028\u0029",
-            "name": "setSSLOptions",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlHandle.html#method_setSSLOptions"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlHandle\u003A\u003AsetHeaderOptions\u0028\u0029",
-            "name": "setHeaderOptions",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlHandle.html#method_setHeaderOptions"
+            "url": "classes/chillerlan-HTTP-CurlHandle.html#method_setCA"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\CurlHandle\u003A\u003AsetRequestOptions\u0028\u0029",
             "name": "setRequestOptions",
@@ -93,12 +93,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\chillerlan\\HTTP\\CurlHandle\u003A\u003Aexec\u0028\u0029",
             "name": "exec",
-            "summary": "",
+            "summary": "executes\u0020the\u0020current\u0020cURL\u0020instance\u0020and\u0020returns\u0020the\u0020error\u0020number",
             "url": "classes/chillerlan-HTTP-CurlHandle.html#method_exec"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\CurlHandle\u003A\u003AgetError\u0028\u0029",
             "name": "getError",
-            "summary": "",
+            "summary": "returns\u0020a\u0020string\u0020containing\u0020the\u0020last\u0020error",
             "url": "classes/chillerlan-HTTP-CurlHandle.html#method_getError"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\CurlHandle\u003A\u003ACURL_NETWORK_ERRORS",
@@ -106,15 +106,20 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTP-CurlHandle.html#constant_CURL_NETWORK_ERRORS"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlHandle\u003A\u003ACURLINFO_SSL_VERIFYRESULT",
-            "name": "CURLINFO_SSL_VERIFYRESULT",
+            "fqsen": "\\chillerlan\\HTTP\\CurlHandle\u003A\u003ANEVER_OVERWRITE",
+            "name": "NEVER_OVERWRITE",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlHandle.html#constant_CURLINFO_SSL_VERIFYRESULT"
+            "url": "classes/chillerlan-HTTP-CurlHandle.html#constant_NEVER_OVERWRITE"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\CurlHandle\u003A\u003A\u0024curl",
             "name": "curl",
             "summary": "",
             "url": "classes/chillerlan-HTTP-CurlHandle.html#property_curl"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\CurlHandle\u003A\u003A\u0024handleID",
+            "name": "handleID",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-CurlHandle.html#property_handleID"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\CurlHandle\u003A\u003A\u0024curlOptions",
             "name": "curlOptions",
@@ -161,6 +166,11 @@ Search.appendIndex(
             "summary": "CurlMultiClient\u0020constructor.",
             "url": "classes/chillerlan-HTTP-CurlMultiClient.html#method___construct"
         },                {
+            "fqsen": "\\chillerlan\\HTTP\\CurlMultiClient\u003A\u003AinitCurlMultiOptions\u0028\u0029",
+            "name": "initCurlMultiOptions",
+            "summary": "",
+            "url": "classes/chillerlan-HTTP-CurlMultiClient.html#method_initCurlMultiOptions"
+        },                {
             "fqsen": "\\chillerlan\\HTTP\\CurlMultiClient\u003A\u003A__destruct\u0028\u0029",
             "name": "__destruct",
             "summary": "close\u0020an\u0020existing\u0020cURL\u0020multi\u0020handle\u0020on\u0020exit",
@@ -173,38 +183,38 @@ Search.appendIndex(
         },                {
             "fqsen": "\\chillerlan\\HTTP\\CurlMultiClient\u003A\u003Aclose\u0028\u0029",
             "name": "close",
-            "summary": "",
+            "summary": "closes\u0020the\u0020handle",
             "url": "classes/chillerlan-HTTP-CurlMultiClient.html#method_close"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\CurlMultiClient\u003A\u003AaddRequest\u0028\u0029",
             "name": "addRequest",
-            "summary": "",
+            "summary": "adds\u0020a\u0020request\u0020to\u0020the\u0020stack",
             "url": "classes/chillerlan-HTTP-CurlMultiClient.html#method_addRequest"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\CurlMultiClient\u003A\u003AaddRequests\u0028\u0029",
             "name": "addRequests",
-            "summary": "",
+            "summary": "adds\u0020multiple\u0020requests\u0020to\u0020the\u0020stack",
             "url": "classes/chillerlan-HTTP-CurlMultiClient.html#method_addRequests"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\CurlMultiClient\u003A\u003Aprocess\u0028\u0029",
             "name": "process",
-            "summary": "",
+            "summary": "processes\u0020the\u0020stack",
             "url": "classes/chillerlan-HTTP-CurlMultiClient.html#method_process"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\CurlMultiClient\u003A\u003Aresolve\u0028\u0029",
+            "name": "resolve",
+            "summary": "resolves\u0020the\u0020handle,\u0020calls\u0020the\u0020response\u0020handler\u0020callback\u0020and\u0020creates\u0020the\u0020next\u0020handle",
+            "url": "classes/chillerlan-HTTP-CurlMultiClient.html#method_resolve"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\CurlMultiClient\u003A\u003AcreateHandle\u0028\u0029",
             "name": "createHandle",
-            "summary": "",
+            "summary": "creates\u0020a\u0020new\u0020request\u0020handle",
             "url": "classes/chillerlan-HTTP-CurlMultiClient.html#method_createHandle"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\CurlMultiClient\u003A\u003A\u0024curl_multi",
             "name": "curl_multi",
-            "summary": "",
+            "summary": "the\u0020cURL\u0020multi\u0020handle\u0020instance",
             "url": "classes/chillerlan-HTTP-CurlMultiClient.html#property_curl_multi"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlMultiClient\u003A\u003A\u0024handleCounter",
-            "name": "handleCounter",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlMultiClient.html#property_handleCounter"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\CurlMultiClient\u003A\u003A\u0024requests",
             "name": "requests",
@@ -215,6 +225,11 @@ Search.appendIndex(
             "name": "handles",
             "summary": "the\u0020stack\u0020of\u0020running\u0020handles",
             "url": "classes/chillerlan-HTTP-CurlMultiClient.html#property_handles"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\CurlMultiClient\u003A\u003A\u0024counter",
+            "name": "counter",
+            "summary": "the\u0020request\u0020counter\u0020\u0028request\u0020ID\/order\u0020in\u0020multi\u0020response\u0020handler\u0029",
+            "url": "classes/chillerlan-HTTP-CurlMultiClient.html#property_counter"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\CurlMultiClient\u003A\u003A\u0024multiResponseHandler",
             "name": "multiResponseHandler",
@@ -235,61 +250,6 @@ Search.appendIndex(
             "name": "logger",
             "summary": "",
             "url": "classes/chillerlan-HTTP-CurlMultiClient.html#property_logger"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlMultiHandle",
-            "name": "CurlMultiHandle",
-            "summary": "Implements\u0020a\u0020cURL\u0020multi\u0020connection\u0020object",
-            "url": "classes/chillerlan-HTTP-CurlMultiHandle.html"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlMultiHandle\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "CurlHandle\u0020constructor.",
-            "url": "classes/chillerlan-HTTP-CurlMultiHandle.html#method___construct"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlMultiHandle\u003A\u003AgetID\u0028\u0029",
-            "name": "getID",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlMultiHandle.html#method_getID"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlMultiHandle\u003A\u003AsetID\u0028\u0029",
-            "name": "setID",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlMultiHandle.html#method_setID"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlMultiHandle\u003A\u003AgetRetries\u0028\u0029",
-            "name": "getRetries",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlMultiHandle.html#method_getRetries"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlMultiHandle\u003A\u003AsetRetries\u0028\u0029",
-            "name": "setRetries",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlMultiHandle.html#method_setRetries"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlMultiHandle\u003A\u003AaddRetry\u0028\u0029",
-            "name": "addRetry",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlMultiHandle.html#method_addRetry"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlMultiHandle\u003A\u003AhandleResponse\u0028\u0029",
-            "name": "handleResponse",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlMultiHandle.html#method_handleResponse"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlMultiHandle\u003A\u003A\u0024multiResponseHandler",
-            "name": "multiResponseHandler",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-CurlMultiHandle.html#property_multiResponseHandler"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlMultiHandle\u003A\u003A\u0024id",
-            "name": "id",
-            "summary": "a\u0020handle\u0020ID\u0020\u0028counter\u0029,\u0020used\u0020in\u0020CurlMultiClient",
-            "url": "classes/chillerlan-HTTP-CurlMultiHandle.html#property_id"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\CurlMultiHandle\u003A\u003A\u0024retries",
-            "name": "retries",
-            "summary": "a\u0020retry\u0020counter,\u0020used\u0020in\u0020CurlMultiClient",
-            "url": "classes/chillerlan-HTTP-CurlMultiHandle.html#property_retries"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\HTTPClientAbstract",
             "name": "HTTPClientAbstract",
@@ -371,25 +331,15 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/chillerlan-HTTP-HTTPOptionsTrait.html#method_set_user_agent"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\HTTPOptionsTrait\u003A\u003Aset_ca_info\u0028\u0029",
-            "name": "set_ca_info",
-            "summary": "",
-            "url": "classes/chillerlan-HTTP-HTTPOptionsTrait.html#method_set_ca_info"
-        },                {
             "fqsen": "\\chillerlan\\HTTP\\HTTPOptionsTrait\u003A\u003Aset_curl_options\u0028\u0029",
             "name": "set_curl_options",
             "summary": "",
             "url": "classes/chillerlan-HTTP-HTTPOptionsTrait.html#method_set_curl_options"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\HTTPOptionsTrait\u003A\u003AsetCA\u0028\u0029",
-            "name": "setCA",
+            "fqsen": "\\chillerlan\\HTTP\\HTTPOptionsTrait\u003A\u003Aset_dns_over_https\u0028\u0029",
+            "name": "set_dns_over_https",
             "summary": "",
-            "url": "classes/chillerlan-HTTP-HTTPOptionsTrait.html#method_setCA"
-        },                {
-            "fqsen": "\\chillerlan\\HTTP\\HTTPOptionsTrait\u003A\u003AcheckCA\u0028\u0029",
-            "name": "checkCA",
-            "summary": "Check\u0020whether\u0020the\u0020given\u0020CA\u0020info\u0020exists\u0020and\u0020if\u0020it\u0020is\u0020file\u0020or\u0020dir",
-            "url": "classes/chillerlan-HTTP-HTTPOptionsTrait.html#method_checkCA"
+            "url": "classes/chillerlan-HTTP-HTTPOptionsTrait.html#method_set_dns_over_https"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\HTTPOptionsTrait\u003A\u003A\u0024user_agent",
             "name": "user_agent",
@@ -403,7 +353,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\chillerlan\\HTTP\\HTTPOptionsTrait\u003A\u003A\u0024ca_info",
             "name": "ca_info",
-            "summary": "CA\u0020Root\u0020Certificates\u0020for\u0020use\u0020with\u0020CURL\/SSL\u0020\u0028if\u0020not\u0020configured\u0020in\u0020php.ini\u0020or\u0020available\u0020in\u0020a\u0020default\u0020path\u0029",
+            "summary": "CA\u0020Root\u0020Certificates\u0020for\u0020use\u0020with\u0020CURL\/SSL",
             "url": "classes/chillerlan-HTTP-HTTPOptionsTrait.html#property_ca_info"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\HTTPOptionsTrait\u003A\u003A\u0024ssl_verifypeer",
@@ -415,6 +365,11 @@ Search.appendIndex(
             "name": "curl_multi_options",
             "summary": "options\u0020for\u0020the\u0020curl\u0020multi\u0020instance",
             "url": "classes/chillerlan-HTTP-HTTPOptionsTrait.html#property_curl_multi_options"
+        },                {
+            "fqsen": "\\chillerlan\\HTTP\\HTTPOptionsTrait\u003A\u003A\u0024curl_check_OCSP",
+            "name": "curl_check_OCSP",
+            "summary": "cURL\u0020extra\u0020hardening",
+            "url": "classes/chillerlan-HTTP-HTTPOptionsTrait.html#property_curl_check_OCSP"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\HTTPOptionsTrait\u003A\u003A\u0024window_size",
             "name": "window_size",
@@ -436,10 +391,10 @@ Search.appendIndex(
             "summary": "Number\u0020of\u0020retries\u0020\u0028multi\u0020fetch\u0029",
             "url": "classes/chillerlan-HTTP-HTTPOptionsTrait.html#property_retries"
         },                {
-            "fqsen": "\\chillerlan\\HTTP\\HTTPOptionsTrait\u003A\u003A\u0024curl_check_OCSP",
-            "name": "curl_check_OCSP",
-            "summary": "cURL\u0020extra\u0020hardening",
-            "url": "classes/chillerlan-HTTP-HTTPOptionsTrait.html#property_curl_check_OCSP"
+            "fqsen": "\\chillerlan\\HTTP\\HTTPOptionsTrait\u003A\u003A\u0024dns_over_https",
+            "name": "dns_over_https",
+            "summary": "Sets\u0020a\u0020DNS\u002Dover\u002DHTTPS\u0020provider\u0020URL",
+            "url": "classes/chillerlan-HTTP-HTTPOptionsTrait.html#property_dns_over_https"
         },                {
             "fqsen": "\\chillerlan\\HTTP\\LoggingClient",
             "name": "LoggingClient",
@@ -620,6 +575,31 @@ Search.appendIndex(
             "name": "setUp",
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-CurlHandleTest.html#method_setUp"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\CurlHandleTest\u003A\u003AcreateHandle\u0028\u0029",
+            "name": "createHandle",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-CurlHandleTest.html#method_createHandle"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\CurlHandleTest\u003A\u003AinvalidCaOptionProvider\u0028\u0029",
+            "name": "invalidCaOptionProvider",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-CurlHandleTest.html#method_invalidCaOptionProvider"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\CurlHandleTest\u003A\u003AtestInvalidCAException\u0028\u0029",
+            "name": "testInvalidCAException",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-CurlHandleTest.html#method_testInvalidCAException"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\CurlHandleTest\u003A\u003AcaOptionProvider\u0028\u0029",
+            "name": "caOptionProvider",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-CurlHandleTest.html#method_caOptionProvider"
+        },                {
+            "fqsen": "\\chillerlan\\HTTPTest\\CurlHandleTest\u003A\u003AtestCaInfoFile\u0028\u0029",
+            "name": "testCaInfoFile",
+            "summary": "",
+            "url": "classes/chillerlan-HTTPTest-CurlHandleTest.html#method_testCaInfoFile"
         },                {
             "fqsen": "\\chillerlan\\HTTPTest\\CurlHandleTest\u003A\u003ArequestMethodProvider\u0028\u0029",
             "name": "requestMethodProvider",
@@ -805,36 +785,6 @@ Search.appendIndex(
             "name": "testInvalidUserAgentException",
             "summary": "",
             "url": "classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testInvalidUserAgentException"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\HTTPOptionsTest\u003A\u003AtestInvalidCAException\u0028\u0029",
-            "name": "testInvalidCAException",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testInvalidCAException"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\HTTPOptionsTest\u003A\u003AtestCaInfoFile\u0028\u0029",
-            "name": "testCaInfoFile",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testCaInfoFile"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\HTTPOptionsTest\u003A\u003AtestCaInfoDir\u0028\u0029",
-            "name": "testCaInfoDir",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testCaInfoDir"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\HTTPOptionsTest\u003A\u003AtestCaInfoInvalidException\u0028\u0029",
-            "name": "testCaInfoInvalidException",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testCaInfoInvalidException"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\HTTPOptionsTest\u003A\u003AtestCurloptCaInfoInvalidException\u0028\u0029",
-            "name": "testCurloptCaInfoInvalidException",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testCurloptCaInfoInvalidException"
-        },                {
-            "fqsen": "\\chillerlan\\HTTPTest\\HTTPOptionsTest\u003A\u003AtestSetVerifyPeer\u0028\u0029",
-            "name": "testSetVerifyPeer",
-            "summary": "",
-            "url": "classes/chillerlan-HTTPTest-HTTPOptionsTest.html#method_testSetVerifyPeer"
         },                {
             "fqsen": "\\chillerlan\\HTTPTest\\LoggingClientTest",
             "name": "LoggingClientTest",

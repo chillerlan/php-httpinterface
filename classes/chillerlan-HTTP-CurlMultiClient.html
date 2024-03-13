@@ -111,9 +111,6 @@
                             </ul>
         </div>
     
-            <span class="phpdocumentor-element__implements">
-            implements
-                            <abbr title="\Psr\Log\LoggerAwareInterface">LoggerAwareInterface</abbr>                    </span>
     
     </h2>
 
@@ -144,13 +141,6 @@
 
 
 
-    <h4 id="toc-interfaces">
-        Interfaces
-        <a href="classes/chillerlan-HTTP-CurlMultiClient.html#toc-interfaces" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\Psr\Log\LoggerAwareInterface">LoggerAwareInterface</abbr></dt>    </dl>
 
 
 
@@ -164,21 +154,23 @@
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/chillerlan-HTTP-CurlMultiClient.html#property_curl_multi">$curl_multi</a>
-    <span>
-                        &nbsp;: <abbr title="\CurlMultiHandle">CurlMultiHandle</abbr>|null            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/chillerlan-HTTP-CurlMultiClient.html#property_handleCounter">$handleCounter</a>
+    <a href="classes/chillerlan-HTTP-CurlMultiClient.html#property_counter">$counter</a>
     <span>
                         &nbsp;: int            </span>
 </dt>
+<dd>the request counter (request ID/order in multi response handler)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/chillerlan-HTTP-CurlMultiClient.html#property_curl_multi">$curl_multi</a>
+    <span>
+                        &nbsp;: <abbr title="\CurlMultiHandle">CurlMultiHandle</abbr>            </span>
+</dt>
+<dd>the cURL multi handle instance</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/chillerlan-HTTP-CurlMultiClient.html#property_handles">$handles</a>
     <span>
-                        &nbsp;: array&lt;string|int, <a href="classes/chillerlan-HTTP-CurlMultiHandle.html"><abbr title="\chillerlan\HTTP\CurlMultiHandle">CurlMultiHandle</abbr></a>&gt;            </span>
+                        &nbsp;: array&lt;string|int, mixed&gt;            </span>
 </dt>
 <dd>the stack of running handles</dd>
 
@@ -240,29 +232,33 @@
     <span>
                                 &nbsp;: static    </span>
 </dt>
+<dd>adds a request to the stack</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/chillerlan-HTTP-CurlMultiClient.html#method_addRequests">addRequests()</a>
     <span>
                                 &nbsp;: static    </span>
 </dt>
+<dd>adds multiple requests to the stack</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/chillerlan-HTTP-CurlMultiClient.html#method_close">close()</a>
     <span>
-                                &nbsp;: void    </span>
+                                &nbsp;: static    </span>
 </dt>
+<dd>closes the handle</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/chillerlan-HTTP-CurlMultiClient.html#method_process">process()</a>
     <span>
                                 &nbsp;: static    </span>
 </dt>
+<dd>processes the stack</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/chillerlan-HTTP-CurlMultiClient.html#method_setLogger">setLogger()</a>
     <span>
-                                &nbsp;: void    </span>
+                                &nbsp;: static    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
@@ -270,6 +266,20 @@
     <span>
                                 &nbsp;: void    </span>
 </dt>
+<dd>creates a new request handle</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a href="classes/chillerlan-HTTP-CurlMultiClient.html#method_initCurlMultiOptions">initCurlMultiOptions()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a href="classes/chillerlan-HTTP-CurlMultiClient.html#method_resolve">resolve()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>resolves the handle, calls the response handler callback and creates the next handle</dd>
 
     </dl>
 
@@ -292,9 +302,9 @@
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_curl_multi">
-        $curl_multi
-        <a href="classes/chillerlan-HTTP-CurlMultiClient.html#property_curl_multi" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_counter">
+        $counter
+        <a href="classes/chillerlan-HTTP-CurlMultiClient.html#property_counter" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                 </span>
@@ -302,16 +312,17 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlMultiClient.php"><a href="files/src-curlmulticlient.html"><abbr title="src/CurlMultiClient.php">CurlMultiClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">28</span>
+    <span class="phpdocumentor-element-found-in__line">48</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">the request counter (request ID/order in multi response handler)</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type"><abbr title="\CurlMultiHandle">CurlMultiHandle</abbr>|null</span>
-    <span class="phpdocumentor-signature__name">$curl_multi</span>
-     = <span class="phpdocumentor-signature__default-value">null</span></code>
+        <span class="phpdocumentor-signature__type">int</span>
+    <span class="phpdocumentor-signature__name">$counter</span>
+     = <span class="phpdocumentor-signature__default-value">0</span></code>
 
     
     
@@ -325,9 +336,9 @@
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_handleCounter">
-        $handleCounter
-        <a href="classes/chillerlan-HTTP-CurlMultiClient.html#property_handleCounter" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_curl_multi">
+        $curl_multi
+        <a href="classes/chillerlan-HTTP-CurlMultiClient.html#property_curl_multi" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                 </span>
@@ -335,16 +346,17 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlMultiClient.php"><a href="files/src-curlmulticlient.html"><abbr title="src/CurlMultiClient.php">CurlMultiClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">29</span>
+    <span class="phpdocumentor-element-found-in__line">31</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">the cURL multi handle instance</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">int</span>
-    <span class="phpdocumentor-signature__name">$handleCounter</span>
-     = <span class="phpdocumentor-signature__default-value">0</span></code>
+        <span class="phpdocumentor-signature__type"><abbr title="\CurlMultiHandle">CurlMultiHandle</abbr></span>
+    <span class="phpdocumentor-signature__name">$curl_multi</span>
+    </code>
 
     
     
@@ -368,7 +380,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlMultiClient.php"><a href="files/src-curlmulticlient.html"><abbr title="src/CurlMultiClient.php">CurlMultiClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">41</span>
+    <span class="phpdocumentor-element-found-in__line">43</span>
 
     </aside>
 
@@ -376,11 +388,13 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">array&lt;string|int, <a href="classes/chillerlan-HTTP-CurlMultiHandle.html"><abbr title="\chillerlan\HTTP\CurlMultiHandle">CurlMultiHandle</abbr></a>&gt;</span>
+        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
     <span class="phpdocumentor-signature__name">$handles</span>
      = <span class="phpdocumentor-signature__default-value">[]</span></code>
 
-    
+        <section class="phpdocumentor-description"><p>cURL instance id =&gt; [counter, retries, handle]</p>
+</section>
+
     
     
 
@@ -402,7 +416,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlMultiClient.php"><a href="files/src-curlmulticlient.html"><abbr title="src/CurlMultiClient.php">CurlMultiClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">50</span>
+    <span class="phpdocumentor-element-found-in__line">57</span>
 
     </aside>
 
@@ -435,7 +449,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlMultiClient.php"><a href="files/src-curlmulticlient.html"><abbr title="src/CurlMultiClient.php">CurlMultiClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">47</span>
+    <span class="phpdocumentor-element-found-in__line">54</span>
 
     </aside>
 
@@ -468,7 +482,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlMultiClient.php"><a href="files/src-curlmulticlient.html"><abbr title="src/CurlMultiClient.php">CurlMultiClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">49</span>
+    <span class="phpdocumentor-element-found-in__line">56</span>
 
     </aside>
 
@@ -501,7 +515,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlMultiClient.php"><a href="files/src-curlmulticlient.html"><abbr title="src/CurlMultiClient.php">CurlMultiClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">34</span>
+    <span class="phpdocumentor-element-found-in__line">36</span>
 
     </aside>
 
@@ -535,7 +549,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlMultiClient.php"><a href="files/src-curlmulticlient.html"><abbr title="src/CurlMultiClient.php">CurlMultiClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">48</span>
+    <span class="phpdocumentor-element-found-in__line">55</span>
 
     </aside>
 
@@ -573,7 +587,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlMultiClient.php"><a href="files/src-curlmulticlient.html"><abbr title="src/CurlMultiClient.php">CurlMultiClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">46</span>
+    <span class="phpdocumentor-element-found-in__line">53</span>
 
     </aside>
 
@@ -636,7 +650,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlMultiClient.php"><a href="files/src-curlmulticlient.html"><abbr title="src/CurlMultiClient.php">CurlMultiClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">68</span>
+    <span class="phpdocumentor-element-found-in__line">82</span>
 
     </aside>
 
@@ -668,11 +682,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlMultiClient.php"><a href="files/src-curlmulticlient.html"><abbr title="src/CurlMultiClient.php">CurlMultiClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">94</span>
+    <span class="phpdocumentor-element-found-in__line">108</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">adds a request to the stack</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">addRequest</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\RequestInterface">RequestInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
@@ -713,11 +728,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlMultiClient.php"><a href="files/src-curlmulticlient.html"><abbr title="src/CurlMultiClient.php">CurlMultiClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">103</span>
+    <span class="phpdocumentor-element-found-in__line">119</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">adds multiple requests to the stack</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">addRequests</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, <abbr title="\Psr\Http\Message\RequestInterface">RequestInterface</abbr>&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$stack</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
@@ -758,14 +774,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlMultiClient.php"><a href="files/src-curlmulticlient.html"><abbr title="src/CurlMultiClient.php">CurlMultiClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">83</span>
+    <span class="phpdocumentor-element-found-in__line">99</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">closes the handle</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">close</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">close</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -773,7 +790,11 @@
     
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">static</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -789,11 +810,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlMultiClient.php"><a href="files/src-curlmulticlient.html"><abbr title="src/CurlMultiClient.php">CurlMultiClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">120</span>
+    <span class="phpdocumentor-element-found-in__line">137</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">processes the stack</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">process</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
@@ -810,15 +832,6 @@
     </h5>
     <dl class="phpdocumentor-tag-list">
                                     <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">phan-suppress</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                
-                                                 <section class="phpdocumentor-description"><p>PhanTypeInvalidThrowsIsInterface</p>
-</section>
-
-                                    </dd>
-                                                <dt class="phpdocumentor-tag-list__entry">
                     <span class="phpdocumentor-tag__name">throws</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
@@ -848,14 +861,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlMultiClient.php"><a href="files/src-curlmulticlient.html"><abbr title="src/CurlMultiClient.php">CurlMultiClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">76</span>
+    <span class="phpdocumentor-element-found-in__line">90</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setLogger</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Log\LoggerInterface">LoggerInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$logger</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">setLogger</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Log\LoggerInterface">LoggerInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$logger</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -894,7 +907,11 @@
                                     </dd>
                                             </dl>
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">static</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -910,14 +927,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlMultiClient.php"><a href="files/src-curlmulticlient.html"><abbr title="src/CurlMultiClient.php">CurlMultiClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">167</span>
+    <span class="phpdocumentor-element-found-in__line">200</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">creates a new request handle</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-                    <span class="phpdocumentor-signature__name">createHandle</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\RequestInterface">RequestInterface</abbr>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$retries</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">createHandle</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\RequestInterface">RequestInterface</abbr>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$counter</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$retries</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -932,7 +950,7 @@
                 
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$id</span>
+                <span class="phpdocumentor-signature__argument__name">$counter</span>
                 : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
                  = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
@@ -942,6 +960,79 @@
                 <span class="phpdocumentor-signature__argument__name">$retries</span>
                 : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
                  = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_initCurlMultiOptions">
+        initCurlMultiOptions()
+        <a href="classes/chillerlan-HTTP-CurlMultiClient.html#method_initCurlMultiOptions" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/CurlMultiClient.php"><a href="files/src-curlmulticlient.html"><abbr title="src/CurlMultiClient.php">CurlMultiClient.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">64</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                    <span class="phpdocumentor-signature__name">initCurlMultiOptions</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_resolve">
+        resolve()
+        <a href="classes/chillerlan-HTTP-CurlMultiClient.html#method_resolve" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/CurlMultiClient.php"><a href="files/src-curlmulticlient.html"><abbr title="src/CurlMultiClient.php">CurlMultiClient.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">179</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">resolves the handle, calls the response handler callback and creates the next handle</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                    <span class="phpdocumentor-signature__name">resolve</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$handleID</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$handleID</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
             </dd>
@@ -1064,8 +1155,8 @@
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
+                                                    <li><a href="classes/chillerlan-HTTP-CurlMultiClient.html#property_counter">$counter<a href="classes/chillerlan-HTTP-CurlMultiClient.html"></li>
                                                     <li><a href="classes/chillerlan-HTTP-CurlMultiClient.html#property_curl_multi">$curl_multi<a href="classes/chillerlan-HTTP-CurlMultiClient.html"></li>
-                                                    <li><a href="classes/chillerlan-HTTP-CurlMultiClient.html#property_handleCounter">$handleCounter<a href="classes/chillerlan-HTTP-CurlMultiClient.html"></li>
                                                     <li><a href="classes/chillerlan-HTTP-CurlMultiClient.html#property_handles">$handles<a href="classes/chillerlan-HTTP-CurlMultiClient.html"></li>
                                                     <li><a href="classes/chillerlan-HTTP-CurlMultiClient.html#property_logger">$logger<a href="classes/chillerlan-HTTP-CurlMultiClient.html"></li>
                                                     <li><a href="classes/chillerlan-HTTP-CurlMultiClient.html#property_multiResponseHandler">$multiResponseHandler<a href="classes/chillerlan-HTTP-CurlMultiClient.html"></li>
@@ -1086,6 +1177,8 @@
                                             <li><a href="classes/chillerlan-HTTP-CurlMultiClient.html#method_process">process()</a></li>
                                             <li><a href="classes/chillerlan-HTTP-CurlMultiClient.html#method_setLogger">setLogger()</a></li>
                                             <li><a href="classes/chillerlan-HTTP-CurlMultiClient.html#method_createHandle">createHandle()</a></li>
+                                            <li><a href="classes/chillerlan-HTTP-CurlMultiClient.html#method_initCurlMultiOptions">initCurlMultiOptions()</a></li>
+                                            <li><a href="classes/chillerlan-HTTP-CurlMultiClient.html#method_resolve">resolve()</a></li>
                                     </ul>
             </li>
                     </ul>
