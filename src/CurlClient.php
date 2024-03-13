@@ -17,7 +17,7 @@ use function in_array, sprintf;
 use const CURLE_OK;
 
 /**
- * A simple cURL http client
+ * A "simple" cURL http client
  */
 class CurlClient extends HTTPClientAbstract{
 

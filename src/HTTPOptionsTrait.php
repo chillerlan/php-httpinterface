@@ -40,9 +40,9 @@ trait HTTPOptionsTrait{
 	 *
 	 * (if not configured in php.ini or available in a default path via the `ca-certificates` package)
 	 *
-	 * @link https://curl.se/docs/caextract.html
-	 * @link https://curl.se/ca/cacert.pem
-	 * @link https://raw.githubusercontent.com/bagder/ca-bundle/master/ca-bundle.crt
+	 * @see https://curl.se/docs/caextract.html
+	 * @see https://curl.se/ca/cacert.pem
+	 * @see https://raw.githubusercontent.com/bagder/ca-bundle/master/ca-bundle.crt
 	 */
 	protected string|null $ca_info = null;
 
@@ -50,14 +50,14 @@ trait HTTPOptionsTrait{
 	 * see CURLOPT_SSL_VERIFYPEER
 	 * requires either HTTPOptions::$ca_info or a properly working system CA file
 	 *
-	 * @link https://php.net/manual/function.curl-setopt.php
+	 * @see https://php.net/manual/function.curl-setopt.php
 	 */
 	protected bool $ssl_verifypeer = true;
 
 	/**
 	 * options for the curl multi instance
 	 *
-	 * @link https://www.php.net/manual/function.curl-multi-setopt.php
+	 * @see https://www.php.net/manual/function.curl-multi-setopt.php
 	 */
 	protected array $curl_multi_options = [];
 

@@ -333,7 +333,7 @@ final class CurlHandle{
 	}
 
 	/**
-	 * @link https://php.watch/articles/php-curl-security-hardening
+	 * @see https://php.watch/articles/php-curl-security-hardening
 	 */
 	public function init():CH|null{
 

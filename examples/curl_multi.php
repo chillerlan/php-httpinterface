@@ -1,7 +1,7 @@
 <?php
 /**
  * cURL multi example, fetch data from the GUildWars2 items API
- * @link         https://wiki.guildwars2.com/wiki/API:2/items
+ * @see          https://wiki.guildwars2.com/wiki/API:2/items
  *
  * @filesource   curl_multi.php
  * @created      08.11.2019
