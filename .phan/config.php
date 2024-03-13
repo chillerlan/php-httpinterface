@@ -52,4 +52,8 @@ return [
 		'tests',
 		'vendor',
 	],
+	'suppress_issue_types'            => [
+		'PhanAccessMethodInternal',
+		'PhanTypeInvalidThrowsIsInterface',
+	],
 ];

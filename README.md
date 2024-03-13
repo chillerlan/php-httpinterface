@@ -1,6 +1,6 @@
 # chillerlan/php-httpinterface
 
-A [PSR-7](https://www.php-fig.org/psr/psr-7/)/[PSR-17](https://www.php-fig.org/psr/psr-17/)/[PSR-18](https://www.php-fig.org/psr/psr-18/) implementation.
+A [PSR-7](https://www.php-fig.org/psr/psr-7/)/[PSR-17](https://www.php-fig.org/psr/psr-17/)/[PSR-18](https://www.php-fig.org/psr/psr-18/) HTTP message/client implementation.
 
 [![PHP Version Support][php-badge]][php]
 [![version][packagist-badge]][packagist]
@@ -34,26 +34,34 @@ An API documentation created with [phpDocumentor](https://www.phpdoc.org/) can b
 ## Requirements
 - PHP 8.1+
   - [`ext-curl`](https://www.php.net/manual/book.curl.php)
-  - [`ext-json`](https://www.php.net/manual/book.json.php)
-  - [`ext-mbstring`](https://www.php.net/manual/book.mbstring.php)
-  - [`ext-simplexml`](https://www.php.net/manual/book.simplexml.php)
-  - [`ext-zlib`](https://www.php.net/manual/book.zlib.php)
+  - from dependencies:
+    - [`ext-fileinfo`](https://www.php.net/manual/book.fileinfo.php)
+    - [`ext-intl`](https://www.php.net/manual/book.intl.php)
+    - [`ext-json`](https://www.php.net/manual/book.json.php)
+    - [`ext-mbstring`](https://www.php.net/manual/book.mbstring.php)
+    - [`ext-simplexml`](https://www.php.net/manual/book.simplexml.php)
+    - [`ext-zlib`](https://www.php.net/manual/book.zlib.php)
 
 
-## Installation
-**requires [composer](https://getcomposer.org)**
+## Installation with [composer](https://getcomposer.org)
 
-*composer.json* (note: replace `dev-main` with a [version boundary](https://getcomposer.org/doc/articles/versions.md))
+### Terminal
+
+```
+composer require chillerlan/php-httpinterface
+```
+
+### composer.json
+
 ```json
 {
 	"require": {
 		"php": "^8.1",
-		"chillerlan/php-httpinterface": "dev-main"
+		"chillerlan/php-httpinterface": "dev-main#<commit_hash>"
 	}
 }
 ```
-Note: replace `dev-main` with a [version constraint](https://getcomposer.org/doc/articles/versions.md#writing-version-constraints), e.g. `^5.0` - see [releases](https://github.com/chillerlan/php-httpinterface/releases) for valid versions.
-In case you want to keep using `dev-main`, specify the hash of a commit to avoid running into unforseen issues like so: `dev-main#8ac7f056ef2d492b0c961da29472c27324218b83`
+Note: replace `dev-main` with a [version constraint](https://getcomposer.org/doc/articles/versions.md#writing-version-constraints), e.g. `^6.0` - see [releases](https://github.com/chillerlan/php-httpinterface/releases) for valid versions.
 
 Profit!
 
@@ -65,15 +73,17 @@ as the first parameter, followed by optional `HTTPOptions` and PSR-3 `LoggerInte
 You can then send a request via the implemented PSR-18 method `ClientInterface::sendRequest()`,
 using a PSR-7 `RequestInterface` and expect a PSR-7 `ResponseInterface`.
 
+
 ### `CurlClient`, `StreamClient`
 
 ```php
-$options             = new HTTPOptions;
-$options->ca_info    = '/path/to/cacert.pem';
-$options->user_agent = 'my cool user agent 1.0';
+$options                 = new HTTPOptions;
+$options->ca_info        = '/path/to/cacert.pem';
+$options->user_agent     = 'my cool user agent 1.0';
+$options->dns_over_https = 'https://cloudflare-dns.com/dns-query';
 
-$httpClient    = new CurlClient($responseFactory, $options, $logger);
-$request = $requestFactory->createRequest('GET', 'https://www.example.com?foo=bar');
+$httpClient = new CurlClient($responseFactory, $options, $logger);
+$request    = $requestFactory->createRequest('GET', 'https://www.example.com?foo=bar');
 
 $httpClient->sendRequest($request);
 ```
@@ -88,10 +98,10 @@ It needs a `MultiResponseHandlerInterface` that parses the incoming responses, t
 $handler = new class () implements MultiResponseHandlerInterface{
 
 	public function handleResponse(
-		ResponseInterface $response, // the incoming response
-		RequestInterface $request,   // the corresponding request
-		int $id,                     // the request id
-		array $curl_info ,           // the curl_getinfo() result for this request
+		ResponseInterface $response,  // the incoming response
+		RequestInterface  $request,   // the corresponding request
+		int               $id,        // the request id
+		array|null        $curl_info, // the curl_getinfo() result for this request
 	):RequestInterface|null{
 	
 		if($response->getStatusCode() !== 200){
