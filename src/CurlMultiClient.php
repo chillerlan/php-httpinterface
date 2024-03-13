@@ -14,19 +14,21 @@ namespace chillerlan\HTTP;
 
 use chillerlan\Settings\SettingsContainerInterface;
 use Psr\Http\Message\{RequestInterface, ResponseFactoryInterface};
-use Psr\Log\{LoggerAwareInterface, LoggerInterface, NullLogger};
+use Psr\Log\{LoggerInterface, NullLogger};
 use CurlMultiHandle as CMH;
-use function array_shift, curl_close, curl_multi_add_handle, curl_multi_close, curl_multi_exec,
-	curl_multi_info_read, curl_multi_init, curl_multi_remove_handle, curl_multi_select, curl_multi_setopt, usleep;
+use function array_shift, count, curl_close, curl_multi_add_handle, curl_multi_close, curl_multi_exec,
+	curl_multi_info_read, curl_multi_init, curl_multi_remove_handle, curl_multi_select, curl_multi_setopt, sprintf, usleep;
 use const CURLM_OK, CURLMOPT_MAXCONNECTS, CURLMOPT_PIPELINING, CURLPIPE_MULTIPLEX;
 
 /**
  * Curl multi http client
  */
-class CurlMultiClient implements LoggerAwareInterface{
+class CurlMultiClient{
 
-	protected CMH|null $curl_multi    = null;
-	protected int      $handleCounter = 0;
+	/**
+	 * the cURL multi handle instance
+	 */
+	protected CMH $curl_multi;
 
 	/**
 	 * An array of RequestInterface to run
@@ -36,9 +38,14 @@ class CurlMultiClient implements LoggerAwareInterface{
 	/**
 	 * the stack of running handles
 	 *
-	 * @var \chillerlan\HTTP\CurlMultiHandle[]
+	 * cURL instance id => [counter, retries, handle]
 	 */
 	protected array $handles = [];
+
+	/**
+	 * the request counter (request ID/order in multi response handler)
+	 */
+	protected int $counter = 0;
 
 	/**
 	 * CurlMultiClient constructor.
@@ -51,10 +58,17 @@ class CurlMultiClient implements LoggerAwareInterface{
 	){
 		$this->curl_multi = curl_multi_init();
 
-		$curl_multi_options = ([
+		$this->initCurlMultiOptions();
+	}
+
+	protected function initCurlMultiOptions():void{
+
+		$curl_multi_options = [
 			CURLMOPT_PIPELINING  => CURLPIPE_MULTIPLEX,
 			CURLMOPT_MAXCONNECTS => $this->options->window_size,
-		] + $this->options->curl_multi_options);
+		];
+
+		$curl_multi_options += $this->options->curl_multi_options;
 
 		foreach($curl_multi_options as $k => $v){
 			curl_multi_setopt($this->curl_multi, $k, $v);
@@ -73,23 +87,23 @@ class CurlMultiClient implements LoggerAwareInterface{
 	 * @inheritDoc
 	 * @codeCoverageIgnore
 	 */
-	public function setLogger(LoggerInterface $logger):void{
+	public function setLogger(LoggerInterface $logger):static{
 		$this->logger = $logger;
+
+		return $this;
 	}
 
 	/**
-	 *
+	 * closes the handle
 	 */
-	public function close():void{
+	public function close():static{
+		curl_multi_close($this->curl_multi);
 
-		if($this->curl_multi instanceof CMH){
-			curl_multi_close($this->curl_multi);
-		}
-
+		return $this;
 	}
 
 	/**
-	 *
+	 * adds a request to the stack
 	 */
 	public function addRequest(RequestInterface $request):static{
 		$this->requests[] = $request;
@@ -98,6 +112,8 @@ class CurlMultiClient implements LoggerAwareInterface{
 	}
 
 	/**
+	 * adds multiple requests to the stack
+	 *
 	 * @param \Psr\Http\Message\RequestInterface[] $stack
 	 */
 	public function addRequests(iterable $stack):static{
@@ -114,7 +130,8 @@ class CurlMultiClient implements LoggerAwareInterface{
 	}
 
 	/**
-	 * @phan-suppress PhanTypeInvalidThrowsIsInterface
+	 * processes the stack
+	 *
 	 * @throws \Psr\Http\Client\ClientExceptionInterface
 	 */
 	public function process():static{
@@ -131,40 +148,60 @@ class CurlMultiClient implements LoggerAwareInterface{
 		// ...and process the stack
 		do{
 			// $still_running is not a "flag" as the documentation states, but the number of currently active handles
-			$status = curl_multi_exec($this->curl_multi, $active);
+			$status = curl_multi_exec($this->curl_multi, $active_handles);
 
-			if($active > 0){
-				curl_multi_select($this->curl_multi, $this->options->timeout);
+			if(curl_multi_select($this->curl_multi, $this->options->timeout) === -1){
+				usleep(100000); // sleep a bit (100ms)
 			}
 
+			// this assignment-in-condition is intentional btw
 			while($state = curl_multi_info_read($this->curl_multi)){
-				$id     = (int)$state['handle'];
-				$handle = $this->handles[$id];
-				$result = $handle->handleResponse();
+				$this->resolve((int)$state['handle']);
 
 				curl_multi_remove_handle($this->curl_multi, $state['handle']);
 				curl_close($state['handle']);
-				unset($this->handles[$id]);
-
-				if($result instanceof RequestInterface && $handle->getRetries() < $this->options->retries){
-					$this->createHandle($result, $handle->getID(), $handle->addRetry());
-
-					continue;
-				}
-
-				$this->createHandle();
 			}
 
 		}
-		while($active > 0 && $status === CURLM_OK);
+		while($active_handles > 0 && $status === CURLM_OK);
+
+		// for some reason not all requests were processed (errors while adding to curl_multi)
+		if(!empty($this->requests)){
+			$this->logger->warning(sprintf('%s request(s) in the stack could not be processed', count($this->requests)));
+		}
 
 		return $this;
 	}
 
 	/**
-	 *
+	 * resolves the handle, calls the response handler callback and creates the next handle
 	 */
-	protected function createHandle(RequestInterface|null $request = null, int|null $id = null, int|null $retries = null):void{
+	protected function resolve(int $handleID):void{
+		[$counter, $retries, $handle] = $this->handles[$handleID];
+
+		$result = $this->multiResponseHandler->handleResponse(
+			$handle->getResponse(),
+			$handle->getRequest(),
+			$counter,
+			$handle->getInfo(),
+		);
+
+		$handle->close();
+		unset($this->handles[$handleID]);
+
+		($result instanceof RequestInterface && $retries < $this->options->retries)
+			? $this->createHandle($result, $counter, ++$retries)
+			: $this->createHandle();
+	}
+
+	/**
+	 * creates a new request handle
+	 */
+	protected function createHandle(
+		RequestInterface|null $request = null,
+		int|null              $counter = null,
+		int|null              $retries = null,
+	):void{
 
 		if($request === null){
 
@@ -175,23 +212,20 @@ class CurlMultiClient implements LoggerAwareInterface{
 			$request = array_shift($this->requests);
 		}
 
-		$handle = new CurlMultiHandle(
-			$this->multiResponseHandler,
-			$request,
-			$this->responseFactory->createResponse(),
-			$this->options,
-		);
+		$handle = (new CurlHandle($request, $this->responseFactory->createResponse(), $this->options));
 
-		$curl = $handle
-			->setID(($id ?? $this->handleCounter++))
-			->setRetries($retries ?? 1)
-			->init()
-		;
+		// initialize the handle get the cURL resource and add it to the multi handle
+		$error = curl_multi_add_handle($this->curl_multi, $handle->init());
 
-		/** @phan-suppress-next-line PhanTypeMismatchArgumentNullableInternal */
-		curl_multi_add_handle($this->curl_multi, $curl);
+		if($error !== CURLM_OK){
+			$this->addRequest($request); // re-add the request
 
-		$this->handles[(int)$curl] = $handle;
+			$this->logger->error(sprintf('could not attach current handle to curl_multi instance. (error: %s)', $error));
+
+			return;
+		}
+
+		$this->handles[$handle->getHandleID()] = [($counter ?? ++$this->counter) , ($retries ?? 0), $handle];
 
 		if($this->options->sleep > 0){
 			usleep($this->options->sleep);

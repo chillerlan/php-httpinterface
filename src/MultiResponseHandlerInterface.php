@@ -27,7 +27,7 @@ interface MultiResponseHandlerInterface{
 	 * @param \Psr\Http\Message\ResponseInterface $response    the response
 	 * @param \Psr\Http\Message\RequestInterface  $request     the original request
 	 * @param int                                 $id          the request ID (order of outgoing requests)
-	 * @param array                               $curl_info   curl_info() result for the current request,
+	 * @param array|null                          $curl_info   curl_info() result for the current request,
 	 *                                                         empty array on curl_info() failure
 	 *
 	 * @return \Psr\Http\Message\RequestInterface|null         an optional replacement request if the previous request failed
@@ -36,7 +36,7 @@ interface MultiResponseHandlerInterface{
 		ResponseInterface $response,
 		RequestInterface  $request,
 		int               $id,
-		array             $curl_info,
+		array|null        $curl_info,
 	):RequestInterface|null;
 
 }

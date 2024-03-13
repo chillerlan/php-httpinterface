@@ -15,9 +15,10 @@ namespace chillerlan\HTTPTest;
 use chillerlan\HTTP\{CurlMultiClient, HTTPOptions, MultiResponseHandlerInterface};
 use chillerlan\HTTP\Utils\QueryUtil;
 use PHPUnit\Framework\Attributes\Group;
-use PHPUnit\Framework\{ExpectationFailedException, TestCase};
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
+use Throwable;
 use function array_column, implode, in_array, ksort;
 
 /**
@@ -34,8 +35,9 @@ class CurlMultiClientTest extends TestCase{
 		$this->initFactories();
 
 		$options = new HTTPOptions([
-			'ca_info' => __DIR__.'/cacert.pem',
-			'sleep'   => 1,
+			'ca_info'        => __DIR__.'/cacert.pem',
+			'sleep'          => 750000,
+			'dns_over_https' => null,
 		]);
 
 		$this->multiResponseHandler = $this->getTestResponseHandler();
@@ -74,7 +76,7 @@ class CurlMultiClientTest extends TestCase{
 				ResponseInterface $response,
 				RequestInterface  $request,
 				int               $id,
-				array             $curl_info,
+				array|null        $curl_info,
 			):RequestInterface|null{
 
 				if(in_array($response->getStatusCode(), [200, 206], true)){
@@ -109,18 +111,19 @@ class CurlMultiClientTest extends TestCase{
 			->process()
 		;
 
-		$responses = $this->multiResponseHandler->getResponses();
-
-		$this::assertCount(10, $requests);
-		$this::assertCount(10, $responses);
-
+		// the arenanet API isn't the fastest or most reliable
 		try{
-			// the responses are in the same order as the respective requests
-			$this::assertSame(['de', 'en', 'es', 'fr', 'zh', 'de', 'en', 'es', 'fr', 'zh'], array_column($responses, 'lang'));
+			$responses = $this->multiResponseHandler->getResponses();
+
+			$this::assertCount(10, $requests);
+			$this::assertCount(10, $responses);
 		}
-		catch(ExpectationFailedException){
+		catch(Throwable){
 			$this::markTestSkipped('arenanet API error');
 		}
+
+		// the responses are in the same order as the respective requests
+		$this::assertSame(['de', 'en', 'es', 'fr', 'zh', 'de', 'en', 'es', 'fr', 'zh'], array_column($responses, 'lang'));
 
 		// cover the destructor
 		unset($this->http);

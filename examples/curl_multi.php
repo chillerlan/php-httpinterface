@@ -51,9 +51,9 @@ $handler = new class () implements MultiResponseHandlerInterface{
 
 	public function handleResponse(
 		ResponseInterface $response,
-		RequestInterface $request,
-		int $id,
-		array $curl_info,
+		RequestInterface  $request,
+		int               $id,
+		array|null        $curl_info,
 	):RequestInterface|null{
 
 		// the API returns either 200 or 206 on OK responses
@@ -80,8 +80,9 @@ $handler = new class () implements MultiResponseHandlerInterface{
 
 		// create a file for each item in the response (ofc you'd rather put this in a DB)
 		foreach($json as $item){
-			$file = $lang.'/'.$item->id;
-			file_put_contents(__DIR__.'/'.$file.'.json', json_encode($item, (JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)));
+			$file = sprintf('%s/%s/%s.json', __DIR__, $lang, $item->id);
+
+			file_put_contents($file, json_encode($item, (JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)));
 
 			echo $file.PHP_EOL;
 		}
