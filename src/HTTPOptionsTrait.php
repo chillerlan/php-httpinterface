@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace chillerlan\HTTP;
 
-use function trim;
+use function parse_url, sprintf, strtolower, trim;
 use const CURLOPT_CAINFO, CURLOPT_CAPATH;
 
 /**
@@ -143,16 +143,25 @@ trait HTTPOptionsTrait{
 		$this->curl_options = $curl_options;
 	}
 
+	/**
+	 * @throws \chillerlan\HTTP\ClientException
+	 */
 	protected function set_dns_over_https(string|null $dns_over_https):void{
-		$this->dns_over_https = null;
 
-		if($dns_over_https !== null){
-			$dns_over_https = trim($dns_over_https);
+		if($dns_over_https === null){
+			$this->dns_over_https = null;
 
-			if(!empty($dns_over_https)){
-				$this->dns_over_https = $dns_over_https;
-			}
+			return;
 		}
 
+		$dns_over_https = trim($dns_over_https);
+		$parsed         = parse_url($dns_over_https);
+
+		if(empty($dns_over_https) || !isset($parsed['scheme'], $parsed['host']) || strtolower($parsed['scheme']) !== 'https'){
+			throw new ClientException(sprintf('invalid DNS-over-HTTPS URL: "%s"', $dns_over_https));
+		}
+
+		$this->dns_over_https = $dns_over_https;
 	}
+
 }
