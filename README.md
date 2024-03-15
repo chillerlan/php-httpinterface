@@ -159,44 +159,6 @@ $multiClient->process();
 ```
 
 
-### `URLExtractor`
-
-The `URLExtractor` wraps a PSR-18 `ClientInterface` to extract and follow shortened URLs to their original location.
-
-```php
-$options                 = new HTTPOptions;
-$options->user_agent     = 'my cool user agent 1.0';
-$options->ssl_verifypeer = false;
-$options->curl_options   = [
-	CURLOPT_FOLLOWLOCATION => false,
-	CURLOPT_MAXREDIRS      => 25,
-];
-
-$httpClient   = new CurlClient($responseFactory, $options, $logger);
-$urlExtractor = new URLExtractor($httpClient, $responseFactory);
-
-$request = $factory->createRequest('GET', 'https://t.co/ZSS6nVOcVp');
-
-$urlExtractor->sendRequest($request); // -> response from the final location
-
-// you can retrieve an array with all followed locations afterwards
-$responses = $this->http->getResponses(); // -> ResponseInterface[]
-
-// if you just want the URL of the final location, you can use the extract method: 
-$url = $this->http->extract('https://t.co/ZSS6nVOcVp'); // -> https://api.guildwars2.com/v2/build
-```
-
-
-### `LoggingClient`
- 
-The `LoggingClient` wraps a `ClientInterface` and outputs the HTTP messages in a readable way through a `LoggerInterface` (do NOT use in production!).
-
-```php
-$loggingClient = new LoggingClient($httpClient, $logger);
-
-$loggingClient->sendRequest($request); // -> log to output given via logger
-```
-
 
 ### Auto generated API documentation
 
