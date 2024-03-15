@@ -73,7 +73,7 @@ jobs:
       - name: "Checkout"
         uses: actions/checkout@v4
 
-      - name: "Fetch cacert.pem from curl.haxx.se"
+      - name: "Fetch cacert.pem from curl.se"
         run: curl -o ./tests/cacert.pem https://curl.se/ca/cacert.pem
 
       - name: "Install PHP with extensions"

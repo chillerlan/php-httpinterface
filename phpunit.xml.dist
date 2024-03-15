@@ -8,6 +8,7 @@
 	<testsuites>
 		<testsuite name="php-httpinterface test suite">
 			<directory>tests</directory>
+			<exclude>tests/ClientFactories</exclude>
 		</testsuite>
 	</testsuites>
 	<source>
@@ -32,9 +33,7 @@
 	<php>
 		<const name="REQUEST_FACTORY" value="chillerlan\HTTP\Psr7\HTTPFactory"/>
 		<const name="RESPONSE_FACTORY" value="chillerlan\HTTP\Psr7\HTTPFactory"/>
-		<const name="SERVER_REQUEST_FACTORY" value="chillerlan\HTTP\Psr7\HTTPFactory"/>
 		<const name="STREAM_FACTORY" value="chillerlan\HTTP\Psr7\HTTPFactory"/>
-		<const name="UPLOADED_FILE_FACTORY" value="chillerlan\HTTP\Psr7\HTTPFactory"/>
 		<const name="URI_FACTORY" value="chillerlan\HTTP\Psr7\HTTPFactory"/>
 	</php>
 </phpunit>
