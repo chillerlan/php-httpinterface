@@ -14,6 +14,7 @@ namespace chillerlan\HTTPTest;
 
 use chillerlan\HTTP\{CurlMultiClient, HTTPOptions, MultiResponseHandlerInterface};
 use chillerlan\HTTP\Utils\QueryUtil;
+use chillerlan\PHPUnitHttp\HttpFactoryTrait;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientExceptionInterface;
@@ -25,11 +26,11 @@ use function array_column, implode, in_array, ksort;
  *
  */
 #[Group('slow')]
-class CurlMultiClientTest extends TestCase{
-	use FactoryTrait;
+final class CurlMultiClientTest extends TestCase{
+	use HttpFactoryTrait;
 
-	protected CurlMultiClient               $http;
-	protected MultiResponseHandlerInterface $multiResponseHandler;
+	private CurlMultiClient               $http;
+	private MultiResponseHandlerInterface $multiResponseHandler;
 
 	protected function setUp():void{
 		$this->initFactories();
@@ -45,32 +46,11 @@ class CurlMultiClientTest extends TestCase{
 		$this->http = new CurlMultiClient($this->multiResponseHandler, $this->responseFactory, $options);
 	}
 
-	protected function getRequests():array{
-
-		$ids = [
-			[1, 2, 6, 11, 15, 23, 24, 56, 57, 58, 59, 60, 61, 62, 63, 64, 68, 69, 70, 71, 72, 73, 74, 75, 76],
-			[77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101],
-		];
-
-		$requests = [];
-
-		foreach($ids as $chunk){
-			foreach(['de', 'en', 'es', 'fr', 'zh'] as $lang){
-				$requests[] = $this->requestFactory->createRequest(
-					'GET',
-					'https://api.guildwars2.com/v2/items?'.QueryUtil::build(['lang' => $lang, 'ids' => implode(',', $chunk)])
-				);
-			}
-		}
-
-		return $requests;
-	}
-
-	protected function getTestResponseHandler():MultiResponseHandlerInterface{
+	private function getTestResponseHandler():MultiResponseHandlerInterface{
 
 		return new class () implements MultiResponseHandlerInterface{
 
-			protected array $responses = [];
+			private array $responses = [];
 
 			public function handleResponse(
 				ResponseInterface $response,
@@ -100,9 +80,27 @@ class CurlMultiClientTest extends TestCase{
 
 	}
 
-	/**
-	 * @todo
-	 */
+	private function getRequests():array{
+
+		$ids = [
+			[1, 2, 6, 11, 15, 23, 24, 56, 57, 58, 59, 60, 61, 62, 63, 64, 68, 69, 70, 71, 72, 73, 74, 75, 76],
+			[77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101],
+		];
+
+		$requests = [];
+
+		foreach($ids as $chunk){
+			foreach(['de', 'en', 'es', 'fr', 'zh'] as $lang){
+				$requests[] = $this->requestFactory->createRequest(
+					'GET',
+					'https://api.guildwars2.com/v2/items?'.QueryUtil::build(['lang' => $lang, 'ids' => implode(',', $chunk)])
+				);
+			}
+		}
+
+		return $requests;
+	}
+
 	public function testMultiRequest():void{
 		$requests = $this->getRequests();
 

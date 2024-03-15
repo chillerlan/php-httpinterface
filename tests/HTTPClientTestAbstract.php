@@ -12,42 +12,36 @@ declare(strict_types=1);
 
 namespace chillerlan\HTTPTest;
 
-use chillerlan\HTTP\HTTPOptions;
 use chillerlan\HTTP\Utils\MessageUtil;
-use chillerlan\Settings\SettingsContainerInterface;
+use chillerlan\PHPUnitHttp\HttpFactoryTrait;
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Client\{ClientExceptionInterface, ClientInterface};
-use Exception;
+use Psr\Http\Client\{ClientExceptionInterface};
+use Exception, Throwable;
+use function realpath;
 
 /**
  *
  */
 abstract class HTTPClientTestAbstract extends TestCase{
-	use FactoryTrait;
+	use HttpFactoryTrait;
 
-	protected const USER_AGENT = 'chillerlanHttpTest/2.0';
-
-	protected HTTPOptions|SettingsContainerInterface $options;
-	protected ClientInterface $http;
+	public const USER_AGENT = 'chillerlanHttpTest/2.0';
 
 	protected function setUp():void{
-		$this->initFactories();
-
-		$this->options = new HTTPOptions([
-			'ca_info'    => __DIR__.'/cacert.pem',
-			'user_agent' => $this::USER_AGENT,
-		]);
-
-		$this->http = $this->initClient();
+		// the factories are declared in phpunit.xml, the http clients in their respective tests
+		try{
+			$this->initFactories(realpath(__DIR__.'/cacert.pem'));
+		}
+		catch(Throwable $e){
+			$this->markTestSkipped('unable to init http factories: '.$e->getMessage());
+		}
 	}
-
-	abstract protected function initClient():ClientInterface;
 
 	public function testSendRequest():void{
 
 		try{
 			$url      = 'https://httpbin.org/get';
-			$response = $this->http->sendRequest($this->requestFactory->createRequest('GET', $url));
+			$response = $this->httpClient->sendRequest($this->requestFactory->createRequest('GET', $url));
 			$json     = MessageUtil::decodeJSON($response);
 
 			$this::assertSame($url, $json->url);
@@ -63,7 +57,7 @@ abstract class HTTPClientTestAbstract extends TestCase{
 	public function testNetworkError():void{
 		$this->expectException(ClientExceptionInterface::class);
 
-		$this->http->sendRequest($this->requestFactory->createRequest('GET', 'https://foo'));
+		$this->httpClient->sendRequest($this->requestFactory->createRequest('GET', 'https://foo'));
 	}
 
 }

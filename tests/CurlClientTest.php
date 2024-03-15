@@ -12,24 +12,22 @@ declare(strict_types=1);
 
 namespace chillerlan\HTTPTest;
 
-use chillerlan\HTTP\{CurlClient, RequestException};
+use chillerlan\HTTP\RequestException;
+use chillerlan\HTTPTest\ClientFactories\CurlClientFactory;
 use PHPUnit\Framework\Attributes\Group;
-use Psr\Http\Client\ClientInterface;
 
 /**
  *
  */
 #[Group('slow')]
-class CurlClientTest extends HTTPClientTestAbstract{
+final class CurlClientTest extends HTTPClientTestAbstract{
 
-	protected function initClient():ClientInterface{
-		return new CurlClient($this->responseFactory, $this->options);
-	}
+	protected string $HTTP_CLIENT_FACTORY = CurlClientFactory::class;
 
 	public function testRequestError():void{
 		$this->expectException(RequestException::class);
 
-		$this->http->sendRequest($this->requestFactory->createRequest('GET', ''));
+		$this->httpClient->sendRequest($this->requestFactory->createRequest('GET', ''));
 	}
 
 }

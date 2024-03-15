@@ -12,12 +12,13 @@ declare(strict_types=1);
 
 namespace chillerlan\HTTPTest;
 
-use chillerlan\HTTP\{CurlClient, CurlHandle, HTTPOptions};
+use chillerlan\HTTP\{CurlHandle, HTTPOptions};
 use chillerlan\HTTP\Utils\MessageUtil;
-use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Group;
+use chillerlan\HTTPTest\ClientFactories\CurlClientFactory;
+use chillerlan\PHPUnitHttp\HttpFactoryTrait;
+use PHPUnit\Framework\Attributes\{DataProvider, Group};
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Client\{ClientExceptionInterface, ClientInterface};
+use Psr\Http\Client\ClientExceptionInterface;
 use Exception, Throwable;
 use function str_repeat, strlen, strtolower, realpath;
 use const CURLOPT_CAINFO, CURLOPT_CAPATH, CURLOPT_SSL_VERIFYHOST, CURLOPT_SSL_VERIFYPEER;
@@ -27,19 +28,17 @@ use const CURLOPT_CAINFO, CURLOPT_CAPATH, CURLOPT_SSL_VERIFYHOST, CURLOPT_SSL_VE
  */
 #[Group('slow')]
 class CurlHandleTest extends TestCase{
-	use FactoryTrait;
+	use HttpFactoryTrait;
 
-	protected ClientInterface $http;
+	protected string $HTTP_CLIENT_FACTORY = CurlClientFactory::class;
 
-	// called from FactoryTrait
 	protected function setUp():void{
-		$this->initFactories();
-
-		$options = new HTTPOptions([
-			'ca_info' => __DIR__.'/cacert.pem',
-		]);
-
-		$this->http = new CurlClient($this->responseFactory, $options);
+		try{
+			$this->initFactories(realpath(__DIR__.'/cacert.pem'));
+		}
+		catch(Throwable $e){
+			$this->markTestSkipped('unable to init http factories: '.$e->getMessage());
+		}
 	}
 
 	protected function createHandle(HTTPOptions $options, string $method = 'GET'):CurlHandle{
@@ -95,14 +94,13 @@ class CurlHandleTest extends TestCase{
 	}
 
 	public static function requestMethodProvider():array{
+		// head and options are not supported by httpbin
 		return [
-			'delete'  => ['DELETE'],
-			'get'     => ['GET'],
-#			'head'    => ['HEAD'],
-#			'options' => ['OPTIONS'],
-			'patch'   => ['PATCH'],
-			'post'    => ['POST'],
-			'put'     => ['PUT'],
+			'delete' => ['DELETE'],
+			'get'    => ['GET'],
+			'patch'  => ['PATCH'],
+			'post'   => ['POST'],
+			'put'    => ['PUT'],
 		];
 	}
 
@@ -112,7 +110,7 @@ class CurlHandleTest extends TestCase{
 		$request  = $this->requestFactory->createRequest($method, $url);
 
 		try{
-			$response = $this->http->sendRequest($request);
+			$response = $this->httpClient->sendRequest($request);
 			$status   = $response->getStatusCode();
 
 			if($status !== 200){
@@ -149,7 +147,7 @@ class CurlHandleTest extends TestCase{
 		;
 
 		try{
-			$response = $this->http->sendRequest($request);
+			$response = $this->httpClient->sendRequest($request);
 			$status   = $response->getStatusCode();
 
 			if($status !== 200){
@@ -178,7 +176,7 @@ class CurlHandleTest extends TestCase{
 		;
 
 		try{
-			$response = $this->http->sendRequest($request);
+			$response = $this->httpClient->sendRequest($request);
 			$status   = $response->getStatusCode();
 
 			if($status !== 200){
@@ -207,7 +205,7 @@ class CurlHandleTest extends TestCase{
 		;
 
 		try{
-			$response = $this->http->sendRequest($request);
+			$response = $this->httpClient->sendRequest($request);
 			$status   = $response->getStatusCode();
 
 			if($status !== 200){

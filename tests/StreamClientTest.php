@@ -12,18 +12,15 @@ declare(strict_types=1);
 
 namespace chillerlan\HTTPTest;
 
-use chillerlan\HTTP\StreamClient;
+use chillerlan\HTTPTest\ClientFactories\StreamClientFactory;
 use PHPUnit\Framework\Attributes\Group;
-use Psr\Http\Client\ClientInterface;
 
 /**
  *
  */
 #[Group('slow')]
-class StreamClientTest extends HTTPClientTestAbstract{
+final class StreamClientTest extends HTTPClientTestAbstract{
 
-	protected function initClient():ClientInterface{
-		return new StreamClient($this->responseFactory, $this->options);
-	}
+	protected string $HTTP_CLIENT_FACTORY = StreamClientFactory::class;
 
 }
