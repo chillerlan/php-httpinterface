@@ -21,31 +21,35 @@ use const CURLE_OK;
  */
 class CurlClient extends HTTPClientAbstract{
 
-	protected CurlHandle $handle;
-
 	/**
 	 * @inheritDoc
 	 */
 	public function sendRequest(RequestInterface $request):ResponseInterface{
-		$stream       = $this->streamFactory?->createStream();
-		$this->handle = new CurlHandle($request, $this->responseFactory->createResponse(), $this->options, $stream);
-		$errno        = $this->handle->exec();
+
+		$handle = new CurlHandle(
+			$request,
+			$this->responseFactory->createResponse(),
+			$this->options,
+			$this->streamFactory?->createStream(),
+		);
+
+		$errno = $handle->exec();
 
 		if($errno !== CURLE_OK){
-			$error = $this->handle->getError();
+			$error = $handle->getError();
 
 			$this->logger->error(sprintf('cURL error #%s: %s', $errno, $error));
 
-			if(in_array($errno, $this->handle::CURL_NETWORK_ERRORS, true)){
+			if(in_array($errno, $handle::CURL_NETWORK_ERRORS, true)){
 				throw new NetworkException($error, $request);
 			}
 
 			throw new RequestException($error, $request);
 		}
 
-		$this->handle->close();
+		$handle->close();
 
-		return $this->handle->getResponse();
+		return $handle->getResponse();
 	}
 
 }

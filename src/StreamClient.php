@@ -14,33 +14,51 @@ namespace chillerlan\HTTP;
 
 use chillerlan\HTTP\Utils\HeaderUtil;
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
-use function explode, file_get_contents, get_headers, in_array, intval, restore_error_handler,
-	set_error_handler, stream_context_create, strtolower, str_starts_with, trim;
+use Exception, Throwable;
+use function explode, file_get_contents, get_headers, in_array, intval, is_file, restore_error_handler,
+	set_error_handler, sprintf, stream_context_create, strtolower, str_starts_with, trim;
 
 /**
+ * A http client via PHP streams
  *
+ * (I'm not exactly sure why I'm keeping this - use CurlClient in production)
+ *
+ * @see \file_get_contents()
+ * @see \stream_context_create()
  */
 class StreamClient extends HTTPClientAbstract{
 
 	/**
 	 * @inheritDoc
+	 * @throws \Exception|\chillerlan\HTTP\ClientException
 	 */
 	public function sendRequest(RequestInterface $request):ResponseInterface{
 
 		$errorHandler = function(int $errno, string $errstr):bool{
-			$this->logger->error('StreamClient error #'.$errno.': '.$errstr);
+			$this->logger->error(sprintf('StreamClient error #%s: %s', $errno, $errstr));
 
-			throw new ClientException($errstr, $errno);
+			throw new Exception($errstr, $errno);
 		};
 
 		set_error_handler($errorHandler);
 
-		$context      = stream_context_create($this->getContextOptions($request));
-		$requestUri   = (string)$request->getUri()->withFragment('');
-		$responseBody = file_get_contents($requestUri, false, $context);
-		$response     = $this->createResponse(get_headers($requestUri, true, $context));
+		$exception = null;
+
+		try{
+			$context      = stream_context_create($this->getContextOptions($request));
+			$requestUri   = (string)$request->getUri()->withFragment('');
+			$responseBody = file_get_contents($requestUri, false, $context);
+			$response     = $this->createResponse(get_headers($requestUri, true, $context));
+		}
+		catch(Throwable $e){
+			$exception = $e;
+		}
 
 		restore_error_handler();
+
+		if($exception !== null){
+			throw new ClientException($exception->getMessage());
+		}
 
 		$body = $this->streamFactory !== null
 			? $this->streamFactory->createStream()
@@ -58,9 +76,11 @@ class StreamClient extends HTTPClientAbstract{
 	 */
 	protected function getContextOptions(RequestInterface $request):array{
 		$method = $request->getMethod();
-		$body   = in_array($method, ['DELETE', 'PATCH', 'POST', 'PUT'], true)
-			? $request->getBody()->getContents()
-			: null;
+		$body   = null;
+
+		if(in_array($method, ['DELETE', 'PATCH', 'POST', 'PUT'], true)){
+			$body = $request->getBody()->getContents();
+		}
 
 		$options = [
 			'http' => [
@@ -81,8 +101,10 @@ class StreamClient extends HTTPClientAbstract{
 			],
 		];
 
-		$ca                  = ($this->options->ca_info_is_path) ? 'capath' : 'cafile';
-		$options['ssl'][$ca] = $this->options->ca_info;
+		if($this->options->ca_info){
+			$ca                  = (is_file($this->options->ca_info)) ? 'capath' : 'cafile';
+			$options['ssl'][$ca] = $this->options->ca_info;
+		}
 
 		return $options;
 	}
