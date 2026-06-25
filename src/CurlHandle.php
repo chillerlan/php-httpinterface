@@ -32,7 +32,8 @@ use const CURLOPT_DOH_URL;
  */
 final class CurlHandle{
 
-	public const CURL_NETWORK_ERRORS = [
+	/** @var int[] */
+	public const array CURL_NETWORK_ERRORS = [
 		CURLE_COULDNT_RESOLVE_PROXY,
 		CURLE_COULDNT_RESOLVE_HOST,
 		CURLE_COULDNT_CONNECT,
@@ -42,7 +43,8 @@ final class CurlHandle{
 	];
 
 	// these options shall not be overwritten
-	private const NEVER_OVERWRITE = [
+	/** @var int[] */
+	public const array NEVER_OVERWRITE = [
 		CURLOPT_CAINFO,
 		CURLOPT_CAPATH,
 		CURLOPT_DOH_URL,

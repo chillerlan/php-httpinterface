@@ -25,7 +25,7 @@ use function realpath;
 abstract class HTTPClientTestAbstract extends TestCase{
 	use HttpFactoryTrait;
 
-	public const USER_AGENT = 'chillerlanHttpTest/2.0';
+	public const string USER_AGENT = 'chillerlanHttpTest/2.0';
 
 	protected function setUp():void{
 		// the factories are declared in phpunit.xml, the http clients in their respective tests
