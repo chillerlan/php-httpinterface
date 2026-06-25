@@ -374,6 +374,11 @@ final class CurlHandle{
 			CURLOPT_DOH_SSL_VERIFYSTATUS => (int)($this->options->ssl_doh_verifypeer && $this->options->curl_check_doh_OCSP),
 		];
 
+		// avoid mismatching user agent headers
+		if($this->request->hasHeader('User-Agent')){
+			$this->curlOptions[CURLOPT_USERAGENT] = $this->request->getHeader('User-Agent');
+		}
+
 		$this->setCA();
 		$this->setRequestOptions();
 
