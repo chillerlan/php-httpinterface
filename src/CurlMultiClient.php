@@ -16,7 +16,7 @@ use chillerlan\Settings\SettingsContainerInterface;
 use Psr\Http\Message\{RequestInterface, ResponseFactoryInterface};
 use Psr\Log\{LoggerInterface, NullLogger};
 use CurlMultiHandle as CMH;
-use function array_shift, count, curl_close, curl_multi_add_handle, curl_multi_close, curl_multi_exec,
+use function array_shift, count, curl_multi_add_handle, curl_multi_close, curl_multi_exec,
 	curl_multi_info_read, curl_multi_init, curl_multi_remove_handle, curl_multi_select, curl_multi_setopt, sprintf, usleep;
 use const CURLM_OK, CURLMOPT_MAXCONNECTS, CURLMOPT_PIPELINING, CURLPIPE_MULTIPLEX;
 
@@ -159,7 +159,7 @@ class CurlMultiClient{
 				$this->resolve((int)$state['handle']);
 
 				curl_multi_remove_handle($this->curl_multi, $state['handle']);
-				curl_close($state['handle']);
+				$state['handle'] = null;
 			}
 
 		}

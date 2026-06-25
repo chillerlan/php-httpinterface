@@ -16,7 +16,7 @@ use chillerlan\HTTP\Utils\HeaderUtil;
 use chillerlan\Settings\SettingsContainerInterface;
 use Psr\Http\Message\{RequestInterface, ResponseInterface, StreamInterface};
 use CurlHandle as CH;
-use function count, curl_close, curl_errno, curl_error, curl_exec, curl_getinfo, curl_init, curl_setopt_array, explode,
+use function count, curl_errno, curl_error, curl_exec, curl_getinfo, curl_init, curl_setopt_array, explode,
 	file_exists, in_array, ini_get, is_dir, is_file, is_link, readlink, realpath, sprintf, strlen, strtoupper, substr, trim;
 use const CURL_HTTP_VERSION_2TLS, CURLE_COULDNT_CONNECT, CURLE_COULDNT_RESOLVE_HOST, CURLE_COULDNT_RESOLVE_PROXY,
 	CURLE_GOT_NOTHING, CURLE_OPERATION_TIMEOUTED, CURLE_SSL_CONNECT_ERROR, CURLOPT_CAINFO, CURLOPT_CAPATH,
@@ -53,7 +53,7 @@ final class CurlHandle{
 		CURLOPT_FRESH_CONNECT,
 	];
 
-	private CH              $curl;
+	private CH|null         $curl;
 	private int             $handleID;
 	private array           $curlOptions = [];
 	private bool            $initialized = false;
@@ -86,7 +86,7 @@ final class CurlHandle{
 	 * closes the handle
 	 */
 	public function close():self{
-		curl_close($this->curl);
+		$this->curl = null;
 
 		return $this;
 	}
