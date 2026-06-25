@@ -57,24 +57,25 @@ final class CurlHandle{
 		CURLOPT_USERAGENT,
 	];
 
-	private CH|null         $curl;
-	private int             $handleID;
 	private array           $curlOptions = [];
 	private bool            $initialized = false;
 	private StreamInterface $requestBody;
 	private StreamInterface $responseBody;
 
+	private(set) CH|null    $curl;
+	private(set) int        $id;
+
 	/**
 	 * CurlHandle constructor.
 	 */
 	public function __construct(
-		private RequestInterface                       $request,
+		private(set) RequestInterface                  $request,
 		private ResponseInterface                      $response,
 		private HTTPOptions|SettingsContainerInterface $options,
 		StreamInterface|null                           $stream = null,
 	){
 		$this->curl         = curl_init();
-		$this->handleID     = (int)$this->curl;
+		$this->id           = (int)$this->curl;
 		$this->requestBody  = $this->request->getBody();
 		$this->responseBody = ($stream ?? $this->response->getBody());
 	}
@@ -96,24 +97,6 @@ final class CurlHandle{
 	}
 
 	/**
-	 * returns the internal cURL resource in its current state
-	 *
-	 * @codeCoverageIgnore
-	 */
-	public function getCurlResource():CH{
-		return $this->curl;
-	}
-
-	/**
-	 * returns the handle ID (cURL resource id)
-	 *
-	 * @codeCoverageIgnore
-	 */
-	public function getHandleID():int{
-		return $this->handleID;
-	}
-
-	/**
 	 * returns the result from `curl_getinfo()` or `null` in case of an error
 	 *
 	 * @see \curl_getinfo()
@@ -130,13 +113,6 @@ final class CurlHandle{
 		}
 
 		return null;
-	}
-
-	/**
-	 * @codeCoverageIgnore
-	 */
-	public function getRequest():RequestInterface{
-		return $this->request;
 	}
 
 	/**

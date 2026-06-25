@@ -181,7 +181,7 @@ class CurlMultiClient{
 
 		$result = $this->multiResponseHandler->handleResponse(
 			$handle->getResponse(),
-			$handle->getRequest(),
+			$handle->request,
 			$counter,
 			$handle->getInfo(),
 		);
@@ -225,7 +225,7 @@ class CurlMultiClient{
 			return;
 		}
 
-		$this->handles[$handle->getHandleID()] = [($counter ?? ++$this->counter) , ($retries ?? 0), $handle];
+		$this->handles[$handle->id] = [($counter ?? ++$this->counter), ($retries ?? 0), $handle];
 
 		if($this->options->sleep > 0){
 			usleep($this->options->sleep);
