@@ -6,10 +6,7 @@
  * @author       Smiley <smiley@chillerlan.net>
  * @copyright    2018 Smiley
  * @license      MIT
- *
- * @phan-file-suppress PhanTypeInvalidThrowsIsInterface
  */
-
 declare(strict_types=1);
 
 namespace chillerlan\HTTP;
@@ -17,9 +14,6 @@ namespace chillerlan\HTTP;
 use function parse_url, sprintf, strtolower, trim;
 use const CURLOPT_CAINFO, CURLOPT_CAPATH;
 
-/**
- *
- */
 trait HTTPOptionsTrait{
 
 	/**

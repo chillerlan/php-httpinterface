@@ -14,9 +14,6 @@ namespace chillerlan\HTTP;
 
 use chillerlan\Settings\SettingsContainerAbstract;
 
-/**
- *
- */
 class HTTPOptions extends SettingsContainerAbstract{
 	use HTTPOptionsTrait;
 }

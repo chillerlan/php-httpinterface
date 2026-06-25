@@ -7,7 +7,6 @@
  * @copyright    2018 smiley
  * @license      MIT
  */
-
 declare(strict_types=1);
 
 namespace chillerlan\HTTP;
@@ -15,9 +14,6 @@ namespace chillerlan\HTTP;
 use Exception;
 use Psr\Http\Client\ClientExceptionInterface;
 
-/**
- *
- */
 class ClientException extends Exception implements ClientExceptionInterface{
 
 }

@@ -7,7 +7,6 @@
  * @copyright    2023 smiley
  * @license      MIT
  */
-
 declare(strict_types=1);
 
 namespace chillerlan\HTTP;
@@ -16,9 +15,6 @@ use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\{ResponseFactoryInterface, StreamFactoryInterface};
 use Psr\Log\LoggerInterface;
 
-/**
- *
- */
 interface HTTPClientInterface extends ClientInterface{
 
 	/**

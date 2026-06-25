@@ -7,7 +7,6 @@
  * @copyright    2018 smiley
  * @license      MIT
  */
-
 declare(strict_types=1);
 
 namespace chillerlan\HTTP;
@@ -84,7 +83,6 @@ class CurlMultiClient{
 	}
 
 	/**
-	 * @inheritDoc
 	 * @codeCoverageIgnore
 	 */
 	public function setLogger(LoggerInterface $logger):static{

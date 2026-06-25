@@ -7,7 +7,6 @@
  * @copyright    2019 smiley
  * @license      MIT
  */
-
 declare(strict_types=1);
 
 namespace chillerlan\HTTP;
@@ -29,18 +28,11 @@ use function explode, file_get_contents, get_headers, in_array, intval, is_file,
 class StreamClient extends HTTPClientAbstract{
 
 	/**
-	 * @inheritDoc
 	 * @throws \Exception|\chillerlan\HTTP\ClientException
 	 */
 	public function sendRequest(RequestInterface $request):ResponseInterface{
 
-		$errorHandler = function(int $errno, string $errstr):bool{
-			$this->logger->error(sprintf('StreamClient error #%s: %s', $errno, $errstr));
-
-			throw new Exception($errstr, $errno);
-		};
-
-		set_error_handler($errorHandler);
+		set_error_handler($this->errorHandler(...));
 
 		$exception = null;
 
@@ -71,9 +63,6 @@ class StreamClient extends HTTPClientAbstract{
 		return $response->withBody($body);
 	}
 
-	/**
-	 *
-	 */
 	protected function getContextOptions(RequestInterface $request):array{
 		$method = $request->getMethod();
 		$body   = null;
@@ -109,9 +98,6 @@ class StreamClient extends HTTPClientAbstract{
 		return $options;
 	}
 
-	/**
-	 *
-	 */
 	protected function getRequestHeaders(RequestInterface $request):array{
 		$headers = [];
 
@@ -163,6 +149,15 @@ class StreamClient extends HTTPClientAbstract{
 		}
 
 		return $response;
+	}
+
+	/**
+	 * @throws \Exception
+	 */
+	protected function errorHandler(int $errno, string $errstr):bool{
+		$this->logger->error(sprintf('StreamClient error #%s: %s', $errno, $errstr));
+
+		throw new Exception($errstr, $errno);
 	}
 
 }

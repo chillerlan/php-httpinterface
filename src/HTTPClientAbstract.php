@@ -7,7 +7,6 @@
  * @copyright    2019 smiley
  * @license      MIT
  */
-
 declare(strict_types=1);
 
 namespace chillerlan\HTTP;
@@ -17,9 +16,6 @@ use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Log\{LoggerInterface, NullLogger};
 
-/**
- *
- */
 abstract class HTTPClientAbstract implements HTTPClientInterface{
 
 	protected StreamFactoryInterface|null $streamFactory = null;
@@ -32,11 +28,10 @@ abstract class HTTPClientAbstract implements HTTPClientInterface{
 		protected HTTPOptions|SettingsContainerInterface $options = new HTTPOptions,
 		protected LoggerInterface                        $logger = new NullLogger,
 	){
-
+		// noop
 	}
 
 	/**
-	 * @inheritDoc
 	 * @codeCoverageIgnore
 	 */
 	public function setLogger(LoggerInterface $logger):static{
@@ -46,7 +41,6 @@ abstract class HTTPClientAbstract implements HTTPClientInterface{
 	}
 
 	/**
-	 * @inheritDoc
 	 * @codeCoverageIgnore
 	 */
 	public function setResponseFactory(ResponseFactoryInterface $responseFactory):static{
@@ -56,7 +50,6 @@ abstract class HTTPClientAbstract implements HTTPClientInterface{
 	}
 
 	/**
-	 * @inheritDoc
 	 * @codeCoverageIgnore
 	 */
 	public function setStreamFactory(StreamFactoryInterface $streamFactory):static{

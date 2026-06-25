@@ -7,7 +7,6 @@
  * @copyright    2018 smiley
  * @license      MIT
  */
-
 declare(strict_types=1);
 
 namespace chillerlan\HTTP;
@@ -21,9 +20,6 @@ use Throwable;
  */
 class RequestException extends ClientException implements RequestExceptionInterface{
 
-	/**
-	 *
-	 */
 	public function __construct(
 		string                     $message,
 		protected RequestInterface $request,
@@ -32,9 +28,6 @@ class RequestException extends ClientException implements RequestExceptionInterf
 		parent::__construct($message, 0, $previous);
 	}
 
-	/**
-	 * @inheritDoc
-	 */
 	public function getRequest():RequestInterface{
 		return $this->request;
 	}

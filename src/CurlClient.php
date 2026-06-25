@@ -7,7 +7,6 @@
  * @copyright    2018 smiley
  * @license      MIT
  */
-
 declare(strict_types=1);
 
 namespace chillerlan\HTTP;
@@ -21,9 +20,6 @@ use const CURLE_OK;
  */
 class CurlClient extends HTTPClientAbstract{
 
-	/**
-	 * @inheritDoc
-	 */
 	public function sendRequest(RequestInterface $request):ResponseInterface{
 
 		$handle = new CurlHandle(
@@ -40,7 +36,7 @@ class CurlClient extends HTTPClientAbstract{
 
 			$this->logger->error(sprintf('cURL error #%s: %s', $errno, $error));
 
-			if(in_array($errno, $handle::CURL_NETWORK_ERRORS, true)){
+			if(in_array($errno, CurlHandle::CURL_NETWORK_ERRORS, true)){
 				throw new NetworkException($error, $request);
 			}
 
