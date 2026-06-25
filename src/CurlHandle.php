@@ -383,7 +383,10 @@ final class CurlHandle{
 		$this->setRequestOptions();
 
 		// curl-client does not support "Expect-Continue", so dropping "expect" headers
-		$headers = HeaderUtil::normalize($this->request->withoutHeader('Expect')->getHeaders());
+		$this->request = $this->request->withoutHeader('Expect');
+
+		// normalize headers
+		$headers = HeaderUtil::normalize($this->request->getHeaders());
 
 		foreach($headers as $name => $value){
 			// cURL requires a special format for empty headers.
