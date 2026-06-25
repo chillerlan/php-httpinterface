@@ -47,12 +47,20 @@ trait HTTPOptionsTrait{
 	protected string|null $ca_info = null;
 
 	/**
-	 * see CURLOPT_SSL_VERIFYPEER
 	 * requires either HTTPOptions::$ca_info or a properly working system CA file
 	 *
+	 * @see \CURLOPT_SSL_VERIFYPEER
 	 * @see https://php.net/manual/function.curl-setopt.php
 	 */
 	protected bool $ssl_verifypeer = true;
+
+	/**
+	 * requires either HTTPOptions::$ca_info or a properly working system CA file
+	 *
+	 * @see \CURLOPT_DOH_SSL_VERIFYPEER
+	 * @see https://php.net/manual/function.curl-setopt.php
+	 */
+	protected bool $ssl_doh_verifypeer = true;
 
 	/**
 	 * options for the curl multi instance
@@ -72,6 +80,13 @@ trait HTTPOptionsTrait{
 	 * @see \CURLOPT_SSL_VERIFYSTATUS
 	 */
 	protected bool $curl_check_OCSP = false;
+
+	/**
+	 * When set to true, cURL validates that the DoH server staples an OCSP response during the TLS handshake.
+	 *
+	 * @see \CURLOPT_DOH_SSL_VERIFYSTATUS
+	 */
+	protected bool $curl_check_doh_OCSP = false;
 
 	/**
 	 * maximum of concurrent requests for curl_multi

@@ -20,8 +20,8 @@ use PHPUnit\Framework\Attributes\{DataProvider, Group};
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientExceptionInterface;
 use Exception, Throwable;
-use function str_repeat, strlen, strtolower, realpath;
-use const CURLOPT_CAINFO, CURLOPT_CAPATH, CURLOPT_SSL_VERIFYHOST, CURLOPT_SSL_VERIFYPEER;
+use function file_get_contents, str_repeat, strlen, strtolower, realpath;
+use const CURLOPT_CAINFO, CURLOPT_CAINFO_BLOB, CURLOPT_CAPATH, CURLOPT_SSL_VERIFYHOST, CURLOPT_SSL_VERIFYPEER;
 
 /**
  *
@@ -70,14 +70,19 @@ class CurlHandleTest extends TestCase{
 	public static function caOptionProvider():array{
 		$caPath = __DIR__;
 		$caFile = realpath($caPath.'/cacert.pem');
+		$caBlob = file_get_contents($caFile);
 
 		return [
 			// via the ca_info option
 			'ca_file'               => ['ca_info', $caFile, $caFile, CURLOPT_CAINFO, CURLOPT_CAPATH],
 			'ca_path'               => ['ca_info', $caPath, $caPath, CURLOPT_CAPATH, CURLOPT_CAINFO],
+			'ca_blob'               => ['ca_info', $caBlob, $caBlob, CURLOPT_CAINFO_BLOB, CURLOPT_CAINFO],
 			// via curl_options
 			'ca_file, curl_options' => ['curl_options', [CURLOPT_CAINFO => $caFile], $caFile, CURLOPT_CAINFO, CURLOPT_CAPATH],
 			'ca_path, curl_options' => ['curl_options', [CURLOPT_CAPATH => $caPath], $caPath, CURLOPT_CAPATH, CURLOPT_CAINFO],
+			'ca_blob, curl_options' => [
+				'curl_options', [CURLOPT_CAINFO_BLOB => $caBlob], $caBlob, CURLOPT_CAINFO_BLOB, CURLOPT_CAINFO,
+			],
 		];
 	}
 

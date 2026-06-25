@@ -17,15 +17,16 @@ use chillerlan\Settings\SettingsContainerInterface;
 use Psr\Http\Message\{RequestInterface, ResponseInterface, StreamInterface};
 use CurlHandle as CH;
 use function count, curl_errno, curl_error, curl_exec, curl_getinfo, curl_init, curl_setopt_array, explode,
-	file_exists, in_array, ini_get, is_dir, is_file, is_link, readlink, realpath, sprintf, strlen, strtoupper, substr, trim;
+	file_exists, in_array, ini_get, is_dir, is_file, is_link, readlink, realpath, sprintf, str_contains,
+	strlen, strtoupper, substr, trim;
 use const CURL_HTTP_VERSION_2TLS, CURLE_COULDNT_CONNECT, CURLE_COULDNT_RESOLVE_HOST, CURLE_COULDNT_RESOLVE_PROXY,
 	CURLE_GOT_NOTHING, CURLE_OPERATION_TIMEOUTED, CURLE_SSL_CONNECT_ERROR, CURLOPT_CAINFO, CURLOPT_CAPATH,
-	CURLOPT_CONNECTTIMEOUT, CURLOPT_CUSTOMREQUEST, CURLOPT_FOLLOWLOCATION, CURLOPT_FORBID_REUSE, CURLOPT_FRESH_CONNECT,
+	CURLOPT_CONNECTTIMEOUT, CURLOPT_CUSTOMREQUEST, CURLOPT_DOH_SSL_VERIFYHOST, CURLOPT_DOH_SSL_VERIFYPEER,
+	CURLOPT_DOH_SSL_VERIFYSTATUS, CURLOPT_DOH_URL, CURLOPT_FOLLOWLOCATION, CURLOPT_FORBID_REUSE, CURLOPT_FRESH_CONNECT,
 	CURLOPT_HEADER, CURLOPT_HEADERFUNCTION, CURLOPT_HTTP_VERSION, CURLOPT_HTTPHEADER, CURLOPT_INFILESIZE, CURLOPT_MAXREDIRS,
-	CURLOPT_NOBODY, CURLOPT_POSTFIELDS, CURLOPT_PROTOCOLS, CURLOPT_READFUNCTION, CURLOPT_REDIR_PROTOCOLS, CURLOPT_RETURNTRANSFER,
-	CURLOPT_SSL_VERIFYHOST, CURLOPT_SSL_VERIFYPEER, CURLOPT_SSL_VERIFYSTATUS, CURLOPT_TIMEOUT, CURLOPT_UPLOAD, CURLOPT_URL,
-	CURLOPT_USERAGENT, CURLOPT_USERPWD, CURLOPT_WRITEFUNCTION, CURLPROTO_HTTP, CURLPROTO_HTTPS;
-use const CURLOPT_DOH_URL;
+	CURLOPT_NOBODY, CURLOPT_POSTFIELDS, CURLOPT_PROTOCOLS, CURLOPT_READFUNCTION, CURLOPT_REDIR_PROTOCOLS,
+	CURLOPT_RETURNTRANSFER, CURLOPT_SSL_VERIFYHOST, CURLOPT_SSL_VERIFYPEER, CURLOPT_SSL_VERIFYSTATUS, CURLOPT_TIMEOUT,
+	CURLOPT_UPLOAD, CURLOPT_URL, CURLOPT_USERAGENT, CURLOPT_USERPWD, CURLOPT_WRITEFUNCTION, CURLPROTO_HTTP, CURLPROTO_HTTPS;
 
 /**
  * Implements a cURL connection object
@@ -47,12 +48,13 @@ final class CurlHandle{
 	public const array NEVER_OVERWRITE = [
 		CURLOPT_CAINFO,
 		CURLOPT_CAPATH,
-		CURLOPT_DOH_URL,
 		CURLOPT_CUSTOMREQUEST,
-		CURLOPT_HTTPHEADER,
-		CURLOPT_NOBODY,
+		CURLOPT_DOH_URL,
 		CURLOPT_FORBID_REUSE,
 		CURLOPT_FRESH_CONNECT,
+		CURLOPT_HTTPHEADER,
+		CURLOPT_NOBODY,
+		CURLOPT_USERAGENT,
 	];
 
 	private CH|null         $curl;
@@ -226,6 +228,13 @@ final class CurlHandle{
 
 		$ca = $this->options->ca_info;
 
+		// we're checking if the given CA is a blob first
+		if(str_contains(($ca ?? ''), 'BEGIN CERTIFICATE')){
+			$this->curlOptions[CURLOPT_CAINFO_BLOB] = $ca;
+
+			return;
+		}
+
 		if($ca === null){
 
 			// check php.ini options - PHP should find the file by itself
@@ -340,29 +349,29 @@ final class CurlHandle{
 	public function init():CH|null{
 
 		$this->curlOptions = [
-			CURLOPT_HEADER           => false,
-			CURLOPT_HTTPHEADER       => [],
-			CURLOPT_RETURNTRANSFER   => false,
-			CURLOPT_FOLLOWLOCATION   => false,
-			CURLOPT_MAXREDIRS        => 5,
-			CURLOPT_URL              => (string)$this->request->getUri()->withFragment(''),
-			CURLOPT_HTTP_VERSION     => CURL_HTTP_VERSION_2TLS,
-			CURLOPT_USERAGENT        => $this->options->user_agent,
-			CURLOPT_PROTOCOLS        => (CURLPROTO_HTTP | CURLPROTO_HTTPS),
-			CURLOPT_REDIR_PROTOCOLS  => (CURLPROTO_HTTP | CURLPROTO_HTTPS),
-			CURLOPT_TIMEOUT          => $this->options->timeout,
-			CURLOPT_CONNECTTIMEOUT   => 30,
-			CURLOPT_FORBID_REUSE     => true,
-			CURLOPT_FRESH_CONNECT    => true,
-			CURLOPT_HEADERFUNCTION   => $this->headerFunction(...),
-			CURLOPT_WRITEFUNCTION    => $this->writeFunction(...),
-			CURLOPT_SSL_VERIFYHOST   => 2,
-			CURLOPT_SSL_VERIFYPEER   => $this->options->ssl_verifypeer,
-			CURLOPT_SSL_VERIFYSTATUS => ($this->options->ssl_verifypeer && $this->options->curl_check_OCSP),
-			CURLOPT_DOH_URL          => $this->options->dns_over_https,
-
-			// PHP 8.2+
-#			CURLOPT_DOH_SSL_VERIFYHOST, CURLOPT_DOH_SSL_VERIFYPEER, CURLOPT_DOH_SSL_VERIFYSTATUS, CURLOPT_CAINFO_BLOB
+			CURLOPT_HEADER               => false,
+			CURLOPT_HTTPHEADER           => [],
+			CURLOPT_RETURNTRANSFER       => false,
+			CURLOPT_FOLLOWLOCATION       => false,
+			CURLOPT_MAXREDIRS            => 5,
+			CURLOPT_URL                  => (string)$this->request->getUri()->withFragment(''),
+			CURLOPT_HTTP_VERSION         => CURL_HTTP_VERSION_2TLS,
+			CURLOPT_USERAGENT            => $this->options->user_agent,
+			CURLOPT_PROTOCOLS            => (CURLPROTO_HTTP | CURLPROTO_HTTPS),
+			CURLOPT_REDIR_PROTOCOLS      => (CURLPROTO_HTTP | CURLPROTO_HTTPS),
+			CURLOPT_TIMEOUT              => $this->options->timeout,
+			CURLOPT_CONNECTTIMEOUT       => 30,
+			CURLOPT_FORBID_REUSE         => true,
+			CURLOPT_FRESH_CONNECT        => true,
+			CURLOPT_HEADERFUNCTION       => $this->headerFunction(...),
+			CURLOPT_WRITEFUNCTION        => $this->writeFunction(...),
+			CURLOPT_SSL_VERIFYHOST       => 2,
+			CURLOPT_SSL_VERIFYPEER       => $this->options->ssl_verifypeer,
+			CURLOPT_SSL_VERIFYSTATUS     => ($this->options->ssl_verifypeer && $this->options->curl_check_OCSP),
+			CURLOPT_DOH_URL              => $this->options->dns_over_https,
+			CURLOPT_DOH_SSL_VERIFYHOST   => 2,
+			CURLOPT_DOH_SSL_VERIFYPEER   => (int)$this->options->ssl_doh_verifypeer, // this value is int for some reason
+			CURLOPT_DOH_SSL_VERIFYSTATUS => (int)($this->options->ssl_doh_verifypeer && $this->options->curl_check_doh_OCSP),
 		];
 
 		$this->setCA();
