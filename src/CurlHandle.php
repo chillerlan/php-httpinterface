@@ -57,13 +57,14 @@ final class CurlHandle{
 		CURLOPT_USERAGENT,
 	];
 
+	public readonly int     $id;
+
 	private array           $curlOptions = [];
 	private bool            $initialized = false;
 	private StreamInterface $requestBody;
 	private StreamInterface $responseBody;
 
 	private(set) CH|null    $curl;
-	private(set) int        $id;
 
 	/**
 	 * CurlHandle constructor.
