@@ -7,7 +7,6 @@
  * @copyright    2019 smiley
  * @license      MIT
  */
-
 declare(strict_types=1);
 
 namespace chillerlan\HTTPTest;
@@ -22,9 +21,6 @@ use Psr\Http\Message\{RequestInterface, ResponseInterface};
 use Throwable;
 use function array_column, implode, in_array, ksort;
 
-/**
- *
- */
 #[Group('slow')]
 final class CurlMultiClientTest extends TestCase{
 	use HttpFactoryTrait;
@@ -93,7 +89,7 @@ final class CurlMultiClientTest extends TestCase{
 			foreach(['de', 'en', 'es', 'fr', 'zh'] as $lang){
 				$requests[] = $this->requestFactory->createRequest(
 					'GET',
-					'https://api.guildwars2.com/v2/items?'.QueryUtil::build(['lang' => $lang, 'ids' => implode(',', $chunk)])
+					QueryUtil::merge('https://api.guildwars2.com/v2/items', ['lang' => $lang, 'ids' => implode(',', $chunk)])
 				);
 			}
 		}

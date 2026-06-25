@@ -7,7 +7,6 @@
  * @copyright    2019 smiley
  * @license      MIT
  */
-
 declare(strict_types=1);
 
 namespace chillerlan\HTTPTest;
@@ -23,9 +22,6 @@ use Exception, Throwable;
 use function file_get_contents, str_repeat, strlen, strtolower, realpath;
 use const CURLOPT_CAINFO, CURLOPT_CAINFO_BLOB, CURLOPT_CAPATH, CURLOPT_SSL_VERIFYHOST, CURLOPT_SSL_VERIFYPEER;
 
-/**
- *
- */
 #[Group('slow')]
 class CurlHandleTest extends TestCase{
 	use HttpFactoryTrait;

@@ -7,7 +7,6 @@
  * @copyright    2018 smiley
  * @license      MIT
  */
-
 declare(strict_types=1);
 
 namespace chillerlan\HTTPTest;
@@ -19,9 +18,6 @@ use Psr\Http\Client\{ClientExceptionInterface};
 use Exception, Throwable;
 use function realpath;
 
-/**
- *
- */
 abstract class HTTPClientTestAbstract extends TestCase{
 	use HttpFactoryTrait;
 

@@ -7,7 +7,6 @@
  * @copyright    2018 smiley
  * @license      MIT
  */
-
 declare(strict_types=1);
 
 namespace chillerlan\HTTPTest;
@@ -16,9 +15,6 @@ use chillerlan\HTTP\RequestException;
 use chillerlan\HTTPTest\ClientFactories\CurlClientFactory;
 use PHPUnit\Framework\Attributes\Group;
 
-/**
- *
- */
 #[Group('slow')]
 final class CurlClientTest extends HTTPClientTestAbstract{
 

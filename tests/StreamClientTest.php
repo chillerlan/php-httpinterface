@@ -7,7 +7,6 @@
  * @copyright    2019 smiley
  * @license      MIT
  */
-
 declare(strict_types=1);
 
 namespace chillerlan\HTTPTest;
@@ -15,9 +14,6 @@ namespace chillerlan\HTTPTest;
 use chillerlan\HTTPTest\ClientFactories\StreamClientFactory;
 use PHPUnit\Framework\Attributes\Group;
 
-/**
- *
- */
 #[Group('slow')]
 final class StreamClientTest extends HTTPClientTestAbstract{
 
