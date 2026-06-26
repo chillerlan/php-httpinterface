@@ -6,7 +6,10 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="../">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png"/>
     <link rel="icon" href="images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png"/>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/base.css">
             <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -54,7 +57,7 @@
     Menu
 </label>
 <aside class="phpdocumentor-column -three phpdocumentor-sidebar">
-                    <section class="phpdocumentor-sidebar__category">
+                    <section class="phpdocumentor-sidebar__category -namespaces">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="namespaces/chillerlan.html" class="">chillerlan</a>
@@ -71,7 +74,7 @@
             </ul>
 
                         </section>
-                <section class="phpdocumentor-sidebar__category">
+                <section class="phpdocumentor-sidebar__category -packages">
             <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/Application.html" class="">Application</a>
@@ -79,14 +82,14 @@
 
                         </section>
             
-    <section class="phpdocumentor-sidebar__category">
+    <section class="phpdocumentor-sidebar__category -reports">
         <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
                 <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
     </section>
 
-    <section class="phpdocumentor-sidebar__category">
+    <section class="phpdocumentor-sidebar__category -indices">
         <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="indices/files.html">Files</a></h3>
     </section>
@@ -134,7 +137,8 @@
 
 
 
-
+    
+    
 <h3 id="toc">
     Table of Contents
     <a href="classes/chillerlan-HTTP-CurlHandle.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
@@ -154,15 +158,15 @@
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a href="classes/chillerlan-HTTP-CurlHandle.html#constant_CURL_NETWORK_ERRORS">CURL_NETWORK_ERRORS</a>
+    <a class="" href="classes/chillerlan-HTTP-CurlHandle.html#constant_CURL_NETWORK_ERRORS">CURL_NETWORK_ERRORS</a>
     <span>
-        &nbsp;= [\CURLE_COULDNT_RESOLVE_PROXY, \CURLE_COULDNT_RESOLVE_HOST, \CURLE_COULDNT_CONNECT, \CURLE_OPERATION_TIMEOUTED, \CURLE_SSL_CONNECT_ERROR, \CURLE_GOT_NOTHING]                            </span>
+        &nbsp;: array&lt;string|int, mixed&gt;&nbsp;= [\CURLE_COULDNT_RESOLVE_PROXY, \CURLE_COULDNT_R...                            </span>
 </dt>
 
-            <dt class="phpdocumentor-table-of-contents__entry -constant -private">
-    <a href="classes/chillerlan-HTTP-CurlHandle.html#constant_NEVER_OVERWRITE">NEVER_OVERWRITE</a>
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/chillerlan-HTTP-CurlHandle.html#constant_NEVER_OVERWRITE">NEVER_OVERWRITE</a>
     <span>
-        &nbsp;= [\CURLOPT_CAINFO, \CURLOPT_CAPATH, \CURLOPT_DOH_URL, \CURLOPT_CUSTOMREQUEST, \CURLOPT_HTTPHEADER, \CURLOPT_NOBODY, \CURLOPT_FORBID_REUSE, \CURLOPT_FRESH_CONNECT]                            </span>
+        &nbsp;: array&lt;string|int, mixed&gt;&nbsp;= [\CURLOPT_CAINFO, \CURLOPT_CAPATH, \CURLOPT_CUS...                            </span>
 </dt>
 
     </dl>
@@ -174,56 +178,56 @@
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/chillerlan-HTTP-CurlHandle.html#property_curl">$curl</a>
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/chillerlan-HTTP-CurlHandle.html#property_curl">$curl</a>
     <span>
-                        &nbsp;: <abbr title="\CurlHandle">CurlHandle</abbr>            </span>
+                        &nbsp;: <abbr title="\CurlHandle">CurlHandle</abbr>|null            </span>
 </dt>
 
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/chillerlan-HTTP-CurlHandle.html#property_curlOptions">$curlOptions</a>
-    <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/chillerlan-HTTP-CurlHandle.html#property_handleID">$handleID</a>
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/chillerlan-HTTP-CurlHandle.html#property_id">$id</a>
     <span>
                         &nbsp;: int            </span>
 </dt>
 
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/chillerlan-HTTP-CurlHandle.html#property_initialized">$initialized</a>
-    <span>
-                        &nbsp;: bool            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/chillerlan-HTTP-CurlHandle.html#property_options">$options</a>
-    <span>
-                        &nbsp;: <a href="classes/chillerlan-HTTP-HTTPOptions.html"><abbr title="\chillerlan\HTTP\HTTPOptions">HTTPOptions</abbr></a>|<abbr title="\chillerlan\Settings\SettingsContainerInterface">SettingsContainerInterface</abbr>            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/chillerlan-HTTP-CurlHandle.html#property_request">$request</a>
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/chillerlan-HTTP-CurlHandle.html#property_request">$request</a>
     <span>
                         &nbsp;: <abbr title="\Psr\Http\Message\RequestInterface">RequestInterface</abbr>            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/chillerlan-HTTP-CurlHandle.html#property_requestBody">$requestBody</a>
+    <a class="" href="classes/chillerlan-HTTP-CurlHandle.html#property_curlOptions">$curlOptions</a>
+    <span>
+                        &nbsp;: array&lt;int, mixed&gt;            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/chillerlan-HTTP-CurlHandle.html#property_initialized">$initialized</a>
+    <span>
+                        &nbsp;: bool            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/chillerlan-HTTP-CurlHandle.html#property_options">$options</a>
+    <span>
+                        &nbsp;: <a href="classes/chillerlan-HTTP-HTTPOptions.html"><abbr title="\chillerlan\HTTP\HTTPOptions">HTTPOptions</abbr></a>|<abbr title="\chillerlan\Settings\SettingsContainerInterface">SettingsContainerInterface</abbr>            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/chillerlan-HTTP-CurlHandle.html#property_requestBody">$requestBody</a>
     <span>
                         &nbsp;: <abbr title="\Psr\Http\Message\StreamInterface">StreamInterface</abbr>            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/chillerlan-HTTP-CurlHandle.html#property_response">$response</a>
+    <a class="" href="classes/chillerlan-HTTP-CurlHandle.html#property_response">$response</a>
     <span>
                         &nbsp;: <abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/chillerlan-HTTP-CurlHandle.html#property_responseBody">$responseBody</a>
+    <a class="" href="classes/chillerlan-HTTP-CurlHandle.html#property_responseBody">$responseBody</a>
     <span>
                         &nbsp;: <abbr title="\Psr\Http\Message\StreamInterface">StreamInterface</abbr>            </span>
 </dt>
@@ -237,106 +241,85 @@
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/chillerlan-HTTP-CurlHandle.html#method___construct">__construct()</a>
+    <a class="" href="classes/chillerlan-HTTP-CurlHandle.html#method___construct">__construct()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
 <dd>CurlHandle constructor.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/chillerlan-HTTP-CurlHandle.html#method___destruct">__destruct()</a>
+    <a class="" href="classes/chillerlan-HTTP-CurlHandle.html#method___destruct">__destruct()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
 <dd>close an existing cURL handle on exit</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/chillerlan-HTTP-CurlHandle.html#method_close">close()</a>
+    <a class="" href="classes/chillerlan-HTTP-CurlHandle.html#method_close">close()</a>
     <span>
                                 &nbsp;: self    </span>
 </dt>
 <dd>closes the handle</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/chillerlan-HTTP-CurlHandle.html#method_exec">exec()</a>
+    <a class="" href="classes/chillerlan-HTTP-CurlHandle.html#method_exec">exec()</a>
     <span>
                                 &nbsp;: int    </span>
 </dt>
 <dd>executes the current cURL instance and returns the error number</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/chillerlan-HTTP-CurlHandle.html#method_getCurlOptions">getCurlOptions()</a>
+    <a class="" href="classes/chillerlan-HTTP-CurlHandle.html#method_getCurlOptions">getCurlOptions()</a>
     <span>
                                 &nbsp;: array&lt;string|int, mixed&gt;    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/chillerlan-HTTP-CurlHandle.html#method_getCurlResource">getCurlResource()</a>
-    <span>
-                                &nbsp;: <abbr title="\CurlHandle">CurlHandle</abbr>    </span>
-</dt>
-<dd>returns the internal cURL resource in its current state</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/chillerlan-HTTP-CurlHandle.html#method_getError">getError()</a>
+    <a class="" href="classes/chillerlan-HTTP-CurlHandle.html#method_getError">getError()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
 <dd>returns a string containing the last error</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/chillerlan-HTTP-CurlHandle.html#method_getHandleID">getHandleID()</a>
-    <span>
-                                &nbsp;: int    </span>
-</dt>
-<dd>returns the handle ID (cURL resource id)</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/chillerlan-HTTP-CurlHandle.html#method_getInfo">getInfo()</a>
+    <a class="" href="classes/chillerlan-HTTP-CurlHandle.html#method_getInfo">getInfo()</a>
     <span>
                                 &nbsp;: array&lt;string|int, mixed&gt;|null    </span>
 </dt>
 <dd>returns the result from `curl_getinfo()` or `null` in case of an error</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/chillerlan-HTTP-CurlHandle.html#method_getRequest">getRequest()</a>
-    <span>
-                                &nbsp;: <abbr title="\Psr\Http\Message\RequestInterface">RequestInterface</abbr>    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/chillerlan-HTTP-CurlHandle.html#method_getResponse">getResponse()</a>
+    <a class="" href="classes/chillerlan-HTTP-CurlHandle.html#method_getResponse">getResponse()</a>
     <span>
                                 &nbsp;: <abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/chillerlan-HTTP-CurlHandle.html#method_init">init()</a>
+    <a class="" href="classes/chillerlan-HTTP-CurlHandle.html#method_init">init()</a>
     <span>
                                 &nbsp;: <abbr title="\CurlHandle">CurlHandle</abbr>|null    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a href="classes/chillerlan-HTTP-CurlHandle.html#method_guessCA">guessCA()</a>
+    <a class="" href="classes/chillerlan-HTTP-CurlHandle.html#method_guessCA">guessCA()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
 <dd>Check default locations for the CA bundle</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a href="classes/chillerlan-HTTP-CurlHandle.html#method_setCA">setCA()</a>
+    <a class="" href="classes/chillerlan-HTTP-CurlHandle.html#method_setCA">setCA()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a href="classes/chillerlan-HTTP-CurlHandle.html#method_setRequestOptions">setRequestOptions()</a>
+    <a class="" href="classes/chillerlan-HTTP-CurlHandle.html#method_setRequestOptions">setRequestOptions()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
 
     </dl>
-
 
 
 
@@ -357,14 +340,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlHandle.php"><a href="files/src-curlhandle.html"><abbr title="src/CurlHandle.php">CurlHandle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">35</span>
+    <span class="phpdocumentor-element-found-in__line">36</span>
 
     </aside>
 
     
+    
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
     <span class="phpdocumentor-signature__name">CURL_NETWORK_ERRORS</span>
     = <span class="phpdocumentor-signature__default-value">[\CURLE_COULDNT_RESOLVE_PROXY, \CURLE_COULDNT_RESOLVE_HOST, \CURLE_COULDNT_CONNECT, \CURLE_OPERATION_TIMEOUTED, \CURLE_SSL_CONNECT_ERROR, \CURLE_GOT_NOTHING]</span>
 </code>
@@ -374,8 +358,9 @@
     
     
 
-</article>
-                    <article class="phpdocumentor-element -constant -private ">
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
     <h4 class="phpdocumentor-element__name" id="constant_NEVER_OVERWRITE">
         NEVER_OVERWRITE
         <a href="classes/chillerlan-HTTP-CurlHandle.html#constant_NEVER_OVERWRITE" class="headerlink"><i class="fas fa-link"></i></a>
@@ -385,16 +370,17 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlHandle.php"><a href="files/src-curlhandle.html"><abbr title="src/CurlHandle.php">CurlHandle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">45</span>
+    <span class="phpdocumentor-element-found-in__line">47</span>
 
     </aside>
 
     
+    
     <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
     <span class="phpdocumentor-signature__name">NEVER_OVERWRITE</span>
-    = <span class="phpdocumentor-signature__default-value">[\CURLOPT_CAINFO, \CURLOPT_CAPATH, \CURLOPT_DOH_URL, \CURLOPT_CUSTOMREQUEST, \CURLOPT_HTTPHEADER, \CURLOPT_NOBODY, \CURLOPT_FORBID_REUSE, \CURLOPT_FRESH_CONNECT]</span>
+    = <span class="phpdocumentor-signature__default-value">[\CURLOPT_CAINFO, \CURLOPT_CAPATH, \CURLOPT_CUSTOMREQUEST, \CURLOPT_DOH_URL, \CURLOPT_FORBID_REUSE, \CURLOPT_FRESH_CONNECT, \CURLOPT_HTTPHEADER, \CURLOPT_NOBODY, \CURLOPT_USERAGENT]</span>
 </code>
 
 
@@ -402,7 +388,8 @@
     
     
 
-</article>
+        
+    </article>
             </section>
 
         
@@ -416,27 +403,28 @@
         class="
             phpdocumentor-element
             -property
-            -private
-                                                        "
+            -public
+                                                                    "
 >
     <h4 class="phpdocumentor-element__name" id="property_curl">
         $curl
         <a href="classes/chillerlan-HTTP-CurlHandle.html#property_curl" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
-                                </span>
+                                            </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlHandle.php"><a href="files/src-curlhandle.html"><abbr title="src/CurlHandle.php">CurlHandle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">56</span>
+    <span class="phpdocumentor-element-found-in__line">66</span>
 
     </aside>
 
     
+    
     <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type"><abbr title="\CurlHandle">CurlHandle</abbr></span>
+            <span class="phpdocumentor-signature__visibility">public private(set)</span>
+            <span class="phpdocumentor-signature__type"><abbr title="\CurlHandle">CurlHandle</abbr>|null</span>
     <span class="phpdocumentor-signature__name">$curl</span>
     </code>
 
@@ -444,86 +432,23 @@
     
     
 
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_curlOptions">
-        $curlOptions
-        <a href="classes/chillerlan-HTTP-CurlHandle.html#property_curlOptions" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/CurlHandle.php"><a href="files/src-curlhandle.html"><abbr title="src/CurlHandle.php">CurlHandle.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">58</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
-    <span class="phpdocumentor-signature__name">$curlOptions</span>
-     = <span class="phpdocumentor-signature__default-value">[]</span></code>
-
-    
-    
-    
+        
+        
 
 </article>
                     <article
         class="
             phpdocumentor-element
             -property
-            -private
-                                                        "
+            -public
+                                                -read-only                    "
 >
-    <h4 class="phpdocumentor-element__name" id="property_handleID">
-        $handleID
-        <a href="classes/chillerlan-HTTP-CurlHandle.html#property_handleID" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_id">
+        $id
+        <a href="classes/chillerlan-HTTP-CurlHandle.html#property_id" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/CurlHandle.php"><a href="files/src-curlhandle.html"><abbr title="src/CurlHandle.php">CurlHandle.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">57</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">int</span>
-    <span class="phpdocumentor-signature__name">$handleID</span>
-    </code>
-
-    
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_initialized">
-        $initialized
-        <a href="classes/chillerlan-HTTP-CurlHandle.html#property_initialized" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
+                        <small class="phpdocumentor-element__modifier">read-only</small>                    </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlHandle.php"><a href="files/src-curlhandle.html"><abbr title="src/CurlHandle.php">CurlHandle.php</abbr></a></abbr>
@@ -533,75 +458,47 @@
     </aside>
 
     
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">bool</span>
-    <span class="phpdocumentor-signature__name">$initialized</span>
-     = <span class="phpdocumentor-signature__default-value">false</span></code>
-
-    
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_options">
-        $options
-        <a href="classes/chillerlan-HTTP-CurlHandle.html#property_options" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/CurlHandle.php"><a href="files/src-curlhandle.html"><abbr title="src/CurlHandle.php">CurlHandle.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">69</span>
-
-    </aside>
-
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type"><a href="classes/chillerlan-HTTP-HTTPOptions.html"><abbr title="\chillerlan\HTTP\HTTPOptions">HTTPOptions</abbr></a>|<abbr title="\chillerlan\Settings\SettingsContainerInterface">SettingsContainerInterface</abbr></span>
-    <span class="phpdocumentor-signature__name">$options</span>
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">int</span>
+    <span class="phpdocumentor-signature__name">$id</span>
     </code>
 
     
     
     
 
+        
+        
+
 </article>
                     <article
         class="
             phpdocumentor-element
             -property
-            -private
-                                                        "
+            -public
+                                                                    "
 >
     <h4 class="phpdocumentor-element__name" id="property_request">
         $request
         <a href="classes/chillerlan-HTTP-CurlHandle.html#property_request" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
-                                </span>
+                                            </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlHandle.php"><a href="files/src-curlhandle.html"><abbr title="src/CurlHandle.php">CurlHandle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">67</span>
+    <span class="phpdocumentor-element-found-in__line">72</span>
 
     </aside>
 
     
+    
     <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type"><abbr title="\Psr\Http\Message\RequestInterface">RequestInterface</abbr></span>
+            <span class="phpdocumentor-signature__visibility">public private(set)</span>
+            <span class="phpdocumentor-signature__type"><abbr title="\Psr\Http\Message\RequestInterface">RequestInterface</abbr></span>
     <span class="phpdocumentor-signature__name">$request</span>
     </code>
 
@@ -609,38 +506,8 @@
     
     
 
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_requestBody">
-        $requestBody
-        <a href="classes/chillerlan-HTTP-CurlHandle.html#property_requestBody" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/CurlHandle.php"><a href="files/src-curlhandle.html"><abbr title="src/CurlHandle.php">CurlHandle.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">60</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type"><abbr title="\Psr\Http\Message\StreamInterface">StreamInterface</abbr></span>
-    <span class="phpdocumentor-signature__name">$requestBody</span>
-    </code>
-
-    
-    
-    
+        
+        
 
 </article>
                     <article
@@ -648,47 +515,14 @@
             phpdocumentor-element
             -property
             -private
-                                                        "
+                                                                    "
 >
-    <h4 class="phpdocumentor-element__name" id="property_response">
-        $response
-        <a href="classes/chillerlan-HTTP-CurlHandle.html#property_response" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_curlOptions">
+        $curlOptions
+        <a href="classes/chillerlan-HTTP-CurlHandle.html#property_curlOptions" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/CurlHandle.php"><a href="files/src-curlhandle.html"><abbr title="src/CurlHandle.php">CurlHandle.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">68</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span>
-    <span class="phpdocumentor-signature__name">$response</span>
-    </code>
-
-    
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_responseBody">
-        $responseBody
-        <a href="classes/chillerlan-HTTP-CurlHandle.html#property_responseBody" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
+                                            </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlHandle.php"><a href="files/src-curlhandle.html"><abbr title="src/CurlHandle.php">CurlHandle.php</abbr></a></abbr>
@@ -698,15 +532,204 @@
     </aside>
 
     
+    
     <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type"><abbr title="\Psr\Http\Message\StreamInterface">StreamInterface</abbr></span>
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">array&lt;int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__name">$curlOptions</span>
+     = <span class="phpdocumentor-signature__default-value">[]</span></code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_initialized">
+        $initialized
+        <a href="classes/chillerlan-HTTP-CurlHandle.html#property_initialized" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/CurlHandle.php"><a href="files/src-curlhandle.html"><abbr title="src/CurlHandle.php">CurlHandle.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">62</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">bool</span>
+    <span class="phpdocumentor-signature__name">$initialized</span>
+     = <span class="phpdocumentor-signature__default-value">false</span></code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_options">
+        $options
+        <a href="classes/chillerlan-HTTP-CurlHandle.html#property_options" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/CurlHandle.php"><a href="files/src-curlhandle.html"><abbr title="src/CurlHandle.php">CurlHandle.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">74</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/chillerlan-HTTP-HTTPOptions.html"><abbr title="\chillerlan\HTTP\HTTPOptions">HTTPOptions</abbr></a>|<abbr title="\chillerlan\Settings\SettingsContainerInterface">SettingsContainerInterface</abbr></span>
+    <span class="phpdocumentor-signature__name">$options</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_requestBody">
+        $requestBody
+        <a href="classes/chillerlan-HTTP-CurlHandle.html#property_requestBody" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/CurlHandle.php"><a href="files/src-curlhandle.html"><abbr title="src/CurlHandle.php">CurlHandle.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">63</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><abbr title="\Psr\Http\Message\StreamInterface">StreamInterface</abbr></span>
+    <span class="phpdocumentor-signature__name">$requestBody</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_response">
+        $response
+        <a href="classes/chillerlan-HTTP-CurlHandle.html#property_response" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/CurlHandle.php"><a href="files/src-curlhandle.html"><abbr title="src/CurlHandle.php">CurlHandle.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">73</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span>
+    <span class="phpdocumentor-signature__name">$response</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_responseBody">
+        $responseBody
+        <a href="classes/chillerlan-HTTP-CurlHandle.html#property_responseBody" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/CurlHandle.php"><a href="files/src-curlhandle.html"><abbr title="src/CurlHandle.php">CurlHandle.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">64</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><abbr title="\Psr\Http\Message\StreamInterface">StreamInterface</abbr></span>
     <span class="phpdocumentor-signature__name">$responseBody</span>
     </code>
 
     
     
     
+
+        
+        
 
 </article>
             </section>
@@ -731,7 +754,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlHandle.php"><a href="files/src-curlhandle.html"><abbr title="src/CurlHandle.php">CurlHandle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">66</span>
+    <span class="phpdocumentor-element-found-in__line">71</span>
 
     </aside>
 
@@ -739,38 +762,39 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\RequestInterface">RequestInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$response</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/chillerlan-HTTP-HTTPOptions.html"><abbr title="\chillerlan\HTTP\HTTPOptions">HTTPOptions</abbr></a>|<abbr title="\chillerlan\Settings\SettingsContainerInterface">SettingsContainerInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$options</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\StreamInterface">StreamInterface</abbr>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$stream</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><abbr title="\Psr\Http\Message\RequestInterface">RequestInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$response</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/chillerlan-HTTP-HTTPOptions.html"><abbr title="\chillerlan\HTTP\HTTPOptions">HTTPOptions</abbr></a>|<abbr title="\chillerlan\Settings\SettingsContainerInterface">SettingsContainerInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$options</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\Psr\Http\Message\StreamInterface">StreamInterface</abbr>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$stream</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$request</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\RequestInterface">RequestInterface</abbr></span>
+                <span class="phpdocumentor-argument-list__argument__name">$request</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\Psr\Http\Message\RequestInterface">RequestInterface</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$response</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span>
+                <span class="phpdocumentor-argument-list__argument__name">$response</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$options</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/chillerlan-HTTP-HTTPOptions.html"><abbr title="\chillerlan\HTTP\HTTPOptions">HTTPOptions</abbr></a>|<abbr title="\chillerlan\Settings\SettingsContainerInterface">SettingsContainerInterface</abbr></span>
+                <span class="phpdocumentor-argument-list__argument__name">$options</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/chillerlan-HTTP-HTTPOptions.html"><abbr title="\chillerlan\HTTP\HTTPOptions">HTTPOptions</abbr></a>|<abbr title="\chillerlan\Settings\SettingsContainerInterface">SettingsContainerInterface</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$stream</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\StreamInterface">StreamInterface</abbr>|null</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+                <span class="phpdocumentor-argument-list__argument__name">$stream</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\Psr\Http\Message\StreamInterface">StreamInterface</abbr>|null</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">null</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
             </dd>
@@ -778,6 +802,8 @@
 
     
 
+        
+    
     
 </article>
                     <article
@@ -794,7 +820,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlHandle.php"><a href="files/src-curlhandle.html"><abbr title="src/CurlHandle.php">CurlHandle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">81</span>
+    <span class="phpdocumentor-element-found-in__line">86</span>
 
     </aside>
 
@@ -809,7 +835,10 @@
     
     
     
+    
 
+        
+    
     
 </article>
                     <article
@@ -826,7 +855,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlHandle.php"><a href="files/src-curlhandle.html"><abbr title="src/CurlHandle.php">CurlHandle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">88</span>
+    <span class="phpdocumentor-element-found-in__line">93</span>
 
     </aside>
 
@@ -841,7 +870,10 @@
     
     
     
+    
 
+        
+    
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">self</span>
@@ -862,7 +894,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlHandle.php"><a href="files/src-curlhandle.html"><abbr title="src/CurlHandle.php">CurlHandle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">409</span>
+    <span class="phpdocumentor-element-found-in__line">404</span>
 
     </aside>
 
@@ -877,30 +909,28 @@
     
     
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="method_exec_tags">
         Tags
-        <a href="classes/chillerlan-HTTP-CurlHandle.html#method_exec#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/chillerlan-HTTP-CurlHandle.html#method_exec_tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">see</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">see</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
                                                                                     <span class="phpdocumentor-tag-link"><abbr title="\curl_exec()">curl_exec()</abbr></span>
-                                        
-                                             
+                                                                
                                     </dd>
-                            <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">see</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
+                            <dd class="phpdocumentor-tag-list__definition">
                                                                                     <span class="phpdocumentor-tag-link"><abbr title="\curl_errno()">curl_errno()</abbr></span>
-                                        
-                                             
+                                                                
                                     </dd>
-                                            </dl>
+                        </dl>
 
+        
+    
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">int</span>
@@ -921,7 +951,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlHandle.php"><a href="files/src-curlhandle.html"><abbr title="src/CurlHandle.php">CurlHandle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">150</span>
+    <span class="phpdocumentor-element-found-in__line">130</span>
 
     </aside>
 
@@ -935,74 +965,26 @@
     
     
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="method_getCurlOptions_tags">
         Tags
-        <a href="classes/chillerlan-HTTP-CurlHandle.html#method_getCurlOptions#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/chillerlan-HTTP-CurlHandle.html#method_getCurlOptions_tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">codeCoverageIgnore</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                
-                                             
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">codeCoverageIgnore</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                                                                                        
                                     </dd>
-                                            </dl>
+                        </dl>
 
+        
+    
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getCurlResource">
-        getCurlResource()
-        <a href="classes/chillerlan-HTTP-CurlHandle.html#method_getCurlResource" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/CurlHandle.php"><a href="files/src-curlhandle.html"><abbr title="src/CurlHandle.php">CurlHandle.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">99</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">returns the internal cURL resource in its current state</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getCurlResource</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\CurlHandle">CurlHandle</abbr></span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="classes/chillerlan-HTTP-CurlHandle.html#method_getCurlResource#tags" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">codeCoverageIgnore</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                
-                                             
-                                    </dd>
-                                            </dl>
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><abbr title="\CurlHandle">CurlHandle</abbr></span>
             </section>
 
 </article>
@@ -1020,7 +1002,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlHandle.php"><a href="files/src-curlhandle.html"><abbr title="src/CurlHandle.php">CurlHandle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">425</span>
+    <span class="phpdocumentor-element-found-in__line">420</span>
 
     </aside>
 
@@ -1035,75 +1017,27 @@
     
     
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="method_getError_tags">
         Tags
-        <a href="classes/chillerlan-HTTP-CurlHandle.html#method_getError#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/chillerlan-HTTP-CurlHandle.html#method_getError_tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">see</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">see</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
                                                                                     <span class="phpdocumentor-tag-link"><abbr title="\curl_error()">curl_error()</abbr></span>
-                                        
-                                             
+                                                                
                                     </dd>
-                                            </dl>
+                        </dl>
 
+        
+    
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">string</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getHandleID">
-        getHandleID()
-        <a href="classes/chillerlan-HTTP-CurlHandle.html#method_getHandleID" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/CurlHandle.php"><a href="files/src-curlhandle.html"><abbr title="src/CurlHandle.php">CurlHandle.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">108</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">returns the handle ID (cURL resource id)</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getHandleID</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="classes/chillerlan-HTTP-CurlHandle.html#method_getHandleID#tags" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">codeCoverageIgnore</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                
-                                             
-                                    </dd>
-                                            </dl>
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">int</span>
             </section>
 
 </article>
@@ -1121,7 +1055,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlHandle.php"><a href="files/src-curlhandle.html"><abbr title="src/CurlHandle.php">CurlHandle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">121</span>
+    <span class="phpdocumentor-element-found-in__line">108</span>
 
     </aside>
 
@@ -1136,98 +1070,39 @@
     
     
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="method_getInfo_tags">
         Tags
-        <a href="classes/chillerlan-HTTP-CurlHandle.html#method_getInfo#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/chillerlan-HTTP-CurlHandle.html#method_getInfo_tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">see</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">see</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
                                                                                     <span class="phpdocumentor-tag-link"><abbr title="\curl_getinfo()">curl_getinfo()</abbr></span>
-                                        
-                                             
+                                                                
                                     </dd>
-                            <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">see</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
+                            <dd class="phpdocumentor-tag-list__definition">
                                                                                     <span class="phpdocumentor-tag-link"><a href="https://www.php.net/manual/function.curl-getinfo.php#111678">https://www.php.net/manual/function.curl-getinfo.php#111678</a></span>
-                                        
-                                             
+                                                                
                                     </dd>
-                            <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">see</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
+                            <dd class="phpdocumentor-tag-list__definition">
                                                                                     <span class="phpdocumentor-tag-link"><a href="https://www.openssl.org/docs/manmaster/man1/verify.html#VERIFY_OPERATION">https://www.openssl.org/docs/manmaster/man1/verify.html#VERIFY_OPERATION</a></span>
-                                        
-                                             
+                                                                
                                     </dd>
-                            <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">see</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
+                            <dd class="phpdocumentor-tag-list__definition">
                                                                                     <span class="phpdocumentor-tag-link"><a href="https://github.com/openssl/openssl/blob/91cb81d40a8102c3d8667629661be8d6937db82b/include/openssl/x509_vfy.h#L99-L189">https://github.com/openssl/openssl/blob/91cb81d40a8102c3d8667629661be8d6937db82b/include/openssl/x509_vfy.h#L99-L189</a></span>
-                                        
-                                             
+                                                                
                                     </dd>
-                                            </dl>
+                        </dl>
 
+        
+    
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;|null</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getRequest">
-        getRequest()
-        <a href="classes/chillerlan-HTTP-CurlHandle.html#method_getRequest" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/CurlHandle.php"><a href="files/src-curlhandle.html"><abbr title="src/CurlHandle.php">CurlHandle.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">134</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getRequest</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Http\Message\RequestInterface">RequestInterface</abbr></span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="classes/chillerlan-HTTP-CurlHandle.html#method_getRequest#tags" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">codeCoverageIgnore</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                
-                                             
-                                    </dd>
-                                            </dl>
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Http\Message\RequestInterface">RequestInterface</abbr></span>
             </section>
 
 </article>
@@ -1245,7 +1120,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlHandle.php"><a href="files/src-curlhandle.html"><abbr title="src/CurlHandle.php">CurlHandle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">141</span>
+    <span class="phpdocumentor-element-found-in__line">121</span>
 
     </aside>
 
@@ -1259,21 +1134,23 @@
     
     
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="method_getResponse_tags">
         Tags
-        <a href="classes/chillerlan-HTTP-CurlHandle.html#method_getResponse#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/chillerlan-HTTP-CurlHandle.html#method_getResponse_tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">codeCoverageIgnore</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                
-                                             
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">codeCoverageIgnore</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                                                                                        
                                     </dd>
-                                            </dl>
+                        </dl>
 
+        
+    
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span>
@@ -1294,7 +1171,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlHandle.php"><a href="files/src-curlhandle.html"><abbr title="src/CurlHandle.php">CurlHandle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">338</span>
+    <span class="phpdocumentor-element-found-in__line">325</span>
 
     </aside>
 
@@ -1308,22 +1185,24 @@
     
     
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="method_init_tags">
         Tags
-        <a href="classes/chillerlan-HTTP-CurlHandle.html#method_init#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/chillerlan-HTTP-CurlHandle.html#method_init_tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">see</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">see</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
                                                                                     <span class="phpdocumentor-tag-link"><a href="https://php.watch/articles/php-curl-security-hardening">https://php.watch/articles/php-curl-security-hardening</a></span>
-                                        
-                                             
+                                                                
                                     </dd>
-                                            </dl>
+                        </dl>
 
+        
+    
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><abbr title="\CurlHandle">CurlHandle</abbr>|null</span>
@@ -1344,7 +1223,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlHandle.php"><a href="files/src-curlhandle.html"><abbr title="src/CurlHandle.php">CurlHandle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">163</span>
+    <span class="phpdocumentor-element-found-in__line">143</span>
 
     </aside>
 
@@ -1359,45 +1238,41 @@
     
     
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="method_guessCA_tags">
         Tags
-        <a href="classes/chillerlan-HTTP-CurlHandle.html#method_guessCA#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/chillerlan-HTTP-CurlHandle.html#method_guessCA_tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">see</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">see</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
                                                                                     <span class="phpdocumentor-tag-link"><a href="https://packages.ubuntu.com/search?suite=all&searchon=names&keywords=ca-certificates">https://packages.ubuntu.com/search?suite=all&searchon=names&keywords=ca-certificates</a></span>
-                                        
-                                             
+                                                                
                                     </dd>
-                            <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">see</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
+                            <dd class="phpdocumentor-tag-list__definition">
                                                                                     <span class="phpdocumentor-tag-link"><a href="https://packages.debian.org/search?suite=all&searchon=names&keywords=ca-certificates">https://packages.debian.org/search?suite=all&searchon=names&keywords=ca-certificates</a></span>
-                                        
-                                             
+                                                                
                                     </dd>
-                                                <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">codeCoverageIgnore</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                
-                                             
+                                <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">codeCoverageIgnore</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                                                                                        
                                     </dd>
-                                                <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">throws</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
+                                <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">throws</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
                                                                 <span class="phpdocumentor-tag-link"><a href="classes/chillerlan-HTTP-ClientException.html"><abbr title="\chillerlan\HTTP\ClientException">ClientException</abbr></a></span>
-                                                            
-                                             
+                                                                                    
                                     </dd>
-                                            </dl>
+                        </dl>
 
+        
+    
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">string</span>
@@ -1418,7 +1293,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlHandle.php"><a href="files/src-curlhandle.html"><abbr title="src/CurlHandle.php">CurlHandle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">218</span>
+    <span class="phpdocumentor-element-found-in__line">198</span>
 
     </aside>
 
@@ -1432,22 +1307,24 @@
     
     
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="method_setCA_tags">
         Tags
-        <a href="classes/chillerlan-HTTP-CurlHandle.html#method_setCA#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/chillerlan-HTTP-CurlHandle.html#method_setCA_tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">throws</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">throws</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
                                                                 <span class="phpdocumentor-tag-link"><a href="classes/chillerlan-HTTP-ClientException.html"><abbr title="\chillerlan\HTTP\ClientException">ClientException</abbr></a></span>
-                                                            
-                                             
+                                                                                    
                                     </dd>
-                                            </dl>
+                        </dl>
 
+        
+    
     
 </article>
                     <article
@@ -1464,7 +1341,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/CurlHandle.php"><a href="files/src-curlhandle.html"><abbr title="src/CurlHandle.php">CurlHandle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">270</span>
+    <span class="phpdocumentor-element-found-in__line">257</span>
 
     </aside>
 
@@ -1478,118 +1355,29 @@
     
     
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="method_setRequestOptions_tags">
         Tags
-        <a href="classes/chillerlan-HTTP-CurlHandle.html#method_setRequestOptions#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/chillerlan-HTTP-CurlHandle.html#method_setRequestOptions_tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">throws</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">throws</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
                                                                 <span class="phpdocumentor-tag-link"><a href="classes/chillerlan-HTTP-ClientException.html"><abbr title="\chillerlan\HTTP\ClientException">ClientException</abbr></a></span>
-                                                            
-                                             
+                                                                                    
                                     </dd>
-                                            </dl>
+                        </dl>
 
+        
+    
     
 </article>
             </section>
 
-        <div class="phpdocumentor-modal" id="source-view">
-    <div class="phpdocumentor-modal-bg" data-exit-button></div>
-    <div class="phpdocumentor-modal-container">
-        <div class="phpdocumentor-modal-content">
-            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/CurlHandle.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
-        </div>
-        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
-    </div>
-</div>
-
-    <script type="text/javascript">
-        (function () {
-            function loadExternalCodeSnippet(el, url, line) {
-                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
-                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
-                    const language = 'php';
-
-                    const code = document.createElement('code');
-                    code.className = 'language-' + language;
-                    pre.textContent = '';
-                    pre.setAttribute('data-line', line)
-                    code.textContent = 'Loading…';
-                    pre.appendChild(code);
-
-                    var xhr = new XMLHttpRequest();
-
-                    xhr.open('GET', src, true);
-
-                    xhr.onreadystatechange = function () {
-                        if (xhr.readyState !== 4) {
-                            return;
-                        }
-
-                        if (xhr.status < 400 && xhr.responseText) {
-                            code.textContent = xhr.responseText;
-                            Prism.highlightElement(code);
-                            return;
-                        }
-
-                        if (xhr.status === 404) {
-                            code.textContent = '✖ Error: File could not be found';
-                            return;
-                        }
-
-                        if (xhr.status >= 400) {
-                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
-                            return;
-                        }
-
-                        code.textContent = '✖ Error: An unknown error occurred';
-                    };
-
-                    xhr.send(null);
-                });
-            }
-
-            const modalButtons = document.querySelectorAll("[data-modal]");
-            const openedAsLocalFile = window.location.protocol === 'file:';
-            if (modalButtons.length > 0 && openedAsLocalFile) {
-                console.warn(
-                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
-                    'browsers block XHR requests when a page is opened this way'
-                );
-            }
-
-            modalButtons.forEach(function (trigger) {
-                if (openedAsLocalFile) {
-                    trigger.setAttribute("hidden", "hidden");
-                }
-
-                trigger.addEventListener("click", function (event) {
-                    event.preventDefault();
-                    const modal = document.getElementById(trigger.dataset.modal);
-                    if (!modal) {
-                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
-                        return;
-                    }
-                    modal.classList.add("phpdocumentor-modal__open");
-
-                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
-                    const exits = modal.querySelectorAll("[data-exit-button]");
-                    exits.forEach(function (exit) {
-                        exit.addEventListener("click", function (event) {
-                            event.preventDefault();
-                            modal.classList.remove("phpdocumentor-modal__open");
-                        });
-                    });
-                });
-            });
-        })();
-    </script>
-
+        
     </article>
                                 </section>
                 <section class="phpdocumentor-on-this-page__sidebar">
@@ -1609,44 +1397,41 @@
                             <li class="phpdocumentor-on-this-page-section__title">Constants</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
-                                                    <li><a href="classes/chillerlan-HTTP-CurlHandle.html#constant_CURL_NETWORK_ERRORS">CURL_NETWORK_ERRORS</a></li>
-                                                    <li><a href="classes/chillerlan-HTTP-CurlHandle.html#constant_NEVER_OVERWRITE">NEVER_OVERWRITE</a></li>
+                                                    <li class=""><a href="classes/chillerlan-HTTP-CurlHandle.html#constant_CURL_NETWORK_ERRORS">CURL_NETWORK_ERRORS</a></li>
+                                                    <li class=""><a href="classes/chillerlan-HTTP-CurlHandle.html#constant_NEVER_OVERWRITE">NEVER_OVERWRITE</a></li>
                                             </ul>
                 </li>
             
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
-                                                    <li><a href="classes/chillerlan-HTTP-CurlHandle.html#property_curl">$curl<a href="classes/chillerlan-HTTP-CurlHandle.html"></li>
-                                                    <li><a href="classes/chillerlan-HTTP-CurlHandle.html#property_curlOptions">$curlOptions<a href="classes/chillerlan-HTTP-CurlHandle.html"></li>
-                                                    <li><a href="classes/chillerlan-HTTP-CurlHandle.html#property_handleID">$handleID<a href="classes/chillerlan-HTTP-CurlHandle.html"></li>
-                                                    <li><a href="classes/chillerlan-HTTP-CurlHandle.html#property_initialized">$initialized<a href="classes/chillerlan-HTTP-CurlHandle.html"></li>
-                                                    <li><a href="classes/chillerlan-HTTP-CurlHandle.html#property_options">$options<a href="classes/chillerlan-HTTP-CurlHandle.html"></li>
-                                                    <li><a href="classes/chillerlan-HTTP-CurlHandle.html#property_request">$request<a href="classes/chillerlan-HTTP-CurlHandle.html"></li>
-                                                    <li><a href="classes/chillerlan-HTTP-CurlHandle.html#property_requestBody">$requestBody<a href="classes/chillerlan-HTTP-CurlHandle.html"></li>
-                                                    <li><a href="classes/chillerlan-HTTP-CurlHandle.html#property_response">$response<a href="classes/chillerlan-HTTP-CurlHandle.html"></li>
-                                                    <li><a href="classes/chillerlan-HTTP-CurlHandle.html#property_responseBody">$responseBody<a href="classes/chillerlan-HTTP-CurlHandle.html"></li>
+                                                    <li class=""><a href="classes/chillerlan-HTTP-CurlHandle.html#property_curl">$curl</a></li>
+                                                    <li class=""><a href="classes/chillerlan-HTTP-CurlHandle.html#property_id">$id</a></li>
+                                                    <li class=""><a href="classes/chillerlan-HTTP-CurlHandle.html#property_request">$request</a></li>
+                                                    <li class=""><a href="classes/chillerlan-HTTP-CurlHandle.html#property_curlOptions">$curlOptions</a></li>
+                                                    <li class=""><a href="classes/chillerlan-HTTP-CurlHandle.html#property_initialized">$initialized</a></li>
+                                                    <li class=""><a href="classes/chillerlan-HTTP-CurlHandle.html#property_options">$options</a></li>
+                                                    <li class=""><a href="classes/chillerlan-HTTP-CurlHandle.html#property_requestBody">$requestBody</a></li>
+                                                    <li class=""><a href="classes/chillerlan-HTTP-CurlHandle.html#property_response">$response</a></li>
+                                                    <li class=""><a href="classes/chillerlan-HTTP-CurlHandle.html#property_responseBody">$responseBody</a></li>
                                             </ul>
                 </li>
             
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                            <li><a href="classes/chillerlan-HTTP-CurlHandle.html#method___construct">__construct()</a></li>
-                                            <li><a href="classes/chillerlan-HTTP-CurlHandle.html#method___destruct">__destruct()</a></li>
-                                            <li><a href="classes/chillerlan-HTTP-CurlHandle.html#method_close">close()</a></li>
-                                            <li><a href="classes/chillerlan-HTTP-CurlHandle.html#method_exec">exec()</a></li>
-                                            <li><a href="classes/chillerlan-HTTP-CurlHandle.html#method_getCurlOptions">getCurlOptions()</a></li>
-                                            <li><a href="classes/chillerlan-HTTP-CurlHandle.html#method_getCurlResource">getCurlResource()</a></li>
-                                            <li><a href="classes/chillerlan-HTTP-CurlHandle.html#method_getError">getError()</a></li>
-                                            <li><a href="classes/chillerlan-HTTP-CurlHandle.html#method_getHandleID">getHandleID()</a></li>
-                                            <li><a href="classes/chillerlan-HTTP-CurlHandle.html#method_getInfo">getInfo()</a></li>
-                                            <li><a href="classes/chillerlan-HTTP-CurlHandle.html#method_getRequest">getRequest()</a></li>
-                                            <li><a href="classes/chillerlan-HTTP-CurlHandle.html#method_getResponse">getResponse()</a></li>
-                                            <li><a href="classes/chillerlan-HTTP-CurlHandle.html#method_init">init()</a></li>
-                                            <li><a href="classes/chillerlan-HTTP-CurlHandle.html#method_guessCA">guessCA()</a></li>
-                                            <li><a href="classes/chillerlan-HTTP-CurlHandle.html#method_setCA">setCA()</a></li>
-                                            <li><a href="classes/chillerlan-HTTP-CurlHandle.html#method_setRequestOptions">setRequestOptions()</a></li>
+                                            <li class=""><a href="classes/chillerlan-HTTP-CurlHandle.html#method___construct">__construct()</a></li>
+                                            <li class=""><a href="classes/chillerlan-HTTP-CurlHandle.html#method___destruct">__destruct()</a></li>
+                                            <li class=""><a href="classes/chillerlan-HTTP-CurlHandle.html#method_close">close()</a></li>
+                                            <li class=""><a href="classes/chillerlan-HTTP-CurlHandle.html#method_exec">exec()</a></li>
+                                            <li class=""><a href="classes/chillerlan-HTTP-CurlHandle.html#method_getCurlOptions">getCurlOptions()</a></li>
+                                            <li class=""><a href="classes/chillerlan-HTTP-CurlHandle.html#method_getError">getError()</a></li>
+                                            <li class=""><a href="classes/chillerlan-HTTP-CurlHandle.html#method_getInfo">getInfo()</a></li>
+                                            <li class=""><a href="classes/chillerlan-HTTP-CurlHandle.html#method_getResponse">getResponse()</a></li>
+                                            <li class=""><a href="classes/chillerlan-HTTP-CurlHandle.html#method_init">init()</a></li>
+                                            <li class=""><a href="classes/chillerlan-HTTP-CurlHandle.html#method_guessCA">guessCA()</a></li>
+                                            <li class=""><a href="classes/chillerlan-HTTP-CurlHandle.html#method_setCA">setCA()</a></li>
+                                            <li class=""><a href="classes/chillerlan-HTTP-CurlHandle.html#method_setRequestOptions">setRequestOptions()</a></li>
                                     </ul>
             </li>
                     </ul>
