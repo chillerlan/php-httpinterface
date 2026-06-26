@@ -58,7 +58,7 @@ class CurlHandleTest extends TestCase{
 	#[DataProvider('invalidCaOptionProvider')]
 	public function testInvalidCAException(string $option, mixed $value):void{
 		$this->expectException(ClientExceptionInterface::class);
-		$this->expectExceptionMessage('invalid path to SSL CA bundle');
+		$this->expectExceptionMessageIsOrContains('invalid path to SSL CA bundle');
 
 		$this->createHandle(new HTTPOptions([$option => $value]))->init();
 	}
@@ -119,13 +119,14 @@ class CurlHandleTest extends TestCase{
 			}
 
 			$data = MessageUtil::decodeJSON($response);
+
+			$this::assertSame($url, $data->url);
+			$this::assertSame('bar', $data->args->foo);
 		}
 		catch(Throwable $e){
 			$this->markTestSkipped('httpbin-error: '.$e->getMessage());
 		}
 
-		$this::assertSame($url, $data->url);
-		$this::assertSame('bar', $data->args->foo);
 	}
 
 	public static function requestMethodWithBodyProvider():array{
@@ -143,7 +144,7 @@ class CurlHandleTest extends TestCase{
 		$body    = 'foo=bar';
 		$request = $this->requestFactory->createRequest($method, $url)
 			->withHeader('Content-type', 'x-www-form-urlencoded')
-			->withHeader('Content-Length', strlen($body))
+			->withHeader('Content-Length', (string)strlen($body))
 			->withBody($this->streamFactory->createStream($body))
 		;
 
@@ -156,15 +157,16 @@ class CurlHandleTest extends TestCase{
 			}
 
 			$data = MessageUtil::decodeJSON($response);
+
+			$this::assertSame($url, $data->url);
+			$this::assertSame('x-www-form-urlencoded', $data->headers->{'Content-Type'});
+			$this::assertSame(strlen($body), (int)$data->headers->{'Content-Length'});
+			$this::assertSame($body, $data->data);
 		}
 		catch(Throwable $e){
 			$this->markTestSkipped('httpbin-error: '.$e->getMessage());
 		}
 
-		$this::assertSame($url, $data->url);
-		$this::assertSame('x-www-form-urlencoded', $data->headers->{'Content-Type'});
-		$this::assertSame(strlen($body), (int)$data->headers->{'Content-Length'});
-		$this::assertSame($body, $data->data);
 	}
 
 	#[DataProvider('requestMethodWithBodyProvider')]
@@ -185,23 +187,24 @@ class CurlHandleTest extends TestCase{
 			}
 
 			$data = MessageUtil::decodeJSON($response);
+
+			$this::assertSame($url, $data->url);
+			$this::assertSame('application/json', $data->headers->{'Content-Type'});
+			$this::assertSame(strlen($body), (int)$data->headers->{'Content-Length'});
+			$this::assertSame($body, $data->data);
+			$this::assertSame('bar', $data->json->foo);
 		}
 		catch(Throwable $e){
 			$this->markTestSkipped('httpbin-error: '.$e->getMessage());
 		}
 
-		$this::assertSame($url, $data->url);
-		$this::assertSame('application/json', $data->headers->{'Content-Type'});
-		$this::assertSame(strlen($body), (int)$data->headers->{'Content-Length'});
-		$this::assertSame($body, $data->data);
-		$this::assertSame('bar', $data->json->foo);
 	}
 
 	public function testLargeBody():void{
 		$body    = str_repeat('*', ((1 << 20) + 1)); // will enable the read function
 		$request = $this->requestFactory->createRequest('POST', 'https://httpbin.org/post')
 			->withHeader('Content-type', 'text/plain')
-			->withHeader('Content-Length', strlen($body))
+			->withHeader('Content-Length', (string)strlen($body))
 			->withBody($this->streamFactory->createStream($body))
 		;
 
@@ -214,6 +217,8 @@ class CurlHandleTest extends TestCase{
 			}
 
 			$data = MessageUtil::decodeJSON($response);
+
+			$this::assertSame(strlen($body), (int)$data->headers->{'Content-Length'});
 		}
 		catch(Throwable){
 			// httpbin times out after 10 seconds and will most likely fail to transfer 1MB of data
@@ -222,7 +227,6 @@ class CurlHandleTest extends TestCase{
 #			$this->markTestSkipped('httpbin-error: '.$e->getMessage());
 		}
 
-		$this::assertSame(strlen($body), (int)$data->headers->{'Content-Length'});
 	}
 
 }

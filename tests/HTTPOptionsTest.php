@@ -19,8 +19,8 @@ final class HTTPOptionsTest extends TestCase{
 
 	public function testInvalidUserAgentException():void{
 		$this->expectException(ClientExceptionInterface::class);
-		$this->expectExceptionMessage('invalid user agent');
-
+		$this->expectExceptionMessageIs('invalid user agent');
+		/** @phan-suppress-next-line PhanNoopNew */
 		new HTTPOptions(['user_agent' => '']);
 	}
 
@@ -41,8 +41,8 @@ final class HTTPOptionsTest extends TestCase{
 
 	public function testSetDnsOverHttpsURLException():void{
 		$this->expectException(ClientExceptionInterface::class);
-		$this->expectExceptionMessage('invalid DNS-over-HTTPS URL');
-
+		$this->expectExceptionMessageIsOrContains('invalid DNS-over-HTTPS URL');
+		/** @phan-suppress-next-line PhanNoopNew */
 		new HTTPOptions(['dns_over_https' => 'http://nope.whatever']);
 	}
 

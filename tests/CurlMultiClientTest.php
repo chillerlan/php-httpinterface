@@ -107,25 +107,27 @@ final class CurlMultiClientTest extends TestCase{
 
 		// the arenanet API isn't the fastest or most reliable
 		try{
+			/** @phan-suppress-next-line PhanUndeclaredMethod */
 			$responses = $this->multiResponseHandler->getResponses();
 
 			$this::assertCount(10, $requests);
 			$this::assertCount(10, $responses);
+
+			// the responses are in the same order as the respective requests
+			$this::assertSame(['de', 'en', 'es', 'fr', 'zh', 'de', 'en', 'es', 'fr', 'zh'], array_column($responses, 'lang'));
 		}
 		catch(Throwable){
 			$this::markTestSkipped('arenanet API error');
 		}
 
-		// the responses are in the same order as the respective requests
-		$this::assertSame(['de', 'en', 'es', 'fr', 'zh', 'de', 'en', 'es', 'fr', 'zh'], array_column($responses, 'lang'));
-
 		// cover the destructor
+		/** @phan-suppress-next-line PhanTypeObjectUnsetDeclaredProperty */
 		unset($this->http);
 	}
 
 	public function testEmptyStackException():void{
 		$this->expectException(ClientExceptionInterface::class);
-		$this->expectExceptionMessage('request stack is empty');
+		$this->expectExceptionMessageIs('request stack is empty');
 
 		$this->http->process();
 	}

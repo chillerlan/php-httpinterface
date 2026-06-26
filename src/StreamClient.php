@@ -34,7 +34,9 @@ class StreamClient extends HTTPClientAbstract{
 
 		set_error_handler($this->errorHandler(...));
 
-		$exception = null;
+		$exception    = null;
+		$response     = null;
+		$responseBody = '';
 
 		try{
 			$context      = stream_context_create($this->getContextOptions($request));
