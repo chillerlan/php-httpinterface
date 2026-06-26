@@ -44,7 +44,6 @@ trait HTTPOptionsTrait{
 	 */
 	public array $curl_options = [] {
 		set{
-
 			// let's check if there's a CA bundle given via the cURL options and move it to the ca_info option instead
 			foreach([CURLOPT_CAINFO, CURLOPT_CAINFO_BLOB, CURLOPT_CAPATH] as $opt){
 
@@ -59,7 +58,6 @@ trait HTTPOptionsTrait{
 			}
 
 			$this->curl_options = $value;
-
 		}
 	}
 
