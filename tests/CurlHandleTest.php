@@ -22,6 +22,7 @@ use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientExceptionInterface;
 use Exception, Throwable;
 use function file_get_contents, str_repeat, strlen, strtolower, realpath;
+use function sprintf;
 use const CURLOPT_CAINFO, CURLOPT_CAINFO_BLOB, CURLOPT_CAPATH, CURLOPT_SSL_VERIFYHOST, CURLOPT_SSL_VERIFYPEER;
 
 #[Group('slow')]
@@ -105,7 +106,7 @@ final class CurlHandleTest extends TestCase{
 			$status   = $response->getStatusCode();
 
 			if($status !== 200){
-				throw new Exception('HTTP/'.$status.' ('.$url.')');
+				throw new Exception(sprintf('HTTP/%s (%s)', $status, $url));
 			}
 
 			$data = MessageUtil::decodeJSON($response);
@@ -138,7 +139,7 @@ final class CurlHandleTest extends TestCase{
 			$status   = $response->getStatusCode();
 
 			if($status !== 200){
-				throw new Exception('HTTP/'.$status);
+				throw new Exception(sprintf('HTTP/%s (%s)', $status, $url));
 			}
 
 			$data = MessageUtil::decodeJSON($response);
@@ -172,7 +173,7 @@ final class CurlHandleTest extends TestCase{
 			$status   = $response->getStatusCode();
 
 			if($status !== 200){
-				throw new Exception('HTTP/'.$status);
+				throw new Exception(sprintf('HTTP/%s (%s)', $status, $url));
 			}
 
 			$data = MessageUtil::decodeJSON($response);
@@ -203,7 +204,7 @@ final class CurlHandleTest extends TestCase{
 			$status   = $response->getStatusCode();
 
 			if($status !== 200){
-				throw new Exception('HTTP/'.$status);
+				throw new Exception(sprintf('HTTP/%s', $status));
 			}
 
 			$data = MessageUtil::decodeJSON($response);
