@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace chillerlan\HTTP;
 
 use function parse_url, sprintf, strtolower, trim;
-use const CURLOPT_CAINFO, CURLOPT_CAPATH;
+use const CURLOPT_CAINFO, CURLOPT_CAINFO_BLOB, CURLOPT_CAPATH;
 
 trait HTTPOptionsTrait{
 
@@ -46,7 +46,7 @@ trait HTTPOptionsTrait{
 		set{
 
 			// let's check if there's a CA bundle given via the cURL options and move it to the ca_info option instead
-			foreach([CURLOPT_CAINFO, CURLOPT_CAPATH] as $opt){
+			foreach([CURLOPT_CAINFO, CURLOPT_CAINFO_BLOB, CURLOPT_CAPATH] as $opt){
 
 				if(!empty($value[$opt])){
 
