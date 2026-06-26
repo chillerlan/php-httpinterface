@@ -1,6 +1,7 @@
 <?php
 /**
  * cURL multi example, fetch data from the GUildWars2 items API
+ *
  * @see          https://wiki.guildwars2.com/wiki/API:2/items
  *
  * @filesource   curl_multi.php
@@ -9,6 +10,7 @@
  * @copyright    2019 smiley
  * @license      MIT
  */
+declare(strict_types=1);
 
 use chillerlan\HTTP\{CurlClient , CurlMultiClient, HTTPOptions, MultiResponseHandlerInterface};
 use chillerlan\HTTP\Psr7\HTTPFactory;
@@ -28,17 +30,18 @@ $options->retries     = 1;
 $factory = new HTTPFactory;
 $client  = new CurlClient($factory, $options);
 
-$endpoint     = 'https://api.guildwars2.com/v2/items';
-$languages    = ['de', 'en', 'es'];//, 'fr', 'zh'
+const API_ENDPOINT = 'https://api.guildwars2.com/v2/items';
+const LANGUAGES    = ['de', 'en', 'es']; // 'fr', 'zh'
+
 // request the list of item ids
-$itemResponse = $client->sendRequest($factory->createRequest('GET', $endpoint));
+$itemResponse = $client->sendRequest($factory->createRequest('GET', API_ENDPOINT));
 
 if($itemResponse->getStatusCode() !== 200){
 	exit('/v2/items fetch error');
 }
 
 // create directories for each language to dump the item responses into
-foreach($languages as $lang){
+foreach(LANGUAGES as $lang){
 	$dir = __DIR__.'/'.$lang;
 
 	if(!file_exists($dir)){
@@ -82,9 +85,9 @@ $handler = new class () implements MultiResponseHandlerInterface{
 		foreach($json as $item){
 			$file = sprintf('%s/%s/%s.json', __DIR__, $lang, $item->id);
 
-			file_put_contents($file, json_encode($item, (JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)));
+			file_put_contents($file, json_encode($item, (JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)));
 
-			echo $file.PHP_EOL;
+			echo realpath($file).PHP_EOL;
 		}
 
 		// response ok, nothing to return
@@ -97,8 +100,10 @@ $multiClient = new CurlMultiClient($handler, $factory, $options);
 
 // chunk the item response into arrays of 200 ids each (API limit) and create Request objects for each desired language
 foreach(array_chunk(MessageUtil::decodeJSON($itemResponse), 200) as $chunk){
-	foreach($languages as $lang){
-		$multiClient->addRequest($factory->createRequest('GET', $endpoint.'?'.QueryUtil::build(['lang' => $lang, 'ids' => implode(',', $chunk)])));
+	foreach(LANGUAGES as $lang){
+		$url = QueryUtil::merge(API_ENDPOINT, ['lang' => $lang, 'ids' => implode(',', $chunk)]);
+
+		$multiClient->addRequest($factory->createRequest('GET', $url));
 	}
 }
 

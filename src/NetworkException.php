@@ -23,7 +23,7 @@ class NetworkException extends ClientException implements NetworkExceptionInterf
 	public function __construct(
 		string                     $message,
 		protected RequestInterface $request,
-		Throwable|null             $previous = null
+		Throwable|null             $previous = null,
 	){
 		parent::__construct($message, 0, $previous);
 	}

@@ -7,7 +7,6 @@
  * @copyright    2018 smiley
  * @license      MIT
  */
-
 declare(strict_types=1);
 
 namespace chillerlan\HTTP;
@@ -58,7 +57,7 @@ final class CurlHandle{
 	];
 
 	public readonly int     $id;
-
+	/** @var array<int, mixed>  */
 	private array           $curlOptions = [];
 	private bool            $initialized = false;
 	private StreamInterface $requestBody;
@@ -429,6 +428,8 @@ final class CurlHandle{
 	 * typically by reading it from the passed stream resource. It should return an empty string to signal EOF.
 	 *
 	 * @see https://www.php.net/manual/function.curl-setopt
+	 *
+	 * @param resource $stream
 	 *
 	 * @internal
 	 * @noinspection PhpUnusedParameterInspection

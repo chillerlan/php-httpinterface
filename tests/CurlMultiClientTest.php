@@ -45,7 +45,7 @@ final class CurlMultiClientTest extends TestCase{
 	private function getTestResponseHandler():MultiResponseHandlerInterface{
 
 		return new class () implements MultiResponseHandlerInterface{
-
+			/** @var array<int, array<string, string>>  */
 			private array $responses = [];
 
 			public function handleResponse(
@@ -89,7 +89,7 @@ final class CurlMultiClientTest extends TestCase{
 			foreach(['de', 'en', 'es', 'fr', 'zh'] as $lang){
 				$requests[] = $this->requestFactory->createRequest(
 					'GET',
-					QueryUtil::merge('https://api.guildwars2.com/v2/items', ['lang' => $lang, 'ids' => implode(',', $chunk)])
+					QueryUtil::merge('https://api.guildwars2.com/v2/items', ['lang' => $lang, 'ids' => implode(',', $chunk)]),
 				);
 			}
 		}

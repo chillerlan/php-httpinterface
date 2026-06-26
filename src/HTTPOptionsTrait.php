@@ -39,6 +39,8 @@ trait HTTPOptionsTrait{
 	 *
 	 * this array is being merged into the default options as the last thing before curl_exec().
 	 * none of the values (except existence of the CA file) will be checked - that's up to the implementation.
+	 *
+	 * @var array<int, mixed>
 	 */
 	public array $curl_options = [] {
 		set{
@@ -95,6 +97,8 @@ trait HTTPOptionsTrait{
 	 * options for the curl multi instance
 	 *
 	 * @see https://www.php.net/manual/function.curl-multi-setopt.php
+	 *
+	 * @var array<int, mixed>
 	 */
 	public array $curl_multi_options = [];
 
@@ -156,7 +160,7 @@ trait HTTPOptionsTrait{
 		/**
 		 * @throws \chillerlan\HTTP\ClientException
 		 */
-		set(string|null $doh){
+		set(string|null $doh){ // phpcs:ignore
 
 			if($doh === null){
 				$this->dns_over_https = null;

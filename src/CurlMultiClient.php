@@ -31,6 +31,8 @@ class CurlMultiClient{
 
 	/**
 	 * An array of RequestInterface to run
+	 *
+	 * @var \Psr\Http\Message\RequestInterface[]
 	 */
 	protected array $requests = [];
 
@@ -38,6 +40,8 @@ class CurlMultiClient{
 	 * the stack of running handles
 	 *
 	 * cURL instance id => [counter, retries, handle]
+	 *
+	 * @var array<int, array{0: int, 1: int, 2: CurlHandle}>
 	 */
 	protected array $handles = [];
 
@@ -152,13 +156,17 @@ class CurlMultiClient{
 				usleep(100000); // sleep a bit (100ms)
 			}
 
-			// this assignment-in-condition is intentional btw
-			while($state = curl_multi_info_read($this->curl_multi)){
-				$this->resolve((int)$state['handle']);
+			do{
+				$state = curl_multi_info_read($this->curl_multi);
 
-				curl_multi_remove_handle($this->curl_multi, $state['handle']);
-				$state['handle'] = null;
+				if(isset($state['handle'])){
+					$this->resolve((int)$state['handle']);
+
+					curl_multi_remove_handle($this->curl_multi, $state['handle']);
+					$state['handle'] = null;
+				}
 			}
+			while($state !== false);
 
 		}
 		while($active_handles > 0 && $status === CURLM_OK);
@@ -180,7 +188,7 @@ class CurlMultiClient{
 		$result = $this->multiResponseHandler->handleResponse(
 			$handle->getResponse(),
 			$handle->request,
-			$counter,
+			$counter, // we pass the internal counter here, the cURL handle id might overlap with previous requests
 			$handle->getInfo(),
 		);
 

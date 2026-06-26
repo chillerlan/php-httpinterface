@@ -23,7 +23,7 @@ class RequestException extends ClientException implements RequestExceptionInterf
 	public function __construct(
 		string                     $message,
 		protected RequestInterface $request,
-		Throwable|null             $previous = null
+		Throwable|null             $previous = null,
 	){
 		parent::__construct($message, 0, $previous);
 	}
