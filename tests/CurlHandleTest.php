@@ -6,6 +6,8 @@
  * @author       smiley <smiley@chillerlan.net>
  * @copyright    2019 smiley
  * @license      MIT
+ *
+ * @todo: local httpbin on gh-actions
  */
 declare(strict_types=1);
 
@@ -15,7 +17,7 @@ use chillerlan\HTTP\{CurlHandle, HTTPOptions};
 use chillerlan\HTTP\Utils\MessageUtil;
 use chillerlan\HTTPTest\ClientFactories\CurlClientFactory;
 use chillerlan\PHPUnitHttp\HttpFactoryTrait;
-use PHPUnit\Framework\Attributes\{DataProvider, Group};
+use PHPUnit\Framework\Attributes\{DataProvider, Group, Test, TestWith};
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientExceptionInterface;
 use Exception, Throwable;
@@ -23,7 +25,7 @@ use function file_get_contents, str_repeat, strlen, strtolower, realpath;
 use const CURLOPT_CAINFO, CURLOPT_CAINFO_BLOB, CURLOPT_CAPATH, CURLOPT_SSL_VERIFYHOST, CURLOPT_SSL_VERIFYPEER;
 
 #[Group('slow')]
-class CurlHandleTest extends TestCase{
+final class CurlHandleTest extends TestCase{
 	use HttpFactoryTrait;
 
 	protected string $HTTP_CLIENT_FACTORY = CurlClientFactory::class;
@@ -44,19 +46,12 @@ class CurlHandleTest extends TestCase{
 		return new CurlHandle($request, $response, $options);
 	}
 
-	public static function invalidCaOptionProvider():array{
-		return [
-			// via the ca_info option
-			'ca_file'               => ['ca_info', '/foo.pem'],
-			'ca_path'               => ['ca_info', '/foo'],
-			// via curl_options
-			'ca_file, curl_options' => ['curl_options', [CURLOPT_CAINFO => '/foo.pem']],
-			'ca_path, curl_options' => ['curl_options', [CURLOPT_CAPATH => '/foo']],
-		];
-	}
-
-	#[DataProvider('invalidCaOptionProvider')]
-	public function testInvalidCAException(string $option, mixed $value):void{
+	#[Test]
+	#[TestWith(['ca_info', '/foo.pem'], 'ca_file')] // via the ca_info option
+	#[TestWith(['ca_info', '/foo'], 'ca_path')]
+	#[TestWith(['curl_options', [CURLOPT_CAINFO => '/foo.pem']], 'ca_file, curl_options')] // via curl_options
+	#[TestWith(['curl_options', [CURLOPT_CAPATH => '/foo']], 'ca_path, curl_options')]
+	public function invalidCAException(string $option, mixed $value):void{
 		$this->expectException(ClientExceptionInterface::class);
 		$this->expectExceptionMessageIsOrContains('invalid path to SSL CA bundle');
 
@@ -82,8 +77,9 @@ class CurlHandleTest extends TestCase{
 		];
 	}
 
+	#[Test]
 	#[DataProvider('caOptionProvider')]
-	public function testCaInfoFile(string $option, mixed $value, string $expectedPath, int $curl_opt, int $curl_opt_not):void{
+	public function caInfoFile(string $option, mixed $value, string $expectedPath, int $curl_opt, int $curl_opt_not):void{
 		$handle = $this->createHandle(new HTTPOptions([$option => $value]));
 		$handle->init();
 		$curl_options = $handle->getCurlOptions();
@@ -94,19 +90,13 @@ class CurlHandleTest extends TestCase{
 		$this::assertArrayNotHasKey($curl_opt_not, $curl_options);
 	}
 
-	public static function requestMethodProvider():array{
-		// head and options are not supported by httpbin
-		return [
-			'delete' => ['DELETE'],
-			'get'    => ['GET'],
-			'patch'  => ['PATCH'],
-			'post'   => ['POST'],
-			'put'    => ['PUT'],
-		];
-	}
-
-	#[DataProvider('requestMethodProvider')]
-	public function testRequestMethods(string $method):void{
+	#[Test]
+	#[TestWith(['DELETE'], 'delete')] // head and options are not supported by httpbin
+	#[TestWith(['GET'], 'get')]
+	#[TestWith(['PATCH'], 'patch')]
+	#[TestWith(['POST'], 'post')]
+	#[TestWith(['PUT'], 'put')]
+	public function requestMethods(string $method):void{
 		$url      = 'https://httpbin.org/'.strtolower($method).'?foo=bar';
 		$request  = $this->requestFactory->createRequest($method, $url);
 
@@ -129,17 +119,12 @@ class CurlHandleTest extends TestCase{
 
 	}
 
-	public static function requestMethodWithBodyProvider():array{
-		return [
-			'delete' => ['DELETE'],
-			'patch'  => ['PATCH'],
-			'post'   => ['POST'],
-			'put'    => ['PUT'],
-		];
-	}
-
-	#[DataProvider('requestMethodWithBodyProvider')]
-	public function testRequestMethodsWithFormBody(string $method):void{
+	#[Test]
+	#[TestWith(['DELETE'], 'delete')]
+	#[TestWith(['PATCH'], 'patch')]
+	#[TestWith(['POST'], 'post')]
+	#[TestWith(['PUT'], 'put')]
+	public function requestMethodsWithFormBody(string $method):void{
 		$url     = 'https://httpbin.org/'.strtolower($method);
 		$body    = 'foo=bar';
 		$request = $this->requestFactory->createRequest($method, $url)
@@ -169,8 +154,12 @@ class CurlHandleTest extends TestCase{
 
 	}
 
-	#[DataProvider('requestMethodWithBodyProvider')]
-	public function testRequestMethodsWithJsonBody(string $method):void{
+	#[Test]
+	#[TestWith(['DELETE'], 'delete')]
+	#[TestWith(['PATCH'], 'patch')]
+	#[TestWith(['POST'], 'post')]
+	#[TestWith(['PUT'], 'put')]
+	public function requestMethodsWithJsonBody(string $method):void{
 		$url     = 'https://httpbin.org/'.strtolower($method);
 		$body    = '{"foo":"bar"}';
 		$request = $this->requestFactory->createRequest($method, $url)
@@ -200,7 +189,8 @@ class CurlHandleTest extends TestCase{
 
 	}
 
-	public function testLargeBody():void{
+	#[Test]
+	public function largeBody():void{
 		$body    = str_repeat('*', ((1 << 20) + 1)); // will enable the read function
 		$request = $this->requestFactory->createRequest('POST', 'https://httpbin.org/post')
 			->withHeader('Content-type', 'text/plain')

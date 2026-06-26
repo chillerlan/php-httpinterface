@@ -14,7 +14,7 @@ namespace chillerlan\HTTPTest;
 use chillerlan\HTTP\{CurlMultiClient, HTTPOptions, MultiResponseHandlerInterface};
 use chillerlan\HTTP\Utils\QueryUtil;
 use chillerlan\PHPUnitHttp\HttpFactoryTrait;
-use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\{Group, Test};
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Message\{RequestInterface, ResponseInterface};
@@ -97,7 +97,8 @@ final class CurlMultiClientTest extends TestCase{
 		return $requests;
 	}
 
-	public function testMultiRequest():void{
+	#[Test]
+	public function multiRequest():void{
 		$requests = $this->getRequests();
 
 		$this->http
@@ -125,7 +126,8 @@ final class CurlMultiClientTest extends TestCase{
 		unset($this->http);
 	}
 
-	public function testEmptyStackException():void{
+	#[Test]
+	public function emptyStackException():void{
 		$this->expectException(ClientExceptionInterface::class);
 		$this->expectExceptionMessageIs('request stack is empty');
 

@@ -13,6 +13,7 @@ namespace chillerlan\HTTPTest;
 
 use chillerlan\HTTP\Utils\MessageUtil;
 use chillerlan\PHPUnitHttp\HttpFactoryTrait;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\{ClientExceptionInterface};
 use Exception, Throwable;
@@ -33,7 +34,8 @@ abstract class HTTPClientTestAbstract extends TestCase{
 		}
 	}
 
-	public function testSendRequest():void{
+	#[Test]
+	public function sendRequest():void{
 
 		try{
 			$url      = 'https://httpbin.org/get';
@@ -50,7 +52,8 @@ abstract class HTTPClientTestAbstract extends TestCase{
 
 	}
 
-	public function testNetworkError():void{
+	#[Test]
+	public function networkError():void{
 		$this->expectException(ClientExceptionInterface::class);
 
 		$this->httpClient->sendRequest($this->requestFactory->createRequest('GET', 'https://foo'));

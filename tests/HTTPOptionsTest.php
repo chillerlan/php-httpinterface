@@ -12,19 +12,22 @@ declare(strict_types=1);
 namespace chillerlan\HTTPTest;
 
 use chillerlan\HTTP\HTTPOptions;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientExceptionInterface;
 
 final class HTTPOptionsTest extends TestCase{
 
-	public function testInvalidUserAgentException():void{
+	#[Test]
+	public function invalidUserAgentException():void{
 		$this->expectException(ClientExceptionInterface::class);
 		$this->expectExceptionMessageIs('invalid user agent');
 		/** @phan-suppress-next-line PhanNoopNew */
 		new HTTPOptions(['user_agent' => '']);
 	}
 
-	public function testSetDnsOverHttpsURL():void{
+	#[Test]
+	public function setDnsOverHttpsURL():void{
 		$url = 'https://example.com';
 
 		$options = new HTTPOptions(['dns_over_https' => $url]);
@@ -39,7 +42,8 @@ final class HTTPOptionsTest extends TestCase{
 		$this::assertSame($url, $options->dns_over_https);
 	}
 
-	public function testSetDnsOverHttpsURLException():void{
+	#[Test]
+	public function setDnsOverHttpsURLException():void{
 		$this->expectException(ClientExceptionInterface::class);
 		$this->expectExceptionMessageIsOrContains('invalid DNS-over-HTTPS URL');
 		/** @phan-suppress-next-line PhanNoopNew */
