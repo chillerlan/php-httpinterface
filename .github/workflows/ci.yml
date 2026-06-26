@@ -85,7 +85,7 @@ jobs:
           coverage: pcov
 
       - name: "Install dependencies with composer"
-        uses: ramsey/composer-install@v3
+        uses: ramsey/composer-install@v4
 
       - name: "Run tests with phpunit"
         run: php vendor/phpunit/phpunit/phpunit --configuration=phpunit.xml.dist
@@ -126,6 +126,6 @@ jobs:
       - name: "Publish Docs to gh-pages"
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          BRANCH: gh-pages
-          FOLDER: docs
-          CLEAN: true
+          branch: gh-pages
+          folder: docs
+          clean: true
