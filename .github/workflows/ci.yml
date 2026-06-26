@@ -26,17 +26,12 @@ jobs:
       fail-fast: true
       matrix:
         php-version:
-          - "8.1"
-          - "8.2"
-          - "8.3"
-
-    env:
-      PHAN_ALLOW_XDEBUG: 0
-      PHAN_DISABLE_XDEBUG_WARN: 1
+          - "8.4"
+          - "8.5"
 
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: "Install PHP"
         uses: shivammathur/setup-php@v2
@@ -46,8 +41,14 @@ jobs:
           ini-values: ${{ env.PHP_INI_VALUES }}
           coverage: none
 
-      - name: "Update dependencies with composer"
-        uses: ramsey/composer-install@v3
+      - name: "Validate composer.json"
+        run: composer validate --ansi --strict --with-dependencies --no-interaction --verbose
+
+      - name: "Install dependencies with composer"
+        uses: ramsey/composer-install@v4
+
+      - name: "Run PHP_CodeSniffer"
+        run: php vendor/bin/phpcs -v
 
       - name: "Run phan"
         run: php vendor/bin/phan --target-php-version=${{ matrix.php-version }}
@@ -65,13 +66,12 @@ jobs:
           - ubuntu-latest
           - windows-latest
         php-version:
-          - "8.1"
-          - "8.2"
-          - "8.3"
+          - "8.4"
+          - "8.5"
 
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: "Fetch cacert.pem from curl.se"
         run: curl -o ./tests/cacert.pem https://curl.se/ca/cacert.pem
@@ -91,7 +91,7 @@ jobs:
         run: php vendor/phpunit/phpunit/phpunit --configuration=phpunit.xml.dist
 
       - name: "Send code coverage report to Codecov.io"
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v7
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: .build/coverage/clover.xml
@@ -110,12 +110,12 @@ jobs:
 
     steps:
       - name: "Checkout sources"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: "Install PHP"
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.3"
+          php-version: "8.4"
           tools: phpDocumentor
           extensions: simplexml
           coverage: none
