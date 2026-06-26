@@ -42,7 +42,7 @@
 		"psr/log": "^1.1 || ^2.0 || ^3.0"
 	},
 	"require-dev": {
-		"chillerlan/phpunit-http": "^1.0",
+		"chillerlan/phpunit-http": "^2.0",
 		"phan/phan": "^6.0.7",
 		"phpmd/phpmd": "^2.15",
 		"phpunit/phpunit": "^13.2",
